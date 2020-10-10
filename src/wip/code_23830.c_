@@ -1,0 +1,13 @@
+#include <ultra64.h>
+
+extern s32 D_8002BE00;
+
+s32 func_80023830(void *arg0) {
+    void *phi_a0;
+
+    phi_a0 = arg0;
+    if (arg0 == 0) {
+        phi_a0 = *D_8002BE00;
+    }
+    return phi_a0->unk4;
+}

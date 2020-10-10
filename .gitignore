@@ -1,0 +1,14 @@
+# directories
+
+__pycache__/
+asm/
+bin/
+build/
+ido/ido5.3_compiler
+ido/ido7.1_compiler
+
+# files
+
+*.z64
+conker.ld
+undefined_funcs.txt

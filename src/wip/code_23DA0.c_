@@ -1,0 +1,35 @@
+#include <ultra64.h>
+
+extern s32 D_A4040010;
+extern s32 D_A4080000;
+
+
+void func_80023DA0(s32 arg0) {
+    D_A4040010 = arg0;
+}
+
+s32 func_80023DB0(s32 arg0) {
+    if ((D_A4040010 & 1) == 0) {
+        return -1;
+    }
+    D_A4080000 = arg0;
+    return 0;
+}
+
+
+/*
+
+
+void func_80023DA0(s32 arg0) {
+    *(void *)0xA4040010 = arg0;
+}
+
+? func_80023DB0(s32 arg0) {
+    if ((*(void *)0xA4040010 & 1) == 0) {
+        return -1;
+    }
+    *(void *)0xA4080000 = arg0;
+    return 0;
+}
+
+*/

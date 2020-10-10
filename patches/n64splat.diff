@@ -1,0 +1,13 @@
+diff --git a/tools/n64splat/segtypes/code.py b/tools/n64splat/segtypes/code.py
+index b5be028..d168dde 100644
+--- a/tools/n64splat/segtypes/code.py
++++ b/tools/n64splat/segtypes/code.py
+@@ -324,8 +324,8 @@ class N64SegCode(N64Segment):
+                     old_dir = os.getcwd()
+                     os.chdir(base_path)
+                     c_path = os.path.join(base_path, "src", split_file["name"] + ".c")
+-                    cpp_args = ["-Iinclude", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
++                    cpp_args = ["-Iinclude/2.0L", "-D_LANGUAGE_C", "-ffreestanding", "-DF3DEX_GBI_2", "-DSPLAT"]
+                     ast = parse_file(c_path, use_cpp=True, cpp_args=cpp_args)
+                     os.chdir(old_dir)
+                     v.visit(ast)

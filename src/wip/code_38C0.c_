@@ -1,0 +1,15 @@
+
+void func_800038C0(s32 arg0, ? arg1, ? arg2, ? arg3) {
+
+}
+
+void *func_800038E0(void) {
+    *(void *)0x80038070 = (void *)0xBC000C02;
+    *(void *)0x80038074 = (u16)0x4040;
+    *(void *)0xBC000C02 = (u16)0x4040;
+    return (void *)0xBC000C02;
+}
+
+? func_8000390C(void) {
+    return 0;
+}
