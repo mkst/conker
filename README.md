@@ -1,4 +1,4 @@
-# Conkers Bad Fur Day Decompilation
+# Conker's Bad Fur Day Decompilation
 
 A WIP decompilation of Conker's Bad Fur Day.
 
@@ -6,17 +6,24 @@ Note: To use this repository, you must already have a copy of the game.
 
 # Building
 
-Place the US Conker's Bad Fur Day ROM in the root of this repository, name it `baserom.us.z64`.
+Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name it `baserom.us.z64`.
 
 ## Preamble
 
 The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
 If this is not the case, check the `Dockerfile` for the expected prerequisites.
 
+## Clone repository
+
+```sh
+git clone https://github.com/mkst/conker.git --recursive
+cd conker
+```
+
 ## Install prerequisites
 
 ```sh
-# decomp uses ido 7.1
+# decomp appears to use ido 7.1
 wget https://github.com/n64decomp/oot/releases/download/0.1/ido7.1_compiler.zip
 unzip -d ido ido7.1_compiler.zip
 ```
@@ -30,8 +37,7 @@ docker build . -t conker
 ## Apply patches
 
 ```sh
-# adjust cpp_args as headers are in include/2.0L
-patch -p1 -i patches/n64splat.patch
+git apply patches/n64splat.patch
 ```
 
 ## Sanity check ROM checksum
@@ -52,13 +58,23 @@ docker run --rm -v $(pwd):/conker conker make extract
 docker run --rm -v $(pwd):/conker conker make
 ```
 
+**Note:**
+You may find it easier to jump into the container and run the `make` commands from there, in that case you want to run:
+
+```sh
+docker run --rm -ti -v $(pwd):/conker conker bash
+```
+
 # Contributing
 
-TBD.
+The [wiki](https://github.com/mkst/conker/wiki) will eventually contain discoveries as they are made.
+
+In the meantime, if you wish to contribute in any way, just get stuck in and raise a PR!
 
 # Tools
 
-This repo makes use of the following tools:
+This repo makes use of the following tools without which, there would be no decomp:
 
- - [asm-differ](https://github.com/simonlindholm/asm-differ)
- - [n64splat](https://github.com/ethteck/n64splat)
+ - [asm-differ](https://github.com/simonlindholm/asm-differ); compare assembly against the original ROM
+ - [asm-processor](https://github.com/simonlindholm/asm-processor); allow GLOBAL_ASM wrappers
+ - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
