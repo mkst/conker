@@ -20,7 +20,7 @@ segments:
     vram:  0x80001000
     files:
       - [0x1000, "asm"]
-      - [0x1050, "asm"]
+      - [0x1050, "c"]
       - [0x2DB0, "asm"]
       - [0x2E50, "asm"]
       - [0x3220, "asm"]
@@ -73,12 +73,20 @@ segments:
       - [0x214F0, "asm"]
       - [0x22040, "asm"]
       - [0x22460, "asm"]
+  - name:  os
+    type:  code
+    start: 0x000226F0
+    vram:  0x800226F0
+    files:
       - [0x226F0, "asm"]
       - [0x22790, "asm"]
       - [0x22A50, "asm"]
       - [0x22D10, "asm"]
       - [0x22DC0, "asm"]
-      - [0x22E00, "asm"]
+      - [0x22E00, "asm", "osStopThread"]
+      - [0x22EC0, "asm", "memcpy"] #"c", "os_22E00_wip"]
+      - [0x22EEC, "asm", "strlen"]
+      - [0x22F14, "asm", "strchr"]
       - [0x22F60, "asm"]
       - [0x230F0, "asm"]
       - [0x23390, "asm"]
@@ -102,7 +110,7 @@ segments:
       - [0x25FD0, "asm"]
       - [0x26250, "asm"]
       - [0x26310, "asm"]
-      - [0x263D0, "asm"]
+      - [0x263D0, "c"]
       - [0x26540, "asm"]
       - [0x267A0, "asm"]
       - [0x26800, "asm"]
@@ -112,12 +120,14 @@ segments:
       - [0x27620, "asm"]
       - [0x28670, "asm"]
   - [0x290D0, "bin"]
+  - [0x42C50, "bin"]   # chunk0
+  - [0x186A77, "bin"]
   - name:  code
     type:  code
-    vram:  0x80001000
-    start: 0x19ea88
+    vram:  0x8019ea88
+    start: 0x0019ea88
     files:
-      - [0x19EA88, "asm"]
+      - [0x19EA88, "asm"] # "c", "code_19EA88_wip"]
       - [0x1A0558, "asm"]
       - [0x1A20D8, "asm"]
   - [0x001A2190, "bin"]

@@ -22,27 +22,30 @@ MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
-					 $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
+           $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-					 $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o))
+           $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o))
+
+# Files requiring pre/post-processing
+GREP := grep -rl
+GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(C_FILES))
+GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
 TARGET = $(BUILD_DIR)/conker.$(VERSION)
 LD_SCRIPT = conker.ld
 
 ##################### Compiler Options #######################
-CROSS = mips-linux-gnu-
-AS = $(CROSS)as
-# CC = $(CROSS)gcc
-# CC = tools/ido_recomp/linux/7.1/cc
-# CC = tools/ido5.3_cc/usr/bin/cc
+
 CC := $(QEMU_IRIX) -L $(IRIX_ROOT) $(IRIX_ROOT)/usr/bin/cc
 
+CROSS = mips-linux-gnu-
+AS = $(CROSS)as
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
-OPT_FLAGS :=
+OPT_FLAGS := -g
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
 
@@ -73,15 +76,25 @@ clean:
 extract:
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
 
+# compile flags
+# $(BUILD_DIR)/src/code%.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_1050.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_39B0.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_1E480.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/os_263D0.o: OPT_FLAGS := -O2 -g3
+
+# dependencies
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 
-$(TARGET).elf: $(O_FILES) $(LD_SCRIPT)
+$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-# $(BUILD_DIR)/src/code%.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_39B0.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_1E480.o: OPT_FLAGS := -O2 -g3
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c
+	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
+	$(CC) -c $(CFLAGS) $(OPT_FLAGS) -o $@ $(BUILD_DIR)/$<
+	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
+		--assembler "$(AS) $(ASFLAGS)" --asm-prelude tools/asm-processor/prelude.s
 
 $(BUILD_DIR)/%.o: %.c
 	$(CC) -c $(CFLAGS) $(OPT_FLAGS) -o $@ $<

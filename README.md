@@ -64,6 +64,14 @@ You may find it easier to jump into the container and run the `make` commands fr
 ```sh
 docker run --rm -ti -v $(pwd):/conker conker bash
 ```
+# ROM layout
+
+The layout of the ROM is still being determined. There are a number of sections within the ROM that are compressed with what appears to be proprietary compression format.
+There is a [tool](https://github.com/jombo23/N64-Tools/tree/master/GEDecompressor) which can be used to extract assets from the ROM, and work is ongoing to translate it into Python.
+
+Currently 1 chunk has been decompressed, `chunk0`. If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory.
+
+This repo does not currently contain tooling to recompress the extracted file(s).
 
 # Contributing
 
@@ -73,7 +81,7 @@ In the meantime, if you wish to contribute in any way, just get stuck in and rai
 
 # Tools
 
-This repo makes use of the following tools without which, there would be no decomp:
+This repo makes use of the following open-source tools without which, there would be no decomp:
 
  - [asm-differ](https://github.com/simonlindholm/asm-differ); compare assembly against the original ROM
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow GLOBAL_ASM wrappers
