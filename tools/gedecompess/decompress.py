@@ -24,15 +24,23 @@ with open(sys.argv[1], "rb") as rom:
 
     decompressor = gd.GeDecompressor()
 
+    AMALGAMATE = False
+
     result = []
-    for offset in chunks:
+    for i, offset in enumerate(chunks):
         try:
             compressed_length, decompressed_data = decompressor.Decompress(data[offset:offset + 4096]) # will chunk be larger?
             if compressed_length > 0:
                 print("Index: %s, Compressed: %i, Decompressed: %i" % (str(hex(offset)), compressed_length, len(decompressed_data)))
-                result += decompressed_data
+                if AMALGAMATE:
+                    result += decompressed_data
+                else:
+                    with open(sys.argv[2] + str(i).zfill(4) + ".bin", "wb") as f: # hex(offset)
+                        f.write(bytearray(decompressed_data))
+                    with open(sys.argv[2] + str(i).zfill(4) + ".rzp", "wb") as f:
+                        f.write(bytearray(data[offset:offset+compressed_length]))
         except Exception as e:
-            # print(e)
+            print(e)
             pass
 
     if len(result) > 0:

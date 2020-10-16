@@ -11,7 +11,7 @@ Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name i
 ## Preamble
 
 The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
-If this is not the case, check the `Dockerfile` for the expected prerequisites.
+If this is not the case, check the `Dockerfile` for the expected prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
 
 ## Clone repository
 
@@ -52,6 +52,12 @@ docker run --rm -v $(pwd):/conker conker make check
 docker run --rm -v $(pwd):/conker conker make extract
 ```
 
+## Decompress chunk0
+
+```sh
+docker run --rm -v $(pwd):/conker conker make decompress
+```
+
 ## Compile
 
 ```sh
@@ -66,12 +72,28 @@ docker run --rm -ti -v $(pwd):/conker conker bash
 ```
 # ROM layout
 
-The layout of the ROM is still being determined. There are a number of sections within the ROM that are compressed with what appears to be proprietary compression format.
-There is a [tool](https://github.com/jombo23/N64-Tools/tree/master/GEDecompressor) which can be used to extract assets from the ROM, and work is ongoing to translate it into Python.
+The layout of the ROM is still being determined. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length.
 
-Currently 1 chunk has been decompressed, `chunk0`. If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory.
+The workflow will be to split all compressed chunks from the baserom via n64splat, then for each contiguous chunk:
+  - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py), taking care to keep track of any trailing padding
+  - Combine decompressed blocks into a single file
+  - Run n64splat on this combined file to extract all code and assets
+  - *Translate assembly to c code*
+  - Compile to generate a .bin
+  - Split compiled .bin file into 4096 byte block
+  - Compress each block via [rarezip](tools/rarezip.py)
+  - Combine all compressed blocks along with original padding (TBD: is pad calculated, e.g. length modulo 256?)
 
-This repo does not currently contain tooling to recompress the extracted file(s).
+Then build the ROM with the new chunk(s) which should exactly match the original chunk(s) split out via n64splat.
+
+**Note:**
+This workflow is subject to change as the project matures. The decompression/combination steps may be added into n64splat so the concept of chunks may disappear.
+
+## Chunk 0
+
+Currently 1 chunk has been decompressed, `chunk0`.
+
+If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory. See the [README](chunk0/README.md) for more information.
 
 # Contributing
 

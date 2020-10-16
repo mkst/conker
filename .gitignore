@@ -12,6 +12,8 @@ mp3/
 # files
 
 *.bin
+*.gz
+*.pad
 *.z64
 chunk0.ld
 conker.ld

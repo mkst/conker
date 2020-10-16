@@ -6,6 +6,7 @@ ASM_DIRS := asm
 DATA_DIRS := bin
 SRC_DIRS := src
 MP3_DIRS := mp3
+RZIP_DIRS := rzip
 
 # IRIX_ROOT := ido/ido5.3_compiler
 IRIX_ROOT := ido/ido7.1_compiler
@@ -20,11 +21,14 @@ C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 BIN_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 
+CHUNK0 := $(BUILD_DIR)/chunk0
+
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-           $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o))
+           $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
+           $(BUILD_DIR)/rzip/chunk0.o
 
 # Files requiring pre/post-processing
 GREP := grep -rl
@@ -58,7 +62,7 @@ CFLAGS += $(INCLUDE_CFLAGS)
 LDFLAGS =  -T undefined_funcs.txt -T $(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
 
 default: all
 
@@ -71,10 +75,17 @@ clean:
 	rm -rf asm
 	rm -rf bin
 	rm -rf build
+	rm -rf rzip
 	rm -rf mp3
 
 extract:
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
+
+RZIP_FILES :=	$(foreach dir,$(RZIP_DIRS),$(wildcard $(dir)/*.gz))
+RUNZIP_FILES := $(foreach file,$(RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
+
+# move this to chunk0?
+decompress: $(BUILD_DIR)/chunk0.bin
 
 # compile flags
 # $(BUILD_DIR)/src/code%.o: OPT_FLAGS := -O2 -g3
@@ -113,6 +124,13 @@ $(TARGET).bin: $(TARGET).elf
 
 $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
+
+$(BUILD_DIR)/chunk0.bin: $(RUNZIP_FILES)
+	@cat $(sort $(RUNZIP_FILES)) > $@
+
+# currently n64splat does not write them to build/rzip, so move them there
+$(BUILD_DIR)/%.bin: %.bin
+	mv $< $@
 
 verify: $(TARGET).z64
 	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
