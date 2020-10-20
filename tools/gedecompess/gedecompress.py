@@ -96,15 +96,15 @@ class GeDecompressor:
     def UncompressType0(self):
         # print("UncompressType0")
         discardBits = self.bitsRemain & 0x7
-        self.get_n_bits(discardBits)
-        copyLen = self.get_n_bits(16)
+        self.get_n_bits(discardBits, False)
+        copyLen = self.get_n_bits(16, False)
         self.get_n_bits(16, False)
 
         res = []
         for i in range(copyLen):
             if self.fileSize >= self.MAX_BYTE_SIZE:
                 return None
-            res.append(self.get_n_bits(8), False)
+            res.append(self.get_n_bits(8, False))
             self.fileSize += 1
             if self.iterations > self.MAX_ITERATIONS:
                 return None
@@ -489,27 +489,26 @@ class GeDecompressor:
                 return (0, None)
             compressionType = self.get_n_bits(2, False)
             if compressionType == 0:
-                print("UncompressType0")
+                # print("UncompressType0")
                 res = self.UncompressType0()
                 if res is None:
-                    print("UncompressType0 Failed, managed to get %i" % len(decompressed))
+                    # print("UncompressType0 Failed, managed to get %i" % len(decompressed))
                     return (0, decompressed)
                 elif len(res) == 0:
-                    print("can we remove this?")
                     break
                 else:
                     decompressed += res
             elif compressionType == 1:
                 res = self.UncompressType1()
                 if res is None:
-                    print("UncompressType1 failed, managed to get %i" % len(decompressed))
+                    # print("UncompressType1 failed, managed to get %i" % len(decompressed))
                     return (self.bytesIndex, decompressed)
                 else:
                     decompressed += res
             elif compressionType == 2:
                 res = self.UncompressType2()
                 if res is None:
-                    print("UncompressType2 failed, managed to get %i" % len(decompressed))
+                    # print("UncompressType2 failed, managed to get %i" % len(decompressed))
                     return (self.bytesIndex, decompressed)
                 else:
                     decompressed += res

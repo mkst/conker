@@ -2,14 +2,15 @@
 VERSION := us
 
 BUILD_DIR = build
-ASM_DIRS := asm
+ASM_DIRS := asm asm/os
 DATA_DIRS := bin
-SRC_DIRS := src
+SRC_DIRS := src src/os
 MP3_DIRS := mp3
 RZIP_DIRS := rzip
 
-# IRIX_ROOT := ido/ido5.3_compiler
-IRIX_ROOT := ido/ido7.1_compiler
+IDO_53 := ido/ido5.3_compiler
+IDO_71 := ido/ido7.1_compiler
+IRIX_ROOT := $(IDO_71)
 QEMU_IRIX := $(shell which qemu-irix 2>/dev/null)
 
 ifeq ($(QEMU_IRIX),)
@@ -18,6 +19,7 @@ endif
 
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+H_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
 BIN_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 
@@ -31,7 +33,7 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(BUILD_DIR)/rzip/chunk0.o
 
 # Files requiring pre/post-processing
-GREP := grep -rl
+GREP := grep -l
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(C_FILES))
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
@@ -40,7 +42,8 @@ LD_SCRIPT = conker.ld
 
 ##################### Compiler Options #######################
 
-CC := $(QEMU_IRIX) -L $(IRIX_ROOT) $(IRIX_ROOT)/usr/bin/cc
+CC := $(QEMU_IRIX) -L $(IDO_71) $(IDO_71)/usr/bin/cc
+CC_OLD := $(QEMU_IRIX) -L $(IDO_53) $(IDO_53)/usr/bin/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -50,6 +53,7 @@ OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
 OPT_FLAGS := -g
+MIPSBIT :=
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
 
@@ -90,9 +94,29 @@ decompress: $(BUILD_DIR)/chunk0.bin
 # compile flags
 # $(BUILD_DIR)/src/code%.o: OPT_FLAGS := -O2 -g3
 $(BUILD_DIR)/src/code_1050.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_2DB0.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_38C0.o: OPT_FLAGS := -O2 -g3
 $(BUILD_DIR)/src/code_39B0.o: OPT_FLAGS := -O2 -g3
 $(BUILD_DIR)/src/code_1E480.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/os_263D0.o: OPT_FLAGS := -O2 -g3
+
+$(BUILD_DIR)/src/code_17EC0.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/code_17EC0.o: MIPSBIT := -mips1
+
+$(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -O2 -g3
+
+# compilers
+# $(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
+
+# loop unrolling
+# $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
+
+# libultra
+$(BUILD_DIR)/src/os/%.o: OPT_FLAGS := -O2 -g3
+
+
+	# $(BUILD_DIR)/src/os/osGetThreadPri.o: OPT_FLAGS := -O2 -g3
+# $(BUILD_DIR)/src/os/osGetThreadPri.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/src/os/osGetThreadPri.o: OPT_FLAGS := -O1
 
 # dependencies
 $(BUILD_DIR):
@@ -101,14 +125,14 @@ $(BUILD_DIR):
 $(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h
 	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
-	$(CC) -c $(CFLAGS) $(OPT_FLAGS) -o $@ $(BUILD_DIR)/$<
+	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude tools/asm-processor/prelude.s
 
 $(BUILD_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(OPT_FLAGS) -o $@ $<
+	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<

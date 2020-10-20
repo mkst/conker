@@ -4,6 +4,30 @@ A WIP decompilation of Conker's Bad Fur Day.
 
 Note: To use this repository, you must already have a copy of the game.
 
+# Progress
+
+This project it is in its infancy; there are multiple tasks being worked on:
+
+  - Converting disassembly into (byte-perfect) C code
+  - Determining structure and layout of the ROM
+  - Extracting assets from the ROM and being able to successfully re-pack them
+
+## ROM content:
+
+The breakdown of the ROM is ongoing, this is the current estimate:
+
+  - 24MB+ => MP3 (voices)
+  - ??MB => ??? (music/models/textures)
+  - 2MB+ => Code
+  - (64MB - 24MB - 2MB - ??MB) => TBD
+
+## Open issues
+
+  - Identifying all compressed sections within the ROM
+  - Decompressing each compressed section
+  - Compressing extracted sections in a byte-perfect manner
+  - Identifying and documenting Conker asset (Model/Texture) format
+
 # Building
 
 Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name it `baserom.us.z64`.
@@ -52,7 +76,7 @@ docker run --rm -v $(pwd):/conker conker make check
 docker run --rm -v $(pwd):/conker conker make extract
 ```
 
-## Decompress chunk0
+## Decompress chunk0 (optional)
 
 ```sh
 docker run --rm -v $(pwd):/conker conker make decompress
@@ -82,7 +106,7 @@ The workflow will be to split all compressed chunks from the baserom via n64spla
   - Compile to generate a .bin
   - Split compiled .bin file into 4096 byte block
   - Compress each block via [rarezip](tools/rarezip.py)
-  - Combine all compressed blocks along with original padding (TBD: is pad calculated, e.g. length modulo 256?)
+  - Combine all compressed blocks along with original padding (padding appears to be garbage)
 
 Then build the ROM with the new chunk(s) which should exactly match the original chunk(s) split out via n64splat.
 
@@ -93,18 +117,26 @@ This workflow is subject to change as the project matures. The decompression/com
 
 Currently 1 chunk has been decompressed, `chunk0`.
 
-If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory. See the [README](chunk0/README.md) for more information.
+If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory.
 
-# Contributing
-
-The [wiki](https://github.com/mkst/conker/wiki) will eventually contain discoveries as they are made.
-
-In the meantime, if you wish to contribute in any way, just get stuck in and raise a PR!
+See the [README](chunk0/README.md) for more information. It is non-matching.
 
 # Tools
+
+## Custom tools
+
+ - rarezip/rareunzip; python scripts to compress/decompress the compression format used in the ROM.
+
+## Existing tools
 
 This repo makes use of the following open-source tools without which, there would be no decomp:
 
  - [asm-differ](https://github.com/simonlindholm/asm-differ); compare assembly against the original ROM
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow GLOBAL_ASM wrappers
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
+
+# Contributing
+
+The [wiki](https://github.com/mkst/conker/wiki) will eventually contain discoveries as they are made.
+
+In the meantime, if you wish to contribute in any way, just get stuck in and raise a PR!

@@ -18,7 +18,7 @@ segments:
       - [0x3120, "asm"]
       - [0x39E0, "asm"]
       - [0x4D50, "asm"]
-      - [0x4E00, "asm"]
+      - [0x4E00, "c"]
       - [0x4F00, "asm"]
       - [0x4F30, "asm"]
       - [0x4FE0, "asm"]
@@ -114,4 +114,4 @@ segments:
       - [0x175E0, "asm"]
       - [0x17790, "asm"]
   - [0x183D0, "bin"]
-  - [0x1fa000] # chunk0 end
+  - [0x1fa130] # chunk0 end

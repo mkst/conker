@@ -1,8 +1,8 @@
 #include <ultra64.h>
 
 extern s32 D_8002AB40;
-extern s32 D_A4500000;
-extern s32 D_A4500004;
+extern s32 AI_A4500000;
+extern s32 AI_A4500004;
 
 s32 func_80002DB0(s16 arg0, s16 arg1) {
 
@@ -24,8 +24,8 @@ s32 func_80002DB0(s16 arg0, s16 arg1) {
     if (func_80023390(phi_a2) != 0) {
         return -1;
     }
-    D_A4500000 = func_800233C0(temp_a2, temp_a2);
-    D_A4500004 = arg1;
+    AI_A4500000 = func_800233C0(temp_a2, temp_a2);
+    AI_A4500004 = arg1;
     return 0;
 }
 

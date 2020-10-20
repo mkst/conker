@@ -2,6 +2,7 @@ basename: conker
 options:
   compiler: IDO
   cpp_args:
+    - "-IInclude"
     - "-Iinclude/2.0L"
     - "-D_LANGUAGE_C"
   find-file-boundaries: yes
@@ -24,7 +25,7 @@ segments:
       - [0x2DB0, "asm"]
       - [0x2E50, "asm"]
       - [0x3220, "asm"]
-      - [0x38C0, "asm"]
+      - [0x38C0, "c"]
       - [0x3920, "asm"]
       - [0x39B0, "c"]
       - [0x39C0, "asm"]
@@ -40,7 +41,7 @@ segments:
       - [0x8F90, "asm"]
       - [0xA420, "asm"]
       - [0xEB00, "asm"]
-      - [0x11FA0, "asm"]
+      - [0x11FA0, "c"] # wip
       - [0x12820, "asm"]
       - [0x128D0, "asm"]
       - [0x13320, "asm"]
@@ -49,7 +50,7 @@ segments:
       - [0x17AA0, "c"]
       - [0x17AF0, "asm"]
       - [0x17DF0, "asm"]
-      - [0x17EC0, "asm"]
+      - [0x17EC0, "asm"] # wip
       - [0x17F10, "asm"]
       - [0x18C60, "c"]
       - [0x18CB0, "asm"]
@@ -83,16 +84,16 @@ segments:
       - [0x22A50, "asm"]
       - [0x22D10, "asm"]
       - [0x22DC0, "asm"]
-      - [0x22E00, "asm", "osStopThread"]
-      - [0x22EC0, "asm", "memcpy"] #"c", "os_22E00_wip"]
-      - [0x22EEC, "asm", "strlen"]
-      - [0x22F14, "asm", "strchr"]
+      - [0x22E00, "asm", "os/osStopThread"]
+      - [0x22EC0, "asm", "os/memcpy"] #"c", "os_22E00_wip"]
+      - [0x22EEC, "asm", "os/strlen"]
+      - [0x22F14, "asm", "os/strchr"]
       - [0x22F60, "asm"]
       - [0x230F0, "asm"]
       - [0x23390, "asm"]
       - [0x23440, "asm"]
       - [0x23580, "asm"]
-      - [0x23830, "asm"]
+      - [0x23830, "c", "os/osGetThreadPri"] # wip
       - [0x23850, "asm"]
       - [0x23DA0, "asm"]
       - [0x23DF0, "asm"]
@@ -110,7 +111,8 @@ segments:
       - [0x25FD0, "asm"]
       - [0x26250, "asm"]
       - [0x26310, "asm"]
-      - [0x263D0, "c"]
+      - [0x263D0, "c", "os/osAiSetFrequency"]
+      - [0x26530, "asm", "os/sqrtf"]
       - [0x26540, "asm"]
       - [0x267A0, "asm"]
       - [0x26800, "asm"]
@@ -630,7 +632,9 @@ segments:
       - [0x1852b4, ""]
       - [0x185c80, ""]
       - [0x186550, ""]
-  - [0x186A77, "bin"]
+      - [0x186a78, ""]
+  - [0x186b50, "bin"] # 2048 bytes of leftovers?
+  - [0x187350, "bin"]
   - name:  code
     type:  code
     vram:  0x8019ea88
@@ -872,11 +876,11 @@ segments:
   - [0x01CAE7A0, "mp3"]
   - [0x01CB1040, "mp3"]
   - [0x01CD8D70, "mp3"]
-  - [0x01CDBD48, "mp3"]
-  - [0x01CEAC00, "mp3"]
-  - [0x01D01E90, "mp3"]
-  - [0x01D0D7F8, "mp3"]
-  - [0x01D19338, "mp3"]
+  - [0x01CDBD48, "mp3"] # sloprano
+  - [0x01CEAC00, "mp3"] # sloprano
+  - [0x01D01E90, "mp3"] # sloprano
+  - [0x01D0D7F8, "mp3"] # sloprano
+  - [0x01D19338, "mp3"] # sloprano
   - [0x01D32130, "mp3"]
   - [0x01D3FD38, "mp3"]
   - [0x01D452D0, "mp3"]
