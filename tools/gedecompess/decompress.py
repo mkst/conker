@@ -24,7 +24,7 @@ with open(sys.argv[1], "rb") as rom:
     if len(sys.argv) == 4:
         chunks = [int(x, 16) for x in sys.argv[3].split(",")]
     else:
-        chunks = chunk1
+        chunks = chunk0
 
     decompressor = gd.GeDecompressor()
 

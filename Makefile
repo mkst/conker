@@ -6,7 +6,7 @@ ASM_DIRS := asm asm/os
 DATA_DIRS := bin
 SRC_DIRS := src src/os
 MP3_DIRS := mp3
-RZIP_DIRS := rzip
+RZIP_DIRS := rzip/chunk0 rzip/chunk1
 
 IDO_53 := ido/ido5.3_compiler
 IDO_71 := ido/ido7.1_compiler
@@ -30,7 +30,8 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
            $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
-           $(BUILD_DIR)/rzip/chunk0.o
+           $(BUILD_DIR)/rzip/chunk0/chunk0.o \
+           $(BUILD_DIR)/rzip/chunk1/chunk1.o
 
 # Files requiring pre/post-processing
 GREP := grep -l
@@ -104,6 +105,7 @@ $(BUILD_DIR)/src/code_17EC0.o: MIPSBIT := -mips1
 
 $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -O2 -g3
 
+$(BUILD_DIR)/src/code_4470.o: OPT_FLAGS := -O2 -g3
 # compilers
 # $(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
 

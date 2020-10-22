@@ -81,7 +81,7 @@ split:
 	$(SPLIT) $(TARGET).bin $(SPLIT_DIR)/
 
 compress: $(sort $(SPLIT_FILES_RZ))
-	cp ../rzip/*.pad build/split/
+	cp ../rzip/chunk0/*.pad build/split/
 
 # once this works, output to ../rzip/chunk0.bin
 combine: $(PADDING) $(RZ_FILES)

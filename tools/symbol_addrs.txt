@@ -42,7 +42,6 @@ osStartThread;0x80022a60
 osStopThread;0x80022e00
 osUnmapTLB;0x800262d0
 osViBlack;0x80026250
-osVirtualToPhysical;0x800233c0
 osViSetEvent;0x80024ea0
 osViSetMode;0x800247c0
 osViSwapBuffer;0x80024830

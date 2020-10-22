@@ -8,15 +8,3 @@ void func_80017AA0(s32 arg0) {
 
     func_8001C224(arg0 + 0x48, &sp18, 0, 2);
 }
-
-/*
-original mips_2_c
-
-void func_80017AA0(s32 arg0) {
-    s16 sp18;
-
-    sp18 = (u16)0xF;
-    func_8001C224(arg0 + 0x48, &sp18, 0, 2);
-}
-
-*/
