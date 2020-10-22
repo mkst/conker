@@ -8,14 +8,6 @@ SRC_DIRS := src src/os
 MP3_DIRS := mp3
 RZIP_DIRS := rzip/chunk0 rzip/chunk1
 
-IDO_53 := ido/ido5.3_compiler
-IDO_71 := ido/ido7.1_compiler
-IRIX_ROOT := $(IDO_71)
-QEMU_IRIX := $(shell which qemu-irix 2>/dev/null)
-
-ifeq ($(QEMU_IRIX),)
-  $(error ERROR: qemu-irix not found. Get it from https://github.com/n64decomp/sm64/releases.)
-endif
 
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
@@ -43,8 +35,8 @@ LD_SCRIPT = conker.ld
 
 ##################### Compiler Options #######################
 
-CC := $(QEMU_IRIX) -L $(IDO_71) $(IDO_71)/usr/bin/cc
-CC_OLD := $(QEMU_IRIX) -L $(IDO_53) $(IDO_53)/usr/bin/cc
+CC := ido/ido7.1_recomp/cc
+CC_OLD := ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as

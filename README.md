@@ -4,6 +4,64 @@ A WIP decompilation of Conker's Bad Fur Day.
 
 Note: To use this repository, you must already have a copy of the game.
 
+# Building
+
+Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name it `baserom.us.z64`.
+
+**Preamble**
+
+The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
+If this is not the case, check the `Dockerfile` for the expected prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
+
+**Clone repository**
+
+```sh
+git clone https://github.com/mkst/conker.git --recursive
+cd conker
+```
+
+**Build Docker image**
+
+```sh
+docker build . -t conker
+```
+
+**Apply patches**
+
+```sh
+git apply patches/n64splat.patch
+```
+
+**Spin up the image interactively**
+
+```sh
+docker run --rm -ti -v $(pwd):/conker conker bash
+```
+
+**Sanity check ROM checksum**
+
+```sh
+make check
+```
+
+**Extract assets from ROM**
+
+```sh
+make extract
+```
+
+**Decompress chunk0 (optional)**
+
+```sh
+make decompress
+```
+
+**Compile**
+
+```sh
+make -- jobs
+```
+
 # Progress
 
 This project it is in its infancy; there are multiple tasks being worked on:
@@ -12,91 +70,34 @@ This project it is in its infancy; there are multiple tasks being worked on:
   - Determining structure and layout of the ROM
   - Extracting assets from the ROM and being able to successfully re-pack them
 
-## ROM content:
-
-The breakdown of the ROM is ongoing, this is the current estimate:
-
-  - 24MB+ => MP3 (voices)
-  - ??MB => ??? (music/models/textures)
-  - 2MB+ => Code
-  - (64MB - 24MB - 2MB - ??MB) => TBD
-
 ## Open issues
 
   - Identifying all compressed sections within the ROM
   - Decompressing each compressed section
   - Compressing extracted sections in a byte-perfect manner
-  - Identifying and documenting Conker asset (Model/Texture) format
+  - Identifying and documenting Conker asset (model/texture) format
 
-# Building
+## ROM layout
 
-Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name it `baserom.us.z64`.
+The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length. These sections are dubbed 'rzip'.
 
-## Preamble
-
-The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
-If this is not the case, check the `Dockerfile` for the expected prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
-
-## Clone repository
-
-```sh
-git clone https://github.com/mkst/conker.git --recursive
-cd conker
+```
+[header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
+[ boot ]  0000 0040 > 0000 1000
+[ code ]  0000 1000 > 0002 26F0 ; initialisation code
+[ code ]  0002 26F0 > 0004 2C50 ; libultra code
+[ rzip ]  0004 2C50 > 0019 EA88 ; "chunk0", code + more
+[ code ]  0019 EA88 > 001A 2190
+[ ???? ]  001A 2190 > 0130 4F00
+[ rzip ]  0130 4F00 > 0132 E691 ; "chunk1", unknown data
+[ ???? ]  0132 E691 > 0133 12E8
+[ mp3s ]  0133 12E8 > 029A FD38 ; some are somewhat scrambled
+[ ???? ]  029A FD38 > 03EC C788
+[ midi ]  03EC C788 > 03F7 38D0 ; some form of compression
+[ ???? ]  03F7 38D0 > 0400 0000
 ```
 
-## Install prerequisites
-
-```sh
-# decomp appears to use ido 7.1
-wget https://github.com/n64decomp/oot/releases/download/0.1/ido7.1_compiler.zip
-unzip -d ido ido7.1_compiler.zip
-```
-
-## Build Docker image
-
-```sh
-docker build . -t conker
-```
-
-## Apply patches
-
-```sh
-git apply patches/n64splat.patch
-```
-
-## Sanity check ROM checksum
-
-```sh
-docker run --rm -v $(pwd):/conker conker make check
-```
-
-## Extract assets from ROM
-
-```sh
-docker run --rm -v $(pwd):/conker conker make extract
-```
-
-## Decompress chunk0 (optional)
-
-```sh
-docker run --rm -v $(pwd):/conker conker make decompress
-```
-
-## Compile
-
-```sh
-docker run --rm -v $(pwd):/conker conker make
-```
-
-**Note:**
-You may find it easier to jump into the container and run the `make` commands from there, in that case you want to run:
-
-```sh
-docker run --rm -ti -v $(pwd):/conker conker bash
-```
-# ROM layout
-
-The layout of the ROM is still being determined. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length.
+### Compressed section(s)
 
 The workflow will be to split all compressed chunks from the baserom via n64splat, then for each contiguous chunk:
   - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py), taking care to keep track of any trailing padding
@@ -113,7 +114,7 @@ Then build the ROM with the new chunk(s) which should exactly match the original
 **Note:**
 This workflow is subject to change as the project matures. The decompression/combination steps may be added into n64splat so the concept of chunks may disappear.
 
-## Chunk 0
+### Chunk 0
 
 Currently 1 chunk has been decompressed, `chunk0`.
 
@@ -132,7 +133,7 @@ See the [README](chunk0/README.md) for more information. It is non-matching.
 This repo makes use of the following open-source tools without which, there would be no decomp:
 
  - [asm-differ](https://github.com/simonlindholm/asm-differ); compare assembly against the original ROM
- - [asm-processor](https://github.com/simonlindholm/asm-processor); allow GLOBAL_ASM wrappers
+ - [asm-processor](https://github.com/simonlindholm/asm-processor); allow `GLOBAL_ASM` wrappers to include assembly within the c files
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
 
 # Contributing
