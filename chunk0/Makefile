@@ -6,9 +6,6 @@ SRC_DIRS := src
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
-IRIX_ROOT := ../ido/ido7.1_compiler
-QEMU_IRIX := $(shell which qemu-irix 2>/dev/null)
-
 ASM_PROCESSOR_DIR := ../tools/asm-processor
 
 SPLIT := split -b 4096 -d --additional-suffix=.split --suffix-length=4
@@ -38,7 +35,8 @@ LD_SCRIPT = chunk0.ld
 
 ##################### Compiler Options #######################
 
-CC := $(QEMU_IRIX) -L $(IRIX_ROOT) $(IRIX_ROOT)/usr/bin/cc
+CC := ../ido/ido7.1_recomp/cc
+CC_OLD := ../ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -47,7 +45,7 @@ OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
-OPT_FLAGS := -g
+OPT_FLAGS := -O2 -g3
 MIPSBIT :=
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
@@ -58,11 +56,13 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS =  -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
-#-T undefined_syms.txt
+LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
+
+
+# $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 default: all
 
@@ -99,9 +99,9 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
-	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
+	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude $(ASM_PROCESSOR_DIR)/prelude.s
 

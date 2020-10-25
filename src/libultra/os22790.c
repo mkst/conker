@@ -2,7 +2,7 @@
 
 #include "variables.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/os/os22790/func_80022790.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/func_80022790.s")
 /*
 void func_80022790(void) {
     s32 sp3C;
@@ -94,6 +94,6 @@ loop_9:
 
 
 // mfc0
-#pragma GLOBAL_ASM("asm/nonmatchings/os/os22790/func_80022A30.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/func_80022A30.s")
 // mfc0
-#pragma GLOBAL_ASM("asm/nonmatchings/os/os22790/func_80022A40.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/func_80022A40.s")

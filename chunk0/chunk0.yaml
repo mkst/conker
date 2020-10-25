@@ -51,7 +51,7 @@ segments:
       - [0x8840, "asm"]
       - [0x8870, "asm"]
       - [0x89D0, "asm"]
-      - [0x8A10, "asm"]
+      - [0x8A10, "c"]
       - [0x8B90, "asm"]
       - [0x8BF0, "asm"]
       - [0x8DD0, "asm"]

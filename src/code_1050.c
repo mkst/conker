@@ -1,5 +1,6 @@
 #include <ultra64.h>
 
+#include "functions.h"
 #include "variables.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80001050.s")
@@ -52,11 +53,12 @@ void func_800010F8(s32 arg0) {
 //     func_80003930();
 //     func_80003BD0();
 //     func_8000709C();
+//     // matches to here ^^
 //     *(D_8002AAE8 + 0) = func_80003C6C(0x1ECC0, 0xFF, 3, 1, 0); // 126144
 //     *(D_8002AAE8 + 1) = func_80003C6C(0x1ECC0, 0xFF, 3, 1, 0); // 126144
 //     func_800034E0(0xFE);
 //     func_80004514(_extcodeSegmentRomStart, &D_80082B20, 0x10, 1);
-//     offset = *D_80082B20 + _extcodeSegmentRomStart; // first chunk base
+//     offset = D_80082B20 + _extcodeSegmentRomStart; // first chunk base
 //     tbd = func_80003C40(_extcodeSegmentRomEnd - offset, 1, 2, 0);
 //     func_80004514(offset, tbd, _extcodeSegmentRomEnd - offset, 1);
 //     func_80006240(tbd, &D_80082B20, D_8003809C);
@@ -137,11 +139,16 @@ void func_800014A0(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_800019F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80001AA8.s")
 
-int func_80002070(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_80002070(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80002088.s")
+// not matching
+// void func_80002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+//     D_80035500 = 0;
+//     func_800020D0(&D_10002070, 0, arg0, &arg1);
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_800020D0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80002718.s")

@@ -2,9 +2,9 @@
 VERSION := us
 
 BUILD_DIR = build
-ASM_DIRS := asm asm/os
+ASM_DIRS := asm asm/libultra
 DATA_DIRS := bin
-SRC_DIRS := src src/os
+SRC_DIRS := src src/libultra
 MP3_DIRS := mp3
 RZIP_DIRS := rzip/chunk0 rzip/chunk1
 
@@ -45,7 +45,7 @@ OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
-OPT_FLAGS := -g
+OPT_FLAGS := -O2 -g3
 MIPSBIT :=
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
@@ -84,33 +84,14 @@ RUNZIP_FILES := $(foreach file,$(RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
 # move this to chunk0?
 decompress: $(BUILD_DIR)/chunk0.bin
 
-# compile flags
-# $(BUILD_DIR)/src/code%.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_1050.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_2DB0.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_38C0.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_39B0.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_1E480.o: OPT_FLAGS := -O2 -g3
-
-$(BUILD_DIR)/src/code_17EC0.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/code_17EC0.o: MIPSBIT := -mips1
-
-$(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -O2 -g3
-
-$(BUILD_DIR)/src/code_4470.o: OPT_FLAGS := -O2 -g3
-# compilers
-# $(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
-
+# file-specific compile flags
+$(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # libultra
-$(BUILD_DIR)/src/os/%.o: OPT_FLAGS := -O2 -g3
-
-
-	# $(BUILD_DIR)/src/os/osGetThreadPri.o: OPT_FLAGS := -O2 -g3
-# $(BUILD_DIR)/src/os/osGetThreadPri.o: CC := $(CC_OLD)
-# $(BUILD_DIR)/src/os/osGetThreadPri.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/src/libultra/%.o: OPT_FLAGS := -O2 -g3
 
 # dependencies
 $(BUILD_DIR):

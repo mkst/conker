@@ -1,6 +1,6 @@
 #include <ultra64.h>
 
-#pragma GLOBAL_ASM("asm/nonmatchings/os/osGetThreadPri/osGetThreadPri.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/osGetThreadPri/osGetThreadPri.s")
 
 /*
 extern OSThread *D_8002BE00;

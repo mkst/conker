@@ -1,5 +1,6 @@
 #include <ultra64.h>
 
+#include "functions.h"
 #include "variables.h"
 
 void func_8001E480(void) {

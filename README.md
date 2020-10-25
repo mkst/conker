@@ -135,6 +135,7 @@ This repo makes use of the following open-source tools without which, there woul
  - [asm-differ](https://github.com/simonlindholm/asm-differ); compare assembly against the original ROM
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow `GLOBAL_ASM` wrappers to include assembly within the c files
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
+ - [ido-static-recomp](https://github.com/Emill/ido-static-recomp); IDO compiler
 
 # Contributing
 
