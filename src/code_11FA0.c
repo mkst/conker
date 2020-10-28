@@ -7,6 +7,8 @@ void func_80011FA0(s32 *arg0) {
     D_80042770 = arg0;
 }
 
+#pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80011FB0.s")
+// NON-MATCHING: using t6 not v0
 // s32 func_80011FB0(s32 arg0) {
 //     if (D_80042774 == 3) {
 //         D_80041FD9 = 1;
@@ -15,7 +17,6 @@ void func_80011FA0(s32 *arg0) {
 //     return D_80042774;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80011FB0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80011FDC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80011FEC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80012020.s")

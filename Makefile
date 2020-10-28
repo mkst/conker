@@ -1,4 +1,3 @@
-
 VERSION := us
 
 BUILD_DIR = build
@@ -85,8 +84,13 @@ RUNZIP_FILES := $(foreach file,$(RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
 decompress: $(BUILD_DIR)/chunk0.bin
 
 # file-specific compile flags
+$(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1AAE0.o: OPT_FLAGS := -g
+# $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
+
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
@@ -100,7 +104,7 @@ $(BUILD_DIR):
 $(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/functions.h include/structs.h
 	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
 	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \

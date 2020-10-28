@@ -8,7 +8,7 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000B060.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000B1B0.s")
 
-// void *func_8000B1B0(s32 arg0) {
+// s32 *func_8000B1B0(s32 arg0) {
 //     void *temp_a0;
 //     void *temp_v1;
 //     void *phi_v1;
@@ -78,22 +78,14 @@ s32 func_8000BBE8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E588.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E654.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E704.s")
-typedef struct {
-  s8 unk0;
-  s8 unk1;
-  s8 unk2;
-  u8 unk3;
-} struct2;
-// non-matching, unk0 lb not lw
-// s32 func_8000E704(s32 arg0, s32 arg1, s32 arg2) {
-//     struct2 *temp_v0 = func_8000B1B0(arg0);
-//     if (temp_v0 && temp_v0->unk0 >= 0) {
-//         func_80008A94(temp_v0->unk3, arg2, arg1);
-//         return 1;
-//     }
-//     return 0;
-// }
+s32 func_8000E704(s32 arg0, s32 arg1, s32 arg2) {
+    s32 *tmp = func_8000B1B0(arg0);
+    if (tmp && *tmp >= 0) {
+        func_80008A94(*tmp, arg2, arg1);
+        return 1;
+    }
+    return 0;
+}
 
 void func_8000E75C(s32 arg0) {
     D_8002B070 = arg0 >> 1;

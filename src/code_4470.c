@@ -19,7 +19,6 @@ void func_80004470(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_80004514.s")
 
-
 void func_80004674(void) {
     int i;
     for (i = 0; i < D_8003A571; i++)

@@ -1,9 +1,11 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-extern s32 *D_100010F8;
+#include "structs.h"
+
+extern s32  D_100010F8;
 extern s32 *D_10001194;
-extern s32 D_10002070;
+extern s32 *D_10002070;
 
 extern s32 *D_10002E50;
 extern s32 *D_100049E0;
@@ -11,10 +13,15 @@ extern s32 *D_100052A0;
 extern s32 *D_10023850;
 extern s32 *D_10023930;
 extern s32 *D_1002AAD0;
+extern s32  D_100097CC;
+extern s32  D_10009CBC;
+extern s32  D_10012E04;
+extern s32  D_10012F94;
+extern s32  D_100131D8;
 
 /* 80000000 */
 extern s32  D_80000300;
-extern s32 *D_8000030C;
+extern s32  D_8000030C;
 extern u32  D_80000310;
 
 /* 80020000 */
@@ -24,11 +31,15 @@ extern s32  D_8002AAE8[2]; // framebuffer
 extern u8   D_8002AB40;
 extern OSViMode *D_8002AB90;
 extern OSViMode *D_8002ABE0;
+extern s32  D_8002AC30;
 extern u8   D_8002AC5C;
+extern u8   D_8002AE40;
+extern OSThread *D_8003E3A0;
 extern s32  D_8002B070;
-extern s32 *D_8002BA44;
+extern struct7 *D_8002BA44[];
 extern s32  D_8002BD18;
 extern s32  D_8002BD60;
+extern f32  D_8002C450;
 extern s32  D_8002D4B0;
 extern s32 *D_8002D8B0;
 
@@ -37,16 +48,16 @@ extern OSThread *D_80031AE0;
 extern OSThread *D_800318B0;
 
 extern s32  D_80032B3F;
-extern s32 *D_8003333F;
+extern s32  D_8003333F;
 
-extern s32 *D_800354F8;
-extern s32 *D_800354FC;
+extern s32  D_800354F8;
+extern s32  D_800354FC;
 extern s16  D_80035500;
 extern OSThread *D_80035910;
 
 extern OSMesgQueue *D_80036B40;
 extern OSMesg      *D_80036B58;
-extern s32  *D_80036B60;
+extern struct0 *D_80036B60;
 extern s32  D_80036B70;
 extern s32  D_80036B78;
 extern s32  D_80036B80;
@@ -64,10 +75,16 @@ extern u32  D_80038098;
 extern u32  D_8003809C;
 extern f32  D_800380A0;
 extern f32  D_800380A4;
-extern s32  *D_800380B0;
+extern s32  D_800380B0;
 extern s32  D_800380B4[5];
-extern s32  *D_800380B8;
-extern s32  *D_800380BC;
+extern s32  D_800380B8;
+extern s32  D_800380BC;
+
+extern s32  D_800380C0;
+extern s32  D_800380C4;
+extern s32  D_800380C8;
+extern s32  D_800380CC;
+extern s32  D_800380D0;
 extern s32  D_800380E0;
 extern s32  D_800388B0;
 
@@ -108,15 +125,28 @@ extern u8  D_8003A570;
 extern u8  D_8003A571;
 extern u8  D_8003A582;
 
-extern s32  D_8003BE70;
-extern s32  D_8003BE74;
+extern s32  D_8003BC30;
+extern s32  D_8003BD30;
+extern s32  D_8003BE30;
+extern u8   D_8003BE50[];
+extern u32  D_8003BE70;
+extern u32  D_8003BE74;
+extern u8   D_8003BE78;
+extern s32   D_8003BE7C;
 
+extern s32  D_8003C8E0;
+extern u32  D_8003C900[];
 extern u32  D_803F5000;
 extern u32  D_803FE000;
 extern u32  D_807F5000;
 extern u32  D_807FE000;
 
 /* 80040000 */
+extern s32  D_80040000;
+extern u32  D_800406A0[];
+extern u8   D_800406B8;
+extern u32  D_80040AC8;
+extern u32  D_80040F78[];
 extern s32  D_80041F04;
 extern s32  D_80041F08;
 extern s32  D_80041F0C;
@@ -126,9 +156,11 @@ extern s8   D_80041FD9;
 extern s32 *D_80042770;
 extern s32  D_80042774;
 extern s32  D_800425E0;
+extern s32  *D_80042800;
+extern s32  D_80042804;
 extern s32 *D_800428F8;
 
-extern s32  D_80043B40[]; // 4064
+extern u32  D_80043B40[]; // 4064
 
 /* 80080000 */
 extern s32  D_80082B20;
@@ -150,7 +182,8 @@ extern s32 D_800BE9E4;
 
 /* other */
 
-extern s32 *D_151FA130;
+extern s32 D_151FA130;
+extern s32 D_15000000;
 
 extern u8 _extcodeSegmentRomStart[];
 extern u8 _extcodeSegmentRomEnd[];
@@ -158,6 +191,6 @@ extern u8 _extcodeSegmentRomEnd[];
 extern u32  AI_A4500000;
 extern s32  AI_A4500004;
 
-extern s16 D_BC000C02;
+extern u16 *D_BC000C02;
 
 #endif

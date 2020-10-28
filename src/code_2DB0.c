@@ -17,10 +17,10 @@
 //     } else {
 //         D_8002AB40 = 0;
 //     }
-//     if (func_80023390(phi_a2) != 0) {
+//     if (func_80023390(phi_a2) != 0) { // func_80023390 takes no args
 //         return -1;
 //     }
-//     AI_A4500000 = func_800233C0(phi_a2);
+//     AI_A4500000 = osVirtualToPhysical(phi_a2);
 //     AI_A4500004 = arg1;
 //     return 0;
 // }

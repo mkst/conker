@@ -25,11 +25,11 @@
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_800051C8.s")
-// void *func_800051C8(void *arg0, OSMesgQueue *arg1) {
+// NON-MATCHING: uses v1 instead of v0
+// s32 func_800051C8(struct1 *arg0, OSMesgQueue *arg1) {
 //     arg0->unk4 = arg1;
-//     arg0->unk0 = (void *) *(void *)0x8003B234;
-//     *(void *)0x8003B234 = arg0;
-//     return (void *)0x8003B234;
+//     arg0->unk0 = D_8003B234;
+//     return &D_8003B234;
 // }
 
 void func_800051E8(void) {

@@ -21,7 +21,7 @@ segments:
     vram:  0x80001000
     files:
     - [0x1000, "asm"]
-    - [0x1050, "c"]
+    - [0x1050, "c"]    # -O2 -g3
     - [0x2DB0, "c"]
     - [0x2E50, "c"]
     - [0x3220, "c"]
@@ -36,13 +36,13 @@ segments:
     - [0x5570, "c"]
     - [0x57E0, "c"]
     - [0x5AB0, "c"]
-    - [0x8120, "asm"]
-    - [0x8180, "asm"]
-    - [0x8F90, "asm"]
+    - [0x8120, "c"]
+    - [0x8180, "c"]
+    - [0x8F90, "c"]
     - [0xA420, "c"]
     - [0xEB00, "c"]
     - [0x11FA0, "c"]
-    - [0x12820, "asm"]
+    - [0x12820, "c"]    # -g from here down (?)
     - [0x128D0, "asm"]
     - [0x13320, "asm"]
     - [0x15550, "asm"]
@@ -67,8 +67,8 @@ segments:
     - [0x1E170, "asm"]
     - [0x1E2A0, "asm"]
     - [0x1E480, "c"]
-    - [0x1E4A0, "asm"]
-    - [0x1E530, "asm"]
+    - [0x1E4A0, "c"]
+    - [0x1E530, "c"]
     - [0x20000, "asm"]
     - [0x210C0, "asm"]
     - [0x214F0, "asm"]
@@ -641,7 +641,7 @@ segments:
     vram:  0x8019ea88
     start: 0x0019ea88
     files:
-    - [0x19EA88, "asm"] # "c", "code_19EA88_wip"]
+    - [0x19EA88, "asm"]
     - [0x1A0558, "asm"]
     - [0x1A20D8, "asm"]
   - [0x001A2190, "bin"] # ~19 MB

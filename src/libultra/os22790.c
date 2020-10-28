@@ -21,7 +21,7 @@ void func_80022790(void) {
 
     sp38 = 0;
     *(void *)0x800428E0 = 1;
-    func_80022A30(func_80022A40() | 0x20000000);
+    __osSetSR(func_80022A40() | 0x20000000);
     func_80022A50(0x1000800);
     if (func_80026700(0x1FC007FC, &sp3C) != 0) {
 loop_1:
@@ -94,6 +94,6 @@ loop_9:
 
 
 // mfc0
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/func_80022A30.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/__osSetSR.s")
 // mfc0
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/func_80022A40.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/os22790/__osGetSR.s")

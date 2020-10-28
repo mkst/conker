@@ -5,15 +5,6 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EB00.s")
 
-typedef struct {
-  s32 unk4;
-  s32 unk8;
-  s32 unkC;
-  s32 unk10;
-  s32 unk14;
-  s32 unk18;
-} struct0;
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EBC4.s")
 // s32 func_8000EBC4(struct0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     s32 temp_v0;
@@ -39,12 +30,6 @@ typedef struct {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EFB4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F1A8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F248.s")
-
-typedef struct {
-  s32 unk0;
-  s32 unk4;
-  s32 unk8;
-} struct1;
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F3D0.s")
 // s32 func_8000F3D0(s32 arg0) {
