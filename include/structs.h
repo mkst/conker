@@ -164,6 +164,20 @@ typedef struct {
     s32 unk4;
     s32 unk8;
     s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+} struct13;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
 } struct14;
 
 typedef struct {
@@ -200,5 +214,28 @@ typedef struct {
     u32 pad34;
     u32 pad38;
 } struct16;
+
+typedef struct {
+  s32 pad1;
+  s32 pad2;
+  s32 pad3;
+  s32 pad4;
+  s32 pad5;
+  s32 pad6;
+  s32 unk8;
+} struct17;
+
+typedef struct {
+  s32 pad0;
+  s32 pad1;
+  s32 pad2;
+  s32 pad3;
+  s32 pad4;
+  s32 pad5;
+  struct17 *unk18;
+  s32 pad6;
+  s32 pad7;
+  s32 unk24;
+} struct18;
 
 #endif

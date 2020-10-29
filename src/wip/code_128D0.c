@@ -205,20 +205,6 @@ void func_800131D8(s32 *arg0) {
     D_80042800 = arg0;
 }
 
-typedef struct {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-} struct13;
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_800131FC.s")
 // void func_800131FC(struct13 *arg0, s32 arg1) {
 //     struct13 *sp24;

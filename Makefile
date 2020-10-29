@@ -39,6 +39,7 @@ CC_OLD := ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
+CPP = $(CROSS)cpp
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
@@ -55,7 +56,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS =  -T undefined_funcs.txt -T $(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
+LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
@@ -77,11 +78,13 @@ clean:
 extract:
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
 
-RZIP_FILES :=	$(foreach dir,$(RZIP_DIRS),$(wildcard $(dir)/*.gz))
-RUNZIP_FILES := $(foreach file,$(RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
+CHUNK_0_RZIP_FILES :=	$(wildcard rzip/chunk0/*.gz)
+CHUNK_1_RZIP_FILES :=	$(wildcard rzip/chunk1/*.gz)
+CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
+CHUNK_1_RUNZIP_FILES := $(foreach file,$(CHUNK_1_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
 
 # move this to chunk0?
-decompress: $(BUILD_DIR)/chunk0.bin
+decompress: $(BUILD_DIR)/chunk0.bin $(BUILD_DIR)/chunk1.bin
 
 # file-specific compile flags
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
@@ -98,10 +101,10 @@ $(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/libultra/%.o: OPT_FLAGS := -O2 -g3
 
 # dependencies
-$(BUILD_DIR):
-	mkdir $(BUILD_DIR)
+$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
+	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
-$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
+$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/functions.h include/structs.h
@@ -128,8 +131,11 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
 
-$(BUILD_DIR)/chunk0.bin: $(RUNZIP_FILES)
-	@cat $(sort $(RUNZIP_FILES)) > $@
+$(BUILD_DIR)/chunk0.bin: $(CHUNK_0_RUNZIP_FILES)
+	cat $(sort $(CHUNK_0_RUNZIP_FILES)) > $@
+
+$(BUILD_DIR)/chunk1.bin: $(CHUNK_1_RUNZIP_FILES)
+	cat $(sort $(CHUNK_1_RUNZIP_FILES)) > $@
 
 # currently n64splat does not write them to build/rzip, so move them there
 $(BUILD_DIR)/%.bin: %.bin

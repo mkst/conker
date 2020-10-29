@@ -36,10 +36,11 @@ LD_SCRIPT = chunk0.ld
 ##################### Compiler Options #######################
 
 CC := ../ido/ido7.1_recomp/cc
-CC_OLD := ../ido/ido5.3_recomp/cc
+# CC_OLD := ../ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
+CPP = $(CROSS)cpp
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
@@ -56,11 +57,10 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
-
 
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
@@ -83,7 +83,7 @@ split:
 compress: $(sort $(SPLIT_FILES_RZ))
 	cp ../rzip/chunk0/*.pad build/split/
 
-# once this works, output to ../rzip/chunk0.bin
+# once this matches, output result to ../rzip/chunk0.bin
 combine: $(PADDING) $(RZ_FILES)
 	cat $(sort $(PADDING) $(RZ_FILES)) > $(BUILD_DIR)/chunk0.gz.bin
 
@@ -93,10 +93,13 @@ verify_o:
 verify:
 	@echo "$$(cat chunk0.gz.sha1)  build/chunk0.gz.bin" | sha1sum --check
 
+$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
+	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+
 $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
-$(TARGET).elf: $(O_FILES) $(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
+$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h

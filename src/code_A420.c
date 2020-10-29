@@ -37,7 +37,6 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000B8B8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000BA18.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000BAFC.s")
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000BBE8.s")
 
 s32 func_8000BBE8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg0 == 0) {

@@ -1,8 +1,9 @@
+name: "Conker's Bad Fur Day (US)"
 basename: conker
 options:
   compiler: IDO
   cpp_args:
-  - "-IInclude"
+  - "-Iinclude"
   - "-Iinclude/2.0L"
   - "-D_LANGUAGE_C"
   find-file-boundaries: yes
@@ -42,7 +43,7 @@ segments:
     - [0xA420, "c"]
     - [0xEB00, "c"]
     - [0x11FA0, "c"]
-    - [0x12820, "c"]    # -g from here down (?)
+    - [0x12820, "c"]    # -g from here onwards ?
     - [0x128D0, "asm"]
     - [0x13320, "asm"]
     - [0x15550, "asm"]
@@ -636,14 +637,14 @@ segments:
   - [0x00186b54, "bin"] # 6096 bytes of zeros
   - [0x00188324, "bin"] # tbd, not asm
   - [0x0019c7d8, "bin"] # more zeroes
-  - name:  code
-    type:  code
-    vram:  0x8019ea88
-    start: 0x0019ea88
-    files:
-    - [0x19EA88, "asm"]
-    - [0x1A0558, "asm"]
-    - [0x1A20D8, "asm"]
+  # - name:  unknown
+  #   type:  code
+  #   vram:  0x8019ea88
+  #   start: 0x0019ea88
+  #   files:
+  #   - [0x19EA88, "asm"]
+  #   - [0x1A0558, "asm"]
+  #   - [0x1A20D8, "asm"]
   - [0x001A2190, "bin"] # ~19 MB
   - [0x01304f00, "bin"] # chunk1 offsets table
   - name: chunk1
