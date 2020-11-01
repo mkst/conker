@@ -1,20 +1,19 @@
+BUILD_DIR = build
 VERSION := us
 
-BUILD_DIR = build
 ASM_DIRS := asm asm/libultra
 DATA_DIRS := bin
 SRC_DIRS := src src/libultra
-MP3_DIRS := mp3
+MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
+            mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
+            mp3/its_war mp3/the_heist mp3/intro mp3/other
 RZIP_DIRS := rzip/chunk0 rzip/chunk1
-
 
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 H_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
 BIN_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
-
-CHUNK0 := $(BUILD_DIR)/chunk0
 
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
@@ -35,7 +34,7 @@ LD_SCRIPT = conker.ld
 ##################### Compiler Options #######################
 
 CC := ido/ido7.1_recomp/cc
-CC_OLD := ido/ido5.3_recomp/cc
+# CC := ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -48,7 +47,7 @@ PYTHON = python3
 OPT_FLAGS := -O2 -g3
 MIPSBIT :=
 
-INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
+INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR -I include/libc
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
@@ -87,12 +86,31 @@ CHUNK_1_RUNZIP_FILES := $(foreach file,$(CHUNK_1_RZIP_FILES),$(BUILD_DIR)/$(file
 decompress: $(BUILD_DIR)/chunk0.bin $(BUILD_DIR)/chunk1.bin
 
 # file-specific compile flags
+# $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_13320.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_15550.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1AAE0.o: OPT_FLAGS := -g
-# $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17870.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17A80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17AF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17DF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17F10.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_18CB0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_18DA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_18E60.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_19B50.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1C690.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1C9E0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1D900.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1DC80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1E170.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1E2A0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1E4A0.o: OPT_FLAGS := -g
+# $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
 
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0

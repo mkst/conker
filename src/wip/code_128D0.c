@@ -73,8 +73,7 @@ void func_800128D0(struct8 *arg0, s32 arg1) {
 //     sp4 = 0;
 //     if ((s32) arg0->unkE > 0) {
 // loop_3:
-//         temp_t2 = sp4 * 4;
-//         (arg0 + temp_t2)->unk10 = (s32) ((arg0 + temp_t2)->unk10 + ((arg1 & -8) << 5));
+//         arg0[sp4].unk10 = (s32) (arg0[sp4].unk10 + ((arg1 & -8) << 5));
 //         temp_t8 = sp4 + 1;
 //         sp4 = temp_t8;
 //         if (temp_t8 < (s32) arg0->unkE) {

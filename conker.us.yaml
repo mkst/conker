@@ -16,8 +16,7 @@ segments:
   - name:  boot
     type:  bin
     start: 0x00000040
-  - name:  code
-    type:  code
+  - type:  code
     start: 0x00001000
     vram:  0x80001000
     files:
@@ -44,29 +43,29 @@ segments:
     - [0xEB00, "c"]
     - [0x11FA0, "c"]
     - [0x12820, "c"]    # -g from here onwards ?
-    - [0x128D0, "asm"]
-    - [0x13320, "asm"]
-    - [0x15550, "asm"]
-    - [0x17870, "asm"]
+    - [0x128D0, "asm"] # wip
+    - [0x13320, "c"]
+    - [0x15550, "c"]
+    - [0x17870, "c"]
     - [0x17AA0, "c"]
-    - [0x17AF0, "asm"]
-    - [0x17DF0, "asm"]
-    - [0x17EC0, "asm"]
-    - [0x17F10, "asm"]
+    - [0x17AF0, "c"]
+    - [0x17DF0, "c"]
+    - [0x17EC0, "asm"] # wip
+    - [0x17F10, "c"]
     - [0x18C60, "c"]
-    - [0x18CB0, "asm"]
-    - [0x18DA0, "asm"]
-    - [0x18E60, "asm"]
-    - [0x19AB0, "asm"]
-    - [0x19B50, "asm"]
-    - [0x1AAE0, "asm"]
-    - [0x1C060, "asm"]
-    - [0x1C690, "asm"]
-    - [0x1C9E0, "asm"]
-    - [0x1D900, "asm"]
-    - [0x1DBA0, "asm"]
-    - [0x1E170, "asm"]
-    - [0x1E2A0, "asm"]
+    - [0x18CB0, "c"]
+    - [0x18DA0, "c"]
+    - [0x18E60, "c"]
+    - [0x19AB0, "c"]
+    - [0x19B50, "c"]
+    - [0x1AAE0, "asm"] # wip
+    - [0x1C060, "c"]
+    - [0x1C690, "c"]
+    - [0x1C9E0, "c"]
+    - [0x1D900, "c"]
+    - [0x1DBA0, "c"]
+    - [0x1E170, "c"]
+    - [0x1E2A0, "c"]
     - [0x1E480, "c"]
     - [0x1E4A0, "c"]
     - [0x1E530, "c"]
@@ -74,7 +73,7 @@ segments:
     - [0x210C0, "asm"]
     - [0x214F0, "asm"]
     - [0x22040, "asm"]
-    - [0x22460, "asm"]
+    - [0x22460, "c"]
   - name:  libultra
     type:  code
     start: 0x000226F0
@@ -632,20 +631,7 @@ segments:
     - [0x185c80, ""]
     - [0x186550, ""]
     - [0x186a78, ""]
-  # these 4 slices are somewhat arbitrary until the data is better understood
-  - [0x00186b50, "bin"] # 4 bytes of something
-  - [0x00186b54, "bin"] # 6096 bytes of zeros
-  - [0x00188324, "bin"] # tbd, not asm
-  - [0x0019c7d8, "bin"] # more zeroes
-  # - name:  unknown
-  #   type:  code
-  #   vram:  0x8019ea88
-  #   start: 0x0019ea88
-  #   files:
-  #   - [0x19EA88, "asm"]
-  #   - [0x1A0558, "asm"]
-  #   - [0x1A20D8, "asm"]
-  - [0x001A2190, "bin"] # ~19 MB
+  - [0x00186b50, "bin"] # ~18 MB
   - [0x01304f00, "bin"] # chunk1 offsets table
   - name: chunk1
     type: rzip
@@ -906,7 +892,7 @@ segments:
   - [0x015B3DB8, "mp3"]
   - [0x015C50A8, "mp3"]
   - [0x015DA450, "mp3"]
-  - [0x015E1FD8, "mp3", "conker_the_king"]
+  - [0x015E1FD8, "mp3", "intro/conker_the_king"]
   - [0x01611298, "mp3"]
   - [0x01619B70, "mp3"]
   - [0x0161DC68, "mp3"]
@@ -916,7 +902,7 @@ segments:
   - [0x01644578, "mp3"]
   - [0x0164DE38, "mp3"]
   - [0x0164F868, "mp3"]
-  - [0x01654028, "mp3", "haybot_buff_you_asshole"]
+  - [0x01654028, "mp3", "barn_boys/haybot_buff_you_asshole"]
   - [0x01655A98, "mp3"]
   - [0x0165B630, "mp3"]
   - [0x0165F1F8, "mp3"]
@@ -1024,7 +1010,7 @@ segments:
   - [0x019CF418, "mp3"]
   - [0x019D17F8, "mp3"]
   - [0x019D2BE8, "mp3"]
-  - [0x019D5BC0, "mp3", "manual_z_button_to_fire"]
+  - [0x019D5BC0, "mp3", "other/manual_z_button_to_fire"]
   - [0x019D7F80, "mp3"]
   - [0x019DA760, "mp3"]
   - [0x019F5CD0, "mp3"]
@@ -1053,14 +1039,14 @@ segments:
   - [0x01AACBB8, "mp3"]
   - [0x01AAF398, "mp3"]
   - [0x01AAFF08, "mp3"]
-  - [0x01AB12F8, "mp3", "game_over"]
+  - [0x01AB12F8, "mp3", "other/game_over"]
   - [0x01AB3290, "mp3"]
   - [0x01AB6708, "mp3"]
   - [0x01ABBEB8, "mp3"]
   - [0x01ACE990, "mp3"]
   - [0x01AE0878, "mp3"]
   - [0x01AE8FF8, "mp3"]
-  - [0x01AF0350, "mp3", "berri_0"]
+  - [0x01AF0350, "mp3", "intro/berri"]
   - [0x01B28EC8, "mp3"]
   - [0x01B64B10, "mp3"]
   - [0x01B7F520, "mp3"]
@@ -1088,11 +1074,11 @@ segments:
   - [0x01CAE7A0, "mp3"]
   - [0x01CB1040, "mp3"]
   - [0x01CD8D70, "mp3"]
-  - [0x01CDBD48, "mp3", "sloprano_0"]
-  - [0x01CEAC00, "mp3", "sloprano_1"]
-  - [0x01D01E90, "mp3", "sloprano_2"]
-  - [0x01D0D7F8, "mp3", "sloprano_3"]
-  - [0x01D19338, "mp3", "sloprano_4"]
+  - [0x01CDBD48, "mp3", "sloprano/song_0"]
+  - [0x01CEAC00, "mp3", "sloprano/song_1"]
+  - [0x01D01E90, "mp3", "sloprano/song_2"]
+  - [0x01D0D7F8, "mp3", "sloprano/song_3"]
+  - [0x01D19338, "mp3", "sloprano/song_4"]
   - [0x01D32130, "mp3"]
   - [0x01D3FD38, "mp3"]
   - [0x01D452D0, "mp3"]

@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80001050.s")
 // NOT MATCHING: matches on 5.3, not 7.1
 // void func_80001050(void) {
@@ -127,7 +128,7 @@ void func_800014A0(void) {
 //     func_80005B04(arg0);
 //     func_80001420();
 //     func_80005BE0();
-//     __osRestoreInt(saveMask );
+//     __osRestoreInt(saveMask);
 // }
 
 // contains delay slot

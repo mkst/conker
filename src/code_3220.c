@@ -49,7 +49,7 @@
 //
 //     while (func_80023DB0(0x4001000) == -1) {};                          // __osSpSetPc
 //     while (func_80023DF0(1, 0x4000FC0, tmp, 64) == -1) {};              // __osSpRawStartDma
-//     while (__osSpDeviceBusy()) {};                                         // __osSpDeviceBusy
+//     while (__osSpDeviceBusy()) {};                                      // __osSpDeviceBusy
 //     while (func_80023DF0(1, 0x4001000, tmp->unk8, tmp->unkC) == -1) {}; // __osSpRawStartDma
 // }
 

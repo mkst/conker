@@ -33,6 +33,7 @@ void func_8000862C(u8 arg0, s32 arg1) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008660.s")
+// NON-MATCHING
 // void func_80008660(u8 arg0, u8 arg1, u8 arg2, s32 arg3) {
 //     s32 temp_lo;
 //     u8 phi_s0;
