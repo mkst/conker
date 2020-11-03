@@ -1,9 +1,10 @@
 BUILD_DIR = build
 VERSION := us
 
-ASM_DIRS := asm asm/libultra
+ASM_DIRS := asm \
+					  asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 DATA_DIRS := bin
-SRC_DIRS := src src/libultra
+SRC_DIRS := src src/libultra src/libultra/io src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
@@ -34,7 +35,7 @@ LD_SCRIPT = conker.ld
 ##################### Compiler Options #######################
 
 CC := ido/ido7.1_recomp/cc
-# CC := ido/ido5.3_recomp/cc
+CC_OLD := ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -45,7 +46,7 @@ OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
 OPT_FLAGS := -O2 -g3
-MIPSBIT :=
+MIPSBIT := -mips2
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR -I include/libc
 
@@ -102,21 +103,35 @@ $(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18CB0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18DA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18E60.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_19AB0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_19B50.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1C690.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1C9E0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1D900.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1DBA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1DC80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E170.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E2A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E4A0.o: OPT_FLAGS := -g
-# $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
+
+# compilers
+$(BUILD_DIR)/src/code_19AB0.o: CC := $(CC_OLD)
+
+# mips
+$(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
 
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # libultra
 $(BUILD_DIR)/src/libultra/%.o: OPT_FLAGS := -O2 -g3
+# $(BUILD_DIR)/src/libultra/libultra_27620.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/src/libultra/libultra_23390.o: OPT_FLAGS := -O1
+
 
 # dependencies
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)

@@ -38,8 +38,8 @@ void func_80012560(s32 arg0) {
     func_85043BB8(&D_800427A0);
 }
 
-void func_80012588(void) {
-    func_85016170();
+void func_80012588(s32 arg0) {
+    func_85016170(arg0);
     func_85043A00(&D_800427A0, &D_800427B0, 64);
     func_851F3C1C(&D_10012560);
 }

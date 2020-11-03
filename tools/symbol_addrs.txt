@@ -27,6 +27,7 @@ __osPfsGetStatus;0x80027714
 __osPfsRequestData;0x80025170
 __osPfsRWInode;0x800282dc
 __osPfsSelectBank;0x800285fc
+__osPiCreateAccessQueue;0x800236D0
 __osProbeTLB;0x800273d0
 __osRepairPackId;0x800279d4
 __osRestoreInt;0x80022de0
@@ -34,13 +35,16 @@ __osSetCompare;0x80027490
 __osSetFpcCsr;0x80022a50
 __osSetHWIntrRoutine;0x80026ac0
 __osSetSR;0x80022a30
+__osSiCreateAccessQueue;0x80025700
 __osSiDeviceBusy;0x80027630
+__osSiGetAccess;0x80025750
 __osSiRawReadIo;0x80026700
+__osSpRawReadIo;0x80026700
 __osSiRawStartDma;0x800257c0
 __osSiRawWriteIo;0x80026750
+__osSiRelAccess;0x80025794
 __osSpDeviceBusy;0x80023e80
 __osSpGetStatus;0x80027620
-__osSpRawReadIo;0x80026700
 __osSpRawStartDma;0x80023df0
 __osSpRawWriteIo;0x80026750
 __osSpSetPc;0x80023db0
@@ -56,6 +60,7 @@ __ull_divremi;0x80026998
 __ull_rem;0x8002682c
 __ull_rshift;0x80026800
 _Litob;0x800230f0
+_VirtualToPhysicalTask;0x80003220
 bcopy;0x80023a10
 bzero;0x800226F0
 corrupted_init;0x80028d34
@@ -65,11 +70,14 @@ lldiv;0x80022f60
 memcpy;0x80022ec0
 osAiGetStatus;0x80024a30
 osAiSetFrequency;0x800263d0
+osAiSetNextBuffer;0x80002DB0
 osContGetReadData;0x80024c84
 osContInit;0x80025340
 osContStartReadData;0x80024bc0
 osCreateMesgQueue;0x80023790
+osCreatePiManager;0x800030A0
 osCreateThread;0x800037F0
+osCreateViManager;0x800034E0
 osDestroyThread;0x80026150
 osEPiRawStartDma;0x80023930
 osGetCount;0x80024770
@@ -80,6 +88,8 @@ osInvalICache;0x80022c90
 osJamMesg;0x800274a0
 osLeoDiskInit;0x80027820
 osMapTLB;0x80026310
+osMotorStart;0x800056A0
+osMotorStop;0x80005570
 osPfsChecker;0x80028670
 osPfsInit;0x80027660
 osPfsIsPlug;0x80024fd0
@@ -95,6 +105,8 @@ osSetEventMesg;0x800237c0
 osSetIntMask;0x80024880
 osSetThreadPri;0x80022bb0
 osSetTimer;0x80024a40
+osSpTaskLoad;0x80003330
+osSpTaskStartGo;0x8000349C
 osSpTaskYield;0x80024ba0
 osSpTaskYielded;0x80024b20
 osStartThread;0x80022a60
@@ -109,3 +121,4 @@ osWritebackDCacheAll;0x80024f10
 sqrtf;0x80026530
 strchr;0x80022f14
 strlen;0x80022eec
+viMgrMain;0x80003658

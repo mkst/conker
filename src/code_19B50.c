@@ -147,7 +147,7 @@ void func_8001A224(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A2F8.s")
-// NON-MATCHING: sra in wrong place
+// NON-MATCHING: doesnt use t3 reg
 // void func_8001A2F8(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     arg3 = arg3 & 0x7F;
 //     arg0->unk60[arg2].unkA = (arg0->unk60[arg2].unkA & 0x80) | arg3;
@@ -164,7 +164,10 @@ void func_8001A3E0(struct24 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk36 = arg3;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A3FC.s")
+void func_8001A3FC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_8001263C(arg0->unk36 * 0x64 + arg3, 0x7FFF, 0x40);
+}
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A45C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A508.s")
@@ -193,6 +196,59 @@ void func_8001A3E0(struct24 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A704.s")
+// void func_8001A704(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+//     u8 sp2F;
+//     u8 sp2E;
+//     s32 sp28;
+//     s32 sp24;
+//     f32 sp20;
+//     f32 sp1C;
+//
+//     sp2F = arg0->unk60[arg2].unkD;
+//     sp2E = arg0->unk60[arg2].unkE;
+//     sp20 = arg0->unk60[arg2].unk10;
+//     sp28 = sp2E - sp2F;
+//     if (sp28 > 0) {
+//         if (arg0->unk60[arg2].unkF & 0x80) {
+//             sp20 = sp20 * 2.0f;
+//         }
+//         sp24 = sp20;
+//         if (sp24 == 0) {
+//             sp24 = 1;
+//             sp1C = 1.0f / sp20;
+//         } else {
+//             sp1C = (f32) sp24 / sp20;
+//         }
+//         if (sp24 < sp28) {
+//             sp28 = sp24;
+//         }
+//     } else {
+//         sp24 = sp20;
+//         if (sp24 == 0) {
+//             sp24 = 1;
+//             sp1C = sp20;
+//         } else {
+//             sp1C = (f32) sp24 / sp20;
+//         }
+//         sp24 = -sp24;
+//         if (sp28 < sp24) {
+//             sp28 = sp24;
+//         }
+//     }
+//     sp2F = sp28 + sp2F;
+//     arg0->unk60[arg2].unkD = sp2F;
+//     if (sp2F != sp2E) {
+//         func_8001C224(&arg0->unk48, arg1, (s32) (arg0->unk24 * 100 * sp1C), 2);
+//     }
+//     if (sp2F != 0) {
+//         arg0->unk30 = (arg0->unk30 | (1 << arg2));
+//     } else {
+//         arg0->unk30 = (arg0->unk30 & ~(1 << arg2));
+//     }
+//     func_8001A45C(arg0, arg2);
+// }
+
+
 
 void func_8001A9DC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk60[arg2].unkF = arg3;

@@ -4,24 +4,6 @@
 #include "variables.h"
 
 
-// typedef struct {
-//   s32 unk0;
-//   s32 unk4;
-//   s32 unk8;
-//   s32 unkC;
-//   s32 unk10;
-//   s32 unk14;
-//   s32 unk18;
-// } struct97;
-//
-// typedef struct {
-//     s32 unk0;
-//     struct97 *unk4;
-//     s32 unk8;
-//     s32 unkC;
-//     s32 unk10;
-// } struct98;
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_8001C060.s")
 // void func_8001C060(struct15 *arg0, s32 arg1, s32 arg2) {
 //     s32 spC;

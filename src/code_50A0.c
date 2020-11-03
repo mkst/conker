@@ -20,13 +20,13 @@
 //     osViSetEvent(&D_8003B218, 0, 1);
 //     osSetEventMesg(9, &D_8003B218, 1);
 //     osSetEventMesg(4, &D_8003B218, 2);
-//     osCreateThread(&D_8003B6A0, 0x14, &D_100049E0, 0, &D_8003B660, 0xD);
+//     osCreateThread(&D_8003B6A0, 0x14, &D_100049E0, 0, &D_8003B660, 13);
 //     osStartThread(&D_8003B6A0);
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_800051C8.s")
 // NON-MATCHING: uses v1 instead of v0
-// s32 func_800051C8(struct1 *arg0, OSMesgQueue *arg1) {
+// s32 func_800051C8(struct01 *arg0, OSMesgQueue *arg1) {
 //     arg0->unk4 = arg1;
 //     arg0->unk0 = D_8003B234;
 //     return &D_8003B234;
@@ -39,7 +39,7 @@ void func_800051E8(void) {
 void func_80005218(void) {
     osCreateMesgQueue(&D_8003B9D0, &D_8003B9E8, 2);
     osSetEventMesg(0xE, &D_8003B9D0, 5);
-    osCreateThread(&D_8003B9F0, 0x15, &D_100052A0, 0, &D_8003B9D0, 0xFA);
+    osCreateThread(&D_8003B9F0, 0x15, &D_100052A0, 0, &D_8003B9D0, OS_PRIORITY_RMON);
     osStartThread(&D_8003B9F0);
 }
 
@@ -50,13 +50,13 @@ void func_80005298(void) {
 // no thankyou
 // void func_800052A0(s32 arg0) {
 //     OSMesg *sp4C; // was ?32
-//     s32 temp_ret;
+//     OSTime temp_ret;
 //     s32 temp_s0;
 //     s32 temp_s1;
-//     u32 temp_ret_2;
-//     u32 temp_ret_3;
-//     u32 temp_ret_4;
-//     u32 temp_ret_5;
+//     OSTime temp_ret_2;
+//     OSTime temp_ret_3;
+//     OSTime temp_ret_4;
+//     OSTime temp_ret_5;
 //     u32 temp_t2;
 //     u32 temp_t3;
 //     u32 temp_t4;

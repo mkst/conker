@@ -6,13 +6,14 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EB00.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EBC4.s")
-// s32 func_8000EBC4(struct0 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-//     s32 temp_v0;
-//     s32 temp_v1;
+// NON-MATCHING: uses t6 not v1 in wrong place
+// s32 func_8000EBC4(struct00 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //
-//     temp_v1 = arg0->unk18 - D_800BE9E4;
+//     s32 temp_v0 = arg0->unkC;
+//     s32 temp_v1 = arg0->unk18 - D_800BE9E4;
+//
 //     if (temp_v1 <= 0) {
-//         temp_v0 = arg0->unkC - D_800BE9E4 * 1000;
+//         temp_v0 = temp_v0 - D_800BE9E4 * 1000;
 //         if (temp_v0 < 0) {
 //             return 1;
 //         }

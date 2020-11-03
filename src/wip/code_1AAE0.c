@@ -157,7 +157,7 @@
 //     return (MAX(0, MIN(127, sp10)) | sp14) & 0xff;
 // }
 
-s32 func_8001B40C(struct7 *arg0, s32 arg1) {
+s32 func_8001B40C(struct07 *arg0, s32 arg1) {
     s32 sp4;
 
     sp4 = arg0->unk28 - arg1;

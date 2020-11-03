@@ -135,7 +135,7 @@ void func_800014A0(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_80001550.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1050/func_800019F0.s")
 // NON-MATCHING: quite a few differences
-// s16 func_800019F0(s16 *arg0, struct5 *arg1) {
+// s16 func_800019F0(s16 *arg0, struct05 *arg1) {
 //     u16 temp_a2 = arg1->unk0;
 //     s16 temp_v1 = (temp_a2 & 0x7FF0) >> 4;
 //

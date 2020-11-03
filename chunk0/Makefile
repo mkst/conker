@@ -36,7 +36,7 @@ LD_SCRIPT = chunk0.ld
 ##################### Compiler Options #######################
 
 CC := ../ido/ido7.1_recomp/cc
-# CC_OLD := ../ido/ido5.3_recomp/cc
+# CC := ../ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -60,8 +60,11 @@ CFLAGS += $(INCLUDE_CFLAGS)
 LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
+
+
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
 
+# $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 default: all

@@ -13,7 +13,7 @@ segments:
     start: 0x00000000
     vram:  0x80000000
     files:
-      - [0x0000, "asm"]
+      - [0x0000, "c"]
       - [0x0940, "asm"]
       - [0x3120, "asm"]
       - [0x39E0, "asm"]
@@ -57,7 +57,7 @@ segments:
       - [0x8DD0, "asm"]
       - [0x8E00, "asm"]
       - [0x9150, "asm"]
-      - [0x91D0, "asm"]
+      - [0x91D0, "c"]
       - [0xC1E0, "asm"]
       - [0xC2A0, "asm"]
       - [0xE470, "asm"]
@@ -100,7 +100,7 @@ segments:
       - [0x12770, "asm"]
       - [0x12780, "asm"]
       - [0x127B0, "asm"]
-      - [0x12FE0, "asm"]
+      - [0x12FE0, "c"]
       - [0x15910, "asm"]
       - [0x15F40, "asm"]
       - [0x16170, "asm"]

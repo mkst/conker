@@ -15,8 +15,8 @@ void func_80015550(struct26 *arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_15550/func_800155A0.s")
 
-s32 func_80015878(struct4 *arg0) {
-    struct4 *sp2C;
+s32 func_80015878(struct04 *arg0) {
+    struct04 *sp2C;
     struct33 tmp;
 
     sp2C = arg0;

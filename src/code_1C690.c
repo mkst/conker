@@ -5,8 +5,8 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C690/func_8001C690.s")
-// NON-MATCHING: matches if D_8002BA44 is struct7**
-// void func_8001C690(struct7 *arg0) {
+// NON-MATCHING: matches if D_8002BA44 is struct07**
+// void func_8001C690(struct07 *arg0) {
 //     OSIntMask mask = osSetIntMask(1);
 //     arg0->unk10 = (s32) D_8002BA44[8];
 //     arg0->unk0 = (s32) *D_8002BA44;
@@ -15,8 +15,8 @@
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C690/func_8001C700.s")
-// NON-MATCHING: matches if D_8002BA44 is struct7**
-// void func_8001C700(struct7 *arg0) {
+// NON-MATCHING: matches if D_8002BA44 is struct07**
+// void func_8001C700(struct07 *arg0) {
 //     OSIntMask mask = osSetIntMask(1);
 //     arg0->unk10 = (s32) D_8002BA44[8];
 //     arg0->unk0 = (s32) *D_8002BA44;
@@ -24,7 +24,6 @@
 //     osSetIntMask(mask);
 // }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_1C690/func_8001C770.s")
 void func_8001C770(struct22 *arg0) {
     struct40 *sp1C;
 

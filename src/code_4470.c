@@ -5,7 +5,7 @@
 
 void func_80004470(void) {
     int i;
-    func_800030A0(150, &D_800388B0, &D_800380E0, 0xC8);
+    osCreatePiManager(150, &D_800388B0, &D_800380E0, 0xC8);
 
     for (i = 0; i < 3; i++)
     {

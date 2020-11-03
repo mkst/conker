@@ -6,31 +6,16 @@ typedef struct {
     s32 unk0;
     s32 unk4;
     s32 unk8;
-    s32 unkC;
+    s32 unkC;   // used
     s32 unk10;
     s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
-    s32 unk30;
-    s32 unk34;
-    s32 unk38;
-    s32 unk3C;
-} struct0;
+    s32 unk18;  // used
+} struct00;
 
 typedef struct {
-    s32 unk0;
-    s32 unk4;
-} struct1;
-
-typedef struct {
-  s32 unk0;
-  s32 unk4;
-  s32 unk8;
-} struct2;
+    s32 unk0;   // used
+    s32 unk4;   // used
+} struct01;
 
 typedef struct {
     s32 unk0;
@@ -38,12 +23,12 @@ typedef struct {
     s32 unk8;
     s32 unkC;
     s32 unk10;
-    s32 unk14;
+    s32 unk14;  // used
     s32 unk18;
     s32 unk1C;
     s32 unk20;
     s32 unk24;
-    s16 unk28;
+    s16 unk28;  // used
     s16 unk2A;
     s32 unk2C;
     s32 unk30;
@@ -52,34 +37,34 @@ typedef struct {
     s32 unk3C;
     s32 unk40;
     s32 unk44;
-    s32 unk48;
-    s32 unk4C;
-    s32 unk50;
+    s32 unk48;  // used
+    s32 unk4C;  // used
+    s32 unk50;  // used
     s32 unk54;
     s32 unk58;
     s32 unk5C;
     s32 unk60;
     u8  unk64;
     u8  unk65;
-} struct4;
+} struct04;
 
 typedef struct {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-} struct5;
+    u16 unk0;   // used
+    u16 unk2;   // used
+    u16 unk4;   // used
+    u16 unk6;   // used
+} struct05;
 
 typedef struct {
     f32 unk0;
     f32 unk4;
     f32 unk8;
     f32 unkC;
-    f32 unk10;
-    f32 unk14;
+    f32 unk10;  // used
+    f32 unk14;  // used
     f32 unk18;
-    f32 unk1C;
-} struct6;
+    f32 unk1C;  // used
+} struct06;
 
 typedef struct {
     s32 unk0;
@@ -107,25 +92,24 @@ typedef struct {
 
 typedef struct {
     s32 unk0;     // used
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
+    s32 unk4;     // used
+    s32 unk8;     // used
+    s32 unkC;     // used
+    s32 unk10;    // used
+    s32 unk14;    // used
+    s32 unk18;    // used
+    s32 unk1C;    // used
+    s32 unk20;    // used
+    s32 unk24;    // used
+    s32 unk28;    // used
+    s32 unk2C;    // used
     s32 unk30;
-    // s16 unk32;
     s32 unk34;
     s32 unk38;
     s32 unk3C;
     struct36 *unk40;
-    s32 unk44;
-    struct37 *unk48;
+    s32 unk44;    // used
+    struct37 *unk48; // used
     s32 unk4C;    // used
     s32 unk50;    // used
     s32 unk54;
@@ -134,7 +118,7 @@ typedef struct {
     s32 unk60;
     s32 unk64;
     s32 unk68;
-} struct7;
+} struct07;
 
 typedef struct {
   s32 unk0;
@@ -200,6 +184,15 @@ typedef struct {
     u32 unk0;
     s32 unk4;
     u32 unk8;
+    s32 unkC;
+    s32 unk10;  // used
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;  // used
 } struct15;
 
 typedef struct {
@@ -368,8 +361,9 @@ struct struct27 {
     s32 unk8;
 } ;
 
-typedef struct {
-    u32 unk0;
+typedef struct  struct25 struct25;
+struct struct25 {
+    struct25 *unk0;
     u16 unk4;
     u8 unk6;
     u8 unk7;
@@ -401,7 +395,7 @@ typedef struct {
     u8 unk39;
     u8 unk3A;
     u8 unk3B;
-} struct25;
+};
 
 typedef struct {
     s32 *unk0;
@@ -466,7 +460,8 @@ typedef struct {
     u16 unk32;
     u8  unk34;
     u8  unk35;
-    u16 unk36;
+    u8  unk36;
+    u8  unk37;
     u16 unk38;
     u16 unk3A;
     u32 unk3C;
@@ -646,7 +641,7 @@ typedef struct {
     s32 unkAC;
     s32 unkB0;
     s32 unkB4;
-    s32 unkB8;
+    s32 *unkB8; // used
     s32 unkBC;
     s32 unkC0;
     s32 unkC4;
@@ -668,11 +663,11 @@ typedef struct {
 } struct43;
 
 typedef struct {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
+    s16 unk0;   // used
+    s16 unk2;   // used
+    s16 unk4;   // used
     s16 unk6;
-    s32 unk8;
+    s32 unk8;   // used
 } struct44;
 
 typedef struct {
@@ -732,4 +727,86 @@ typedef struct {
     s8 unk2;
     s8 unk3;
 } struct49;
+
+typedef struct {
+    s32 unk0;   // used
+    s32 unk4;   // used
+    s16 unk8;   // used
+    s16 unkA;
+    s32 unkC;
+    s32 unk10;  // used
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;  // used
+    s32 unk20;  // used
+    s32 unk24;
+    s32 unk28;  // used
+    s32 unk2C;  // used
+    s32 unk30;  // used
+    s32 unk34;  // used
+    s32 unk38;  // used
+    s32 unk3C;
+    s32 unk40;  // used
+    s32 unk44;  // used
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;  // used
+    s32 unk5C;  // used
+    s32 unk60;  // used
+    s32 unk64;  // used
+    s32 unk68;  // used
+    s32 unk6C;  // used
+    s32 unk70;  // used
+} struct50;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s16 unk8;
+} struct51;
+
+typedef struct {
+    s32 unk0;
+    f32 unk4;
+} struct52;
+
+typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s32 unk4;
+} struct53; // used as OSMesg
+
+typedef struct struct54 struct54;
+
+struct struct54 {
+    struct54 *unk0;
+    struct54 *unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s8 unk14;   // used
+    u8 unk15;   // used
+    u8 unk16;   // used
+};
+
+typedef struct {
+    s16 unk0;
+    s16 unk2; // used
+    s32 unk4;
+    s32 unk8;
+    u8 pad[0x1C];
+    s32 unk28; // used
+    s32 *unk2C; // used
+} struct55;
+
+typedef struct struct56 struct56;
+
+struct struct56 {
+    s32 unk0;
+    s32 unk4;
+    struct56 *unk8;
+};
+
 #endif

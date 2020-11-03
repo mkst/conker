@@ -1,55 +1,39 @@
 #include <ultra64.h>
 
-#include "functions.h"
-#include "variables.h"
 
+// Unable to determine jump table for jr instruction.
 #pragma GLOBAL_ASM("asm/nonmatchings/code_2E50/func_80002E50.s")
-
-// typedef struct {
-//   s32 unk0;
-//   s32 unk4;
-//   OSMesgQueue *unk8;
-//   s32 unkC;
-//   s32 unk10;
-//   s32 unk14;
-//   s32 unk18;
-// } struct0;
+// void func_80002E50(void *arg0) {
+//     void *sp5C;
+//     ? sp58;
+//     ? sp54;
+//     s32 phi_s0;
 //
-// extern struct0 *D_8002AB50;
-
-#pragma GLOBAL_ASM("asm/nonmatchings/code_2E50/func_800030A0.s")
-// far from matching
-// void func_800030A0(OSPri priority, OSMesgQueue *mesgQueue, OSMesg *arg2, s32 arg3) {
-//     s32 foo;
-//     OSPri targetPrio;
-//     OSPri currentPrio;
-//
-//     if (D_8002AB50->unk0 == 0) {
-//         osCreateMesgQueue(mesgQueue, arg2, arg3);
-//         osCreateMesgQueue(&D_80036B40, &D_80036B58, 1);
-//         if (D_8002BD60 == 0) {
-//             func_800236D0();
+//     sp5C = NULL;
+// loop_1:
+//     osRecvMesg(arg0->unk8, &sp5C, 1);
+//     if ((u32) (sp5C->unk0 - 0xA) < 7U) {
+//         // jr goes here
+//         if (*(void *)0x8003A572 != 0) {
+//             *(void *)0x8003A575 = (u8)1;
+//             osStopThread(0x80035910);
+//             *(void *)0x8003A575 = (u8)0;
 //         }
-//         osSetEventMesg(8, &D_80036B40, 0x22222222);
-//         targetPrio = -1;
-//         currentPrio = osGetThreadPri(0);
-//         if (currentPrio < priority) {
-//             targetPrio = currentPrio;
-//             osSetThreadPri(0, priority);
-//         }
-//         foo = __osDisableInt();
-//         D_8002AB50->unk0 = 1;
-//         D_8002AB50->unk4 = &D_80035910;
-//         D_8002AB50->unkC = &D_80036B40;
-//         D_8002AB50->unk10 = &D_800428F8;
-//         D_8002AB50->unk14 = &D_10023850;
-//         D_8002AB50->unk18 = &D_10023930;
-//         D_8002AB50->unk8 = &mesgQueue;
-//         osCreateThread(&D_80035910, 0, &D_10002E50, D_8002AB50, &D_80036B40, priority);
-//         osStartThread(&D_80035910);
-//         __osRestoreInt(foo);
-//         if (targetPrio != -1) {
-//             osSetThreadPri(0, targetPrio);
-//         }
+//         *(void *)0x8003A573 = (u8)1;
+//         osRecvMesg(arg0->unk10, &sp54, 1);
+//         phi_s0 = arg0->unk14(0, sp5C->unkC, sp5C->unk8, sp5C->unk10);
+//     } else {
+//         phi_s0 = -1;
 //     }
+//     if (phi_s0 != 0) {
+//         goto loop_1;
+//     }
+//     osRecvMesg(arg0->unkC, &sp58, 1);
+//     osSendMesg(sp5C->unk4, sp5C, 0);
+//     osSendMesg(arg0->unk10, 0, 0);
+//     if (sp5C->unk0 != 0xB) {
+//         goto loop_1;
+//     }
+//     *(void *)0x8003A573 = (u8)0;
+//     goto loop_1;
 // }

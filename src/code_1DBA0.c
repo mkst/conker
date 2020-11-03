@@ -5,6 +5,34 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_8001DBA0.s")
+// NON-MATCHING: far away
+// s32 func_8001DBA0(struct42 *arg0, s32 *arg1) {
+//     u32 i;
+//     u32 sp8;
+//     s32 sp4;
+//
+//     sp8 = -1;
+//     sp4 = arg0->unk10;
+//     if (arg0->unk4 == 0) {
+//         return 0;
+//     }
+//     for (i = 0; i < 16; i++)
+//     {
+//         if (((u32) arg0->unk4 >> i) & 1) {
+//             if (arg0->unk14) {
+//                 arg0->unkB8[i]--; // = arg0->unkB8[i - 1]; // sp4 ?
+//             }
+//             if (arg0->unkB8[i] < sp8) {
+//                 sp8 = arg0->unkB8[i];
+//             }
+//         }
+//     }
+//
+//     arg0->unk14 = 0;
+//     *arg1 = sp8;
+//     return 1;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_8001DC80.s")
 // s32 func_8001DC80(struct43 *arg0, struct44 *arg1) {
 //     void *sp2C;

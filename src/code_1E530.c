@@ -94,49 +94,45 @@
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001F978.s")
-// void *func_8001F978(void *arg0, s32 arg1, s32 arg2, void *arg3) {
-//     void *sp24;
+// NON-MATCHING: lots of work still to do
+// struct56 *func_8001F978(struct55 *arg0, s32 arg1, s32 arg2, struct56 *arg3) {
+//     struct56 *sp24;
 //     s16 sp22;
-//     void *sp1C;
-//     void *sp18;
-//     void *temp_t4;
-//     void *temp_t9;
+//     struct56 *temp_t9;
 //
 //     sp24 = arg3;
-//     sp22 = (s16) (arg2 >> 8);
+//     sp22 = arg2 >> 8;
 //     temp_t9 = sp24;
-//     sp24 = temp_t9 + 8;
-//     sp1C = temp_t9;
-//     sp1C->unk0 = 0xB000020;
-//     sp1C->unk4 = osVirtualToPhysical(arg0 + 8);
-//     temp_t4 = sp24;
-//     sp24 = temp_t4 + 8;
-//     sp18 = temp_t4;
-//     temp_t4->unk0 = (s32) (((arg0->unk28 & 0xFF) << 0x10) | 0xE000000 | (arg0->unk2 & 0xFFFF));
-//     temp_t4->unk4 = (s32) ((osVirtualToPhysical((arg0 + (arg1 * 4))->unk2C) & 0xFFFFFF) | ((sp22 & 0xFF) << 0x18));
+//     sp24 = temp_t9->unk8;
+//     temp_t9->unk0 = 0xB000020;
+//     temp_t9->unk4 = osVirtualToPhysical(&arg0->unk8);
+//     temp_t9 = sp24;
+//     sp24 = temp_t9->unk8;
+//     temp_t9->unk0 = (s32) (((arg0->unk28 & 0xFF) << 0x10) | 0xE000000 | (arg0->unk2 & 0xFFFF));
+//     temp_t9->unk4 = (s32) ((osVirtualToPhysical(arg0->unk2C[arg1]) & 0xFFFFFF) | ((sp22 & 0xFF) << 0x18));
 //     arg0->unk28 = 0;
 //     return sp24;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FA78.s")
-// NON-MATCHING: f4/f6 swapped
-// f32 func_8001FA78(struct6 *arg0, s32 arg1) {
+// NON-MATCHING: f4/f6 swapped, wrong branch, missing a nop
+// f32 func_8001FA78(struct06 *arg0, s32 arg1) {
 //     f32 tmp;
 //
-//     arg0->unk14 = (f32) (arg0->unk14 + (arg0->unk10 * (f32) arg1));
+//     arg0->unk14 += arg0->unk10 * (f32)arg1;
 //     if (2.0f < arg0->unk14) {
-//         arg0->unk14 = arg0->unk14 - 4.0f;
-//     } else {
-//         arg0->unk14 = arg0->unk14;
+//         arg0->unk14 -= 4.0f;
+//     }
+//     else {
+//         arg0->unk14 = arg0->unk14; // ???
 //     }
 //     tmp = arg0->unk14;
-//     tmp = (tmp < 0.0f) ? -tmp : (tmp - 1.0f);
+//     tmp = tmp < 0.0f ? -tmp : (tmp - 1.0f);
 //     return arg0->unk1C * tmp;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FB40.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FFE0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FFF4.s")
-// void func_8001FFF4(void) {
-//
-// }
+
+void func_8001FFE0(struct43 *arg0, s16 arg1) {
+    arg0->unk1A = arg1;
+}

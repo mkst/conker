@@ -5,7 +5,7 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80018E60.s")
-// void func_80018E60(struct7 *arg0) {
+// void func_80018E60(struct07 *arg0) {
 //     s32 sp44;
 //     // s32 sp40;
 //     // void *sp3C;

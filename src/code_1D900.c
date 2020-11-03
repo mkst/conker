@@ -21,7 +21,7 @@ void func_8001D900(struct22 *arg0, u8 arg1) {
 }
 
 s32 func_8001D9B0(s16 arg0) {
-    struct7 *sp4;
+    struct07 *sp4;
 
     sp4 = D_8002BA44->unk44;
     if (sp4->unk4 == (u32)&D_1001E530) {
@@ -32,7 +32,7 @@ s32 func_8001D9B0(s16 arg0) {
 }
 
 s32 func_8001DA28(s16 arg0) {
-    struct7 *sp4;
+    struct07 *sp4;
 
     sp4 = D_8002BA44->unk44;
     if (sp4->unk4 == (u32)&D_1001E530) {
