@@ -3,15 +3,18 @@
 #include "functions.h"
 #include "variables.h"
 
-void func_800128D0(struct8 *arg0, s32 arg1) {
-    s32 size = arg1;
 
-    s32 i;
-    for (i = 0; i < arg0->unk2; i++)
-    {
-        arg0->unk4[i].unk0 += size;
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_800128D0.s")
+// NON-MATCHING: not too far away
+// void func_800128D0(struct8 *arg0, s32 arg1) {
+//     s32 size = arg1;
+//
+//     s32 i;
+//     for (i = 0; i < arg0->unk2; i++)
+//     {
+//         arg0->unk4[i].unk0 += size;
+//     }
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012934.s")
 // void func_80012934(void *arg0, s32 arg1, s32 arg2) {
@@ -45,20 +48,15 @@ void func_800128D0(struct8 *arg0, s32 arg1) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012A28.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012B84.s")
-// NOT-MATCHING: missing some moves
-// void func_80012B84(struct11 *arg0, s32 arg1) {
-//     if (arg0->unk3) {
-//         return;
-//     }
-//     arg0->unk3 = 1;
-//     arg1 = (0xFFFFFFF8 & arg1) << 5;
-//     arg0->unk10 += arg1;
-// }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012BC8.s")
-// static void func_80012BC8(void) {
-// }
+void func_80012B84(struct11 *arg0, s32 arg1) {
+    if (arg0->unk3) {
+        return;
+    }
+    arg0->unk3 = 1;
+    arg1 = (0xFFFFFFF8 & arg1) << 5;
+    arg0->unk10 += arg1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012BD0.s")
 // void func_80012BD0(void *arg0, s32 arg1) {
@@ -82,16 +80,17 @@ void func_800128D0(struct8 *arg0, s32 arg1) {
 //     }
 // }
 
-void func_80012C5C(struct9 *arg0, s32 arg1, s32 arg2) {
-    if (arg0->unkE) {
-        return;
-    }
-    arg0->unkE = 1;
-    arg0->unk0 = arg0->unk0 + arg1;
-    arg0->unk4 = arg0->unk4 + arg1;
-    arg0->unk8 = arg0->unk8 + arg1;
-    func_80012CFC(arg0->unk8, arg1, arg2);
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012C5C.s")
+// void func_80012C5C(struct9 *arg0, s32 arg1, s32 arg2) {
+//     if (arg0->unkE) {
+//         return;
+//     }
+//     arg0->unkE = 1;
+//     arg0->unk0 = arg0->unk0 + arg1;
+//     arg0->unk4 = arg0->unk4 + arg1;
+//     arg0->unk8 = arg0->unk8 + arg1;
+//     func_80012CFC(arg0->unk8, arg1, arg2);
+// }
 
 void func_80012CFC(struct12 *arg0, s32 arg1, s32 arg2) {
     arg0->unk9 = 1;
@@ -107,14 +106,10 @@ void func_80012CFC(struct12 *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012D78.s")
-// static void func_80012D78(void) {
-// }
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_80012D80.s")
 // NOT-MATCHING: missing a couple of moves
 // f32 func_80012D80(u8 arg0) {
-//     f32 sp4 = D_8002C450;
+//     f32 sp4 = F_1_000_000;
 //     f32 sp0 = 1.0f;
 //
 //     while (arg0)
@@ -198,34 +193,9 @@ void func_80012CFC(struct12 *arg0, s32 arg1, s32 arg2) {
 //     return sp24;
 // }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_800131D8.s")
 void func_800131D8(s32 *arg0) {
     *arg0 = D_80042800;
     D_80042800 = arg0;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_128D0/func_800131FC.s")
-// void func_800131FC(struct13 *arg0, s32 arg1) {
-//     struct13 *sp24;
-//     s32 sp20;
-//     s32 temp_t2;
-//
-//     D_80042804 = func_80012844(0, 0, arg0->unkC, arg1, 0x2C);
-//     D_80042800 = D_80042804;
-//     D_80042800 = D_80042804;
-//     sp24 = D_80042804;
-//     sp20 = 0;
-//     if ((arg1 - 1) > 0) {
-//         do
-//         {
-//             *sp24 = (s32) ((sp20 * 44) + D_80042804 + 44);
-//             sp24 = *sp24;
-//             temp_t2 = sp20 + 1;
-//             sp20 = temp_t2;
-//         } while (temp_t2 < (arg1 - 1));
-//     }
-//     *sp24 = 0;
-//     arg0->unk10 = D_10012E04;
-//     arg0->unk14 = D_10012F94;
-//     arg0->unk18 = D_100131D8;
-// }

@@ -84,11 +84,9 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 ```
 [header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
 [ boot ]  0000 0040 > 0000 1000
-[ code ]  0000 1000 > 0002 26F0 ; initialisation code
-[ code ]  0002 26F0 > 0004 2C50 ; libultra code
+[ code ]  0000 1000 > 0004 2C50 ; boot + libultra code
 [ rzip ]  0004 2C50 > 0019 EA88 ; "chunk0", code + more
-[ code ]  0019 EA88 > 001A 2190
-[ ???? ]  001A 2190 > 0130 4F00
+[ ???? ]  0019 EA88 > 0130 4F00
 [ rzip ]  0130 4F00 > 0132 E691 ; "chunk1", unknown data
 [ ???? ]  0132 E691 > 0133 12E8
 [ mp3s ]  0133 12E8 > 029A FD38 ; some are somewhat scrambled

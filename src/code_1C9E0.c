@@ -61,9 +61,9 @@ void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4)
         arg1 = arg0 - 200.0f;
     }
 
-    sp24 = func_850484A0(arg1 * D_8002C770, arg0);
+    sp24 = func_850484A0(arg1 * PI, arg0);
     sp20 = sp24 * sp24;
-    sp1C = (sp24 * D_8002C774) / arg2;
+    sp1C = (sp24 * F_1__4142136573791504) / arg2;
     arg3->unk0 = sp20 / (1.0f + sp20 + sp1C);
     arg3->unk4 = arg3->unk0 * 2.0f;
     arg3->unk8 = arg3->unk0;

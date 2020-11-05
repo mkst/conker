@@ -2,8 +2,9 @@ BUILD_DIR = build
 VERSION := us
 
 ASM_DIRS := asm \
-					  asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
-DATA_DIRS := bin
+            asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
+BIN_DIRS := bin
+RODATA_DIRS := rodata
 SRC_DIRS := src src/libultra src/libultra/io src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
@@ -13,14 +14,16 @@ RZIP_DIRS := rzip/chunk0 rzip/chunk1
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 H_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
-BIN_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
+BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
+RODATA_FILES := $(foreach dir,$(RODATA_DIRS),$(wildcard $(dir)/*.rodata))
 
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
            $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
+           $(foreach file,$(RODATA_FILES),$(BUILD_DIR)/$(file:.rodata=.o)) \
            $(BUILD_DIR)/rzip/chunk0/chunk0.o \
            $(BUILD_DIR)/rzip/chunk1/chunk1.o
 
@@ -44,11 +47,12 @@ LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
+XXD = xxd
 
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2
 
-INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR -I include/libc
+INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
@@ -59,7 +63,7 @@ CFLAGS += $(INCLUDE_CFLAGS)
 LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
 ######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RODATA_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
 
 default: all
 
@@ -72,6 +76,7 @@ clean:
 	rm -rf asm
 	rm -rf bin
 	rm -rf build
+	rm -rf rodata
 	rm -rf rzip
 	rm -rf mp3
 
@@ -92,12 +97,15 @@ $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_13320.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_15550.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1AAE0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17870.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17880.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17A80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17AF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17C00.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17D80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17DF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_17EC0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_17F10.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18CB0.o: OPT_FLAGS := -g
@@ -105,6 +113,7 @@ $(BUILD_DIR)/src/code_18DA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_18E60.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_19AB0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_19B50.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1AAE0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1C690.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1C9E0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1D900.o: OPT_FLAGS := -g
@@ -115,22 +124,34 @@ $(BUILD_DIR)/src/code_1E2A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E4A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
 
 # compilers
+$(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_EB00.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/src/code_3920.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_19AB0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_17C00.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_128D0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_17AF0.o: CC := $(CC_OLD)
 
-# mips
-$(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
+
+
+$(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
+# $(BUILD_DIR)/src/libultra/io/ai.o: OPT_FLAGS := -O2 -g
+# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: MIPSBIT := -mips1
+
+# mips version
+# $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
+$(BUILD_DIR)/src/code_EB00.o: MIPSBIT := -mips2 -32
+
 
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # libultra
-$(BUILD_DIR)/src/libultra/%.o: OPT_FLAGS := -O2 -g3
-# $(BUILD_DIR)/src/libultra/libultra_27620.o: CC := $(CC_OLD)
-# $(BUILD_DIR)/src/libultra/libultra_23390.o: OPT_FLAGS := -O1
+# $(BUILD_DIR)/src/libultra/%.o: OPT_FLAGS := -O2 -g3
 
 
 # dependencies
@@ -158,6 +179,9 @@ $(BUILD_DIR)/%.o: %.bin
 $(BUILD_DIR)/%.o: %.mp3
 	$(LD) -r -b binary -o $@ $<
 
+$(BUILD_DIR)/%.o: %.rodata
+	$(AS) $(ASFLAGS) -o $@ $<
+
 $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $< $@ -O binary
 
@@ -177,4 +201,7 @@ $(BUILD_DIR)/%.bin: %.bin
 verify: $(TARGET).z64
 	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
 
+# settings
+
 .PHONY: all clean default
+SHELL = /bin/bash -e -o pipefail

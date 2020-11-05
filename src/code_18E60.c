@@ -3,7 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80018E60.s")
 // void func_80018E60(struct07 *arg0) {
 //     s32 sp44;
@@ -234,7 +233,7 @@ void func_80019744(struct36 **arg0) {
 s32 func_80019964(s32 arg0) {
     f32 sp4;
 
-    sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f;
+    sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / F_1_000_000) + 0.5f;
     return (s32) sp4;
 }
 

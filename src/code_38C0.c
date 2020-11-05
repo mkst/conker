@@ -4,8 +4,8 @@
 #include "variables.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_38C0/func_800038C0.s")
+// NON-MATCHING: no addiu start/end
 // void func_800038C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-//     return;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_38C0/func_800038E0.s")

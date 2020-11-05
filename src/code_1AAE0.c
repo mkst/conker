@@ -163,11 +163,13 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
     sp4 = arg0->unk28 - arg1;
     if (sp4 >= 0) {
         return sp4;
+    } else {
+        return 1000;
     }
-    return 1000;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B450.s")
+// NON-MATCHING: what struct is this?
 // u8 func_8001B450(struct25 *arg0, struct26 *arg1) {
 //     s32 sp4;
 //
@@ -182,7 +184,7 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 //     } else {
 //         sp4 = 0x7F;
 //     }
-//     return sp7;
+//     return sp4;
 // }
 
 
@@ -253,11 +255,6 @@ void func_8001B620(struct26 *arg0, s32 arg1) {
     arg0->unk60[arg1].unk15 = 0;
     arg0->unk60[arg1].unk14 = 0;
     arg0->unk60[arg1].unk8 = 0;
-}
-
-
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B7C8.s")
-void func_8001B7C8(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B7D0.s")

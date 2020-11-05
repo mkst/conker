@@ -20,8 +20,10 @@ segments:
     start: 0x00001000
     vram:  0x80001000
     files:
-    - [0x1000, "asm"]
-    - [0x1050, "c"]    # -O2 -g3
+    # -O2 -g3 from here
+    - [0x1000, "asm", "entrypoint"]
+    - [0x1050, "c"]
+    - [0x1420, "c"]
     - [0x2DB0, "c", "libultra/io/aisetnextbuf"]
     - [0x2E50, "c"]
     - [0x30A0, "c", "libultra/io/pimgr"]
@@ -45,15 +47,19 @@ segments:
     - [0xA420, "c"]
     - [0xEB00, "c"]
     - [0x11FA0, "c"]
-    - [0x12820, "c"]    # -g from here onwards ?
-    - [0x128D0, "asm"] # wip
+    # -g from here
+    - [0x12820, "c"]
+    - [0x128D0, "c"] # wip
     - [0x13320, "c"]
     - [0x15550, "c"]
     - [0x17870, "c"]
+    - [0x17A80, "c"]
     - [0x17AA0, "c"]
     - [0x17AF0, "c"]
+    - [0x17C00, "c"]
+    - [0x17D80, "c"]
     - [0x17DF0, "c"]
-    - [0x17EC0, "asm"] # wip
+    - [0x17EC0, "c"]
     - [0x17F10, "c"]
     - [0x18C60, "c"]
     - [0x18CB0, "c"]
@@ -61,7 +67,7 @@ segments:
     - [0x18E60, "c"]
     - [0x19AB0, "c"]
     - [0x19B50, "c"]
-    - [0x1AAE0, "asm"] # wip
+    - [0x1AAE0, "c"]
     - [0x1C060, "c"]
     - [0x1C690, "c"]
     - [0x1C9E0, "c"]
@@ -77,68 +83,65 @@ segments:
     - [0x214F0, "c"]
     - [0x22040, "c"]
     - [0x22460, "c"]
-  - name:  libultra
-    type:  code
-    start: 0x000226F0
-    vram:  0x800226F0
-    files:
+    # -O2 -g3 from here (?)
     - [0x226F0, "asm", "libultra/libc/bzero"]
     - [0x22790, "c", "libultra/os/os22790"]
-    - [0x22A30, "asm", "libultra/os/__osSetSR"]
-    - [0x22A40, "asm", "libultra/os/__osGetSR"]
-    - [0x22A50, "asm", "libultra/os/__osSetFpcCsr"]
-    - [0x22A60, "asm", "libultra/os/osStartThread"]
-    - [0x22BB0, "asm", "libultra/os/osSetThreadPri"]
-    - [0x22C90, "asm", "libultra/os/osInvalICache"]
-    - [0x22D10, "asm", "libultra/os/osInvalDCache"]
-    - [0x22DC0, "asm", "libultra/os/__osDisableInt"]
-    - [0x22DE0, "asm", "libultra/os/__osRestoreInt"]
-    - [0x22E00, "asm", "libultra/os/osStopThread"]
+    - [0x22A30, "asm", "libultra/os/setsr"]
+    - [0x22A40, "asm", "libultra/os/getsr"]
+    - [0x22A50, "asm", "libultra/os/setfpccsr"]
+    - [0x22A60, "asm", "libultra/os/startthread"]
+    - [0x22BB0, "asm", "libultra/os/setthreadpri"]
+    - [0x22C90, "asm", "libultra/os/invalicache"]
+    - [0x22D10, "asm", "libultra/os/invaldcache"]
+    - [0x22DC0, "asm", "libultra/os/interrupt"]
+    - [0x22E00, "asm", "libultra/os/stopthread"]
     - [0x22EC0, "asm", "libultra/libc/string"]
     - [0x22F60, "asm", "libultra/libc/lldiv"]
     - [0x23060, "asm", "libultra/libc/ldiv"]
-    - [0x230F0, "asm", "libultra/libc/_Litob"]
-    - [0x23390, "asm", "libultra/os/__osAiDeviceBusy"]
-    - [0x233C0, "asm", "libultra/os/osVirtualToPhysical"]
-    - [0x23440, "asm", "libultra/os/osRecvMesg"]
-    - [0x23580, "asm", "libultra/os/osSendMesg"]
-    - [0x236D0, "asm", "libultra/os/__osPiCreateAccessQueue"]
-    - [0x23720, "asm"] # functions are not aligned
-    - [0x23790, "asm", "libultra/os/osCreateMesgQueue"]
-    - [0x237C0, "asm", "libultra/os/osSetEventMesg"]
-    - [0x23830, "c", "libultra/os/osGetThreadPri"] # wip
-    - [0x23850, "asm", "libultra/os/osPiRawStartDma"]
-    - [0x23930, "asm", "libultra/os/osEPiRawStartDma"]
+    - [0x230F0, "asm", "libultra/libc/xlitob"]
+    - [0x23390, "c", "libultra/io/ai"]
+    - [0x233C0, "asm", "libultra/os/virtualtophysical"]
+    - [0x23440, "asm", "libultra/os/recvmesg"]
+    - [0x23580, "asm", "libultra/os/sendmesg"]
+    - [0x236D0, "asm", "libultra/os/piacs"]
+    - [0x23790, "asm", "libultra/os/createmesgqueue"]
+    - [0x237C0, "asm", "libultra/os/seteventmesg"]
+    - [0x23830, "c", "libultra/os/getthreadpri"] # wip
+    - [0x23850, "asm", "libultra/io/pirawdma"]
+    - [0x23930, "asm", "libultra/io/epirawdma"]
     - [0x23A10, "asm", "libultra/libc/bcopy"]
-    - [0x23DA0, "asm", "libultra/os/osGetThreadPri"]
-    - [0x23DF0, "asm", "libultra/os/__osSpRawStartDma"]
-    - [0x23E80, "asm", "libultra/os/__osSpDeviceBusy"]
-    - [0x23EB0, "asm"] # functions are not aligned
-    - [0x242B0, "asm", "libultra/os/__osViInit"]
-    - [0x24400, "asm", "libultra/os/osPiGetDeviceType"]
-    - [0x24410, "asm", "libultra/os/__osViSwapContext"]
-    - [0x24770, "asm", "libultra/os/osGetCount"]
-    - [0x24780, "asm", "libultra/os/__osDequeueThread"]
-    - [0x247C0, "asm", "libultra/os/osViSetMode"]
-    - [0x24830, "asm", "libultra/os/osViSwapBuffer"]
-    - [0x24880, "asm", "libultra/os/osSetIntMask"]
-    - [0x24920, "asm", "libultra/os/osPiStartDma"]
-    - [0x24A30, "asm", "libultra/os/osAiGetStatus"]
-    - [0x24A40, "asm", "libultra/os/osSetTimer"]
-    - [0x24B20, "asm", "libultra/os/osSpTaskYielded"]
-    - [0x24BA0, "asm", "libultra/os/osSpTaskYield"]
-    - [0x24BC0, "asm"] # functions are not aligned
-    - [0x24E20, "asm", "libultra/os/osViGetCurrentFramebuffer"]
-    - [0x24E60, "asm", "libultra/os/osViGetNextFramebuffer"]
+    - [0x23DA0, "asm", "libultra/io/spsetstat"]
+    - [0x23DB0, "asm", "libultra/io/spsetpc"]
+    - [0x23DF0, "asm", "libultra/io/sprawdma"]
+    - [0x23E80, "asm", "libultra/io/sp"]
+    - [0x23EB0, "asm", "libultra/os/timerintr"]
+    - [0x242B0, "asm", "libultra/io/vi"]
+    - [0x24400, "asm", "libultra/io/pigettype"]
+    - [0x24410, "asm", "libultra/io/viswapcontext"]
+    - [0x24770, "asm", "libultra/os/getcount"]
+    - [0x24780, "asm", "libultra/os/thread"]
+    - [0x247C0, "asm", "libultra/io/visetmode"]
+    - [0x24830, "asm", "libultra/io/viswapbuf"]
+    - [0x24880, "asm", "libultra/os/setintmask"]
+    - [0x24920, "asm", "libultra/io/pidma"]
+    - [0x24A30, "asm", "libultra/io/aigetstat"]
+    - [0x24A40, "asm", "libultra/os/settimer"]
+    - [0x24B20, "asm", "libultra/io/sptaskyielded"]
+    - [0x24BA0, "asm", "libultra/io/sptaskyield"]
+    - [0x24BC0, "asm", "libultra/io/contreaddata"]
+    - [0x24E20, "asm", "libultra/io/vigetcurrframebuf"]
+    - [0x24E60, "asm", "libultra/io/vigetnextframebuf.c"]
     - [0x24EA0, "asm", "libultra/io/visetevent"]
     - [0x24F10, "asm", "libultra/os/writebackdcacheall"]
     - [0x24F40, "asm", "libultra/os/gettime"]
     - [0x24FD0, "asm", "libultra/io/pfsisplug"]
-    - [0x25340, "asm", "libultra//osContInit"]
-    - [0x25700, "asm", "libultra/os/__osSiCreateAccessQueue"] # siacs.c
-    - [0x25870, "asm", "libultra/os/__osContRamWrite"]
-    - [0x25C20, "asm", "libultra/os/__osContRamRead"]
+    - [0x25340, "asm", "libultra/io/controller"]
+    - [0x25700, "asm", "libultra/io/siacs"]
+    - [0x257C0, "asm", "libultra/io/sirawdma"]
+    - [0x25870, "asm", "libultra/io/contramwrite"]
+    - [0x25C20, "asm", "libultra/io/contramread"]
     - [0x25FD0, "asm", "libultra/io/crc"]
+    - [0x26150, "asm", "libultra/os/destroythread"]
     - [0x26250, "asm", "libultra/io/viblack"]
     - [0x262C0, "asm", "libultra/io/pigetstat"]
     - [0x262D0, "asm", "libultra/os/unmaptlb"]
@@ -150,6 +153,7 @@ segments:
     - [0x26750, "asm", "libultra/io/sprawwrite"]
     - [0x267A0, "asm", "libultra/io/pirawread"]
     - [0x26800, "asm", "libultra/libc/__ull_rshift"]
+    - [0x26AC0, "asm", "libultra/io/sethwinterrupt"]
     - [0x273D0, "asm", "libultra/os/probetlb"]
     - [0x27490, "asm", "libultra/os/setcompare"]
     - [0x274A0, "asm", "libultra/os/jammesg"]
@@ -157,8 +161,37 @@ segments:
     - [0x27620, "asm", "libultra/io/spgetstat"]
     - [0x27660, "asm", "libultra/io/pfsinit"]
     - [0x27820, "asm", "libultra/io/leodiskinit"]
-    - [0x28670, "asm", "libultra/io/pfschecker"] # includes corrupted_init, corrupted
+    - [0x28670, "asm", "libultra/io/pfschecker"]
   - [0x000290D0, "bin"]
+  - name: rodata
+    type: rodata
+    start: 0x0002C750
+    vram: 0x8002C750
+    files:
+    - start: 0x0002C750
+      types: "ffffffffffffffffffff"
+      glabel:
+      - "F_1_000_000"
+      - "D_8002C754"
+      - "D_8002C758"
+      - "D_8002C75C"
+      - "F_1__0005778074264526"
+      - "F_0__999422550201416"
+      - "D_8002C768"
+      - "D_8002C76C"
+      - "PI"
+      - "F_1__4142136573791504" # root 2
+      - "D_8002C778"
+      - "D_8002C77C"
+      - "D_8002C780"
+      - "D_8002C784"
+      - "D_8002C788"
+      - "D_8002C78C"
+      - "F_0__10000000149011612"
+      - "D_8002C794"
+      - "D_8002C798"
+      - "D_8002C79C"
+  - [0x0002C7A0, "bin"]
   - name: chunk0
     type: rzip
     start: 0x42C50
@@ -1358,5 +1391,6 @@ segments:
   #   - [0x03ed2e14, ""]
   - [0x03ECC788, "bin"] # midis
   # - [0x03ed3e88, "bin"] # end of first midi chunk?
-  - [0x03f738d0, "bin"]
+  - [0x03f738d0, "bin"] # ~ 95K
+  - [0x03f8b800, "bin", "trailer"] # 0xff to the end
   - [0x04000000] # the end of the rom

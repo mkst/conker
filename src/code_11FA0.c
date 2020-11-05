@@ -22,14 +22,9 @@ void func_80011FDC(s32 arg0) {
     D_80042778 = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80011FEC.s")
-// void *func_80011FEC(void) {
-//     *(void *)0x8004277C = 0;
-//     *(void *)0x80042778 = 0;
-//     D_80042774 = 0;
-//     D_80042770 = 0;
-//     return (void *)0x8004277C;
-// }
+void func_80011FEC(void) {
+    D_80042770 = D_80042774 = D_80042778 = D_8004277C = 0;
+}
 
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_80012020.s")

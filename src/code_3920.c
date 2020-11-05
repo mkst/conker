@@ -9,8 +9,8 @@
 //     D_80038080 = 0;
 // }
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3920/func_80003930.s")
+// NON-MATCHING: wrong O flag maybe?
 // u32 func_80003930(void) {
 //     if (D_80038080) {
 //         D_80038090 = D_807F5000;

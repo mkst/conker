@@ -71,7 +71,7 @@
 //     if (D_8000030C == 0) {
 //         bzero(0x8000031C, 0x40);
 //     }
-//     temp_t4 = *(void *)0xA4600010;
+//     temp_t4 = *(void *)0xA4600010; // PI_STATUS_REG
 //     sp30 = temp_t4;
 //     if ((temp_t4 & 3) != 0) {
 // loop_9:
@@ -84,7 +84,7 @@
 //     sp34 = temp_t3;
 //     if ((temp_t3 & 0xFFFF) == 0) {
 //         *(void *)0x8002BD20 = 1;
-//         __osSetHWIntrRoutine(1, 0x10026B10);
+//         __osSetHWIntrRoutine(1, 0x10026B10); // __osLeoInterrupt?
 //         return;
 //     }
 //     *(void *)0x8002BD20 = 0;

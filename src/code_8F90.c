@@ -301,7 +301,7 @@ void func_80009B2C(struct54 *arg0) {
         arg0->unk14--;
     }
 }
-struct54 *func_80009BE4(struct54 * arg0) ;
+
 void func_80009B4C(struct54 *arg0) {
     if (((s32)arg0 & 1) == 0) {
         arg0->unk14--;

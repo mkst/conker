@@ -22,3 +22,11 @@ index 0000000..6e4aa49
 @@ -0,0 +1 @@
 +../../../patches/n64splat/rzip.py
 \ No newline at end of file
+diff --git a/tools/n64splat/segtypes/rodata.py b/tools/n64splat/segtypes/rodata.py
+new file mode 120000
+index 0000000..6e4aa49
+--- /dev/null
++++ b/tools/n64splat/segtypes/rodata.py
+@@ -0,0 +1 @@
++../../../patches/n64splat/rodata.py
+\ No newline at end of file

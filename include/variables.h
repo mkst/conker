@@ -3,6 +3,19 @@
 
 #include "structs.h"
 
+
+/* defined */
+
+extern f32 PI;
+
+extern f32 F_1__0005778074264526;
+extern f32 F_0__999422550201416;
+extern f32 F_0__10000000149011612;
+extern f32 F_1__4142136573791504;
+extern f32 F_1_000_000;
+
+/* undefined */
+
 extern s32  D_100010F8;
 extern s32 *D_10001194;
 extern s32 *D_10002070;
@@ -45,7 +58,10 @@ extern u8   D_8002AB40;
 extern OSViMode *D_8002AB90;
 extern OSViMode *D_8002ABE0;
 extern s32  D_8002AC30;
+extern struct58 *D_8002AC50; // contains pointer to framebuffer
+extern u8   D_8002AC54;
 extern u8   D_8002AC5C;
+extern s8   D_8002AC6C;
 extern u8   D_8002AE40;
 extern s32  D_8002AE4C;
 extern s32  D_8002AE54;
@@ -73,15 +89,7 @@ extern s16  D_8002BA30;
 extern s32  D_8002BA2C;
 extern s32  D_8002BD18;
 extern s32  D_8002BD60;
-extern f32  D_8002C450;
-extern f32  D_8002C750;
-extern f32  D_8002C760; // 1.0005778074264526
-extern f32  D_8002C764; // 0.999422550201416
-extern f32  D_8002C770; // pi
-extern f32  D_8002C774; // 1.4142136573791504
-extern f32  D_8002C780; // 26768.0
-extern f32  D_8002C784; // 26768.0
-extern f32  D_8002C790;
+extern f32  D_8002C450; // 1.0309929847717285
 extern s32  D_8002D4B0;
 extern s32 *D_8002D8B0;
 
@@ -118,7 +126,7 @@ extern u32  D_8003809C;
 extern f32  D_800380A0;
 extern f32  D_800380A4;
 extern s32  D_800380B0;
-extern s32  D_800380B4[5];
+extern struct54 *D_800380B4;
 extern s32  D_800380B8;
 extern s32  D_800380BC;
 
@@ -165,7 +173,12 @@ extern u32 D_8003BC24;
 
 extern u8  D_8003A570;
 extern u8  D_8003A571;
+extern u8  D_8003A581;
 extern u8  D_8003A582;
+extern u8  D_8003A583;
+extern u8  D_8003A584;
+extern u8  D_8003A588;
+extern u8  D_8003A5C8;
 
 extern s32  D_8003BC30;
 extern s32  D_8003BD30;
@@ -200,10 +213,21 @@ extern s32  D_80041F08;
 extern s32  D_80041F0C;
 extern struct49 *D_80041F10[];
 extern u32  D_80041F50;
+extern s32  D_80041F54;
+extern s32  D_80041F56;
+extern f32  D_80041F58;
+extern s32  D_80041F5C;
+extern u8   D_80041F60;
 extern u8   D_80041F61;
+extern s8   D_80041FD8;
 extern s8   D_80041FD9;
+extern s32  D_80041FDC;
 
-extern s32 *D_80042770;
+extern f32  D_8002C3F8; // rodata
+extern f32  D_8002C3FC; // rodata
+
+
+extern s32  D_80042770;
 extern s32  D_80042774;
 extern s32  D_80042778;
 extern s32  D_8004277C;

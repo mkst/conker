@@ -809,4 +809,26 @@ struct struct56 {
     struct56 *unk8;
 };
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;  // used
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    u16 unk24;  // used
+} struct57;
+
+typedef struct {
+  u32 pad0[3];
+  s32 unkC;               // used
+  void *framebuffer;      // framebuffer
+  u32 pad1[17];
+  OSMesgQueue *mesgQueue; // used
+  OSMesg *mesg;           // used
+} struct58;
+
 #endif
