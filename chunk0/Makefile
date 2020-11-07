@@ -36,7 +36,7 @@ LD_SCRIPT = chunk0.ld
 ##################### Compiler Options #######################
 
 CC := ../ido/ido7.1_recomp/cc
-# CC := ../ido/ido5.3_recomp/cc
+CC_OLD := ../ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
@@ -47,7 +47,7 @@ OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
 OPT_FLAGS := -O2 -g3
-MIPSBIT :=
+MIPSBIT := -mips2
 
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
 
@@ -58,14 +58,21 @@ CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
 LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
-######################## Targets #############################
 
-
-
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
+####################### Overrides ############################
 
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
+
+# CC
+# $(BUILD_DIR)/src/code_0.o: CC := $(CC_OLD)
+
+# OPT_FLAGS
+
+######################## Targets #############################
+
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
+
 
 default: all
 
@@ -86,7 +93,7 @@ split:
 compress: $(sort $(SPLIT_FILES_RZ))
 	cp ../rzip/chunk0/*.pad build/split/
 
-# once this matches, output result to ../rzip/chunk0.bin
+# TODO: once this matches, output result to ../rzip/chunk0.bin
 combine: $(PADDING) $(RZ_FILES)
 	cat $(sort $(PADDING) $(RZ_FILES)) > $(BUILD_DIR)/chunk0.gz.bin
 

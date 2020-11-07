@@ -1,131 +1,131 @@
-__libm_qnan_f;0x8002c920
-__ll_div;0x8002690c
-__ll_lshift;0x800268a4
-__ll_mod;0x800269f8
-__ll_mul;0x80026968
-__ll_rem;0x800268d0
-__osTimerServicesInit;0x80023EB0
-__ll_rshift;0x80026a94
-__osAiDeviceBusy;0x80023390
-__osCheckId;0x800281e0
-__osCheckPackId;0x80027dec
-__osContAddressCrc;0x80025fd0
-__osContDataCrc;0x80026080
-__osContGetInitData;0x80025538
-__osContRamRead;0x80025c20
-__osContRamWrite;0x80025870
-__osDequeueThread;0x80024780
-__osDisableInt;0x80022dc0
-__osGetActiveQueue;0x80024400
-__osGetCurrFaultedThread;0x80024400
-__osGetId;0x80027f84
-__osGetSR;0x80022a40
-__osIdCheckSum;0x8002796c
-__osLeoInterrupt;0x80026b10
-__osPackRamWriteData;0x80025AA0
-__osPackReadData;0x80024D2C
-__osPackRequestData;0x80025608
-__osPfsGetInitData;0x8002526c
-__osPfsGetStatus;0x80027714
-__osPfsRequestData;0x80025170
-__osPfsRWInode;0x800282dc
-__osPfsSelectBank;0x800285fc
-__osPiCreateAccessQueue;0x800236D0
-__osPiGetAccess;0x80023720
-__osPiRelAccess;0x80023764
-__osProbeTLB;0x800273d0
-__osRepairPackId;0x800279d4
-__osRestoreInt;0x80022de0
-__osSetCompare;0x80027490
-__osSetFpcCsr;0x80022a50
-__osSetHWIntrRoutine;0x80026ac0
-__osSetSR;0x80022a30
-__osSetTimerIntr;0x800240B4
-__osSiCreateAccessQueue;0x80025700
-__osSiDeviceBusy;0x80027630
-__osSiGetAccess;0x80025750
-__osSiRawReadIo;0x80026700
-__osSiRawStartDma;0x800257c0
-__osSiRawWriteIo;0x80026750
-__osSiRelAccess;0x80025794
-__osSpDeviceBusy;0x80023e80
-__osSpGetStatus;0x80027620
-__osSpRawReadIo;0x80026700
-__osSpRawStartDma;0x80023df0
-__osSpRawWriteIo;0x80026750
-__osSpSetPc;0x80023db0
-__osSpSetStatus;0x80023da0
-__osSumcalc;0x80027910
-__osTimerInterrupt;0x80023F3C
-__osViGetCurrentContext;0x80024400
-__osViGetNextContext;0x80024400
-__osViInit;0x800242b0
-__osViSwapContext;0x80024410
-__sinf;0x80026540
-__ull_div;0x80026868
-__ull_divremi;0x80026998
-__ull_rem;0x8002682c
-__ull_rshift;0x80026800
-_Litob;0x800230f0
-_VirtualToPhysicalTask;0x80003220
-bcopy;0x80023a10
-bzero;0x800226F0
-corrupted_init;0x80028d34
-corrupted;0x80028ee8
-ldiv;0x80023060
-lldiv;0x80022f60
-memcpy;0x80022ec0
-osAiGetStatus;0x80024a30
-osAiSetFrequency;0x800263d0
-osAiSetNextBuffer;0x80002DB0
-osContGetReadData;0x80024c84
-osContInit;0x80025340
-osContStartReadData;0x80024bc0
-osCreateMesgQueue;0x80023790
-osCreatePiManager;0x800030A0
-osCreateThread;0x800037F0
-osCreateViManager;0x800034E0
-osDestroyThread;0x80026150
-osEPiRawStartDma;0x80023930
-osGetCount;0x80024770
-osGetThreadPri;0x80023830
-osGetTime;0x80024f40
-osInvalDCache;0x80022d10
-osInvalICache;0x80022c90
-osJamMesg;0x800274a0
-osLeoDiskInit;0x80027820
-osMapTLB;0x80026310
-osMotorStart;0x800056A0
-osMotorStop;0x80005570
-osPfsChecker;0x80028670
-osPfsInit;0x80027660
-osPfsIsPlug;0x80024fd0
-osPiGetCmdQueue;0x800275f0
-osPiGetDeviceType;0x80024400
-osPiGetStatus;0x800262c0
-osPiRawReadIo;0x800267a0
-osPiRawStartDma;0x80023850
-osPiStartDma;0x80024920
-osRecvMesg;0x80023440
-osSendMesg;0x80023580
-osSetEventMesg;0x800237c0
-osSetIntMask;0x80024880
-osSetThreadPri;0x80022bb0
-osSetTimer;0x80024a40
-osSpTaskLoad;0x80003330
-osSpTaskStartGo;0x8000349C
-osSpTaskYield;0x80024ba0
-osSpTaskYielded;0x80024b20
-osStartThread;0x80022a60
-osStopThread;0x80022e00
-osUnmapTLB;0x800262d0
-osViBlack;0x80026250
-osVirtualToPhysical;0x800233c0
-osViSetEvent;0x80024ea0
-osViSetMode;0x800247c0
-osViSwapBuffer;0x80024830
-osWritebackDCacheAll;0x80024f10
-sqrtf;0x80026530
-strchr;0x80022f14
-strlen;0x80022eec
-viMgrMain;0x80003658
+__libm_qnan_f = 0x8002c920;
+__ll_div = 0x8002690c;
+__ll_lshift = 0x800268a4;
+__ll_mod = 0x800269f8;
+__ll_mul = 0x80026968;
+__ll_rem = 0x800268d0;
+__ll_rshift = 0x80026a94;
+__osAiDeviceBusy = 0x80023390;
+__osCheckId = 0x800281e0;
+__osCheckPackId = 0x80027dec;
+__osContAddressCrc = 0x80025fd0;
+__osContDataCrc = 0x80026080;
+__osContGetInitData = 0x80025538;
+__osContRamRead = 0x80025c20;
+__osContRamWrite = 0x80025870;
+__osDequeueThread = 0x80024780;
+__osDisableInt = 0x80022dc0;
+__osGetActiveQueue = 0x80024400;
+__osGetCurrFaultedThread = 0x80024400;
+__osGetId = 0x80027f84;
+__osGetSR = 0x80022a40;
+__osIdCheckSum = 0x8002796c;
+__osLeoInterrupt = 0x80026b10;
+__osPackRamWriteData = 0x80025AA0;
+__osPackReadData = 0x80024D2C;
+__osPackRequestData = 0x80025608;
+__osPfsGetInitData = 0x8002526c;
+__osPfsGetStatus = 0x80027714;
+__osPfsRequestData = 0x80025170;
+__osPfsRWInode = 0x800282dc;
+__osPfsSelectBank = 0x800285fc;
+__osPiCreateAccessQueue = 0x800236D0;
+__osPiGetAccess = 0x80023720;
+__osPiRelAccess = 0x80023764;
+__osProbeTLB = 0x800273d0;
+__osRepairPackId = 0x800279d4;
+__osRestoreInt = 0x80022de0;
+__osSetCompare = 0x80027490;
+__osSetFpcCsr = 0x80022a50;
+__osSetHWIntrRoutine = 0x80026ac0;
+__osSetSR = 0x80022a30;
+__osSetTimerIntr = 0x800240B4;
+__osSiCreateAccessQueue = 0x80025700;
+__osSiDeviceBusy = 0x80027630;
+__osSiGetAccess = 0x80025750;
+__osSiRawReadIo = 0x80026700;
+__osSiRawStartDma = 0x800257c0;
+__osSiRawWriteIo = 0x80026750;
+__osSiRelAccess = 0x80025794;
+__osSpDeviceBusy = 0x80023e80;
+__osSpGetStatus = 0x80027620;
+__osSpRawReadIo = 0x80026700;
+__osSpRawStartDma = 0x80023df0;
+__osSpRawWriteIo = 0x80026750;
+__osSpSetPc = 0x80023db0;
+__osSpSetStatus = 0x80023da0;
+__osSumcalc = 0x80027910;
+__osTimerInterrupt = 0x80023F3C;
+__osTimerServicesInit = 0x80023EB0;
+__osViGetCurrentContext = 0x80024400;
+__osViGetNextContext = 0x80024400;
+__osViInit = 0x800242b0;
+__osViSwapContext = 0x80024410;
+__sinf = 0x80026540;
+__ull_div = 0x80026868;
+__ull_divremi = 0x80026998;
+__ull_rem = 0x8002682c;
+__ull_rshift = 0x80026800;
+_Litob = 0x800230f0;
+_VirtualToPhysicalTask = 0x80003220;
+bcopy = 0x80023a10;
+bzero = 0x800226F0;
+corrupted = 0x80028ee8;
+corrupted_init = 0x80028d34;
+ldiv = 0x80023060;
+lldiv = 0x80022f60;
+memcpy = 0x80022ec0;
+osAiGetStatus = 0x80024a30;
+osAiSetFrequency = 0x800263d0;
+osAiSetNextBuffer = 0x80002DB0;
+osContGetReadData = 0x80024c84;
+osContInit = 0x80025340;
+osContStartReadData = 0x80024bc0;
+osCreateMesgQueue = 0x80023790;
+osCreatePiManager = 0x800030A0;
+osCreateThread = 0x800037F0;
+osCreateViManager = 0x800034E0;
+osDestroyThread = 0x80026150;
+osEPiRawStartDma = 0x80023930;
+osGetCount = 0x80024770;
+osGetThreadPri = 0x80023830;
+osGetTime = 0x80024f40;
+osInvalDCache = 0x80022d10;
+osInvalICache = 0x80022c90;
+osJamMesg = 0x800274a0;
+osLeoDiskInit = 0x80027820;
+osMapTLB = 0x80026310;
+osMotorStart = 0x800056A0;
+osMotorStop = 0x80005570;
+osPfsChecker = 0x80028670;
+osPfsInit = 0x80027660;
+osPfsIsPlug = 0x80024fd0;
+osPiGetCmdQueue = 0x800275f0;
+osPiGetDeviceType = 0x80024400;
+osPiGetStatus = 0x800262c0;
+osPiRawReadIo = 0x800267a0;
+osPiRawStartDma = 0x80023850;
+osPiStartDma = 0x80024920;
+osRecvMesg = 0x80023440;
+osSendMesg = 0x80023580;
+osSetEventMesg = 0x800237c0;
+osSetIntMask = 0x80024880;
+osSetThreadPri = 0x80022bb0;
+osSetTimer = 0x80024a40;
+osSpTaskLoad = 0x80003330;
+osSpTaskStartGo = 0x8000349C;
+osSpTaskYield = 0x80024ba0;
+osSpTaskYielded = 0x80024b20;
+osStartThread = 0x80022a60;
+osStopThread = 0x80022e00;
+osUnmapTLB = 0x800262d0;
+osViBlack = 0x80026250;
+osVirtualToPhysical = 0x800233c0;
+osViSetEvent = 0x80024ea0;
+osViSetMode = 0x800247c0;
+osViSwapBuffer = 0x80024830;
+osWritebackDCacheAll = 0x80024f10;
+sqrtf = 0x80026530;
+strchr = 0x80022f14;
+strlen = 0x80022eec;
+viMgrMain = 0x80003658;

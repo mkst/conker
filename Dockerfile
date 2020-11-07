@@ -15,7 +15,8 @@ RUN apt-get update && \
 
 RUN python3 -m pip install \
       capstone pyyaml pycparser \
-      colorama ansiwrap watchdog python-Levenshtein cxxfilt
+      colorama ansiwrap watchdog python-Levenshtein cxxfilt \
+      python-ranges
 
 RUN mkdir /conker
 WORKDIR /conker

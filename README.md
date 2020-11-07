@@ -11,7 +11,7 @@ Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name i
 **Preamble**
 
 The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
-If this is not the case, check the `Dockerfile` for the expected prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
+If this is not the case, check the `Dockerfile` for the prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
 
 **Clone repository**
 
@@ -64,61 +64,67 @@ make -- jobs
 
 # Progress
 
-This project it is in its infancy; there are multiple tasks being worked on:
+This project is in its infancy; there are multiple tasks being worked on:
 
   - Converting disassembly into (byte-perfect) C code
-  - Determining structure and layout of the ROM
   - Extracting assets from the ROM and being able to successfully re-pack them
+  - Identify and document all asset types used in the ROM
+  - Tooling to support the above tasks
 
 ## Open issues
 
-  - Identifying all compressed sections within the ROM
-  - Decompressing each compressed section
   - Compressing extracted sections in a byte-perfect manner
-  - Identifying and documenting Conker asset (model/texture) format
+  - Identifying and documenting Conker asset (model/texture/sound) format
 
 ## ROM layout
 
-The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length. These sections are dubbed 'rzip'.
+The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length. These sections are dubbed `rzip`.
 
 ```
 [header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
-[ boot ]  0000 0040 > 0000 1000
-[ code ]  0000 1000 > 0004 2C50 ; boot + libultra code
-[ rzip ]  0004 2C50 > 0019 EA88 ; "chunk0", code + more
-[ ???? ]  0019 EA88 > 0130 4F00
-[ rzip ]  0130 4F00 > 0132 E691 ; "chunk1", unknown data
-[ ???? ]  0132 E691 > 0133 12E8
-[ mp3s ]  0133 12E8 > 029A FD38 ; some are somewhat scrambled
-[ ???? ]  029A FD38 > 03EC C788
-[ midi ]  03EC C788 > 03F7 38D0 ; some form of compression
-[ ???? ]  03F7 38D0 > 0400 0000
+[ boot ]  0000 0040 > 0000 1000 ;
+[ code ]  0000 1000 > 0004 2C50 ; code
+[ ???? ]  0002 90D0 > ???? ???? ;
+[ data ]  0002 C750 > 0002 C7A0 ; rodata section
+[ ???? ]  0002 C7A0 > 0004 2C50 ;
+[ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
+[ ???? ]  0018 6B50 > 0018 8328 ;
+[ rzip ]  0018 8328 > 0019 C7D8 ; chunk1; unknown data
+[ ???? ]  0019 C7D8 > 0019 EA88 ; more code?
+[ offs ]  00AB 1950 > 00AB 1A40 ; list of offset tables
+[ rzip ]  00AB 1A40 > 03F8 B800 ; assets00 thru assets1C
+[ ffff ]  03F8 B800 > 0400 0000 ; 0xff padding
 ```
 
 ### Compressed section(s)
 
-The workflow will be to split all compressed chunks from the baserom via n64splat, then for each contiguous chunk:
+There a number of compressed sections within the ROM. The goal is to be able to:
+
+  1. Extract all files within each compressed section
+  2. Decompile and/or document them
+  3. Compress and reassemble to create a byte-perfect match.
+
+### Chunk 0
+
+The first compressed chunk within the ROM is named `chunk0`. It does not have a header (unlike the other compressed sections). Instead, each file can be identified by its 4-byte header containing the uncompressed size - 4096 bytes (except for the final file).
+
+Once decompressed these files form a contiguous chunk of code.
+
+The steps for Chunk 0 are as follows:
   - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py), taking care to keep track of any trailing padding
   - Combine decompressed blocks into a single file
   - Run n64splat on this combined file to extract all code and assets
   - *Translate assembly to c code*
   - Compile to generate a .bin
-  - Split compiled .bin file into 4096 byte block
+  - Split compiled .bin file into 4096 byte blocks
   - Compress each block via [rarezip](tools/rarezip.py)
-  - Combine all compressed blocks along with original padding (padding appears to be garbage)
+  - Combine all compressed blocks along with original padding
 
-Then build the ROM with the new chunk(s) which should exactly match the original chunk(s) split out via n64splat.
+If you wish to examine this file, you can run `make decompress` after you have done the initial `make extract`.
 
-**Note:**
-This workflow is subject to change as the project matures. The decompression/combination steps may be added into n64splat so the concept of chunks may disappear.
+See the [README](chunk0/README.md) for more information.
 
-### Chunk 0
-
-Currently 1 chunk has been decompressed, `chunk0`.
-
-If you wish to example this file, then you can run `make decompress` from within the `chunk0/` directory.
-
-See the [README](chunk0/README.md) for more information. It is non-matching.
+**NOTE:** Compression is currently not 100%-matching; approximately 3% of files do not match.
 
 # Tools
 
