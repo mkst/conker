@@ -90,9 +90,11 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 [ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
 [ ???? ]  0018 6B50 > 0018 8328 ;
 [ rzip ]  0018 8328 > 0019 C7D8 ; chunk1; unknown data
-[ ???? ]  0019 C7D8 > 0019 EA88 ; more code?
+[ code ]  0019 C7D8 > 001A 2190 ; code
+[ data ]  001A 2190 > 001A 37E0 ; rodata section (?)
+[ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
 [ offs ]  00AB 1950 > 00AB 1A40 ; list of offset tables
-[ rzip ]  00AB 1A40 > 03F8 B800 ; assets00 thru assets1C
+[ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C
 [ ffff ]  03F8 B800 > 0400 0000 ; 0xff padding
 ```
 

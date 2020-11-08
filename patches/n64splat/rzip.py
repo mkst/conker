@@ -50,8 +50,11 @@ class N64SegRzip(N64Segment):
             # are there other types?
             subtype = "compressed" if type == 16 else "uncompressed"
             # require 8-byte alignment
-            end += 0 if end % 8 == 0 else (8 - end % 8)
-            fl = {"start": start, "end": end, "name": name, "subtype": subtype}
+            pad = 0 if end % 8 == 0 else (8 - end % 8)
+            if pad:
+                # print("Padding %s with %i bytes" % (name, pad))
+                end += pad
+            fl = {"start": start, "end": end, "pad": pad, "name": name, "subtype": subtype}
             ret.append(fl)
         return ret
 
@@ -84,8 +87,7 @@ class N64SegRzip(N64Segment):
             self.files = self.parse_segment_files(self.segment)
         else:
             self.files = self.get_files_from_offsets(rom_bytes)
-
-        print("  >> Found %i file(s)" % len(self.files))
+            print(">> Found %i file(s)" % len(self.files))
 
         out_dir = self.create_split_dir(base_path, "rzip/%s" % self.name)
         # write out bin until compression is matching
@@ -99,8 +101,10 @@ class N64SegRzip(N64Segment):
             extension = "bin"
             compressed = rom_bytes[split_file["start"] : split_file["end"]]
             decompressed = None
-            if split_file["subtype"] == "uncompressed":
+            if split_file["subtype"] in ("uncompressed", "mp3"):
                 decompressed = compressed
+                if split_file["subtype"] == "mp3":
+                    extension = "mp3"
                 # TODO: add padding
             else:
                 try:
@@ -123,7 +127,8 @@ class N64SegRzip(N64Segment):
                             if padding > 7:
                                 print("Padding %i for %s" % (padding, str(hex(split_file["start"]))))
                             f.write(compressed[-padding:])
-            out_filename = filename if split_file["subtype"] != "compressed" else (filename + ".gz")
+
+            out_filename = filename + (".gz" if split_file["subtype"] in ("gz", "compressed") else "")
             with open(os.path.join(out_dir,  out_filename), "wb") as f:
                 f.write(compressed)
             if decompressed:
