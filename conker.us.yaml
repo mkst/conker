@@ -110,6 +110,7 @@ segments:
     - [0x23850, "asm", "libultra/io/pirawdma"]
     - [0x23930, "asm", "libultra/io/epirawdma"]
     - [0x23A10, "asm", "libultra/libc/bcopy"]
+    - [0x23D20, "asm", "libultra/os/writebackdcache"]
     - [0x23DA0, "asm", "libultra/io/spsetstat"]
     - [0x23DB0, "asm", "libultra/io/spsetpc"]
     - [0x23DF0, "asm", "libultra/io/sprawdma"]
@@ -714,7 +715,8 @@ segments:
     start: 0x0019EA80 # hack, should be 88
     vram:  0x8019EA80
     files:
-    - [0x0019EA80, "asm"]
+    - [0x0019EA80, "c"]
+    - [0x001A0550, "c"]
   - [0x001A2190, "bin"] # more rodata?
   ###
   - [0x001A37E0, "bin", "compressed00"]

@@ -172,6 +172,8 @@ $(BUILD_DIR)/src/code_17C00.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_128D0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_17AF0.o: CC := $(CC_OLD)
 
+# $(BUILD_DIR)/src/code_19EA80.o: CC := $(CC_OLD)
+
 
 # libultra
 $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g

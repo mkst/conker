@@ -251,10 +251,11 @@ extern u32  D_80043B40[]; // 4064
 /* 80080000 */
 extern s32  D_80082B20;
 extern s32  D_80084064;
-
+extern s32  D_8008FD90;
 /* 800E0000 */
 extern s32  D_800E9D10[];
 
+extern u8  D_800BE616;
 extern s32 D_800BE620;
 extern s32 D_800BE624;
 extern s32 D_800BE760;
@@ -267,6 +268,13 @@ extern s32 D_800BE9C4;
 extern s32 D_800BE9E4;
 extern s32 D_800BE9F8;
 
+/* 800C0000 */
+
+extern u16 D_800C3E7C;
+extern s32 D_800C3E80;
+extern s32 D_800C3E84;
+extern struct106 D_800C6660[];
+
 /* other */
 
 extern s32 D_151FA130;
@@ -275,9 +283,130 @@ extern s32 D_15000000;
 extern u8 _extcodeSegmentRomStart[];
 extern u8 _extcodeSegmentRomEnd[];
 
+/* unsure */
+extern s32  D_16003890;
+extern u8   D_16003AF4;
+extern s8   D_16003B1C;
+extern s32  D_160038A0;
+extern s8   D_16003B28;
+extern s32  D_1600389C;
+
+extern s32  D_160047D0;
+extern s32  D_160047D4;
+extern s32  D_160047DC;
+extern s32  D_160047E0;
+
 extern u32  AI_A4500000;
 extern s32  AI_A4500004;
 
 extern u16 *D_BC000C02;
+
+
+/* chunk 0 */
+
+extern s32 D_80041E58;
+extern s32 D_80041EA0;
+
+extern u32 D_80087380;
+extern s32 D_80088720;
+extern s32 D_80088730;
+extern vertex *D_80088724;
+
+extern u8  D_8008CEB0;
+
+extern s32 D_80095B70;
+extern s32 D_80091C04[];
+
+extern s32 D_800B0DC0;
+extern s32 D_800B0DC4;
+extern s32 D_800B0DC8;
+extern u8 *D_800B0DE0;
+extern s32 D_800B0DE4;
+extern struct104 *D_800B0DF0;
+extern s32 D_800B0E58;
+extern s32 D_800B0E5C;
+extern struct105 *D_800B0E60[];
+extern s32 D_800BE570;
+extern u8  D_800BE574;
+extern u8  D_800BE575;
+extern s32 D_800BE5D0;
+
+extern s32 D_800BE9F0;
+
+/* 800D */
+extern s32 D_800D2138;
+extern s32 D_800D23C0;
+
+extern struct102 *D_800D2E4C;
+extern s32 D_800D2E50;
+extern s32 D_800D2E60;
+extern s32 D_800D2E70;
+extern u8  D_800D2E44;
+
+extern u8  D_800D9E64;
+
+extern s32 D_800DBDD8[];
+extern s32 D_800DBDE8[];
+extern s32 D_800DBDF8[];
+
+extern s32 D_800DBE18[];
+extern s32 D_800DBE1C;
+extern s32 D_800DBE20;
+extern s32 D_800DBE24;
+extern s16 D_800DBE28;
+extern s16 D_800DBE2A;
+extern s16 D_800DBE2C;
+extern s32 D_800DBE38;
+extern s32 D_800DBE4C;
+extern s32 D_800DBE50;
+extern s32 D_800DBE5C;
+extern u8  D_800DBE62;
+extern u8  D_800DBE63;
+extern f32 D_800DBE64;
+extern u8  D_800DBF00;
+
+extern u8  D_800DDD1C;
+extern s32 D_800DDC00;
+extern s32 D_800DDC08;
+extern s32 D_800DDC04;
+extern s32 D_800DDD20;
+
+extern s32 D_800BE4A0;
+extern s32 D_800BE4A0;
+extern s32 D_800DDA90;
+extern s32 D_800DD478;
+extern u8  D_800DCD30;
+extern u8  D_800DCD31;
+extern u8  D_800DCD32;
+extern u8  D_800DCD33;
+extern u8  D_800DCD34;
+extern u8  D_800DCD35;
+extern u8  D_800DCD36;
+extern u8  D_800DCD37;
+extern u8  D_800DCD38;
+extern u8  D_800DCD39;
+extern u8  D_800DCD3A;
+extern u8  D_800DCD3B;
+extern u8  D_800DCD3C;
+extern u8  D_800DCD3D;
+extern s32 D_800DCD40;
+extern s32 D_800DCD78;
+extern s32 D_800DCD7C;
+extern s32 D_800DCD80;
+extern s32 D_800DCD84;
+
+extern u8 D_800D2F3C;
+extern s32 D_800D2F40;
+extern s32 D_800D2F48;
+extern f32 D_800D2DB0;
+extern u8  D_800D2E41;
+extern u8  D_800D2E42;
+extern s32 D_800D3858;
+extern u8  D_800D2E44;
+extern f32 D_800968C0;
+
+
+extern struct100 *D_800DCD24;
+extern struct100 *D_800DCD28;
 
 #endif

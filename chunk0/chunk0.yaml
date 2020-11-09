@@ -11,11 +11,11 @@ segments:
   - name:  code
     type:  code
     start: 0x00000000
-    vram:  0x80000000
+    vram:  0x85000000
     files:
       - [0x0000, "c"]
-      - [0x0940, "asm"]
-      - [0x3120, "asm"]
+      - [0x0940, "c"]
+      - [0x3120, "c"]
       - [0x39E0, "asm"]
       - [0x4D50, "asm"]
       - [0x4E00, "c"]
@@ -110,8 +110,8 @@ segments:
       - [0x16500, "asm"]
       - [0x16670, "asm"]
       - [0x16850, "asm"]
-      - [0x17300, "asm"]
-      - [0x175E0, "asm"]
-      - [0x17790, "asm"]
+      - [0x17300, "c"]
+      - [0x175E0, "c"]
+      - [0x17790, "c"]
   - [0x183D0, "bin"]
   - [0x1fa130] # chunk0 end

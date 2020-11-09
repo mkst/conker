@@ -831,4 +831,76 @@ typedef struct {
   OSMesg *mesg;           // used
 } struct58;
 
+
+/* chunk 0 */
+
+typedef struct {
+  f32 x;
+  f32 y;
+  f32 z;
+} vertex;
+
+typedef struct {
+  u8 unk0;
+  u8 unk1;
+  u8 unk2;
+} struct100;
+
+typedef struct {
+  s32 unk0;
+  f32 unk4;
+  f32 unk8;
+} struct101;
+
+typedef struct {
+  s32 unk0;
+  s32 unk4;
+  s32 unk8;
+  s32 unkC;
+  s32 unk10;
+  s32 unk14;
+  u8  unk18;  // used
+} struct102;
+
+typedef struct {
+  u16 unk0;
+  u8  unk2;
+  u8  unk3;   // used?
+  u16 unk4;   // used
+  u16 unk6;
+  u16 unk8;
+  u16 unkA;
+  u16 unkC;   // used
+  s32 unkE;   // used
+} struct103;
+
+typedef struct {
+    s32 unk0;  // used
+    s32 unk4;  // used
+    s32 unk8;  // used
+    s32 unkC;
+    s16 unk10;
+    u8  unk12; // used
+    u8  unk13;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    s16 unk1A;
+} struct104;
+
+typedef struct {
+    s32 unk0;  // used
+    s32 unk4;  // used
+    s32 unk8;  // used
+    s32 unkC;  // used
+} struct105;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s8  pad[0x3];
+    u8  unkF;
+} struct106;
+
 #endif

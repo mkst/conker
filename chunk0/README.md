@@ -6,12 +6,14 @@ The address of the first compress block is `0x42c50`, the final block starts at 
 
 Each compressed block is extracted via n64splat and then combined via `cat` to create the `chunk0.bin`.
 
+Current working theory is that the code in this chunk is translated to `0x85000000` offset.
+
 # Building
 
 The following commands are used to extract, compile, recompress and recombine it.
 
 **Note:**
-Does **not** currently generate a matching chunk0.o:
+Does **not** currently generate a matching `chunk0.o`, but the C code *does* match original assembly:
 
 ```sh
 $ diff chunk0/build/split/ rzip/ | grep Bin
@@ -41,6 +43,7 @@ make extract
 
 ## compile
 ```sh
+# there is a sanity check that this matches the original chunk0.bin
 make
 ```
 

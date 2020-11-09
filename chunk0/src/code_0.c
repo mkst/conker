@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_80000000.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_85000000.s")
 // NON-MATCHING: wrong registers
-// void func_80000000(void) {
+// void func_85000000(void) {
 //     u32 i = 0;
 //     s32 phi_s2 = &D_80041EA0;
 //     s32 phi_s1 = &D_80041E58;
@@ -24,11 +24,11 @@
 //     func_8000E934();
 // }
 
-void func_80000090(void) {
+void func_85000090(void) {
     func_8000DEC4();
 }
 
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_800000B0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_850000B0.s")
 // no thankyou
-#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_800006E0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_850006E0.s")

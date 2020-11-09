@@ -63,9 +63,12 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRI
 
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
+$(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
-# $(BUILD_DIR)/src/code_0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_175E0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_940.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/src/code_4E00.o: CC := $(CC_OLD)
 
 # OPT_FLAGS
 
@@ -112,7 +115,7 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
 
-$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
 	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \

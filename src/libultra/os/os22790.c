@@ -50,7 +50,7 @@
 //     (void *)0x80000180->unk4 = (s32) (void *)0x100071D0->unk4;
 //     (void *)0x80000180->unk8 = (s32) (void *)0x100071D0->unk8;
 //     (void *)0x80000180->unkC = (s32) (void *)0x100071D0->unkC;
-//     func_80023D20(0x80000000, 0x190);
+//     osWritebackDCache(0x80000000, 0x190);
 //     osInvalICache(0x80000000, 0x190);
 //     func_80008120();
 //     osPiRawReadIo(4, &sp38);

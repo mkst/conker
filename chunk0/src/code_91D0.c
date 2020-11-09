@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_800091D0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_850091D0.s")
 // NON-MATCHING: is this all a struct?
-// void func_800091D0(void) {
+// void func_850091D0(void) {
 //     D_800DCD78 = 0;
 //     D_800DCD7C = 1;
 //     D_800DCD80 = 0;
@@ -42,74 +42,74 @@
 //     func_800226F0(&D_800DCD40, 56);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_800092DC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009334.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_850092DC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009334.s")
 
-void func_800095D8(s32 arg0, s32 arg1) {
+void func_850095D8(s32 arg0, s32 arg1) {
     func_8516127C(arg0, 0xFF, 1);
 }
 
-void func_80009600(s32 arg0, s32 arg1) {
+void func_85009600(s32 arg0, s32 arg1) {
     func_85161334(arg0, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009628.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009628.s")
 
-void func_8000969C(s32 arg0, s32 arg1) {
+void func_8500969C(s32 arg0, s32 arg1) {
     func_85161408(arg0, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_800096C4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_850096C4.s")
 
-void func_80009740(s32 arg0, s32 arg1) {
+void func_85009740(s32 arg0, s32 arg1) {
     func_85161494(arg0, 0xFF, 1);
 }
 
-void func_80009768(s32 arg0, s32 arg1) {
+void func_85009768(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 0, 0, 0xE, 0xFF, 1);
 }
 
-void func_800097A4(s32 arg0, s32 arg1) {
+void func_850097A4(s32 arg0, s32 arg1) {
     func_85161540(arg0, 0xFF, 1);
 }
 
-void func_800097CC(s32 arg0, s32 arg1) {
+void func_850097CC(s32 arg0, s32 arg1) {
     s32 temp_v0 = func_851615F8(arg0, 0, 2, 0xE, 0xFF, 1);
     if (temp_v0 != 0) {
         func_850121C0(temp_v0);
     }
 }
 
-void func_80009818(s32 arg0, s32 arg1) {
+void func_85009818(s32 arg0, s32 arg1) {
     func_851B8DB0(arg0, 0, 0xFF, 1);
 }
 
-void func_80009844(s32 arg0, s32 arg1) {
+void func_85009844(s32 arg0, s32 arg1) {
     func_851B8DB0(arg0, 1, 0xFF, 1);
 }
 
-void func_80009870(s32 arg0, s32 arg1) {
+void func_85009870(s32 arg0, s32 arg1) {
     func_85108850(arg0);
 }
 
-void func_80009894(s32 arg0, s32 arg1) {
+void func_85009894(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 1, 0, 0xE, 0xFF, 1);
 }
 
-void func_800098D0(s32 arg0, s32 arg1) {
+void func_850098D0(s32 arg0, s32 arg1) {
     func_85162034(arg0, 0xFF, 1);
 }
 
-void func_800098F8(s32 arg0, s32 arg1) {
+void func_850098F8(s32 arg0, s32 arg1) {
     func_851623F4(arg0, 1, 0x16, 0, -1, 300, 0xFF, 1);
 }
 
-void func_80009944(s32 arg0, s32 arg1) {
+void func_85009944(s32 arg0, s32 arg1) {
     func_85162740(arg0, 1, 6, 0, 300, 2, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009990.s")
-// void func_80009990(s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009990.s")
+// void func_85009990(s32 arg1) {
 //     u8 sp40;
 //     s32 temp_v0;
 //
@@ -120,29 +120,29 @@ void func_80009944(s32 arg0, s32 arg1) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009A38.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009A38.s")
 
-void func_80009AA0(s32 arg0, s32 arg1) {
+void func_85009AA0(s32 arg0, s32 arg1) {
     func_85162FAC(arg0, 1, 0, 2, 300, 0xD, 0xFF, 1);
 }
 
-void func_80009AEC(s32 arg0, s32 arg1) {
+void func_85009AEC(s32 arg0, s32 arg1) {
     func_85162740(arg0, 2, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_80009B38(s32 arg0, s32 arg1) {
+void func_85009B38(s32 arg0, s32 arg1) {
     func_85162740(arg0, 20, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_80009B84(s32 arg0, s32 arg1) {
+void func_85009B84(s32 arg0, s32 arg1) {
     func_85162740(arg0, 3, 6, 0, 300, 2, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009BD0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009BD0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009C7C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009C7C.s")
 // NON-MATCHING: todo
-// void func_80009C7C(s32 arg0, s32 arg1) {
+// void func_85009C7C(s32 arg0, s32 arg1) {
 //     f32 sp30;
 //     f32 sp2C;
 //     s32 sp28;
@@ -157,147 +157,147 @@ void func_80009B84(s32 arg0, s32 arg1) {
 //     }
 // }
 
-void func_80009D28(s32 arg0, s32 arg1) {
+void func_85009D28(s32 arg0, s32 arg1) {
     func_85163604(arg0, 1, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_80009D6C(s32 arg0, s32 arg1) {
+void func_85009D6C(s32 arg0, s32 arg1) {
     func_85163604(arg0, 2, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_80009DB0(s32 arg0, s32 arg1) {
+void func_85009DB0(s32 arg0, s32 arg1) {
     func_85162740(arg0, 4, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_80009DFC(s32 arg0, s32 arg1) {
+void func_85009DFC(s32 arg0, s32 arg1) {
     func_85162740(arg0, 5, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_80009E48(s32 arg0, s32 arg1) {
+void func_85009E48(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 1, 1, 0xE, 0xFF, 1);
 }
 
-void func_80009E84(s32 arg0, s32 arg1) {
+void func_85009E84(s32 arg0, s32 arg1) {
     func_85163604(arg0, 3, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_80009EC8(s32 arg0, s32 arg1) {
+void func_85009EC8(s32 arg0, s32 arg1) {
     func_8516381C(arg0, 32, 0xFF, 1);
 }
 
-void func_80009EF4(s32 arg0, s32 arg1) {
+void func_85009EF4(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 1, 3, 0x23, 0xFF, 1);
 }
 
-void func_80009F30(s32 arg0, s32 arg1) {
+void func_85009F30(s32 arg0, s32 arg1) {
     func_85163604(arg0, 4, 36, 300, 0, 0, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_80009F74.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_85009F74.s")
 
-void func_8000A028(s32 arg0, s32 arg1) {
+void func_8500A028(s32 arg0, s32 arg1) {
     func_85163604(arg0, 5, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A06C(s32 arg0, s32 arg1) {
+void func_8500A06C(s32 arg0, s32 arg1) {
     func_85163604(arg0, 6, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A0B0(s32 arg0, s32 arg1) {
+void func_8500A0B0(s32 arg0, s32 arg1) {
     func_85162740(arg0, 7, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A0FC(s32 arg0, s32 arg1) {
+void func_8500A0FC(s32 arg0, s32 arg1) {
     func_85162740(arg0, 9, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A148(s32 arg0, s32 arg1) {
+void func_8500A148(s32 arg0, s32 arg1) {
     func_85162740(arg0, 10, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A194(s32 arg0, s32 arg1) {
+void func_8500A194(s32 arg0, s32 arg1) {
     func_85162740(arg0, 11, 38, 0, 300, 2, 0xFF, 1);
 }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A1E0.s")
-void func_8000A1E0(s32 arg0, s32 arg1) {
+// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A1E0.s")
+void func_8500A1E0(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 1, 4, 0xE, 0xFF, 1);
 }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A21C.s")
-void func_8000A21C(s32 arg0, s32 arg1) {
+// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A21C.s")
+void func_8500A21C(s32 arg0, s32 arg1) {
     func_85163604(arg0, 7, 5, 300, 0, 0, 0xFF, 1);
 }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A260.s")
-void func_8000A260(s32 arg0, s32 arg1) {
+// #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A260.s")
+void func_8500A260(s32 arg0, s32 arg1) {
     func_85162FAC(arg0, 2, 0, 2, 300, 0xD, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A2AC.s")
-// void func_8000A2AC(s32 arg0, s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A2AC.s")
+// void func_8500A2AC(s32 arg0, s32 arg1) {
 //     s32 sp1C;
 //
 //     sp1C = D_80095B70;
 //     func_851B8DB0(arg0, (&sp1C + arg1)->unk-33, 0xFF, 1);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A2F4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A2F4.s")
 
-void func_8000A33C(s32 arg0, s32 arg1) {
+void func_8500A33C(s32 arg0, s32 arg1) {
     func_85163604(arg0, 8, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A380(s32 arg0, s32 arg1) {
+void func_8500A380(s32 arg0, s32 arg1) {
     func_85163604(arg0, 9, 0x28, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A3C4(s32 arg0, s32 arg1) {
+void func_8500A3C4(s32 arg0, s32 arg1) {
     func_85162740(arg0, 0xF, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A410(s32 arg0, s32 arg1) {
+void func_8500A410(s32 arg0, s32 arg1) {
     func_85163604(arg0, 0xA, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A454(s32 arg0, s32 arg1) {
+void func_8500A454(s32 arg0, s32 arg1) {
     func_851615F8(arg0, 0, 5, 0xE, 0xFF, 1);
 }
 
-void func_8000A490(s32 arg0, s32 arg1) {
+void func_8500A490(s32 arg0, s32 arg1) {
     func_85163604(arg0, 0xB, 5, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A4D4(s32 arg0, s32 arg1) {
+void func_8500A4D4(s32 arg0, s32 arg1) {
     func_85163604(arg0, 0xC, 0x29, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A518(s32 arg0, s32 arg1) {
+void func_8500A518(s32 arg0, s32 arg1) {
     func_85163604(arg0, 0xD, 0x29, 300, 0, 0, 0xFF, 1);
 }
 
-void func_8000A55C(s32 arg0, s32 arg1) {
+void func_8500A55C(s32 arg0, s32 arg1) {
     func_851623F4(arg0, 1, 0x16, 0, -1, 300, 0xFF, 1);
 }
 
-void func_8000A5A8(s32 arg0, s32 arg1) {
+void func_8500A5A8(s32 arg0, s32 arg1) {
     func_85162740(arg0, 0x11, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A5F4(s32 arg0, s32 arg1) {
+void func_8500A5F4(s32 arg0, s32 arg1) {
     func_85162740(arg0, 0x12, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A640(s32 arg0, s32 arg1) {
+void func_8500A640(s32 arg0, s32 arg1) {
     func_85162740(arg0, 0x13, 6, 0, 300, 2, 0xFF, 1);
 }
 
-void func_8000A68C(s32 arg0, s32 arg1) {
+void func_8500A68C(s32 arg0, s32 arg1) {
     func_85162740(arg0, 0x15, 6, 0, 300, 2, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A6D8.s")
-// void func_8000A6D8(s32 arg0, s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A6D8.s")
+// void func_8500A6D8(s32 arg0, s32 arg1) {
 //     s8 sp4C;
 //     s16 sp4A;
 //     s8 sp49;
@@ -325,12 +325,12 @@ void func_8000A68C(s32 arg0, s32 arg1) {
 //     }
 // }
 
-void func_8000A79C(s32 arg0, s32 arg1) {
+void func_8500A79C(s32 arg0, s32 arg1) {
     func_85162740(arg0, 22, 6, 0, 300, 2, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A7E8.s")
-// void func_8000A7E8(s32 arg0, s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A7E8.s")
+// void func_8500A7E8(s32 arg0, s32 arg1) {
 //     s8 sp4C;
 //     s16 sp4A;
 //     s8 sp49;
@@ -368,19 +368,19 @@ void func_8000A79C(s32 arg0, s32 arg1) {
 //     }
 // }
 
-void func_8000A8C8(s32 arg0, s32  arg1) {
+void func_8500A8C8(s32 arg0, s32  arg1) {
     func_851615F8(arg0, 0, 6, 0xE, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A904.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A904.s")
 // NON-MATCHING: missing a temp reg
-// void func_8000A904(s32 arg0, s32 arg1) {
+// void func_8500A904(s32 arg0, s32 arg1) {
 //     u8 tmp = arg1 - 80;
 //     func_851615F8(arg0, 1, tmp, 0xE, 0xFF, 1);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A94C.s")
-// void func_8000A94C(s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A94C.s")
+// void func_8500A94C(s32 arg1) {
 //     void *temp_v0;
 //
 //     if ((arg1 > 0) && (arg1 < 0x59)) {
@@ -391,30 +391,30 @@ void func_8000A8C8(s32 arg0, s32  arg1) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000A990.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000AB5C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500A990.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500AB5C.s")
 
-void func_8000ABA0(s32 arg0) {
+void func_8500ABA0(s32 arg0) {
     func_800226F0(&D_800BE4A0, 0x3C);
     func_8502B8E0(&D_800BE4A0, 0x3C, 3, 0xC, arg0, 0xA);
     func_800226F0(&D_800DDA90, 0xF0);
     func_800226F0(&D_800DD478, 0x618);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000AC14.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000AD84.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000AF08.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000B1F4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000B3B0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000B714.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000B8F4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000BAB8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000BC7C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000BE40.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500AC14.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500AD84.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500AF08.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500B1F4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500B3B0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500B714.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500B8F4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500BAB8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500BC7C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500BE40.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000BE68.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500BE68.s")
 // NON-MATCHING: uses a0/a1 not v0/v1
-// void func_8000BE68(void) {
+// void func_8500BE68(void) {
 //     D_800DDD1C = 0;
 //     D_8008CEB0 = 0;
 //     D_800DDC00 = 0;
@@ -425,4 +425,4 @@ void func_8000ABA0(s32 arg0) {
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8000BEC0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500BEC0.s")

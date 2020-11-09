@@ -133,6 +133,36 @@ void func_8001E494(void);
 s32  func_8001E4A0(s16 arg0, s32 arg1, s32 arg2);
 s32  func_80022338(struct21 *arg0, s32 arg1, s32 arg2);
 
+/* chunk0 */
+
+void func_85000090(void);
+void func_85000AC0(void);
+void func_85001B08(void);
+void func_850026C4(void);
+void func_850026E8(s32 arg0);
+void func_85002724(void);
+void func_85002F40(s32 arg0);
+s32  func_85002FA0(s32 arg0);
+void func_8500310C(void);
+void func_850038A0(void);
+s32  func_8500390C(s32 arg0);
+void func_850039B0(s32 arg0);
+void func_85004E00(void);
+
+void func_850095D8(s32 arg0, s32 arg1);
+void func_85009600(s32 arg0, s32 arg1);
+void func_8500969C(s32 arg0, s32 arg1);
+void func_85009740(s32 arg0, s32 arg1);
+void func_85009768(s32 arg0, s32 arg1);
+void func_850097A4(s32 arg0, s32 arg1);
+void func_850097CC(s32 arg0, s32 arg1);
+void func_85009818(s32 arg0, s32 arg1);
+void func_85009844(s32 arg0, s32 arg1);
+void func_85009870(s32 arg0, s32 arg1);
+void func_85009894(s32 arg0, s32 arg1);
+void func_850098D0(s32 arg0, s32 arg1);
+void func_850098F8(s32 arg0, s32 arg1);
+void func_85009944(s32 arg0, s32 arg1);
 
 /* non-matching */
 void func_80001194(s32 arg0);
@@ -373,7 +403,12 @@ void func_8001A2F8(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3);
 //func_801A04EC
 //func_801A04F4
 //func_801A0538
-f32 func_8001FA78(struct06 *arg0, s32 arg1);
-f32 func_850484A0(f32 arg0, f32 arg1);
+f32  func_8001FA78(struct06 *arg0, s32 arg1);
+f32  func_850484A0(f32 arg0, f32 arg1);
+
+void func_8516127C(s32 arg0, u8 arg1, u8 arg2);
+void func_85161334(s32 arg0, u8 arg1, u8 arg2);
+void func_851B8DB0(s32 arg0, u8 arg1, u8 arg2, u8 arg3);
+s32  func_851615F8(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5);
 
 #endif
