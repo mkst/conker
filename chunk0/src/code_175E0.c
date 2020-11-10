@@ -3,9 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-extern u8  D_800BE616;
-extern u8  D_800D2456;
-extern u8  D_800D2457;
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_850175E0.s")
 // NON-MATCHING: uses different registers...

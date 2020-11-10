@@ -395,7 +395,7 @@ void func_8500A8C8(s32 arg0, s32  arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_8500AB5C.s")
 
 void func_8500ABA0(s32 arg0) {
-    func_800226F0(&D_800BE4A0, 0x3C);
+    func_800226F0(&D_800BE4A0, 0x3C); // bzero
     func_8502B8E0(&D_800BE4A0, 0x3C, 3, 0xC, arg0, 0xA);
     func_800226F0(&D_800DDA90, 0xF0);
     func_800226F0(&D_800DD478, 0x618);

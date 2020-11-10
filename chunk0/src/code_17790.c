@@ -6,7 +6,7 @@
 
 void func_85017790(void) {
     func_8509C120();
-    func_800226F0(D_800D2E4C, 0x1B);
+    func_800226F0(D_800D2E4C, 0x1B);  // bzero
     func_800226F0(&D_800D2E50, 0x10);
     func_800226F0(&D_800D2E60, 9);
     func_800226F0(&D_800D2E70, 0xCC);

@@ -134,9 +134,9 @@ s32  func_8001E4A0(s16 arg0, s32 arg1, s32 arg2);
 s32  func_80022338(struct21 *arg0, s32 arg1, s32 arg2);
 
 /* chunk0 */
-
 void func_85000090(void);
 void func_85000AC0(void);
+
 void func_85001B08(void);
 void func_850026C4(void);
 void func_850026E8(s32 arg0);
@@ -147,7 +147,46 @@ void func_8500310C(void);
 void func_850038A0(void);
 s32  func_8500390C(s32 arg0);
 void func_850039B0(s32 arg0);
+void func_850045BC(void);
 void func_85004E00(void);
+void func_85004F00(void);
+void func_85004F10(void);
+void func_85004F30(void);
+void func_85005270(void);
+void func_85005AB0(struct108 *arg0);
+void func_85005AF0(s32 arg0);
+void func_85005B00(s32 arg0);
+void func_85005B10(struct108 *arg0);
+void func_85005B50(s32 arg0);
+void func_85005B60(s32 arg0);
+void func_85005B70(s32 arg0);
+void func_85005BD0(struct108 *arg0);
+void func_85005C30(struct108 *arg0);
+void func_85005CF0(s32 arg0);
+void func_85005D00(struct108 *arg0);
+void func_85005D60(struct108 *arg0);
+void func_85005E30(struct108 *arg0);
+void func_85005EA0(struct108 *arg0);
+void func_85005EE0(struct108 *arg0);
+void func_85005F20(struct108 *arg0);
+void func_85005F60(struct108 *arg0);
+void func_85005FA0(s32 arg0);
+void func_85005FB0(struct108 *arg0);
+void func_85006170(struct108 *arg0);
+void func_85007644(void);
+void func_8500764C(void);
+void func_85007668(void);
+void func_85007684(void);
+void func_850076A0(void);
+void func_850076BC(s32 arg0);
+void func_85007718(s32 arg0);
+void func_85007750(s32 arg0);
+void func_85007A20(void);
+void func_85008230(void);
+void func_85008840(void);
+void func_85008B90(void);
+void func_85008BB0(void);
+void func_85008BE0(void);
 
 void func_850095D8(s32 arg0, s32 arg1);
 void func_85009600(s32 arg0, s32 arg1);
@@ -163,6 +202,13 @@ void func_85009894(s32 arg0, s32 arg1);
 void func_850098D0(s32 arg0, s32 arg1);
 void func_850098F8(s32 arg0, s32 arg1);
 void func_85009944(s32 arg0, s32 arg1);
+
+void func_85017790(void);
+void func_850177F8(void);
+
+void func_85093878(void);
+s32  func_850C3D48(s32 arg0);
+void func_850CEF10(struct108 *arg0);
 
 /* non-matching */
 void func_80001194(s32 arg0);

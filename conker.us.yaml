@@ -6,7 +6,6 @@ options:
   - "-Iinclude"
   - "-Iinclude/2.0L"
   - "-D_LANGUAGE_C"
-  find-file-boundaries: yes
   modes:
   - all
 segments:

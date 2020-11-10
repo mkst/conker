@@ -18,6 +18,13 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o))
 
+
+# CORE_O_FILES := $(shell find ../build -name "*.o")
+# proof of concept
+CORE_O_FILES := ../build/asm/libultra/libc/bzero.o
+
+
+
 # Files requiring pre/post-processing
 GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM src/)
@@ -62,13 +69,20 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRI
 ####################### Overrides ############################
 
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
+
+
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
 $(BUILD_DIR)/src/code_175E0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_940.o: CC := $(CC_OLD)
-# $(BUILD_DIR)/src/code_4E00.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_39E0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_5E70.o: CC := $(CC_OLD)
+
+# $(BUILD_DIR)/src/code_8EF80.o: CC := $(CC_OLD)
+
 
 # OPT_FLAGS
 
@@ -100,7 +114,7 @@ compress: $(sort $(SPLIT_FILES_RZ))
 combine: $(PADDING) $(RZ_FILES)
 	cat $(sort $(PADDING) $(RZ_FILES)) > $(BUILD_DIR)/chunk0.gz.bin
 
-verify_o:
+verify_o: $(TARGET).bin
 	@echo "$$(cat chunk0.sha1)  build/chunk0.bin" | sha1sum --check
 
 verify:
@@ -114,6 +128,8 @@ $(TARGET).bin: $(TARGET).elf
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+
+#$(CORE_O_FILES)
 
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<

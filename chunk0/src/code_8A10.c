@@ -2,6 +2,7 @@
 
 #include "variables.h"
 
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8A10/func_85008A10.s")
 // NON-MATCHING: mtc1 in wrong place
 // void func_85008A10(void) {
