@@ -105,6 +105,7 @@ extern s32  D_800354FC;
 extern s16  D_80035500;
 extern OSThread *D_80035910;
 
+extern s32 D_800364C4;
 extern OSMesgQueue *D_80036B40;
 extern OSMesg      *D_80036B58;
 extern struct00 *D_80036B60;
@@ -127,8 +128,8 @@ extern f32  D_800380A0;
 extern f32  D_800380A4;
 extern s32  D_800380B0;
 extern struct54 *D_800380B4;
-extern s32  D_800380B8;
-extern s32  D_800380BC;
+extern struct54 *D_800380B8;
+extern struct54 *D_800380BC;
 
 extern s32  D_800380C0;
 extern s32  D_800380C4;
@@ -157,8 +158,7 @@ extern u8 D_8003B239;
 extern u8 D_8003B23A;
 extern OSMesg      *D_8003B240;
 
-extern s32 D_8003B260;
-extern s32 D_8003B264;
+// extern s32 *D_8003B264;
 extern OSThread    *D_8003B6A0;
 extern OSMesg      *D_8003B660;
 extern OSMesg      *D_8003B670;
@@ -256,7 +256,7 @@ extern s32  D_80084064;
 extern s32  D_8008FD90;
 /* 800E0000 */
 extern s32  D_800E9D00;
-extern s32  D_800E9D10[];
+extern struct54 D_800E9D10[]; // probably not struct54
 
 extern s32 D_800BE2D0;
 extern u8  D_800BE616;
@@ -292,6 +292,18 @@ extern s32 D_800C3E84;
 extern s32 D_800C3EE0;
 extern struct106 D_800C6660[];
 extern u8  D_800C4000;
+extern u8  D_800CBD60;
+extern u8  D_800CBD61;
+extern u8  D_800CBD62;
+extern u8  D_800CBD63;
+extern s32 D_800CBD64;
+extern s16 D_800CBD70;
+extern s16 D_800CBD72;
+extern u8  D_800CBD74;
+extern u32 D_800CBD78;
+extern s16 D_800CBD7C;
+
+extern f32 D_800CBD80;
 /* other */
 
 extern s32 D_80041E58;
@@ -450,10 +462,11 @@ extern u8   D_800DD2A3;
 extern s32  D_151FA130;
 extern s32  D_15000000;
 
-extern u8 _extcodeSegmentRomStart[];
-extern u8 _extcodeSegmentRomEnd[];
 
-/* unsure */
+
+/* second TLB'd section */
+
+extern s32  D_16001B8C; // a struct
 extern s32  D_16003890;
 extern u8   D_16003AF4;
 extern s8   D_16003B1C;
@@ -461,17 +474,14 @@ extern s32  D_160038A0;
 extern s8   D_16003B28;
 extern s32  D_1600389C;
 
+extern s32  D_160046AC;
 extern s32  D_160047D0;
 extern s32  D_160047D4;
 extern s32  D_160047DC;
 extern s32  D_160047E0;
 
-/* these are registers */
-extern u32  AI_A4500000;
-extern s32  AI_A4500004;
-
 /* what is this */
-extern u16 *D_BC000C02;
+extern s16 *D_BC000C02;
 
 
 

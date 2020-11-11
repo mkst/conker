@@ -80,6 +80,7 @@ $(BUILD_DIR)/src/code_175E0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_940.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_39E0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_5E70.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_42D50.o: CC := $(CC_OLD)
 
 # $(BUILD_DIR)/src/code_8EF80.o: CC := $(CC_OLD)
 

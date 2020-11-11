@@ -1,9 +1,14 @@
 import os
 import struct
 
+
 from segtypes.segment import N64Segment
 from pathlib import Path
 
+# FIXME: this is horrible
+import sys
+if not 'custom/n64splat/' in sys.path:
+    sys.path.append('custom/n64splat/')
 import rareunzip
 
 # Rare zip format:

@@ -25,6 +25,9 @@ BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 RODATA_FILES := $(foreach dir,$(RODATA_DIRS),$(wildcard $(dir)/*.rodata))
 
+CHUNK_0_RZIP_FILES := $(wildcard rzip/chunk0/*.gz)
+CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
+
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
@@ -99,35 +102,9 @@ CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
 LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
-######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RODATA_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
+### file-specific compile flags
 
-default: all
-
-all: check $(BUILD_DIR) $(TARGET).z64 verify
-
-check:
-	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
-
-clean:
-	rm -rf asm
-	rm -rf bin
-	rm -rf build
-	rm -rf rodata
-	rm -rf rzip
-	rm -rf mp3
-
-extract:
-	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
-
-CHUNK_0_RZIP_FILES := $(wildcard rzip/chunk0/*.gz)
-CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
-
-# move this to chunk0?
-decompress: $(BUILD_DIR)/chunk0.bin
-
-# file-specific compile flags
 # $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
@@ -163,19 +140,17 @@ $(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
 
-# compilers
+# compiler version
 $(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_39C0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_50A0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_EB00.o: CC := $(CC_OLD)
-# $(BUILD_DIR)/src/code_3920.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_19AB0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_17C00.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_128D0.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/code_17AF0.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_17C00.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/code_19AB0.o: CC := $(CC_OLD)
 
-# $(BUILD_DIR)/src/code_19EA80.o: CC := $(CC_OLD)
-
-
-# libultra
+# libultra specifics
 $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/libultra/io/ai.o: OPT_FLAGS := -O2 -g
 # $(BUILD_DIR)/src/libultra/io/aisetfreq.o: MIPSBIT := -mips1
@@ -188,8 +163,37 @@ $(BUILD_DIR)/src/code_EB00.o: MIPSBIT := -mips2 -32
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
+######################## Targets #############################
 
-# dependencies
+default: all
+
+all: check dirs $(TARGET).z64 verify
+
+check:
+	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
+
+dirs:
+	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RODATA_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
+
+clean:
+	rm -rf asm
+	rm -rf bin
+	rm -rf build
+	rm -rf rodata
+	rm -rf rzip
+	rm -rf mp3
+
+extract:
+	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
+
+# move this to chunk0?
+decompress: dirs $(BUILD_DIR)/chunk0.bin
+
+verify: $(TARGET).z64
+	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
+
+######################## Recipes #############################
+
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
@@ -230,10 +234,7 @@ $(BUILD_DIR)/chunk0.bin: $(CHUNK_0_RUNZIP_FILES)
 $(BUILD_DIR)/%.bin: %.bin
 	mv $< $@
 
-verify: $(TARGET).z64
-	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
 
 # settings
-
 .PHONY: all clean default
 SHELL = /bin/bash -e -o pipefail

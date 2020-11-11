@@ -11,10 +11,12 @@ void func_800010F8(s32 arg0);
 void func_80001444(void);
 void func_800014A0(void);
 s32  func_80002070(s32 arg0, s32 arg1, s32 arg2);
-void func_80002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+// void func_80002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_8000349C(s32 arg0);
 s32  func_8000390C(void);
+void func_80003930(void);
 void func_800039B0(void);
+void func_800039C0(void);
 s32  func_80003C40(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_80004470(void);
 void func_80004674(void);
@@ -227,11 +229,10 @@ void func_80003330(struct00 *arg0);
 //func_800034E0
 //func_80003658
 void func_800038C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_800038E0(void);
+// void func_800038E0(void);
 void func_80003920(void);
-u32  func_80003930(void);
 void func_800039C0(void);
-void func_80003BD0(void);
+// void func_80003BD0(void);
 //func_80003ACC
 //func_80003C6C
 //func_80004074
@@ -246,7 +247,7 @@ void func_800043B4(s32 *arg0, u32 arg1);
 //func_80004DB0
 //func_80004F00
 void func_800050A0(OSMesgQueue *arg0);
-s32  func_800051C8(struct01 *arg0, OSMesgQueue *arg1);
+// s32  func_800051C8(struct01 *arg0, OSMesgQueue *arg1);
 void func_800052A0(s32 arg0);
 //func_80005570
 //func_800056A0

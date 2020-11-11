@@ -4,15 +4,15 @@
 #include "variables.h"
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_800050A0.s")
-// not quite matching
-// void func_800050A0(OSMesgQueue *arg0) {
-//     D_8003B260 = 0;
-//     D_8003B264 = 0xFEFEFEFE;
+// NON-MATCHING: will match once BSS is figured out
+// static u64 D_8003B260;
+// void func_800050A0(OSMesgQueue *queue) {
+//     D_8003B260 = 0x00000000FEFEFEFE;
 //     D_8003B234 = 0;
-//     D_8003B230 = arg0;
-//     D_8003B238 = 0xFF;
-//     D_8003B239 = 0;
-//     D_8003B23A = 0;
+//     D_8003B230 = queue;
+//     D_8003B238 = (u8)0xFF;
+//     D_8003B239 = (u8)0;
+//     D_8003B23A = (u8)0;
 //     osCreateMesgQueue(&D_8003B1E8, &D_8003B660, 3);
 //     osCreateMesgQueue(&D_8003B200, &D_8003B670, 1);
 //     osCreateMesgQueue(&D_8003B218, &D_8003B680, 8);
@@ -26,9 +26,9 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_800051C8.s")
 // NON-MATCHING: uses v1 instead of v0
-// s32 func_800051C8(struct01 *arg0, OSMesgQueue *arg1) {
-//     arg0->unk4 = arg1;
-//     arg0->unk0 = D_8003B234;
+// s32 func_800051C8(OSPfs *pfs, OSMesgQueue *queue) {
+//     pfs->queue = queue;
+//     pfs->status = D_8003B234;
 //     return &D_8003B234;
 // }
 

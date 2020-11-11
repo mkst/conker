@@ -141,7 +141,7 @@ segments:
     - [0x40350, "asm"]
     - [0x40D90, "asm"]
     - [0x412C0, "asm"]
-    - [0x42D50, "asm"]
+    - [0x42D50, "c"]
     - [0x44370, "asm"]
     - [0x47C00, "asm"]
     - [0x47D60, "asm"]
@@ -199,6 +199,8 @@ segments:
     - [0xA7DA0, "asm"]
     - [0xA8050, "asm"]
     - [0xAB1F0, "asm"]
+    - [0xAD770, "asm"] # syscall
+    - [0xAD780, "asm"]
     - [0xAD8B0, "asm"]
     - [0xAD9A0, "asm"]
     - [0xADAF0, "asm"]

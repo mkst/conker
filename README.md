@@ -26,12 +26,6 @@ cd conker
 docker build . -t conker
 ```
 
-**Apply patches**
-
-```sh
-git apply patches/n64splat.patch
-```
-
 **Spin up the image interactively**
 
 ```sh
