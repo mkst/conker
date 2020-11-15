@@ -3,51 +3,43 @@
 #include "functions.h"
 #include "variables.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EB00.s")
-// ? func_8000EB00(void *arg0, ? arg1, void *arg2, void *arg3, void *arg6) {
-//     s32 temp_t3;
-//
-//     if (arg0->unk24 != 0) {
-//         arg0->unk24 = (u16)0U;
-//     }
-//     *arg3 = 0x40;
-//     if (*(void *)0x800CC37D != 0) {
-// block_4:
-//         *arg2 = 0;
-//         *arg6 = (u16)0;
-//         return 0;
-//     }
-//     if (*arg2 == 0) {
-//         goto block_4;
-//     }
-//     temp_t3 = arg0->unk18 - *(void *)0x800BE9E4;
-//     arg0->unk18 = temp_t3;
-//     if (temp_t3 > 0) {
-//         *arg2 = 0;
-//         *arg6 = (u16)0;
-//     } else {
-//         arg0->unk18 = (s32) ((func_850ADA20() & 0x7F) + 0x80);
-//         arg0->unk0 = (s16) ((func_850ADA20(arg0) % 3U) + 0x6C);
-//     }
-//     return 0;
-// }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EBC4.s")
-// NON-MATCHING: uses t6 not v1 in wrong place
-// s32 func_8000EBC4(struct00 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-//     s32 temp_v0 = arg0->unkC;
-//     s32 temp_v1 = arg0->unk18 - D_800BE9E4;
-//
-//     if (temp_v1 <= 0) {
-//         temp_v0 = temp_v0 - D_800BE9E4 * 1000;
-//         if (temp_v0 < 0) {
-//             return 1;
-//         }
-//         arg0->unkC = temp_v0;
-//     }
-//     arg0->unk18 = temp_v1;
-//     return 0;
-// }
+s32 func_8000EB00(struct04 *arg0, s32 arg1, s32 *arg2, s32 *arg3, s32 arg6, s32 arg7, u16 *arg8) {
+    if (arg0->unk24 != 0) {
+        arg0->unk24 = 0;
+    }
+    *arg3 = 64;
+    if (D_800CC37D || (*arg2 == 0)) {
+        *arg2 = 0;
+        *arg8 = 0;
+        return 0;
+    }
+    arg0->unk18 -= D_800BE9E4;
+    if (arg0->unk18 > 0) {
+        *arg2 = 0;
+        *arg8 = 0;
+    } else {
+        arg0->unk18 = (func_850ADA20() & 0x7F) + 0x80;
+        arg0->unk0 = (func_850ADA20() % 3U) + 0x6C;
+    }
+    return 0;
+}
+
+s32 func_8000EBC4(struct00 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_v0 = arg0->unkC;
+    s32 temp_v1 = arg0->unk18;
+    temp_v1 -= D_800BE9E4;
+
+    if (temp_v1 <= 0) {
+        temp_v0 = temp_v0 - D_800BE9E4 * 1000;
+        if (temp_v0 < 0) {
+            return 1;
+        }
+        arg0->unkC = temp_v0;
+    }
+    arg0->unk18 = temp_v1;
+    return 0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000EC24.s")
 // ? func_8000EC24(void *arg0, ? arg1, void *arg2, void *arg3, void *arg4, void *arg5, void *arg6) {
@@ -171,7 +163,7 @@ s32 func_8000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 //     temp_v1 = (temp_a1 * 12) + &D_800425E0;
 //     if (temp_v1->unk8) {
 //         if ((temp_t6 == temp_v1->unk0) || (temp_a1 == temp_t6)) {
-//             if (func_800173C4(temp_v1 + 8, temp_a1)) {
+//             if (func_800173C4(temp_v1->unk8, temp_a1)) {
 //                 return 1;
 //             }
 //         }
@@ -179,22 +171,21 @@ s32 func_8000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 //     return 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F44C.s")
-// ? func_8000F44C(u16 arg0) {
-//     s32 temp_v0;
-//     void *temp_a1;
-//     void *temp_a2;
-//
-//     temp_v0 = __osDisableInt();
-//     temp_a1 = ((arg0 & 0xF) * 0xC) + &D_800425E0;
-//     temp_a2 = temp_a1->unk8;
-//     if ((temp_a2 != 0) && (arg0 == temp_a1->unk0) && ((temp_a2->unk53 & 2) != 0)) {
-//         __osRestoreInt(temp_v0, temp_a1, temp_a2);
-//         return 1;
-//     }
-//     __osRestoreInt(temp_v0, temp_a1, temp_a2);
-//     return 0;
-// }
+s32 func_8000F44C(u16 arg0) {
+    u32 mask;
+    struct120 *temp_a1;
+    struct31 *temp_a2;
+
+    mask = __osDisableInt();
+    temp_a1 = &D_800425E0[arg0 & 0xF];
+    temp_a2 = temp_a1->unk8;
+    if ((temp_a2 != 0) && (temp_a1->unk0 == arg0) && ((temp_a2->unk53 & 2) != 0)) {
+        __osRestoreInt(mask);
+        return 1;
+    }
+    __osRestoreInt(mask);
+    return 0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F4D8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000F568.s")
@@ -282,6 +273,27 @@ s32 func_8000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000FEF0.s")
+// NON-MATCHING: needs a re-work
+// s32 func_8000FEF0(u16 arg0, s32 arg1, s32 arg2) {
+//     s32 i;
+//     struct15 *tmp;
+//
+//     if (arg0 == 0) {
+//         // nothing
+//     } else {
+//         for (i = 0; i < D_80042760; i++) {
+//             tmp = &D_80041FE0[i];
+//             if ((arg0 == tmp->unk24) &&
+//                 (arg1 == tmp->unk18) &&
+//                 (arg2 == tmp->unk1C) &&
+//                 ((tmp->unk10 & 0x80) == 0)) {
+//                 return i;
+//             }
+//         }
+//     }
+//     return -1;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8000FF90.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8001001C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_800100E0.s")
@@ -290,8 +302,43 @@ s32 func_8000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010558.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010630.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010720.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_800107F8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010894.s")
+
+s32 func_800107F8(struct48 *arg0) {
+    if (arg0->unk0 == 0) {
+        return 0;
+    } else {
+        if (arg0->unk318 != 0) {
+            if (arg0->unk8E != 0) {
+                if (func_8000F3D0(arg0->unk8E, arg0) != 0) {
+                    return 1;
+                }
+            }
+        } else {
+            if (func_8000FF90(&D_1000EE70, arg0, arg0->unk3B | 0x10000) != -1) {
+                return 1;
+            }
+        }
+        arg0->unk8E = 0;
+    }
+    return 0;
+}
+
+s32 func_80010894(struct48 *arg0) {
+    if (arg0->unk318 != 0) {
+        if (arg0->unk8C != 0) {
+            if (func_8000F3D0(arg0->unk8C, arg0) != 0) {
+                return 1;
+            }
+        }
+    } else {
+        if (func_8000FF90(&D_1000EE70, arg0, arg0->unk3B | 0x20000) != -1) {
+            return 1;
+        }
+    }
+    arg0->unk8C = 0;
+    return 0;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_8001091C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_800109D0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010A3C.s")

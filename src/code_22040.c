@@ -3,7 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
-
+// returns struct21
 #pragma GLOBAL_ASM("asm/nonmatchings/code_22040/func_80022040.s")
 
 s32 func_80022338(struct21 *arg0, s32 arg1, s32 arg2) {

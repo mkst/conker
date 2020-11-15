@@ -45,6 +45,7 @@ LD_SCRIPT = chunk0.ld
 CC := ../ido/ido7.1_recomp/cc
 CC_OLD := ../ido/ido5.3_recomp/cc
 
+
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
 CPP = $(CROSS)cpp
@@ -71,19 +72,12 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRI
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
 
-
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
-$(BUILD_DIR)/src/code_175E0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_940.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_39E0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_5E70.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_42D50.o: CC := $(CC_OLD)
-
-# $(BUILD_DIR)/src/code_8EF80.o: CC := $(CC_OLD)
-
+$(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/src/code_11C70.o: CC := $(CC)
 
 # OPT_FLAGS
 

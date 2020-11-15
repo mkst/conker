@@ -77,14 +77,15 @@ segments:
     - [0x1E480, "c"]
     - [0x1E4A0, "c"]
     - [0x1E530, "c"]
+    - [0x1FB40, "c"]
     - [0x20000, "c"]
     - [0x210C0, "c"]
     - [0x214F0, "c"]
     - [0x22040, "c"]
     - [0x22460, "c"]
-    # -O2 -g3 from here (?)
+    # -O2 -g3 from here
     - [0x226F0, "asm", "libultra/libc/bzero"]
-    - [0x22790, "c", "libultra/os/os22790"]
+    - [0x22790, "c",   "libultra/os/os22790"]
     - [0x22A30, "asm", "libultra/os/setsr"]
     - [0x22A40, "asm", "libultra/os/getsr"]
     - [0x22A50, "asm", "libultra/os/setfpccsr"]
@@ -98,14 +99,14 @@ segments:
     - [0x22F60, "asm", "libultra/libc/lldiv"]
     - [0x23060, "asm", "libultra/libc/ldiv"]
     - [0x230F0, "asm", "libultra/libc/xlitob"]
-    - [0x23390, "c", "libultra/io/ai"]
+    - [0x23390, "c",   "libultra/io/ai"]
     - [0x233C0, "asm", "libultra/os/virtualtophysical"]
     - [0x23440, "asm", "libultra/os/recvmesg"]
     - [0x23580, "asm", "libultra/os/sendmesg"]
     - [0x236D0, "asm", "libultra/os/piacs"]
     - [0x23790, "asm", "libultra/os/createmesgqueue"]
     - [0x237C0, "asm", "libultra/os/seteventmesg"]
-    - [0x23830, "c", "libultra/os/getthreadpri"]
+    - [0x23830, "c",   "libultra/os/getthreadpri"]
     - [0x23850, "asm", "libultra/io/pirawdma"]
     - [0x23930, "asm", "libultra/io/epirawdma"]
     - [0x23A10, "asm", "libultra/libc/bcopy"]
@@ -146,7 +147,7 @@ segments:
     - [0x262C0, "asm", "libultra/io/pigetstat"]
     - [0x262D0, "asm", "libultra/os/unmaptlb"]
     - [0x26310, "asm", "libultra/os/maptlb"]
-    - [0x263D0, "c", "libultra/io/aisetfreq"]
+    - [0x263D0, "c",   "libultra/io/aisetfreq"]
     - [0x26530, "asm", "libultra/gu/sqrtf"]
     - [0x26540, "asm", "libultra/gu/sinf"]
     - [0x26700, "asm", "libultra/io/sprawread"]
@@ -163,8 +164,19 @@ segments:
     - [0x27820, "asm", "libultra/io/leodiskinit"]
     - [0x28670, "asm", "libultra/io/pfschecker"]
   - [0x000290D0, "bin"] # early rodata?
-  - name:  rodata
-    type:  rodata
+  - type:  rodata
+    start: 0x0002C450
+    vram:  0x8002C450
+    files:
+    - start: 0x0002C450
+      types: "ffff"
+      glabel:
+        - "F_1__0309929847717285"
+        - "F_6__2831854820251465"
+        - "F_6__2831854820251465_2" # also contains 6.2831854820251465
+        - "D_8002C45C"
+  - [0x2C460, "bin"] # more rodata
+  - type:  rodata
     start: 0x0002C750
     vram:  0x8002C750
     files:
@@ -181,8 +193,8 @@ segments:
       - "D_8002C76C"
       - "PI"
       - "F_1__4142136573791504"
-      - "D_8002C778"
-      - "D_8002C77C"
+      - "F_1__0594631433486938"
+      - "F_0__9438742995262146"
       - "D_8002C780"
       - "D_8002C784"
       - "D_8002C788"
@@ -708,14 +720,17 @@ segments:
     type:  rzip
     start: 0x00188328
     files:
-    - [0x00188328, "bin"] # compressed 0x144AF, uncompressed 0x2e2a0, 1 byte padding
+    - [0x00188328, "gz"] # compressed 0x144AF, uncompressed 0x2e2a0, 1 byte padding
   - [0x0019C7D8, "bin", "zeroes_1"] # 0x00 padding, 8880 bytes
   - type:  code
     start: 0x0019EA88
     vram:  0x86000000
     files:
-    - [0x0019EA88, "c"]
+    - [0x0019EA88, "c"] # 0x000000
+    - [0x001A0188, "c"] # 0x001700
+    - [0x001A0538, "c"] # 0x001AB0
     - [0x001A0558, "c"] # 0x001AD0
+    # - [0x001A0558, "c"] # 0x001AD0
   - [0x001A2190, "bin"] # more rodata?
   ###
   - [0x001A37E0, "bin", "compressed00"]
@@ -1260,19 +1275,19 @@ segments:
   - name:  assets17     # TODO: split out midi (m64?) files
     type:  rzip
     start: 0x029ae9e8
-  - name:  assets18
+  - name:  assets18    # another compressed file inside
     type:  rzip
     start: 0x03F82170
   - name:  assets19
     type:  rzip
     start: 0x03f82490
-  - name:  assets1A
+  - name:  assets1A    # "the <LANGUAGE> catapult..."
     type:  rzip
     start: 0x03F87F68
   - name:  assets1B
     type:  rzip
     start: 0x03F89640
-  - name:  assets1C
+  - name:  assets1C    # text, credits etc
     type:  rzip
     start: 0x03f8ab18
   - [0x03F8B770, "bin"] # TODO: anything interesting here?

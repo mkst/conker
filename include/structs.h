@@ -18,7 +18,8 @@ typedef struct {
 } struct01;
 
 typedef struct {
-    s32 unk0;
+    s16 unk0;
+    s16 unk2;
     s32 unk4;
     s32 unk8;
     s32 unkC;
@@ -27,7 +28,8 @@ typedef struct {
     s32 unk18;
     s32 unk1C;
     s32 unk20;
-    s32 unk24;
+    u16 unk24;
+    s16 unk26;
     s16 unk28;  // used
     s16 unk2A;
     s32 unk2C;
@@ -121,15 +123,17 @@ typedef struct {
 } struct07;
 
 typedef struct {
-  s32 unk0;
-  s32 unk4;
+    s32 unk0;
+    s32 unk4;
 } struct10;
 
 typedef struct {
-    u16 unk0;
+    s16 unk0;
     s16 unk2;
-    struct10 *unk4;
+    struct10 unk4[8];
 } struct8;
+
+typedef struct struct12 struct12;
 
 typedef struct {
     s32 unk0;
@@ -141,15 +145,16 @@ typedef struct {
 
 typedef struct {
     u16 unk0;
-    u8 unk2;
-    u8 unk3;
+    u8  unk2;
+    u8  unk3;       // used
     s32 unk4;
     s32 unk8;
-    s32 unkC;
-    u32 unk10;
+    s16 unkC;
+    s16 unkE;       // used
+    u32 unk10[16];  // used
 } struct11;
 
-typedef struct {
+struct struct12 {
     s32 unk0;
     s32 unk1;
     u8  unk8;
@@ -157,7 +162,7 @@ typedef struct {
     s32 unkC;
     s32 unk10;
     s32 unk14;
-} struct12;
+};
 
 typedef struct {
     s32 unk0;
@@ -190,7 +195,8 @@ typedef struct {
     s32 unk18;
     s32 unk1C;
     s32 unk20;
-    s32 unk24;
+    u16 unk24;
+    u16 unk26;
     s32 unk28;
     s32 unk2C;  // used
 } struct15;
@@ -248,7 +254,9 @@ typedef struct {
 typedef struct {
     s32 unk0;
     s32 unk4;
-    s32 unk8;
+    s16 unk8;
+    s8 unkA;
+    s8 unkB;
     struct19 *unkC;
 } struct20;
 
@@ -273,23 +281,28 @@ typedef struct {
     s32 unk44;
     s32 unk48;
     s32 unk4C;
-    s32 unk50;
-    f32 unk54;
-    s32 unk58;
+    s32 unk50;    // used
+    f32 unk54;    // used
+    s32 unk58;    // used
     s32 unk5C;
     s16 unk60;
-    s16 unk62;
-    s32 unk64;
-    s32 unk68;
-    s32 unk6C;
-    s32 unk70;
-    s32 unk74;
+    s16 unk62;    // used
+    s16 unk64;
+    s16 unk66;
+    s16 unk68;
+    s16 unk6A;
+    s16 unk6C;
+    s16 unk6E;    // used
+    s16 unk70;
+    s16 unk72;
+    s16 unk74;    // used
+    s16 unk76;    // used
     s32 unk78;
-    s32 unk7C;
-    s32 unk80;
-    OSMesgQueue *unk84;
-    s32 unk88;
-    s32 unk8C;
+    s32 unk7C;    // used
+    s32 unk80;    // used
+    OSMesgQueue *unk84;   // used
+    s32 *unk88;   // used
+    s32 unk8C;    // used
     s32 unk90;
     s32 unk94;
     s8  unk98;
@@ -482,7 +495,7 @@ typedef struct {
     u32 unk78;
     f32 unk7C;
     f32 unk80;
-    s32 unk84;
+    s32 unk84; // address of mesgQueue?
     s32 unk88;
     u8  unk8C;
     u8  unk8D;
@@ -718,7 +731,12 @@ typedef struct {
     s32 unk14;
     s32 unk18;
     s32 unk1C;
-    u8 pad[0x2f8];
+    u8 pad1[0x1b];
+    u8 unk3B;
+    u8 pad0[0x4F];
+    u16 unk8C;
+    u16 unk8E;
+    u8 pad2[0x288];
     s32 unk318;
 } struct48;
 
@@ -781,10 +799,10 @@ typedef struct {
 typedef struct struct54 struct54;
 
 struct struct54 {
-    struct54 *unk0;
+    struct54 *unk0;   // used
     struct54 *unk4;
-    s32 unk8;
-    s32 unkC;
+    u32 unk8;   // used
+    s32 unkC;   // used
     s32 unk10;
     s8 unk14;   // used
     u8 unk15;   // used
@@ -822,11 +840,13 @@ typedef struct {
     u16 unk24;  // used
 } struct57;
 
-typedef struct {
+typedef struct { // size 0x44
   u32 pad0[3];
   s32 unkC;               // used
   void *framebuffer;      // framebuffer
-  u32 pad1[17];
+  s32 unk14;
+  s32 unk18;
+  u32 pad1[0xF];
   OSMesgQueue *mesgQueue; // used
   OSMesg *mesg;           // used
 } struct58;
@@ -853,8 +873,14 @@ typedef struct {
 } struct101;
 
 typedef struct {
-  s32 unk0;
-  s32 unk4;
+  u8  unk0;
+  u8  unk1;   // used
+  u8  unk2;
+  u8  unk3;
+  u8  unk4;
+  u8  unk5;
+  u8  unk6;
+  u8  unk7;
   s32 unk8;
   s32 unkC;
   s32 unk10;
@@ -938,7 +964,6 @@ typedef struct {
     s32 unk5F0;      // used
     u8  pad60[0x148];
     u16 unk73C;
-
 } struct108;
 
 typedef struct {
@@ -986,5 +1011,165 @@ typedef struct {
     s32  unk1B;
 } struct110;
 
+typedef struct {
+    u8 pad[0x18];
+    f32 unk48;
+    f32 unk4C;
+    f32 unk50;
+} struct111;
+
+typedef struct {
+    f32 unk0;   // used
+    f32 unk4;   // used
+    f32 unk8;   // used
+    f32 unkC;
+    f32 unk10;  // used
+    f32 unk14;  // used
+    f32 unk18;  // used
+    f32 unk1C;
+    f32 unk20;  // used
+    f32 unk24;  // used
+    f32 unk28;  // used
+    f32 unk2C;
+    f32 unk30;  // used
+    f32 unk34;  // used
+    f32 unk38;  // used
+    f32 unk3C;
+} struct112;
+
+typedef struct {
+    u8 pad0[0x18];
+    s16 unk18;
+    s16 unk1A;
+    s16 unk1C;
+    s16 unk1E;
+    u8 pad1[0x18];
+    s16 unk38;
+    s16 unk3A;
+    s16 unk3C;
+    s16 unk3E;
+} struct113;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;  // used
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s16 unk28;
+    s16 unk2A;  // used
+    s32 unk2C;
+    s32 unk30;
+    s16 unk34;  // used
+    s16 unk36;  // used
+    s16 unk38;
+    s8  unk3A;  // used
+} struct114;
+
+typedef struct {
+    void (*unk0)(struct102 *arg0); // used
+    u8 pad0[0x14];
+    void (*unk18)(struct102 *arg0); // used
+    u8 pad1[0x18];
+} struct115;
+
+typedef struct {
+    u8 pad[0x18];
+} struct116;
+
+typedef struct {
+    u8 pad[0x20];
+} struct117; // used as OSMesg
+
+typedef struct {
+    u8 pad0[0x14];
+    s32 unk14;
+    u8 pad1[0x100];
+    s32 unk118;
+    s32 unk11C;
+    s32 unk120;
+    s32 unk124;
+} struct118;
+
+typedef struct struct119 struct119;
+
+struct struct119 {
+    u8 pad0[0x170];
+    struct119 *unk170;
+};
+
+typedef struct {
+    u16 unk0;       // used
+    u16 unk2;
+    s32 unk4;
+    struct31 *unk8; // used
+} struct120;
+
+typedef struct {
+    s16 unk0;
+    u8  unk2;
+    u8  unk3;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC[8];
+} struct121;
+
+typedef struct {
+    s32 unk0;
+} struct123;
+
+typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s32 unk4[8];
+} struct122;
+
+typedef struct struct124 struct124;
+
+struct INTS {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
+struct FLOAT {
+    f32 unk0;
+};
+
+struct struct124 {
+    struct124* unk0;
+    u8 unk4;
+    s8 unk5;
+    s8 unk6;
+    s8 unk7;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s16 unk20;
+    u16 unk22;
+    u16 unk24;
+    s16 unk26;
+    union {
+        struct INTS i;
+        struct FLOAT f;
+    } data;
+};
+
+typedef struct {
+    s16 unk0;
+    s16 unk2;       // used
+    s32 unk4;
+    s16 unk8[0x10]; // used
+    s32 unk28;      // used
+} struct125;
 
 #endif

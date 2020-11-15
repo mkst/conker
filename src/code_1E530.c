@@ -114,25 +114,21 @@
 //     return sp24;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FA78.s")
-// NON-MATCHING: f4/f6 swapped, wrong branch, missing a nop
-// f32 func_8001FA78(struct06 *arg0, s32 arg1) {
-//     f32 tmp;
-//
-//     arg0->unk14 += arg0->unk10 * (f32)arg1;
-//     if (2.0f < arg0->unk14) {
-//         arg0->unk14 -= 4.0f;
-//     }
-//     else {
-//         arg0->unk14 = arg0->unk14; // ???
-//     }
-//     tmp = arg0->unk14;
-//     tmp = tmp < 0.0f ? -tmp : (tmp - 1.0f);
-//     return arg0->unk1C * tmp;
-// }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001FB40.s")
+f32 func_8001FA78(struct06 *arg0, s32 arg1) {
+    f32 tmp;
 
-void func_8001FFE0(struct43 *arg0, s16 arg1) {
-    arg0->unk1A = arg1;
+    arg0->unk14 += arg0->unk10 * arg1;
+    if (arg0->unk14 > 2.0f) {
+        arg0->unk14 -= 4.0f;
+    }
+    else {
+        arg0->unk14 = arg0->unk14; // ???
+    }
+
+    tmp = arg0->unk14;
+    tmp = tmp < 0.0f ? -tmp : tmp;
+    tmp = tmp - 1.0f;
+
+    return tmp * arg0->unk1C;
 }

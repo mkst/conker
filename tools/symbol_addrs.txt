@@ -45,7 +45,6 @@ __osSiDeviceBusy = 0x80027630;
 __osSiGetAccess = 0x80025750;
 __osSiRawReadIo = 0x80026700;
 __osSiRawStartDma = 0x800257c0;
-__osSiRawStartDma = 0x801A0430;
 __osSiRawWriteIo = 0x80026750;
 __osSiRelAccess = 0x80025794;
 __osSpDeviceBusy = 0x80023e80;

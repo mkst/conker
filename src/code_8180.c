@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+
+// this one is a monster
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008180.s")
 
 void func_800084D8(u8 arg0) {
@@ -15,7 +17,7 @@ void func_8000853C(u8 arg0) {
     func_80017A80(D_8003C900[arg0]);
 }
 
-void func_80008570(u8 arg0, s32 arg1) {
+void func_80008570(u8 arg0, s32 arg1) { // arg1 is OSMesgQueue ?
     func_80017AF0(D_8003C900[arg0], arg1);
 }
 
@@ -32,27 +34,19 @@ void func_8000862C(u8 arg0, s32 arg1) {
     func_80017C00(D_8003C900[arg0], arg1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008660.s")
-// NON-MATCHING
-// void func_80008660(u8 arg0, u8 arg1, u8 arg2, s32 arg3) {
-//     s32 temp_lo;
-//     u8 phi_s0;
-//
-//     if (arg3 > 0) {
-//         temp_lo = (s32) (arg3 * 10) / 60;
-//         if (temp_lo == 0) {
-//             phi_s0 = 1;
-//         } else {
-//             phi_s0 = temp_lo;
-//             if (temp_lo >= 0x80) {
-//                 phi_s0 = 0x7F;
-//             }
-//         }
-//     } else {
-//         phi_s0 = 0;
-//     }
-//     func_80017C68(D_8003C900[arg0], arg1, arg2, phi_s0);
-// }
+void func_80008660(u8 arg0, u8 arg1, u8 arg2, s32 arg3) {
+    if (arg3 > 0) {
+        arg3 = (arg3 * 10) / 60;
+        if (arg3 == 0) {
+            arg3 = 1;
+        } else if (arg3 >= 128) {
+            arg3 = 127;
+        }
+    } else {
+        arg3 = 0;
+    }
+    func_80017C68(D_8003C900[arg0], arg1, arg2, arg3);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_800086FC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008744.s")

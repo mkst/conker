@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3920/func_80003920.s")
 // non-matching; ops in wrong order
 // void func_80003920(void) {

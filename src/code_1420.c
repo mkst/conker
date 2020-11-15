@@ -7,7 +7,7 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1420/func_80001420.s")
 // NOT MATCHING: uses v registers not a/t registers
 // void func_80001420(void) {
-//     u32 *ptr = D_80043B40;
+//     s32 *ptr = D_80043B40;
 //     do {
 //       *ptr++ = 0;
 //     }

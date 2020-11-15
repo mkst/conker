@@ -88,7 +88,6 @@ LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
-XXD = xxd
 
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2
@@ -104,6 +103,10 @@ CFLAGS += $(INCLUDE_CFLAGS)
 LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
 
 ### file-specific compile flags
+
+# compiler version
+$(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
+$(BUILD_DIR)/src/libultra/%.o: CC := $(CC)
 
 # $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
@@ -136,19 +139,10 @@ $(BUILD_DIR)/src/code_1E170.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E2A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E4A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_1FB40.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
-
-# compiler version
-$(BUILD_DIR)/src/code_1050.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_39C0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_50A0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_EB00.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_128D0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_17AF0.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_17C00.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/code_19AB0.o: CC := $(CC_OLD)
 
 # libultra specifics
 $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
@@ -157,7 +151,6 @@ $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
 
 # mips version
 # $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
-$(BUILD_DIR)/src/code_EB00.o: MIPSBIT := -mips2 -32
 
 
 # loop unrolling

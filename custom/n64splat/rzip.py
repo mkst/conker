@@ -52,8 +52,8 @@ class N64SegRzip(N64Segment):
             end = start + length
             #
             name = self.get_default_name(start) if self.name == self.get_default_name(self.rom_start) else f"{prefix}{start:08X}"
-            # are there other types?
-            subtype = "compressed" if type == 16 else "uncompressed"
+            # are there other flags?
+            subtype = "compressed" if (type & 16) else "uncompressed"
             # require 8-byte alignment
             pad = 0 if end % 8 == 0 else (8 - end % 8)
             if pad:

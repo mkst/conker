@@ -47,13 +47,11 @@ void func_8001DAA0(s32 arg0, s16 arg1, s32 arg2) {
     func_8001ED6C(sp1C, arg1, arg2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1D900/func_8001DAE4.s")
-// NON-MATCHING: extra cvt.d.s
-// void func_8001DAE4(struct47 *arg0, s16 arg1, s32 *arg2) {
-//     if (arg1 == 8) {
-//         arg0->unk2 = (f32) *arg2 * D_8002C790;
-//     } else if (arg1 == 9) {
-//         arg0->unk0 = *arg2;
-//     }
-//     func_8001CF38(arg0, (f32) D_8002BA44->unk54);
-// }
+void func_8001DAE4(struct47 *arg0, s16 arg1, s32 *arg2) {
+    if (arg1 == 8) {
+        arg0->unk2 = (f32) *arg2 * F_0__10000000149011612;
+    } else if (arg1 == 9) {
+        arg0->unk0 = *arg2;
+    }
+    func_8001CF38(arg0, D_8002BA44->unk54);
+}

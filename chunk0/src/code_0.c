@@ -7,17 +7,15 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_85000000.s")
 // NON-MATCHING: wrong registers
 // void func_85000000(void) {
-//     u32 i = 0;
-//     s32 phi_s2 = &D_80041EA0;
-//     s32 phi_s1 = &D_80041E58;
+//     s32 tmp1;
+//     s32 i;
 //
 //     for (i = 0; i < 3; i++)
 //     {
-//         func_80023790(phi_s1, phi_s2, 8);
-//         func_80008570(i & 0xFF, phi_s1);
+//         tmp1 = &D_80041E58[i];
 //
-//         phi_s1 += 0x18;
-//         phi_s2 += 0x20;
+//         func_80023790(tmp1, &D_80041EA0[i], 8); // osCreateMesgQueue
+//         func_80008570(i, &D_80041E58[i]);
 //     }
 //
 //     func_800085A4(0, 6, 1);

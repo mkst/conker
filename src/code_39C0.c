@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
+
 void func_800039C0(void) {
     OSViMode *mode;
 
