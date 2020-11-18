@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout this repo
+      uses: actions/checkout@v2
+
+    - name: checkout baserom
+      uses: actions/checkout@v2
+      with:
+        repository: mkst/conker-private
+        token: ${{ secrets.PRIVATE_REPO_ACCESS }}
+        path: baserom
+
+    - name: copy in baserom
+      run: mv ../baserom/baserom.us.z64 .
+
+    - name: make extract
+      run: make extract
+
+    - name: make
+      run: make
+
+    - name: make decompress
+      run: make decompress
+
+#     - name: make extract (chunk0)
+#       run: make extract     
+      
