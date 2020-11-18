@@ -17,6 +17,7 @@ textures/
 
 *.bin
 *.gz
+*.o
 *.pad
 *.z64
 chunk0.ld

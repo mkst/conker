@@ -716,7 +716,7 @@ segments:
     - [0x186550, "gz"]
     - [0x186a78, "gz"] # final chunk is 0x130 uncompressed, 0xd7 compressed
   - [0x00186b50, "bin", "zeroes_0"] # 0x00 padding, 6104 bytes
-  - name:  chunk1
+  - name:  chunk0_rodata
     type:  rzip
     start: 0x00188328
     files:

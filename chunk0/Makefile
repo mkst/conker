@@ -71,13 +71,14 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRI
 
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_5A60.o: OPT_FLAGS := -O2 -g3
 
 # $(BUILD_DIR)/src/code_8A10.o: LOOP_UNROLL := -Wo,-loopunroll,0
 $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
-# $(BUILD_DIR)/src/code_11C70.o: CC := $(CC)
+# $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
 
 # OPT_FLAGS
 

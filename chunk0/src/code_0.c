@@ -5,7 +5,7 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_0/func_85000000.s")
-// NON-MATCHING: wrong registers
+// NON-MATCHING: just not right
 // void func_85000000(void) {
 //     s32 tmp1;
 //     s32 i;

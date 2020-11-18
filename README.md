@@ -72,22 +72,22 @@ This project is in its infancy; there are multiple tasks being worked on:
 
 ## ROM layout
 
-The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but the standard header/trailer is stripped and instead there is a 4-byte header containing the uncompressed data length. These sections are dubbed `rzip`.
+The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but have the standard header/trailer stripped and, instead, replaced with a 4-byte header containing the uncompressed data length. These sections are dubbed `rzip`.
 
 ```
 [header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
 [ boot ]  0000 0040 > 0000 1000 ;
-[ code ]  0000 1000 > 0004 2C50 ; code
+[ code ]  0000 1000 > 0004 2C50 ; code (init + libultra)
 [ ???? ]  0002 90D0 > ???? ???? ;
 [ data ]  0002 C750 > 0002 C7A0 ; rodata section
 [ ???? ]  0002 C7A0 > 0004 2C50 ;
 [ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
 [ ???? ]  0018 6B50 > 0018 8328 ;
-[ rzip ]  0018 8328 > 0019 C7D8 ; chunk1; unknown data
+[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 rodata
 [ code ]  0019 C7D8 > 001A 2190 ; code
 [ data ]  001A 2190 > 001A 37E0 ; rodata section (?)
 [ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
-[ offs ]  00AB 1950 > 00AB 1A40 ; list of offset tables
+[ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
 [ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C
 [ ffff ]  03F8 B800 > 0400 0000 ; 0xff padding
 ```
@@ -102,7 +102,7 @@ There a number of compressed sections within the ROM. The goal is to be able to:
 
 ### Chunk 0
 
-The first compressed chunk within the ROM is named `chunk0`. It does not have a header (unlike the other compressed sections). Instead, each file can be identified by its 4-byte header containing the uncompressed size - 4096 bytes (except for the final file).
+The first compressed chunk within the ROM is named `chunk0`. It does not have an offsets table (unlike the other compressed sections). Instead, the start of each compressed block can be identified by the 4-byte length header that precedes it (`0x00001000` - 4096 bytes).
 
 Once decompressed these files form a contiguous chunk of code.
 

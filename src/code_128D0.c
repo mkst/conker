@@ -173,22 +173,22 @@ s32 func_80012F94(struct124 *arg0, f32 *arg1) {
     switch (sp28->unk4)
     {
         case 1: // guess this means union is u8s
-            sp28->unk24 += 1;
-            if (sp28->unk24 >= sp28->unk22) {
+            sp28->unk24 = (u16)sp28->unk24 + 1;
+            if ((u16)sp28->unk24 >= (u16)sp28->unk22) {
                 sp28->unk24 = 0;
             }
-            sp2C = (f32)sp28->unk24 / (f32) sp28->unk22;
+            sp2C = (f32)(u16)sp28->unk24 / (f32) (u16)sp28->unk22;
             sp2C = func_85047D60(sp2C * F_6__2831854820251465);
             sp2C = sp28->data.i.unk0 * sp2C;
             *arg1 = sp28->data.i.unk1 + sp2C;
             break;
 
         case 128: // guess this means float?
-            sp28->unk24 += 1;
-            if (sp28->unk24 >= sp28->unk22) {
+            sp28->unk24 = (u16)sp28->unk24 + 1;
+            if ((u16)sp28->unk24 >= (u16)sp28->unk22) {
                 sp28->unk24 = 0;
             }
-            sp2C = (f32) sp28->unk24 / (f32) sp28->unk22;
+            sp2C = (f32)(u16) sp28->unk24 / (f32)(u16) sp28->unk22;
             sp2C = func_85047D60(sp2C * F_6__2831854820251465_2) * sp28->data.f.unk0;
             *arg1 = func_80019AB0(sp2C);
             break;

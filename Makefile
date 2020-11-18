@@ -9,7 +9,7 @@ SRC_DIRS := src src/libultra src/libultra/io src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
-RZIP_DIRS := rzip/chunk0 rzip/chunk1 rzip/assets00 rzip/assets01 \
+RZIP_DIRS := rzip/chunk0 rzip/chunk0_rodata rzip/assets00 rzip/assets01 \
              rzip/assets02 rzip/assets03 rzip/assets04 rzip/assets05 \
              rzip/assets06 rzip/assets07 rzip/assets08 rzip/assets09 \
              rzip/assets0A rzip/assets0B rzip/assets0C rzip/assets0D \
@@ -34,7 +34,7 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
            $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
            $(foreach file,$(RODATA_FILES),$(BUILD_DIR)/$(file:.rodata=.o)) \
-           $(BUILD_DIR)/rzip/chunk0/chunk0.o $(BUILD_DIR)/rzip/chunk1/chunk1.o \
+           $(BUILD_DIR)/rzip/chunk0/chunk0.o $(BUILD_DIR)/rzip/chunk0_rodata/chunk0_rodata.o \
 
 ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
           $(BUILD_DIR)/rzip/assets01/assets01.o \

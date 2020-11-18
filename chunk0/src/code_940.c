@@ -84,9 +84,9 @@ void func_85001B08(void) {
 //     func_80004074(tmp2);
 // }
 
-void func_850026C4(void) {
+void func_850026C4(s32 arg0) {
     D_800DBE38 = 0;
-    func_8510F800();
+    func_8510F800(arg0);
 }
 
 void func_850026E8(s32 arg0) {
@@ -95,8 +95,8 @@ void func_850026E8(s32 arg0) {
     D_800B0DE4 += D_800DBE38;
 }
 
-void func_85002724(void) {
-    D_800DBE38 += func_850027F8();
+void func_85002724(s32 arg0) {
+    D_800DBE38 += func_850027F8(arg0);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85002754.s")
