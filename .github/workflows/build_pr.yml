@@ -1,0 +1,49 @@
+name: build_pr
+
+on:
+  pull_request_target:
+    branches: [ master ]
+
+jobs:
+  build_pr:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+        ref: ${{ github.event.pull_request.head.ref }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+    - name: Checkout baserom
+      uses: actions/checkout@v2
+      with:
+        repository: mkst/conker-private
+        token: ${{ secrets.PRIVATE_REPO_ACCESS }}
+        path: baserom
+    - name: Copy in baserom
+      run: mv baserom/baserom.us.z64 .
+    - name: Perform make extract
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: make extract
+    - name: Perform make
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: make --jobs
+    - name: Perform make decompress
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: make decompress
+
+    - name: Perform make extract (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make extract"
+    - name: Perform make (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make --jobs"
+    - name: Perform make split (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make split"
