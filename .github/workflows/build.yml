@@ -8,8 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container: markstreet/conker:latest
+    runs-on: ubuntu-20.04
     steps:
     - name: print pwd
       run: pwd
@@ -28,17 +27,35 @@ jobs:
     - name: how about now
       run: ls -al
     # main
+    - name: see if anything was mounted?
+      uses: markstreet/conker:latest
+      with: 
+        args: ls -al      
+        options: -v /__w/conker/conker:conker
     - name: make extract
-      run: make extract
+      uses: markstreet/conker:latest
+      with: 
+        args: make extract
+        options: -v /__w/conker/conker:conker:
     - name: make
-      run: make
+      uses: markstreet/conker:latest
+      with: 
+        args: make
+        options: -v /__w/conker/conker:conker
     - name: make decompress
-      run: make decompress
+      uses: markstreet/conker:latest
+      with: 
+        args: make decompress
+        options: -v /__w/conker/conker:conker
     # chunk 0
     - name: make extract (chunk0)
-      run: make extract     
-      working-directory: conker/chunk0/
+      uses: markstreet/conker:latest
+      with: 
+        args: cd chunk0 && make extract
+        options: -v /__w/conker/conker:conker
     - name: make (chunk0)
-      run: make 
-      working-directory: conker/chunk0/
+      uses: markstreet/conker:latest
+      with: 
+        args: cd chunk0 && make extract
+        options: -v /__w/conker/conker:conker
       
