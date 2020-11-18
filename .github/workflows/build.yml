@@ -24,11 +24,11 @@ jobs:
         clean: no
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
-        path: /home/runner/work/conker/baserom
+        path: baserom
     - name: how about now
       run: ls -al
     - name: copy in baserom
-      run: mv /home/runner/work/conker/baserom/baserom.us.z64 /home/runner/work/conker/conker/
+      run: mv baserom/baserom.us.z64 .
     # main
     - name: see if anything was mounted?
       uses: docker://docker.io/markstreet/conker:latest
