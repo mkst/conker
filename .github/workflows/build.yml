@@ -29,6 +29,10 @@ jobs:
       run: ls -al
     - name: copy in baserom
       run: mv baserom/baserom.us.z64 .
+    - name: fixup perms
+      run: chmod +x ido/ido5.3_recomp/*
+    - name: fixup perms
+      run: chmod +x ido/ido7.1_recomp/*
     # main
     - name: see if anything was mounted?
       uses: docker://docker.io/markstreet/conker:latest
