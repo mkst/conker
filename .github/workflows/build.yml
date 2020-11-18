@@ -24,38 +24,41 @@ jobs:
         clean: no
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
+        path: /home/runner/work/conker/baserom
     - name: how about now
       run: ls -al
+    - name: copy in baserom
+      run: mv /home/runner/work/conker/baserom/baserom.us.z64 /home/runner/work/conker/conker/
     # main
     - name: see if anything was mounted?
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: ls -al      
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
     - name: make extract
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: make extract
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
     - name: make
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: make
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
     - name: make decompress
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: make decompress
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
     # chunk 0
     - name: make extract (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: cd chunk0 && make extract
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
     - name: make (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: cd chunk0 && make extract
-        options: "-v /__w/conker/conker:conker"
+#         options: "-v /__w/conker/conker:conker"
       
