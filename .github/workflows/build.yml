@@ -8,14 +8,12 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-
     - name: checkout this repo
       uses: actions/checkout@v2
-
+      with:
+        submodules: yes
     - name: checkout baserom
       uses: actions/checkout@v2
       with:
@@ -23,17 +21,19 @@ jobs:
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
         path: baserom
 
-    - name: copy in baserom
-      run: mv ../baserom/baserom.us.z64 .
-
-    - name: make extract
-      run: make extract
-
-    - name: make
-      run: make
-
-    - name: make decompress
-      run: make decompress
+#     - name: copy in baserom
+#       run: mv ../baserom/baserom.us.z64 .
+#     - name: bastardman
+#       uses: markstreet/conker:latest   
+#       with:
+#         volumes:
+#           - my_docker_volume:/volume_mount
+#     - name: make extract
+#       run: make extract
+#     - name: make
+#       run: make
+#     - name: make decompress
+#       run: make decompress
 
 #     - name: make extract (chunk0)
 #       run: make extract     
