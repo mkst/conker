@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: markstreet/conker:latest
     steps:
     - name: checkout this repo
       uses: actions/checkout@v2
@@ -19,22 +20,21 @@ jobs:
       with:
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
-        path: baserom
-
-#     - name: copy in baserom
-#       run: mv ../baserom/baserom.us.z64 .
-#     - name: bastardman
-#       uses: markstreet/conker:latest   
-#       with:
-#         volumes:
-#           - my_docker_volume:/volume_mount
-#     - name: make extract
-#       run: make extract
-#     - name: make
-#       run: make
-#     - name: make decompress
-#       run: make decompress
-
-#     - name: make extract (chunk0)
-#       run: make extract     
+        path: /baserom
+    - name: copy in baserom
+      run: mv /baserom/baserom.us.z64 /conker/
+    # main
+    - name: make extract
+      run: make extract
+    - name: make
+      run: make
+    - name: make decompress
+      run: make decompress
+    # chunk 0
+    - name: make extract (chunk0)
+      run: make extract     
+      working-directory: /conker/chunk0/
+    - name: make (chunk0)
+      run: make 
+      working-directory: /conker/chunk0/
       
