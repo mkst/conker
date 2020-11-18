@@ -11,18 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     container: markstreet/conker:latest
     steps:
+    - name: print pwd
+      run: pwd
     - name: checkout this repo
       uses: actions/checkout@v2
       with:
         submodules: yes
+    - name: whats new
+      run: ls -al
     - name: checkout baserom
       uses: actions/checkout@v2
       with:
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
-        path: /baserom
+    - name: how about now
+      run: ls -al
     - name: copy in baserom
-      run: mv /baserom/baserom.us.z64 /conker/
+      run: mv conker-private/baserom.us.z64 conker/
     # main
     - name: make extract
       run: make extract
@@ -33,8 +38,8 @@ jobs:
     # chunk 0
     - name: make extract (chunk0)
       run: make extract     
-      working-directory: /conker/chunk0/
+      working-directory: conker/chunk0/
     - name: make (chunk0)
       run: make 
-      working-directory: /conker/chunk0/
+      working-directory: conker/chunk0/
       
