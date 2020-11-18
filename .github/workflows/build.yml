@@ -43,9 +43,9 @@ jobs:
     - name: make (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
-        args: cd chunk0 && make --jobs
+        args: sh -c "cd chunk0 && make --jobs"
     - name: make split (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
-        args: cd chunk0 && make split
+        args: sh -c "cd chunk0 && make split"
       
