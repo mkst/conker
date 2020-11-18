@@ -39,7 +39,7 @@ jobs:
     - name: make extract (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
-        args: cd chunk0 && make extract
+        args: sh -c "cd chunk0 && make extract"
     - name: make (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
