@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout this repo
