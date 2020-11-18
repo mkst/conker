@@ -10,59 +10,42 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - name: print pwd
-      run: pwd
     - name: checkout this repo
       uses: actions/checkout@v2
       with:
         submodules: recursive
-    - name: whats new
-      run: ls -al
     - name: checkout baserom
       uses: actions/checkout@v2
       with:
-        clean: no
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
         path: baserom
-    - name: how about now
-      run: ls -al
     - name: copy in baserom
       run: mv baserom/baserom.us.z64 .
-    - name: fixup perms
-      run: chmod +x ido/ido5.3_recomp/*
-    - name: fixup perms
-      run: chmod +x ido/ido7.1_recomp/*
     # main
-    - name: see if anything was mounted?
-      uses: docker://docker.io/markstreet/conker:latest
-      with: 
-        args: ls -al      
-#         options: "-v /__w/conker/conker:conker"
     - name: make extract
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: make extract
-#         options: "-v /__w/conker/conker:conker"
     - name: make
       uses: docker://docker.io/markstreet/conker:latest
       with: 
-        args: make
-#         options: "-v /__w/conker/conker:conker"
+        args: make --jobs
     - name: make decompress
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: make decompress
-#         options: "-v /__w/conker/conker:conker"
     # chunk 0
     - name: make extract (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
         args: cd chunk0 && make extract
-#         options: "-v /__w/conker/conker:conker"
     - name: make (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with: 
-        args: cd chunk0 && make extract
-#         options: "-v /__w/conker/conker:conker"
+        args: cd chunk0 && make --jobs
+    - name: make split (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with: 
+        args: cd chunk0 && make split
       
