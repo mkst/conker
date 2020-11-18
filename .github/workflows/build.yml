@@ -22,12 +22,14 @@ jobs:
     - name: checkout baserom
       uses: actions/checkout@v2
       with:
+        clean: no
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
+        path: baserom
     - name: how about now
       run: ls -al
     - name: copy in baserom
-      run: mv conker-private/baserom.us.z64 conker/
+      run: mv baserom/baserom.us.z64 .
     # main
     - name: make extract
       run: make extract
