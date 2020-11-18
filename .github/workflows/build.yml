@@ -16,7 +16,7 @@ jobs:
     - name: checkout this repo
       uses: actions/checkout@v2
       with:
-        submodules: yes
+        submodules: recursive
     - name: whats new
       run: ls -al
     - name: checkout baserom
@@ -25,11 +25,8 @@ jobs:
         clean: no
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
-        path: baserom
     - name: how about now
       run: ls -al
-    - name: copy in baserom
-      run: mv baserom/baserom.us.z64 .
     # main
     - name: make extract
       run: make extract
