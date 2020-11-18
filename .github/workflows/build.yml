@@ -47,3 +47,4 @@ jobs:
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: sh -c "cd chunk0 && make split"
+    - run: echo hello world!
