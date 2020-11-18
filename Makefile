@@ -83,7 +83,7 @@ CC_OLD := ido/ido5.3_recomp/cc
 
 CROSS = mips-linux-gnu-
 AS = $(CROSS)as
-CPP = $(CROSS)cpp
+CPP = cpp
 LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
