@@ -21,8 +21,8 @@ jobs:
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
         path: baserom
-    - name: Copy in baserom
-      run: mv baserom/baserom.us.z64 .
+    - name: Decrypt  baserom
+      run: echo ${{ secrets.CONKER_BASEROM_US }} | openssl enc -d -aes-256-cbc -pass stdin -pbkdf2 -in baserom/baserom.us.z64.aes -out baserom.us.z64
     - name: Perform make extract
       uses: docker://docker.io/markstreet/conker:latest
       with:
