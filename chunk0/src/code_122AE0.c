@@ -19,7 +19,7 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_122AE0/func_85124AB4.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_122AE0/func_85124B18.s")
-// f32 func_85124B18(void *arg0) {
+// f32 func_85124B18(struct108 *arg0) {
 //     s32 temp_t8;
 //     void *temp_v0;
 //

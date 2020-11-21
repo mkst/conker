@@ -3,7 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
-
+// struct21 *func_800214F0(struct42 *arg0, void *arg1, s32 arg2, void *struct21);
 #pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_800214F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_80021C40.s")
 // ? func_80021C40(void *arg0, s32 arg1, s32 arg2) {

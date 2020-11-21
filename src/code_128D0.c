@@ -23,7 +23,7 @@ void func_80012934(struct122 *arg0, s32 arg1, s32 arg2) {
     sp20 = arg1;
     sp1C = arg2;
 
-    if (arg0->unk0 != 0x4231) { // is this magic? 16945?
+    if (arg0->unk0 != 0x4231) { // first 4 bytes of assets17/0000.bin!
         return;
     }
 

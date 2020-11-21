@@ -25,7 +25,7 @@ BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 RODATA_FILES := $(foreach dir,$(RODATA_DIRS),$(wildcard $(dir)/*.rodata))
 
-CHUNK_0_RZIP_FILES := $(wildcard rzip/chunk0/*.gz)
+CHUNK_0_RZIP_FILES := $(sort $(wildcard rzip/chunk0/*.gz))
 CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
 
 # Object files
@@ -108,6 +108,8 @@ LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/libultra/%.o: CC := $(CC)
 
+# $(BUILD_DIR)/src/code_20000.o: CC := $(CC)
+
 # $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
@@ -143,6 +145,7 @@ $(BUILD_DIR)/src/code_1FB40.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
+$(BUILD_DIR)/src/code_22460.o: OPT_FLAGS := -g
 
 # libultra specifics
 $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
@@ -151,7 +154,6 @@ $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
 
 # mips version
 # $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
-
 
 # loop unrolling
 # $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0

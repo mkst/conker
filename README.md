@@ -102,11 +102,11 @@ There a number of compressed sections within the ROM. The goal is to be able to:
 
 ### Chunk 0
 
-The first compressed chunk within the ROM is named `chunk0`. It does not have an offsets table (unlike the other compressed sections). Instead, the start of each compressed block can be identified by the 4-byte length header that precedes it (`0x00001000` - 4096 bytes).
+The first compressed chunk within the ROM is named `chunk0`. It is preceded by a 512 byte header containing offsets for each compressed block. The values in the headers are `xor`'d with a key of `0x8039CCCA`, so need to be `xor`'d with this key in order to get the true values.
 
-Once decompressed these files form a contiguous chunk of code.
+Once decompressed, these blocks form a contiguous chunk of code.
 
-The steps for Chunk 0 are as follows:
+The steps for decompiling `chunk0` are as follows:
   - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py), taking care to keep track of any trailing padding
   - Combine decompressed blocks into a single file
   - Run n64splat on this combined file to extract all code and assets

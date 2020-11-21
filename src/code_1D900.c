@@ -47,7 +47,7 @@ void func_8001DAA0(s32 arg0, s16 arg1, s32 arg2) {
     func_8001ED6C(sp1C, arg1, arg2);
 }
 
-void func_8001DAE4(struct47 *arg0, s16 arg1, s32 *arg2) {
+void func_8001DAE4(struct139 *arg0, s16 arg1, s32 *arg2) {
     if (arg1 == 8) {
         arg0->unk2 = (f32) *arg2 * F_0__10000000149011612;
     } else if (arg1 == 9) {

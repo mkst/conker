@@ -71,38 +71,35 @@ void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4)
     arg4->unk8 = ((1.0f + sp20) - sp1C) / (1.0f + sp20 + sp1C);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_8001CD54.s")
-// NON-MATCHING: one line out..
-// void func_8001CD54(struct125 *arg0) {
-//     s32 i;
-//     s32 sp10;
-//     s16 spE;
-//     f32 temp_f8;
-//     f32 sp4;
-//     f32 sp0;
-//
-//     sp10 = arg0->unk0 * 16384.0f;
-//     spE = sp10 >> 15;
-//     arg0->unk2 = 16384.0f - spE;
-//     arg0->unk28 = 0;
-//
-//     for (i = 0; i < 8; i++)
-//     {
-//         arg0->unk8[i] = 0;
-//     }
-//     arg0->unk8[i] = spE;
-//
-//     i = i + 1;
-//     sp0 = 16384.0f;
-//     temp_f8 = spE / sp0;
-//     // sp4 = temp_f8;
-//
-//     for (;i < 16; i++)
-//     {
-//         sp4 *= temp_f8;
-//         arg0->unk8[i] = sp4 * sp0;
-//     }
-// }
+void func_8001CD54(struct125 *arg0) {
+    s32 i;
+    s32 sp10;
+    s16 spE;
+    f32 temp_f8;
+    f32 sp4;
+    f32 sp0;
+
+    sp10 = arg0->unk0 * 16384.0f;
+    spE = sp10 >> 15;
+    arg0->unk2 = 16384.0f - spE;
+    arg0->unk28 = 0;
+
+    for (i = 0; i < 8; i++)
+    {
+        arg0->unk8[i] = 0;
+    }
+    arg0->unk8[i] = spE;
+
+    i = i + 1;
+    sp0 = 16384.0f;
+    sp4 = temp_f8 = spE / sp0;
+
+    for (;i < 16; i++)
+    {
+        sp4 *= temp_f8;
+        arg0->unk8[i] = sp4 * sp0;
+    }
+}
 
 f32 func_8001CEA4(s32 arg0) {
     f32 sp4;
@@ -126,45 +123,35 @@ f32 func_8001CEA4(s32 arg0) {
     return sp0;
 }
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_8001CF38.s")
-// void func_8001CF38(struct47 *arg0, f32 arg1) {
-//     s32 sp3C;
-//     ? sp30;
-//     ? sp24;
-//     s32 temp_t3;
-//     s32 temp_t9;
+// NON-MATCHING: missing some addiu
+// void func_8001CF38(struct139 *arg0, f32 arg1) {
+//     s32 i;
+//     struct17 sp30;
+//     struct17 sp24;
 //
 //     if (arg0->unk2 == 0) {
 //         return;
 //     }
-//     if ((s32) arg0->unk2 < 0xA) {
-//         arg0->unk2 = (u16)0xA;
+//     if ((s32) arg0->unk2 < 10) {
+//         arg0->unk2 = 10;
 //     }
-//     func_8001CBF0(arg1, (f32) arg0->unk0 + 10.0f, (f32) arg0->unk2 / 10.0f, &sp30, &sp24);
-//     sp3C = 3;
-// loop_5:
-//     (arg0 + (sp3C * 2))->unk8 = (u16)0;
-//     temp_t3 = sp3C + 1;
-//     sp3C = temp_t3;
-//     if (temp_t3 < 8) {
-//         goto loop_5;
+//     func_8001CBF0(arg1,  arg0->unk0 + 10.0f, arg0->unk2 / 10.0f, &sp30, &sp24);
+//
+//     for(i = 3; i < 8; i++) {
+//         arg0->unk8[i] = 0;
 //     }
-//     arg0->unk8 = (s16) (s32) (sp30.unk0 * (*(void *)0x8002C780 - ((f32) arg0->unk2 * 128.0f)));
-//     arg0->unkA = (s16) (s32) (sp30.unk4 * (*(void *)0x8002C784 - ((f32) arg0->unk2 * 128.0f)));
-//     arg0->unkC = (u16)0;
-//     arg0->unk18 = (s16) (s32) (sp24.unk4 * -16384.0f);
-//     arg0->unk1A = (s16) (s32) (sp24.unk8 * -16384.0f);
-//     sp3C = 0xA;
-// loop_7:
-//     (arg0 + (sp3C * 2))->unk8 = (u16)0;
-//     temp_t9 = sp3C + 1;
-//     sp3C = temp_t9;
-//     if (temp_t9 < 0x10) {
-//         goto loop_7;
+//     arg0->unk8[0] =       (s32) (sp30.unk0 * (F_26768 -   (arg0->unk2 * 128.0f)));
+//     arg0->unk8[1] = (s16) (s32) (sp30.unk4 * (F_26768_2 - (arg0->unk2 * 128.0f)));
+//     arg0->unk8[2] = 0;
+//
+//     arg0->unk8[8] = (s16) (s32) (sp24.unk4 * -16384.0f);
+//     arg0->unk8[9] = (s16) (s32) (sp24.unk8 * -16384.0f);
+//     //
+//     for (i = 10; i < 16; i++) {
+//         arg0->unk8[i] = 0;
 //     }
 // }
-
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_8001D124.s")
 

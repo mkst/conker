@@ -12,26 +12,22 @@ void func_85000AC0(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85000AD0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85001460.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85001970.s")
-// NON-MATCHING: what does func_80003C40 return?
-// void func_85001970(void) {
-//     s32 sp18;
-//     s32 temp_a0;
-//     s32 temp_v0;
-//
-//     D_800B0DE4 = 0;
-//     D_800DBE63 = 0;
-//     D_800DBE18 = 0;
-//     D_800DBE1C = 0;
-//     temp_a0 = D_80091C04[D_800BE9F0];
-//     D_800DBE20 = 0;
-//     D_800DBE24 = 0;
-//     sp18 = temp_a0;
-//     temp_v0 = func_80003C40(sp18, 1, 0, 0);
-//     D_800B0DC0 = temp_v0;
-//     D_800B0DC8 = (s32) (sp18 + temp_v0);
-//     D_800B0DC4 = temp_v0;
-// }
+
+void func_85001970(void) {
+    s32 pad;
+    s32 tmp;
+
+    D_800B0DE4 = 0;
+    D_800DBE63 = 0;
+    *D_800DBE18 = 0;
+    D_800DBE1C = 0;
+    D_800DBE20 = 0;
+    tmp = D_80091C04[D_800BE9F0];
+    D_800DBE24 = 0;
+    D_800B0DC0 = func_80003C40(tmp, 1, 0, 0);;
+    D_800B0DC8 = tmp + D_800B0DC0;
+    D_800B0DC4 = D_800B0DC0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85001A08.s")
 
@@ -43,17 +39,16 @@ void func_85001B08(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85001B5C.s")
 // NON-MATCHING: uses v1 not v0
 // u8* func_85001B5C(u8 arg0) {
-//     *D_800B0DE0 = arg0;
-//     D_800B0DE0++;
+//     *D_800B0DE0++ = arg0;
 //     return D_800B0DE0;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_85001B8C.s")
 // NON-MATCHING: uses t9 not t0
 // void func_85001B8C(u16 arg0) {
-//     s32 tmp = arg0;
+//     u16 tmp = arg0 >> 8;
 //
-//     *(D_800B0DE0 + 0) = tmp >> 8;
+//     *(D_800B0DE0 + 0) = tmp;
 //     *(D_800B0DE0 + 1) = tmp;
 //     D_800B0DE0 += 2;
 // }

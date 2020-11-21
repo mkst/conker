@@ -115,7 +115,7 @@
 // }
 
 
-f32 func_8001FA78(struct06 *arg0, s32 arg1) {
+f32 func_8001FA78(struct112 *arg0, s32 arg1) {
     f32 tmp;
 
     arg0->unk14 += arg0->unk10 * arg1;

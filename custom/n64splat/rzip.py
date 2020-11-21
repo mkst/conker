@@ -12,7 +12,7 @@ if not 'custom/n64splat/' in sys.path:
 import rareunzip
 
 # Rare zip format:
-# 4 byte uncompressed length followed by gzip level 9 stripped payload
+# 4 byte uncompressed length followed by deflate level 9 raw payload
 class N64SegRzip(N64Segment):
     def __init__(self, segment, next_segment, options):
         super().__init__(segment, next_segment, options)
@@ -36,7 +36,7 @@ class N64SegRzip(N64Segment):
             #
             start = base + uncompressed
             type = compressed >> 24
-            length = compressed % 0x10000000
+            length = compressed % 0x10000000 # can we just and with 0xffffff ?
             if self.next_segment and start >= self.next_segment:
                 break
             if length > len(rom_bytes):
@@ -56,9 +56,7 @@ class N64SegRzip(N64Segment):
             subtype = "compressed" if (type & 16) else "uncompressed"
             # require 8-byte alignment
             pad = 0 if end % 8 == 0 else (8 - end % 8)
-            if pad:
-                # print("Padding %s with %i bytes" % (name, pad))
-                end += pad
+
             fl = {"start": start, "end": end, "pad": pad, "name": name, "subtype": subtype}
             ret.append(fl)
         return ret
@@ -99,46 +97,38 @@ class N64SegRzip(N64Segment):
         with open(os.path.join(out_dir, self.name + ".bin"), "wb") as f:
             f.write(rom_bytes[self.rom_start:self.rom_end])
 
-        MAX_PADDING = 15
-
         for i, split_file in enumerate(self.files):
+            result = padding = None
+
             filename = str(i).zfill(4)
             extension = "bin"
-            compressed = rom_bytes[split_file["start"] : split_file["end"]]
-            decompressed = None
+
+            pad = split_file["pad"] if "pad" in split_file else 0
+            data = rom_bytes[split_file["start"] : split_file["end"] + pad]
+
             if split_file["subtype"] in ("uncompressed", "mp3"):
-                decompressed = compressed
+                result = data[:-pad]
+                if pad:
+                    padding = data[-pad:]
                 if split_file["subtype"] == "mp3":
                     extension = "mp3"
-                # TODO: add padding
             else:
                 try:
-                    decompressed = rareunzip.runzip(compressed)
-                except:
-                    padding = 0
-                    while True:
-                        padding += 1
-                        try:
-                            decompressed = rareunzip.runzip(compressed[:-padding])
-                            compressed = compressed[:-padding]
-                            break
-                        except:
-                            if padding == MAX_PADDING:
-                                print("Error decompressing %s" % filename)
-                                break
-                    if 0 < padding < MAX_PADDING:
-                        with open(os.path.join(out_dir,  filename + ".pad"), "wb") as f:
-                            # max seen so far: 7 bytes of padding
-                            if padding > 7:
-                                print("Padding %i for %s" % (padding, str(hex(split_file["start"]))))
-                            f.write(compressed[-padding:])
-
+                    result, padding = rareunzip.runzip_with_leftovers(data)
+                except Exception as e:
+                    print("Failed to decompress file", split_file, e)
+            # write out raw data
             out_filename = filename + (".gz" if split_file["subtype"] in ("gz", "compressed") else "")
             with open(os.path.join(out_dir,  out_filename), "wb") as f:
-                f.write(compressed)
-            if decompressed:
+                f.write(data)
+            # write out processed data
+            if result:
                 with open(os.path.join(out_dir,  filename + "." + extension), "wb") as f:
-                    f.write(decompressed)
+                    f.write(result)
+            # write out padding
+            if padding:
+                with open(os.path.join(out_dir,  filename + ".pad"), "wb") as f:
+                    f.write(padding)
 
 
     def get_ld_files(self):

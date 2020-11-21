@@ -40,12 +40,17 @@ class N64SegRodata(N64Segment):
 
             start = split_file['start']
             ret = self.get_header()
+            offset = 0
             for i, datatype in enumerate(split_file["types"]):
                 glabel = split_file["glabel"][i] if split_file["glabel"] else ("D_" + self.get_default_name(0x80000000 + start+i*4))
                 ret.append(f"glabel {glabel}")
                 if datatype == "f":
-                    value = struct.unpack(">f", rom_bytes[start+i*4:start+4+i*4])[0]
+                    value = struct.unpack(">f", rom_bytes[start+(offset + i)*4:start+4+(offset + i)*4])[0]
                     ret.append(f".float {value}")
+                elif datatype == "d":
+                    value = struct.unpack(">d", rom_bytes[start+(offset + i)*4:start+8+(offset + i)*4])[0]
+                    ret.append(f".double {value}")
+                    offset += 1
                 else:
                     print("UNSUPPORTED TYPE!")
             ret.append("")

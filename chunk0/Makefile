@@ -78,7 +78,15 @@ $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
+
 # $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
+
+# $(BUILD_DIR)/src/code_A7B80.o: CC := $(CC)
+
+# $(BUILD_DIR)/src/code_E470.o: MIPSBIT := -mips1 -32bit
+# $(BUILD_DIR)/src/code_940.o: CC := $(CC)
+
+# $(BUILD_DIR)/src/code_AD9A0.o: CC := $(CC)
 
 # OPT_FLAGS
 
@@ -134,7 +142,7 @@ $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude $(ASM_PROCESSOR_DIR)/prelude.s
 
 $(BUILD_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
