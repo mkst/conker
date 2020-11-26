@@ -164,7 +164,7 @@ void func_800093CC(void) {
 // void func_80009400(s32 arg0) {
 //     OSMesg *msg;
 //     s32 sp54;
-//     void *sp4C;
+//     OSPfs *sp4C;
 //     s16 temp_v0;
 //     u32 phi_s0;
 //     u32 phi_s0_2;
@@ -194,7 +194,7 @@ void func_800093CC(void) {
 //             if (phi_s0 >= 2U) {
 //                 phi_s0_2 = 0U;
 //             }
-//             if (phi_s0_2 == 0) { //&& (func_800095A0(((((u32) *(void *)0x8002AE44 % 3U) * 4) + 0x80040000)->unk-1C70, phi_s5) != 0)) {
+//             if (phi_s0_2 == 0 && (func_800095A0(D_8003E390[D_8002AE44 % 3U], phi_s5) != 0)) {
 //                 if (phi_s4 == 0) {
 //                     osRecvMesg(&D_8003E608, &msg, 1);
 //                     phi_s5 = ((struct53*)msg)->unk4;
@@ -205,7 +205,6 @@ void func_800093CC(void) {
 //         }
 //     }
 //     while (phi_s1 == 0);
-//
 //
 //     func_80018E0C(&D_8003E640);
 //     while (1) {
@@ -255,7 +254,7 @@ void func_800093CC(void) {
 //         arg0->unk4 = (s32) arg0->unk0;
 //         phi_a2 = temp_a2;
 //     }
-//     // temp_v1 = func_80019498(((*D_8002AE4C * 4) + 0x80040000)->unk-1C78, &sp34, phi_a2, arg0->unk8);
+//     // temp_v1 = func_80019498(D_8003E388[D_8002AE4C], &sp34, phi_a2, arg0->unk8);
 //     if (sp34 == 0) {
 //         return 0;
 //     }
@@ -264,8 +263,8 @@ void func_800093CC(void) {
 //     arg0->unk6C = arg0->unk70;
 //     arg0->unk1C = 2;
 //     arg0->unk20 = 0;
-//     arg0->unk58 = (s32) ((D_8002AE4C * 4) + D_8003E388);
-//     arg0->unk5C = (s32) (((s32) (temp_v1 - ((D_8002AE4C * 4) + D_8003E388)) >> 3) * 8);
+//     arg0->unk58 = (s32) D_8003E388[D_8002AE4C];
+//     arg0->unk5C = (s32) (((s32) D_8003E388[temp_v1 - D_8002AE4C] >> 3) * 8);
 //     arg0->unk28 = 2;
 //     arg0->unk30 = 0x100290D0;
 //     arg0->unk34 = (s32) (D_100291A0 - D_100290D0);
@@ -283,17 +282,106 @@ void func_800093CC(void) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_800097CC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_80009980.s")
-// NON-MATCHING: might be a struct
-// s32 func_80009980(s32 *arg0) {
-//     if (D_80040F78[0] == 0) {
-//         D_80040F78[1] = (u8) 0;
-//         D_80040F78[2] = &D_800406B8;
-//         D_80040F78[0] = 1;
+// NON-MATCHING: another horrible function
+// s32 func_800097CC(u32 arg0, s32 arg1, s32 arg2) {
+//     s32 sp2C;
+//     s32 sp28;
+//     s32 temp_a3;
+//     s32 temp_t0;
+//     s32 temp_t1;
+//     s32 temp_t9;
+//     u32 temp_v0;
+//     u32 temp_v0_6;
+//     struct19 *temp_a2;
+//     struct19 *temp_v0_2;
+//     struct19 *temp_v0_3;
+//     struct19 *temp_v0_4;
+//     struct19 *temp_v0_5;
+//     struct19 *temp_v1;
+//     struct19 *temp_v1_2;
+//     struct19 *temp_v1_3;
+//     struct19 *phi_v1;
+//     struct19 *phi_a2;
+//
+//     temp_v1 = D_80040F78.unk4;
+//     phi_v1 = temp_v1;
+//     phi_a2 = NULL;
+//     phi_a2 = NULL;
+//     if (temp_v1 != 0) {
+// loop_1:
+//         temp_v0 = phi_v1->unk8;
+//         if (arg0 >= temp_v0) {
+//             temp_a2 = phi_v1;
+//             if ((temp_v0 + 0x800) >= (arg0 + arg1)) {
+//                 phi_v1->unkC = (s32) D_8002AE44;
+//                 return osVirtualToPhysical((phi_v1->unk10 + arg0) - temp_v0); //, temp_a2, arg0);
+//             }
+//             temp_v1_2 = phi_v1->unk0;
+//             phi_v1 = temp_v1_2;
+//             phi_a2 = temp_a2;
+//             // phi_a2 = temp_a2;
+//             if (temp_v1_2 != 0) {
+//                 goto loop_1;
+//             }
+//         }
 //     }
-//     *arg0 = 0;
-//     return &D_100097CC;
+//     temp_v1_3 = D_80040F78.unk8;
+//     if ((temp_v1_3 == 0) || ((u32) D_8002AE48 >= 0x20U)) {
+//         return 0;
+//     }
+//     D_80040F78.unk8 = (struct19 *) temp_v1_3->unk0;
+//     temp_v0_2 = temp_v1_3->unk0;
+//     if (temp_v0_2 != 0) {
+//         temp_v0_2->unk4 = (struct19 *) temp_v1_3->unk4;
+//     }
+//     temp_v0_3 = temp_v1_3->unk4;
+//     if (temp_v0_3 != 0) {
+//         temp_v0_3 = (struct19 *) temp_v1_3->unk0; // ()
+//     }
+//     if (phi_a2 != 0) {
+//         temp_v1_3->unk4 = phi_a2;
+//         temp_v1_3->unk0 = (struct19 *) phi_a2; // *
+//         temp_v0_4 = phi_a2; // *
+//         if (temp_v0_4 != 0) {
+//             temp_v0_4->unk4 = temp_v1_3;
+//         }
+//         phi_a2 = temp_v1_3; // *
+//     } else {
+//         temp_v0_5 = D_80040F78.unk4;
+//         if (temp_v0_5 != 0) {
+//             D_80040F78.unk4 = temp_v1_3;
+//             temp_v1_3->unk0 = temp_v0_5;
+//             temp_v1_3->unk4 = NULL;
+//             temp_v0_5->unk4 = temp_v1_3;
+//         } else {
+//             D_80040F78.unk4 = temp_v1_3;
+//             temp_v1_3->unk0 = NULL;
+//             temp_v1_3->unk4 = NULL;
+//         }
+//     }
+//     temp_t0 = arg0 & 1;
+//     temp_t1 = temp_v1_3->unk10;
+//     sp28 = temp_t0;
+//     temp_a3 = arg0 - temp_t0;
+//     temp_v1_3->unk8 = temp_a3;
+//     temp_v1_3->unkC = (s32) D_8002AE44;
+//     temp_v0_6 = D_8002AE48;
+//     // temp_t9 = temp_v0_6; // * 0x18;
+//     D_8002AE48 = (u32) (temp_v0_6 + 1); // next free slot in D_80040F98?
+//     sp2C = temp_t1;
+//     osPiStartDma(&D_80040F98[temp_v0_6], 1, 0, temp_a3, temp_t1, 0x800, &D_80041298);
+//     return osVirtualToPhysical(sp2C) + sp28;
 // }
+
+s32 func_80009980(s32 *arg0) {
+    if (D_80040F78.unk0 == 0) {
+        D_80040F78.unk4 = (u8) 0;
+        D_80040F78.unk8 = &D_800406B8;
+        D_80040F78.unk0 = 1;
+    }
+    *arg0 = 0;
+    return &D_100097CC;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_800099BC.s")
 
@@ -303,7 +391,7 @@ void func_80009B2C(struct54 *arg0) {
     }
 }
 
-void func_80009B4C(struct54 *arg0) {
+void func_80009B4C(struct54 *arg0) { // struct147 unk14 is wrong type
     if (((s32)arg0 & 1) == 0) {
         arg0->unk14--;
         if (arg0->unk14 == 0) {
@@ -326,60 +414,58 @@ void func_80009B90(struct54 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_80009BE4.s")
-// NON-MATCHING: work-in-progress
-// struct54 *func_80009BE4(struct54 * arg0) {
+// void func_80009BE4(struct147 *arg0) {
 //     struct54 *temp_a1;
 //     struct54 *temp_v0;
 //     struct54 *temp_v0_2;
 //     struct54 *temp_v1;
 //
 //     if (((s32)arg0 & 1) != 0) {
-//         D_8003C8E0 = 0xF000004;
-//         return func_850AD770(0x80040000);
+//         D_8003C8E0 = 0x0F000004;
+//         func_850AD770(0x80040000);
+//         return;
 //     }
-//     arg0->unkC = arg0->unk8; //*
-//     if (arg0 == D_800406A0->unk4) {
-//         D_800406A4 = arg0->unk0; // *
+//     arg0->unkC = (s32) arg0->unk8;
+//     if ((s32)arg0 == D_800406A0.unk4) {
+//         D_800406A4 = (struct54 *) arg0->unk0;
 //     }
 //     temp_v0_2 = arg0->unk0;
 //     if (temp_v0_2 != 0) {
-//         temp_v0_2->unk4 = arg0->unk4;
+//         temp_v0_2->unk4 = (struct54 *) arg0->unk4;
 //     }
 //     temp_v0 = arg0->unk4;
 //     if (temp_v0 != 0) {
-//         temp_v0 = arg0->unk0; // *
+//         temp_v0 = (struct54 *) arg0->unk0;
 //     }
-//     temp_v1 = D_800406A0->unk10;
+//     temp_v1 = D_800406A0.unk10;
 //     if (temp_v1 != 0) {
 //         arg0->unk4 = temp_v1;
-//         arg0->unk0 = temp_v1; // *
-//         temp_a1 = temp_v1; //
+//         arg0->unk0 = (struct54 *) &temp_v1;
+//         temp_a1 = &temp_v1;
 //         if (temp_a1 != 0) {
 //             temp_a1->unk4 = arg0;
 //         }
-//         temp_v1 = arg0; // *
-//         return temp_v1;
+//         temp_v1 = arg0;
+//         return;;
 //     }
 //     D_800406B0 = arg0;
 //     arg0->unk0 = NULL;
 //     arg0->unk4 = NULL;
-//     return temp_v0;
+//     // return temp_v0;
 // }
-
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_80009CBC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_80009FFC.s")
-// NON-MATCHING: might be a struct
-// s32 func_80009FFC(void) {
-//     if (D_800406A0[0] == 0) {
-//         D_800406A0[1] = 0;
-//         D_800406A0[2] = &D_80040AC8;
-//         D_800406A0[3] = 0;
-//         D_800406A0[4] = 0;
-//         D_800406A0[0] = (u8)1U;
-//     }
-//     return &D_10009CBC;
-// }
+
+s32 func_80009FFC(void) {
+    if (D_800406A0.unk0 == 0) {
+        D_800406A0.unk4 = NULL;
+        D_800406A0.unk8 = &D_80040AC8;
+        D_800406A0.unkC = 0;
+        D_800406A0.unk10 = NULL;
+        D_800406A0.unk0 = (u8)1U;
+    }
+    return &D_10009CBC;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_8000A03C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_8000A348.s")

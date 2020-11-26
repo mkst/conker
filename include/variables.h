@@ -6,11 +6,14 @@
 
 /* defined */
 
+// 0x0002C200
+extern f32 F_0__009999999776482582;
+extern f32 F_3__068309783935547;
 
 // 0x0002C210
 extern f32 F_0__7111111283302307;
-extern f32 F_0__009999999776482582;
-extern f32 F_3__068309783935547;
+extern f32 F_0__009999999776482582_2;
+extern f32 F_3__068309783935547_2;
 
 // 0x0002C220
 extern f32 F_3015;
@@ -83,14 +86,31 @@ extern s32  D_10013598;
 extern s32  D_1001E530;
 extern s32 *D_10023850;
 extern s32 *D_10023930;
+extern s32  D_10026B10;
 extern s32  D_100291A0;
 extern s32  D_100290D0;
 extern s32 *D_1002AAD0;
+extern s32  D_1FC007FC;
+
+extern struct14 *D_100071D0;
+
 
 /* 80000000 */
+
+extern s32  D_80000000;
+extern s32  D_80000004;
+extern s32  D_80000008;
+extern s32  D_8000000C;
+
+extern struct14 *D_80000080;
+extern struct14 *D_80000100;
+extern struct14 *D_80000180;
+
 extern s32  D_80000300;
+extern s32  D_80000308;
 extern s32  D_8000030C;
 extern u32  D_80000310;
+extern s32  D_8000031C[16]; // 64 bytes
 
 /* 80020000 */
 
@@ -103,15 +123,18 @@ extern OSViMode *D_8002ABE0;
 extern s32  D_8002AC30;
 extern struct58 *D_8002AC50; // contains pointer to framebuffer
 extern u8   D_8002AC54;
-extern s32  D_8002AC58;
+extern struct58 *D_8002AC58;
 extern u8   D_8002AC5C;
 extern s8   D_8002AC6C;
 extern u8   D_8002AE40;
+extern u32  D_8002AE44;
+extern s32  D_8002AE48;
 extern s32  D_8002AE4C;
 extern s32  D_8002AE54;
 extern s32  D_8003E368;
 extern s32  D_8003E370;
 extern s32  D_8003E388;
+extern struct50 *D_8003E390[];
 extern OSThread *D_8003E3A0;
 extern s32  D_8003E640;
 
@@ -123,6 +146,9 @@ extern OSMesgQueue *D_80041298;
 extern OSMesg      *D_800412B0;
 extern OSMesgQueue *D_800416F0;
 extern OSMesg      *D_80041708;
+
+extern struct151* D_800417B0[];
+extern u8 D_800418AC[];
 
 extern struct137 D_800419A8[12]; // 1200 bytes
 
@@ -136,7 +162,10 @@ extern struct31 *D_8002BA24;
 extern struct31 *D_8002BA28;
 extern s16  D_8002BA30;
 extern s32  D_8002BA2C;
+extern s64  D_8002BD10;
+extern s32  D_8002BD14;
 extern s32  D_8002BD18;
+extern s32  D_8002BD20; // init ok?
 extern s32  D_8002BD60;
 
 extern s32  D_8002D4B0;
@@ -155,7 +184,7 @@ extern s32  D_80032B3F;
 extern s32  D_8003333F;
 
 extern s32  D_800354F8;
-extern s32  D_800354FC;
+extern u32  *D_800354FC; // contains chunk0 offsets
 extern s16  D_80035500;
 extern OSThread *D_80035910;
 
@@ -207,7 +236,7 @@ extern OSMesgQueue *D_8003B200;
 extern OSMesgQueue *D_8003B218;
 
 extern OSMesgQueue *D_8003B230;
-extern s32 D_8003B234;
+extern s32  D_8003B234;
 extern u8 D_8003B238;
 extern u8 D_8003B239;
 extern u8 D_8003B23A;
@@ -228,6 +257,10 @@ extern u32 D_8003BC24;
 
 extern u8  D_8003A570;
 extern u8  D_8003A571;
+extern u8  D_8003A572;
+extern u8  D_8003A573;
+extern u8  D_8003A574;
+extern u8  D_8003A575;
 extern u8  D_8003A580;
 extern u8  D_8003A581;
 extern u8  D_8003A582;
@@ -242,12 +275,13 @@ extern s32  D_8003BE30;
 extern u8   D_8003BE50[];
 extern u32  D_8003BE70;
 extern u32  D_8003BE74;
-extern u8   D_8003BE78;
-extern s32   D_8003BE7C;
+extern s16  D_8003BE78;
+extern s32  D_8003BE7C;
 
 extern s32  D_8003C8E0;
 extern struct26 *D_8003C900[];
 extern struct14 *D_8003CD40;
+extern struct108 D_8003CD48[];
 extern s16  D_8003C910[];
 extern u32  D_803F5000;
 extern u32  D_803FE000;
@@ -255,21 +289,23 @@ extern u32  D_807F5000;
 extern u32  D_807FE000;
 
 extern s32  D_8003CA3C;
-extern s32  D_8003CA48;
+extern s32  D_8003CA48[];
+extern struct149 D_8003CA58[];
 extern s32  D_8003C90C;
 
 /* 80040000 */
 extern s32  D_80040000;
-extern struct54 *D_800406A0;
+extern struct147 D_800406A0;
 extern struct54 *D_800406A4;
 extern struct54 *D_800406B0;
 extern u8   D_800406B8;
 extern u32  D_80040AC8;  // 1200 byte struct?
-extern u32  D_80040F78[];
+extern struct147 D_80040F78;
 extern u8   D_80040F84;
 extern s32  D_80040F88;
 extern s32  D_80040F8C;
 extern s32  D_80040F90;
+extern struct146 D_80040F98[];
 extern s32  D_80041F04;
 extern s32  D_80041F08;
 extern s32  D_80041F0C;
@@ -282,10 +318,13 @@ extern s32  D_80041F5C;
 extern u8   D_80041F60;
 extern u8   D_80041F61;
 extern s8   D_80041FD8;
-extern s8   D_80041FD9;
+extern u8   D_80041FD9;
 extern s32  D_80041FDC;
 extern struct15 D_80041FE0[];
+extern s32  D_80041FEC[];
 
+extern f32  D_8002C200;
+extern struct120 D_8002C240[];
 extern f32  D_8002C3F8; // rodata
 extern f32  D_8002C3FC; // rodata
 
@@ -307,6 +346,7 @@ extern u8   D_800428C2;
 extern u8  D_800428C4[];
 extern u8  D_800428C6[];
 extern u8  D_800428C8[];
+extern s32  D_800428E0;
 extern s32 *D_800428F8;
 
 extern s32 D_80043B40[]; // 4064
@@ -317,7 +357,9 @@ extern u8   D_80082B40[];
 extern u8   D_80082BB4;
 extern void (*D_80082D90[])(void);
 extern s32  D_80084064;
+extern s32  D_800848B0;
 extern s32  D_80082FA0;
+extern void (*D_800844B0[])(s32 arg0);
 extern void (*D_80082EA0[])(void);
 extern void (*D_80082ECC[])(void);
 extern void (*D_80082F40[])(void);
@@ -347,7 +389,7 @@ extern s32  D_800E0934;
 extern s32  D_800E0940;
 extern u8   D_800E0A10;
 extern s32  D_800E9D00;
-extern struct54 D_800E9D10[]; // probably not struct54
+extern struct54 D_800E9D10; // probably not struct54
 
 /* 800A0000 */
 extern s32 D_800AB3C8;
@@ -392,6 +434,9 @@ extern s32 D_800C3E80;
 extern s32 D_800C3E84;
 extern s32 D_800C3EE0;
 extern struct106 D_800C6660[];
+extern s32 D_800C6860[];
+extern u8  D_800C68A0;
+extern u8  D_800C68A1;
 extern u8  D_800C4000;
 extern u8  D_800CBD60;
 extern u8  D_800CBD61;
@@ -631,10 +676,10 @@ extern u8   D_800DD2A2;
 extern u8   D_800DD2A3;
 
 /* other */
-extern s32  D_151FA130;
 extern s32  D_15000000;
 extern s32  D_150EA904;
 extern s32  D_150EB430;
+extern s32  D_151FA130;
 
 
 /* second TLB'd section */

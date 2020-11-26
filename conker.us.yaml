@@ -35,6 +35,7 @@ segments:
     - [0x39B0, "c"]
     - [0x39C0, "c"]
     - [0x3BD0, "c"]
+    - [0x3C40, "c"]
     - [0x4470, "c"]
     - [0x49E0, "c"]
     - [0x50A0, "c"]
@@ -131,7 +132,7 @@ segments:
     - [0x24BA0, "asm", "libultra/io/sptaskyield"]
     - [0x24BC0, "asm", "libultra/io/contreaddata"]
     - [0x24E20, "asm", "libultra/io/vigetcurrframebuf"]
-    - [0x24E60, "asm", "libultra/io/vigetnextframebuf.c"]
+    - [0x24E60, "asm", "libultra/io/vigetnextframebuf"]
     - [0x24EA0, "asm", "libultra/io/visetevent"]
     - [0x24F10, "asm", "libultra/os/writebackdcacheall"]
     - [0x24F40, "asm", "libultra/os/gettime"]
@@ -154,7 +155,8 @@ segments:
     - [0x26750, "asm", "libultra/io/sprawwrite"]
     - [0x267A0, "asm", "libultra/io/pirawread"]
     - [0x26800, "asm", "libultra/libc/__ull_rshift"]
-    - [0x26AC0, "asm", "libultra/io/sethwinterrupt"]
+    - [0x26AC0, "asm", "libultra/os/sethwinterrupt"]
+    - [0x26B10, "asm", "libultra/io/leointerrupt"]
     - [0x273D0, "asm", "libultra/os/probetlb"]
     - [0x27490, "asm", "libultra/os/setcompare"]
     - [0x274A0, "asm", "libultra/os/jammesg"]
@@ -165,15 +167,19 @@ segments:
     - [0x28670, "asm", "libultra/io/pfschecker"]
   - [0x000290D0, "bin"] # early rodata?
   - type: rodata
-    start: 0x0002C210
-    vram:  0x8002C210
+    start: 0x0002C200
+    vram:  0x8002C200
     files:
-    - start: 0x0002C210
-      types: "ffffffff"
+    - start: 0x0002C200
+      types: "ffffffffffff"
       glabel:
-      - "F_0__7111111283302307"
       - "F_0__009999999776482582"
+      - "D_8002C204"
       - "F_3__068309783935547"
+      - "D_8002C20C"
+      - "F_0__7111111283302307"
+      - "F_0__009999999776482582_2"
+      - "F_3__068309783935547_2"
       - "D_8002C21C" # 7.806111346002818e+27 // 1841940611
       - "F_3015"
       - "F_36000000"
@@ -215,8 +221,8 @@ segments:
       - "F_1__4142136573791504"
       - "F_1__0594631433486938"
       - "F_0__9438742995262146"
-      - "F_26768"  # 26768.0
-      - "F_26768_2"  # 26768.0
+      - "F_26768"     # 26768.0
+      - "F_26768_2"   # 26768.0
       - "D_8002C788"  # 173123.40625
       - "D_8002C78C"  # 0.0
       - "F_0__10000000149011612"
@@ -863,7 +869,7 @@ segments:
     type:  rzip
     start: 0x01330478
     files:
-    - [0x013312E8, "mp3"] # TODO: do we care about names?
+    - [0x013312E8, "mp3"] # TODO: do we care about names? if so, fix rzip.py
     - [0x01348008, "mp3"]
     - [0x0134CFC0, "mp3"]
     - [0x01352AF8, "mp3"]

@@ -152,6 +152,10 @@ $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/libultra/io/ai.o: OPT_FLAGS := -O2 -g
 # $(BUILD_DIR)/src/libultra/io/aisetfreq.o: MIPSBIT := -mips1
 
+# $(BUILD_DIR)/src/libultra/os/os22790.o: OPT_FLAGS := -O2 -g3
+$(BUILD_DIR)/src/libultra/os/os22790.o: CC := $(CC_OLD)
+
+
 # mips version
 # $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
 

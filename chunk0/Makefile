@@ -81,7 +81,7 @@ $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 
 # $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
 
-# $(BUILD_DIR)/src/code_A7B80.o: CC := $(CC)
+# $(BUILD_DIR)/src/code_40350.o: CC := $(CC)
 
 # $(BUILD_DIR)/src/code_E470.o: MIPSBIT := -mips1 -32bit
 # $(BUILD_DIR)/src/code_940.o: CC := $(CC)
