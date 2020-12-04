@@ -4,8 +4,7 @@ VERSION := us
 ASM_DIRS := asm \
             asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 BIN_DIRS := bin
-RODATA_DIRS := rodata
-SRC_DIRS := src src/libultra src/libultra/io src/libultra/os
+SRC_DIRS := src src/data src/libultra src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
@@ -23,7 +22,6 @@ C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 H_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
 BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
-RODATA_FILES := $(foreach dir,$(RODATA_DIRS),$(wildcard $(dir)/*.rodata))
 
 CHUNK_0_RZIP_FILES := $(sort $(wildcard rzip/chunk0/*.gz))
 CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
@@ -33,7 +31,6 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
            $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
-           $(foreach file,$(RODATA_FILES),$(BUILD_DIR)/$(file:.rodata=.o)) \
            $(BUILD_DIR)/rzip/chunk0/chunk0.o $(BUILD_DIR)/rzip/chunk0_rodata/chunk0_rodata.o \
 
 ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
@@ -90,17 +87,17 @@ OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
 OPT_FLAGS := -O2 -g3
-MIPSBIT := -mips2
+MIPSBIT := -mips2 -o32
 
-INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc
+INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
 CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r4300_mul
-CFLAGS += -D_LANGUAGE_C
+CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS =  -T undefined_funcs.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
 
 ### file-specific compile flags
 
@@ -147,14 +144,16 @@ $(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_22460.o: OPT_FLAGS := -g
 
+# $(BUILD_DIR)/src/libultra/os/virtualtophysical.o: OPT_FLAGS := -O1 -g3
+
 # libultra specifics
-$(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -g
-# $(BUILD_DIR)/src/libultra/io/ai.o: OPT_FLAGS := -O2 -g
-# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: MIPSBIT := -mips1
 
-# $(BUILD_DIR)/src/libultra/os/os22790.o: OPT_FLAGS := -O2 -g3
-$(BUILD_DIR)/src/libultra/os/os22790.o: CC := $(CC_OLD)
+# asm-processor cannot handle -O -g3 flag
+# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -O -g3
+# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: CC := $(CC_OLD)
 
+# $(BUILD_DIR)/src/libultra/os/getthreadpri.o: OPT_FLAGS := -g2 -O2
+# $(BUILD_DIR)/src/libultra/os/getthreadpri.o: CC := $(CC_OLD)
 
 # mips version
 # $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
@@ -172,13 +171,12 @@ check:
 	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
 
 dirs:
-	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RODATA_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
+	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
 
 clean:
 	rm -rf asm
 	rm -rf bin
 	rm -rf build
-	rm -rf rodata
 	rm -rf rzip
 	rm -rf mp3
 
@@ -205,7 +203,7 @@ $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/functio
 	$(PYTHON) tools/asm-processor/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude tools/asm-processor/prelude.s
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(CC) -c $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s
@@ -217,11 +215,8 @@ $(BUILD_DIR)/%.o: %.bin
 $(BUILD_DIR)/%.o: %.mp3
 	$(LD) -r -b binary -o $@ $<
 
-$(BUILD_DIR)/%.o: %.rodata
-	$(AS) $(ASFLAGS) -o $@ $<
-
 $(TARGET).bin: $(TARGET).elf
-	$(OBJCOPY) $< $@ -O binary
+	$(OBJCOPY) $(OBJCOPYFLAGS) -O binary $< $@
 
 $(TARGET).z64: $(TARGET).bin
 	@cp $< $@

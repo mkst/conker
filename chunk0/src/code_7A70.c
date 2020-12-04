@@ -4,36 +4,81 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_85007A70.s")
-// NON-MATCHING: far away
-// void func_85007A70(s16 arg0, s16 arg1, s16 arg2) {
-//     D_800BE9B4 = (u8)2;
-//     func_8503FB08();
-//     D_800BE9F4 = arg2;
-//     D_800BE9F0 = arg2;
-//
-//     func_85172C50(D_800DD2C0);
-//     func_85008230();
-//     func_85005270();
-//     func_85017300(arg0, arg1);
-//
-//     // func_85015F40(D_800D2138[D_80087280], arg2);
-//     func_850175E0();
-//     func_850177F8();
-//     func_85089BB0();
-//     func_85000090();
-//     D_800BE938 = (u8)1;
-//     D_800D18A8 = (u8)0;
-//     D_800BE9ED = (u8)0;
-// }
+void func_85007A70(s16 arg0, s16 arg1, s16 arg2) {
 
+    D_800BE9B4 = 2;
+    func_8503FB08();
+    D_800BE9F0 = D_800BE9F4 = arg2;
+
+    func_85172C50(D_800DD2C0);
+    func_85008230();
+    func_85005270();
+    func_85017300(arg0, arg1);
+
+    func_85015F40(D_80087280[D_800D2138], arg2);
+    func_850175E0();
+    func_850177F8();
+    func_85089BB0();
+    func_85000090();
+    D_800BE938 = 1;
+    D_800D18A8 = 0;
+    D_800BE9ED = 0;
+}
+
+// requires jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_85007B3C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_850081E4.s")
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_85008230.s")
+
+void func_850081E4(void) {
+    s32 i;
+
+    D_800D3668 = 0;
+    D_800CBE00 = 0;
+    D_800DDD64 = 0;
+
+    for (i = 0; i < 2; i++)
+    {
+        D_800DF7C8[i] = 0;
+    }
+
+    D_800D245C = 0;
+    D_800D2548 = 0;
+}
+
+
 void func_85008230(void) {
     D_800C35C4 = (u8)0;
     D_800C3C88 = (u8)0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_85008248.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_850082CC.s")
+void func_85008248(s32 arg0) {
+    s32 i;
+
+    D_800C3638 = 0;
+    D_800C3671 = 0;
+    D_800C3670 = 0;
+    func_8501D044(0);
+    func_8501D044(1);
+    D_800C3663 = 0;
+
+    for (i = 0; i < 3; i++)
+    {
+        D_800C3CA0[i].unk0 = 0;
+        D_800C3CA0[i].unkC = 0;
+    }
+
+    D_800C3681 = 0;
+    D_800C3682 = 0;
+    D_800C3683 = 0;
+}
+
+void func_850082CC(void) {
+    s32 tmp = D_800C35C4 - 1;
+
+    if (D_800C35C4 != 0) {
+        if (D_800C35C5 == 0) {
+            D_800C35EA = 2;
+        }
+        D_800C35C4 = 0;
+        func_8501D348(D_800BE9F0, tmp, 0, D_800C3C90, D_800C3C94);
+    }
+}

@@ -113,7 +113,7 @@ void func_80012CFC(struct12 *arg0, s32 arg1, s32 arg2) {
 }
 
 f32 func_80012D80(u8 arg0) {
-    f32 sp4 = F_1__0309929847717285;
+    f32 sp4 = D_8002C450;
     f32 sp0 = 1.0f;
 
     while (arg0)
@@ -178,7 +178,7 @@ s32 func_80012F94(struct124 *arg0, f32 *arg1) {
                 sp28->unk24 = 0;
             }
             sp2C = (f32)(u16)sp28->unk24 / (f32) (u16)sp28->unk22;
-            sp2C = func_85047D60(sp2C * F_6__2831854820251465);
+            sp2C = func_85047D60(sp2C * D_8002C454);
             sp2C = sp28->data.i.unk0 * sp2C;
             *arg1 = sp28->data.i.unk1 + sp2C;
             break;
@@ -189,7 +189,7 @@ s32 func_80012F94(struct124 *arg0, f32 *arg1) {
                 sp28->unk24 = 0;
             }
             sp2C = (f32)(u16) sp28->unk24 / (f32)(u16) sp28->unk22;
-            sp2C = func_85047D60(sp2C * F_6__2831854820251465_2) * sp28->data.f.unk0;
+            sp2C = func_85047D60(sp2C * D_8002C458) * sp28->data.f.unk0;
             *arg1 = func_80019AB0(sp2C);
             break;
         default:

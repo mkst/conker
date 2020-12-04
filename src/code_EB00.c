@@ -296,7 +296,7 @@ void func_8000F9D4(u16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010630.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_80010720.s")
 
-s32 func_800107F8(struct48 *arg0) {
+s32 func_800107F8(struct127 *arg0) {
     if (arg0->unk0 == 0) {
         return 0;
     } else {
@@ -316,7 +316,7 @@ s32 func_800107F8(struct48 *arg0) {
     return 0;
 }
 
-s32 func_80010894(struct48 *arg0) {
+s32 func_80010894(struct127 *arg0) {
     if (arg0->unk318 != 0) {
         if (arg0->unk8C != 0) {
             if (func_8000F3D0(arg0->unk8C) != 0) {

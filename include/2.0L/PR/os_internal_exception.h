@@ -12,7 +12,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_internal_exception.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:10 $
@@ -31,7 +31,7 @@ extern "C" {
 
 /* Routine for HW interrupt "handler" */
 extern void 		__osSetHWIntrRoutine(OSHWIntr interrupt,
-					     s32 (*handler)(void), void *stackEnd);
+					     s32 (*handler)(void)); // no stackEnd
 extern void 		__osGetHWIntrRoutine(OSHWIntr interrupt,
 					     s32 (**handler)(void), void **stackEnd);
 

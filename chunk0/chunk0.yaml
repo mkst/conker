@@ -5,6 +5,10 @@ options:
   - "-Iinclude"
   - "-Iinclude/2.0L"
   - "-D_LANGUAGE_C"
+  generated_c_preamble: |
+    #include <ultra64.h>
+    #include "functions.h"
+    #include "variables.h"
 segments:
   - name:  code
     type:  code
@@ -19,7 +23,7 @@ segments:
     - [0x4E00, "c"]
     - [0x4F00, "c"]
     - [0x4F30, "c"]
-    - [0x4FE0, "asm"]
+    - [0x4FE0, "c"]
     - [0x5270, "c"]
     - [0x5290, "c"]
     - [0x5A60, "c"]
@@ -56,7 +60,7 @@ segments:
     - [0x8BF0, "c"]
     - [0x8DD0, "c"]
     - [0x8E00, "asm"]
-    - [0x9150, "asm"]
+    - [0x9150, "c"]
     - [0x91D0, "c"]
     - [0xC1E0, "asm"]
     - [0xC2A0, "asm"]
@@ -65,7 +69,7 @@ segments:
     - [0xEB30, "asm"]
     - [0xED80, "asm"]
     - [0xEF20, "asm"]
-    - [0xF210, "asm"]
+    - [0xF210, "c"]
     - [0xF290, "asm"]
     - [0xF9D0, "asm"]
     - [0xFE30, "asm"]
@@ -124,7 +128,7 @@ segments:
     - [0x1C880, "asm"]
     - [0x23870, "asm"]
     - [0x238D0, "asm"]
-    - [0x2AAF0, "asm"]
+    - [0x2AAF0, "c"]
     - [0x2BAD0, "asm"]
     - [0x2FE10, "asm"]
     - [0x33FE0, "asm"]
@@ -304,7 +308,7 @@ segments:
     - [0xF52B0, "asm"]
     - [0xF5340, "asm"]
     - [0xF5420, "asm"]
-    - [0xF6B00, "asm"]
+    - [0xF6B00, "c"]
     - [0xF6DB0, "asm"]
     - [0xF7470, "asm"]
     - [0xF9A20, "asm"]
@@ -372,7 +376,7 @@ segments:
     - [0x134070, "asm"]
     - [0x13B5E0, "c"]
     - [0x13C060, "asm"]
-    - [0x141970, "asm"]
+    - [0x141970, "c"]
     - [0x146890, "asm"]
     - [0x147740, "asm"]
     - [0x147DA0, "asm"]
@@ -495,5 +499,5 @@ segments:
     - [0x1F27E0, "asm"]
     - [0x1F3DE0, "c"]
     - [0x1F8870, "asm"]
-  - [0x1F9BF0, "bin"] # FIXME
+    - [0x1F9BF0, "asm"]
   - [0x1fa130] # chunk0 end

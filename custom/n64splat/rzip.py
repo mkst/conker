@@ -132,7 +132,7 @@ class N64SegRzip(N64Segment):
 
 
     def get_ld_files(self):
-        return [(f"rzip/{self.name}/", f"{self.name}.bin", ".data")]
+        return [(f"rzip/{self.name}/", f"{self.name}.bin", ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

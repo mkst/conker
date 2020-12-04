@@ -18,12 +18,12 @@
 //
 //     if ((arg0->unk99 != 0) && (arg0->unk99 < 64)) {
 //         if (arg0->unk99 >= 6) {
-//             sp28 = F_26755 / sqrtf(arg0->unk99 + 1.0f);
+//             sp28 = D_8002C820 / sqrtf(arg0->unk99 + 1.0f);
 //         } else {
 //             sp28 = 65536.0f / (arg0->unk99 + 1.0f);
 //         }
-//         if (sp28 < F_7723) {
-//             sp28 = F_7723_2;
+//         if (sp28 < D_8002C834) {
+//             sp28 = D_8002C838;
 //         }
 //         sp24 = sp2C = &sp2C->unk8;
 //         sp24->unk0 = ((s32)arg1 & 0xFFFF);

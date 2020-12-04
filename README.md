@@ -80,11 +80,11 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 [ code ]  0000 1000 > 0004 2C50 ; code (init + libultra)
 [ ???? ]  0002 90D0 > ???? ???? ;
 [ data ]  0002 C750 > 0002 C7A0 ; rodata section
-[ ???? ]  0002 C7A0 > 0004 2C50 ;
+[ ???? ]  0002 C7A0 > 0004 2C50 ; μcode
 [ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
 [ ???? ]  0018 6B50 > 0018 8328 ;
 [ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 rodata
-[ code ]  0019 C7D8 > 001A 2190 ; code
+[ code ]  0019 C7D8 > 001A 2190 ; code (debugger?)
 [ data ]  001A 2190 > 001A 37E0 ; rodata section (?)
 [ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
 [ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
@@ -107,20 +107,20 @@ The first compressed chunk within the ROM is named `chunk0`. It is preceded by a
 Once decompressed, these blocks form a contiguous chunk of code.
 
 The steps for decompiling `chunk0` are as follows:
-  - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py), taking care to keep track of any trailing padding
+  - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py)
   - Combine decompressed blocks into a single file
   - Run n64splat on this combined file to extract all code and assets
   - *Translate assembly to c code*
   - Compile to generate a .bin
   - Split compiled .bin file into 4096 byte blocks
-  - Compress each block via [rarezip](tools/rarezip.py)
-  - Combine all compressed blocks along with original padding
+  - Compress each block via [rarezip](tools/rarezip.py), padding to 2-byte alignment
+  - Combine all compressed blocks
 
 If you wish to examine this file, you can run `make decompress` after you have done the initial `make extract`.
 
 See the [README](chunk0/README.md) for more information.
 
-**NOTE:** Compression is currently not 100%-matching; approximately 3% of files do not match.
+**NOTE:** Compression is currently not 100%-matching; approximately 3% of chunk0 blocks do not match.
 
 # Tools
 

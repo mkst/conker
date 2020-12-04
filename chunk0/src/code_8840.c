@@ -4,5 +4,5 @@
 #include "variables.h"
 
 void func_85008840(void) {
-    func_800226F0(&D_800D99D0, 0x20); // bzero
+    func_800226F0(&D_800D99D0, 32); // bzero
 }

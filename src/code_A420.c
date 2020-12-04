@@ -32,10 +32,10 @@
 //         if (arg9 != 0) {
 //             if (func_850AD960(arg0, arg2, 0, 0) >= 31) {
 //                 phi_f12 = sqrtf((f32) ((arg0 * arg0) + (arg2 * arg2)));
-//                 if (F_0__009999999776482582 < phi_f12) { // rodata, 0.009999999776482582
+//                 if (D_8002C200 < phi_f12) { // rodata, 0.009999999776482582
 //                     phi_f12 = (f32) arg0 / phi_f12;
 //                 }
-//                 tmp0 = (s32) ((f64) func_850487E0(phi_f12) * F_3__068309783935547); // rodata, 3.068309783935547
+//                 tmp0 = (s32) ((f64) func_850487E0(phi_f12) * D_8002C208); // rodata, 3.068309783935547
 //                 if (arg2 > 0) {
 //                     if (tmp0 < 0) {
 //                         tmp0 = -128 - tmp0;
@@ -91,11 +91,11 @@
 //
 //     temp_f0 = sqrtf((arg0 * arg0) + (arg1 * arg1));
 //     sp18 = temp_f0;
-//     if (F_0__009999999776482582_2 < temp_f0) {
+//     if (D_8002C214 < temp_f0) {
 //         sp18 = arg0 / temp_f0;
 //     }
 //     sp1C = 128;
-//     temp_f6 = ((f64) func_850487E0(sp18) * F_3__068309783935547_2); // ,(u16)0x80
+//     temp_f6 = ((f64) func_850487E0(sp18) * D_8002C218); // ,(u16)0x80
 //     phi_v1 = temp_f6;
 //     if (0.0f < arg1) {
 //         temp_t8 = temp_f6;
@@ -317,7 +317,35 @@ s32 func_8000E0F8(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E40C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E46C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E588.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E654.s")
+// #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E654.s")
+
+s32 func_8000E654(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct151 *sp1C;
+    struct151 *phi_a0;
+
+    sp1C = func_8000B1FC(arg0);
+    phi_a0 = NULL;
+    if (arg3 >= 0) {
+        phi_a0 = func_8000B1FC(arg3);
+    }
+
+    if (sp1C != NULL) {
+        if (arg2 == 0) {
+            if (sp1C->unk0 >= 0) {
+                func_80008C6C(sp1C->unk0, arg1 - 1);
+                return 1;
+            }
+        }
+        sp1C->unk24 = arg1;
+        sp1C->unk20 = arg2;
+        if (phi_a0 != NULL) {
+            sp1C->unk10 = phi_a0;
+        }
+        return 1;
+    }
+    return 0;
+}
+
 
 s32 func_8000E704(s32 arg0, s32 arg1, s32 arg2) {
     struct151 *tmp = func_8000B1B0(arg0);
@@ -386,6 +414,7 @@ u8 func_8000E8F0(s32 arg0) {
     }
 }
 
+// initialising with grim loops
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_8000E934.s")
 
 u16 func_8000EA94(s32 arg0) {

@@ -1,4 +1,3 @@
-__libm_qnan_f = 0x8002c920;
 __ll_div = 0x8002690c;
 __ll_lshift = 0x800268a4;
 __ll_mod = 0x800269f8;
@@ -138,3 +137,5 @@ sqrtf = 0x80026530;
 strchr = 0x80022f14;
 strlen = 0x80022eec;
 viMgrMain = 0x80003658;
+osMapTLBRdb = 0x80008120;
+__osInitialize_common = 0x80022790;

@@ -110,11 +110,43 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C2C00.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C2FCC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C308C.s")
+// ? func_850C308C(void *arg0) {
+//     u8 sp1F;
+//     f32 temp_f0;
+//     f32 temp_f2;
+//     u8 temp_a1;
+//     void *temp_v0;
+//     u8 phi_a1;
+//
+//     phi_a1 = (u8)0U;
+//     if ((s32) arg0->unk1C >= 6) {
+//         sp1F = 0;
+//         temp_v0 = func_85144B34(D_80082FA4, (u8)0U);
+//         temp_f0 = temp_v0->unk0;
+//         temp_f2 = temp_v0->unk8;
+//         temp_a1 = sp1F;
+//         if (((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) < D_800A0310) {
+// block_4:
+//             phi_a1 = (u8)1U;
+//         } else {
+//             sp1F = temp_a1;
+//             phi_a1 = temp_a1;
+//             if (D_800A0314 < func_85144C8C(func_850484A0(temp_v0->unk0, temp_v0->unk8, temp_a1), arg0->unk160)) {
+//                 goto block_4;
+//             }
+//         }
+//     }
+//     if (phi_a1 != 0) {
+//         arg0->unk1C = (u16)5;
+//     }
+//     return 1;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C3160.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C3230.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C3574.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C3994.s")
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_C1F60/func_850C3D48.s")
+
 s32 func_850C3D48(s32 arg0) {
     return arg0 + 0xEDCBA988;
 }

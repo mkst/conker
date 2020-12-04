@@ -80,10 +80,9 @@ s32 func_80002070(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-// s32 func_800020D0(void *arg0, s32 arg1, void *arg2, s32 arg3);
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1420/func_80002088.s")
-// NOT MATCHING: close but also not...
-// void func_80002088(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+// NOT MATCHING: stack is incorrect
+// void func_80002088(void *arg0, u32 arg1, s32 u8, s32 arg3) {
 //     D_80035500 = 0;
 //     func_800020D0(&D_10002070, 0, arg0, &arg0);
 // }

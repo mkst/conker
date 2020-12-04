@@ -10,6 +10,7 @@ typedef struct struct56 struct56;
 typedef struct struct119 struct119;
 typedef struct struct124 struct124;
 typedef struct struct127 struct127;
+typedef struct struct108 struct108;
 
 typedef struct {
     s32 unk0;
@@ -733,14 +734,16 @@ typedef struct {
     s32 unk14;
     s32 unk18;
     s32 unk1C;
-    u8 pad1[0x1b];
+    u8 pad00[0x1b];
     u8 unk3B;
-    u8 pad0[0x4F];
+    u8 pad01[0x4F];
     u16 unk8C;
     u16 unk8E;
-    u8 pad2[0x288];
-    s32 unk318;
-    u8 pad3[0xb8];
+    u8 pad02[0xfc];
+    f32 unk18C;
+    u8 pad03[0x188];
+    struct108 *unk318;
+    u8 pad04[0xb8];
     s32 unk3D4;
 } struct48;
 
@@ -902,8 +905,20 @@ typedef struct {
 } struct103;
 
 typedef struct {
-    u8 pad[0xA];
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;  // used
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
     u8 unkA;
+    u8 padB[0x5];
+    u8 unk10;
+    u8 pad11[0x9];
+    u16 unk1A;
 } struct104;
 
 typedef struct {
@@ -932,39 +947,6 @@ typedef struct {
 typedef struct {
     u8 pad[0xEC];
 } struct150; // size 0xEC
-
-typedef struct {
-    u8  pad00[0x2C];
-    s32 unk2C;       // used
-    struct150 *unk30;
-    u8  pad01[0x50];
-    s32 unk84;       // used
-    u8  pad10[0xaC];
-    s32 unk134;      // used
-    u8  pad11[0x54];
-    f32 unk18C;      // used
-    f32 unk190;      // used
-    u8  pad12[0x20];
-    s16 unk1B4;      // used
-    u8  pad20[0x2A];
-    u16 unk1E0;      // used
-    u8  pad30[0x5A];
-    u8  unk23C;
-    u8  unk23D;
-    u8  unk23E; // used
-    u8  unk23F;
-    u8  pad31[0x108];
-    f32 unk348;      // used
-    f32 unk34C;      // used
-    u8  pad40[0x24];
-    f32 unk374;      // used
-    u8  pad48[0x58];
-    struct127 *unk3D0;
-    u8  pad50[0x21c];
-    s32 unk5F0;      // used
-    u8  pad60[0x148];
-    u16 unk73C;
-} struct108;
 
 typedef struct {
     u8  pad[0x18]; // help me
@@ -1359,7 +1341,7 @@ struct struct127 {
     u32 pad180;
     u32 pad184;
     u32 pad188;
-    u32 pad18C;
+    f32 unk18C; // used
     u32 pad190;
     u32 pad194;
     u32 pad198;
@@ -1412,7 +1394,7 @@ struct struct127 {
     u8  pad238;
     s8  unk239; // used
     u8  padB[0xde];
-    struct48  *unk318;
+    struct127 *unk318;
     struct126 *unk31C; // used
     u8  padCa[0xC];
 }; // size 0x32c => 812 bytes
@@ -1425,7 +1407,7 @@ typedef struct {
     f32 unk10;
     f32 unk14;
     f32 unk18;
-    struct48 *unk1C;
+    struct127 *unk1C;
     s32 unk20;
 } struct130;
 
@@ -1628,5 +1610,245 @@ typedef struct {
     s32 unk60;  // used
 } struct151;
 
+typedef struct {
+    s32 pad0;
+    u8  unk4;
+    s8  unk5; // used
+} struct152;
+
+typedef struct {
+    s32 pad0;
+    struct152 *unk4;
+} struct153;
+
+typedef struct {
+    s32 pad0;
+    s32 pad4;
+    s32 pad8;
+    struct153 *unkC;
+    s32 pad10;
+    s32 pad14;
+    s32 pad18;
+    s32 pad1C;
+    s32 pad20;
+    s32 pad24;
+    s32 pad28;
+    s32 pad2C;
+    s32 pad30;
+    f32 unk34;  // used
+} struct154;
+
+typedef struct {
+    s16 unk0;         // used
+    s16 pad2;
+    struct154 *unk4;  // used
+    s32 unk8;         // used
+} struct155;
+
+typedef struct {
+    u8 pad[0x68];
+} struct156; // size 0x68
+
+typedef struct {
+    s32 unk0;
+    s16 unk4;
+    s8  unk6;
+    s8  unk7;
+    s32 unk8;
+    s32 unkC;
+    s8  unk10;
+    s8  unk11;
+    s8  unk12;
+    s8  unk13;
+    s8  unk14;
+    s8  unk15;
+    s8  unk16;
+    s8  unk17;
+    s32 unk18;
+    s32 unk1C;
+    s8  unk20;
+    s8  pad21;
+    s16 unk22;
+    s16 unk24;
+} struct157;
+
+struct struct108 {
+    /* 0x000 */ u8  pad00[0x2C];
+    /* 0x02C */ s32 unk2C;
+    /* 0x030 */ struct150 *unk30;
+    /* 0x034 */ u8  pad34[0x50];
+    /* 0x084 */ s32 unk84;
+    /* 0x088 */ u8  pad88[0x54];
+    /* 0x0DC */ s32 unkDC;
+    /* 0x0E0 */ u8  padE0[0x54];
+    /* 0x134 */ s32 unk134;
+    /* 0x138 */ u8  pad138[0x54];
+    /* 0x18C */ f32 unk18C;      // used
+    /* 0x190 */ f32 unk190;      // used
+    /* 0x194 */ u8  pad194[0x20];
+    /* 0x1B4 */ s16 unk1B4;      // used
+    /* 0x1B6 */ u16 unk1B6[0x15]; // 0x15 * 2 => 0x1E0
+    /* 0x1E0 */ u16 unk1E0;
+    /* 0x1E2 */ u8  pad1E2[0x56];
+    /* 0x238 */ s32 unk238;
+    /* 0x23C */ u8  unk23C;
+    /* 0x23D */ u8  unk23D;
+    /* 0x23E */ u8  unk23E; // used
+    /* 0x23F */ u8  unk23F;
+    /* 0x240 */ s32 unk240;
+    /* 0x244 */ u8  pad244[0x8];
+    /* 0x24C */ f32 unk24C;
+    /* 0x250 */ f32 unk250;
+    /* 0x254 */ u8  pad254[0x18];
+    /* 0x26C */ f32 unk26C;
+    /* 0x270 */ s16 pad270;
+    /* 0x272 */ s16 unk272;
+    /* 0x274 */ u8  pad274[0x30];
+    /* 0x2A4 */ f32 unk2A4;
+    /* 0x2A8 */ f32 unk2A8;
+    /* 0x2AC */ f32 unk2AC;
+    /* 0x2B0 */ f32 unk2B0;
+    /* 0x2B4 */ f32 unk2B4;
+    /* 0x2B8 */ f32 unk2B8;
+    /* 0x2BC */ s32 unk2BC;
+    /* 0x2C0 */ s32 unk2C0;
+    /* 0x2C4 */ s32 unk2C4;
+    /* 0x2C8 */ u8  pad2C8[0x18];
+    /* 0x2E0 */ s32 unk2E0;
+    /* 0x2E4 */ s32 unk2E4;
+    /* 0x2E8 */ s32 unk2E8;
+    /* 0x2EC */ s32 unk2EC;
+    /* 0x2F0 */ s32 unk2F0;
+    /* 0x2F4 */ s32 unk2F4;
+    /* 0x2F8 */ s32 unk2F8;
+    /* 0x2FC */ s32 unk2FC;
+    /* 0x300 */ s32 unk300;
+    /* 0x304 */ u8  pad304[0x44];
+    /* 0x348 */ f32 unk348;      // used
+    /* 0x34C */ f32 unk34C;      // used
+    /* 0x350 */ u8  pad350[0x14];
+    /* 0x364 */ f32 unk364;
+    /* 0x368 */ s16 unk368;
+    /* 0x36A */ u8  pad36A[0xa];
+    /* 0x374 */ f32 unk374;      // used
+    /* 0x378 */ u8  pad378[0xc];
+    /* 0x384 */ f32 unk384;
+    /* 0x388 */ u8  pad388[0x18];
+    /* 0x3A0 */ f32 unk3A0;
+    /* 0x3A4 */ f32 pad3A4;
+    /* 0x3A8 */ f32 unk3A8;
+    /* 0x3AC */ u8  pad3AC[0x20];
+    /* 0x3CC */ s16 unk3CC;
+    /* 0x3CE */ u16 pad3CE;
+    /* 0x3D0 */ struct127 *unk3D0;
+    /* 0x3D4 */ struct127 *unk3D4;
+    /* 0x3D8 */ u8  pad3D8[0x8];
+    /* 0x3E0 */ f32 unk3E0;
+    /* 0x3E4 */ u32 pad3E4;
+    /* 0x3E8 */ u8  unk3E8;
+    /* 0x3E9 */ u8  pad3E9[0xb];
+    /* 0x3F4 */ f32 unk3F4;
+    /* 0x3F8 */ f32 unk3F8;
+    /* 0x3FC */ u8  pad3FC[0x1d0];
+    /* 0x5CC */ f32 unk5CC;
+    /* 0x5D0 */ u32 pad5D0;
+    /* 0x5D4 */ s32 unk5D4;
+    /* 0x5D8 */ f32 unk5D8;
+    /* 0x5DC */ u8  pad5DC[0x14];
+    /* 0x5FA */ s32 unk5F0;
+    /* 0x5DC */ u8  pad5F4[0x6];
+    /* 0x5FA */ s16 unk5FA;
+    /* 0x5FC */ u16 unk5FC;
+    /* 0x5FE */ u16 unk5FE;
+    /* 0x600 */ u8  pad600[0x74];
+    /* 0x674 */ f32 unk674;
+    /* 0x678 */ u8  pad678[0x4];
+    /* 0x67C */ f32 unk67C;
+    /* 0x680 */ u8  pad680[0xbc];
+    /* 0x73C */ u16 unk73C;
+    /* 0x73E */ u8  pad73E[0x7e];
+    /* 0x7BC */ f32 unk7BC;
+    /* 0x7C0 */ u8  pad7C0[0xc];
+    /* 0x7CC */ s32 unk7CC;
+    /* 0x7D0 */ u8  pad7D0[0x18];
+    /* 0x7E8 */ f32 unk7E8;
+    /* 0x7EC */ u8  pad7EC[0x80];
+    /* 0x86C */ f32 unk86C;
+    /* 0x870 */ u8  pad870[0x4c];
+    /* 0x8BC */ s32 unk8BC;
+    /* 0x8C0 */ u8  pad8C0[0xe0];
+}; // size 0x9A0
+
+// func_80002E50
+typedef struct {
+    u16 unk0;
+    u16 unk2;
+    OSMesgQueue unk4;
+    OSMesgQueue unk8;
+    OSMesgQueue unkC;
+    OSMesgQueue unk10;
+    s32 (*unk14)(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+} struct158;
+
+typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    u32 unk8;
+    s16 unkC;
+    s16 unkE;
+    s16 unk10;
+    s16 unk12;
+} struct160; // size 0x14
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+} struct161; // size 0x18
+
+typedef struct {
+    u8  pad0[0x8];
+    s32 unk8;
+    u8  padC[0x2];
+    s8  unkE;
+    s8  padF;
+    u8  pad10[0x8];
+    s32 unk18;
+    u8  pad1C[0x2];
+    s8  unk1E;
+    s8  pad1F;
+    u8  pad20[0x8];
+    s32 unk28;
+    u8  pad2C[0x2];
+    s8  unk2E;
+    s8  pad2F;
+} struct162;
+
+typedef struct {
+    u16 unk0;
+    u8  pad2[0xA];
+    u8  unkC;
+    u8  padD[0x2B];
+} struct163; // size 0x38
+
+typedef struct {
+    f32 unk0;   // used
+    f32 unk4;   // used
+    f32 unk8;   // used
+    f32 unkC;
+    f32 unk10;  // used
+    f32 unk14;  // used
+    f32 unk18;  // used
+    f32 unk1C;
+    f32 unk20;  // used
+    f32 unk24;  // used
+    f32 unk28;  // used
+    f32 unk2C;
+} struct164;
 
 #endif

@@ -146,13 +146,11 @@ void func_8001A224(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A2F8.s")
-// NON-MATCHING: doesnt use t3 reg
-// void func_8001A2F8(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-//     arg3 = arg3 & 0x7F;
-//     arg0->unk60[arg2].unkA = (arg0->unk60[arg2].unkA & 0x80) | arg3;
-//     func_8001A224(arg0, arg1, arg2, arg0->unk60[arg2].unkA >> 7);
-// }
+void func_8001A2F8(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg3 = arg3 & 0x7F;
+    arg0->unk60[arg2].unkA = (arg0->unk60[arg2].unkA & 0x80) | arg3;
+    func_8001A224(arg0, arg1, arg2, arg0->unk60[arg2].unkA >> 7);
+}
 
 void func_8001A39C(struct26 *arg0, s32 arg1, s32 arg2, u32 arg3) {
     if (arg3 < D_8002BA44->unk50) {
@@ -168,34 +166,32 @@ void func_8001A3FC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_8001263C(arg0->unk36 * 0x64 + arg3, 0x7FFF, 0x40);
 }
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A45C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A508.s")
-// NON-MATCHING: not too far away
+// NON-MATCHING: cant figure out the branching
 // void func_8001A508(struct26 *arg0, struct25 *arg1, s32 arg2, s32 arg3) {
 //     f32 sp1C;
-//     struct25 *temp_t2;
 //
 //     if (arg0->unk60[arg2].unkF == 0) {
 //         arg0->unk60[arg2].unkF = 136;
 //     }
 //     if (arg0->unk60[arg2].unkE != arg3) {
 //         sp1C = arg3 - arg0->unk60[arg2].unkD;
-//         temp_t2 = &arg0->unk60[arg2];
-//         temp_t2->unk10 = sp1C / (temp_t2->unkF & 0x7F);
+//         arg0->unk60[arg2].unk10 = sp1C / (arg0->unk60[arg2].unkF & 0x7F);
 //         arg0->unk60[arg2].unk10 = fabsf(arg0->unk60[arg2].unk10);
-//         temp_t2 = &arg0->unk60[arg2];
-//         if (temp_t2->unkD == temp_t2->unkE) {
-//             arg0->unk60[arg2].unkE = (s8) arg3;
-//             arg1->unk9 = 0xFE;
-//             func_8001A704(arg0, arg1, arg2, arg3);
+//
+//         if (arg0->unk60[arg2].unkE == arg0->unk60[arg2].unkD) {
+//             arg0->unk60[arg2].unkE = arg3;
 //         } else {
 //             arg0->unk60[arg2].unkE = arg3;
+//             arg1->unk9 = 0xFE;
+//             func_8001A704(arg0, arg1, arg2, arg3);
 //         }
 //     }
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_19B50/func_8001A704.s")
+// NON-MATCHING: last few lines need some tweaking
 // void func_8001A704(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     u8 sp2F;
 //     u8 sp2E;
@@ -238,7 +234,7 @@ void func_8001A3FC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     sp2F = sp28 + sp2F;
 //     arg0->unk60[arg2].unkD = sp2F;
 //     if (sp2F != sp2E) {
-//         func_8001C224(&arg0->unk48, arg1, (s32) (arg0->unk24 * 100 * sp1C), 2);
+//         func_8001C224(&arg0->unk48, arg1, arg0->unk24 * 100 * sp1C, 2);
 //     }
 //     if (sp2F != 0) {
 //         arg0->unk30 = (arg0->unk30 | (1 << arg2));
@@ -247,8 +243,6 @@ void func_8001A3FC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     }
 //     func_8001A45C(arg0, arg2);
 // }
-
-
 
 void func_8001A9DC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk60[arg2].unkF = arg3;

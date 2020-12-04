@@ -48,19 +48,17 @@ void func_80016E90(struct31 *arg0) {
     func_80016F80(D_8002BA2C + 20, arg0, 0xFFFF);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_15550/func_80016F00.s")
-// void func_80016F00(void *arg0) {
-//     s32 sp28;
-//     void *sp24;
-//     s16 sp20;
-//     f32 sp1C;
-//
-//     sp1C = func_80019AB0(arg0->unkC->unk4->unk5) * arg0->unk34;
-//     sp20 = 16;
-//     sp24 = arg0;
-//     sp28 = (bitwise s32) sp1C;
-//     func_8001C224(D_8002BA2C + 20, &sp20, 33333, 2);
-// }
+void func_80016F00(struct154 *arg0) {
+    s16 pad;
+    struct155 tmp;
+    f32 res;
+
+    res = func_80019AB0(arg0->unkC->unk4->unk5) * arg0->unk34;
+    tmp.unk0 = 16;
+    tmp.unk4 = arg0;
+    tmp.unk8 = *(s32*)&res;
+    func_8001C224(D_8002BA2C + 20, &tmp, 33333, 2);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_15550/func_80016F80.s")
 // void func_80016F80(void *arg0, s32 arg1, u16 arg2) {

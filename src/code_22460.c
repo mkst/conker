@@ -23,8 +23,8 @@
 //         sp20->unk0 = (sp32 & 0xFFFFFF) | 0xA000000;
 //         sp20->unk4 = ((((s32 )arg1 & 0xFFFF) << 16) | 368);
 //     } else {
-//         if (D_1__99996 < (f64) arg0->unk4C) {
-//             arg0->unk4C = F_1__999959945678711;
+//         if (D_8002C840 < (f64) arg0->unk4C) {
+//             arg0->unk4C = D_8002C848;
 //         }
 //         arg0->unk4C = (s32) (arg0->unk4C * 32768.0f);
 //         arg0->unk4C /= 32768.0f;

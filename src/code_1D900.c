@@ -49,7 +49,7 @@ void func_8001DAA0(s32 arg0, s16 arg1, s32 arg2) {
 
 void func_8001DAE4(struct139 *arg0, s16 arg1, s32 *arg2) {
     if (arg1 == 8) {
-        arg0->unk2 = (f32) *arg2 * F_0__10000000149011612;
+        arg0->unk2 = (f32) *arg2 * D_8002C790;
     } else if (arg1 == 9) {
         arg0->unk0 = *arg2;
     }

@@ -3,11 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
-
 void func_80001050(void) {
-    bzero(&D_8002D4B0, (s32) &D_80043B40 - (s32) &D_8002D4B0);
-    func_800061F8(1, 0x1F);
-    func_80022790();
+    bzero(&D_8002D4B0, (s32) &D_80043B40 - (s32) &D_8002D4B0); // zero out bss
+    func_800061F8(1, 31); // in the middle of asm
+    osInitialize();
     __osSetSR(__osGetSR() | SR_CU1 | SR_FR);
     __osSetFpcCsr(FPCSR_FS);
     osCreateThread(&D_800318B0, 1, &D_100010F8, 0, &D_8002D8B0, 5); // spawn func_800010F8

@@ -4,6 +4,7 @@
 #include "variables.h"
 
 
+// required jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_7830/func_85007830.s")
 
 void func_85007A20(void) {

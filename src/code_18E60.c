@@ -208,35 +208,13 @@ void func_80019744(struct36 **arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80019770.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_800198B0.s")
-// void func_800198B0(void *arg0) {
-//     void *spC;
-//     void *sp8;
-//     void *sp4;
-//
-//     spC = arg0;
-//     if (spC->unk0 != 0) {
-//         spC->unk0->unk4 = (s32) spC->unk4;
-//     }
-//     if (spC->unk4 != 0) {
-//         *spC->unk4 = (s32) spC->unk0;
-//     }
-//     sp8 = arg0;
-//     sp4 = D_8002BA44->unk14;
-//     sp8->unk0 = (s32) *sp4;
-//     sp8->unk4 = sp4;
-//     if (*sp4 != 0) {
-//         (*sp4)->unk4 = sp8;
-//     }
-//     *sp4 = sp8;
-// }
 
 s32 func_80019964(s32 arg0) {
     f32 sp4;
 
-    sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / F_1_000_000) + 0.5f;
+    sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f; // 1000000.0f
     return (s32) sp4;
 }
-
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_800199C8.s")
 // NON-MATCHING: and/move wrong

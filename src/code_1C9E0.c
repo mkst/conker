@@ -63,7 +63,7 @@ void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4)
 
     sp24 = func_850484A0(arg1 * PI, arg0);
     sp20 = sp24 * sp24;
-    sp1C = (sp24 * F_1__4142136573791504) / arg2;
+    sp1C = (sp24 * D_8002C774) / arg2;
     arg3->unk0 = sp20 / (1.0f + sp20 + sp1C);
     arg3->unk4 = arg3->unk0 * 2.0f;
     arg3->unk8 = arg3->unk0;
@@ -106,9 +106,9 @@ f32 func_8001CEA4(s32 arg0) {
     f32 sp0 = 1.0f;
 
     if (arg0 >= 0) {
-        sp4 = F_1__0594631433486938;
+        sp4 = D_8002C778;
     } else {
-        sp4 = F_0__9438742995262146;
+        sp4 = D_8002C77C;
         arg0 = -arg0;
     }
 
@@ -141,8 +141,8 @@ f32 func_8001CEA4(s32 arg0) {
 //     for(i = 3; i < 8; i++) {
 //         arg0->unk8[i] = 0;
 //     }
-//     arg0->unk8[0] =       (s32) (sp30.unk0 * (F_26768 -   (arg0->unk2 * 128.0f)));
-//     arg0->unk8[1] = (s16) (s32) (sp30.unk4 * (F_26768_2 - (arg0->unk2 * 128.0f)));
+//     arg0->unk8[0] =       (s32) (sp30.unk0 * (D_8002C780 -   (arg0->unk2 * 128.0f)));
+//     arg0->unk8[1] = (s16) (s32) (sp30.unk4 * (D_8002C784 - (arg0->unk2 * 128.0f)));
 //     arg0->unk8[2] = 0;
 //
 //     arg0->unk8[8] = (s16) (s32) (sp24.unk4 * -16384.0f);

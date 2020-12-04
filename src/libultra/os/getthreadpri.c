@@ -3,8 +3,7 @@
 extern OSThread *__osRunningThread;
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/os/getthreadpri/osGetThreadPri.s")
-// NON-MATCHING: just.. doesnt match
-//
+// NON-MATCHING: close with -g2 -O2
 // OSPri osGetThreadPri(OSThread *thread) {
 //     if (thread == NULL) {
 //         thread = __osRunningThread;

@@ -6,9 +6,14 @@ options:
   - "-Iinclude"
   - "-Iinclude/2.0L"
   - "-D_LANGUAGE_C"
+  - "-D_FINALROM"
   extensions: "custom/n64splat"
   modes:
   - all
+  generated_c_preamble: |
+    #include <ultra64.h>
+    #include "functions.h"
+    #include "variables.h"
 segments:
   - name:  header
     type:  header
@@ -16,6 +21,13 @@ segments:
   - name:  boot
     type:  bin
     start: 0x00000040
+  - type: code
+    start: 0x00000168
+    vram:  0x1fc00000 # fairly sure this is not correct
+    files:
+    - [0x168, "asm"]
+  - [0x000007D4, "bin"]
+  - [0x00000CF0, "bin"]
   - type:  code
     start: 0x00001000
     vram:  0x80001000
@@ -24,12 +36,12 @@ segments:
     - [0x1000, "asm", "entrypoint"]
     - [0x1050, "c"]
     - [0x1420, "c"]
-    - [0x2DB0, "c", "libultra/io/aisetnextbuf"]
+    - [0x2DB0, "asm", "libultra/io/aisetnextbuf"]
     - [0x2E50, "c"]
-    - [0x30A0, "c", "libultra/io/pimgr"]
-    - [0x3220, "c", "libultra/io/sptask"]
-    - [0x34E0, "c", "libultra/io/vimgr"]
-    - [0x37F0, "c", "libultra/os/createthread"]
+    - [0x30A0, "asm", "libultra/io/pimgr"]
+    - [0x3220, "c",   "libultra/io/sptask"]
+    - [0x34E0, "asm", "libultra/io/vimgr"]
+    - [0x37F0, "c",   "libultra/os/createthread"]
     - [0x38C0, "c"]
     - [0x3920, "c"]
     - [0x39B0, "c"]
@@ -39,9 +51,9 @@ segments:
     - [0x4470, "c"]
     - [0x49E0, "c"]
     - [0x50A0, "c"]
-    - [0x5570, "c", "libultra/io/motor"]
+    - [0x5570, "asm", "libultra/io/motor"]
     - [0x5AB0, "c"]
-    - [0x8120, "c"]
+    - [0x8120, "asm", "libultra/os/maptlbrdb"]
     - [0x8180, "c"]
     - [0x8F90, "c"]
     - [0xA420, "c"]
@@ -86,7 +98,7 @@ segments:
     - [0x22460, "c"]
     # -O2 -g3 from here
     - [0x226F0, "asm", "libultra/libc/bzero"]
-    - [0x22790, "c",   "libultra/os/os22790"]
+    - [0x22790, "c",   "libultra/os/initialize"]
     - [0x22A30, "asm", "libultra/os/setsr"]
     - [0x22A40, "asm", "libultra/os/getsr"]
     - [0x22A50, "asm", "libultra/os/setfpccsr"]
@@ -100,7 +112,7 @@ segments:
     - [0x22F60, "asm", "libultra/libc/lldiv"]
     - [0x23060, "asm", "libultra/libc/ldiv"]
     - [0x230F0, "asm", "libultra/libc/xlitob"]
-    - [0x23390, "c",   "libultra/io/ai"]
+    - [0x23390, "asm", "libultra/io/ai"]
     - [0x233C0, "asm", "libultra/os/virtualtophysical"]
     - [0x23440, "asm", "libultra/os/recvmesg"]
     - [0x23580, "asm", "libultra/os/sendmesg"]
@@ -148,7 +160,7 @@ segments:
     - [0x262C0, "asm", "libultra/io/pigetstat"]
     - [0x262D0, "asm", "libultra/os/unmaptlb"]
     - [0x26310, "asm", "libultra/os/maptlb"]
-    - [0x263D0, "c",   "libultra/io/aisetfreq"]
+    - [0x263D0, "c",   "libultra/io/aisetfreq"] # -O1 -g3
     - [0x26530, "asm", "libultra/gu/sqrtf"]
     - [0x26540, "asm", "libultra/gu/sinf"]
     - [0x26700, "asm", "libultra/io/sprawread"]
@@ -166,97 +178,53 @@ segments:
     - [0x27820, "asm", "libultra/io/leodiskinit"]
     - [0x28670, "asm", "libultra/io/pfschecker"]
   - [0x000290D0, "bin"] # early rodata?
-  - type: rodata
+  - type: code
     start: 0x0002C200
     vram:  0x8002C200
     files:
-    - start: 0x0002C200
-      types: "ffffffffffff"
-      glabel:
-      - "F_0__009999999776482582"
-      - "D_8002C204"
-      - "F_3__068309783935547"
-      - "D_8002C20C"
-      - "F_0__7111111283302307"
-      - "F_0__009999999776482582_2"
-      - "F_3__068309783935547_2"
-      - "D_8002C21C" # 7.806111346002818e+27 // 1841940611
-      - "F_3015"
-      - "F_36000000"
-      - "F_6000"
-      - "F_0__04183333367109299"
-      - "F_1290"
-      - "F_0__37166666984558105"
-      - "F_24000"
-      - "D_8002C23C" # 0.0 // 0
-  - [0x0002C230, "bin"]
-  - type:  rodata
-    start: 0x0002C450
-    vram:  0x8002C450
+    - [0x0002C200, ".data", "data/data_2C200"]
+    - [0x0002C250, "bin"] # more data
+    - [0x0002C420, ".data", "data/data_2C420"]
+    - [0x0002C460, "bin"] # more data
+    - [0x0002C6B0, ".data", "data/data_2C6B0"]
+    - [0x0002C708, "bin"] # more data
+    - [0x0002C750, ".data", "data/data_2C750"]
+    - [0x0002C7A0, "bin"] # more data
+    - [0x0002C810, ".data", "data/data_2C810"]
+    - [0x0002C850, "bin"] # more data
+  - [0x0002C8D0, "bin"] # tbd
+  - [0x0002D4B0, "bin"] # ucode?
+  - [0x0002DE08, "bin"] # ucode?
+  - [0x0002e698, "bin"] # ucode?
+  - [0x0002f520, "bin"] # ucode?
+  - [0x0002fdb0, "bin"] # ucode?
+  - [0x00030c38, "bin"] # ucode?
+  - [0x000314c8, "bin"] # ucode?
+  - [0x00031fe8, "bin"] # ucode?
+  - [0x0003293d, "bin"] # ucode?
+  - [0x000334f8, "bin"] # ucode?
+  - [0x00033e4d, "bin"] # ucode?
+  - [0x00034a08, "bin"] # ucode?
+  - [0x0003535d, "bin"] # ucode?
+  - [0x00035f38, "bin"] # ucode?
+  - [0x0003688d, "bin"] # ucode?
+  - [0x00037468, "bin"] # ucode?
+  - [0x00037dba, "bin"] # ucode?
+  - [0x00038908, "bin"] # ucode?
+  - [0x0003925c, "bin"] # ucode?
+  - [0x00039da8, "bin"] # ucode?
+  - [0x0003a6fc, "bin"] # ucode?
+  - [0x0003b248, "bin"] # ucode?
+  - [0x0003bb9c, "bin"] # ucode?
+  - [0x0003c124, "bin"] # ucode data section
+  - type: code
+    start: 0x00042450
+    vram:  0x80042450
     files:
-    - start: 0x0002C450
-      types: "ffff"
-      glabel:
-      - "F_1__0309929847717285"
-      - "F_6__2831854820251465"
-      - "F_6__2831854820251465_2" # also contains 6.2831854820251465
-      - "D_8002C45C"
-  - [0x2C460, "bin"] # more rodata
-  - type:  rodata
-    start: 0x0002C750
-    vram:  0x8002C750
-    files:
-    - start: 0x0002C750
-      types: "ffffffffffffffffffff"
-      glabel:
-      - "F_1_000_000"
-      - "D_8002C754"
-      - "D_8002C758"
-      - "D_8002C75C"
-      - "F_1__0005778074264526"
-      - "F_0__999422550201416"
-      - "D_8002C768"
-      - "D_8002C76C"
-      - "PI"
-      - "F_1__4142136573791504"
-      - "F_1__0594631433486938"
-      - "F_0__9438742995262146"
-      - "F_26768"     # 26768.0
-      - "F_26768_2"   # 26768.0
-      - "D_8002C788"  # 173123.40625
-      - "D_8002C78C"  # 0.0
-      - "F_0__10000000149011612"
-      - "D_8002C794"
-      - "D_8002C798"
-      - "D_8002C79C"
-  - [0x0002C7A0, "bin"] # more rodata
-  - type:  rodata
-    start: 0x0002C810
-    vram:  0x8002C810
-    files:
-    - start: 0x0002C810
-      types: "ffffffffffffdff"
-      glabel:
-        - D_8002C810
-        - F_65535
-        - D_8002C818
-        - D_8002C81C
-        - F_26755
-        - D_8002C824
-        - D_8002C828
-        - D_8002C82C
-        - F_26755_2
-        - F_7723
-        - F_7723_2
-        - D_8002C83C
-        - D_1__99996 #
-        - F_1__999959945678711 #D_1__9996795654296875 #F_1__999959945678711
-        - D_8002C84C
-  - [0x0002C850, "bin"] # more rodata
-  - [0x00042450, "bin", "chunk0_offsets"] # xor with 0x8039CCCA
+    - [0x00042450, ".data", "data/data_42450"] # xor offsets with 0x8039CCCA
   - name:  chunk0
     type:  rzip
-    start: 0x42C50 #TODO: call n64splat recursively?
+    start: 0x42C50
     files:
     - [0x42c50, "gz"]
     - [0x4367a, "gz"]
@@ -780,8 +748,7 @@ segments:
     - [0x001A0188, "c"] # 0x001700
     - [0x001A0538, "c"] # 0x001AB0
     - [0x001A0558, "c"] # 0x001AD0
-    # - [0x001A0558, "c"] # 0x001AD0
-  - [0x001A2190, "bin"] # more rodata?
+  - [0x001A2190, "bin"] # data
   ###
   - [0x001A37E0, "bin", "compressed00"]
   - [0x00333291, "bin"] # ??
@@ -1322,7 +1289,7 @@ segments:
     - [0x029A0758, "mp3"]
     - [0x029A3690, "mp3"]
     - [0x029A9E30, "mp3"]
-  - name:  assets17     # TODO: split out midi (m64?) files
+  - name:  assets17    # TODO: split out (m64?) files
     type:  rzip
     start: 0x029ae9e8
   - name:  assets18    # another compressed file inside
@@ -1343,3 +1310,4 @@ segments:
   - [0x03F8B770, "bin"] # TODO: anything interesting here?
   - [0x03F8b800, "bin", "trailer"] # 0xff to the end
   - [0x04000000] # the end of the rom
+#

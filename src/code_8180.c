@@ -149,6 +149,7 @@ void func_80008BC0(u8 arg0, f32 arg1, f32 arg2) {
 
 // not sure what going on with this
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008C6C.s")
+
 // contains delay slot
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_80008CE8.s")
 

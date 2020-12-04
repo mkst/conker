@@ -130,7 +130,7 @@ s16 func_80020E18(f32 arg0, f32 arg1, s32 arg2, u16 *arg3) {
     spC = (s16) (s32) sp0;
     spE = spE + spC;
     sp0 = sp0 - (f32) spC;
-    *arg3 = (u32) (F_65535 * sp0);
+    *arg3 = (u32) (D_8002C814 * sp0); // 65535.0f
     return spE;
 }
 
