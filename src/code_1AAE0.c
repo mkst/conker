@@ -4,8 +4,8 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001AAE0.s")
-// void func_8001AAE0(void *arg0, s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001AAE0.s")
+// void func_1001AAE0(void *arg0, s32 arg1) {
 //     void *sp4;
 //     void *sp0;
 //     void *temp_t6;
@@ -37,8 +37,8 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001ABA0.s")
-// void func_8001ABA0(struct26 *arg0, void *arg1, s32 arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001ABA0.s")
+// void func_1001ABA0(struct26 *arg0, void *arg1, s32 arg2) {
 //     void *sp3C;
 //     s16 sp38;
 //     void *sp34;
@@ -88,19 +88,19 @@
 //     sp34->unk38 = (u8)3;
 //     sp34->unk34 = (u8)0;
 //     sp34->unk28 = (s32) (arg0->unk1C + arg2);
-//     func_8001FFE0(arg1, 0);
-//     func_8001C910(arg1, 0, arg2);
+//     func_1001FFE0(arg1, 0);
+//     func_1001C910(arg1, 0, arg2);
 //     sp38 = 5;
 //     sp3C = arg1;
 //     arg2 = arg2 + 0x7D00;
-//     func_8001C224(arg0 + 0x48, &sp38, arg2, 0);
+//     func_1001C224(arg0 + 0x48, &sp38, arg2, 0);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001ADA4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001ADA4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001AF28.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001AF28.s")
 // NON-MATCHING: what is going on with struct26!
-// struct29 *func_8001AF28(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3) {
+// struct29 *func_1001AF28(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3) {
 //     struct29 *sp4;
 //
 //     sp4 = arg0->unk6C;
@@ -125,12 +125,12 @@
 //     return sp4;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001AFEC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001AFEC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B07C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B07C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B200.s")
-// s16 func_8001B200(struct25 *arg0, struct26 *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B200.s")
+// s16 func_1001B200(struct25 *arg0, struct26 *arg1) {
 //     s32 sp4;
 //     s32 sp0;
 //
@@ -145,9 +145,9 @@
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B310.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B310.s")
 // NON-MATCHING: missing a move
-// s32 func_8001B310(struct25 *arg0, struct26 *arg1) {
+// s32 func_1001B310(struct25 *arg0, struct26 *arg1) {
 //     s32 sp14;
 //     s32 sp10;
 //
@@ -157,7 +157,7 @@
 //     return (MAX(0, MIN(127, sp10)) | sp14) & 0xff;
 // }
 
-s32 func_8001B40C(struct07 *arg0, s32 arg1) {
+s32 func_1001B40C(struct07 *arg0, s32 arg1) {
     s32 sp4;
 
     sp4 = arg0->unk28 - arg1;
@@ -168,9 +168,9 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B450.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B450.s")
 // NON-MATCHING: what struct is this?
-// u8 func_8001B450(struct25 *arg0, struct26 *arg1) {
+// u8 func_1001B450(struct25 *arg0, struct26 *arg1) {
 //     s32 sp4;
 //
 //     sp4 = ((arg1->unk60 + (arg0->unk35 * 0x3C))->unk6 + arg0->unk24->unkC) - 0x40;
@@ -189,8 +189,8 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B4D4.s")
-// void func_8001B4D4(void *arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B4D4.s")
+// void func_1001B4D4(void *arg0, void *arg1) {
 //     s32 sp1C;
 //     s32 sp18;
 //     s32 temp_t8;
@@ -208,7 +208,7 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 //     sp1C = 0;
 //     if ((s32) arg0->unk34 > 0) {
 // loop_3:
-//         func_8001B620(arg0, sp1C);
+//         func_1001B620(arg0, sp1C);
 //         temp_t8 = sp1C + 1;
 //         sp1C = temp_t8;
 //         if (temp_t8 < (s32) arg0->unk34) {
@@ -216,12 +216,12 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 //         }
 //     }
 //     if (arg1->unk8 != 0) {
-//         func_8001B620(arg0, sp1C);
+//         func_1001B620(arg0, sp1C);
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B59C.s")
-// void func_8001B59C(void *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B59C.s")
+// void func_1001B59C(void *arg0) {
 //     s32 sp1C;
 //     s32 temp_t4;
 //
@@ -229,7 +229,7 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 //     if ((s32) arg0->unk34 > 0) {
 // loop_1:
 //         *(arg0->unk60 + (sp1C * 0x3C)) = 0;
-//         func_8001B620(arg0, sp1C);
+//         func_1001B620(arg0, sp1C);
 //         temp_t4 = sp1C + 1;
 //         sp1C = temp_t4;
 //         if (temp_t4 < (s32) arg0->unk34) {
@@ -238,7 +238,7 @@ s32 func_8001B40C(struct07 *arg0, s32 arg1) {
 //     }
 // }
 
-void func_8001B620(struct26 *arg0, s32 arg1) {
+void func_1001B620(struct26 *arg0, s32 arg1) {
     arg0->unk60[arg1].unkA = 0;
     arg0->unk60[arg1].unk6 = 64;
     arg0->unk60[arg1].unk9 = 127;
@@ -257,9 +257,9 @@ void func_8001B620(struct26 *arg0, s32 arg1) {
     arg0->unk60[arg1].unk8 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001B7D0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001BD34.s")
-// s32 func_8001BD34(void *arg0, void *arg1, s32 arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B7D0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001BD34.s")
+// s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {
 //     void *sp1C;
 //     s32 sp18;
 //     s32 phi_v0;
@@ -281,8 +281,8 @@ void func_8001B620(struct26 *arg0, s32 arg1) {
 //     return sp18;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001BE1C.s")
-// void func_8001BE1C(void *arg0, s32 arg1, s32 arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001BE1C.s")
+// void func_1001BE1C(void *arg0, s32 arg1, s32 arg2) {
 //     if (arg2 == -1) {
 //         arg0->unk30(arg1);
 //     } else {
@@ -290,4 +290,4 @@ void func_8001B620(struct26 *arg0, s32 arg1) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_8001BE94.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001BE94.s")

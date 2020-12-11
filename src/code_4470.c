@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-void func_80004470(void) {
+void func_10004470(void) {
     int i;
     osCreatePiManager(150, &D_800388B0, &D_800380E0, 0xC8);
 
@@ -18,7 +18,7 @@ void func_80004470(void) {
     D_8003A571 = 0;
 }
 
-s32 func_80004514(s32 devAddr, void *dramAddr, u32 size, s32 arg3) {
+s32 func_10004514(s32 devAddr, void *dramAddr, u32 size, s32 arg3) {
     OSMesgQueue *msgQueue;
     OSIoMesg tmpIoMsg;
     OSIoMesg *ioMsg;
@@ -26,7 +26,7 @@ s32 func_80004514(s32 devAddr, void *dramAddr, u32 size, s32 arg3) {
 
     sp3c = __osRunningThread->id - 3;
     if ((size < 0xC8U) && (sp3c == 0)) {
-        func_8000480C(devAddr, dramAddr, size);
+        func_1000480C(devAddr, dramAddr, size);
         return;
     }
     if ((sp3c >= 4) || ( sp3c < 0)) {
@@ -57,7 +57,7 @@ s32 func_80004514(s32 devAddr, void *dramAddr, u32 size, s32 arg3) {
     }
 }
 
-void func_80004674(void) {
+void func_10004674(void) {
     int i;
     for (i = 0; i < D_8003A571; i++)
     {
@@ -67,9 +67,9 @@ void func_80004674(void) {
     D_8003A571 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_800046E4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_100046E4.s")
 // NON-MATCHING: stack isnt right
-// void func_800046E4(s32 devAddr, void *dramAddr, u32 size) {
+// void func_100046E4(s32 devAddr, void *dramAddr, u32 size) {
 //     s32 _dramAddr;
 //     s32 idx;
 //     s32 threadId;
@@ -106,8 +106,8 @@ void func_80004674(void) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_8000480C.s")
-// void *func_8000480C(s32 devAddr, void *dramAddr, s32 size) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_1000480C.s")
+// void *func_1000480C(s32 devAddr, void *dramAddr, s32 size) {
 //     s32 sp38;
 //     s32 *temp_t0;
 //     s32 *temp_t0_2;

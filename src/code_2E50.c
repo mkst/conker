@@ -5,8 +5,8 @@
 
 
 // Unable to determine jump table for jr instruction.
-#pragma GLOBAL_ASM("asm/nonmatchings/code_2E50/func_80002E50.s")
-// void func_80002E50(struct158 *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_2E50/func_10002E50.s")
+// void func_10002E50(struct158 *arg0) {
 //     s32 phi_s0;
 //     struct158 *sp5C;
 //     s32 sp58;

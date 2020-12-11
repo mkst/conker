@@ -4,8 +4,8 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80013320.s")
-// void func_80013320(struct26 *arg0, struct30 *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10013320.s")
+// void func_10013320(struct26 *arg0, struct30 *arg1) {
 //     s32 i;
 //     s32 sp30;
 //     struct30 *sp2C;
@@ -18,7 +18,7 @@
 //     arg0->unk18 = 0;
 //     arg0->unk14 = D_8002BA44; // fuuuuuuu
 //     arg0->unk30 = 0xFFFF;
-//     func_80017B30(arg0);
+//     func_10017B30(arg0);
 //     arg0->unk24 = 488;
 //     arg0->unk28 = 0;
 //     arg0->unk2C = 0;
@@ -36,9 +36,9 @@
 //     arg0->unk8C = arg1->unk0;
 //     arg0->unk38 = 9;
 //     arg0->unk34 = arg1->unk8;
-//     arg0->unk60 = func_80012844(0, 0, sp24, arg1->unk8, 0x3C);
-//     func_8001B59C(arg0);
-//     sp28 = func_80012844(0, 0, sp24, arg1->unk0, 0x44);
+//     arg0->unk60 = func_10012844(0, 0, sp24, arg1->unk8, 0x3C);
+//     func_1001B59C(arg0);
+//     sp28 = func_10012844(0, 0, sp24, arg1->unk0, 0x44);
 //     arg0->unk6C = 0; // NULL?
 //     /// fuuuuuuu
 //     // for (i = 0; i < arg1->unk0; i++)
@@ -59,21 +59,21 @@
 //
 //     arg0->unk64 = 0;
 //     arg0->unk68 = 0;
-//     sp30 = func_80012844(0, 0, sp24, arg1->unk4, 0x1C);
-//     func_8001C060(arg0 + 0x48, sp30, arg1->unk4);
+//     sp30 = func_10012844(0, 0, sp24, arg1->unk4, 0x1C);
+//     func_1001C060(arg0 + 0x48, sp30, arg1->unk4);
 //     arg0->unk0 = 0;
 //     arg0->unk8 = &D_10013598;
 //     arg0->unk4 = arg0;
-//     func_8001C700(arg0);
+//     func_1001C700(arg0);
 // }
 
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80013598.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10013598.s")
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80014048.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10014048.s")
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_8001415C.s")
-// void func_80015310(s32 arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_1001415C.s")
+// void func_10015310(s32 arg0, void *arg1) {
 //     void *sp14;
 //     void *sp10;
 //     void *spC;
@@ -118,8 +118,8 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80015044.s")
-// void func_80015044(void *arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10015044.s")
+// void func_10015044(void *arg0, void *arg1) {
 //     void *sp44;
 //     s32 sp40;
 //     s32 sp3C;
@@ -140,7 +140,7 @@
 //     if ((arg1->unk8 == 0xFF) && (arg1->unk9 == 0x51)) {
 //         sp3C = arg0->unk24;
 //         sp40 = (sp44->unk7 << 0x10) | (sp44->unk8 << 8) | sp44->unk9;
-//         func_80015464(arg0, (f32) sp40);
+//         func_10015464(arg0, (f32) sp40);
 //         sp2C = arg0->unk50;
 //         if (sp2C != 0) {
 // loop_3:
@@ -187,7 +187,7 @@
 //             sp28 = temp_t2;
 //             sp38 = (s32) sp2C->unk8 / sp3C;
 //             sp2C->unk8 = (s32) (arg0->unk24 * sp38);
-//             func_80015310(arg0 + 0x48, sp2C);
+//             func_10015310(arg0 + 0x48, sp2C);
 //             sp2C = temp_t2;
 //             if (sp2C != 0) {
 //                 goto loop_18;
@@ -196,8 +196,8 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80015310.s")
-// void func_80015310(s32 arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10015310.s")
+// void func_10015310(s32 arg0, void *arg1) {
 //     void *sp14;
 //     void *sp10;
 //     void *spC;
@@ -242,9 +242,9 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_80015464.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10015464.s")
 // NON-MATCHING: f4/f6 flipped
-// void func_80015464(struct18 *arg0, f32 arg1) {
+// void func_10015464(struct18 *arg0, f32 arg1) {
 //     if (arg0->unk18) {
 //         arg0->unk24 = arg0->unk18->unk8 * arg1;
 //     } else {
@@ -253,19 +253,19 @@
 //     // arg0->unk24 = arg0->unk18 ? (s32)(arg0->unk18->unk8 * arg1) : 0x1E8;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_800154AC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_100154AC.s")
 // NON-MATCHING: need to figure final line, probably is not struct26
-// void func_800154AC(struct26 *arg0) {
+// void func_100154AC(struct26 *arg0) {
 //     struct33 tmp;
 //     s32 sp1C;
 //
 //     if (arg0->unk2C != 1 || arg0->unk18 == 0) {
 //         return;
 //     }
-//     if (func_8001DBA0(arg0->unk18, &sp1C) == 0) {
+//     if (func_1001DBA0(arg0->unk18, &sp1C) == 0) {
 //         return;
 //     }
 //     tmp.unk0 = 0;
 //     // struct/pointer/array/balls
-//     func_8001C224(&arg0->unk48, &tmp, arg0->unk48, 0);
+//     func_1001C224(&arg0->unk48, &tmp, arg0->unk48, 0);
 // }

@@ -4,5 +4,5 @@
 #include "variables.h"
 
 
-void func_85005B60(s32 arg0) {
+void func_15005B60(s32 arg0) {
 }

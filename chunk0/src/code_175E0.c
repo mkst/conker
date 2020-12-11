@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_850175E0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_150175E0.s")
 // NON-MATCHING: uses different registers...
-// u8* func_850175E0(void) {
+// u8* func_150175E0(void) {
 //     if ((D_800BE616 == 0) && ((D_800D2E4C->unk18 & 1) == 0)) {
 //         D_800D2456 = 3;
 //         D_800D2457 = 3;
@@ -18,8 +18,8 @@
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_85017640.s")
-// void func_85017640(void) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_15017640.s")
+// void func_15017640(void) {
 //     u32 temp_v0;
 //     void *temp_v0_2;
 //     u32 phi_v0;
@@ -50,6 +50,6 @@
 //     temp_v0_2->unk3D = (u8)0;
 //     temp_v0_2->unkD = (u8)0;
 //     *(void *)0x800D24C0 = 0;
-//     func_800226F0(0x800D24C8, 0xC0, (void *)0x800D2438);
-//     func_85048134(0x800D23D0, 0x800D2454, 0x42480000, 0x42726666, 53.0f, *(void *)0x800968B0, 1.0f);
+//     func_100226F0(0x800D24C8, 0xC0, (void *)0x800D2438);
+//     func_15048134(0x800D23D0, 0x800D2454, 0x42480000, 0x42726666, 53.0f, *(void *)0x800968B0, 1.0f);
 // }

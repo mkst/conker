@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_8001DBA0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_1001DBA0.s")
 // NON-MATCHING: far away
-// s32 func_8001DBA0(struct42 *arg0, s32 *arg1) {
+// s32 func_1001DBA0(struct42 *arg0, s32 *arg1) {
 //     u32 i;
 //     u32 sp8;
 //     s32 sp4;
@@ -33,8 +33,8 @@
 //     return 1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_8001DC80.s")
-// s32 func_8001DC80(struct43 *arg0, struct44 *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_1001DC80.s")
+// s32 func_1001DC80(struct43 *arg0, struct44 *arg1) {
 //     void *sp2C;
 //     void *sp28;
 //     s32 sp24;
@@ -51,27 +51,27 @@
 //     arg0->unk18 = (u16)0;
 //     arg0->unk8 = 0;
 //     arg0->unk14 = (s32) arg1->unk8;
-//     sp24 = func_8001DF3C(&sp2C, arg1->unk0);
+//     sp24 = func_1001DF3C(&sp2C, arg1->unk0);
 //     if (sp2C != 0) {
 //         if (sp24 != 0) {
 //             sp2C->unk90 = 0x228;
 //             sp2C->unk10->unk8 = 0;
 //             sp2C->unk10 = arg0;
 //             arg0->unk8 = sp2C;
-//             sp28 = func_800196E4();
+//             sp28 = func_100196E4();
 //             if (sp28 != 0) {
 //                 sp28->unk4 = (s32) D_8002BA44->unk1C;
 //                 sp28->unk8 = (u16)0xB;
 //                 sp28->unkC = 0;
 //                 sp28->unk10 = 0x170;
-//                 func_80020978(arg0->unk8, 3, sp28);
+//                 func_10020978(arg0->unk8, 3, sp28);
 //             }
-//             sp28 = func_800196E4();
+//             sp28 = func_100196E4();
 //             if (sp28 != 0) {
 //                 sp28->unk4 = (s32) (D_8002BA44->unk1C + sp2C->unk90);
 //                 sp28->unk8 = (u16)0xF;
 //                 sp28->unk0 = 0;
-//                 func_80020978(arg0->unk8, 3, sp28);
+//                 func_10020978(arg0->unk8, 3, sp28);
 //             }
 //         } else {
 //             sp2C->unk90 = 0;
@@ -99,4 +99,4 @@
 //     return sp2C != 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_8001DF3C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1DBA0/func_1001DF3C.s")

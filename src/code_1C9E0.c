@@ -4,11 +4,11 @@
 #include "variables.h"
 
 
-void func_8001C9E0(struct22 *arg0, f32 arg1) {
+void func_1001C9E0(struct22 *arg0, f32 arg1) {
     struct40 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_800196E4();
+        sp1C = func_100196E4();
         if (sp1C == NULL) {
             return;
         }
@@ -16,15 +16,15 @@ void func_8001C9E0(struct22 *arg0, f32 arg1) {
         sp1C->unk8 = 7;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_80020978(arg0->unk8, 3, sp1C);
+        func_10020978(arg0->unk8, 3, sp1C);
     }
 }
 
-void func_8001CA90(struct22 *arg0, f32 arg1) {
+void func_1001CA90(struct22 *arg0, f32 arg1) {
     struct40 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_800196E4();
+        sp1C = func_100196E4();
         if (sp1C == NULL) {
             return;
         }
@@ -32,15 +32,15 @@ void func_8001CA90(struct22 *arg0, f32 arg1) {
         sp1C->unk8 = 19;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_80020978(arg0->unk8, 3, sp1C);
+        func_10020978(arg0->unk8, 3, sp1C);
     }
 }
 
-void func_8001CB40(struct22 *arg0, u8 arg1) {
+void func_1001CB40(struct22 *arg0, u8 arg1) {
     struct41 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_800196E4();
+        sp1C = func_100196E4();
         if (sp1C == NULL) {
             return;
         }
@@ -48,11 +48,11 @@ void func_8001CB40(struct22 *arg0, u8 arg1) {
         sp1C->unk8 = 18;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_80020978(arg0->unk8, 3, sp1C);
+        func_10020978(arg0->unk8, 3, sp1C);
     }
 }
 
-void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4) {
+void func_1001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4) {
     f32 sp24;
     f32 sp20;
     f32 sp1C;
@@ -61,7 +61,7 @@ void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4)
         arg1 = arg0 - 200.0f;
     }
 
-    sp24 = func_850484A0(arg1 * PI, arg0);
+    sp24 = func_150484A0(arg1 * PI, arg0);
     sp20 = sp24 * sp24;
     sp1C = (sp24 * D_8002C774) / arg2;
     arg3->unk0 = sp20 / (1.0f + sp20 + sp1C);
@@ -71,7 +71,7 @@ void func_8001CBF0(f32 arg0, f32 arg1, f32 arg2, struct17 *arg3, struct17 *arg4)
     arg4->unk8 = ((1.0f + sp20) - sp1C) / (1.0f + sp20 + sp1C);
 }
 
-void func_8001CD54(struct125 *arg0) {
+void func_1001CD54(struct125 *arg0) {
     s32 i;
     s32 sp10;
     s16 spE;
@@ -101,7 +101,7 @@ void func_8001CD54(struct125 *arg0) {
     }
 }
 
-f32 func_8001CEA4(s32 arg0) {
+f32 func_1001CEA4(s32 arg0) {
     f32 sp4;
     f32 sp0 = 1.0f;
 
@@ -123,9 +123,9 @@ f32 func_8001CEA4(s32 arg0) {
     return sp0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_8001CF38.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_1001CF38.s")
 // NON-MATCHING: missing some addiu
-// void func_8001CF38(struct139 *arg0, f32 arg1) {
+// void func_1001CF38(struct139 *arg0, f32 arg1) {
 //     s32 i;
 //     struct17 sp30;
 //     struct17 sp24;
@@ -136,7 +136,7 @@ f32 func_8001CEA4(s32 arg0) {
 //     if ((s32) arg0->unk2 < 10) {
 //         arg0->unk2 = 10;
 //     }
-//     func_8001CBF0(arg1,  arg0->unk0 + 10.0f, arg0->unk2 / 10.0f, &sp30, &sp24);
+//     func_1001CBF0(arg1,  arg0->unk0 + 10.0f, arg0->unk2 / 10.0f, &sp30, &sp24);
 //
 //     for(i = 3; i < 8; i++) {
 //         arg0->unk8[i] = 0;
@@ -153,21 +153,21 @@ f32 func_8001CEA4(s32 arg0) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_8001D124.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_1001D124.s")
 
-void func_8001D6E8(struct42 *arg0, s32 (*arg1)(s32 arg), struct15 *arg2) {
-    arg0->unk14 = func_80012844(0, 0, arg2, 1, 32);
-    arg0->unk18 = func_80012844(0, 0, arg2, 1, 32);
+void func_1001D6E8(struct42 *arg0, s32 (*arg1)(s32 arg), struct15 *arg2) {
+    arg0->unk14 = func_10012844(0, 0, arg2, 1, 32);
+    arg0->unk18 = func_10012844(0, 0, arg2, 1, 32);
     arg0->unk30 = arg1(&arg0->unk34);
     arg0->unk3C = 0;
     arg0->unk40 = 1;
     arg0->unk44 = 0;
-    arg0->unk48 = func_80012844(0, 0, arg2, 1, 32);
+    arg0->unk48 = func_10012844(0, 0, arg2, 1, 32);
     arg0->unk54 = 0.0f;
     arg0->unk58 = 1;
     arg0->unk4C = 1.0f;
     arg0->unk50 = 0;
-    arg0->unk5C = func_80012844(0, 0, arg2, 1, 80);
+    arg0->unk5C = func_10012844(0, 0, arg2, 1, 80);
     arg0->unk80 = 1;
     arg0->unk8C = 0;
     arg0->unk62 = 1;
@@ -189,6 +189,6 @@ void func_8001D6E8(struct42 *arg0, s32 (*arg1)(s32 arg), struct15 *arg2) {
     arg0->unk99 = 0;
     arg0->unkA2 = 0;
     arg0->unkA0 = 0;
-    arg0->unkCC = func_80012844(0, 0, arg2, 1, 8);
+    arg0->unkCC = func_10012844(0, 0, arg2, 1, 8);
     arg0->unkC8 = 0;
 }

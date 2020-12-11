@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-void func_85005C80(struct108 *arg0) {
+void func_15005C80(struct108 *arg0) {
     arg0->unk2C = 8;
     arg0->unk84 |= 0x1300000;
     arg0->unk1B4 = 1;
@@ -19,5 +19,5 @@ void func_85005C80(struct108 *arg0) {
     arg0->unk374 = 370.0f;
 }
 
-void func_85005CF0(s32 arg0) {
+void func_15005CF0(s32 arg0) {
 }

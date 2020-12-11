@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167010.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167010.s")
 // NON-MATCHING: not hugely far away
-// void* func_85167010(void) {
+// void* func_15167010(void) {
 //     void * (*func)(void);
 //     void * res;
 //     s32 i;
@@ -22,25 +22,25 @@
 //     return res;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_8516706C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_851670C0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_851671E8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167310.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_851674F8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167A68.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167AD8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167B44.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167C58.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167D84.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85167E0C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168118.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_8516865C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168800.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168870.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168A2C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168A4C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168A9C.s")
-// void *func_85168A9C(struct12 *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516706C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_151670C0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_151671E8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167310.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_151674F8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167A68.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167AD8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167B44.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167C58.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167D84.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167E0C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168118.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516865C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168800.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168870.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168A2C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168A4C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168A9C.s")
+// void *func_15168A9C(struct12 *arg0) {
 //     void *temp_a1;
 //     void *temp_v0;
 //     void *temp_v0_2;
@@ -61,32 +61,32 @@
 // }
 
 
-void func_85168B10(s32 arg0, s32 arg1) {
-    func_85168A9C(arg0);
-    func_85168A4C(arg0, arg1);
+void func_15168B10(s32 arg0, s32 arg1) {
+    func_15168A9C(arg0);
+    func_15168A4C(arg0, arg1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168B44.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168BAC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168BE4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168C4C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168E34.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168E54.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168F08.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85168F84.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85169040.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85169070.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85169260.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_8516944C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_851695F0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_8516962C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85169668.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_8516968C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_851696DC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168B44.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168BAC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168BE4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168C4C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168E34.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168E54.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168F08.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15168F84.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15169040.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15169070.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15169260.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516944C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_151695F0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516962C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15169668.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516968C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_151696DC.s")
 
-void func_8516972C(struct102 *arg0) {
+void func_1516972C(struct102 *arg0) {
     void (*func)(struct102 *arg0);
-    func_851696DC();
+    func_151696DC();
 
     if (arg0->unk0 >= 2) {
         func = D_8008B4D0[arg0->unk0].unk0;
@@ -94,29 +94,29 @@ void func_8516972C(struct102 *arg0) {
             func(arg0);
             return;
         }
-        func_85169804(arg0);
+        func_15169804(arg0);
     }
 }
 
-void func_8516979C(struct102 *arg0) {
+void func_1516979C(struct102 *arg0) {
     void (*func)(struct102 *arg0);
 
-    func_851696DC();
+    func_151696DC();
     func = D_8008B4D4[arg0->unk0].unk0;
     if (func != NULL) {
         func(arg0);
         return;
     }
-    func_85169824(arg0);
+    func_15169824(arg0);
 }
 
-void func_85169804(struct102 *arg0) {
-    func_85168B10(arg0, 1);
+void func_15169804(struct102 *arg0) {
+    func_15168B10(arg0, 1);
 }
 
-void func_85169824(s32 arg0) {
-    func_85168A9C(arg0);
-    func_80004074(arg0);
+void func_15169824(s32 arg0) {
+    func_15168A9C(arg0);
+    func_10004074(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_85169850.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15169850.s")

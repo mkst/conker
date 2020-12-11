@@ -1,5 +1,5 @@
 #include <ultra64.h>
 
 
-void func_85100330(s32 arg0) {
+void func_15100330(s32 arg0) {
 }

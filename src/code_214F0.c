@@ -3,10 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
-// struct21 *func_800214F0(struct42 *arg0, void *arg1, s32 arg2, void *struct21);
-#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_800214F0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_80021C40.s")
-// ? func_80021C40(void *arg0, s32 arg1, s32 arg2) {
+// struct21 *func_100214F0(struct42 *arg0, void *arg1, s32 arg2, void *struct21);
+#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_100214F0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_10021C40.s")
+// ? func_10021C40(void *arg0, s32 arg1, s32 arg2) {
 //     s32 temp_s0;
 //     s32 temp_s0_2;
 //     void *temp_t3;
@@ -54,4 +54,4 @@
 //     return 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_80021E4C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_214F0/func_10021E4C.s")

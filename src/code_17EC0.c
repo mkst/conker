@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-s32 func_80017EC0(struct18 *arg0) {
+s32 func_10017EC0(struct18 *arg0) {
     if (arg0->unk18 == 0) {
         return 0;
     }

@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_8BF0/func_85008BF0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_8BF0/func_15008BF0.s")
 // NON-MATCHING: absolute mess
-// s32 func_85008BF0(struct110 *arg0) {
+// s32 func_15008BF0(struct110 *arg0) {
 //     struct109 tmp;
 //     f32 foo;
 //     f32 bar = D_80095B40;
@@ -35,7 +35,7 @@
 //     tmp.unk2E = 8;
 //     tmp.unk2C = ((arg0->unkC * bar) - 64.0f);
 //
-//     func_85143874(tmp.unk28 - 64, arg0->unk6, &tmp.unk20, &tmp.unk24);
+//     func_15143874(tmp.unk28 - 64, arg0->unk6, &tmp.unk20, &tmp.unk24);
 //
 //     tmp.unk30 = arg0->unk0 - tmp.unk20;
 //     tmp.unk34 = arg0->unk2;
@@ -44,7 +44,7 @@
 //     tmp.unk38 = arg0->unk4 - tmp.unk24;
 //     tmp.unk44 = tmp.unk24 + tmp.unk24;
 //
-//     func_85189900(&tmp, arg0->unk1B);
+//     func_15189900(&tmp, arg0->unk1B);
 //
 //     return 1;
 // }

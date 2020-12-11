@@ -4,12 +4,12 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_86001700.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_86001830.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_860018BC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_16001700.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_16001830.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1A0188/func_160018BC.s")
 
 // another __osSiDeviceBusy function
-s32 func_86001984()
+s32 func_16001984()
 {
     register u32 stat = IO_READ(SI_STATUS_REG);
     if (stat & (SI_STATUS_DMA_BUSY | SI_STATUS_RD_BUSY))
@@ -18,11 +18,11 @@ s32 func_86001984()
 }
 
 // very similar to __osSiRawStartDma
-s32 func_860019A8(s32 direction, void *dramAddr) {
+s32 func_160019A8(s32 direction, void *dramAddr) {
     if ((s32)dramAddr & 3) { // what is this checking?
         return -1;
     }
-    if (func_86001984()) {
+    if (func_16001984()) {
         return -1;
     }
 
@@ -44,10 +44,10 @@ s32 func_860019A8(s32 direction, void *dramAddr) {
     return 0;
 }
 
-void func_86001A64(void) {
+void func_16001A64(void) {
 }
 
-s32 func_86001A6C(f32 arg0) {
+s32 func_16001A6C(f32 arg0) {
     s32 tmp = *(s32*) &arg0;
 
     if ((tmp * 2) == 0) {

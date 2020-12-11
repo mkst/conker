@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A7B80/func_850A7B80.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_A7B80/func_150A7B80.s")
 
 // struct WORD {
 //     s64 unk0;
@@ -83,7 +83,7 @@
 //     // s16 unk3E;
 // } foobar;
 //
-// void func_850A7B80(baz *arg0)
+// void func_150A7B80(baz *arg0)
 // {
 //     arg0->u0.w.unk0 = 0;
 //     arg0->u1.w.unk0 = 0;

@@ -4,6 +4,6 @@
 #include "variables.h"
 
 
-void func_850106B0(void) {
+void func_150106B0(void) {
     D_800E0930 = &D_150EB430;
 }

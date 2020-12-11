@@ -4,13 +4,13 @@
 #include "variables.h"
 
 
-void func_85103800(void) {
-    func_800226F0(D_800D9AB0, 8); // bzero
+void func_15103800(void) {
+    func_100226F0(D_800D9AB0, 8); // bzero
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103828.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_15103828.s")
 // NON-MATCHING: uses a0 not v1
-// void func_85103828(void) {
+// void func_15103828(void) {
 //     u16 temp_v1;
 //     s32 i;
 //
@@ -29,6 +29,6 @@ void func_85103800(void) {
 // }
 
 // need to figure out the structs
-#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103910.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103AA0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103C14.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_15103910.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_15103AA0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_15103C14.s")

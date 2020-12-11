@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_22460/func_80022460.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_22460/func_10022460.s")
 // NON-MATCHING: same issues as the other functions in this range
-// struct21 *func_80022460(struct42 *arg0, struct119 *arg1, struct21 *arg2) {
+// struct21 *func_10022460(struct42 *arg0, struct119 *arg1, struct21 *arg2) {
 //     struct21 *sp34;
 //     s16 sp32;
 //     s32 sp2C;
@@ -18,7 +18,7 @@
 //     sp34 = arg2;
 //     sp32 = 368; // 0x170;
 //     if (arg0->unk50 != 0) {
-//         sp34 = func_800214F0(arg0, &sp32, 0xB8, arg2);
+//         sp34 = func_100214F0(arg0, &sp32, 0xB8, arg2);
 //         sp20 = sp34 = &sp34->unk8;
 //         sp20->unk0 = (sp32 & 0xFFFFFF) | 0xA000000;
 //         sp20->unk4 = ((((s32 )arg1 & 0xFFFF) << 16) | 368);
@@ -31,7 +31,7 @@
 //         sp24 = arg0->unk54 + (arg0->unk4C * 184.0f);
 //         sp2C = sp24;
 //         arg0->unk54 = (sp24 - sp2C);
-//         sp34 = func_800214F0(arg0, &sp32, sp2C, arg2);
+//         sp34 = func_100214F0(arg0, &sp32, sp2C, arg2);
 //         sp28 = arg0->unk4C * 32768.0f;
 //
 //         sp1C = sp34 = &sp34->unk8;

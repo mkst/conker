@@ -1,2 +1,2 @@
-void func_8501C860(void) {
+void func_1501C860(void) {
 }

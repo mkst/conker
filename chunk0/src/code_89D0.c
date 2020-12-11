@@ -4,9 +4,9 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_89D0/func_850089D0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_89D0/func_150089D0.s")
 // NON-MATCHING: almost matches with -g, but.. doesnt quite
-// void func_850089D0(void) {
+// void func_150089D0(void) {
 //     // this is closer with -O2 -g3
 //     D_800DD2A0 = -1;
 //     D_800DD2A1 = -1;

@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-f32 func_80019AB0(s32 arg0) {
+f32 func_10019AB0(s32 arg0) {
     f32 sp4;
     f32 sp0 = 1.0f;
 

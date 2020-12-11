@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-void func_80017870(u8 arg0) {
+void func_10017870(u8 arg0) {
     s32 i;
 
     D_800428C0 = (u8)0;
@@ -25,11 +25,11 @@ void func_80017870(u8 arg0) {
     }
 
     for(i = 0; i < 2; i++) {
-        func_80017944(i, 0);
+        func_10017944(i, 0);
     }
 }
 
-void func_80017944(s32 arg0, u32 arg1) {
+void func_10017944(s32 arg0, u32 arg1) {
     if (arg1 == 0) {
         arg1 = D_800428C8[arg0];
     }

@@ -6,9 +6,9 @@
 
 // some mips3/64bit stuff going on here
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_850AD9A0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_150AD9A0.s")
 // NON-MATCHING: I am nothing without mip2c.
-// s32 func_850AD9A0(s32 arg0, s32 arg1, s32 arg2) {
+// s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {
 //     s32 v0;
 //     s32 tmp0 = (s32)arg0; // = arg0;
 //     s32 tmp1 = (s32)arg1;
@@ -91,8 +91,8 @@
 // }
 
 // well this is a bastard
-#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_850ADA20.s")
-// s32 func_850ADA20() {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_150ADA20.s")
+// s32 func_150ADA20() {
 //     // u32 tmp1;
 //     u64 tmp2;
 //     u64 tmp0;
@@ -134,10 +134,10 @@
 //     // tmp0 = tmp0 >> 0 + 32;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_850ADA68.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_150ADA68.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_850ADACC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_AD9A0/func_150ADACC.s")
 // NON-MATCHING: hand-written function
-// void func_850ADACC(s64 arg0) {
+// void func_150ADACC(s64 arg0) {
 //     D_800885B0 = arg0 + 1;
 // }

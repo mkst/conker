@@ -4,31 +4,31 @@
 #include "variables.h"
 
 
-void func_85007A70(s16 arg0, s16 arg1, s16 arg2) {
+void func_15007A70(s16 arg0, s16 arg1, s16 arg2) {
 
     D_800BE9B4 = 2;
-    func_8503FB08();
+    func_1503FB08();
     D_800BE9F0 = D_800BE9F4 = arg2;
 
-    func_85172C50(D_800DD2C0);
-    func_85008230();
-    func_85005270();
-    func_85017300(arg0, arg1);
+    func_15172C50(D_800DD2C0);
+    func_15008230();
+    func_15005270();
+    func_15017300(arg0, arg1);
 
-    func_85015F40(D_80087280[D_800D2138], arg2);
-    func_850175E0();
-    func_850177F8();
-    func_85089BB0();
-    func_85000090();
+    func_15015F40(D_80087280[D_800D2138], arg2);
+    func_150175E0();
+    func_150177F8();
+    func_15089BB0();
+    func_15000090();
     D_800BE938 = 1;
     D_800D18A8 = 0;
     D_800BE9ED = 0;
 }
 
 // requires jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_85007B3C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_7A70/func_15007B3C.s")
 
-void func_850081E4(void) {
+void func_150081E4(void) {
     s32 i;
 
     D_800D3668 = 0;
@@ -45,19 +45,19 @@ void func_850081E4(void) {
 }
 
 
-void func_85008230(void) {
+void func_15008230(void) {
     D_800C35C4 = (u8)0;
     D_800C3C88 = (u8)0;
 }
 
-void func_85008248(s32 arg0) {
+void func_15008248(s32 arg0) {
     s32 i;
 
     D_800C3638 = 0;
     D_800C3671 = 0;
     D_800C3670 = 0;
-    func_8501D044(0);
-    func_8501D044(1);
+    func_1501D044(0);
+    func_1501D044(1);
     D_800C3663 = 0;
 
     for (i = 0; i < 3; i++)
@@ -71,7 +71,7 @@ void func_85008248(s32 arg0) {
     D_800C3683 = 0;
 }
 
-void func_850082CC(void) {
+void func_150082CC(void) {
     s32 tmp = D_800C35C4 - 1;
 
     if (D_800C35C4 != 0) {
@@ -79,6 +79,6 @@ void func_850082CC(void) {
             D_800C35EA = 2;
         }
         D_800C35C4 = 0;
-        func_8501D348(D_800BE9F0, tmp, 0, D_800C3C90, D_800C3C94);
+        func_1501D348(D_800BE9F0, tmp, 0, D_800C3C90, D_800C3C94);
     }
 }

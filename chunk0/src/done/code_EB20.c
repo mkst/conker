@@ -1,2 +1,2 @@
-void func_8500EB20(void) {
+void func_1500EB20(void) {
 }

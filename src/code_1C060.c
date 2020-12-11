@@ -4,8 +4,8 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_8001C060.s")
-// void func_8001C060(struct15 *arg0, s32 arg1, s32 arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_1001C060.s")
+// void func_1001C060(struct15 *arg0, s32 arg1, s32 arg2) {
 //     s32 spC;
 //     void *sp8;
 //     void *sp4;
@@ -36,8 +36,8 @@
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_8001C108.s")
-// s32 func_8001C108(void *arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_1001C108.s")
+// s32 func_1001C108(void *arg0, void *arg1) {
 //     void *sp2C;
 //     s32 sp28;
 //     void *sp24;
@@ -70,8 +70,8 @@
 //     return sp28;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_8001C224.s")
-// void func_8001C224(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_1001C224.s")
+// void func_1001C224(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     void *sp3C;
 //     void *sp38;
 //     void *sp34;
@@ -159,8 +159,8 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_8001C4F0.s")
-// s32 func_8001C4F0(void *arg0, s16 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1C060/func_1001C4F0.s")
+// s32 func_1001C4F0(void *arg0, s16 arg1) {
 //     void *sp3C;
 //     void *sp38;
 //     void *sp34;

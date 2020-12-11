@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-void func_85012780(void) {
+void func_15012780(void) {
     s32 i;
 
     D_800DD418 = 0;

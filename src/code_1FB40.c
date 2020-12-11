@@ -4,8 +4,8 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1FB40/func_8001FB40.s")
-// void *func_8001FB40(s32 arg0, void *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1FB40/func_1001FB40.s")
+// void *func_1001FB40(s32 arg0, void *arg1) {
 //     void *sp54;
 //     s32 sp50;
 //     s32 sp4C;
@@ -36,7 +36,7 @@
 //     void *temp_t8_2;
 //
 //     sp54 = arg1;
-//     if ((D_800E0E04 == 0) || (func_851F2E88(0xB8, &sp54) == 0)) {
+//     if ((D_800E0E04 == 0) || (func_151F2E88(0xB8, &sp54) == 0)) {
 //         temp_t8 = sp54;
 //         sp54 = temp_t8 + 8;
 //         sp48 = temp_t8;
@@ -112,7 +112,7 @@
 //         if ((s32) D_8002BA44->unk48[sp4C]->unk40->unk2 > 0) {
 //             sp28 = D_8002BA44->unk48[sp4C]->unk40;
 //             if (sp28->unk28 != 0) {
-//                 func_8001CF38(sp28, (f32) D_8002BA44->unk54);
+//                 func_1001CF38(sp28, (f32) D_8002BA44->unk54);
 //             }
 //             temp_t2_2 = sp54;
 //             sp54 = temp_t2_2 + 8;
@@ -141,6 +141,6 @@
 //     return sp54;
 // }
 
-void func_8001FFE0(struct43 *arg0, s16 arg1) {
+void func_1001FFE0(struct43 *arg0, s16 arg1) {
     arg0->unk1A = arg1;
 }

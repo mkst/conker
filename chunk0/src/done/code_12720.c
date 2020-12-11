@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-u8 func_85012720(void) {
+u8 func_15012720(void) {
     switch(D_800BE9F0)
     {
         case 0:

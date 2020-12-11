@@ -21,16 +21,12 @@ segments:
   - name:  boot
     type:  bin
     start: 0x00000040
-  - type: code
-    start: 0x00000168
-    vram:  0x1fc00000 # fairly sure this is not correct
-    files:
-    - [0x168, "asm"]
+  - [0x00000168, "bin"]
   - [0x000007D4, "bin"]
   - [0x00000CF0, "bin"]
   - type:  code
     start: 0x00001000
-    vram:  0x80001000
+    vram:  0x10001000
     files:
     # -O2 -g3 from here
     - [0x1000, "asm", "entrypoint"]
@@ -219,7 +215,7 @@ segments:
   - [0x0003c124, "bin"] # ucode data section
   - type: code
     start: 0x00042450
-    vram:  0x80042450
+    vram:  0x10042450
     files:
     - [0x00042450, ".data", "data/data_42450"] # xor offsets with 0x8039CCCA
   - name:  chunk0
@@ -742,7 +738,7 @@ segments:
   - [0x0019C7D8, "bin", "zeroes_1"] # 0x00 padding, 8880 bytes
   - type:  code
     start: 0x0019EA88
-    vram:  0x86000000
+    vram:  0x16000000
     files:
     - [0x0019EA88, "c", "debug/debugger"] # 0x000000
     - [0x001A0188, "c"] # 0x001700

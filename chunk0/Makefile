@@ -130,8 +130,8 @@ $(TARGET).bin: $(TARGET).elf
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) $(O_FILES) -o $@
-
-#--just-symbols=../build/conker.us.elf
+# --just-symbols=../build/asm/libultra/os/createmesgqueue.o
+# --just-symbols=../build/conker.us.elf
 
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<

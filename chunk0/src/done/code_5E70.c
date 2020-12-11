@@ -4,15 +4,15 @@
 #include "variables.h"
 
 
-void func_85005E70(struct108 *arg0) {
+void func_15005E70(struct108 *arg0) {
     arg0->unk1B4 = 2;
-    func_85124B18(arg0);
+    func_15124B18(arg0);
     arg0->unk23C = 1;
 }
 
-void func_85005EA0(struct108 *arg0) {
+void func_15005EA0(struct108 *arg0) {
     arg0->unk1B4 = 1;
     arg0->unk1E0 = 15;
-    func_85124B18(arg0);
+    func_15124B18(arg0);
     arg0->unk134 = 1;
 }

@@ -4,17 +4,17 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4FE0/func_85004FE0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_4FE0/func_15004FE0.s")
 // NON-MATCHING: miles away
-// s32 func_85004FE0(s32 arg0) {
+// s32 func_15004FE0(s32 arg0) {
 //     struct161 **sp34;
 //     u32 temp_lo;
 //     s32 i;
 //
 //     sp34 = 0;
-//     temp_lo = func_8502B7F0(&sp34, 3, 12, arg0, 3) / 24U;
+//     temp_lo = func_1502B7F0(&sp34, 3, 12, arg0, 3) / 24U;
 //     D_800C6654 = temp_lo;
-//     func_80003C40(temp_lo * 20, 1, 1, 0);
+//     func_10003C40(temp_lo * 20, 1, 1, 0);
 //
 //     for(i = 0; i < D_800C6654; i++) {
 //         D_800C6650[i].unk0 = sp34[i]->unk0;
@@ -28,7 +28,7 @@
 //         D_800C6650[i].unk12 = sp34[i]->unk14;
 //     }
 //     if (sp34 != NULL) {
-//         func_80004074(sp34);
+//         func_10004074(sp34);
 //     }
 //     return i;
 // }

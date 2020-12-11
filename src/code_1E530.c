@@ -4,11 +4,11 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001E530.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001ED6C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001F28C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001F5A4.s")
-// void *func_8001F5A4(void *arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, void *arg5) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001E530.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001ED6C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001F28C.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001F5A4.s")
+// void *func_1001F5A4(void *arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, void *arg5) {
 //     void *sp34;
 //     s32 sp30;
 //     s32 sp2C;
@@ -50,8 +50,8 @@
 //     return sp34;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001F79C.s")
-// void *func_8001F79C(void *arg0, s32 arg1, u32 arg2, s32 arg3, void *arg4) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001F79C.s")
+// void *func_1001F79C(void *arg0, s32 arg1, u32 arg2, s32 arg3, void *arg4) {
 //     void *sp34;
 //     s32 sp30;
 //     s32 sp2C;
@@ -93,9 +93,9 @@
 //     return sp34;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_8001F978.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1E530/func_1001F978.s")
 // NON-MATCHING: lots of work still to do
-// struct56 *func_8001F978(struct55 *arg0, s32 arg1, s32 arg2, struct56 *arg3) {
+// struct56 *func_1001F978(struct55 *arg0, s32 arg1, s32 arg2, struct56 *arg3) {
 //     struct56 *sp24;
 //     s16 sp22;
 //     struct56 *temp_t9;
@@ -115,7 +115,7 @@
 // }
 
 
-f32 func_8001FA78(struct112 *arg0, s32 arg1) {
+f32 func_1001FA78(struct112 *arg0, s32 arg1) {
     f32 tmp;
 
     arg0->unk14 += arg0->unk10 * arg1;

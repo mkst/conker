@@ -3,8 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80018E60.s")
-// void func_80018E60(struct07 *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10018E60.s")
+// void func_10018E60(struct07 *arg0) {
 //     s32 sp44;
 //     // s32 sp40;
 //     // void *sp3C;
@@ -39,28 +39,28 @@
 //     } else {
 //         D_8002BA44->unk50 = (s32) arg0->unkC;
 //     }
-//     D_8002BA44->unk48 = func_80012844(0, 0, sp34, D_8002BA44->unk50, 0x44);
+//     D_8002BA44->unk48 = func_10012844(0, 0, sp34, D_8002BA44->unk50, 0x44);
 //     sp44 = 0;
 //     if (D_8002BA44->unk50 > 0) {
 // loop_6:
 //         (D_8002BA44->unk48 + (sp44 * 0x44))->unk14 = 0;
 //         (D_8002BA44->unk48 + (sp44 * 0x44))->unk18 = 0;
 //         if ((arg0 + sp44)->unk30 != 0) {
-//             (D_8002BA44->unk48 + (sp44 * 0x44))->unk1C = func_8001E4A0(sp44, arg0, sp34);
+//             (D_8002BA44->unk48 + (sp44 * 0x44))->unk1C = func_1001E4A0(sp44, arg0, sp34);
 //         } else {
 //             (D_8002BA44->unk48 + (sp44 * 0x44))->unk1C = 0;
 //         }
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40 = func_80012844(0, 0, sp34, 1, 0x38);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40 = func_10012844(0, 0, sp34, 1, 0x38);
 //         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2 = (u16)0;
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2C = func_80012844(0, 0, sp34, 1, 8);
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk30 = func_80012844(0, 0, sp34, 1, 8);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2C = func_10012844(0, 0, sp34, 1, 8);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk30 = func_10012844(0, 0, sp34, 1, 8);
 //         temp_t4 = sp44 + 1;
 //         sp44 = temp_t4;
 //         if (temp_t4 < D_8002BA44->unk50) {
 //             goto loop_6;
 //         }
 //     }
-//     D_8002BA44->unk44 = func_80012844(0, 0, sp34, 1, 0x14);
+//     D_8002BA44->unk44 = func_10012844(0, 0, sp34, 1, 0x14);
 //     D_8002BA44->unk44->unk4 = 0x1001E530;
 //     D_8002BA44->unk4 = 0;
 //     D_8002BA44->unk8 = 0;
@@ -68,7 +68,7 @@
 //     D_8002BA44->unk18 = 0;
 //     D_8002BA44->unkC = 0;
 //     D_8002BA44->unk10 = 0;
-//     sp38 = func_80012844(0, 0, sp34, arg0->unk4, 0xD0);
+//     sp38 = func_10012844(0, 0, sp34, arg0->unk4, 0xD0);
 //     sp44 = 0;
 //     if (arg0->unk4 > 0) {
 // loop_11:
@@ -82,7 +82,7 @@
 //         }
 //         *sp24 = sp28;
 //         sp3C->unk10 = 0;
-//         func_8001D6E8(sp3C, D_8002BA44->unk24, sp34);
+//         func_1001D6E8(sp3C, D_8002BA44->unk24, sp34);
 //         temp_t3 = sp44 + 1;
 //         sp44 = temp_t3;
 //         if (temp_t3 < arg0->unk4) {
@@ -100,7 +100,7 @@
 //             goto loop_15;
 //         }
 //     }
-//     sp30 = func_80012844(0, 0, sp34, arg0->unk8, 0x24);
+//     sp30 = func_10012844(0, 0, sp34, arg0->unk8, 0x24);
 //     D_8002BA44->unk40 = 0;
 //     sp44 = 0;
 //     if (arg0->unk8 > 0) {
@@ -117,8 +117,8 @@
 //     D_8002BA44->unk3C = sp34;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80019498.s")
-// void *func_80019498(void *arg0, void *arg1, s32 arg2, u32 arg3) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019498.s")
+// void *func_10019498(void *arg0, void *arg1, s32 arg2, u32 arg3) {
 //     void *sp3C;
 //     void *sp38;
 //     s32 sp34;
@@ -140,14 +140,14 @@
 //         *arg1 = 0;
 //         return arg0;
 //     }
-//     D_8002BA44->unk1C = func_80019A04(&sp3C);
+//     D_8002BA44->unk1C = func_10019A04(&sp3C);
 //     temp_t2 = D_8002BA44;
 //     if ((u32) (temp_t2->unk1C - temp_t2->unk20) < arg3) {
 // loop_3:
 //         temp_t7 = D_8002BA44;
 //         temp_t7->unk1C = (s32) (temp_t7->unk1C & -0x10);
-//         sp3C->unk10 = (s32) (sp3C->unk10 + func_80019964(sp3C->unk8(sp3C)));
-//         D_8002BA44->unk1C = func_80019A04(&sp3C);
+//         sp3C->unk10 = (s32) (sp3C->unk10 + func_10019964(sp3C->unk8(sp3C)));
+//         D_8002BA44->unk1C = func_10019A04(&sp3C);
 //         temp_t5 = D_8002BA44;
 //         if ((u32) (temp_t5->unk1C - temp_t5->unk20) < arg3) {
 //             goto loop_3;
@@ -163,7 +163,7 @@
 //         } else {
 //             sp34 = (s32) arg3;
 //         }
-//         sp38 = func_8001FB40(D_8002BA44->unk20, sp38);
+//         sp38 = func_1001FB40(D_8002BA44->unk20, sp38);
 //         temp_t0 = sp38;
 //         sp38 = temp_t0 + 8;
 //         sp2C = temp_t0;
@@ -182,12 +182,12 @@
 //         }
 //     }
 //     *arg1 = (s32) ((s32) (sp38 - arg0) >> 3);
-//     func_80019770();
+//     func_10019770();
 //     return sp38;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_800196E4.s")
-// void *func_800196E4(void) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100196E4.s")
+// void *func_100196E4(void) {
 //     void *sp4;
 //     void *temp_t0;
 //
@@ -201,29 +201,29 @@
 //     return sp4;
 // }
 
-void func_80019744(struct36 **arg0) {
+void func_10019744(struct36 **arg0) {
     *arg0 = (s32) D_8002BA44->unk40;
     D_8002BA44->unk40 = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80019770.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_800198B0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019770.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100198B0.s")
 
-s32 func_80019964(s32 arg0) {
+s32 func_10019964(s32 arg0) {
     f32 sp4;
 
     sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f; // 1000000.0f
     return (s32) sp4;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_800199C8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100199C8.s")
 // NON-MATCHING: and/move wrong
-// s32 func_800199C8(s32 arg0) {
-//     return func_80019964(arg0) & -0x10;
+// s32 func_100199C8(s32 arg0) {
+//     return func_10019964(arg0) & -0x10;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_80019A04.s")
-// s32 func_80019A04(void *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019A04.s")
+// s32 func_10019A04(void *arg0) {
 //     u32 sp4;
 //     void *sp0;
 //     void *temp_t2;

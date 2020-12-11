@@ -4,13 +4,13 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_3920/func_80003920.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_3920/func_10003920.s")
 // non-matching; ops in wrong order
-// void func_80003920(void) {
+// void func_10003920(void) {
 //     D_80038080 = 0;
 // }
 
-void func_80003930(void) {
+void func_10003930(void) {
     if (D_80038080) {
         D_80038090 = 0x807F5000;
         D_80038094 = 0x807FE000;

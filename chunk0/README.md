@@ -6,7 +6,7 @@ The address of the first compressed block is `0x42C50`, the final block starts a
 
 Each compressed block is extracted via n64splat and then combined via `cat` to create the `chunk0.bin`.
 
-Current working theory is that the code in this chunk is TLB'd to `0x85000000` offset.
+Current working theory is that the code in this chunk is TLB'd to `0x15000000` offset.
 
 Each compressed file is padded to align to a 2-byte boundary. Initially the padding byte seemed to be random garbage - however after testing, it appears that the output buffer was recycled when compressing each block, therefore the padding is actually the previously compressed block. See the [compress_chunk0.py](../tools/compress_chunk0.py) script for more info.
 

@@ -4,8 +4,8 @@
 #include "variables.h"
 
 
-void func_85005DB0(struct108 *arg0) {
-    func_85123934(arg0, 8, 0, arg0->unk134, 3);
+void func_15005DB0(struct108 *arg0) {
+    func_15123934(arg0, 8, 0, arg0->unk134, 3);
     arg0->unk84 |= 0x1000000;
     arg0->unk84 &= -5;
     arg0->unk348 = 500.0f;

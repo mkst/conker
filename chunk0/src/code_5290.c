@@ -4,39 +4,39 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_85005290.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_15005290.s")
 // NON-MATCHING: first half ok, second half needs work
-// void func_85005290(s32 arg0, s32 arg1) {
+// void func_15005290(s32 arg0, s32 arg1) {
 //     s32 pad0;
 //     s32 sp68;
 //     s32 pad1;
 //     s32 temp_s0;
 //     s32 i;
 //
-//     D_800DC020 = func_8502B5C8(&sp68, 3, 12, arg0, 8);
+//     D_800DC020 = func_1502B5C8(&sp68, 3, 12, arg0, 8);
 //     D_80089550 = (sp68 / 24U);
 //     temp_s0 = D_80082FA0 + 1;
-//     D_800DBFF0 = func_80003C40(temp_s0 * 0x9A0, 1, 1, 0);
-//     D_800DC2B0 = func_80003C40(temp_s0 * 0xB0, 1, 0, 0);
-//     D_800DC2A0->unk0 = func_80003C40(temp_s0 << 6, 1, 1, 0);
-//     D_800DC2A0->unk4 = func_80003C40(temp_s0 << 6, 1, 1, 0);
+//     D_800DBFF0 = func_10003C40(temp_s0 * 0x9A0, 1, 1, 0);
+//     D_800DC2B0 = func_10003C40(temp_s0 * 0xB0, 1, 0, 0);
+//     D_800DC2A0->unk0 = func_10003C40(temp_s0 << 6, 1, 1, 0);
+//     D_800DC2A0->unk4 = func_10003C40(temp_s0 << 6, 1, 1, 0);
 //
 //     i = 0;
 //     do {
-//         D_800BE2B0[i] = func_80003C40(D_800BE620 * 2, 1, 2, 0);
-//         func_850054C4(&D_800DBFF0[i], i, arg0, arg1);
+//         D_800BE2B0[i] = func_10003C40(D_800BE620 * 2, 1, 2, 0);
+//         func_150054C4(&D_800DBFF0[i], i, arg0, arg1);
 //         D_800DBFF4[i] = 0;
 //     } while (D_80082FA0 >= i++) ;
 //
-//     func_8512ABF8();
-//     func_8512D238();
+//     func_1512ABF8();
+//     func_1512D238();
 //     D_800894B0 = 0;
-//     D_800DC010 = func_80003C40((D_80082FA0 * 0x9A0) + 0x9A0, 1, 2, 0);
+//     D_800DC010 = func_10003C40((D_80082FA0 * 0x9A0) + 0x9A0, 1, 2, 0);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_850054C4.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_150054C4.s")
 // NON-MATCHING: not a terrible start.
-// void func_850054C4(struct108 *arg0, s32 arg1, s16 arg2, s32 arg3) {
+// void func_150054C4(struct108 *arg0, s32 arg1, s16 arg2, s32 arg3) {
 //     f32 temp_f2;
 //     f32 temp_f4;
 //     s32 temp_s2;
@@ -46,14 +46,14 @@
 //     u16 phi_s0;
 //     f32 phi_f4;
 //
-//     func_800226F0(arg0, 0x9A0); // bzero
+//     func_100226F0(arg0, 0x9A0); // bzero
 //
 //     arg0->unk23C = 1;
 //     arg0->unk23D = arg1;
 //
 //     for (phi_s0 = 0; phi_s0 < 0x15; phi_s0++)
 //     {
-//         func_851239CC(arg0, phi_s0);
+//         func_151239CC(arg0, phi_s0);
 //         arg0->unk1B6[phi_s0] = 999;
 //     }
 //     temp_v0 = arg0->unk23D;
@@ -74,7 +74,7 @@
 //     arg0->unk1B4 = (u16)3;
 //     arg0->unk5CC = 1.0f;
 //     arg0->unk3A8 = 0.0f;
-//     func_85124B18(arg0);
+//     func_15124B18(arg0);
 //     arg0->unk272 = (u16)-1;
 //     arg0->unk5FA = (s16) 1;
 //     arg0->unk3E8 = (u8)1;
@@ -90,11 +90,11 @@
 //     arg0->unk2B8 = (f32) arg0->unk2AC;
 //     arg0->unk5F0 = (s32) (arg0->unk5F0 | 0x80000000);
 //     arg0->unk384 = (f32) D_800959E0;
-//     func_85124AB4(arg0);
-//     func_85125394(arg0);
+//     func_15124AB4(arg0);
+//     func_15125394(arg0);
 //     arg0->unk5FC = (u16)0xA;
 //     arg0->unk26C = 1.0f;
-//     func_8512D66C(arg0);
+//     func_1512D66C(arg0);
 //     temp_v0 = arg0->unk23D;
 //     arg0->unk238 = -1;
 //     arg0->unk3CC = (s16) temp_v0;
@@ -102,7 +102,7 @@
 //     temp_a2 = &D_800CC2D0[temp_v0]; // * 0x32C);
 //     arg0->unk3D0 = temp_a2;
 //     arg0->unk3D4 = temp_a2->unk31C;
-//     func_851298C0(arg0, arg2, temp_a2);
+//     func_151298C0(arg0, arg2, temp_a2);
 //     temp_f2 = D_800959E4;
 //     arg0->unk7CC = 2;
 //     arg0->unk3F4 = -1.0f;
@@ -110,11 +110,11 @@
 //     arg0->unk7BC = temp_f2;
 //     arg0->unk3E0 = (f32) arg0->unk3A0;
 //     arg0->unk3D4->unk18C = temp_f2;
-//     func_8512D6F0(arg0);
-//     func_85125924(arg0);
+//     func_1512D6F0(arg0);
+//     func_15125924(arg0);
 //     arg0->unk674 = 1.0f;
-//     func_85085430(arg0->unk3D0, arg3, 0);
-//     func_85005A60(arg0, arg2);
+//     func_15085430(arg0->unk3D0, arg3, 0);
+//     func_15005A60(arg0, arg2);
 //     arg0->unk2E0 = arg0->unk2BC;
 //     arg0->unk364 = D_800959E8;
 //     arg0->unk2E8 = arg0->unk2C4;
@@ -133,8 +133,8 @@
 //     arg0->unk23C = (u8)1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_85005818.s")
-// void func_85005818(struct108 *arg0, void *arg1, void *arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_5290/func_15005818.s")
+// void func_15005818(struct108 *arg0, void *arg1, void *arg2) {
 //     void *sp48;
 //     f32 temp_f0;
 //     f32 temp_f12;
@@ -158,7 +158,7 @@
 //     arg0->unk30C = (s32) temp_v1->unk8;
 //     temp_f0 = arg0->unk2FC;
 //     sp48 = temp_v1;
-//     func_8510E7A4(arg0->unk644, arg0->unk648, arg0->unk354, arg0->unk360, arg0->unk640, 0, arg0->unk2F8, temp_f0, arg0->unk300, temp_f0, 0, 0, D_800959F0, temp_f0);
+//     func_1510E7A4(arg0->unk644, arg0->unk648, arg0->unk354, arg0->unk360, arg0->unk640, 0, arg0->unk2F8, temp_f0, arg0->unk300, temp_f0, 0, 0, D_800959F0, temp_f0);
 //     temp_f2 = arg0->unk354;
 //     arg0->unk358 = temp_f2;
 //     arg0->unk35C = temp_f2;
@@ -185,15 +185,15 @@
 //     arg0->unk2EC = (s32) temp_v1->unk0;
 //     arg0->unk2F0 = (s32) temp_v1->unk4;
 //     arg0->unk2F4 = (s32) temp_v1->unk8;
-//     func_85124B18(temp_f12, temp_f14, arg0, temp_a1);
-//     func_85125330(arg0);
-//     func_8512523C(arg0);
-//     func_85123070(arg0);
+//     func_15124B18(temp_f12, temp_f14, arg0, temp_a1);
+//     func_15125330(arg0);
+//     func_1512523C(arg0);
+//     func_15123070(arg0);
 //     arg0->unk5F0 = (s32) (arg0->unk5F0 | 4);
 //     if ((D_800BE9F0 != 0x21) && (D_800C35EA != 1)) {
-//         func_8512D560(arg0, 5, 0);
+//         func_1512D560(arg0, 5, 0);
 //         D_800C3600->unkC = (f32) arg0->unk37C;
-//         func_8512D560(arg0, 8, D_800C3600);
-//         func_8512D560(arg0, 6, 0);
+//         func_1512D560(arg0, 8, D_800C3600);
+//         func_1512D560(arg0, 6, 0);
 //     }
 // }
