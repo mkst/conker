@@ -177,7 +177,7 @@ segments:
     - [0x27660, "asm", "libultra/io/pfsinit"]
     - [0x27820, "asm", "libultra/io/leodiskinit"]
     - [0x28670, "asm", "libultra/io/pfschecker"]
-  - [0x000290D0, "bin"] # early rodata?
+  - [0x000290D0, "bin"] # data
   - type: code
     start: 0x0002C200
     vram:  0x8002C200
@@ -744,11 +744,19 @@ segments:
     start: 0x0019EA88
     vram:  0x86000000
     files:
-    - [0x0019EA88, "c"] # 0x000000
+    - [0x0019EA88, "c", "debug/debugger"] # 0x000000
     - [0x001A0188, "c"] # 0x001700
     - [0x001A0538, "c"] # 0x001AB0
     - [0x001A0558, "c"] # 0x001AD0
-  - [0x001A2190, "bin"] # data
+  - [0x001A2190, "bin"] # jump table?
+  - [0x001A2278, "bin"] #
+  - [0x001A2580, "bin"] #
+  - type: code
+    start: 0x001A2A68
+    vram:  0x16003FE0
+    files:
+    - [0x001A2A68, ".data", "data/data_1A2A68"]
+  - [0x001A3268, "bin"]
   ###
   - [0x001A37E0, "bin", "compressed00"]
   - [0x00333291, "bin"] # ??

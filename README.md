@@ -53,7 +53,7 @@ make decompress
 **Compile**
 
 ```sh
-make -- jobs
+make --jobs
 ```
 
 # Progress
@@ -69,6 +69,7 @@ This project is in its infancy; there are multiple tasks being worked on:
 
   - Compressing extracted sections in a byte-perfect manner
   - Identifying and documenting Conker asset (model/texture/sound) format
+  - Linking `src` and `chunk0/src` code
 
 ## ROM layout
 

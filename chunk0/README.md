@@ -25,7 +25,7 @@ make extract
 ## compile
 ```sh
 # there is a sanity check that the compiled code matches the original chunk0.bin
-make
+make --jobs
 ```
 
 ## split into 4096-byte chunks

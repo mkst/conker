@@ -7,6 +7,33 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_85003120.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_850031EC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_850034B4.s")
+// NON-MATCHING: for loop is way off the mark
+// void func_850034B4(void) {
+//     s32 i;
+//
+//     D_800B0E58 = -1;
+//     D_800BC448 = (u8)0;
+//     D_800B0E5C = -1;
+//     D_800BC449 = (u8)0;
+//
+//     for (i = 0; i < 485; i++) {
+//         D_800B0E60[i]->unk0 = -1;
+//         D_800B0E60[i]->unk4 = -1;
+//         D_800B0E60[i]->unk8 = -1;
+//         D_800B0E60[i]->unkC = -1;
+//         D_800BC44A[i] = 0;
+//     }
+//     D_800D9F58 = 0xFFFF;
+//     D_800D9F5C = -1;
+//
+//     if ((D_800BE9F0 != 1) && (D_800BE9F0 != 50)) {
+//         D_800D9F60 = (u8)0;
+//         return;
+//     }
+//     D_800D9F60 = (u8)1;
+// }
+
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_85003570.s")
 // NON-MATCHING: miles away!
 // void func_85003570(void) {

@@ -47,8 +47,34 @@ s32 func_8501396C(struct16 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85013C38.s")
 
-// looked simple but meh
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85013D38.s")
+// #NON-MATCHING: looks close but think its wrong
+// s32 func_851BE850(struct17 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
+// s32 func_85013D38(struct47 *arg0) {
+//     s32 tmp1;
+//     s32 tmp2;
+//     s32 tmp3;
+//     s32 tmp4;
+//     struct17 *tmp;
+//
+//     arg0->unk16 |= 4;
+//
+//     tmp->unk0 = arg0->unk0;
+//     tmp->unk4 = arg0->unk2;
+//     tmp->unk8 = arg0->unk4;
+//
+//     tmp4 = 1;
+//     tmp1 = arg0->unk18;
+//     if (tmp1) {
+//         tmp4 = tmp1;
+//     }
+//
+//     tmp2 = arg0->unk10;
+//     tmp3 = arg0->unk1F;
+//
+//     func_851BE850(tmp, tmp2, tmp4, tmp3, 0xff, 1, 1);
+//     return 1;
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85013DE8.s")
 
@@ -126,10 +152,38 @@ s32 func_8501407C(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_8501474C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85014B60.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85014F6C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_850150A4.s")
+
+s32 func_850150A4(void) {
+    struct17 *temp_v0 = func_8515F1B0();
+    if (temp_v0 == NULL) {
+        return 1;
+    }
+
+    func_8515F25C(&D_800DCDC4, temp_v0);
+    D_800DCD90 += temp_v0->unk8;
+    return 1;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85015104.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_850151D4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85015300.s")
+
+s32 func_85015300(struct134 *arg0) {
+    void (*func)(void);
+    s32 idx = arg0->unk1C;
+
+    if ((idx < 0) || (idx >= 2)) {
+        return 1;
+    }
+
+    func = D_80082F70[idx];
+    if (func != NULL) {
+        func();
+    }
+
+    return 1;
+}
+
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85015354.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_85015644.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_850156F4.s")

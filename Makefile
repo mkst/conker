@@ -4,7 +4,7 @@ VERSION := us
 ASM_DIRS := asm \
             asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 BIN_DIRS := bin
-SRC_DIRS := src src/data src/libultra src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
+SRC_DIRS := src src/debug src/data src/libultra src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
@@ -24,7 +24,7 @@ BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 
 CHUNK_0_RZIP_FILES := $(sort $(wildcard rzip/chunk0/*.gz))
-CHUNK_0_RUNZIP_FILES := $(foreach file,$(CHUNK_0_RZIP_FILES),$(BUILD_DIR)/$(file:.gz=.bin))
+CHUNK_0_RUNZIP_FILES := $(sort $(foreach file,$(CHUNK_0_RZIP_FILES),$(file:.gz=.bin)))
 
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
@@ -222,7 +222,7 @@ $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
 
 $(BUILD_DIR)/chunk0.bin: $(CHUNK_0_RUNZIP_FILES)
-	cat $(sort $(CHUNK_0_RUNZIP_FILES)) > $@
+	cat $(CHUNK_0_RUNZIP_FILES) > $@
 
 # currently n64splat does not write them to build/rzip, so move them there
 $(BUILD_DIR)/%.bin: %.bin

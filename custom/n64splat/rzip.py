@@ -90,7 +90,7 @@ class N64SegRzip(N64Segment):
             self.files = self.parse_segment_files(self.segment)
         else:
             self.files = self.get_files_from_offsets(rom_bytes)
-            print(">> Found %i file(s)" % len(self.files))
+            # print(">> Found %i file(s)" % len(self.files))
 
         out_dir = self.create_split_dir(base_path, "rzip/%s" % self.name)
         # write out bin until compression is matching

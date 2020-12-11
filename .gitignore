@@ -8,8 +8,6 @@ expected/
 ido/ido5.3_compiler
 ido/ido7.1_compiler
 junk/
-mp3/
-rodata/
 rzip/
 textures/
 
@@ -20,6 +18,7 @@ textures/
 *.o
 *.pad
 *.z64
+.splat_cache
 chunk0.ld
 conker.ld
 undefined_funcs_auto.txt

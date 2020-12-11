@@ -2,7 +2,7 @@
 BUILD_DIR := build
 ASM_DIRS := asm
 DATA_DIRS := bin
-SRC_DIRS := src
+SRC_DIRS := src src/done
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
@@ -63,7 +63,8 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map
+# --no-check-sections
 
 ####################### Overrides ############################
 
@@ -80,9 +81,7 @@ $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 # $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
 
 # $(BUILD_DIR)/src/code_103800.o: MIPSBIT := -mips2 -32bit
-# $(BUILD_DIR)/src/code_940.o: CC := $(CC)
-
-# $(BUILD_DIR)/src/code_AD9A0.o: CC := $(CC)
+# $(BUILD_DIR)/src/code_C1E0.o: CC := $(CC)
 
 # OPT_FLAGS
 
@@ -95,12 +94,15 @@ default: all
 
 all: $(BUILD_DIR) $(TARGET).bin verify_o
 
+check:
+	@echo "$$(cat chunk0.sha1)  ../build/chunk0.bin" | sha1sum --check
+
 clean:
 	rm -rf asm
 	rm -rf bin
 	rm -rf build
 
-extract:
+extract: check
 	$(PYTHON) ../tools/n64splat/split.py ../build/chunk0.bin chunk0.yaml .
 
 split:
@@ -127,9 +129,9 @@ $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
-	@$(LD) $(LDFLAGS) -o $@ $(O_FILES)
+	@$(LD) $(LDFLAGS) $(O_FILES) -o $@
 
-#$(CORE_O_FILES)
+#--just-symbols=../build/conker.us.elf
 
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<

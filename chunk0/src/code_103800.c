@@ -28,6 +28,7 @@ void func_85103800(void) {
 //     }
 // }
 
+// need to figure out the structs
 #pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103910.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103AA0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_85103C14.s")

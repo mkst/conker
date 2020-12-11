@@ -3,7 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-
 void func_85000000(void) {
     OSMesgQueue *msgQueue;
     s32 i;
@@ -12,7 +11,7 @@ void func_85000000(void) {
     {
         msgQueue = &D_80041E58[i];
 
-        func_80023790(msgQueue, &D_80041EA0[i], 8); // osCreateMesgQueue
+        func_80023790(msgQueue, (OSMesg*)&D_80041EA0[i], 8); // osCreateMesgQueue
         func_80008570(i, msgQueue);
     }
 
