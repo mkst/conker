@@ -5,6 +5,9 @@
 
 #include "structs.h"
 
+extern f32 fabsf(f32);
+#pragma intrinsic (fabsf)
+
 /* matching */
 void func_10001050(void);
 void func_100010F8(s32 arg0);
@@ -319,8 +322,6 @@ void func_1500ABA0(s32 arg0);
 void func_1500BE40(s32 arg0);
 void func_1500BE68(void);
 
-void func_150DE310(s32 arg0);
-void func_150DEC90(s32 arg0);
 void func_1500EB20(void);
 void func_1500EB30(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_1500EBC4(void);
@@ -329,20 +330,36 @@ void func_1500EE18(struct127 *arg0, s32 arg1, s32 arg2);
 void func_1500EE94(struct16 *arg0);
 void func_1500EF20(void);
 
+void func_15010240(void);
 void func_150102C0(void);
+void func_150102D0(void);
+void func_150103E0(void);
 void func_15010680(void);
 void func_150106A0(void);
 void func_150106B0(void);
-void func_15011C40(void);
+s32  func_150106D0(struct39 *arg0);
+void func_15010780(void);
+void func_15010FB0(void);
+void func_150110F0(void);
+void func_15011170(void);
 void func_15011330(void);
+void func_15011360(void);
+void func_15011A78(struct127 *arg0, u8 arg1, s32 arg2);
+void func_15011B00(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_15011B94(void);
+void func_15011C40(void);
 void func_15011C70(void);
 void func_15011CA0(void);
 void func_15011CC0(void);
+void func_15011F20(s32 arg0);
+void func_15011FA0(s32 arg0);
+void func_15012020(s32 arg0, s32 arg1);
 u8   func_15012720(void);
 void func_15012770(void);
 void func_15012780(void);
 s32  func_150150A4(void);
 s32  func_15015300(struct134 *arg0);
+void func_15016370(void);
 void func_15017790(void);
 void func_150177F8(void);
 void func_1501C860(void);
@@ -385,6 +402,9 @@ void func_1506B100(s32 arg0, f32 arg1, f32 arg2);
 void func_15093878(void);
 s32  func_150C3D48(s32 arg0);
 void func_150CEF10(struct108 *arg0);
+void func_150DE310(s32 arg0);
+void func_150DE32C(void); // dummy
+void func_150DEC90(s32 arg0);
 void func_150FCA00(struct108 *arg0);
 
 void func_15100330(s32 arg0);
@@ -552,7 +572,7 @@ s32 func_1000E588(s32 arg1, s32 arg2);
 //func_1000F6B8
 void func_1000F85C(u16 arg0, u16 arg1, s32 arg2);
 void func_1000F91C(u16 arg0, u16 arg1, s16 arg2, u8 arg3, s32 arg4, s16 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9);
-u16  func_1000FA64(u16 arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, u16 arg5, s16 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s32 argB);
+u16  func_1000FA64(u16 arg0, s16 arg1, s16 arg2, s16 arg3, s32 arg4, u16 arg5, s16 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s32 argB);
 //func_1000FC18
 //func_1000FD38
 //func_1000FDF4
@@ -659,5 +679,6 @@ void func_15177410(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, s
 s32  func_15187EC0(s32 arg0, f32 arg1, s32 arg2, s32 arg3, u8 arg4, u8 arg5, u8 arg6, u8 arg7);
 void *func_15195AA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7);
 void func_151B8DB0(s32 arg0, u8 arg1, u8 arg2, u8 arg3);
+void func_151F3C4C(void);
 
 #endif

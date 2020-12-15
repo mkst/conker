@@ -4,6 +4,8 @@
 #include "variables.h"
 
 
+f32 D_8002C790 = 0.10000000149011612;
+
 void func_1001D900(struct22 *arg0, u8 arg1) {
     struct46 *sp1C;
 

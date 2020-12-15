@@ -175,16 +175,29 @@ segments:
     - [0x28670, "asm", "libultra/io/pfschecker"]
   - [0x000290D0, "bin"] # data
   - type: code
+    start: 0x0002C080
+    vram:  0x8002C080
+    files:
+      - [0x2C080, ".data", "data/data_2C080"] # jump table for func_10002E50
+      - [0x2C0A0, ".data", "data/data_2C0A0"] # jump table for func_100049E0
+  - [0x2C0C0, "bin"]
+  - type: code
     start: 0x0002C200
     vram:  0x8002C200
     files:
     - [0x0002C200, ".data", "data/data_2C200"]
     - [0x0002C250, "bin"] # more data
-    - [0x0002C420, ".data", "data/data_2C420"]
-    - [0x0002C460, "bin"] # more data
+    - [0x0002C3F0, ".data", "data/data_2C3F0"]
+    - [0x0002C400, ".data", "data/data_2C400"]
+    - [0x0002C410, ".data", "code_11FA0"]
+    - [0x0002C450, ".data", "code_128D0"]
+    - [0x0002C460, ".data", "data/data_2C460"] # jumptables for code_13320.c
     - [0x0002C6B0, ".data", "data/data_2C6B0"]
     - [0x0002C708, "bin"] # more data
     - [0x0002C750, ".data", "data/data_2C750"]
+    - [0x0002C760, ".data", "code_19AB0"]
+    - [0x0002C770, ".data", "data/data_2C770"]
+    - [0x0002C790, ".data", "code_1D900"]
     - [0x0002C7A0, "bin"] # more data
     - [0x0002C810, ".data", "data/data_2C810"]
     - [0x0002C850, "bin"] # more data
@@ -730,7 +743,7 @@ segments:
     - [0x186550, "gz"]
     - [0x186a78, "gz"] # final chunk is 0x130 uncompressed, 0xd7 compressed
   - [0x00186b50, "bin", "zeroes_0"] # 0x00 padding, 6104 bytes
-  - name:  chunk0_rodata
+  - name:  chunk0_data
     type:  rzip
     start: 0x00188328
     files:

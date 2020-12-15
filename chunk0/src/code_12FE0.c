@@ -11,6 +11,7 @@ void func_15012FE0(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_15013000.s")
+// requires jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_12FE0/func_150130B4.s")
 
 s32 func_1501370C(struct16 *arg0) {

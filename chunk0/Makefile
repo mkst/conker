@@ -2,7 +2,7 @@
 BUILD_DIR := build
 ASM_DIRS := asm
 DATA_DIRS := bin
-SRC_DIRS := src src/done
+SRC_DIRS := src src/data src/done
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
@@ -19,15 +19,9 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o))
 
 
-# CORE_O_FILES := $(shell find ../build -name "*.o")
-# proof of concept
-CORE_O_FILES := ../build/asm/libultra/libc/bzero.o
-
-
-
 # Files requiring pre/post-processing
 GREP := grep -rl
-GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM src/)
+GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM src/ </dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
 RZ_FILES := $(wildcard $(SPLIT_DIR)/*.gz)
@@ -63,8 +57,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map
-# --no-check-sections
+LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
 
 ####################### Overrides ############################
 
@@ -81,7 +74,6 @@ $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 # $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
 
 # $(BUILD_DIR)/src/code_103800.o: MIPSBIT := -mips2 -32bit
-# $(BUILD_DIR)/src/code_C1E0.o: CC := $(CC)
 
 # OPT_FLAGS
 
@@ -103,11 +95,11 @@ clean:
 	rm -rf build
 
 extract: check
-	$(PYTHON) ../tools/n64splat/split.py ../build/chunk0.bin chunk0.yaml .
+	$(PYTHON) ../tools/n64splat/split.py game.bin chunk0.yaml .
 
-split:
+split: $(TARGET).code.bin
 	mkdir -p $(SPLIT_DIR)
-	$(SPLIT) $(TARGET).bin $(SPLIT_DIR)/
+	$(SPLIT) $(TARGET).code.bin $(SPLIT_DIR)/
 
 compress:
 	$(PYTHON) ../tools/compress_chunk0.py build/split build/split
@@ -117,7 +109,7 @@ combine: $(RZ_FILES)
 	cat $(sort $(RZ_FILES)) > $(BUILD_DIR)/chunk0.gz.bin
 
 verify_o: $(TARGET).bin
-	@echo "$$(cat chunk0.sha1)  build/chunk0.bin" | sha1sum --check
+	@echo "$$(cat game.sha1)  build/chunk0.bin" | sha1sum --check
 
 verify:
 	@echo "$$(cat chunk0.gz.sha1)  build/chunk0.gz.bin" | sha1sum --check
@@ -128,8 +120,11 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
 
+$(TARGET).code.bin: $(TARGET).elf
+	$(OBJCOPY) -O binary --only-section .code_code $< $@
+
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
-	@$(LD) $(LDFLAGS) $(O_FILES) -o $@
+	@$(LD) $(LDFLAGS) -o $@
 # --just-symbols=../build/asm/libultra/os/createmesgqueue.o
 # --just-symbols=../build/conker.us.elf
 

@@ -4,6 +4,10 @@
 #include "variables.h"
 
 
+f32 D_8002C450 = 1.0309929847717285f;
+f32 D_8002C454 = 6.2831854820251465f;
+f32 D_8002C458 = 6.2831854820251465f;
+
 void func_100128D0(struct8 *arg0, s32 arg1) {
     s32 size = arg1;
     s32 i;

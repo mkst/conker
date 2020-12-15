@@ -69,8 +69,77 @@
 
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10013598.s")
+
+extern void (*jtbl_8002C4CC[])(void);
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_10014048.s")
+// void func_10014048(struct26 *arg0) {
+//     s16 sp18;
+//     u32 temp_t1;
+//
+//     if ((arg0->unk18 == 0) || (arg0->unk2C == 3)) {
+//         return;
+//     }
+//
+//     func_10018100(arg0->unk18, &sp18, 1);
+//     temp_t1 = sp18 - 1;
+//     if (temp_t1 < 0x15U) {
+//         jtbl_8002C4CC[temp_t1]();
+//
+//         switch(temp_t1) {
+//             case 0:
+//                 func_1001415C(arg0, &sp18);
+//                 func_100154AC(arg0);
+//                 return;
+//             case 2:
+//                 func_10015044(arg0, &sp18);
+//                 func_100154AC(arg0);
+//                 return;
+//             case 3:
+//                 arg0->unk2C = 2;
+//                 sp18 = 17;
+//                 func_1001C224(&arg0->unk48, &sp18, 0x7FFFFFFF, 0);
+//                 func_100154AC(arg0);
+//                 return;
+//         }
+//   }
+// }
+
+// void func_10014048(void *arg0) {
+//     s16 sp18;
+//     u32 temp_t1;
+//
+//     if (arg0->unk18 == 0) {
+// block_2:
+//         return;
+//     }
+//     if (arg0->unk2C == 3) {
+//         goto block_2;
+//     }
+//     func_10018100(arg0->unk18, &sp18, 1);
+//     temp_t1 = sp18 - 1;
+//     if (temp_t1 < 0x15U) {
+//         goto **(&jtbl_8002C4CC + (temp_t1 * 4));
+//     case 0:
+//         func_1001415C(arg0, &sp18);
+//         func_100154AC(arg0);
+//         goto block_10;
+//     case 2:
+//         func_10015044(arg0, &sp18);
+//         func_100154AC(arg0);
+//         goto block_10;
+//     case 3:
+//         arg0->unk2C = 2;
+//         sp18 = 0x11;
+//         func_1001C224(arg0 + 0x48, &sp18, 0x7FFFFFFF, 0);
+//     } else {
+//     default:
+//     }
+// block_10:
+// }
+
+
+
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13320/func_1001415C.s")
 // void func_10015310(s32 arg0, void *arg1) {
@@ -187,7 +256,7 @@
 //             sp28 = temp_t2;
 //             sp38 = (s32) sp2C->unk8 / sp3C;
 //             sp2C->unk8 = (s32) (arg0->unk24 * sp38);
-//             func_10015310(arg0 + 0x48, sp2C);
+//             func_10015310(arg0->unk48, sp2C);
 //             sp2C = temp_t2;
 //             if (sp2C != 0) {
 //                 goto loop_18;
