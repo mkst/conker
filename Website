@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Perfect Dark Decompilation Status</title>
+		<link href="assets/main.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<h1>Perfect Dark Decompilation Status</h1>
+
+		<div class="content">
+							<div class="dialog dialog-matching">
+					<div class="dialog-title">
+						<div class="left">NTSC Final</div>
+													<div class="right">24.74%</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Matching
+															</div>
+						</div>
+
+													<hr>
+							<div class="row total">
+								<div class="left">Words Decompiled:</div>
+								<div class="middle">
+									128,175/518,128								</div>
+								<div class="right">
+									24.74%
+								</div>
+							</div>
+															<div class="row">
+									<div class="left indent"><small>boot:</small></div>
+									<div class="middle"><small>284/2,044</small></div>
+									<div class="right"><small>13.89%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>lib:</small></div>
+									<div class="middle"><small>5,111/81,168</small></div>
+									<div class="right"><small>6.30%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>game:</small></div>
+									<div class="middle"><small>121,576/433,712</small></div>
+									<div class="right"><small>28.03%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>inflate:</small></div>
+									<div class="middle"><small>1,204/1,204</small></div>
+									<div class="right"><small>100.00%</small></div>
+								</div>
+																		</div>
+				</div>
+							<div class="dialog dialog-matching">
+					<div class="dialog-title">
+						<div class="left">NTSC 1.0</div>
+													<div class="right">24.74%</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Matching
+															</div>
+						</div>
+
+													<hr>
+							<div class="row total">
+								<div class="left">Words Decompiled:</div>
+								<div class="middle">
+									128,149/517,984								</div>
+								<div class="right">
+									24.74%
+								</div>
+							</div>
+															<div class="row">
+									<div class="left indent"><small>boot:</small></div>
+									<div class="middle"><small>284/2,044</small></div>
+									<div class="right"><small>13.89%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>lib:</small></div>
+									<div class="middle"><small>5,111/81,168</small></div>
+									<div class="right"><small>6.30%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>game:</small></div>
+									<div class="middle"><small>121,550/433,568</small></div>
+									<div class="right"><small>28.03%</small></div>
+								</div>
+															<div class="row">
+									<div class="left indent"><small>inflate:</small></div>
+									<div class="middle"><small>1,204/1,204</small></div>
+									<div class="right"><small>100.00%</small></div>
+								</div>
+																		</div>
+				</div>
+							<div class="dialog dialog-unsupported">
+					<div class="dialog-title">
+						<div class="left">NTSC Beta</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Not Yet Supported
+															</div>
+						</div>
+
+											</div>
+				</div>
+							<div class="dialog dialog-unsupported">
+					<div class="dialog-title">
+						<div class="left">PAL Final</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Not Yet Supported
+															</div>
+						</div>
+
+											</div>
+				</div>
+							<div class="dialog dialog-unsupported">
+					<div class="dialog-title">
+						<div class="left">PAL Beta</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Not Yet Supported
+															</div>
+						</div>
+
+											</div>
+				</div>
+							<div class="dialog dialog-unsupported">
+					<div class="dialog-title">
+						<div class="left">JPN Final</div>
+											</div>
+					<div class="dialog-content">
+						<div class="row">
+							<div>ROM Status:</div>
+							<div>
+																	Not Yet Supported
+															</div>
+						</div>
+
+											</div>
+				</div>
+					</div>
+
+		<footer>
+			<a href="https://gitlab.com/RyanDwyer/perfect-dark">View the project on GitLab</a>
+		</footer>
+
+	</body>
+</html>
