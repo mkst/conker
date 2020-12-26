@@ -140,7 +140,7 @@ void func_1001A224(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if(sp1C = arg0->unk64) {
         do {
             if ((sp1C->unk35 == arg2) && (sp1C->unk38 != 3)) {
-                func_1001D900(&sp1C->unk4, arg0->unk60[arg2].unkA);
+                n_alSynSetFXMix(&sp1C->unk4, arg0->unk60[arg2].unkA);
             }
         } while (sp1C = sp1C->unk0);
     }

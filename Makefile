@@ -2,9 +2,9 @@ BUILD_DIR = build
 VERSION := us
 
 ASM_DIRS := asm \
-            asm/libultra asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
+            asm/libultra asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 BIN_DIRS := bin
-SRC_DIRS := src src/debug src/data src/libultra src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
+SRC_DIRS := src src/debug src/data src/libultra src/libultra/audio src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
@@ -89,7 +89,7 @@ PYTHON = python3
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2 -o32
 
-INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os
+INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os -I src/libultra/audio
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
@@ -104,8 +104,9 @@ LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_
 # compiler version
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 $(BUILD_DIR)/src/libultra/%.o: CC := $(CC)
+$(BUILD_DIR)/src/libultra/audio/%.o: CC := $(CC_OLD)
 
-# $(BUILD_DIR)/src/code_20000.o: CC := $(CC)
+$(BUILD_DIR)/src/libultra/audio/%.o: OPT_FLAGS := -g
 
 # $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g

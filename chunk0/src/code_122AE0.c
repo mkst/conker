@@ -514,10 +514,10 @@ void func_15126138(struct108 *arg0) {
 // }
 
 void func_15127FEC(struct108 *arg0, s32 arg1, s32 arg2) {
-    arg0->unk7F4 = (u16)1;
-    arg0->unk7F8 = (f32) arg0->unk2A4;
-    arg0->unk7FC = (f32) arg0->unk2A8;
-    arg0->unk800 = (f32) arg0->unk2AC;
+    arg0->unk7F4 = 1;
+    arg0->unk7F8 = arg0->unk2A4;
+    arg0->unk7FC = arg0->unk2A8;
+    arg0->unk800 = *(f32*)&arg0->unk2AC;
     func_1512A390();
 }
 
@@ -530,11 +530,11 @@ void func_15128680(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_122AE0/func_1512868C.s")
-// NON-MATCHING: using a2 not t0
+// NON-MATCHING: JUSTREG: using a2 not t0
 // void func_1512868C(struct108 *arg0) {
 //     struct127 *temp_v1_2;
-//     struct127 *temp_t0;
-//     u8 temp_v0_2;
+//     struct126 *temp_t0;
+//     u8 idx;
 //     s32 i;
 //
 //     for (i = 0; i < 21; i++)
@@ -548,11 +548,9 @@ void func_15128680(s32 arg0) {
 //     arg0->unk84 = 14;
 //     arg0->unk1B4 = 3;
 //     func_15124B18(arg0);
-//     temp_v0_2 = arg0->unk23D;
-//     temp_v1_2 = &D_800CC2D0[temp_v0_2];
-//     arg0->unk3D0 = temp_v1_2;
-//     arg0->unk3CC = temp_v0_2;
-//     arg0->unk368 = temp_v0_2;
+//     idx = arg0->unk23D;
+//     arg0->unk3D0 = temp_v1_2 = &D_800CC2D0[idx];
+//     arg0->unk368 = arg0->unk3CC = idx;
 //     temp_t0 = temp_v1_2->unk31C;
 //     arg0->unk190 = 0.0f;
 //     arg0->unk198 = 0.0f;

@@ -6,7 +6,7 @@
 // relies on jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/code_20000/func_10020000.s")
 
-s32 func_10020978(struct21 *arg0, s32 arg1, s32 arg2) {
+s32 n_alEnvmixerParam(struct21 *arg0, s32 arg1, s32 arg2) {
     struct21 *sp24 = arg0;
 
     switch (arg1) {

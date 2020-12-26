@@ -80,13 +80,13 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 [ boot ]  0000 0040 > 0000 1000 ;
 [ code ]  0000 1000 > 0004 2C50 ; code (init + libultra)
 [ ???? ]  0002 90D0 > ???? ???? ;
-[ data ]  0002 C750 > 0002 C7A0 ; rodata section
+[ data ]  0002 C750 > 0002 C7A0 ; data section
 [ ???? ]  0002 C7A0 > 0004 2C50 ; μcode
 [ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
 [ ???? ]  0018 6B50 > 0018 8328 ;
-[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 rodata
-[ code ]  0019 C7D8 > 001A 2190 ; code (debugger?)
-[ data ]  001A 2190 > 001A 37E0 ; rodata section (?)
+[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 data
+[ code ]  0019 C7D8 > 001A 2190 ; debugger
+[ data ]  001A 2190 > 001A 37E0 ; debugger data section
 [ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
 [ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
 [ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C

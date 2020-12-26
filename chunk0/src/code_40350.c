@@ -80,8 +80,17 @@ void func_15040814(s32 arg0) {
 void func_15040820(s32 arg0) {
 }
 
-// should be easy
-#pragma GLOBAL_ASM("asm/nonmatchings/code_40350/func_1504082C.s")
+s32 func_1504082C(u32 *arg0) {
+    s32 tmp0 = (*arg0 >> 16) & 0xff;
+    s32 tmp1 = (*arg0 >> 8) & 0xff;
+    s32 tmp2 = (*arg0 >> 0) & 0xff;
+
+    if ((tmp0 & 1) || (tmp1 & 1) || (tmp2 & 1)) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 void func_1504086C(s32 arg0) {
 }

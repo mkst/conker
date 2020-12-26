@@ -27,13 +27,12 @@ void func_10011FA0(s32 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_10011FB0.s")
-// NON-MATCHING: using t6 not v0
+// NON-MATCHING: JUSTREG: using v0/t7 not v1/t6
 // s32 func_10011FB0(s32 arg0) {
 //     if (D_80042774 == 3) {
 //         D_80041FD9 = 1;
 //     }
 //     D_80042774 = arg0;
-//     return D_80042774;
 // }
 
 void func_10011FDC(s32 arg0) {

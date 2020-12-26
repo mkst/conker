@@ -8,7 +8,7 @@ void func_1001C9E0(struct22 *arg0, f32 arg1) {
     struct40 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_100196E4();
+        sp1C = __n_allocParam();
         if (sp1C == NULL) {
             return;
         }
@@ -16,7 +16,7 @@ void func_1001C9E0(struct22 *arg0, f32 arg1) {
         sp1C->unk8 = 7;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
 
@@ -24,7 +24,7 @@ void func_1001CA90(struct22 *arg0, f32 arg1) {
     struct40 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_100196E4();
+        sp1C = __n_allocParam();
         if (sp1C == NULL) {
             return;
         }
@@ -32,7 +32,7 @@ void func_1001CA90(struct22 *arg0, f32 arg1) {
         sp1C->unk8 = 19;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
 
@@ -40,7 +40,7 @@ void func_1001CB40(struct22 *arg0, u8 arg1) {
     struct41 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = func_100196E4();
+        sp1C = __n_allocParam();
         if (sp1C == NULL) {
             return;
         }
@@ -48,7 +48,7 @@ void func_1001CB40(struct22 *arg0, u8 arg1) {
         sp1C->unk8 = 18;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
 

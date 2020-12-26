@@ -1,38 +1,40 @@
 #include <ultra64.h>
 
+#include <synthInternals.h>
+
 #include "functions.h"
 #include "variables.h"
 
 
-void func_1001E2A0(struct22 *arg0, u8 arg1) {
-    struct23 *sp1C;
+void func_1001E2A0(struct22 *arg0, u8 fxmix) {
+    ALParam *update;
 
     if (arg0->unk8) {
-        sp1C = (struct23*) func_100196E4();
-        if (sp1C == NULL) {
+        update = __n_allocParam();
+        if (update == NULL) {
             return;
         }
-        sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
-        sp1C->unk8 = 12;
-        sp1C->unkC = arg1;
-        sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        update->delta = D_8002BA44->unk1C + arg0->unk8->unk90;
+        update->type = 12; // AL_FILTER_SET_PAN
+        update->data.i = fxmix;
+        update->next = 0;
+        n_alEnvmixerParam(arg0->unk8, AL_FILTER_ADD_UPDATE, update);
     }
 }
 
-void func_1001E350(struct22 *arg0, u8 arg1) {
-    struct23 *sp1C;
+void func_1001E350(struct22 *arg0, u8 fxmix) {
+    ALParam *update;
 
     if (arg0->unk8) {
-        sp1C = (struct23*) func_100196E4();
-        if (sp1C == NULL) {
+        update = __n_allocParam();
+        if (update == NULL) {
             return;
         }
-        sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
-        sp1C->unk8 = 17;
-        sp1C->unkC = arg1;
-        sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        update->delta = D_8002BA44->unk1C + arg0->unk8->unk90;
+        update->type = 17;
+        update->data.i = fxmix;
+        update->next = 0;
+        n_alEnvmixerParam(arg0->unk8, AL_FILTER_ADD_UPDATE, update);
     }
 }
 

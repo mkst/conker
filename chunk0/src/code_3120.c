@@ -131,11 +131,9 @@ s32 func_1500390C(s32 arg0) {
 void func_150039B0(s32 arg0) {
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_150039BC.s")
-// NON-MATCHING: uses v0 not v1
-// void func_150039BC(s32 arg0) {
-//     D_800DBE5C = arg0;
-//     if (arg0) {
-//         D_800DBE5C = arg0 + 8;
-//     }
-// }
+void func_150039BC(s32 arg0) {
+    D_800DBE5C = arg0;
+    if (D_800DBE5C) {
+        D_800DBE5C += 8;
+    }
+}

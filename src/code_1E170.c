@@ -1,33 +1,34 @@
 #include <ultra64.h>
 
-#include "functions.h"
+#include <synthInternals.h>
+
+// #include "functions.h"
 #include "variables.h"
 
 
-void func_1001E170(struct22 *arg0, s32 arg1, f32 arg2, s16 arg3, u8 arg4,
-                   u8 arg5, u8 arg6, f32 arg7, u8 arg8, s32 arg9) {
-    struct45 *sp1C;
-
+void func_1001E170(struct22 *arg0, s32 *w, f32 pitch, s16 vol, u8 pan, u8 fxmix,
+                   u8 arg6, f32 arg7, u8 arg8, s32 arg9) {
+    struct45 *update;
 
     if (arg0->unk8) {
-        sp1C = (struct45 *) func_100196E4();
-        if (sp1C == NULL) {
+        update = (struct45 *) __n_allocParam();
+        if (update == NULL) {
             return;
         }
 
-        sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
-        sp1C->unk0 = 0;
-        sp1C->unk8 = 13;
-        sp1C->unkA = arg0->unk1E;
-        sp1C->unk12 = arg4;
-        sp1C->unk10 = arg3;
-        sp1C->unk13 = arg5;
-        sp1C->unkC = arg2;
-        sp1C->unk14 = arg8;
-        sp1C->unk15 = arg6;
-        sp1C->unk18 = arg7;
-        sp1C->unk1C = func_100199C8(arg9);
-        sp1C->unk20 = arg1;
-        func_10020978(arg0->unk8, 3, sp1C);
+        update->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
+        update->unk0 = 0;           // next
+        update->unk8 = AL_FILTER_START_VOICE_ALT; // type
+        update->unkA = arg0->unk1E; // unity
+        update->unk12 = pan;        // pan?
+        update->unk10 = vol;        // volume
+        update->unk13 = fxmix;      // fxMix?
+        update->unkC = pitch;       // pitch
+        update->unk14 = arg8;
+        update->unk15 = arg6;
+        update->unk18 = arg7;
+        update->unk1C = _n_timeToSamples(arg9); // samples
+        update->unk20 = w;       // wave
+        n_alEnvmixerParam(arg0->unk8, AL_FILTER_ADD_UPDATE, update);
     }
 }

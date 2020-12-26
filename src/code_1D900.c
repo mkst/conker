@@ -6,19 +6,19 @@
 
 f32 D_8002C790 = 0.10000000149011612;
 
-void func_1001D900(struct22 *arg0, u8 arg1) {
+void n_alSynSetFXMix(struct22 *arg0, u8 arg1) {
     struct46 *sp1C;
 
     if (arg0->unk8) {
-        sp1C = (struct46 *) func_100196E4();
+        sp1C = (struct46 *) __n_allocParam();
         if (sp1C == NULL) {
             return;
         }
-        sp1C->unk4 = (s32) (D_8002BA44->unk1C + arg0->unk8->unk90);
-        sp1C->unk8 = (u16)0x10;
+        sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
+        sp1C->unk8 = 16;
         sp1C->unkC = arg1;
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
 

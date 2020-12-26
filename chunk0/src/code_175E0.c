@@ -4,19 +4,13 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_150175E0.s")
-// NON-MATCHING: uses different registers...
-// u8* func_150175E0(void) {
-//     if ((D_800BE616 == 0) && ((D_800D2E4C->unk18 & 1) == 0)) {
-//         D_800D2456 = 3;
-//         D_800D2457 = 3;
-//         return &D_800D2456;
-//     }
-//     D_800D2456 = 6;
-//     D_800D2457 = 6;
-//     return &D_800D2456;
-// }
-
+void func_150175E0(void) {
+    if ((D_800BE616 == 0) && ((D_800D2E4C->unk18 & 1) == 0)) {
+        D_800D2457 = D_800D2456 = 3;
+    } else {
+        D_800D2457 = D_800D2456 = 6;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_175E0/func_15017640.s")
 // void func_15017640(void) {

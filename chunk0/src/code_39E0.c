@@ -26,8 +26,8 @@ void func_150045BC(void) {
 // void func_15004A4C(void) {
 //     u32 i;
 //     for (i = 0; i < D_800DBEF0; i++) {
-//         D_800DBEF8[i] = 0;
-//         D_800DBEFC[i] = 0;
+//         D_800DBEFC[i] = D_800DBEF8[i] = 0;
+//         // D_800DBEFC[i] = 0;
 //     }
 // }
 

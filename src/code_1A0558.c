@@ -19,9 +19,9 @@ u8* func_16001AD0(u8 *arg0, u8 *arg1, u32 arg2) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1A0558/func_16001B00.s")
 // NON-MATCHING: moves in wrong order!
-// u32 func_16001B00(u8 *arg0) { // strlen
-//     u32 i;
-//     for (i=0; arg0[i]; i++) {};
+// s32 func_16001B00(u8 *arg0) { // strlen
+//     s32 i;
+//     for (i = 0; arg0[i]; i++) {};
 //     return i;
 // }
 

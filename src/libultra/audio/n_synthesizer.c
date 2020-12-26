@@ -3,8 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10018E60.s")
-// void func_10018E60(struct07 *arg0) {
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/n_alSynNew.s")
+// void n_alSynNew(struct07 *arg0) {
 //     s32 sp44;
 //     // s32 sp40;
 //     // void *sp3C;
@@ -117,8 +117,8 @@
 //     D_8002BA44->unk3C = sp34;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019498.s")
-// void *func_10019498(void *arg0, void *arg1, s32 arg2, u32 arg3) {
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/n_alAudioFrame.s")
+// void *n_alAudioFrame(void *arg0, void *arg1, s32 arg2, u32 arg3) {
 //     void *sp3C;
 //     void *sp38;
 //     s32 sp34;
@@ -146,7 +146,7 @@
 // loop_3:
 //         temp_t7 = D_8002BA44;
 //         temp_t7->unk1C = (s32) (temp_t7->unk1C & -0x10);
-//         sp3C->unk10 = (s32) (sp3C->unk10 + func_10019964(sp3C->unk8(sp3C)));
+//         sp3C->unk10 = (s32) (sp3C->unk10 + _n_timeToSamplesNoRound(sp3C->unk8(sp3C)));
 //         D_8002BA44->unk1C = func_10019A04(&sp3C);
 //         temp_t5 = D_8002BA44;
 //         if ((u32) (temp_t5->unk1C - temp_t5->unk20) < arg3) {
@@ -182,12 +182,12 @@
 //         }
 //     }
 //     *arg1 = (s32) ((s32) (sp38 - arg0) >> 3);
-//     func_10019770();
+//     _collectPVoices();
 //     return sp38;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100196E4.s")
-// void *func_100196E4(void) {
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/__n_allocParam.s")
+// void *__n_allocParam(void) {
 //     void *sp4;
 //     void *temp_t0;
 //
@@ -201,28 +201,60 @@
 //     return sp4;
 // }
 
-void func_10019744(struct36 **arg0) {
+void _n_freeParam(struct36 **arg0) {
     *arg0 = (s32) D_8002BA44->unk40;
     D_8002BA44->unk40 = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019770.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100198B0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_collectPVoices.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_freePVoice.s")
 
-s32 func_10019964(s32 arg0) {
-    f32 sp4;
-
-    sp4 = (((f32) arg0 * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f; // 1000000.0f
-    return (s32) sp4;
+s32 _n_timeToSamplesNoRound(s32 micros) {
+    f32 tmp = (((f32) micros * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f; // 1000000.0f
+    return (s32) tmp;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_100199C8.s")
-// NON-MATCHING: and/move wrong
-// s32 func_100199C8(s32 arg0) {
-//     return func_10019964(arg0) & -0x10;
-// }
+s32 _n_timeToSamples(s32 micros) {
+    return _n_timeToSamplesNoRound(micros) & -0x10;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_18E60/func_10019A04.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/__n_nextSampleTime.s")
+// static s32 __n_nextSampleTime(ALPlayer **client)
+// {
+//   ALMicroTime temp,delta = 0x7fffffff;     /* max delta for s32 */
+//   ALPlayer *cl;
+//
+//   /*    assert(D_8002BA44->head); */
+//   *client = 0;
+//
+// #if 0
+//   for (cl = D_8002BA44->head; cl != 0; cl = cl->next) {
+//     if ((cl->samplesLeft - D_8002BA44->curSamples) < delta) {
+//       *client = cl;
+//       delta = cl->samplesLeft - D_8002BA44->curSamples;
+//     }
+//   }
+// #endif
+//
+//   if( D_8002BA44->n_sndp )
+//     if( (temp = D_8002BA44->n_sndp->samplesLeft - D_8002BA44->curSamples) < delta ) {
+//       *client = D_8002BA44->n_sndp;
+//       delta = temp;
+//     }
+//
+//   if( D_8002BA44->n_seqp1 )
+//     if( (temp = D_8002BA44->n_seqp1->samplesLeft - D_8002BA44->curSamples) < delta ) {
+//       *client = D_8002BA44->n_seqp1;
+//       delta = temp;
+//     }
+//
+//   if( D_8002BA44->n_seqp2 )
+//     if( (D_8002BA44->n_seqp2->samplesLeft - D_8002BA44->curSamples) < delta ) {
+//       *client = D_8002BA44->n_seqp2;
+//     }
+//
+//   return (*client)->samplesLeft;
+// }
 // s32 func_10019A04(void *arg0) {
 //     u32 sp4;
 //     void *sp0;

@@ -67,7 +67,7 @@ void func_1504C854(struct127 *arg0) {
 void func_15052408(struct127 *arg0) {
     arg0->unkB2 = 0;
     arg0->unk31C->unk95 = 0;
-    if (arg0->unk1CA != 0) {
+    if (arg0->unk1CA != 0) { // if health not zero
         arg0->unk81 = 0;
         arg0->unk83 = 0;
         arg0->unk89 = 6;
@@ -311,7 +311,6 @@ void func_1505371C(struct127 *arg0) {
 // }
 
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15053894.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_150538CC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_150548D8.s")
@@ -322,9 +321,99 @@ void func_1505371C(struct127 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15054F74.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055260.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_1505528C.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055A2C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055B0C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055B64.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055BF8.s")
+// NON-MATCHING: something like this but.. cant figure it out
+// void func_15055A2C(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
+//     s32 phi_a0 = 1549;
+//     s32 phi_v1 = 1000;
+//
+//     if (arg4 == 1) {
+//         phi_a0 = 1549;
+//         phi_v1 = 100;
+//     } else {
+//         phi_a0 = D_8009919C[func_150ADA20(1549) % 6U];
+//     }
+//     func_10010F88(phi_a0, 32700, func_150ADA20(phi_a0) % 500U, 0, 0, (s32) arg1, (s32) arg2, (s32) arg3, phi_v1, 3000);
+// }
+
+void func_15055B0C(struct127 *arg0, s32 arg1) {
+    arg0->unk0 = 39;
+    func_1505E650(arg0, arg0->unk84, 0, 0.0f, 0.0f, 0.0f, 0);
+    arg0->unkE4 = 0;
+    arg0->unkE6 = 0;
+    arg0->unk21C = arg1;
+}
+
+void func_15055B64(struct127 *arg0) {
+    arg0->unk40 = (s16)(arg0->unk7A + 16384) * 0.005493164f;
+    arg0->unkF8 |= 0x1000000;
+
+    if (D_800BE9A0 < arg0->unk21C) {
+        arg0->unk21C -= D_800BE9E4;
+    } else {
+        arg0->unk21C = 0;
+        if (arg0->unk1D4 == 0) {
+            func_15060F28(arg0, 1);
+        }
+    }
+}
+
+void func_15055BF8(struct127 *arg0) {
+    arg0->unk40 = (s16)(arg0->unk7A + 16384) * 0.005493164f;
+    arg0->unkF8 |= 0x1000000;
+    arg0->unk18 -= D_800BE9A4;
+
+    if (arg0->unk18 < (arg0->unk180 - 100.0f)) {
+        func_15060F28(arg0, 0);
+    }
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055C88.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_4A620/func_15055D48.s")
+// NON-MATCHING: JUSTREG: using v1 not v0
+// void func_15055C88(struct127 *arg0) {
+//     s32 sp2C = 2099172; // 0x2007E4;
+//     if (((arg0->unk9C & 0x1000) == 0) && func_1506E46C(arg0, &sp2C, 1)) {
+//         func_15060A30(sp2C, arg0);
+//     }
+//     arg0->unk31C->unk36 = 100;
+//     func_1506160C(arg0, 2, 0, 6, 0);
+//     arg0->unk89 = 200;
+//     arg0->unk83 = 200;
+//     arg0->unk1CC = D_80099418;
+//     arg0->unk0 = 41;
+//     arg0->unk24 = 0.0f;
+//     arg0->unk20 = 0.0f;
+//     arg0->unk3C = 0.0f;
+//     func_1507CD64(arg0, 9);
+// }
+
+void func_15055D48(struct127 *arg0) {
+    f32 temp_f0;
+
+    arg0->unk31C->unk36 += D_800BE9A0;
+    if (arg0->unk31C->unk36 >= 0x8D) {
+        D_800D18A0 |= (1 << (((s32)arg0 - (s32)&D_800CC2D0) / 0x32C));
+        if (D_800D18A0 != 0) {
+            arg0->unk125 = 0xFF;
+            arg0->unk104 = 0xFF;
+            arg0->unk89 = 0xFF;
+            arg0->unkF8 |= 0x200;
+            arg0->unkE4 = 0;
+            arg0->unkE6 = 0;
+            arg0->unk7 = 0;
+            arg0->unk1CA = 0;
+            arg0->unk0 = 5;
+            arg0->unk3C = 0.0f;
+            arg0->unk20 = 0.0f;
+            arg0->unk24 = 0.0f;
+            return;
+        }
+        func_1506D538();
+    }
+    temp_f0 = D_8009941C;
+    arg0->unk1CA = (u8)0;
+    arg0->unk14C *= temp_f0;
+    arg0->unk150 *= temp_f0;
+    arg0->unk3C *= temp_f0;
+}

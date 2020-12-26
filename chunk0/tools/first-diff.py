@@ -78,7 +78,7 @@ if version is None:
 if args.make:
     check_call(["make", "-j4", "VERSION=" + version, "COMPARE=0"])
 
-baseimg = f"../build/chunk0.bin"
+baseimg = f"game.bin"
 basemap = f"chunk0.map"
 
 myimg = f"build/chunk0.bin"

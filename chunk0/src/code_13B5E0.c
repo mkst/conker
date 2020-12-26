@@ -9,7 +9,7 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13B5E0/func_1513B83C.s")
 
 s32 func_1513B968(s32 arg0, s32 arg1) {
-    // &arg0->unk_120[D_800BE9C0]
+    // FIXME: &arg0->unk_120[D_800BE9C0]
     func_150A7B80(arg0 + 120 + (D_800BE9C0 << 6));
     return 1;
 }

@@ -36,15 +36,12 @@ void func_15001B08(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001B10.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001B5C.s")
-// NON-MATCHING: uses v1 not v0
-// u8* func_15001B5C(u8 arg0) {
-//     *D_800B0DE0++ = arg0;
-//     return D_800B0DE0;
-// }
+void func_15001B5C(u8 arg0) {
+    *D_800B0DE0++ = arg0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001B8C.s")
-// NON-MATCHING: uses t9 not t0
+// NON-MATCHING: JUSTREG: uses t9 not t0
 // void func_15001B8C(u16 arg0) {
 //     u16 tmp = arg0 >> 8;
 //

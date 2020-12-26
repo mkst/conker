@@ -24,7 +24,7 @@ void func_10001444(void) {
 }
 
 void func_100014A0(void) {
-    osStopThread(&D_80031AE0); // Incompatible pointer type assignment
+    osStopThread(&D_80031AE0);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1420/func_100014C4.s")

@@ -39,8 +39,8 @@ void func_100051E8(void) {
 
 void func_10005218(void) {
     osCreateMesgQueue(&D_8003B9D0, &D_8003B9E8, 2);
-    osSetEventMesg(0xE, &D_8003B9D0, 5);
-    osCreateThread(&D_8003B9F0, 0x15, &D_100052A0, 0, &D_8003B9D0, OS_PRIORITY_RMON);
+    osSetEventMesg(0xE, &D_8003B9D0, (OSMesg *)5);
+    osCreateThread(&D_8003B9F0, 0x15, (void *) &D_100052A0, 0, &D_8003B9D0, OS_PRIORITY_RMON);
     osStartThread(&D_8003B9F0);
 }
 

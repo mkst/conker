@@ -26,8 +26,8 @@ void func_15016680(void) {
 //             D_800D212C->unk0 = D_800D20FC->unk6;
 //             D_800D212C->unk2 = D_800D20FC->unk8;
 //             D_800D212C->unk4 = D_800D20FC->unkA;
-//             D_800D212C->unk8 = D_800D20FC->unk6 + 0x64;
-//             D_800D212C->unkC = D_800D20FC->unk8 + 0x64;
+//             D_800D212C->unk8 = D_800D20FC->unk6 + 100;
+//             D_800D212C->unkC = D_800D20FC->unk8 + 100;
 //             D_800D212C->unk10 = D_800D20FC->unkA;
 //             D_800D212C->unk6 = 0;
 //             D_800D212C->unk7 = D_800D20FC->unkC;

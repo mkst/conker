@@ -9,7 +9,7 @@ void func_15103800(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_103800/func_15103828.s")
-// NON-MATCHING: uses a0 not v1
+// NON-MATCHING: JUSTREG: uses a0 not v1
 // void func_15103828(void) {
 //     u16 temp_v1;
 //     s32 i;

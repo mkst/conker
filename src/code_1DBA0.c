@@ -58,20 +58,20 @@
 //             sp2C->unk10->unk8 = 0;
 //             sp2C->unk10 = arg0;
 //             arg0->unk8 = sp2C;
-//             sp28 = func_100196E4();
+//             sp28 = __n_allocParam();
 //             if (sp28 != 0) {
 //                 sp28->unk4 = (s32) D_8002BA44->unk1C;
 //                 sp28->unk8 = (u16)0xB;
 //                 sp28->unkC = 0;
 //                 sp28->unk10 = 0x170;
-//                 func_10020978(arg0->unk8, 3, sp28);
+//                 n_alEnvmixerParam(arg0->unk8, 3, sp28);
 //             }
-//             sp28 = func_100196E4();
+//             sp28 = __n_allocParam();
 //             if (sp28 != 0) {
 //                 sp28->unk4 = (s32) (D_8002BA44->unk1C + sp2C->unk90);
 //                 sp28->unk8 = (u16)0xF;
 //                 sp28->unk0 = 0;
-//                 func_10020978(arg0->unk8, 3, sp28);
+//                 n_alEnvmixerParam(arg0->unk8, 3, sp28);
 //             }
 //         } else {
 //             sp2C->unk90 = 0;

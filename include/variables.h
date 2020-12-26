@@ -25,6 +25,8 @@ extern f32 D_8002C230;
 extern f32 D_8002C234;
 extern f32 D_8002C238;
 
+extern struct120 D_8002C240[];
+
 extern f32 D_8002C3F8;
 extern f32 D_8002C3FC;
 
@@ -61,7 +63,8 @@ extern char D_8002C6DC[];
 
 extern OSThread *__osRunningThread;
 
-// TODO: fix vram / whatever is preventing referencing function addresses by name
+/* FUNCTIONS */
+// FIXME: we should be able to reference these directly
 extern s32  D_100010F8;
 extern s32 *D_10001194;
 extern s32 *D_10002070;
@@ -92,7 +95,6 @@ extern s32  D_10026B10;
 extern s32  D_100291A0;
 extern s32  D_100290D0;
 extern s32 *D_1002AAD0;
-extern s32  D_1FC007FC;
 
 extern struct14 *D_100071D0;
 
@@ -118,70 +120,55 @@ extern s32  D_8000031C[16]; // 64 bytes
 
 extern u8   D_8002AAE0;
 extern u8   D_8002AAE4;
-extern s32  D_8002AAE8[2]; // framebuffer
+extern s32  D_8002AAE8[2]; // pointer to framebuffer
 extern u8   D_8002AB40;
 extern OSViMode *D_8002AB90;
 extern OSViMode *D_8002ABE0;
 extern s32  D_8002AC30;
-extern struct58 *D_8002AC50; // contains pointer to framebuffer
+extern struct58 *D_8002AC50; // contains pointer to framebuffer pointer
 extern struct58 *D_8002AC54;
 extern struct58 *D_8002AC58;
 extern u8   D_8002AC5C;
+extern u8   D_8002AC60;
+extern u16  D_8002AC64;
 extern s8   D_8002AC6C;
 extern u8   D_8002AE40;
 extern u32  D_8002AE44;
 extern s32  D_8002AE48;
 extern s32  D_8002AE4C;
 extern s32  D_8002AE54;
-extern s32  D_8003E368;
-extern s32  D_8003E370;
-extern s32  D_8003E388;
-extern struct50 *D_8003E390[];
-extern OSThread *D_8003E3A0;
-extern s32  D_8003E640;
 
-extern OSMesgQueue *D_8003E608;
-extern OSMesg      *D_8003E620;
-extern OSMesgQueue *D_8003E5D0;
-extern OSMesg      *D_8003E5E8;
-extern OSMesgQueue *D_80041298;
-extern OSMesg      *D_800412B0;
-extern OSMesgQueue *D_800416F0;
-extern OSMesg      *D_80041708;
-
-extern struct151* D_800417B0[];
-extern u8 D_800418AC[];
-
-extern u8 D_800419A0;
-extern struct137 D_800419A8[12]; // 1200 bytes
-
-extern s32  D_80044B20; // 253952 bytes, bunch of structs?
 extern s32  D_8002B070;
 extern struct138 D_8002B074[];
-extern struct07  *D_8002BA40;
-extern struct07  *D_8002BA44;
+extern s32  D_8002B9D4;
+extern s32  D_8002B9F4;
+
 extern struct31 *D_8002BA20;
 extern struct31 *D_8002BA24;
 extern struct31 *D_8002BA28;
-extern s16  D_8002BA30;
 extern s32  D_8002BA2C;
+extern s16  D_8002BA30;
+
+extern struct07  *D_8002BA40;
+extern struct07  *D_8002BA44;
+
+extern s16  D_8002BC10[];
+extern s16  D_8002BD0E[];
 extern s64  D_8002BD10;
 extern s32  D_8002BD14;
 extern s32  D_8002BD18;
 extern s32  D_8002BD20; // init ok?
 extern s32  D_8002BD60;
 
+/* data section from D_8002C080 to D_8002C8D0 (ish) */
+
 extern s32  D_8002D4B0;
 extern s32 *D_8002D8B0;
-extern s16  D_8002BC10[];
-extern s16  D_8002BD0E[];
 
-extern s32 D_8002B9D4;
-extern s32 D_8002B9F4;
 
 /* 80030000 */
-extern OSThread *D_80031AE0;
-extern OSThread *D_800318B0;
+extern OSThread D_80031AE0;
+extern OSThread D_800318B0;
 
 extern s32  D_80032B3F;
 extern s32  D_8003333F;
@@ -222,17 +209,31 @@ extern s32  D_800380C4;
 extern s32  D_800380C8;
 extern s32  D_800380CC;
 extern s32  D_800380D0;
-extern s32  D_800380E0;
-extern s32  D_800388B0;
+extern OSMesg      D_800380E0;
+extern OSMesgQueue D_800388B0;
 
-extern OSMesg *gMessage0;
-extern OSMesgQueue *gMessageQueue0;
+extern OSMesg      gMessage0;
+extern OSMesgQueue gMessageQueue0;
 
-extern OSMesg *gMessages[3];
+extern OSMesg      gMessages[3];
 extern OSMesgQueue gMessageQueue[3];
 
 extern s32 D_80038904;
 extern OSIoMesg D_80038950[];
+
+extern u8  D_8003A570;
+extern u8  D_8003A571;
+extern u8  D_8003A572;
+extern u8  D_8003A573;
+extern u8  D_8003A574;
+extern u8  D_8003A575;
+extern u8  D_8003A580;
+extern u8  D_8003A581;
+extern u8  D_8003A582;
+extern u8  D_8003A583;
+extern u8  D_8003A584;
+extern u8  D_8003A588;
+extern u8  D_8003A5C8;
 
 extern OSMesgQueue *D_8003B1E8;
 extern OSMesgQueue *D_8003B200;
@@ -251,26 +252,12 @@ extern OSMesg      *D_8003B660;
 extern OSMesg      *D_8003B670;
 extern OSMesg      *D_8003B680;
 
-extern OSMesgQueue *D_8003B9D0;
-extern OSMesg      *D_8003B9E8;
-extern OSThread    *D_8003B9F0;
+extern OSMesgQueue D_8003B9D0;
+extern OSMesg      D_8003B9E8;
+extern OSThread    D_8003B9F0;
 
-extern u64 D_8003BC20;
-extern u32 D_8003BC24;
-
-extern u8  D_8003A570;
-extern u8  D_8003A571;
-extern u8  D_8003A572;
-extern u8  D_8003A573;
-extern u8  D_8003A574;
-extern u8  D_8003A575;
-extern u8  D_8003A580;
-extern u8  D_8003A581;
-extern u8  D_8003A582;
-extern u8  D_8003A583;
-extern u8  D_8003A584;
-extern u8  D_8003A588;
-extern u8  D_8003A5C8;
+extern u64  D_8003BC20;
+extern u32  D_8003BC24;
 
 extern s32  D_8003BC30;
 extern s32  D_8003BD30;
@@ -286,10 +273,18 @@ extern struct26 *D_8003C900[];
 extern struct14 *D_8003CD40;
 extern struct108 D_8003CD48[];
 extern s16  D_8003C910[];
-extern u32  D_803F5000;
-extern u32  D_803FE000;
-extern u32  D_807F5000;
-extern u32  D_807FE000;
+
+extern s32  D_8003E368;
+extern s32  D_8003E370;
+extern s32  D_8003E388;
+extern struct50 *D_8003E390[];
+extern OSThread *D_8003E3A0;
+extern s32  D_8003E640;
+
+extern OSMesgQueue *D_8003E608;
+extern OSMesg      *D_8003E620;
+extern OSMesgQueue *D_8003E5D0;
+extern OSMesg      *D_8003E5E8;
 
 extern s32  D_8003CA3C;
 extern s32  D_8003CA48[];
@@ -297,6 +292,8 @@ extern struct149 D_8003CA58[];
 extern s32  D_8003C90C;
 
 /* 80040000 */
+
+
 extern s32  D_80040000;
 extern struct147 D_800406A0;
 extern struct54 *D_800406A4;
@@ -326,8 +323,19 @@ extern s32  D_80041FDC;
 extern struct15 D_80041FE0[];
 extern s32  D_80041FEC[];
 
-extern f32  D_8002C200;
-extern struct120 D_8002C240[];
+extern OSMesgQueue *D_80041298;
+extern OSMesg      *D_800412B0;
+extern OSMesgQueue *D_800416F0;
+extern OSMesg      *D_80041708;
+
+extern struct151* D_800417B0[];
+extern u8 D_800418AC[];
+
+extern u8 D_800419A0;
+extern struct137 D_800419A8[12]; // 1200 bytes
+extern OSMesgQueue D_80041E58[3];
+extern struct117 D_80041EA0[3];
+
 extern s32  D_80042760;
 extern s32  D_80042770;
 extern s32  D_80042774;
@@ -349,13 +357,17 @@ extern u16  D_800428B8[];
 extern u8   D_800428C0;
 extern u8   D_800428C1;
 extern u8   D_800428C2;
-extern u8  D_800428C4[];
-extern u8  D_800428C6[];
-extern u8  D_800428C8[];
+extern u8   D_800428C4[];
+extern u8   D_800428C6[];
+extern u8   D_800428C8[];
 extern s32  D_800428E0;
 extern s32 *D_800428F8;
 
-extern s32 D_80043B40[]; // 4064
+extern s32  D_80043B40[]; // 4064
+extern s32  D_80044B20; // 253952 bytes, bunch of structs?
+
+// this space is filled by D_80044B20
+// 0x80044B20 + 253952 = 0x80082B20
 
 /* 80080000 */
 extern s32  D_80082B20;
@@ -365,185 +377,35 @@ extern u8   D_80082BC0;
 extern void (*D_80082BFC[])(s32 arg0);
 extern void (*D_80082D60[])(void);
 extern void (*D_80082D90[])(void);
-extern u8   D_80084064;
-extern s32  D_80084300;
-extern s32  D_800848B0;
-extern void (*D_80082F70[])(void);
-extern s32  D_80082FA0;
-extern s32  D_80082FA4;
-extern void (*D_800844B0[])(s32 arg0);
 extern void (*D_80082EA0[])(void);
 extern void (*D_80082ECC[])(void);
 extern void (*D_80082F40[])(void);
+extern void (*D_80082F70[])(void);
+extern s32  D_80082FA0;
+extern s32  D_80082FA4;
+extern u8   D_80084064;
+extern s32  D_80084300;
+extern s16  D_80084480;
+extern void (*D_800844B0[])(s32 arg0);
+extern s32  D_800848B0;
+
+extern f32 D_80085FD0;
+extern f32 D_80085FD4;
+extern f32 D_80085FD8;
+extern f32 D_80085FDC;
+extern f32 D_80085FE0;
+extern f32 D_80085FE4;
+extern f32 D_80085FE8;
+
+extern u16 D_80085EC0[];
+extern u16 D_80085F3C[];
+extern u16 D_80085FBC[];
 
 extern s32 D_80086000;
 
 extern s8  D_80087260;
 extern s8  D_8008726C;
-
-extern struct115 D_8008B4A8[];
-extern struct115 D_8008B4D0[];
-extern struct115 D_8008B4D4[];
-
-extern s8   D_8008FD8C;
-extern s32  D_8008FD90;
-extern s32  D_8008FD94;
-extern s8   D_8008FDA8;
-extern u16  D_8008FDBC;
-/* 800B0000 */
-extern u8   D_800BE358[8];
-extern s8   D_800BE3D8;
-extern s8   D_800BE3D9;
-extern s8   D_800BE3DA;
-extern s8   D_800BE3DB;
-extern s16  D_800BE3DC;
-extern u8   D_800BE3DE;
-extern u8   D_800BE3DF;
-extern u8   D_800BE3E0;
-extern s32  D_800BE3E8;
-extern u8   D_800BE3EC;
-extern struct162 *D_800BE3F8;
-
-/* 800E0000 */
-extern s32  D_800E0C20;
-extern s32  D_800E0E04;
-extern struct134 *D_800E0900[]; // probably not struct134
-extern s32  D_800E0930;
-extern s32  D_800E0934;
-extern s32  D_800E0940;
-extern u8   D_800E0A10;
-extern struct186 *D_800E0D80;
-extern s32  D_800E9D00;
-extern struct54 D_800E9D10; // probably not struct54
-
-/* 800A0000 */
-extern f32 D_800A0288;
-extern f32 D_800A028C;
-extern f32 D_800A0290;
-extern f32 D_800A0310;
-extern f32 D_800A0314;
-extern f32 D_800A34D0;
-extern f32 D_800A34D4;
-extern f32 D_800A351C;
-extern f32 D_800A3520;
-extern f32 D_800A3524;
-extern f32 D_800A3528;
-extern f32 D_800A352C;
-extern f32 D_800A3530;
-extern f32 D_800A3550;
-extern f32 D_800A3554;
-extern f32 D_800A35AC;
-extern s32 D_800AB3C8;
-
-/* 800B0000 */
-extern s32 D_800BE2B0[]; // type?
-
-extern s32 D_800BE2D0;
-extern u8  D_800BE616;
-extern s8  D_800BE618;
-extern s32 D_800BE620;
-extern s32 D_800BE624;
-extern struct140 D_800BE628[]; // contains structs size 0x180
-extern struct156 D_800BE760[];
-extern OSMesgQueue *D_800BE900;
-extern u8   D_800BE938;
-
-extern u8   D_800BE93C[];
-
-extern u16  D_800BE710[];
-extern u16  D_800BE720[];
-extern s32  D_800BE728[];
-extern u8   D_800BE940[];
-extern u8   D_800BE944[];
-extern u8   D_800BE948[];
-extern f32  D_800BE950[];
-extern f32  D_800BE960[];
-extern f32  D_800BE970[];
-extern f32  D_800BE980[];
-
-extern OSMesg      *D_800BE990;
-extern u8   D_800BE9B4;
-extern u8   D_800BE9C0;
-extern s32  D_800BE9C4;
-extern s32  D_800BE9E0; // OSMesg
-extern s32  D_800BE9E4;
-extern u8   D_800BE9ED;
-extern s32  D_800BE9F4;
-extern s32  D_800BE9F8;
-
-extern struct14 D_800BE730;
-extern s32 D_800BE748;
-extern s32 D_800BE74E;
-extern s32 D_800BE754;
-extern s32 D_800BE75A;
-
-extern s32 D_800BEA08;
-extern u8  D_800BEAC0;
-/* 800C0000 */
-
-extern u8  D_800C35C4;
-extern u8  D_800C35C5;
-extern u8  D_800C35EA;
-extern struct168 *D_800C3600;
-extern u8  D_800C3638;
-extern s32 D_800C3654;
-extern u8  D_800C3663;
-extern u8  D_800C3670;
-extern u8  D_800C3671;
-extern u8  D_800C3681;
-extern u8  D_800C3682;
-extern u8  D_800C3683;
-extern u8  D_800C3C88;
-extern u8  D_800C3C90;
-extern s32 D_800C3C94;
-extern struct163 D_800C3CA0[3];
-extern s8  D_800C3E78;
-extern u16 D_800C3E7C;
-extern s32 D_800C3E80;
-extern s32 D_800C3E84;
-extern s32 D_800C3EE0;
-extern s32 D_800C3FC0;
-extern s32 D_800C3FC4;
-extern s64 D_800C3A60[];
-extern struct160 D_800C6650[];
-extern s32 D_800C6654;
-extern struct106 D_800C6660[];
-extern s32 D_800C6860[];
-extern u8  D_800C68A0;
-extern u8  D_800C68A1;
-extern u8  D_800C4000;
-extern s32 D_800CBE00;
-extern u8  D_800CBD60;
-extern u8  D_800CBD61;
-extern u8  D_800CBD62;
-extern u8  D_800CBD63;
-extern s32 D_800CBD64;
-extern s16 D_800CBD70;
-extern s16 D_800CBD72;
-extern u8  D_800CBD74;
-extern u32 D_800CBD78;
-extern s16 D_800CBD7C;
-
-extern f32 D_800CBD80;
-
-extern u8  D_800CC26E;
-extern s32 D_800CC288;
-extern s32 D_800CC298; // 0x18 length
-extern u8  D_800CC2A2;
-
-extern u8  D_800CC2B0;
-extern struct127 D_800CC2D0[26];
-extern u8  D_800CC335;
-extern u8  D_800CC37D;
-
-extern struct127 *D_800CE370;
-
-/* other */
-
-extern OSMesgQueue D_80041E58[3];
-extern struct117 D_80041EA0[3];
-
-extern u8 D_80087280[];
+extern u8  D_80087280[];
 extern u32 D_80087380;
 
 extern u64 D_800885B0;
@@ -561,12 +423,21 @@ extern s32 D_80089534[];
 extern s16 D_80089550;
 extern void (*D_80089C44[])(void);
 extern void (*D_80089C54[])(void);
-
 extern struct32 D_8008A0B4[];
 extern s32  D_8008A084[];
-extern u8  D_8008CEB0;
-extern u8  D_8008CD00;
-extern s32 D_8008CFFC[];
+extern struct115 D_8008B4A8[];
+extern struct115 D_8008B4D0[];
+extern struct115 D_8008B4D4[];
+
+extern u8   D_8008CEB0;
+extern u8   D_8008CD00;
+extern s32  D_8008CFFC[];
+
+extern s8   D_8008FD8C;
+extern s32  D_8008FD90;
+extern s32  D_8008FD94;
+extern s8   D_8008FDA8;
+extern u16  D_8008FDBC;
 
 /* 8009 */
 extern s32 D_800902B8;
@@ -622,7 +493,6 @@ extern f32 D_8009617C;
 extern f32 D_80096180;
 extern f32 D_80096184;
 
-
 extern f32 D_800961A8;
 extern f32 D_800961AC;
 extern f32 D_800961B0;
@@ -658,25 +528,71 @@ extern f32 D_80096560;
 extern f32 D_80096570;
 extern u32 D_8009667C;
 extern f32 D_800968C0;
+extern s32 D_800968E0;
+
+extern f32 D_800990B0;
+extern u16 D_8009919C[6];
+extern f32 D_800991A8;
+extern f32 D_80099418;
+extern f32 D_8009941C; // 0.949999988079071
 
 extern f32 D_80099444;
 extern f32 D_80099C34;
 
+extern f32 D_8009A020[];
+extern f32 D_8009A220[];
+extern f32 D_8009A420[];
+extern f32 D_8009A620[];
+
+/* 800A0000 */
+extern f32 D_800A1B80;
+extern f32 D_800A1B8C;
+extern f32 D_800A1B98;
+extern f32 D_800A1B9C;
+extern f32 D_800A1BA0;
+extern f32 D_800A0288;
+extern f32 D_800A028C;
+extern f32 D_800A0290;
+extern f32 D_800A0310;
+extern f32 D_800A0314;
+extern f32 D_800A34D0;
+extern f32 D_800A34D4;
+extern f32 D_800A351C;
+extern f32 D_800A3520;
+extern f32 D_800A3524;
+extern f32 D_800A3528;
+extern f32 D_800A352C;
+extern f32 D_800A3530;
+extern f32 D_800A3550;
+extern f32 D_800A3554;
+extern f32 D_800A35AC;
+extern f32 D_800A56A8;
+extern f32 D_800A56AC;
+extern f32 D_800A56B4;
+extern f32 D_800A56B8;
+extern f32 D_800A56BC; // 57.2957763671875
+extern f32 D_800A56C0;
+extern f32 D_800A56C4;
+extern f32 D_800A56C8;
+extern s32 D_800AB3C8;
+
+extern f32 D_800A548C[];
+
 // end of data D_800B0DBC
 
-/* 800B */
+/* 800B0000 */
 
-extern s32 D_800B0DC0;
-extern s32 D_800B0DC4;
-extern s32 D_800B0DC8;
-extern u8 *D_800B0DE0;
-extern s32 D_800B0DE4;
+extern s32  D_800B0DC0;
+extern s32  D_800B0DC4;
+extern s32  D_800B0DC8;
+extern u8  *D_800B0DE0;
+extern s32  D_800B0DE4;
 extern struct104 *D_800B0DF0;
 extern struct00 *D_800B0E00;
-extern s32 D_800B0E04;
+extern s32  D_800B0E04;
 
 extern s32 *D_800B0E30[];
-extern u8  D_800B0E34[];
+extern u8   D_800B0E34[];
 
 extern s32 D_800B0E58;
 extern s32 D_800B0E5C;
@@ -696,28 +612,198 @@ extern s32 D_800BE570;
 extern u8  D_800BE574;
 extern u8  D_800BE575;
 extern s32 D_800BE5D0;
+extern u8  D_800BE5E0;
 extern u8  D_800BE9A0;
+extern f32 D_800BE9A4;
 extern s32 D_800BE9F0;
 
-/* 800C */
+extern s32  D_800BE2B0[]; // type?
+extern s32  D_800BE2D0;
+extern u8   D_800BE358[8];
+extern s8   D_800BE3D8;
+extern s8   D_800BE3D9;
+extern s8   D_800BE3DA;
+extern s8   D_800BE3DB;
+extern s16  D_800BE3DC;
+extern u8   D_800BE3DE;
+extern u8   D_800BE3DF;
+extern u8   D_800BE3E0;
+extern s32  D_800BE3E8;
+extern u8   D_800BE3EC;
+extern struct162 *D_800BE3F8;
+
+extern u8   D_800BE614;
+extern u8   D_800BE615;
+extern u8   D_800BE616;
+extern u8   D_800BE617;
+extern s8   D_800BE618;
+extern s32  D_800BE620;
+extern s32  D_800BE624;
+extern struct140 D_800BE628[]; // contains structs size 0x180
+// extern s32 D_800BE628;
+extern s32  D_800BE62C;
+extern u8   D_800BE635;
+extern f32  D_800BE63C;
+extern f32  D_800BE6B8;
+extern struct156 D_800BE760[];
+extern OSMesgQueue *D_800BE900;
+extern u8   D_800BE938;
+extern s32  D_800BE9D0;
+extern s32  D_800BE9D8[];
+
+extern u8   D_800BE93C[];
+
+extern u16  D_800BE710[];
+extern u16  D_800BE720[];
+extern s32  D_800BE728[];
+extern u8   D_800BE940[];
+extern u8   D_800BE944[];
+extern u8   D_800BE948[];
+extern f32  D_800BE950[];
+extern f32  D_800BE960[];
+extern f32  D_800BE970[];
+extern f32  D_800BE980[];
+
+extern OSMesg      *D_800BE990;
+extern u8   D_800BE9B4;
+extern u8   D_800BE9C0;
+extern s32  D_800BE9C4;
+extern s32  D_800BE9E0; // OSMesg
+extern s32  D_800BE9E4;
+extern s32  D_800BE9E8;
+extern u8   D_800BE9ED;
+extern u16  *D_800BE9F4;
+extern s32  D_800BE9F8;
+
+extern struct14 D_800BE730;
+extern s32 D_800BE748;
+extern s32 D_800BE74E;
+extern s32 D_800BE754;
+extern s32 D_800BE75A;
+
+extern struct04 *D_800BEA00;
+extern struct04 *D_800BEA04;
+extern s32 D_800BEA08;
+extern OSMesgQueue D_800BEA10;
+extern OSMesg      D_800BEA28;
+extern struct195  *D_800BEA68;
+extern u16 D_800BEAA8;
+extern u8  D_800BEAAA;
+extern u8  D_800BEAAB;
+extern u8  D_800BEAC0;
+extern u8  D_800BEAC1;
+
+/* 800C0000 */
+
+extern u8  D_800C35C4;
+extern u8  D_800C35C5;
+extern u8  D_800C35EA;
+extern struct168 *D_800C3600;
+extern u8  D_800C3638;
+extern s32 D_800C3654;
+extern u8  D_800C3663;
+extern u8  D_800C3670;
+extern u8  D_800C3671;
+extern u8  D_800C3681;
+extern u8  D_800C3682;
+extern u8  D_800C3683;
+extern u8  D_800C3C88;
+extern u8  D_800C3C90;
+extern s32 D_800C3C94;
+extern struct163 D_800C3CA0[3];
+extern s8  D_800C3E78;
+extern u16 D_800C3E7C;
+extern s32 D_800C3E80;
+extern s32 D_800C3E84;
+extern s32 D_800C3EE0;
+extern s32 D_800C3FC0;
+extern s32 D_800C3FC4;
+extern s64 D_800C3A60[];
+extern u8  D_800C4000;
 
 extern s16 D_800C5A90[187]; // 374 bytes, 187 shorts
 extern s32 D_800C5C08[187];
 extern s32 D_800C6070[187];
 extern s32 D_800C6360[187];
+
+extern struct160 D_800C6650[];
+extern s32 D_800C6654;
+extern struct106 D_800C6660[];
 extern u8  D_800C67F0;
 extern u8  D_800C67F1;
+extern s32 D_800C6860[];
+extern u8  D_800C68A0;
+extern u8  D_800C68A1;
 
+extern s32 D_800CBE00;
+extern u8  D_800CBD60;
+extern u8  D_800CBD61;
+extern u8  D_800CBD62;
+extern u8  D_800CBD63;
+extern s32 D_800CBD64;
+extern s16 D_800CBD70;
+extern s16 D_800CBD72;
+extern u8  D_800CBD74;
+extern u32 D_800CBD78;
+extern s16 D_800CBD7C;
 
-/* 800D */
+extern f32 D_800CBD80;
+
+extern f32 D_800CC210;
+extern f32 D_800CC214;
+extern f32 D_800CC218;
+extern f32 D_800CC21C;
+extern f32 D_800CC220;
+extern f32 D_800CC224;
+extern f32 D_800CC228;
+extern f32 D_800CC22C;
+extern f32 D_800CC230;
+extern f32 D_800CC234;
+extern f32 D_800CC238;
+extern f32 D_800CC23C;
+
+extern u8  D_800CC26E;
+extern s32 D_800CC288;
+extern s32 D_800CC298; // 0x18 length
+extern u8  D_800CC2A2;
+
+extern u8  D_800CC2B0;
+extern struct127 D_800CC2D0[26]; // objects
+extern u8  D_800CC335;
+extern u8  D_800CC37D;
+
+extern struct127 *D_800CE370;
+
+/* 800D0000 */
+
 extern f32 D_800D1550;
 extern s32 D_800D1580;
 extern s32 D_800D1588[187];  // 748 bytes
 extern struct127 *D_800D154C;
-extern u8  D_800D18C0;
+
+extern u8  D_800D1890;
+extern u8  D_800D1892;
+extern u8  D_800D1893;
 extern u16 D_800D18A0;
+extern u16 D_800D18A2;
+extern s32 D_800D18A4;
 extern u8  D_800D18A8;
+extern u8  D_800D18C0;
 extern u8  D_800D18D0;
+
+extern u8  D_800D1940;
+extern u8  D_800D1941;
+extern s32 D_800D1944;
+extern s32 D_800D1948;
+extern s32 D_800D194C;
+extern s32 D_800D1950;
+extern s32 D_800D1958[12]; // 48 bytes long, struct?
+extern f32 D_800D1988;
+extern f32 D_800D198C;
+extern f32 D_800D1990;
+extern u8  D_800D1994;
+extern u8  D_800D1995;
+extern s32 D_800D1998;
 
 extern s32 D_800D19A0;
 extern struct124 *D_800D1C90[187]; // 748 bytes, 187 pointers
@@ -731,18 +817,21 @@ extern s32 D_800D2128;
 extern struct187 *D_800D212C;
 extern s32 D_800D2138;
 
+extern s16 D_800D2340;
+extern u8  D_800D23A9;
 extern s32 D_800D23C0;
 
 extern f32 D_800D2410[];
 extern s32 D_800D2448;
 extern s32 D_800D244C;
-extern s8  D_800D2456;
+extern u8  D_800D2456;
 extern u8  D_800D2457;
 extern u8  D_800D2458;
 extern s32 D_800D245C;
 extern s32 D_800D2548;
 
 extern u8  D_800D2C68;
+extern s32 D_800D2C28;
 extern s32 D_800D2C2C;
 
 extern s32 D_800D2E50;
@@ -766,6 +855,7 @@ extern struct178 *D_800D3098;
 extern struct00 *D_800D3300;
 extern s32 D_800D3668;
 extern s32 D_800D366C;
+extern s16 D_800D3674;
 extern s32 D_800D3858;
 
 extern s32 D_800D98E0;
@@ -778,8 +868,10 @@ extern s32 D_800D99D0[8];
 extern struct134 *D_800D9A20;
 extern struct134 *D_800D9A24;
 extern s32 D_800D9A40;
+extern s32 D_800D9A50;
 extern struct134 *D_800D9AA0[]; // length 3?
 extern u16 D_800D9AB0[4];
+extern s32 D_800D9D10[];
 extern u8  D_800D9E64;
 extern s32 D_800D9F58;
 extern s32 D_800D9F5C;
@@ -933,8 +1025,20 @@ extern u8   D_800DDF60[];
 extern s8   D_800DDF68[];
 extern s32  D_800DDF78[];
 
+/* 800E0000 */
+extern u8   D_800E0B94;
+extern s32  D_800E0C20;
+extern s32  D_800E0E04;
+extern struct134 *D_800E0900[]; // probably not struct134
+extern s32  D_800E0930;
+extern s32  D_800E0934;
+extern s32  D_800E0940;
+extern u8   D_800E0A10;
+extern struct186 *D_800E0D80;
+extern s32  D_800E9D00;
+extern struct54 D_800E9D10; // probably not struct54
 
-/* other */
+/* chunk0 functions */
 extern s32  D_15000000;
 extern s32  D_150EA904;
 extern s32  D_150EB430;
@@ -942,7 +1046,7 @@ extern s32  D_15103910;
 extern s32  D_15103AA0;
 extern s32  D_151FA130;
 
-/* second TLB'd section */
+/* debugger variables */
 
 extern s32  D_16001B8C; // a struct
 extern s8   D_160036F3; // control stick Y-axis ?
@@ -984,9 +1088,15 @@ extern u8   D_160047D4[];
 extern u8   D_160047DC[];
 extern u8   D_160047E0[];
 
+/* other */
+
+extern u32  D_803F5000;
+extern u32  D_803FE000;
+extern u32  D_807F5000;
+extern u32  D_807FE000;
+
 /* what is this */
-extern s16 D_BC000C02;
-
-
+extern s16  D_BC000C02;
+extern s32  D_1FC007FC;
 
 #endif

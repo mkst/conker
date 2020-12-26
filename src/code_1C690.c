@@ -28,14 +28,14 @@ void func_1001C770(struct22 *arg0) {
     struct40 *sp1C;
 
     if (arg0->unk8 != 0) {
-        sp1C = func_100196E4();
+        sp1C = __n_allocParam();
         if (sp1C == 0) {
             return;
         }
         sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
         sp1C->unk8 = 15;
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
 
@@ -45,16 +45,16 @@ void func_1001C770(struct22 *arg0) {
 //
 //     if (arg0->unk8 != 0) {
 //         if (arg0->unk8->unk90 != 0) {
-//             sp1C = func_100196E4();
+//             sp1C = __n_allocParam();
 //             if (sp1C == 0) {
 //                 return;
 //             }
 //             sp1C->unk4 = (s32) (D_8002BA44->unk1C + arg0->unk8->unk90);
 //             sp1C->unk8 = (u16)0;
 //             sp1C->unkC = (s32) arg0->unk8;
-//             func_10020978(arg0->unk8, 3, sp1C);
+//             n_alEnvmixerParam(arg0->unk8, 3, sp1C);
 //         } else {
-//             func_100198B0(arg0->unk8);
+//             _freePVoice(arg0->unk8);
 //         }
 //         arg0->unk8 = 0;
 //     }
@@ -67,15 +67,15 @@ void func_1001C910(struct22 *arg0, s16 arg1, s32 arg2) {
     struct41 *sp1C;
 
     if (arg0->unk8 != 0) {
-        sp1C = func_100196E4();
+        sp1C = __n_allocParam();
         if (sp1C == 0) {
             return;
         }
         sp1C->unk4 = D_8002BA44->unk1C + arg0->unk8->unk90;
         sp1C->unk8 = 0xB;
         sp1C->unkC = arg1;
-        sp1C->unk10 = func_100199C8(arg2);
+        sp1C->unk10 = _n_timeToSamples(arg2);
         sp1C->unk0 = 0;
-        func_10020978(arg0->unk8, 3, sp1C);
+        n_alEnvmixerParam(arg0->unk8, 3, sp1C);
     }
 }
