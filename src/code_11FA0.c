@@ -28,7 +28,7 @@ void func_10011FA0(s32 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_10011FB0.s")
 // NON-MATCHING: JUSTREG: using v0/t7 not v1/t6
-// s32 func_10011FB0(s32 arg0) {
+// void func_10011FB0(s32 arg0) {
 //     if (D_80042774 == 3) {
 //         D_80041FD9 = 1;
 //     }
@@ -261,21 +261,19 @@ void func_100126E8(s32 arg0, s32 arg1) {
     func_15043CA4(&D_800427A0, arg0, arg1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_10012718.s")
-// NON-MATCHING: types are wrong
-// s32 func_10012718(u16 arg0, struct48 *arg1, s32 arg2, s16 arg3, u16 arg4) {
-//     u32 sp3C;
-//     u32 sp38;
-//     u32 sp34;
-//
-//     if (arg1->unk318 != 0) {
-//         func_1001263C(arg0, arg2, 64);
-//     } else {
-//         func_100114D0(arg1->unk14, arg1->unk18, arg1->unk1C, arg2, arg4, arg3, &sp3C, &sp38, &sp34);
-//         func_1001263C(arg0, sp38, sp3C);
-//     }
-//     return 1;
-// }
+s32 func_10012718(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4) {
+    u32 sp3C;
+    u32 sp38;
+    u32 sp34;
+
+    if (arg1->unk318 != 0) {
+        func_1001263C(arg0, arg2, 64);
+    } else {
+        func_100114D0(arg1->unk14, arg1->unk18, arg1->unk1C, arg2, arg4, arg3, &sp3C, &sp38, &sp34);
+        func_1001263C(arg0, sp38, sp3C);
+    }
+    return 1;
+}
 
 s32 func_100127D0(void) {
     s32 tmp = func_151F2CDC();

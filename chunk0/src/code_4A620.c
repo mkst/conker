@@ -339,7 +339,7 @@ void func_1505371C(struct127 *arg0) {
 
 void func_15055B0C(struct127 *arg0, s32 arg1) {
     arg0->unk0 = 39;
-    func_1505E650(arg0, arg0->unk84, 0, 0.0f, 0.0f, 0.0f, 0);
+    func_1505E650(arg0, arg0->unk84.h.unk0, 0, 0.0f, 0.0f, 0.0f, 0);
     arg0->unkE4 = 0;
     arg0->unkE6 = 0;
     arg0->unk21C = arg1;

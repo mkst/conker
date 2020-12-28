@@ -29,7 +29,7 @@ extern "C" {
 #include <PR/ultratypes.h>
 #include <PR/mbi.h>
 
-    
+
 /*
  * Synthesis driver stuff
  */
@@ -59,10 +59,10 @@ typedef struct {
     ALHeap      *heap;
     struct ALParam_s    *paramList;
     struct N_ALMainBus_s  *mainBus;
-    struct N_ALAuxBus_s   *auxBus; 
+    struct N_ALAuxBus_s   *auxBus;
     s32                 numPVoices;
     s32                 maxAuxBusses;
-    s32                 outputRate; 
+    s32                 outputRate;
     s32                 maxOutSamples;
     s32	       		sv_dramout;
     s32                 sv_first;
@@ -161,7 +161,7 @@ typedef struct {
 
 void            n_alEvtqNew(ALEventQueue *evtq, N_ALEventListItem *items, s32 itemCount);
 ALMicroTime     n_alEvtqNextEvent(ALEventQueue *evtq, N_ALEvent *evt);
-void            n_alEvtqPostEvent(ALEventQueue *evtq, N_ALEvent *evt, ALMicroTime delta);
+void            n_alEvtqPostEvent(ALEventQueue *evtq, N_ALEvent *evt, ALMicroTime delta, s32 foo);
 void        	n_alEvtqFlushType(ALEventQueue *evtq, s16 type);
 
 

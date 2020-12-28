@@ -205,7 +205,7 @@ s32 func_1000F44C(u16 arg0) {
 //             if (temp_a1_2 == 16) {
 //                 sp18 = sp18;
 //                 arg1 = temp_a1_2;
-//                 sp1C = func_10019AB0(arg2, temp_a1_2);
+//                 sp1C = alCents2Ratio(arg2, temp_a1_2);
 //                 arg2 = (s32) sp1C;
 //                 phi_a1 = arg1;
 //             } else {
@@ -488,15 +488,15 @@ void func_10011E94(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_10011EB8.s")
 // NON-MATCHING: whats going on here
-// s32 func_10011EB8(s32 arg0, s16 *arg1, s32 arg2, s32 arg3) {
+// u16 func_10011EB8(s32 arg0, s16 *arg1, s32 arg2, s32 arg3) {
 //     struct120 *temp_v1_2;
 //     s32 temp_v0;
-//     u16 temp_a0;
+//     s32 temp_a0;
 //
 //     temp_v0 = func_1510F8CC(arg0);
 //     if (arg1 != NULL) {
 //         if (D_80082FA0 != 0) {
-//             *arg1 = 0x7FFF /  (D_80082FA0 + 1);
+//             *arg1 = 0x7FFF / (D_80082FA0 + 1);
 //         } else {
 //             *arg1 = 0x7FFF;
 //         }

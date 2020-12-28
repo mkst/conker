@@ -13,12 +13,12 @@ void func_10017F10(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
     tmp.unk6 = arg3;
     tmp.unk7 = arg4;
 
-    func_1001C224(&arg0->unk48, &tmp, 0, 2);
+    n_alEvtqPostEvent(&arg0->unk48, &tmp, 0, 2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_10017F80.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_10018100.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_100182A8.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/n_alCSeqNew.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/n_alCSeqNextEvent.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/__n_alCSeqGetTrackEvent.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_100186DC.s")
 // void func_100186DC(void *arg0, void *arg1) {
 //     s32 sp4;
@@ -48,8 +48,8 @@ void func_10017F10(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_10018790.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/func_100189D0.s")
-// u8 func_100189D0(s32 arg0, s32 arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_17F10/__getTrackByte.s")
+// u8 __getTrackByte(s32 arg0, s32 arg1) {
 //     u8 spF;
 //     u8 spE;
 //     u8 spD;
@@ -87,18 +87,18 @@ void func_10017F10(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
 //     return spF;
 // }
 
-s32 func_10018BC4(s32 arg0, s32 arg1) {
-    s32 tmp1;
-    s32 tmp2;
+u32 __readVarLen(s32 seq, s32 track) {
+    u32 value;
+    u32 c;
 
-    tmp1 = func_100189D0(arg0, arg1);
-    if (tmp1 & 0x80) {
-        tmp1 = tmp1 & 0x7F;
+    value = __getTrackByte(seq, track);
+    if (value & 0x80) {
+        value &= 0x7F;
         do
         {
-            tmp2 = func_100189D0(arg0, arg1);
-            tmp1 = (tmp1 << 7) + (tmp2 & 0x7F);
-        } while (tmp2 & 0x80);
+            c = __getTrackByte(seq, track);
+            value = (value << 7) + (c & 0x7F);
+        } while (c & 0x80);
     }
-    return tmp1;
+    return value;
 }

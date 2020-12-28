@@ -39,7 +39,7 @@
 //     } else {
 //         D_8002BA44->unk50 = (s32) arg0->unkC;
 //     }
-//     D_8002BA44->unk48 = func_10012844(0, 0, sp34, D_8002BA44->unk50, 0x44);
+//     D_8002BA44->unk48 = alHeapDBAlloc(0, 0, sp34, D_8002BA44->unk50, 0x44);
 //     sp44 = 0;
 //     if (D_8002BA44->unk50 > 0) {
 // loop_6:
@@ -50,25 +50,25 @@
 //         } else {
 //             (D_8002BA44->unk48 + (sp44 * 0x44))->unk1C = 0;
 //         }
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40 = func_10012844(0, 0, sp34, 1, 0x38);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40 = alHeapDBAlloc(0, 0, sp34, 1, 0x38);
 //         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2 = (u16)0;
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2C = func_10012844(0, 0, sp34, 1, 8);
-//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk30 = func_10012844(0, 0, sp34, 1, 8);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk2C = alHeapDBAlloc(0, 0, sp34, 1, 8);
+//         (D_8002BA44->unk48 + (sp44 * 0x44))->unk40->unk30 = alHeapDBAlloc(0, 0, sp34, 1, 8);
 //         temp_t4 = sp44 + 1;
 //         sp44 = temp_t4;
 //         if (temp_t4 < D_8002BA44->unk50) {
 //             goto loop_6;
 //         }
 //     }
-//     D_8002BA44->unk44 = func_10012844(0, 0, sp34, 1, 0x14);
-//     D_8002BA44->unk44->unk4 = 0x1001E530;
+//     D_8002BA44->unk44 = alHeapDBAlloc(0, 0, sp34, 1, 0x14);
+//     D_8002BA44->unk44->unk4 = (s32)func_1001E530;
 //     D_8002BA44->unk4 = 0;
 //     D_8002BA44->unk8 = 0;
 //     D_8002BA44->unk14 = 0;
 //     D_8002BA44->unk18 = 0;
 //     D_8002BA44->unkC = 0;
 //     D_8002BA44->unk10 = 0;
-//     sp38 = func_10012844(0, 0, sp34, arg0->unk4, 0xD0);
+//     sp38 = alHeapDBAlloc(0, 0, sp34, arg0->unk4, 0xD0);
 //     sp44 = 0;
 //     if (arg0->unk4 > 0) {
 // loop_11:
@@ -100,7 +100,7 @@
 //             goto loop_15;
 //         }
 //     }
-//     sp30 = func_10012844(0, 0, sp34, arg0->unk8, 0x24);
+//     sp30 = alHeapDBAlloc(0, 0, sp34, arg0->unk8, 0x24);
 //     D_8002BA44->unk40 = 0;
 //     sp44 = 0;
 //     if (arg0->unk8 > 0) {

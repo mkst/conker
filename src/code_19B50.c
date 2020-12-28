@@ -14,8 +14,8 @@ void func_10019B50(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if(sp2C = arg0->unk64) {
         do {
             if ((sp2C->unk35 == arg2) && (sp2C->unk38 != 3)) {
-                tmp = func_1001B200(sp2C, arg0);
-                func_1001C910(&sp2C->unk4, tmp, func_1001B40C(sp2C, arg0->unk1C));
+                tmp = __n_vsVol(sp2C, arg0);
+                n_alSynSetVol(&sp2C->unk4, tmp, __n_vsDelta(sp2C, arg0->unk1C));
             }
         } while (sp2C = sp2C->unk0);
     }
@@ -28,7 +28,7 @@ void func_10019C28(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if(sp2C = arg0->unk64) {
         do {
             if ((sp2C->unk35 == arg2)) {
-                tmp = func_1001B450(sp2C, arg0);
+                tmp = __n_vsPan(sp2C, arg0);
                 func_1001E2A0(&sp2C->unk4, tmp);
             }
         } while (sp2C = sp2C->unk0);
@@ -234,7 +234,7 @@ void func_1001A3FC(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     sp2F = sp28 + sp2F;
 //     arg0->unk60[arg2].unkD = sp2F;
 //     if (sp2F != sp2E) {
-//         func_1001C224(&arg0->unk48, arg1, arg0->unk24 * 100 * sp1C, 2);
+//         n_alEvtqPostEvent(&arg0->unk48, arg1, arg0->unk24 * 100 * sp1C, 2);
 //     }
 //     if (sp2F != 0) {
 //         arg0->unk30 = (arg0->unk30 | (1 << arg2));

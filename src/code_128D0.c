@@ -27,7 +27,7 @@ void func_10012934(struct122 *arg0, s32 arg1, s32 arg2) {
     sp20 = arg1;
     sp1C = arg2;
 
-    if (arg0->unk0 != 0x4231) { // first 4 bytes of assets17/0000.bin!
+    if (arg0->unk0 != 'B1') { // 0x4231 - first 4 bytes of assets17/0000.bin!
         return;
     }
 
@@ -145,7 +145,7 @@ s32 func_10012E04(s32 *arg0, f32 *arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5) {
         sp2C->unk4 = arg2;
         *arg0 = sp2C;
         ret = arg5 << 0xE;
-        switch (arg2){
+        switch (arg2) {
             case 1:
                 sp2C->unk24 = 0;
                 sp2C->unk22 = 0x103 - arg3;
@@ -194,7 +194,7 @@ s32 func_10012F94(struct124 *arg0, f32 *arg1) {
             }
             sp2C = (f32)(u16) sp28->unk24 / (f32)(u16) sp28->unk22;
             sp2C = func_15047D60(sp2C * D_8002C458) * sp28->data.f.unk0;
-            *arg1 = func_10019AB0(sp2C);
+            *arg1 = alCents2Ratio(sp2C);
             break;
         default:
             break;
@@ -212,7 +212,7 @@ void func_100131FC(struct13 *arg0, s32 arg1) {
     s32 *sp24;
     s32 i;
 
-    D_80042804 = func_10012844(0, 0, arg0->unkC, arg1, 0x2C);
+    D_80042804 = alHeapDBAlloc(0, 0, arg0->unkC, arg1, 0x2C);
     D_80042800 = (s32) D_80042804;
     D_80042800 = (s32) D_80042804; // ???
     sp24 = D_80042804;

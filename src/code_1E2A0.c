@@ -50,5 +50,5 @@ void func_1001E400(struct26 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4) {
     tmp.unkC = 0;
 
     tmp2 = arg1;
-    func_1001C224(&arg0->unk48, &tmp, tmp2, 2);
+    n_alEvtqPostEvent(&arg0->unk48, &tmp, tmp2, 2);
 }

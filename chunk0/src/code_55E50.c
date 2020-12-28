@@ -14,7 +14,22 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_1505841C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150585F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15058898.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15058EA4.s")
+
+void func_15058EA4(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
+    if (arg1 < arg0->unk18) {
+        arg0->unk24 = arg2;
+    } else if (arg0->unk18 < arg3) {
+        arg0->unk24 = arg4;
+    }
+    if (arg5 < arg0->unk20) {
+        arg0->unk20 = arg5;
+        return;
+    }
+    if (arg0->unk20 < arg6) {
+        arg0->unk20 = arg6;
+    }
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15058F24.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15059140.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150593C4.s")

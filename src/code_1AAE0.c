@@ -89,11 +89,11 @@
 //     sp34->unk34 = (u8)0;
 //     sp34->unk28 = (s32) (arg0->unk1C + arg2);
 //     func_1001FFE0(arg1, 0);
-//     func_1001C910(arg1, 0, arg2);
+//     n_alSynSetVol(arg1, 0, arg2);
 //     sp38 = 5;
 //     sp3C = arg1;
 //     arg2 = arg2 + 0x7D00;
-//     func_1001C224(arg0 + 0x48, &sp38, arg2, 0);
+//     n_alEvtqPostEvent(arg0 + 0x48, &sp38, arg2, 0);
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001ADA4.s")
@@ -129,8 +129,8 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B07C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B200.s")
-// s16 func_1001B200(struct25 *arg0, struct26 *arg1) {
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/__n_vsVol.s")
+// s16 __n_vsVol(struct25 *arg0, struct26 *arg1) {
 //     s32 sp4;
 //     s32 sp0;
 //
@@ -157,104 +157,36 @@
 //     return (MAX(0, MIN(127, sp10)) | sp14) & 0xff;
 // }
 
-s32 func_1001B40C(struct07 *arg0, s32 arg1) {
-    s32 sp4;
-
-    sp4 = arg0->unk28 - arg1;
-    if (sp4 >= 0) {
-        return sp4;
+s32 __n_vsDelta(struct07 *arg0, s32 t) {
+    s32 delta = arg0->unk28 - t;
+    if (delta >= 0) {
+        return delta;
     } else {
-        return 1000;
+        return 1000; // AL_GAIN_CHANGE_TIME
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B450.s")
-// NON-MATCHING: what struct is this?
-// u8 func_1001B450(struct25 *arg0, struct26 *arg1) {
-//     s32 sp4;
-//
-//     sp4 = ((arg1->unk60 + (arg0->unk35 * 0x3C))->unk6 + arg0->unk24->unkC) - 0x40;
-//     if (sp4 > 0) {
-//       // nothing?!
-//     } else {
-//         sp4 = 0;
-//     }
-//     if (sp4 < 0x7F) {
-//
-//     } else {
-//         sp4 = 0x7F;
-//     }
-//     return sp4;
-// }
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/__n_vsPan.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/__n_initFromBank.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/__n_initChanState.s")
 
-
-
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B4D4.s")
-// void func_1001B4D4(void *arg0, void *arg1) {
-//     s32 sp1C;
-//     s32 sp18;
-//     s32 temp_t8;
-//
-//     sp18 = 0;
-//     sp1C = 1;
-//     if (sp18 == 0) {
-// loop_1:
-//         sp18 = (arg1 + (sp1C * 4))->unkC;
-//         sp1C = sp1C + 1;
-//         if (sp18 == 0) {
-//             goto loop_1;
-//         }
-//     }
-//     sp1C = 0;
-//     if ((s32) arg0->unk34 > 0) {
-// loop_3:
-//         func_1001B620(arg0, sp1C);
-//         temp_t8 = sp1C + 1;
-//         sp1C = temp_t8;
-//         if (temp_t8 < (s32) arg0->unk34) {
-//             goto loop_3;
-//         }
-//     }
-//     if (arg1->unk8 != 0) {
-//         func_1001B620(arg0, sp1C);
-//     }
-// }
-
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B59C.s")
-// void func_1001B59C(void *arg0) {
-//     s32 sp1C;
-//     s32 temp_t4;
-//
-//     sp1C = 0;
-//     if ((s32) arg0->unk34 > 0) {
-// loop_1:
-//         *(arg0->unk60 + (sp1C * 0x3C)) = 0;
-//         func_1001B620(arg0, sp1C);
-//         temp_t4 = sp1C + 1;
-//         sp1C = temp_t4;
-//         if (temp_t4 < (s32) arg0->unk34) {
-//             goto loop_1;
-//         }
-//     }
-// }
-
-void func_1001B620(struct26 *arg0, s32 arg1) {
-    arg0->unk60[arg1].unkA = 0;
-    arg0->unk60[arg1].unk6 = 64;
-    arg0->unk60[arg1].unk9 = 127;
-    arg0->unk60[arg1].unk7 = 5;
-    arg0->unk60[arg1].unkC = 0;
-    arg0->unk60[arg1].unk4 = 200;
-    arg0->unk60[arg1].unk18 = 1.0f;
-    arg0->unk60[arg1].unk17 = 0;
-    arg0->unk60[arg1].unkD = 255;
-    arg0->unk60[arg1].unkE = 255;
-    arg0->unk60[arg1].unkF = 0;
-    arg0->unk60[arg1].unkB = 0;
-    arg0->unk60[arg1].unk16 = 0;
-    arg0->unk60[arg1].unk15 = 0;
-    arg0->unk60[arg1].unk14 = 0;
-    arg0->unk60[arg1].unk8 = 0;
+void __n_resetPerfChanState(struct26 *arg0, s32 chan) {
+    arg0->unk60[chan].unkA = 0;     // fxId or fxmix ?
+    arg0->unk60[chan].unk6 = 64;    // pan
+    arg0->unk60[chan].unk9 = 127;   // vol
+    arg0->unk60[chan].unk7 = 5;     // priority
+    arg0->unk60[chan].unkC = 0;     // sustain
+    arg0->unk60[chan].unk4 = 200;   // bendRange
+    arg0->unk60[chan].unk18 = 1.0f; // pitchBend
+    arg0->unk60[chan].unk17 = 0;
+    arg0->unk60[chan].unkD = 255;
+    arg0->unk60[chan].unkE = 255;
+    arg0->unk60[chan].unkF = 0;
+    arg0->unk60[chan].unkB = 0;
+    arg0->unk60[chan].unk16 = 0;
+    arg0->unk60[chan].unk15 = 0;
+    arg0->unk60[chan].unk14 = 0;
+    arg0->unk60[chan].unk8 = 0;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001B7D0.s")
@@ -290,4 +222,4 @@ void func_1001B620(struct26 *arg0, s32 arg1) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/func_1001BE94.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/code_1AAE0/__n_seqpStopOsc.s")

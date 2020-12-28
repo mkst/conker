@@ -10,7 +10,7 @@ void func_10015550(struct26 *arg0, s32 arg1) {
     tmp.unk0 = 14;
     tmp.unk4 = arg1;
 
-    func_1001C224(&arg0->unk48, &tmp, 0, 2);
+    n_alEvtqPostEvent(&arg0->unk48, &tmp, 0, 2);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_15550/func_100155A0.s")
@@ -24,12 +24,12 @@ s32 func_10015878(struct04 *arg0) {
         if (sp2C->unk28 == 32) {
             if (0) {};
             tmp.unk0 = 32;
-            func_1001C224(&sp2C->unk14, &tmp, sp2C->unk48, 3);
+            n_alEvtqPostEvent(&sp2C->unk14, &tmp, sp2C->unk48, 3);
         } else {
             func_10015944(&sp2C->unk28);
             if (0) {};
         }
-        sp2C->unk4C = func_1001C108(&sp2C->unk14, &sp2C->unk28);
+        sp2C->unk4C = n_alEvtqNextEvent(&sp2C->unk14, &sp2C->unk28);
     } while (sp2C->unk4C == 0);
 
     sp2C->unk50 += sp2C->unk4C;
@@ -41,8 +41,8 @@ s32 func_10015878(struct04 *arg0) {
 
 void func_10016E90(struct31 *arg0) {
     if ((arg0->unk53 & 4) != 0) {
-        func_1001C770(&arg0->unk10);
-        func_1001C810(&arg0->unk10);
+        n_alSynStopVoice(&arg0->unk10);
+        n_alSynFreeVoice(&arg0->unk10);
     }
     func_10017298(arg0);
     func_10016F80(D_8002BA2C + 20, arg0, 0xFFFF);
@@ -53,11 +53,11 @@ void func_10016F00(struct154 *arg0) {
     struct155 tmp;
     f32 res;
 
-    res = func_10019AB0(arg0->unkC->unk4->unk5) * arg0->unk34;
+    res = alCents2Ratio(arg0->unkC->unk4->unk5) * arg0->unk34;
     tmp.unk0 = 16;
     tmp.unk4 = arg0;
     tmp.unk8 = *(s32*)&res;
-    func_1001C224(D_8002BA2C + 20, &tmp, 33333, 2);
+    n_alEvtqPostEvent(D_8002BA2C + 20, &tmp, 33333, 2);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_15550/func_10016F80.s")
@@ -228,7 +228,7 @@ s32 func_100173C4(struct31 **arg0) {
 //             sp34->unk50 = arg5;
 //             sp34->unk51 = arg6;
 //             sp28 = 0;
-//             func_1001C224(D_8002BA2C + 20, &sp18, sp28 + 1, 2);
+//             n_alEvtqPostEvent(D_8002BA2C + 20, &sp18, sp28 + 1, 2);
 //             sp30 = sp34;
 //         }
 //         arg1 = (u16)0;
@@ -258,7 +258,7 @@ void func_10017594(struct31 *arg0) {
         sp18 = 1024;
         sp1C = arg0;
         sp1C->unk53 &= -0x11;
-        func_1001C224(D_8002BA2C + 20, &sp18, 0, 2);
+        n_alEvtqPostEvent(D_8002BA2C + 20, &sp18, 0, 2);
     }
 }
 
@@ -280,7 +280,7 @@ void func_10017594(struct31 *arg0) {
 //             sp20 = sp18;
 //             if ((sp18->unk53 & arg0) == arg0) {
 //                 sp20->unk53 = sp20->unk53 & -0x11;
-//                 func_1001C224(D_8002BA2C + 20, &sp1C, 0, 2);
+//                 n_alEvtqPostEvent(D_8002BA2C + 20, &sp1C, 0, 2);
 //             }
 //             sp18 = sp18->unk0;
 //         }
@@ -304,7 +304,7 @@ void func_10017714(s32 arg0, s16 arg1, s32 arg2) {
         tmp.unk0 = arg1;
         tmp.unk4 = arg0;
         tmp.unk8 = arg2;
-        func_1001C224(D_8002BA2C + 20, &tmp, 0, 2);
+        n_alEvtqPostEvent(D_8002BA2C + 20, &tmp, 0, 2);
     }
 }
 
@@ -330,7 +330,7 @@ void func_10017714(s32 arg0, s16 arg1, s32 arg2) {
 //             // if ((temp_t4 != 0) && ((temp_t4->unk4->unk2 & 0x1F) == arg0)) {
 //             //     sp1C = 1024;
 //             //     sp20 = sp30;
-//             //     func_1001C224(D_8002BA2C + 20, &sp1C, 0, 2);
+//             //     n_alEvtqPostEvent(D_8002BA2C + 20, &sp1C, 0, 2);
 //             // }
 //             sp2C = sp2C + 1;
 //             temp_t4_2 = sp30->unk0;

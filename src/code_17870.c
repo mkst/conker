@@ -14,7 +14,7 @@ void func_10017870(u8 arg0) {
     switch (arg0) {
 
         case 1:
-              D_800428C1 = (u8)1;
+            D_800428C1 = (u8)1;
             break;
         case 3:
             D_800428C2 = (u8)1;

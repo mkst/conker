@@ -26,7 +26,7 @@ s32 func_1001D9B0(s16 arg0) {
     struct07 *sp4;
 
     sp4 = D_8002BA44->unk44;
-    if (sp4->unk4 == (u32)&D_1001E530) {
+    if (sp4->unk4 == (s32)func_1001E530) {
         return D_8002BA44->unk48[arg0].unk1C;
     } else {
         return 0;
@@ -37,7 +37,7 @@ s32 func_1001DA28(s16 arg0) {
     struct07 *sp4;
 
     sp4 = D_8002BA44->unk44;
-    if (sp4->unk4 == (u32)&D_1001E530) {
+    if (sp4->unk4 == (s32)func_1001E530) {
         return D_8002BA44->unk48[arg0].unk40;
     } else {
         return 0;

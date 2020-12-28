@@ -130,7 +130,7 @@ void func_10008A94(u8 arg0, s32 arg1, s32 arg2) {
 }
 
 void func_10008B2C(u8 arg0) {
-    func_10017EC0(D_8003C900[arg0]);
+      n_alCSPGetTempo(D_8003C900[arg0]);
 }
 
 void func_10008B60(u8 arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
@@ -149,15 +149,21 @@ void func_10008BC0(u8 arg0, f32 arg1, f32 arg2) {
 
 // not sure what going on with this
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_10008C6C.s")
+// void func_10008C6C(s32 arg0, s32 arg1) {
+//     u8 tmp0 = arg0 & 0xFF;
+//     u8 tmp1 = arg1 & 0xFF;
+//     func_100186DC(&D_8003CA58[tmp0], &D_8003CD48 + (tmp0 * 0x760) + (tmp1 * 0xEC));
+// }
 
 // contains delay slot
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_10008CE8.s")
 
 void func_10008EE0(u8 arg0, s32 arg1) {
-    func_10018D00(D_8003C900[arg0], arg1);
+    func_10018D00(D_8003C900[arg0], (s16)arg1);
 }
 
 void func_10008F24(u8 arg0) {
+    // AL_TRACK_END
     func_10018C60(D_8003C900[arg0]);
 }
 

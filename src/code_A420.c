@@ -137,8 +137,35 @@ struct151 *func_1000B1B0(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B1FC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B294.s")
+// NON-MATCHING: no idea.
+// struct151 * func_1000B294(s32 *arg0) {
+//     s32 i;
+//     struct151 *phi_v1;
+//     struct151 *tmp;
+//     struct151 *ret = NULL;
+//
+//     for (i = 0; i < 3; i++)
+//     {
+//         phi_v1 = &D_800417B0[i];
+//         ret = phi_v1;
+//         if (phi_v1)
+//         {
+//             if (arg0 == phi_v1->unk10)
+//             {
+//                 phi_v1->unk10 = phi_v1;
+//             }
+//             tmp = *phi_v1->unk60;
+//             if ((tmp) && (arg0 == tmp->unk10))
+//             {
+//                 phi_v1->unk10 = tmp;
+//             }
+//         }
+//     }
+//     return ret;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B2F4.s")
-// NON-MATCHING: close... using t1/t2 not t2/t3
+// NON-MATCHING: JUSTREG: using t1/t2 not t2/t3
 // struct137 *func_1000B2F4(s32 arg0) {
 //     struct137 *tmp;
 //     struct138 *tmp2 = &D_8002B074[arg0];
@@ -180,9 +207,20 @@ struct151 *func_1000B1B0(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B3D4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B548.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B638.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B830.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B8B8.s")
 
+s32 func_1000B830(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 tmp = D_800DBFF0->unk5F0 & 1;
+    if ((tmp != 0) && (arg0 == 0)) {
+        arg0 = 1;
+        func_1000E40C(16, 1000);
+    } else if ((tmp == 0) && (arg0 != 0)) {
+        arg0 = 0;
+        func_1000E40C(16, 18000);
+    }
+    return arg0;
+}
+
+#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B8B8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000BA18.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000BAFC.s")
 
@@ -317,7 +355,6 @@ s32 func_1000E0F8(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E40C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E46C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E588.s")
-// #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E654.s")
 
 s32 func_1000E654(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct151 *sp1C;

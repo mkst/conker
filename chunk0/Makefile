@@ -46,7 +46,7 @@ PYTHON = python3
 TRUNCATE = truncate
 
 OPT_FLAGS := -O2 -g3
-MIPSBIT := -mips2 -o32
+MIPSBIT := -mips2
 
 OBJCOPY_FLAGS  := --remove-section=.reginfo --remove-section=.MIPS.abiflags -O binary
 INCLUDE_CFLAGS := -I include -I include/2.0L -I include/2.0L/PR
@@ -61,10 +61,10 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD
 
 ####################### Overrides ############################
 
-# $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
-# $(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_5A60.o: OPT_FLAGS := -O2 -g3
+# $(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_8A10.o: OPT_FLAGS := -g
+# $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 
 $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 

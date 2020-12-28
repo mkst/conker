@@ -4,6 +4,15 @@
 #include "variables.h"
 
 
+f32 PI = 3.1415927410125732;
+f32 D_8002C774 = 1.4142136573791504;
+f32 D_8002C778 = 1.0594631433486938;
+f32 D_8002C77C = 0.9438742995262146;
+f32 D_8002C780 = 26768.0;
+f32 D_8002C784 = 26768.0;
+f32 D_8002C788 = 173123.40625;
+f32 D_8002C78C = 0.0;
+
 void func_1001C9E0(struct22 *arg0, f32 arg1) {
     struct40 *sp1C;
 
@@ -156,18 +165,18 @@ f32 func_1001CEA4(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1C9E0/func_1001D124.s")
 
 void func_1001D6E8(struct42 *arg0, s32 (*arg1)(s32 arg), struct15 *arg2) {
-    arg0->unk14 = func_10012844(0, 0, arg2, 1, 32);
-    arg0->unk18 = func_10012844(0, 0, arg2, 1, 32);
+    arg0->unk14 = alHeapDBAlloc(0, 0, arg2, 1, 32);
+    arg0->unk18 = alHeapDBAlloc(0, 0, arg2, 1, 32);
     arg0->unk30 = arg1(&arg0->unk34);
     arg0->unk3C = 0;
     arg0->unk40 = 1;
     arg0->unk44 = 0;
-    arg0->unk48 = func_10012844(0, 0, arg2, 1, 32);
+    arg0->unk48 = alHeapDBAlloc(0, 0, arg2, 1, 32);
     arg0->unk54 = 0.0f;
     arg0->unk58 = 1;
     arg0->unk4C = 1.0f;
     arg0->unk50 = 0;
-    arg0->unk5C = func_10012844(0, 0, arg2, 1, 80);
+    arg0->unk5C = alHeapDBAlloc(0, 0, arg2, 1, 80);
     arg0->unk80 = 1;
     arg0->unk8C = 0;
     arg0->unk62 = 1;
@@ -189,6 +198,6 @@ void func_1001D6E8(struct42 *arg0, s32 (*arg1)(s32 arg), struct15 *arg2) {
     arg0->unk99 = 0;
     arg0->unkA2 = 0;
     arg0->unkA0 = 0;
-    arg0->unkCC = func_10012844(0, 0, arg2, 1, 8);
+    arg0->unkCC = alHeapDBAlloc(0, 0, arg2, 1, 8);
     arg0->unkC8 = 0;
 }

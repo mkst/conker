@@ -90,13 +90,13 @@
 // //     phi_s0->unk0 = phi_s1;
 // //     temp_s1 = phi_s1 + 0x14;
 // //     temp_s0 = phi_s0 + 0x14;
-// //     temp_s0->unk-4 = func_10012844(0, 0, arg0->unk28, 1, 2048);
+// //     temp_s0->unk-4 = alHeapDBAlloc(0, 0, arg0->unk28, 1, 2048);
 // //     phi_s0 = temp_s0;
 // //     phi_s1 = temp_s1;
 // //     if ((u32) temp_s1 < (u32) &D_80040AC8) {
 // //         goto loop_5;
 // //     }
-// //     temp_s0->unk10 = func_10012844(0, 0, arg0->unk28, 1, 2048);
+// //     temp_s0->unk10 = alHeapDBAlloc(0, 0, arg0->unk28, 1, 2048);
 // //     bzero(&D_80040AC8, 1200);
 // //     D_80040AC8.unk4 = 0;
 // //     D_80040AC8.unk0 = 0;
@@ -124,7 +124,7 @@
 // //     phi_s0_2 = 0x8003E388U;
 // // loop_13:
 // //     temp_s0_2 = phi_s0_2 + 4;
-// //     temp_s0_2->unk-4 = func_10012844(0, 0, arg0->unk28, 1, arg2->unk8 * 8);
+// //     temp_s0_2->unk-4 = alHeapDBAlloc(0, 0, arg0->unk28, 1, arg2->unk8 * 8);
 // //     phi_s0_2 = temp_s0_2;
 // //     if (temp_s0_2 < 0x8003E390U) {
 // //         goto loop_13;
@@ -132,13 +132,13 @@
 // //     *(void *)0x80040F94 = (s32) arg2->unk8;
 // //     phi_s0_3 = (void *)0x8003E388;
 // // loop_15:
-// //     temp_v0_4 = func_10012844(0, 0, arg0->unk28, 1, 0x90);
+// //     temp_v0_4 = alHeapDBAlloc(0, 0, arg0->unk28, 1, 0x90);
 // //     phi_s0_3->unk8 = temp_v0_4;
 // //     temp_v0_4->unk70 = (u16)2;
 // //     temp_v1 = phi_s0_3->unk8;
 // //     temp_v1->unk74 = temp_v1;
 // //     temp_s0_3 = phi_s0_3 + 4;
-// //     phi_s0_3->unk8->unk0 = func_10012844(0, 0, arg0->unk28, 1, *(void *)0x80040F90 * 4);
+// //     phi_s0_3->unk8->unk0 = alHeapDBAlloc(0, 0, arg0->unk28, 1, *(void *)0x80040F90 * 4);
 // //     phi_s0_3 = temp_s0_3;
 // //     if (temp_s0_3 != 0x8003E394) {
 // //         goto loop_15;
