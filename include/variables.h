@@ -65,28 +65,6 @@ extern OSThread *__osRunningThread;
 
 /* FUNCTIONS */
 // FIXME: we should be able to reference these directly
-extern s32  D_100010F8;
-extern s32 *D_10001194;
-extern s32 *D_10002070;
-
-extern s32 *D_10002E50;
-extern s32 *D_100049E0;
-extern s32 *D_100052A0;
-extern s32  D_1000EE70;
-extern s32  D_1000EF40;
-
-extern s32  D_10009400;
-extern s32  D_100097CC;
-extern s32  D_10009980;
-extern s32  D_10009B2C;
-extern s32  D_10009B4C;
-extern s32  D_10009B90;
-extern s32  D_10009CBC;
-extern s32  D_10009FFC;
-extern s32  D_10012560;
-extern s32  D_10012E04;
-extern s32  D_10012F94;
-extern s32  D_100131D8;
 extern s32  D_10013598;
 extern s32  D_1001E530;
 extern s32 *D_10023850;
@@ -140,6 +118,7 @@ extern s32  D_8002AE54;
 
 extern s32  D_8002B070;
 extern struct138 D_8002B074[];
+extern s32  D_8002B078[][4]; // probably not correct...
 extern s32  D_8002B9D4;
 extern s32  D_8002B9F4;
 
@@ -235,22 +214,22 @@ extern u8  D_8003A584;
 extern u8  D_8003A588;
 extern u8  D_8003A5C8;
 
-extern OSMesgQueue *D_8003B1E8;
-extern OSMesgQueue *D_8003B200;
-extern OSMesgQueue *D_8003B218;
+extern OSMesgQueue D_8003B1E8;
+extern OSMesgQueue D_8003B200;
+extern OSMesgQueue D_8003B218;
 
 extern OSMesgQueue *D_8003B230;
-extern s32  D_8003B234;
+extern OSPfs       *D_8003B234;
 extern u8 D_8003B238;
 extern u8 D_8003B239;
 extern u8 D_8003B23A;
 extern OSMesg      *D_8003B240;
 
 // extern s32 *D_8003B264;
-extern OSThread    *D_8003B6A0;
-extern OSMesg      *D_8003B660;
-extern OSMesg      *D_8003B670;
-extern OSMesg      *D_8003B680;
+extern OSThread    D_8003B6A0;
+extern OSMesg      D_8003B660;
+extern OSMesg      D_8003B670;
+extern OSMesg      D_8003B680;
 
 extern OSMesgQueue D_8003B9D0;
 extern OSMesg      D_8003B9E8;
@@ -263,10 +242,10 @@ extern s32  D_8003BC30;
 extern s32  D_8003BD30;
 extern s32  D_8003BE30;
 extern u8   D_8003BE50[];
-extern u32  D_8003BE70;
+extern s8   D_8003BE70[];
 extern u32  D_8003BE74;
 extern s16  D_8003BE78;
-extern s32  D_8003BE7C;
+extern s8   D_8003BE7C;
 
 extern s32  D_8003C8E0;
 extern struct26 *D_8003C900[];
@@ -306,6 +285,7 @@ extern s32  D_80040F88;
 extern s32  D_80040F8C;
 extern s32  D_80040F90;
 extern struct146 D_80040F98[];
+extern u8   D_80041F00;
 extern s32  D_80041F04;
 extern s32  D_80041F08;
 extern s32  D_80041F0C;
@@ -455,6 +435,7 @@ extern s32 D_80090320;
 
 extern s32 jtbl_80091A30[];
 
+extern s32 D_80091AF0[];
 extern s32 D_80091C04[];
 extern s32 D_80091D20[];
 
@@ -580,6 +561,7 @@ extern f32 D_8009A620[];
 /* 800A0000 */
 extern f32 D_800A2148;
 extern f32 D_800A2154;
+extern struct201 D_800A2CD0[];
 extern f32 D_800A1B80;
 extern f32 D_800A1B8C;
 extern f32 D_800A1B98;
@@ -622,6 +604,9 @@ extern f32 D_800A548C[];
 extern s32  D_800B0DC0;
 extern s32  D_800B0DC4;
 extern s32  D_800B0DC8;
+extern s32  D_800B0DCC;
+extern s32  D_800B0DD0;
+extern s32  D_800B0DDC;
 extern u8  *D_800B0DE0;
 extern s32  D_800B0DE4;
 extern struct104 *D_800B0DF0;
@@ -904,6 +889,7 @@ extern struct178 *D_800D3098;
 extern struct00 *D_800D3300;
 extern s32 D_800D3668;
 extern s32 D_800D366C;
+extern f32 D_800D3670;
 extern s16 D_800D3674;
 extern s32 D_800D3858;
 
@@ -920,6 +906,34 @@ extern s32 D_800D9A40;
 extern s32 D_800D9A50;
 extern struct134 *D_800D9AA0[]; // length 3?
 extern u16 D_800D9AB0[4];
+extern struct17 D_800D9AC0[];
+extern u8 D_800D9AF0;
+extern struct200 D_800D9AF8[];
+
+extern u8  D_800D9B18;
+extern f32 D_800D9B1C;
+extern f32 D_800D9B20;
+extern u8  D_800D9B68[4][3];
+extern u8  D_800D9B78[4][3];
+extern u8  D_800D9B84[];
+extern u8  D_800D9B88[];
+extern u8  D_800D9B8B;
+extern u8  D_800D9B8C;
+extern u8  D_800D9BD0[][2][8];
+extern s32 D_800D9E10[];
+extern u8  D_800D9E20;
+
+// extern u16 D_800D9E70[][3];
+// extern u8 D_800D9E88[][3];
+// extern u8 D_800D9E98[][3];
+// extern u8 D_800D9EA8[][3];
+// extern u8 D_800D9EB4[][3];
+// extern u8 D_800D9EB8[][3];
+//
+// extern u8 D_800A2D04[][3];
+// extern u8 D_800A2CE8[][3];
+// extern u8 D_800A2CEC[][3];
+
 extern s32 D_800D9D10[];
 extern u8  D_800D9E64;
 extern s32 D_800D9F58;
@@ -937,6 +951,10 @@ extern s32 D_800DBE24;
 extern s16 D_800DBE28;
 extern s16 D_800DBE2A;
 extern s16 D_800DBE2C;
+extern u16 D_800DBE30;
+extern u16 D_800DBE32;
+extern u16 D_800DBE34;
+extern u16 D_800DBE36;
 extern s32 D_800DBE38;
 extern s32 D_800DBE3C;
 extern s32 D_800DBE4C;

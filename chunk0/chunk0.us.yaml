@@ -502,6 +502,7 @@ segments:
     - [0x1F8870, "asm"]
     - [0x1F9BF0, "asm"]
   - type: code
+    name: data
     start: 0x001FA130
     vram:  0x80082B20
     files:

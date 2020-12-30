@@ -26,14 +26,13 @@ void func_10011FA0(s32 *arg0) {
     D_80042770 = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_11FA0/func_10011FB0.s")
-// NON-MATCHING: JUSTREG: using v0/t7 not v1/t6
-// void func_10011FB0(s32 arg0) {
-//     if (D_80042774 == 3) {
-//         D_80041FD9 = 1;
-//     }
-//     D_80042774 = arg0;
-// }
+void func_10011FB0(s32 arg0) {
+    s32 tmp = D_80042774;
+    if (tmp == 3) {
+        D_80041FD9 = 1;
+    }
+    D_80042774 = arg0;
+}
 
 void func_10011FDC(s32 arg0) {
     D_80042778 = arg0;
@@ -220,19 +219,17 @@ void func_10012560(s32 arg0) {
 void func_10012588(s32 arg0) {
     func_15016170(arg0);
     func_15043A00(&D_800427A0, &D_800427B0, 64);
-    func_151F3C1C(&D_10012560);
+    func_151F3C1C(func_10012560);
 }
 
 void func_100125CC(s32 arg0) {
-    s32 temp_v0;
-
-    temp_v0 = func_151F2CDC();
+    s32 res = func_151F2CDC();
     if ((arg0 != 30) || (D_800BE9F8 != 27)) {
-        if (temp_v0 == 1) {
+        if (res == 1) {
             func_151F2D6C(0, 11010);
             return;
         }
-        if (temp_v0 != 0) {
+        if (res != 0) {
             func_151F2BA8();
         }
     }

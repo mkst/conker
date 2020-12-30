@@ -67,7 +67,6 @@ This project is in its infancy; there are multiple tasks being worked on:
 
 ## Open issues
 
-  - Compressing extracted sections in a byte-perfect manner
   - Identifying and documenting Conker asset (model/texture/sound) format
   - Linking `src` and `chunk0/src` code
 
@@ -78,15 +77,14 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 ```
 [header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
 [ boot ]  0000 0040 > 0000 1000 ;
-[ code ]  0000 1000 > 0004 2C50 ; code (init + libultra)
+[ code ]  0000 1000 > 0004 2C50 ; init + libultra .text
 [ ???? ]  0002 90D0 > ???? ???? ;
-[ data ]  0002 C750 > 0002 C7A0 ; data section
+[ data ]  0002 C750 > 0002 C7A0 ; init + libultra .data
 [ ???? ]  0002 C7A0 > 0004 2C50 ; μcode
-[ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 (compressed code)
-[ ???? ]  0018 6B50 > 0018 8328 ;
-[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 data
-[ code ]  0019 C7D8 > 001A 2190 ; debugger
-[ data ]  001A 2190 > 001A 37E0 ; debugger data section
+[ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 .text (compressed)
+[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 .data (compressed)
+[ code ]  0019 EA88 > 001A 2190 ; debugger .text
+[ data ]  001A 2190 > 001A 37E0 ; debugger .data
 [ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
 [ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
 [ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C
@@ -101,33 +99,17 @@ There a number of compressed sections within the ROM. The goal is to be able to:
   2. Decompile and/or document them
   3. Compress and reassemble to create a byte-perfect match.
 
-### Chunk 0
+### Game Logic AKA "Chunk 0"
 
-The first compressed chunk within the ROM is named `chunk0`. It is preceded by a 512 byte header containing offsets for each compressed block. The values in the headers are `xor`'d with a key of `0x8039CCCA`, so need to be `xor`'d with this key in order to get the true values.
-
-Once decompressed, these blocks form a contiguous chunk of code.
-
-The steps for decompiling `chunk0` are as follows:
-  - Decompress all blocks within the chunk via [rareunzip](tools/rareunzip.py)
-  - Combine decompressed blocks into a single file
-  - Run n64splat on this combined file to extract all code and assets
-  - *Translate assembly to c code*
-  - Compile to generate a .bin
-  - Split compiled .bin file into 4096 byte blocks
-  - Compress each block via [rarezip](tools/rarezip.py), padding to 2-byte alignment
-  - Combine all compressed blocks
-
-If you wish to examine this file, you can run `make decompress` after you have done the initial `make extract`.
-
-See the [README](chunk0/README.md) for more information.
-
-**NOTE:** Compression is currently not 100%-matching; approximately 3% of chunk0 blocks do not match.
+The core game logic code is compressed within the ROM. See the [README](chunk0/README.md) for more information.
 
 # Tools
 
 ## Custom tools
 
  - rarezip/rareunzip; python scripts to compress/decompress the compression format used in the ROM.
+
+NOTE: `gzip` is used for compression rather than `zlib`; use the one in `tools` in order to get matching compression.
 
 ## Existing tools
 

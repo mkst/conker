@@ -142,8 +142,10 @@ void func_10008BC0(u8 arg0, f32 arg1, f32 arg2) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8180/func_10008C04.s")
-// NON-MATCHING: what is func_10018790?
-// void func_10008C04(u8 arg0, s32 arg1, s32 arg2) {
+// NON-MATCHING: something like this...
+// void func_10018790(s32, s32, u8, s32);
+// void func_10008C04(u8 arg0, u8 arg1, s32 arg2) {
+//     // func_10018790(&D_8003CA58[arg0 * 0xF8], &D_8003CD48[arg0 * 0x760], arg1, arg2);
 //     func_10018790(&D_8003CA58[arg0], &D_8003CD48[arg0], arg1, arg2);
 // }
 

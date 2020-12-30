@@ -19,10 +19,35 @@ class N64SegRzip(N64Segment):
         self.has_files = "files" in segment
         self.segment = segment
         self.next_segment = next_segment["start"] if "start" in next_segment else 0
+        self.xor = segment["xor"] if "xor" in segment else None
     def get_default_name(self, addr):
         return f"code_{addr:X}"
 
+    def get_game_offsets(self, rom_bytes):
+        prefix = self.name if self.name.endswith("/") else f"{self.name}_"
+        ret = []
+        offset = 1 # first item is data length
+        previous = 0
+        key = self.xor
+        while True:
+            start = struct.unpack(">I", rom_bytes[offset*4:offset*4+4])[0]
+            offset += 1
+
+            if start == 0:
+                break
+            else:
+                start = key ^ start
+                name = self.get_default_name(start) if self.name == self.get_default_name(self.rom_start) else f"{prefix}{start:08X}"
+                if previous > 0:
+                    ret.append({"start": previous, "end": start, "subtype": "compressed", "name": name}) # length is start - previous
+                previous = start
+        return ret
+
+
     def get_files_from_offsets(self, rom_bytes):
+        if self.xor:
+            return self.get_game_offsets(rom_bytes)
+
         prefix = self.name if self.name.endswith("/") else f"{self.name}_"
         base = self.rom_start
         offset = 0

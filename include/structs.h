@@ -756,8 +756,8 @@ typedef struct {
 
 typedef struct {
     s16 unk0;
-    s8 unk2;
-    s8 unk3;
+    s8  unk2;
+    s8  unk3;
 } struct49;
 
 typedef struct {
@@ -917,8 +917,7 @@ typedef struct {
 } struct103;
 
 typedef struct {
-    u8 unk0;
-    u8 unk1;
+    u16 unk0;
     u16 unk2;  // used
     u8 unk4;
     u8 unk5;
@@ -931,6 +930,8 @@ typedef struct {
     u8 unk10;
     u8 pad11[0x9];
     u16 unk1A;
+    u8  pad1C[0xD];
+    u8  unk29;
 } struct104;
 
 typedef struct {
@@ -1776,7 +1777,10 @@ typedef struct {
     s32 unk28;
     s32 unk2C;
     s32 unk30;  // used
-    u8  pad[0x2C];
+    u8  pad34[0x1A];
+    u16 unk4E;
+    u16 unk50;
+    u8  unk52[0xE];
     s32 *unk60;  // used
 } struct151;
 
@@ -2500,5 +2504,16 @@ typedef struct {
     f32 unk28;
     f32 unk2C;
 } struct199; // size 0x30
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+} struct200;
+
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+} struct201;
 
 #endif

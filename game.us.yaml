@@ -1,0 +1,18 @@
+basename: conker
+options:
+  extensions: "custom/n64splat"
+  modes:
+  - all
+segments:
+  - name:  code
+    type:  rzip
+    xor:   0x8039CCCA
+    start: 0x0
+  - [0x144700, "bin", "code_padding"] # zero padding
+  - name:  data
+    type:  rzip
+    start: 0x145ED8
+    files:
+      - [0x145ED8, "compressed"] # compressed .data
+  - [0x15A388, "bin", "data_padding"] # zero padding
+  - [0x15C638] # 1,427,000 bytes

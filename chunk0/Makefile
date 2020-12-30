@@ -1,14 +1,12 @@
-
+VERSION   := us
 BUILD_DIR := build
-ASM_DIRS := asm
+ASM_DIRS  := asm
 DATA_DIRS := bin
-SRC_DIRS := src src/data src/done
+SRC_DIRS  := src src/data src/done
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
 ASM_PROCESSOR_DIR := ../tools/asm-processor
-
-SPLIT := split -b 4096 -d --additional-suffix=.bin --suffix-length=4
 
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 C_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
@@ -17,7 +15,6 @@ BIN_FILES := $(foreach dir,$(DATA_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o))
-
 
 # Files requiring pre/post-processing
 GREP := grep -rl
@@ -43,7 +40,10 @@ LD = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
-TRUNCATE = truncate
+
+GZIPLEVEL := --best --no-name --force
+GZIP = ../tools/gzip $(GZIPLEVEL)
+SPLIT := split -b 4096 -d --additional-suffix=.bin --suffix-length=4
 
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2
@@ -61,7 +61,8 @@ LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD
 
 ####################### Overrides ############################
 
-$(BUILD_DIR)/src/code_5A60.o: OPT_FLAGS := -O2 -g3
+# custom OPT_FLAGS
+# $(BUILD_DIR)/src/code_5A60.o: OPT_FLAGS := -O2 -g3
 # $(BUILD_DIR)/src/code_89D0.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_8A10.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
@@ -72,14 +73,11 @@ $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 
 # $(BUILD_DIR)/src/code_55E50.o: OPT_FLAGS := -O2 -g3
-
 # $(BUILD_DIR)/src/code_103800.o: MIPSBIT := -mips2 -32bit
-
-# OPT_FLAGS
 
 ######################## Targets #############################
 
-$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS) $(MP3_DIRS),$(shell mkdir -p build/$(dir)))
+$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS),$(shell mkdir -p build/$(dir)))
 
 
 default: all
@@ -87,7 +85,7 @@ default: all
 all: $(BUILD_DIR) $(TARGET).bin verify_o
 
 check:
-	@echo "$$(cat chunk0.sha1)  ../build/chunk0.bin" | sha1sum --check
+	@echo "$$(cat game.$(VERSION).sha1)  game.bin" | sha1sum --check
 
 clean:
 	rm -rf asm
@@ -95,24 +93,33 @@ clean:
 	rm -rf build
 
 extract: check
-	$(PYTHON) ../tools/n64splat/split.py game.bin chunk0.yaml .
+	$(PYTHON) ../tools/n64splat/split.py game.bin chunk0.$(VERSION).yaml .
 
-split: $(TARGET).code.bin
+split: $(TARGET).code.bin $(TARGET).data.bin
 	mkdir -p $(SPLIT_DIR)
 	$(SPLIT) $(TARGET).code.bin $(SPLIT_DIR)/
 
 compress:
-	$(PYTHON) ../tools/compress_chunk0.py build/split build/split
+	$(PYTHON) ../tools/compress_chunk0.py $(SPLIT_DIR) $(SPLIT_DIR)
+	$(GZIP) $(TARGET).data.bin
+	$(PYTHON) ../tools/fixup_gzip.py $(TARGET).data.bin.gz $(TARGET).data.gz.bin
 
-# TODO: once this matches, output result to ../rzip/chunk0.bin
 combine: $(RZ_FILES)
-	cat $(sort $(RZ_FILES)) > $(BUILD_DIR)/chunk0.gz.bin
+	@cat $(sort $(RZ_FILES)) > $(TARGET).code.gz.bin
+	cat $(BUILD_DIR)/split/offsets.bin $(TARGET).code.gz.bin ../game/bin/code_padding.bin $(TARGET).data.gz.bin ../game/bin/data_padding.bin > $(TARGET).gz.bin
+
+replace: verify_gz
+	cp $(TARGET).gz.bin ../bin/game.bin
 
 verify_o: $(TARGET).bin
-	@echo "$$(cat game.sha1)  build/chunk0.bin" | sha1sum --check
+	@echo "$$(cat game.$(VERSION).sha1)  $(TARGET).bin" | sha1sum --check
 
 verify:
-	@echo "$$(cat chunk0.gz.sha1)  build/chunk0.gz.bin" | sha1sum --check
+	@echo "$$(cat game.$(VERSION).code.gz.sha1)  $(TARGET).code.gz.bin" | sha1sum --check
+	@echo "$$(cat game.$(VERSION).data.gz.sha1)  $(TARGET).data.gz.bin" | sha1sum --check
+
+verify_gz:
+	@echo "$$(cat game.$(VERSION).gz.sha1)  $(TARGET).gz.bin" | sha1sum --check
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
@@ -122,6 +129,9 @@ $(TARGET).bin: $(TARGET).elf
 
 $(TARGET).code.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .code_code $< $@
+
+$(TARGET).data.bin: $(TARGET).elf
+	$(OBJCOPY) -O binary --only-section .code_data $< $@
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	@$(LD) $(LDFLAGS) -o $@

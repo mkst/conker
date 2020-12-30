@@ -294,7 +294,14 @@ void func_1000F9D4(u16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_10010344.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_10010558.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_10010630.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_EB00/func_10010720.s")
+
+void func_10010720(u16 arg0, struct48 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 arg5) {
+    if (arg5 <= 0) {
+        func_10010630(arg0, arg1, arg2, arg3, arg4);
+    } else {
+        func_1000FA64(arg0, arg1->unk14, arg1->unk18, arg1->unk1C, arg2, arg4, arg3, func_1000EDA0, arg5, arg1, 0, 0);
+    }
+}
 
 s32 func_100107F8(struct127 *arg0) {
     if (arg0->unk0 == 0) {
@@ -307,7 +314,7 @@ s32 func_100107F8(struct127 *arg0) {
                 }
             }
         } else {
-            if (func_1000FF90(&D_1000EE70, arg0, arg0->unk3B | 0x10000) != -1) {
+            if (func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x10000) != -1) {
                 return 1;
             }
         }
@@ -324,7 +331,7 @@ s32 func_10010894(struct127 *arg0) {
             }
         }
     } else {
-        if (func_1000FF90(&D_1000EE70, arg0, arg0->unk3B | 0x20000) != -1) {
+        if (func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x20000) != -1) {
             return 1;
         }
     }
@@ -344,7 +351,7 @@ s32 func_10010894(struct127 *arg0) {
 //                 return;
 //             }
 //         } else {
-//             temp_v0 = func_1000FF90(&D_1000EE70, arg0, arg0->unk3B | 0x10000);
+//             temp_v0 = func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x10000);
 //             if (temp_v0 != -1) {
 //                 D_80041FEC[temp_v0] = arg1;
 //             } else {
@@ -360,7 +367,7 @@ void func_100109D0(struct127 *arg0) {
           func_100111C8(arg0->unk8E);
       }
   } else {
-      func_1000FD38(&D_1000EE70, arg0, arg0->unk3B | 0x10000);
+      func_1000FD38(func_1000EE70, arg0, arg0->unk3B | 0x10000);
   }
   arg0->unk8E = 0;
 }
@@ -371,7 +378,7 @@ void func_10010A3C(struct127 *arg0) {
             func_100111C8(arg0->unk8C);
         }
     } else {
-        func_1000FD38(&D_1000EE70, arg0, arg0->unk3B | 0x20000);
+        func_1000FD38(func_1000EE70, arg0, arg0->unk3B | 0x20000);
     }
     arg0->unk8C = 0;
 }

@@ -107,7 +107,7 @@ void func_10004674(void) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_4470/func_1000480C.s")
-// void *func_1000480C(s32 devAddr, void *dramAddr, s32 size) {
+// void func_1000480C(s32 devAddr, void *dramAddr, u32 size) {
 //     s32 sp38;
 //     s32 *temp_t0;
 //     s32 *temp_t0_2;
@@ -132,91 +132,82 @@ void func_10004674(void) {
 //     u32 phi_a0_4;
 //     void *phi_a1_2;
 //     u32 phi_a2;
-//     void *phi_return;
 //
-//     D_8003A572 = (u8)1;
-//     temp_t7 = (size + 1) & -2;
-//     // if (D_8003A573 != 0) {
-//         while (D_8003A573 != 0) {};
-//     // }
-//     temp_a2 = temp_t7 - 2;
-//     while (IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY|PI_STATUS_IO_BUSY)) != 0) {};
-//     //     if ((*(void *)0xA4600010 & 3) != 0) {
-//     //         goto loop_3;
-//     //     }
-//     // }
+//     D_8003A572 = 1;
+//     size = (size + 1) & ~1;
+//     do {} while (D_8003A573 != 0);
+//
+//     temp_a2 = size - 2;
+//
+//     while ((IO_READ(PI_STATUS_REG) & (PI_STATUS_DMA_BUSY|PI_STATUS_IO_BUSY)) != 0) {};
 //
 //     temp_t0 = &sp38;
-//     temp_s1 = devAddr | D_80000308;
-//     if ((temp_s1 & 2) != 0) {
-//         temp_s0 = temp_t7 - 2;
-//         sp38 = *((temp_s1 - 2) | 0xA0000000);
-//         temp_a2_2 = temp_s0 - 2;
-//         *dramAddr = (u16) temp_t0->unk2;
-//         phi_a0_2 = 0U;
-//         phi_a1_2 = dramAddr;
-//         phi_return = IO_READ(PI_STATUS_REG); //(void *) *(void *)0xA4600010;
-//         if (temp_a2_2 != 0) {
-//             phi_a1 = temp_s1 + 2;
-//             phi_v0 = dramAddr;
-//             phi_a0 = 0U;
-// loop_7:
-//             temp_t4 = *(phi_a1 | 0xA0000000);
-//             temp_a0 = phi_a0 + 4;
-//             sp38 = temp_t4;
-//             phi_v0->unk2 = (s16) (temp_t4 >> 0x10);
-//             temp_a1 = phi_a1 + 4;
-//             temp_v0 = phi_v0 + 4;
-//             *temp_v0 = (s16) sp38;
-//             phi_a1 = temp_a1;
-//             phi_v0 = temp_v0;
-//             phi_a0 = temp_a0;
-//             phi_a0_2 = temp_a0;
-//             phi_a1_2 = (void *) temp_a1;
-//             phi_return = temp_v0;
-//             if (temp_a0 < temp_a2_2) {
-//                 goto loop_7;
-//             }
-//         }
-//         phi_a2 = temp_a2_2;
-//         if ((temp_s0 & 2) != 0) {
-//             sp38 = *((temp_s1 + phi_a0_2 + 2) | 0xA0000000);
-//             (dramAddr + phi_a0_2)->unk2 = (u16) temp_t0->unk0;
-//             phi_a2 = temp_a2_2;
-//         }
+//     devAddr = devAddr | D_80000308;
+//     if ((devAddr & 2) != 0) {
+//         temp_s0 = size - 2;
+//         sp38 = *((s32*)((devAddr - 2) | 0xA0000000));
+// //         temp_a2_2 = temp_s0 - 2;
+// //         *dramAddr = (u16) temp_t0->unk2;
+// //         phi_a0_2 = 0U;
+// //         phi_a1_2 = dramAddr;
+// //         // phi_return = (void *) *(void *)0xA4600010;
+// //         if (temp_a2_2 != 0) {
+// //             phi_a1 = devAddr + 2;
+// //             phi_v0 = dramAddr;
+// //             phi_a0 = 0U;
+// // loop_7:
+// //             temp_t4 = *(phi_a1 | 0xA0000000);
+// //             temp_a0 = phi_a0 + 4;
+// //             sp38 = temp_t4;
+// //             phi_v0->unk2 = (s16) (temp_t4 >> 0x10);
+// //             temp_a1 = phi_a1 + 4;
+// //             temp_v0 = phi_v0 + 4;
+// //             *temp_v0 = (s16) sp38;
+// //             phi_a1 = temp_a1;
+// //             phi_v0 = temp_v0;
+// //             phi_a0 = temp_a0;
+// //             phi_a0_2 = temp_a0;
+// //             phi_a1_2 = (void *) temp_a1;
+// //             if (temp_a0 < temp_a2_2) {
+// //                 goto loop_7;
+// //             }
+// //         }
+// //         phi_a2 = temp_a2_2;
+// //         if ((temp_s0 & 2) != 0) {
+// //             sp38 = *((devAddr + phi_a0_2 + 2) | 0xA0000000);
+// //             (dramAddr + phi_a0_2)->unk2 = (u16) temp_t0->unk0;
+// //             phi_a2 = temp_a2_2;
+// //         }
 //     } else {
-//         phi_a0_4 = 0U;
-//         phi_return = IO_READ(PI_STATUS_REG); //(void *) *(void *)0xA4600010;
-//         if (temp_a2 != 0) {
-//             phi_v1 = temp_s1;
-//             phi_v0_2 = dramAddr;
-//             phi_a0_3 = 0U;
-// loop_12:
-//             temp_a0_2 = phi_a0_3 + 4;
-//             temp_v0_2 = phi_v0_2 + 4;
-//             temp_v0_2->unk-4 = (s32) *(phi_v1 | 0xA0000000);
-//             phi_v1 = phi_v1 + 4;
-//             phi_v0_2 = temp_v0_2;
-//             phi_a0_3 = temp_a0_2;
-//             phi_a0_4 = temp_a0_2;
-//             phi_return = temp_v0_2;
-//             if (temp_a0_2 < temp_a2) {
-//                 goto loop_12;
-//             }
-//         }
-//         phi_a1_2 = dramAddr;
-//         phi_a2 = temp_a2;
-//         if ((temp_t7 & 2) != 0) {
-//             temp_t0_2 = &sp38;
-//             sp38 = *((phi_a0_4 + temp_s1) | 0xA0000000);
-//             *(dramAddr + phi_a0_4) = (u16) temp_t0_2->unk0;
-//             phi_a1_2 = dramAddr;
-//             phi_a2 = temp_a2;
-//         }
+// //         phi_a0_4 = 0U;
+// //         if (temp_a2 != 0) {
+// //             phi_v1 = devAddr;
+// //             phi_v0_2 = dramAddr;
+// //             phi_a0_3 = 0U;
+// // loop_12:
+// //             temp_a0_2 = phi_a0_3 + 4;
+// //             temp_v0_2 = phi_v0_2 + 4;
+// //             temp_v0_2->unk-4 = (s32) *(phi_v1 | 0xA0000000);
+// //             phi_v1 = phi_v1 + 4;
+// //             phi_v0_2 = temp_v0_2;
+// //             phi_a0_3 = temp_a0_2;
+// //             phi_a0_4 = temp_a0_2;
+// //             if (temp_a0_2 < temp_a2) {
+// //                 goto loop_12;
+// //             }
+// //         }
+// //         phi_a1_2 = dramAddr;
+// //         phi_a2 = temp_a2;
+// //         if ((size & 2) != 0) {
+// //             temp_t0_2 = &sp38;
+// //             sp38 = *((phi_a0_4 + devAddr) | 0xA0000000);
+// //             *(dramAddr + phi_a0_4) = (u16) temp_t0_2->unk0;
+// //             phi_a1_2 = dramAddr;
+// //             phi_a2 = temp_a2;
+// //         }
 //     }
 //     D_8003A572 = (u8)0;
 //     if (D_8003A575 != 0) {
-//         phi_return = osStartThread(&D_80035910, phi_a1_2, phi_a2, 0xA0000000);
+//         osStartThread(&D_80035910); //, phi_a1_2, phi_a2, 0xA0000000);
 //     }
-//     return phi_return;
 // }

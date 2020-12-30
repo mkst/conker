@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1000E40C(s32, s32);
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000A420.s")
 // NON-MATCHING: mostly just stack + 1 cast
@@ -205,8 +206,33 @@ struct151 *func_1000B1B0(s32 arg0) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B3D4.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B548.s")
+// NON-MATCHING: something like this but reg is wrong
+// s32 func_1000B548(s32 *arg0) {
+//     s32 tmp0;
+//     s32 tmp4;
+//     s32 i;
+//     // s32 *ptr = arg0;
+//     s32 ret = 0;
+//
+//     for (i = 0; i < 12; i++) {
+//         tmp4 = D_800419A8[i].unk4;
+//         if (tmp4 != -1) {
+//             tmp0 = D_800419A8[i].unk0;
+//             if (tmp0 != -1) {
+//                 if (tmp4 < 3) {
+//                     *arg0++ = tmp4;
+//                     ret++;
+//                 }
+//             }
+//         }
+//     }
+//     return ret;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B638.s")
+
 
 s32 func_1000B830(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 tmp = D_800DBFF0->unk5F0 & 1;
@@ -220,7 +246,35 @@ s32 func_1000B830(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000B8B8.s")
+s32 func_1000B8B8(s32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
+    s32 tmp;
+
+    if (D_800BE9F0 == 4) {
+        if (((arg0 & 1) != 0) && (D_80041F0C == 0)) {
+            func_1000E46C(19, 0, 4096, 0);
+            arg0 = arg0 & ~1;
+        } else {
+            if (D_80041F0C != 0) {
+                tmp = D_80041F08 / D_80041F0C / 80;
+                if (tmp >= 101) {
+                    tmp = 100;
+                }
+                func_1000E588(19, tmp, 4096);
+                arg0 |= 1;
+            }
+        }
+        D_80041F08 = 0;
+        D_80041F0C = 0;
+        if ((arg0 & 2) == 0) {
+            func_1000DF68(19, 0, 1);
+            func_1000DF68(19, 32768, 0);
+            arg0 |= 2;
+        }
+        return arg0;
+    }
+    return func_1000C530(arg0, arg1, arg2, arg3, arg4);
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000BA18.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000BAFC.s")
 
@@ -302,6 +356,7 @@ s32 func_1000CA18(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CAE4.s")
+// ???
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CBA8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CBF0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CC54.s")
@@ -349,10 +404,39 @@ s32 func_1000E0F8(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E134.s")
+s32 func_1000E134(s32 arg0) {
+    s32 tmp;
+
+    if (arg0 < 150) {
+        tmp = D_8002B078[arg0][0] & ~0xF0;
+        if ((tmp == 1) || (tmp == 3)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E17C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E2F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E40C.s")
+// NON-MATCHING: using a0 not a1
+// void func_1000E40C(s32 arg0, s32 arg1) {
+//     struct151 *temp_v0;
+//
+//     if (arg1 >= 0x8000) {
+//         arg1 = 0x7FFF;
+//     } else if (arg1 < 0) {
+//         arg1 = 0;
+//     }
+//     temp_v0 = func_1000B1FC(arg1);
+//     if (temp_v0 != NULL) {
+//         if (temp_v0->unk0 < 0) {
+//             temp_v0->unk30 = arg1;
+//         }
+//         temp_v0->unk2C = arg1;
+//     }
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E46C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E588.s")
 
@@ -383,7 +467,6 @@ s32 func_1000E654(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-
 s32 func_1000E704(s32 arg0, s32 arg1, s32 arg2) {
     struct151 *tmp = func_1000B1B0(arg0);
     if (tmp && tmp->unk0 >= 0) {
@@ -410,25 +493,22 @@ s32 func_1000E770(s32 *arg0, s32 *arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000E7A0.s")
 // NON-MATCHING: mostly just wrong registers
 // void func_1000E7A0(u32 arg0, s32 arg1) {
-//     u8 tmp;
-//
+//     s32 tmp;
 //     if ((arg0 & 1) == 1) {
 //         D_80041F04 |= 1;
 //     } else if (arg0 & 2) {
-//         D_80041F0C += 1;
 //         D_80041F08 += arg1;
+//         D_80041F0C += 1;
 //     } else if (arg0 & 4) {
 //         D_80041F08 = 1 + arg1;
 //         D_80041F04 |= 4;
 //     } else if (arg0 & 8) {
-//         D_80041F0C = arg1 >> 8;
-//         tmp = arg1;
-//         if ((tmp == 0) || (tmp == 4) || (tmp == 5))  {
+//         D_80041F0C = (arg1 >> 8) & 0xff;
+//         if ((D_80041F0C == 0) || (D_80041F0C == 4) || (D_80041F0C == 5))  {
 //             D_80041F08 = 2;
-//         } else if (tmp == 10) {
+//         } else if (D_80041F0C == 10) {
 //             D_80041F08 = 1;
-//         }
-//         else {
+//         } else {
 //             D_80041F08 = 3;
 //         }
 //     } else if (arg0 & 16) {

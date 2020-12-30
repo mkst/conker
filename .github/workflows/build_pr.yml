@@ -23,14 +23,11 @@ jobs:
         path: baserom
     - name: Decrypt baserom
       run: echo ${{ secrets.CONKER_BASEROM_US }} | openssl enc -d -aes-256-cbc -pass stdin -pbkdf2 -in baserom/baserom.us.z64.aes -out baserom.us.z64
+
     - name: Perform make extract
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: make extract
-    - name: Perform make
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: make --jobs
     - name: Perform make decompress
       uses: docker://docker.io/markstreet/conker:latest
       with:
@@ -48,3 +45,20 @@ jobs:
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: sh -c "cd chunk0 && make split"
+    - name: Perform make compress (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make compress"
+    - name: Perform make combine (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make combine"
+    - name: Perform make replace (chunk0)
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: sh -c "cd chunk0 && make replace"
+
+    - name: Perform make
+      uses: docker://docker.io/markstreet/conker:latest
+      with:
+        args: make --jobs

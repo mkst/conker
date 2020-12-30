@@ -1,4 +1,4 @@
-#include <ultra64.h>
+#include <PR/sched.h>
 
 #include "functions.h"
 #include "variables.h"
@@ -19,9 +19,9 @@
 //     osCreateMesgQueue(&D_8003B218, &D_8003B680, OS_SC_MAX_MESGS);
 //     func_100039C0();
 //     osViSetEvent(&D_8003B218, 0, 1);
-//     osSetEventMesg(OS_EVENT_DP, &D_8003B218, 1);
-//     osSetEventMesg(OS_EVENT_SP, &D_8003B218, 2);
-//     osCreateThread(&D_8003B6A0, 0x14, &D_100049E0, 0, &D_8003B660, 13);
+//     osSetEventMesg(OS_EVENT_DP, &D_8003B218, (OSMesg *) 1);
+//     osSetEventMesg(OS_EVENT_SP, &D_8003B218, (OSMesg *) 2);
+//     osCreateThread(&D_8003B6A0, 0x14, (void *) func_100049E0, 0, &D_8003B660, 13);
 //     osStartThread(&D_8003B6A0);
 // }
 
@@ -38,7 +38,7 @@ void func_100051E8(void) {
 void func_10005218(void) {
     osCreateMesgQueue(&D_8003B9D0, &D_8003B9E8, 2);
     osSetEventMesg(OS_EVENT_PRENMI, &D_8003B9D0, (OSMesg *)5);
-    osCreateThread(&D_8003B9F0, 0x15, (void *) &D_100052A0, 0, &D_8003B9D0, OS_PRIORITY_RMON);
+    osCreateThread(&D_8003B9F0, 0x15, (void *) func_100052A0, 0, &D_8003B9D0, OS_PRIORITY_RMON);
     osStartThread(&D_8003B9F0);
 }
 

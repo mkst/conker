@@ -8,7 +8,7 @@ SRC_DIRS := src src/debug src/data src/libultra src/libultra/audio src/libultra/
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
-RZIP_DIRS := rzip/chunk0 rzip/chunk0_data rzip/assets00 rzip/assets01 \
+RZIP_DIRS :=  rzip/assets00 rzip/assets01 \
              rzip/assets02 rzip/assets03 rzip/assets04 rzip/assets05 \
              rzip/assets06 rzip/assets07 rzip/assets08 rzip/assets09 \
              rzip/assets0A rzip/assets0B rzip/assets0C rzip/assets0D \
@@ -23,15 +23,11 @@ H_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
 BIN_FILES := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 MP3_FILES := $(foreach dir,$(MP3_DIRS),$(wildcard $(dir)/*.mp3))
 
-CHUNK_0_RZIP_FILES := $(sort $(wildcard rzip/chunk0/*.gz))
-CHUNK_0_RUNZIP_FILES := $(sort $(foreach file,$(CHUNK_0_RZIP_FILES),$(file:.gz=.bin)))
-
 # Object files
 O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o)) \
-           $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o)) \
-           $(BUILD_DIR)/rzip/chunk0/chunk0.o $(BUILD_DIR)/rzip/chunk0_data/chunk0_data.o \
+           $(foreach file,$(MP3_FILES),$(BUILD_DIR)/$(file:.mp3=.o))
 
 ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
           $(BUILD_DIR)/rzip/assets01/assets01.o \
@@ -67,7 +63,7 @@ O_FILES += $(ASSETS)
 
 # Files requiring pre/post-processing
 GREP := grep -l
-GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(C_FILES))
+GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(C_FILES) </dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
 TARGET = $(BUILD_DIR)/conker.$(VERSION)
@@ -108,7 +104,6 @@ $(BUILD_DIR)/src/libultra/audio/%.o: CC := $(CC_OLD)
 
 $(BUILD_DIR)/src/libultra/audio/%.o: OPT_FLAGS := -g
 
-# $(BUILD_DIR)/src/code_11FA0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/src/code_13320.o: OPT_FLAGS := -g
@@ -178,14 +173,17 @@ clean:
 	rm -rf asm
 	rm -rf bin
 	rm -rf build
+	rm -rf game
 	rm -rf rzip
 	rm -rf mp3
 
 extract:
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
 
-# move this to chunk0?
-decompress: dirs chunk0/game.bin
+extract_game: bin/game.bin
+	$(PYTHON) tools/n64splat/split.py bin/game.bin game.$(VERSION).yaml game
+
+decompress: dirs extract_game chunk0/game.bin
 
 verify: $(TARGET).z64
 	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
@@ -222,13 +220,10 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
 
-$(BUILD_DIR)/chunk0.bin: $(CHUNK_0_RUNZIP_FILES)
-	cat $(CHUNK_0_RUNZIP_FILES) > $@
+chunk0/game.bin: bin/game.bin
+	cat game/rzip/code/0*.bin game/rzip/data/0000.bin > chunk0/game.bin
 
-chunk0/game.bin: $(BUILD_DIR)/chunk0.bin
-	cat $(BUILD_DIR)/chunk0.bin rzip/chunk0_data/0000.bin > $@
-
-# currently n64splat does not write them to build/rzip, so move them there
+# currently n64splat does not write these to build/rzip, so move them there
 $(BUILD_DIR)/%.bin: %.bin
 	mv $< $@
 

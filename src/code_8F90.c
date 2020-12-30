@@ -38,13 +38,13 @@
 //     // void *phi_s0_3;
 //
 //     func_10012588(&D_8003E370);
-//     arg0->unk10 = &D_10009980;
+//     arg0->unk10 = func_10009980;
 //     temp_v0 = osAiSetFrequency(arg2->unk0);
 //     arg0->unk2C = temp_v0;
-//     arg0->unk14 = &D_10009FFC;
-//     arg0->unk18 = &D_10009B2C;
-//     arg0->unk1C = &D_10009B90;
-//     arg0->unk20 = &D_10009B4C;
+//     arg0->unk14 = func_10009FFC;
+//     arg0->unk18 = func_10009B2C;
+//     arg0->unk1C = func_10009B90;
+//     arg0->unk20 = func_10009B4C;
 //     temp_f0 = ((f32) (u32) arg2->unk4 * (f32) temp_v0) / 30.0f;
 //     temp_f8 = (s32) temp_f0;
 //     D_80040F8C = temp_f8;
@@ -148,7 +148,7 @@
 //     osCreateMesgQueue(&D_8003E5D0, &D_8003E5E8, 8);
 //     osCreateMesgQueue(&D_80041298, &D_800412B0, 32);
 //     osCreateMesgQueue(&D_800416F0, &D_80041708, 40);
-//     osCreateThread(&D_8003E3A0, 4, &D_10009400, 0, &D_800406A0, arg1);
+//     osCreateThread(&D_8003E3A0, 4, (void *) func_10009400, 0, &D_800406A0, arg1);
 //     D_8002AE40 = (u8)1;
 //     osStartThread(&D_8003E3A0);
 // }
@@ -380,7 +380,7 @@ s32 func_10009980(s32 *arg0) {
         D_80040F78.unk0 = 1;
     }
     *arg0 = 0;
-    return &D_100097CC;
+    return func_100097CC;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_100099BC.s")
@@ -464,7 +464,7 @@ s32 func_10009FFC(void) {
         D_800406A0.unk10 = NULL;
         D_800406A0.unk0 = (u8)1U;
     }
-    return &D_10009CBC;
+    return func_10009CBC;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_8F90/func_1000A03C.s")

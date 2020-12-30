@@ -30,6 +30,39 @@ void func_15001970(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001A08.s")
+// NON-MATCHING: 70% there
+// void func_15001A08(void) {
+//     s32 sp24;
+//     s32 pad0;
+//     s32 sp1C;
+//     s32 temp_v0;
+//     s32 phi_a0;
+//
+//     sp24 = D_80091AF0[D_800BE9F0];
+//
+//     func_10023720(); // __osPiGetAccess
+//
+//     while ((IO_READ(PI_STATUS_REG) & 3) != 0) {};
+//
+//     sp1C = (D_80000308 | 0xB0000D24 | 0xA0000000);
+//
+//     func_10023764(); // __osPiRelAccess
+//
+//     phi_a0 = sp24;
+//     if (sp1C != 0x98CCE31A) {
+//         phi_a0 = sp24 * 2;
+//     }
+//     temp_v0 = func_10003C40(phi_a0, 1, 0, 0);
+//     D_800B0DDC = temp_v0;
+//     D_800B0DE0 = temp_v0;
+//     D_800B0DCC = 0;
+//     D_800B0DD0 = 0;
+//     D_800DBE30 = (u16)0;
+//     D_800DBE32 = (u16)0;
+//     D_800DBE34 = (u16)0;
+//     D_800DBE36 = (u16)0;
+// }
+
 
 void func_15001B08(void) {
 }

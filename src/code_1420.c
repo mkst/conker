@@ -7,11 +7,12 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/code_1420/func_10001420.s")
 // NOT MATCHING: uses v registers not a/t registers
 // void func_10001420(void) {
-//     s32 *ptr = D_80043B40;
+//     s32 *tmp = (u32)D_80043B40;
+//     s32 addr = (s32)tmp + 4064;
+//
 //     do {
-//         *ptr++ = 0;
-//     }
-//     while ((u32)ptr < (u32)&D_80043B40 + 4064);
+//         *tmp++ = 0;
+//     } while ((u32)tmp < addr);
 // }
 
 void func_10001444(void) {
@@ -84,7 +85,7 @@ s32 func_10002070(s32 arg0, s32 arg1, s32 arg2) {
 // NOT MATCHING: stack is incorrect
 // void func_10002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     D_80035500 = 0;
-//     func_100020D0(&D_10002070, 0, arg3, &arg3);
+//     func_100020D0(func_10002070, 0, arg3, &arg3);
 // }
 
 // this is a beast:
