@@ -1,0 +1,228 @@
+basename: conker
+options:
+  find_file_boundaries: yes
+  compiler: IDO
+  cpp_args:
+  - "-Iinclude"
+  - "-Iinclude/2.0L"
+  - "-D_LANGUAGE_C"
+  - "-D_FINALROM"
+  extensions: "custom/n64splat"
+  modes:
+  - all
+  generated_c_preamble: |
+    #include <ultra64.h>
+    #include "functions.h"
+    #include "variables.h"
+  undefined_syms: undefined_syms.eu.txt
+  symbol_addrs: tools/symbol_addrs.eu.txt
+segments:
+  - name:  header
+    type:  header
+    start: 0x00000000
+  - name:  boot
+    type:  bin
+    start: 0x00000040
+  - [0x00000168, "bin"]
+  - [0x000007D4, "bin"]
+  - [0x00000CF0, "bin"]
+  - type:  code
+    start: 0x00001000
+    vram:  0x10001000
+    files:
+    - [0x1000, "asm", "entrypoint"]
+    - [0x1050, "c"]
+    - [0x2E40, "asm"]
+    - [0x2EE0, "asm"]
+    - [0x3880, "asm", "libultra/os/createthread"]
+    - [0x32B0, "asm"]
+    - [0x3950, "asm"] # libc/syncprintf.c
+    - [0x39B0, "asm"]
+    - [0x3A40, "asm"]
+    - [0x3A50, "asm"]
+    - [0x3E20, "asm"]
+    - [0x46C0, "asm"]
+    - [0x4C30, "asm"]
+    - [0x5380, "asm"]
+    - [0x5AD0, "asm"]
+    - [0x5DA0, "asm"]
+    - [0x8410, "asm"]
+    - [0x8470, "asm"]
+    - [0x9280, "asm"]
+    - [0xA710, "asm"]
+    - [0xEDF0, "asm"]
+    - [0x12290, "asm"]
+    - [0x12B10, "asm"]
+    - [0x12BC0, "asm"]
+    - [0x13610, "asm"]
+    - [0x15840, "asm"]
+    - [0x17B60, "asm"]
+    - [0x17D90, "asm"]
+    - [0x17DE0, "asm"]
+    - [0x180E0, "asm"]
+    - [0x181B0, "asm"]
+    - [0x18200, "asm"]
+    - [0x18F50, "asm"]
+    - [0x18FA0, "asm"]
+    - [0x19090, "asm"]
+    - [0x19150, "asm"]
+    - [0x19DA0, "asm"]
+    - [0x19E40, "asm"]
+    - [0x1ADD0, "asm"]
+    - [0x1C350, "asm"]
+    - [0x1C980, "asm"]
+    - [0x1CCD0, "asm"]
+    - [0x1DBF0, "asm"]
+    - [0x1DE90, "asm"]
+    - [0x1E460, "asm"]
+    - [0x1E590, "asm"]
+    - [0x1E770, "asm"]
+    - [0x1E790, "asm"]
+    - [0x1E820, "asm"]
+    - [0x202F0, "asm"]
+    - [0x213B0, "asm"]
+    - [0x217E0, "asm"]
+    - [0x22360, "asm"]
+    - [0x22780, "asm"]
+    - [0x22A10, "asm"]
+    - [0x22AB0, "asm"]
+    - [0x22D70, "asm"]
+    - [0x23050, "asm"]
+    - [0x23130, "asm"]
+    - [0x231B0, "asm"]
+    - [0x23260, "asm"]
+    - [0x232A0, "asm"]
+    - [0x23400, "asm"]
+    - [0x23590, "asm"]
+    - [0x23830, "asm"]
+    - [0x238E0, "asm"]
+    - [0x23A20, "asm"]
+    - [0x23CA0, "asm"]
+    - [0x23CC0, "asm"]
+    - [0x24210, "asm"]
+    - [0x24260, "asm"]
+    - [0x242F0, "asm"]
+    - [0x24870, "asm"]
+    - [0x24BF0, "asm"]
+    - [0x24ED0, "asm"]
+    - [0x251D0, "asm"]
+    - [0x252D0, "asm"]
+    - [0x25360, "asm"]
+    - [0x25C10, "asm"]
+    - [0x25FC0, "asm"]
+    - [0x26370, "asm"]
+    - [0x265F0, "asm"]
+    - [0x26640, "asm"]
+    - [0x26700, "asm"]
+    - [0x26870, "asm"]
+    - [0x26AD0, "asm"]
+    - [0x26B30, "asm"]
+    - [0x27700, "asm"]
+    - [0x277C0, "asm"]
+    - [0x277D0, "asm"]
+    - [0x27950, "asm"]
+    - [0x289A0, "asm"]
+  - [0x29400, "bin"]
+  - [0x427B0, "bin", "game"] # chunk0
+  - type: code
+    vram:  0x16000000
+    start: 0x19ede8
+    files:
+    - [0x19ede8, "asm"] # debugger?
+  - [0x001A24F0, "bin"]
+  - [0x1a3b40, "bin"]
+  - [0x333bfc, "bin"]
+  - [0xab2240, "bin"] # offsets
+  - name:  assets00
+    type:  rzip
+    start: 0xab2330
+  - name:  assets01
+    type:  rzip
+    start: 0xaf5208
+  - name:  assets02
+    type:  rzip
+    start: 0xbb2478
+  - name:  assets03
+    type:  rzip
+    start: 0xf8fb50
+  - name:  assets04
+    type:  rzip
+    start: 0xf9ef58
+  - name:  assets05
+    type:  rzip
+    start: 0x1154ba8
+  - name:  assets06
+    type:  rzip
+    start: 0x11806e8
+  - name:  assets07
+    type:  rzip
+    start: 0x1204c30
+  - name:  assets08
+    type:  rzip
+    start: 0x1204c80
+  - name:  assets09
+    type:  rzip
+    start: 0x1205000
+  - name:  assets0A
+    type:  rzip
+    start: 0x125d748
+  - name:  assets0B
+    type:  rzip
+    start: 0x129eff8
+  - name:  assets0C
+    type:  rzip
+    start: 0x12a1eb0
+  - name:  assets0D
+    type:  rzip
+    start: 0x12dfc38
+  - name:  assets0E
+    type:  rzip
+    start: 0x12dfe00
+  - name:  assets0F
+    type:  rzip
+    start: 0x12e3b40
+  - name:  assets10
+    type:  rzip
+    start: 0x12f6d88
+  - name:  assets11
+    type:  rzip
+    start: 0x12fcb38
+  - name:  assets12
+    type:  rzip
+    start: 0x1300398
+  - name:  assets13
+    type:  rzip
+    start: 0x1300fd0
+  - name:  assets14
+    type:  rzip
+    start: 0x1305d48
+  - name:  assets15
+    type:  rzip
+    start: 0x132f5d8
+  - name:  assets16 # mp3s
+    type:  rzip
+    start: 0x13313b8 # uncompressed
+  - name:  assets17
+    type:  rzip
+    start: 0x29af928 # uncompressed
+  - name:  assets18
+    type:  rzip
+    start: 0x3f830b0
+  - name:  assets19
+    type:  rzip
+    start: 0x3f833d0
+  - name:  assets1A
+    type:  rzip
+    start: 0x3f88ea8
+  - name:  assets1B
+    type:  rzip
+    start: 0x3f8a580
+  - name:  assets1C
+    type:  rzip
+    start: 0x3f8ba58
+  # - name:  assets1D
+  #   type:  rzip
+  #   start: 0x3f8c6b0
+  - [0x3f8c6b0, "bin"]
+  - [0x3f8c740, "bin", trailer] # 0xff to end
+  - [0x04000000] # the end of the rom

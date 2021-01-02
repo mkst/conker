@@ -8,11 +8,11 @@ segments:
     type:  rzip
     xor:   0x8039CCCA
     start: 0x0
-  - [0x144700, "bin", "code_padding"] # (almost) zero padding
+  - [0x143ca4, "bin", "code_padding"] # (almost) zero padding
   - name:  data
     type:  rzip
     start: 0x145ED8
     files:
       - [0x145ED8, "compressed"] # compressed .data
-  - [0x15A388, "bin", "data_padding"] # zero padding
+  - [0x15A36C, "bin", "data_padding"] # zero padding
   - [0x15C638] # 1,427,000 bytes

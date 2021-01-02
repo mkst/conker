@@ -28,7 +28,7 @@ void func_1502AAF8(s32 arg0) {
 //     s32 phi_s0_2;
 //
 //     sp38 = 1;
-//     phi_s0_2 = 0xAB1950;
+//     phi_s0_2 = 0xAB1950; // offsets table
 //     temp_s1 = &arg2;
 //
 //     do {

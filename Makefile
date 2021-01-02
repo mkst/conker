@@ -4,7 +4,16 @@ VERSION := us
 ASM_DIRS := asm \
             asm/libultra asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 BIN_DIRS := bin
-SRC_DIRS := src src/debug src/data src/libultra src/libultra/audio src/libultra/gu src/libultra/io src/libultra/libc src/libultra/os
+ifeq ($(VERSION),us)
+SRC_DIR := src
+else
+SRC_DIR := src_eu
+endif
+
+SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/debug $(SRC_DIR)/data \
+            $(SRC_DIR)/libultra $(SRC_DIR)/libultra/audio $(SRC_DIR)/libultra/gu \
+            $(SRC_DIR)/libultra/io $(SRC_DIR)/libultra/libc $(SRC_DIR)/libultra/os
+
 MP3_DIRS := mp3 mp3/hungover mp3/windy mp3/barn_boys \
             mp3/bats_tower mp3/sloprano mp3/uga_buga mp3/spooky \
             mp3/its_war mp3/the_heist mp3/intro mp3/other
@@ -85,7 +94,7 @@ PYTHON = python3
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2 -o32
 
-INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os -I src/libultra/audio
+INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I $(SRC_DIR)/libultra/os -I $(SRC_DIR)/libultra/audio
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
@@ -93,69 +102,69 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.txt -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
 
 ### file-specific compile flags
 
 # compiler version
-$(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
-$(BUILD_DIR)/src/libultra/%.o: CC := $(CC)
-$(BUILD_DIR)/src/libultra/audio/%.o: CC := $(CC_OLD)
+$(BUILD_DIR)/$(SRC_DIR)/%.o: CC := $(CC_OLD)
+$(BUILD_DIR)/$(SRC_DIR)/libultra/%.o: CC := $(CC)
+$(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: CC := $(CC_OLD)
 
-$(BUILD_DIR)/src/libultra/audio/%.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 
-$(BUILD_DIR)/src/code_12820.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_128D0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_13320.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_15550.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17870.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17880.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17A80.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17AA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17AF0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17C00.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17D80.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17DF0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17EC0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_17F10.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_18C60.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_18CB0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_18DA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_18E60.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_19AB0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_19B50.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1AAE0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1C690.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1C9E0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1D900.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1DBA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1DC80.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1E170.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1E2A0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1E4A0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1E530.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_1FB40.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_20000.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_214F0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_22040.o: OPT_FLAGS := -g
-$(BUILD_DIR)/src/code_22460.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_12820.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_128D0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_13320.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_15550.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17870.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17880.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17A80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17AA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17AF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17C00.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17D80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17DF0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17EC0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_17F10.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_18C60.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_18CB0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_18DA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_18E60.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_19AB0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_19B50.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1AAE0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1C690.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1C9E0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1D900.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1DBA0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1DC80.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1E170.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1E2A0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1E4A0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1E530.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_1FB40.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_20000.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_214F0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_22040.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/code_22460.o: OPT_FLAGS := -g
 
-# $(BUILD_DIR)/src/libultra/os/virtualtophysical.o: OPT_FLAGS := -O1 -g3
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/os/virtualtophysical.o: OPT_FLAGS := -O1 -g3
 
 # libultra specifics
 
 # asm-processor cannot handle -O -g3 flag
-# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: OPT_FLAGS := -O -g3
-# $(BUILD_DIR)/src/libultra/io/aisetfreq.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.o: OPT_FLAGS := -O -g3
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.o: CC := $(CC_OLD)
 
-# $(BUILD_DIR)/src/libultra/os/getthreadpri.o: OPT_FLAGS := -g2 -O2
-# $(BUILD_DIR)/src/libultra/os/getthreadpri.o: CC := $(CC_OLD)
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/os/getthreadpri.o: OPT_FLAGS := -g2 -O2
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/os/getthreadpri.o: CC := $(CC_OLD)
 
 # mips version
-# $(BUILD_DIR)/src/code_19AB0.o: MIPSBIT := -mips2
+# $(BUILD_DIR)/$(SRC_DIR)/code_19AB0.o: MIPSBIT := -mips2
 
 # loop unrolling
-# $(BUILD_DIR)/src/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
+# $(BUILD_DIR)/$(SRC_DIR)/code_1050.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 ######################## Targets #############################
 

@@ -38,10 +38,12 @@ def main(indir, outdir, print_c_file):
         output_offsets[idx] = xored
         offset += compressed_length
         idx += 1
+        sys.stdout.write('.');sys.stdout.flush()
     xored = offset ^ XOR_KEY
     output_offsets[idx] = xored
     with open(f"{outdir}/offsets.bin", "wb") as o:
         o.write(struct.pack(">" + NUM_OFFSETS * "I", *output_offsets))
+    print("") # done
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

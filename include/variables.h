@@ -141,9 +141,9 @@ extern s32  D_8002BD60;
 
 /* data section from D_8002C080 to D_8002C8D0 (ish) */
 
-extern s32  D_8002D4B0;
+// BSS STARTS at D_8002D4B0
+extern s32  D_8002D4B0; // BSS
 extern s32 *D_8002D8B0;
-
 
 /* 80030000 */
 extern OSThread D_80031AE0;
@@ -343,6 +343,8 @@ extern u8   D_800428C6[];
 extern u8   D_800428C8[];
 extern s32  D_800428E0;
 extern s32 *D_800428F8;
+
+// BSS ENDS AT D_80043B40
 
 extern s32  D_80043B40[]; // 4064
 extern s32  D_80044B20; // 253952 bytes, bunch of structs?

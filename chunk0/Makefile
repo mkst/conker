@@ -2,7 +2,14 @@ VERSION   := us
 BUILD_DIR := build
 ASM_DIRS  := asm
 DATA_DIRS := bin
-SRC_DIRS  := src src/data src/done
+
+ifeq ($(VERSION),us)
+SRC_DIR  := src
+else
+SRC_DIR := src_eu
+endif
+
+SRC_DIRS  := $(SRC_DIR) $(SRC_DIR)/data $(SRC_DIR)/done
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
@@ -18,7 +25,7 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
 
 # Files requiring pre/post-processing
 GREP := grep -rl
-GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM src/ </dev/null)
+GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
 RZ_FILES := $(wildcard $(SPLIT_DIR)/*.gz)
@@ -41,7 +48,7 @@ OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
-GZIPLEVEL := --best --no-name --force
+GZIPLEVEL := --best --no-name --force -c
 GZIP = ../tools/gzip $(GZIPLEVEL)
 SPLIT := split -b 4096 -d --additional-suffix=.bin --suffix-length=4
 
@@ -57,8 +64,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_syms.txt -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
-
+LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T ../undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
 ####################### Overrides ############################
 
 # custom OPT_FLAGS
@@ -101,7 +107,7 @@ split: $(TARGET).code.bin $(TARGET).data.bin
 
 compress:
 	$(PYTHON) ../tools/compress_chunk0.py $(SPLIT_DIR) $(SPLIT_DIR)
-	$(GZIP) $(TARGET).data.bin
+	$(GZIP) $(TARGET).data.bin > $(TARGET).data.bin.gz
 	$(PYTHON) ../tools/fixup_gzip.py $(TARGET).data.bin.gz $(TARGET).data.gz.bin
 
 combine: $(RZ_FILES)
