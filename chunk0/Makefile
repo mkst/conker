@@ -1,5 +1,14 @@
 VERSION   := us
 BUILD_DIR := build
+
+NON_MATCHING := 0
+VERIFY_GZ    := verify_gz
+VERIFY_O     := verify_o
+ifeq ($(NON_MATCHING),1)
+VERIFY_GZ    :=
+VERIFY_O     :=
+endif
+
 ASM_DIRS  := asm
 DATA_DIRS := bin
 
@@ -27,8 +36,6 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
 GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
-
-RZ_FILES := $(wildcard $(SPLIT_DIR)/*.gz)
 
 
 TARGET = $(BUILD_DIR)/chunk0
@@ -86,11 +93,11 @@ $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
 $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(DATA_DIRS),$(shell mkdir -p build/$(dir)))
 
 
-default: all
+default: verify_o
 
-all: $(BUILD_DIR) $(TARGET).bin verify_o
+all: $(BUILD_DIR) verify_o replace
 
-check:
+check: game.bin
 	@echo "$$(cat game.$(VERSION).sha1)  game.bin" | sha1sum --check
 
 clean:
@@ -98,23 +105,9 @@ clean:
 	rm -rf bin
 	rm -rf build
 
-extract: check
-	$(PYTHON) ../tools/n64splat/split.py game.bin chunk0.$(VERSION).yaml .
+extract: check $(BUILD_DIR)/splat
 
-split: $(TARGET).code.bin $(TARGET).data.bin
-	mkdir -p $(SPLIT_DIR)
-	$(SPLIT) $(TARGET).code.bin $(SPLIT_DIR)/
-
-compress:
-	$(PYTHON) ../tools/compress_chunk0.py $(SPLIT_DIR) $(SPLIT_DIR)
-	$(GZIP) $(TARGET).data.bin > $(TARGET).data.bin.gz
-	$(PYTHON) ../tools/fixup_gzip.py $(TARGET).data.bin.gz $(TARGET).data.gz.bin
-
-combine: $(RZ_FILES)
-	@cat $(sort $(RZ_FILES)) > $(TARGET).code.gz.bin
-	cat $(BUILD_DIR)/split/offsets.bin $(TARGET).code.gz.bin ../game/bin/code_padding.bin $(TARGET).data.gz.bin ../game/bin/data_padding.bin > $(TARGET).gz.bin
-
-replace: verify_gz
+replace: $(TARGET).gz.bin $(VERIFY_GZ)
 	cp $(TARGET).gz.bin ../bin/game.bin
 
 verify_o: $(TARGET).bin
@@ -124,8 +117,12 @@ verify:
 	@echo "$$(cat game.$(VERSION).code.gz.sha1)  $(TARGET).code.gz.bin" | sha1sum --check
 	@echo "$$(cat game.$(VERSION).data.gz.sha1)  $(TARGET).data.gz.bin" | sha1sum --check
 
-verify_gz:
+verify_gz: $(TARGET).gz.bin
 	@echo "$$(cat game.$(VERSION).gz.sha1)  $(TARGET).gz.bin" | sha1sum --check
+
+progress: ../html/progress.csv
+
+### Recipes
 
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
@@ -158,3 +155,38 @@ $(BUILD_DIR)/%.o: %.s
 
 $(BUILD_DIR)/%.o: %.bin
 	$(LD) -r -b binary -o $@ $<
+
+$(TARGET).code.gz.bin: $(TARGET).code.bin
+	mkdir -p $(SPLIT_DIR)
+	$(SPLIT) $(TARGET).code.bin $(SPLIT_DIR)/
+	$(PYTHON) ../tools/compress_chunk0.py $(SPLIT_DIR) $(SPLIT_DIR)
+	cat $(SPLIT_DIR)/*.gz > $(TARGET).code.gz.bin
+
+$(TARGET).data.gz.bin: $(TARGET).data.bin
+	$(GZIP) $(TARGET).data.bin > $(TARGET).data.bin.gz
+	$(PYTHON) ../tools/fixup_gzip.py $(TARGET).data.bin.gz $(TARGET).data.gz.bin
+
+$(TARGET).gz.bin: $(TARGET).code.gz.bin $(TARGET).data.gz.bin $(TARGET).code.pad $(TARGET).data.pad
+	cat $(BUILD_DIR)/split/offsets.bin $(TARGET).code.gz.bin $(TARGET).code.pad $(TARGET).data.gz.bin $(TARGET).data.pad > $(TARGET).gz.bin
+
+$(BUILD_DIR)/splat: chunk0.$(VERSION).yaml
+	$(PYTHON) ../tools/n64splat/split.py game.bin chunk0.$(VERSION).yaml .
+	@touch $(BUILD_DIR)/splat
+
+ifeq ($(NON_MATCHING),1)
+$(TARGET).code.pad: $(TARGET).code.gz.bin
+	dd if=/dev/zero of=$@ bs=1 count=$$((1335000-2048-$$(wc -c <$(TARGET).code.gz.bin)))
+
+$(TARGET).data.pad: $(TARGET).data.gz.bin
+	dd if=/dev/zero of=$@ bs=1 count=$$((92000-$$(wc -c <$(TARGET).data.gz.bin)))
+else
+$(TARGET).code.pad:
+	cp ../game/bin/code_padding.bin $@
+
+$(TARGET).data.pad:
+	cp ../game/bin/data_padding.bin $@
+endif
+
+../html/progress.csv: verify_o
+	mkdir -p ../html
+	$(PYTHON) ../tools/progress.py $(BUILD_DIR)/chunk0.map . .code_code > $@

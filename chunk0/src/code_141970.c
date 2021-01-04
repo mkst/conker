@@ -36,10 +36,12 @@ void func_15141DA4(void *arg0, s32 arg1, s32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15141E38.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15141F78.s")
 // NON-MATCHING: need to determine arguments
+// void func_1513C650(s32, s32, s32, u16, s32, s32, s32, f32, f32, s32, s32, s32, s32, s32, u8, s32);
+// s32 func_1513C650(s32 arg0, u8 arg1, u8 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u8 arg9, u8 argA, s32 argB, s32 argC, s32 argD, u8 argE, s32 argF);
 // void func_15141F78(u8 arg0, struct157 *arg1, f32 arg2, s32 arg3, struct157 *arg4, u8 arg5) {
-//     s32 phi_v0;
-//     f32 temp_f2;
 //     struct157 tmp;
+//     f32 temp_f2;
+//     s32 phi_v0;
 //
 //     tmp.unk6 = arg0;
 //     tmp.unk7 = 0;
@@ -57,10 +59,11 @@ void func_15141DA4(void *arg0, s32 arg1, s32 arg2) {
 //     tmp.unk16 = 0;
 //     tmp.unk17 = 7;
 //     tmp.unk20 = 0xFF;
+//     tmp.unk1C = arg1->unk18;
 //     tmp.unk22 = 0x28;
 //     tmp.unk24 = 6;
-//     tmp.unk1C = arg1->unk18;
 //     temp_f2 = ((func_150ADA68() * 5.0f) + 10.0f) * arg2;
+//     // --- matching to here ---
 //     if (arg5 == 2) {
 //         phi_v0 = 1;
 //     } else {
@@ -105,7 +108,60 @@ s32 func_151422F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15143044.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_1514306C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15143134.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_151432BC.s")
+
+// void func_151432BC(struct208 *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
+//     struct209 tmp;
+//     f32 temp_f2;
+//     f32 temp_f6;
+//     f32 temp_ret;
+//     s32 temp_t6;
+//     u8 temp_a0;
+//
+//     temp_t6 = (arg0->unk15) & 3;
+//     if (temp_t6 == 0) {
+//         tmp.unk1B = func_150ADA20();
+//         tmp.unk14 = func_151423D8((tmp.unk1B - 64) & 0xFF);
+//         tmp.unk10 = func_151423D8(tmp.unk1B);
+//         temp_ret = func_150ADA68();
+//         temp_f2 = temp_ret * arg0->unk6;
+//         *arg1 = (arg0->unk0 + (temp_f2 * tmp.unk10));
+//         *arg2 = (arg0->unk4 - (temp_f2 * tmp.unk14));
+//         *arg3 = (arg0->unk2 + arg0->unk8);
+//         *arg4 = arg0->unk2;
+//     } else if (temp_t6 != 1) {
+//         if (temp_t6 == 2) {
+//             tmp.unk2F = (u32) (arg0->unk10 * D_800A5644); // 0.7111111283302307
+//             tmp.unk28 = func_151423D8((tmp.unk2F - 64));
+//             tmp.unk24 = func_151423D8(tmp.unk2F);
+//             tmp.unk20 = (func_150ADA68() * (2.0f * (f32) arg0->unk6)) + (f32) -(s32) arg0->unk6;
+//             temp_f2 = (func_150ADA68() * (2.0f * (f32) arg0->unkA)) + (f32) -(s32) arg0->unkA;
+//             temp_f6 = temp_f2 * tmp.unk24;
+//             *arg1 = (arg0->unk0 + ((tmp.unk20 * tmp.unk24) + (temp_f2 * tmp.unk28)));
+//             *arg2 = (arg0->unk4 + (temp_f6 - (tmp.unk20 * tmp.unk28)));
+//             *arg3 = (arg0->unk2 + arg0->unk8);
+//             *arg4 = arg0->unk2;
+//         } else {
+//             *arg1 = arg0->unk0;
+//             *arg2 = arg0->unk4;
+//             *arg3 = (arg0->unk2 + arg0->unk8);
+//             *arg4 = (arg0->unk2 - arg0->unk8);
+//         }
+//     } else {
+//         tmp.unkB = func_150ADA20();
+//         tmp.unk4 = func_151423D8((tmp.unkB - 64));
+//         tmp.unk0 = func_151423D8(tmp.unkB);
+//         temp_ret = func_150ADA68();
+//         temp_f2 = temp_ret * (f32) arg0->unk6;
+//         *arg1 = (arg0->unk0 + (temp_f2 * tmp.unk0));
+//         *arg2 = (arg0->unk4 - (temp_f2 * tmp.unk4));
+//         *arg3 = (arg0->unk2 + arg0->unk8);
+//         *arg4 = (arg0->unk2 - arg0->unk8);
+//     }
+// }
+
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_151436B4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_1514373C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15143794.s")
@@ -309,7 +365,7 @@ void func_151467A4(f32 *arg0, f32 arg1, f32 *arg2, f32 arg3, f32 arg4, f32 arg5,
     *arg0 = *arg0 - D_800BE9A4;
     if (*arg0 < 0.0f) {
         *arg0 = func_150ADA68() * arg1;
-        if ((func_150ADA20(arg0) & 3) != 0) {
+        if ((func_150ADA20() & 3) != 0) {
             *arg2 = (func_150ADA68() * (arg4 - arg3)) + arg3;
         } else {
             *arg2 = (func_150ADA68() * (arg5 - arg4)) + arg4;

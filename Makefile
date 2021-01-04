@@ -1,6 +1,12 @@
 BUILD_DIR = build
 VERSION := us
 
+NON_MATCHING := 0
+VERIFY       := verify
+ifeq ($(NON_MATCHING),1)
+VERIFY       :=
+endif
+
 ASM_DIRS := asm \
             asm/libultra asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
 BIN_DIRS := bin
@@ -170,7 +176,7 @@ $(BUILD_DIR)/$(SRC_DIR)/code_22460.o: OPT_FLAGS := -g
 
 default: all
 
-all: check dirs $(TARGET).z64 verify
+all: check dirs $(TARGET).z64 $(VERIFY)
 
 check:
 	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
@@ -186,7 +192,7 @@ clean:
 	rm -rf rzip
 	rm -rf mp3
 
-extract:
+extract: check
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
 
 extract_game: bin/game.bin

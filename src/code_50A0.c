@@ -6,7 +6,7 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_100050A0.s")
 // NON-MATCHING: will match once BSS is figured out
-// static u64 D_8003B260;
+// u64 D_8003B260;
 // void func_100050A0(OSMesgQueue *queue) {
 //     D_8003B260 = 0x00000000FEFEFEFE;
 //     D_8003B234 = 0;
@@ -14,9 +14,9 @@
 //     D_8003B238 = (u8)0xFF;
 //     D_8003B239 = (u8)0;
 //     D_8003B23A = (u8)0;
-//     osCreateMesgQueue(&D_8003B1E8, &D_8003B660, OS_SC_RDP_DONE_MSG);
-//     osCreateMesgQueue(&D_8003B200, &D_8003B670, OS_SC_RETRACE_MSG);
-//     osCreateMesgQueue(&D_8003B218, &D_8003B680, OS_SC_MAX_MESGS);
+//     osCreateMesgQueue(&D_8003B1E8, &D_8003B660, 3);
+//     osCreateMesgQueue(&D_8003B200, &D_8003B670, 1);
+//     osCreateMesgQueue(&D_8003B218, &D_8003B680, 8);
 //     func_100039C0();
 //     osViSetEvent(&D_8003B218, 0, 1);
 //     osSetEventMesg(OS_EVENT_DP, &D_8003B218, (OSMesg *) 1);
@@ -47,6 +47,7 @@ void func_10005298(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_50A0/func_100052A0.s")
 // NON-MATCHING: lots to figure out
+// u64 D_8003BC20;
 // void func_100052A0(s32 arg0) {
 //     u32 temp_t3;
 //     u32 temp_t4;
@@ -64,7 +65,6 @@ void func_10005298(void) {
 //     osStopThread(&D_80031AE0);
 //     func_100093CC(); // stop thread D_8003E3A0 if D_8002AE40 not null
 //     D_8003BC20 = osGetTime();
-//     // D_8003BC20.unk-43DC = temp_v1;
 //     __osViInit();
 //     D_8002AAE0 = 1;
 //     osSetThreadPri(0, 11);

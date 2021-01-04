@@ -41,18 +41,6 @@ jobs:
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: sh -c "cd chunk0 && make --jobs"
-    - name: Perform make split (chunk0)
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: sh -c "cd chunk0 && make split"
-    - name: Perform make compress (chunk0)
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: sh -c "cd chunk0 && make compress"
-    - name: Perform make combine (chunk0)
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: sh -c "cd chunk0 && make combine"
     - name: Perform make replace (chunk0)
       uses: docker://docker.io/markstreet/conker:latest
       with:

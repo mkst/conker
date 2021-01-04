@@ -408,6 +408,12 @@ extern s32 D_80089534[];
 extern s16 D_80089550;
 extern void (*D_80089C44[])(void);
 extern void (*D_80089C54[])(void);
+extern void (*D_80089EE8[])(void);
+extern void (*D_80089EF0[])(void);
+extern void (*D_80089EF8[])(void);
+extern void (*D_80089F2C[])(void);
+// extern void (*D_80089F60[])(s32, s32);
+extern void (*D_80089F60[])(s32, s32, u8);
 extern struct32 D_8008A0B4[];
 extern s32  D_8008A084[];
 extern struct115 D_8008B4A8[];
@@ -587,6 +593,10 @@ extern f32 D_800A3530;
 extern f32 D_800A3550;
 extern f32 D_800A3554;
 extern f32 D_800A35AC;
+extern s32 D_800A4AA0; //?
+extern f32 D_800A5168;
+extern f32 D_800A5178;
+extern f32 D_800A5644;
 extern f32 D_800A56A8;
 extern f32 D_800A56AC;
 extern f32 D_800A56B4;
@@ -667,7 +677,10 @@ extern struct140 D_800BE628[]; // contains structs size 0x180
 // extern s32 D_800BE628;
 extern s32  D_800BE62C;
 extern u8   D_800BE635;
-extern f32  D_800BE63C;
+extern s32  D_800BE638;
+extern s32  D_800BE63C[];
+extern s32  D_800BE650;
+extern s32  D_800BE654[];
 extern f32  D_800BE6B8;
 extern struct156 D_800BE760[];
 extern OSMesgQueue *D_800BE900;
@@ -1021,6 +1034,8 @@ extern s32  D_800DCDC4; // probably wrong type
 extern u8   D_800DCDD0;
 extern s8   D_800DD190;
 extern u8   D_800DD198;
+extern f32  D_800DD1D8[];
+extern f32  D_800DD1E8[];
 
 extern u8   D_800DD2C0;
 extern u8   D_800DD2D0;

@@ -1,5 +1,7 @@
 # Conker's Bad Fur Day Decompilation
 
+![build](https://github.com/mkst/conker/workflows/build/badge.svg)
+
 A WIP decompilation of Conker's Bad Fur Day.
 
 Note: To use this repository, you must already have a copy of the game.
@@ -11,7 +13,7 @@ Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name i
 **Preamble**
 
 The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
-If this is not the case, check the `Dockerfile` for the prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows.
+If this is not the case, see the [Dockerfile](Dockerfile) for the prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows. See the [Quickstart](https://github.com/mkst/conker/wiki/Quickstart) for more information.
 
 **Clone repository**
 
@@ -20,13 +22,13 @@ git clone https://github.com/mkst/conker.git --recursive
 cd conker
 ```
 
-**Build Docker image**
+**Build Docker image (optional)**
 
 ```sh
 docker build . -t conker
 ```
 
-**Spin up the image interactively**
+**Spin up the image interactively (optional)**
 
 ```sh
 docker run --rm -ti -v $(pwd):/conker conker bash
@@ -93,7 +95,7 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 
 ### Compressed section(s)
 
-There a number of compressed sections within the ROM. The goal is to be able to:
+There are a number of compressed sections within the ROM. The goal is to be able to:
 
   1. Extract all files within each compressed section
   2. Decompile and/or document them
@@ -109,7 +111,7 @@ The core game logic code is compressed within the ROM. See the [README](chunk0/R
 
  - rarezip/rareunzip; python scripts to compress/decompress the compression format used in the ROM.
 
-NOTE: `gzip` is used for compression rather than `zlib`; use the one in `tools` in order to get matching compression.
+NOTE: `gzip` is used for compression rather than `zlib`; use the binary in `tools/` in order to get matching compression.
 
 ## Existing tools
 
@@ -119,6 +121,7 @@ This repo makes use of the following open-source tools without which, there woul
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow `GLOBAL_ASM` wrappers to include assembly within the c files
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
  - [ido-static-recomp](https://github.com/Emill/ido-static-recomp); IDO compiler
+ - [gzip](https://ftp.gnu.org/gnu/gzip/); gzip 1.24 from 1993
 
 # Contributing
 
