@@ -1,8 +1,20 @@
-# Config
+# config/
 
-This directory contains `yaml` files used by the `extract_compressed` Python script to extract the compressed chunks in the ROM that do not have an offsets table.
+This directory contains `yaml` files used by the `extract_compressed` Python script to extract the compressed chunks in the ROM that do not (appear to?) have an offsets table.
 
-## Usage:
+# Compressed Sections
+
+## Decompression
+
+Use the `extract_compressed.py` script to decompress these compressed files.
+
+The arguments are the config file, the file to be decompressed, and the output directory to extract to, e.g.:
+
+```sh
+python3 tools/extract_compressed.py config/compressed06.us.yaml bin/compressed06.bin tmp/
+```
+
+You can also iterate over all 6 compressed sections with something like this:
 
 ```sh
 # create output folders
@@ -11,52 +23,22 @@ for d in 00 01 02 03 04 05 06; do mkdir -p textures/${d}; done
 for d in 00 01 02 03 04 05 06; \
 do \
     echo "extracting compressed${d}"; \
-    python3 tools/extract_compressed.py config/compressed${d}.yaml \
+    python3 tools/extract_compressed.py config/compressed${d}.us.yaml \
       bin/compressed${d}.bin textures/${d}; \
 done
 ```
 
-## Assets
+**NOTE:** Change `us` to `eu` if you are working with the `eu` ROM.
 
-**Assets 1C**
+### Compression
 
-Contains a bunch of text including:
- - Level names
- - Cheat codes (and swear words)
- - Credits
+The same script that is used to compress the `chunk0` assets can be re-used to compressed these files. There is no 2-byte alignment within these files, so be sure to pass the `--no-padding` flag:
 
 ```sh
-mkdir -p text/
-python3 tools/extract_compressed.py config/assets1C.yaml rzip/assets1C/0000.bin text/
-```
-
-**Assets 13**
-
-Contains a handful of compressed files.
-```
-24 0 0
-2264 0 0
-3072 0 128
-56 268435456 16
-368 268435456 16
-680 268435456 16
-992 268435456 16
-1304 268435456 16
-1616 268435456 16
-1928 268435456 144
-```
-
-**Assets 08**
-
-contains some compressed files:
-```
-0x48 268435456 16
-0x80 268435456 16
-0xe0 268435456 16
-0x148 268435456 16
-0x1a8 268435456 16
-0x1f0 268435456 16
-0x258 268435456 16
-0x298 268435456 16
-0x310 268435456 144
+# create output folder
+mkdir -p tmp2
+# perform compression
+python3 tools/compress_dir.py tmp tmp2 --no-padding
+# combine compressed files into single blob
+cat tmp2/*.gz > compressed.bin
 ```

@@ -1,0 +1,200 @@
+basename: conker
+options:
+  find_file_boundaries: yes
+  compiler: IDO
+  cpp_args:
+  - "-Iinclude"
+  - "-Iinclude/2.0L"
+  - "-D_LANGUAGE_C"
+  - "-D_FINALROM"
+  extensions: "custom/n64splat"
+  generated_c_preamble: |
+    #include <ultra64.h>
+    #include "functions.h"
+    #include "variables.h"
+  undefined_syms: undefined_syms.debug.txt
+  symbol_addrs: symbol_addrs.debug.txt
+segments:
+  - name: header
+    type: header
+    start: 0x0
+    files:
+    - [0x0, header, header]
+  - name: boot
+    type: bin
+    start: 0x40
+  - type: code
+    start: 0x1000
+    vram: 0x10001000
+    files:
+    - [0x1000, asm, "entrypoint"]
+    - [0x1050, "c"]
+    - [0x1460, asm]
+    - [0x2CC0, asm]
+    - [0x2D60, asm]
+    - [0x3130, asm]
+    - [0x37D0, asm]
+    - [0x38F0, asm]
+    - [0x3940, asm]
+    - [0x39C0, asm]
+    - [0x47C0, asm]
+    - [0x6ED0, asm]
+    - [0x6F70, asm]
+    - [0x7010, asm]
+    - [0x72D0, asm]
+    - [0x7590, asm]
+    - [0x7640, asm]
+    - [0x7680, asm]
+    - [0x77E0, asm]
+    - [0x7970, asm]
+    - [0x7C10, asm]
+    - [0x7CC0, asm]
+    - [0x7E00, asm]
+    - [0x80B0, asm]
+    - [0x80D0, asm]
+    - [0x8620, asm]
+    - [0x8670, asm]
+    - [0x8700, asm]
+    - [0x8C80, asm]
+    - [0x9000, asm]
+    - [0x92F0, asm]
+    - [0x9390, asm]
+    - [0x93E0, asm]
+    - [0x94A0, asm]
+    - [0x9540, asm]
+    - [0x95A0, asm]
+    - [0xA170, asm]
+    - [0xA230, asm]
+    - [0xA240, asm]
+    - [0xA3C0, asm]
+  - [0x0A4E0, bin]   # might be cutting code (start: 0xA774)
+  - [0x11de8, bin]
+  - [0x132ff, bin]
+  - [0x14800, bin]
+  - [0x15d38, bin]
+  - [0x17268, bin]
+  - [0x18708, bin]
+  - [0x19ba8, bin]
+  - [0x1b048, bin]
+  - [0x22240, bin, "game.debug"] ## offsets 1380000 # 0x8039ccca same key, total 1472000 bytes
+  - type: code
+    start: 0x189840
+    vram: 0x16000000
+    files:
+    - [0x189840, asm]
+    - [0x191A50, asm]
+    - [0x194020, asm]
+  - [0x194040, bin] # .data
+  - [0x199ba0, bin, "compressed00"]
+  - [0x32c3ae, bin] # ??
+  - [0x3336a6, bin, "compressed01"]
+  - [0x37106e, bin] # ??
+  - [0x371075, bin, "compressed02"]
+  - [0x3be153, bin] # ?? matches US rom
+  - [0x3bf565, bin, "compressed03"]
+  - [0x419c95, bin] # ?? matches US rom
+  - [0x419dfe, bin, "compressed04"]
+  - [0x56f53b, bin] # ?? matches US rom
+  - [0x56fbb6, bin, "compressed05"]
+  - [0x60bba3, bin] # ??
+  - [0x60c4a2, bin, "compressed06"]
+  - [0x74b59d, bin] # ??
+  - [0x74b5a4, bin, "compressed07"]
+  - [0x7f413c, bin] # ?? matches US rom
+  - [0x7f4365, bin, "compressed08"]
+  - [0xabbcfd, bin] # padding
+  ###
+  - [0x00ABBD00, "bin", "assets_offsets_table"]
+  - name: assets00
+    type: rzip
+    start: 0xabbdf8
+  - name: assets01
+    type: rzip
+    start: 0xb01c60
+  - name: assets02
+    type: rzip
+    start: 0xbc1708
+  - name: assets03
+    type: rzip
+    start: 0xfa0578
+  - name: assets04
+    type: rzip
+    start: 0xfb0a88
+  - name: assets05
+    type: rzip
+    start: 0x11645e8
+  - name: assets06
+    type: rzip
+    start: 0x118f850
+  - name: assets07
+    type: rzip
+    start: 0x1212fc0
+  - name: assets08
+    type: rzip
+    start: 0x1213010
+  - name: assets09
+    type: rzip
+    start: 0x1213390
+  - name: assets0A
+    type: rzip
+    start: 0x126b740
+  - name: assets0B
+    type: rzip
+    start: 0x12acff0
+  - name: assets0C
+    type: rzip
+    start: 0x12afd58
+  - name: assets0D
+    type: rzip
+    start: 0x12e85c0
+  - name: assets0E
+    type: rzip
+    start: 0x12e8788
+  - name: assets0F
+    type: rzip
+    start: 0x12ec430
+  - name: assets10
+    type: rzip
+    start: 0x1331c88
+  - name: assets11
+    type: rzip
+    start: 0x13379c8
+  - name: assets12
+    type: rzip
+    start: 0x133b220
+  - name: assets13
+    type: rzip
+    start: 0x133be58
+  - name: assets14
+    type: rzip
+    start: 0x1340bd0
+  - name: assets15
+    type: rzip
+    start: 0x13688e8
+  - name: assets16
+    type: rzip
+    start: 0x136a6b8
+  - name: assets17
+    type: rzip
+    start: 0x29ff1c8
+  - name: assets18
+    type: rzip
+    start: 0x3faa638
+  - name: assets19
+    type: rzip
+    start: 0x3fab760
+  - name: assets1A
+    type: rzip
+    start: 0x3faba80
+  - name: assets1B
+    type: rzip
+    start: 0x3fb1128
+  - name: assets1C
+    type: rzip
+    start: 0x3fb2800
+  - [0x3fb3cd8, bin]
+  # - name: assets1D
+  #   type: rzip
+  #   start: 0x3fb3cd8
+  - [0x3fb73d0, bin, "trailer"] # 0xff to end
+  - [0x4000000]

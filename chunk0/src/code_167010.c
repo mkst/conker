@@ -6,20 +6,17 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_15167010.s")
 // NON-MATCHING: not hugely far away
-// void* func_15167010(void) {
-//     void * (*func)(void);
-//     void * res;
+// void func_15167010(void) {
+//     void (*func)(void);
 //     s32 i;
 //
-//     for (i = 0; i < 101; i++)
+//     for (i = 0; i < 24; i++)
 //     {
 //         func = D_8008B4A8[i].unk18;
-//         res = func;
 //         if (func != NULL) {
-//             res = func();
+//             func();
 //         }
 //     }
-//     return res;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_167010/func_1516706C.s")

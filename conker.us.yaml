@@ -7,8 +7,6 @@ options:
   - "-D_LANGUAGE_C"
   - "-D_FINALROM"
   extensions: "custom/n64splat"
-  modes:
-  - all
   generated_c_preamble: |
     #include <ultra64.h>
     #include "functions.h"
@@ -208,26 +206,26 @@ segments:
   - [0x0002e698, "bin"] # ucode?
   - [0x0002f520, "bin"] # ucode?
   - [0x0002fdb0, "bin"] # ucode?
-  - [0x00030c38, "bin"] # ucode?
+  - [0x00030c38, "bin"] # ucode? same as 0x0002DE08
   - [0x000314c8, "bin"] # ucode?
   - [0x00031fe8, "bin"] # ucode?
   - [0x0003293d, "bin"] # ucode?
   - [0x000334f8, "bin"] # ucode?
-  - [0x00033e4d, "bin"] # ucode?
-  - [0x00034a08, "bin"] # ucode?
+  - [0x00033e4d, "bin"] # ucode? same as 0x0003293d
+  - [0x00034a08, "bin"] # ucode? same as 0x00031fe8
   - [0x0003535d, "bin"] # ucode?
-  - [0x00035f38, "bin"] # ucode?
-  - [0x0003688d, "bin"] # ucode?
+  - [0x00035f38, "bin"] # ucode? same as 0x000334f8
+  - [0x0003688d, "bin"] # ucode? same as 0x0003535d
   - [0x00037468, "bin"] # ucode?
   - [0x00037dba, "bin"] # ucode?
   - [0x00038908, "bin"] # ucode?
   - [0x0003925c, "bin"] # ucode?
   - [0x00039da8, "bin"] # ucode?
   - [0x0003a6fc, "bin"] # ucode?
-  - [0x0003b248, "bin"] # ucode?
+  - [0x0003b248, "bin"] # ucode? same as 0x00038908
   - [0x0003bb9c, "bin"] # ucode?
-  - [0x0003c124, "bin"] # ucode data section
-  - [0x00042450, "bin", game] # chunk0
+  - [0x0003c124, "bin"] # ucode .data section
+  - [0x00042450, "bin", game.us] # chunk0
   - type:  code
     start: 0x0019EA88
     vram:  0x16000000
@@ -259,7 +257,7 @@ segments:
   - [0x0056d126, "bin", "compressed05"]
   - [0x007edf84, "bin"] # ??
   - [0x007ee1ad, "bin", "compressed06"]
-  - [0x00ab1941, "bin"] # zeroes
+  - [0x00ab1941, "bin"] # padding
   ###
   - [0x00AB1950, "bin", "assets_offsets_table"] # TODO: use to generate this next section
   - name:  assets00

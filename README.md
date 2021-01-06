@@ -76,6 +76,7 @@ This project is in its infancy; there are multiple tasks being worked on:
 
 The layout of the ROM is still a work-in-progress. There are a number of sections within the ROM that are compressed with [gzip](https://tools.ietf.org/html/rfc1952) but have the standard header/trailer stripped and, instead, replaced with a 4-byte header containing the uncompressed data length. These sections are dubbed `rzip`.
 
+Overview of US ROM shown below:
 ```
 [header]  0000 0000 > 0000 0040 ; suggests libultra 2.0G
 [ boot ]  0000 0040 > 0000 1000 ;
@@ -87,7 +88,7 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 [ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 .data (compressed)
 [ code ]  0019 EA88 > 001A 2190 ; debugger .text
 [ data ]  001A 2190 > 001A 37E0 ; debugger .data
-[ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets
+[ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets + unknown
 [ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
 [ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C
 [ ffff ]  03F8 B800 > 0400 0000 ; 0xff padding
@@ -95,11 +96,7 @@ The layout of the ROM is still a work-in-progress. There are a number of section
 
 ### Compressed section(s)
 
-There are a number of compressed sections within the ROM. The goal is to be able to:
-
-  1. Extract all files within each compressed section
-  2. Decompile and/or document them
-  3. Compress and reassemble to create a byte-perfect match.
+There are a number of compressed sections within the ROM. The decompression/compression method is understood and generates matching results.
 
 ### Game Logic AKA "Chunk 0"
 
@@ -109,7 +106,7 @@ The core game logic code is compressed within the ROM. See the [README](chunk0/R
 
 ## Custom tools
 
- - rarezip/rareunzip; python scripts to compress/decompress the compression format used in the ROM.
+ - `rareunzip`; python script to compress/decompress the compression format used in the ROM.
 
 NOTE: `gzip` is used for compression rather than `zlib`; use the binary in `tools/` in order to get matching compression.
 
@@ -127,4 +124,4 @@ This repo makes use of the following open-source tools without which, there woul
 
 The [wiki](https://github.com/mkst/conker/wiki) will eventually contain discoveries as they are made.
 
-In the meantime, if you wish to contribute in any way, just get stuck in and raise a PR!
+In the meantime, if you wish to contribute in any way, get stuck in and raise a PR or find me on Discord `mkst#4741`.

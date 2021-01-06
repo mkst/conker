@@ -13,7 +13,11 @@ BIN_DIRS := bin
 ifeq ($(VERSION),us)
 SRC_DIR := src
 else
+ifeq ($(VERSION),debug)
+SRC_DIR := src_debug
+else
 SRC_DIR := src_eu
+endif
 endif
 
 SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/debug $(SRC_DIR)/data \
@@ -73,6 +77,10 @@ ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
           $(BUILD_DIR)/rzip/assets1A/assets1A.o \
           $(BUILD_DIR)/rzip/assets1B/assets1B.o \
           $(BUILD_DIR)/rzip/assets1C/assets1C.o
+
+ifeq ($(VERSION),debug)
+	ASSETS :=
+endif
 
 O_FILES += $(ASSETS)
 
@@ -178,9 +186,6 @@ default: all
 
 all: check dirs $(TARGET).z64 $(VERIFY)
 
-check:
-	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
-
 dirs:
 	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(MP3_DIRS) $(RZIP_DIRS),$(shell mkdir -p build/$(dir)))
 
@@ -191,14 +196,17 @@ clean:
 	rm -rf game
 	rm -rf rzip
 	rm -rf mp3
+	rm -rf chunk0/game.*.bin
 
-extract: check
-	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 conker.$(VERSION).yaml .
+extract: check bin/game.$(VERSION).bin
 
-extract_game: bin/game.bin
-	$(PYTHON) tools/n64splat/split.py bin/game.bin game.$(VERSION).yaml game
+extract_game: chunk0/game.$(VERSION).bin
 
-decompress: dirs extract_game chunk0/game.bin
+# deprecated
+decompress: dirs extract_game
+
+check:
+	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
 
 verify: $(TARGET).z64
 	@echo "$$(cat conker.$(VERSION).sha1)  $(TARGET).z64" | sha1sum --check
@@ -235,13 +243,18 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
 
-chunk0/game.bin: bin/game.bin
-	cat game/rzip/code/0*.bin game/rzip/data/0000.bin > chunk0/game.bin
-
 # currently n64splat does not write these to build/rzip, so move them there
 $(BUILD_DIR)/%.bin: %.bin
 	mv $< $@
 
+chunk0/game.$(VERSION).bin: game/rzip/data/0000.bin
+	cat game/rzip/code/0*.bin game/rzip/data/0000.bin > chunk0/game.$(VERSION).bin
+
+game/rzip/data/0000.bin: bin/game.$(VERSION).bin
+	$(PYTHON) tools/n64splat/split.py bin/game.$(VERSION).bin game.$(VERSION).yaml game --modes bin rzip
+
+bin/game.$(VERSION).bin: conker.$(VERSION).yaml
+	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 $< .
 
 # settings
 .PHONY: all clean default

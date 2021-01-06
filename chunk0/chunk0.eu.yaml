@@ -1,6 +1,5 @@
 basename: chunk0
 options:
-  find_file_boundaries: yes
   compiler: IDO
   cpp_args:
   - "-Iinclude"

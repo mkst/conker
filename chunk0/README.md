@@ -18,6 +18,7 @@ As part of the n64splat configuration, this chunk is pulled out 'whole' such tha
 
 This chunk is then split out via the `game.REGION.yaml` and the `.text` and `.data` sections are concatenated to create the `game.bin`.
 
+**NOTE:** Above numbers/offsets stated here are for the `us` rom.
 
 ## Decompression
 
@@ -59,7 +60,7 @@ make replace
 
 # Non-Matching Changes
 
-It is possible to build the "chunk0" segment with modified code, and then compile a non-matching ROM.
+It is possible to build the `chunk0` segment with modified code, and then compile a non-matching ROM.
 
 In order to do this add `NON_MATCHING=1` when building both chunk0 and the main ROM:
 

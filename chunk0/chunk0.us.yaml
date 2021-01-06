@@ -184,7 +184,7 @@ segments:
     - [0x9B4A0, "asm"]
     - [0x9C440, "asm"]
     - [0x9CA10, "asm"]
-    - [0x9DD10, "asm"]
+    - [0x9DD10, "c"]
     - [0x9DF20, "asm"]
     - [0x9E640, "asm"]
     - [0x9E900, "asm"]

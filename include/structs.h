@@ -2703,4 +2703,27 @@ typedef struct {
     u8  pad38[0x8];
 } struct213;
 
+typedef struct {
+    u8 pad0[0x7];
+    u8 unk7;
+    u8 pad8[0x3];
+    u8 unkB;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+} struct214;
+
+typedef struct {
+    u8 pad0[0x8];
+    s32 unk8;
+    union {
+        struct SHORTS s;
+        struct INT1   i;
+    } unkC;
+    s32 unk10;
+    s32 unk14;
+} struct215;
+
 #endif

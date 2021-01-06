@@ -1,0 +1,7 @@
+osCreateThread  = 0x10003700;
+bzero           = 0x10006F70;
+__osSetSR       = 0x100072B0;
+__osGetSR       = 0x100072C0;
+__osSetFpcCsr   = 0x100072D0;
+osStartThread   = 0x100072E0;
+osSetThreadPri  = 0x10007430;

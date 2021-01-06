@@ -8,14 +8,12 @@ options:
   - "-D_LANGUAGE_C"
   - "-D_FINALROM"
   extensions: "custom/n64splat"
-  modes:
-  - all
   generated_c_preamble: |
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
   undefined_syms: undefined_syms.eu.txt
-  symbol_addrs: tools/symbol_addrs.eu.txt
+  symbol_addrs:   symbol_addrs.eu.txt
 segments:
   - name:  header
     type:  header
@@ -23,19 +21,16 @@ segments:
   - name:  boot
     type:  bin
     start: 0x00000040
-  - [0x00000168, "bin"]
-  - [0x000007D4, "bin"]
-  - [0x00000CF0, "bin"]
   - type:  code
     start: 0x00001000
     vram:  0x10001000
     files:
     - [0x1000, "asm", "entrypoint"]
-    - [0x1050, "c"]
+    - [0x1050, "asm"]
     - [0x2E40, "asm"]
     - [0x2EE0, "asm"]
-    - [0x3880, "asm", "libultra/os/createthread"]
     - [0x32B0, "asm"]
+    - [0x3880, "asm", "libultra/os/createthread"]
     - [0x3950, "asm"] # libc/syncprintf.c
     - [0x39B0, "asm"]
     - [0x3A40, "asm"]
@@ -123,16 +118,30 @@ segments:
     - [0x27950, "asm"]
     - [0x289A0, "asm"]
   - [0x29400, "bin"]
-  - [0x427B0, "bin", "game"] # chunk0
+  - [0x427B0, "bin", "game.eu"] # chunk0
   - type: code
     vram:  0x16000000
     start: 0x19ede8
     files:
     - [0x19ede8, "asm"] # debugger?
-  - [0x001A24F0, "bin"]
-  - [0x1a3b40, "bin"]
-  - [0x333bfc, "bin"]
-  - [0xab2240, "bin"] # offsets
+  - [0x1A24F0, "bin"] # .data
+  # besides 1 file, the contents match US ROM
+  - [0x1a3b40, "bin", "compressed00"]
+  - [0x3335f1, "bin"] # ??
+  - [0x333bfa, "bin", "compressed01"]
+  - [0x33417c, "bin"] # ??
+  - [0x3343a5, "bin", "compressed02"]
+  - [0x3c1669, "bin"] # ??
+  - [0x3c2a7b, "bin", "compressed03"]
+  - [0x41b4dd, "bin"] # ??
+  - [0x41b646, "bin", "compressed04"] # differs from US ROM
+  - [0x56d3a8, "bin"] # ??
+  - [0x56da23, "bin", "compressed05"]
+  - [0x7ee881, "bin"] # ??
+  - [0x7eeaaa, "bin", "compressed06"]
+  - [0xab223e, "bin"] # padding
+  ###
+  - [0xab2240, "bin", "assets_offsets_table"] # offsets
   - name:  assets00
     type:  rzip
     start: 0xab2330

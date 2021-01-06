@@ -8,9 +8,8 @@
 // void func_150F6B00(struct108 *arg0) {
 //     struct190 tmp;
 //
-//     f32 temp_f2;
 //     f32 phi_f2;
-//     f32 phi_f0;
+//     f32 temp_f2;
 //     f32 phi_f0_2;
 //
 //     // func_1509BE40 has variable number of args

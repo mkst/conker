@@ -349,8 +349,8 @@ s32 func_151253CC(struct108 *arg0) {
 // NON-MATCHING: first statements in wrong order
 // void func_151254F4(struct108 *arg0, s32 arg1) {
 //     f32 tmp = D_800A352C;
-//     arg0->unk3A0 = arg0->unk380 * tmp;
-//     arg0->unk398 = arg0->unk388 * tmp;
+//     arg0->unk3A0 = tmp * arg0->unk380;
+//     arg0->unk398 = tmp * arg0->unk388;
 //     func_15124AB4(arg0);
 //     func_151239CC(arg0, 1);
 //     arg0->unk3D4->unk198 = 0;

@@ -1,8 +1,6 @@
 basename: conker
 options:
   extensions: "custom/n64splat"
-  modes:
-  - all
 segments:
   - name:  code
     type:  rzip
