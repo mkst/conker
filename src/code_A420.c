@@ -356,8 +356,18 @@ s32 func_1000CA18(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CAE4.s")
-// ???
-#pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CBA8.s")
+
+void func_1000CBA8(s32 arg0) {
+    if (D_800417B0[0] != NULL) {
+        D_800417B0[0]->unk4E = arg0;
+        D_800417B0[0]->unk50 = (u16)0x500;
+    }
+    if (D_800417B0[1] != NULL) {
+        D_800417B0[1]->unk4E = arg0;
+        D_800417B0[1]->unk50 = (u16)0x500;
+    }
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CBF0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CC54.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_A420/func_1000CD40.s")

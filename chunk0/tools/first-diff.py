@@ -10,14 +10,6 @@ parser = argparse.ArgumentParser(
 )
 versionGroup = parser.add_mutually_exclusive_group()
 versionGroup.add_argument(
-    "-j",
-    "--jp",
-    help="use original Japanese version",
-    action="store_const",
-    const="jp",
-    dest="version",
-)
-versionGroup.add_argument(
     "-u",
     "--us",
     help="use United States version",
@@ -31,14 +23,6 @@ versionGroup.add_argument(
     help="use European (PAL) version",
     action="store_const",
     const="eu",
-    dest="version",
-)
-versionGroup.add_argument(
-    "-s",
-    "--sh",
-    help="use Shindou (Rumble) version",
-    action="store_const",
-    const="sh",
     dest="version",
 )
 parser.add_argument(
@@ -65,7 +49,7 @@ version = args.version
 if version is None:
     version = "us"
     best = 0
-    for ver in ["us", "jp", "eu", "sh"]:
+    for ver in ["us", "eu"]:
         try:
             mtime = os.path.getmtime(f"build/chunk0.bin")
             if mtime > best:
@@ -76,9 +60,9 @@ if version is None:
     print("Assuming version " + version)
 
 if args.make:
-    check_call(["make", "-j4", "VERSION=" + version, "COMPARE=0"])
+    check_call(["make", "-j4", "VERSION=" + version])
 
-baseimg = f"game.bin"
+baseimg = f"game.{version}.bin"
 basemap = f"chunk0.map"
 
 myimg = f"build/chunk0.bin"

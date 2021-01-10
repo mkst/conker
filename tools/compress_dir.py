@@ -2,10 +2,9 @@ import argparse
 import os
 import sys
 import struct
+import subprocess
 
 import rarezip as rz
-
-# XOR_KEY = 0x8039CCCA
 
 def compress_files(files, indir, outdir, offsets, no_padding, xor_key=0x8039CCCA):
     output_buffer = bytearray(8192)
@@ -18,16 +17,16 @@ def compress_files(files, indir, outdir, offsets, no_padding, xor_key=0x8039CCCA
     offset = initial_offset
     for file in files:
         # slow, but will suffice until we have a python library that matches
-        os.system(f"gzip --best --keep --no-name --force {indir}/{file}")
-        with open(f"{indir}/{file}.gz", "rb") as f:
-            gzip_compressed = f.read()
-        uncompressed_length = struct.unpack("<i", gzip_compressed[-4:])[0]
-        compressed = struct.pack(">i", uncompressed_length) + gzip_compressed[10:-8]
+        compressed = rz.compress_file(f"{indir}/{file}")
+        if compressed is None:
+            print("ERROR calling gzip", res)
+            break
+
         compressed_length = len(compressed)
         # copy into buffer
         for i in range(compressed_length):
             output_buffer[i] = compressed[i]
-        # overwrite gzip file
+        # write gzip file
         with open(f"{outdir}/{file}.gz", "wb") as o:
             if not no_padding: # slightly awkward logic
                 # 2 byte alignment

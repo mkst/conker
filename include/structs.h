@@ -11,6 +11,7 @@ typedef struct struct119 struct119;
 typedef struct struct124 struct124;
 typedef struct struct127 struct127;
 typedef struct struct108 struct108;
+typedef struct struct216 struct216;
 
 typedef struct {
     s32 unk0;
@@ -1129,13 +1130,6 @@ typedef struct {
     s32 unk4[8];
 } struct122;
 
-struct INTS {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-};
-
 struct FLOAT {
     f32 unk0;
 };
@@ -1145,11 +1139,16 @@ struct SHORTS {
     s16 unk2;
 };
 
+struct USHORTS2 {
+    u16 unk0;
+    u16 unk2;
+};
+
 struct SHORT {
     u16 unk0;
 };
 
-struct BYTES {
+struct UBYTES2 {
     u8 unk0;
     u8 unk1;
 };
@@ -1168,8 +1167,12 @@ struct UBYTES4 {
     u8 unk3;
 };
 
-struct INT1 {
+struct WORD {
     s32 unk0;
+};
+
+struct UWORD {
+    u32 unk0;
 };
 
 struct struct124 {
@@ -1230,7 +1233,10 @@ typedef struct {
     s32 unk38;
     u8  pad3C[0x8];
     u8  unk44;
-    u8  pad45[0x9];
+    u8  pad45[0x5];
+    s8  unk4A;
+    u8  pad4B;
+    u16 unk4C;
     u8  unk4E;
     u8  pad4F[0x9];
     u8  unk58;   // used
@@ -1239,14 +1245,17 @@ typedef struct {
     u16 unk66;
     u8  pad68[0x3];
     u8  unk6B;
-    u8  pad6C[0xC];
+    u8  pad6C[0x9];
+    u8  unk75;
+    u8  pad76[0x2];
     u8  unk78;
     u8  pad79[0x4];
     u8  unk7D;
     u8  pad7E[0x2];
     s16 unk80;
     s16 unk82;
-    s32 unk84;  // used
+    u8  unk84;
+    u8  pad85[0x3];
     s16 unk88;
     s16 unk8A;  // used
     u16 unk8C;  // used
@@ -1288,7 +1297,9 @@ typedef struct {
     u8  unk2;
     u8  unk3;
     u8  unk4;
-    u8  pad[0x1b];
+    u8  pad5[0xA];
+    u8  unkF;
+    u8  pad10[0x10];
     f32 unk20;
     f32 unk24;
 } struct129;
@@ -1296,7 +1307,9 @@ typedef struct {
 typedef struct {
     u8  pad0[0x4];
     u16 unk4;
-    u8  pad6[0xA];
+    u8  pad6[0x2];
+    f32 unk8;
+    f32 unkC;
     f32 unk10;
 } struct197;
 
@@ -1306,7 +1319,8 @@ struct struct127 {
     u8  unk5;
     u8  pad6;
     u8  unk7;
-    u8  unk8[0x8];
+    f32 unk8;
+    f32 unkC;
     s32 unk10;  // used
     f32 unk14;  // x_position
     f32 unk18;  // y_position
@@ -1343,8 +1357,7 @@ struct struct127 {
     u8  unk74;
     s8  pad75;
     u16 unk76;  // moving_angle
-    u8  unk78;
-    u8  pad79;
+    u16 unk78;
     u16 unk7A;  // facing angle
     u16 unk7C;
     u16 unk7E;
@@ -1354,7 +1367,7 @@ struct struct127 {
     u8  unk83;  // used
     union {
         struct SHORT h;
-        struct BYTES b;
+        struct UBYTES2 b;
     } unk84; // is this section a union?
     // u8  unk84;  // used
     // u8  unk85;  // used
@@ -1362,7 +1375,7 @@ struct struct127 {
     u8  unk87;
     u8  unk88;
     u8  unk89;  // used
-    u16 pad8A;
+    u8  unk8A;
     u16 unk8C;  // used
     u16 unk8E;  // used
     u32 pad90;
@@ -1371,13 +1384,14 @@ struct struct127 {
     u32 unk9C;
     u32 padA0;
     u32 padA4;
-    u8  padA8;
+    u8  unkA8;
     u8  unkA9;
     u8  unkAA[0x2];
     u8  padAC;
     u8  unkAD;  // used
     u16 padAE;
-    u16 padB0;
+    s8  unkB0;
+    u8  padB1;
     u16 unkB2;  // (oxygen?)
     s32 padB4;
     f32 unkB8;  // used
@@ -1385,14 +1399,15 @@ struct struct127 {
     f32 unkC0;
     f32 unkC4;
     u32 padC8;
-    u32 padCC;
+    s16 unkCC;
+    s16 unkCE;
     s8  unkD0;
     s8  padD1;
     s16 unkD2;    // used
     s16 unkD4;    // used
-    u16 unkD6;    // used
-    u16 unkD8;
-    u16 unkDA;
+    s16 unkD6;    // used
+    s16 unkD8;
+    s16 unkDA;
     f32 unkDC;    // used
     f32 unkE0;    // used
     s16 unkE4;    // used
@@ -1403,7 +1418,7 @@ struct struct127 {
     f32 unkF0;
     s32 unkF4;
     s32 unkF8;
-    u32 padFC;
+    s32 unkFC;
     u8  unk100;   // used
     u8  unk101;
     u8  unk102;
@@ -1482,11 +1497,12 @@ struct struct127 {
     u32 pad1BC;
     u32 pad1C0;
     u32 pad1C4;
-    u16 pad1C8;
+    u8  pad1C8;
+    u8  unk1C9;
     u8  unk1CA; // health
     u8  unk1CB;
     f32 unk1CC;
-    u8  pad1D0;
+    u8  unk1D0;
     s8  unk1D1;
     u16 pad1D2;
     s32 unk1D4;
@@ -1494,10 +1510,12 @@ struct struct127 {
     u32 pad1DC;
     u32 pad1E0;
     s8  unk1E4;
-    s8  unk1E5;
-    s8  unk1E6;
-    s8  pad1E7;
-    u32 pad1E8;
+    u8  unk1E5;
+    u8  unk1E6;
+    u8  unk1E7;
+    u8  unk1E8;
+    u8  pad1E9;
+    s16 unk1EA;
     u32 pad1EC;
     u32 pad1F0;
     s32 unk1F4;
@@ -1510,37 +1528,70 @@ struct struct127 {
     u8  pad201[0x3];
     s32 unk204;
     u32 pad208;
-    u32 pad20C;
-    u32 pad210;
+    u8  pad20C[0x3];
+    u8  unk20F;
+    u8  pad210;
+    u8  unk211;
+    u8  unk212[0x2];
     s32 unk214;
-    s32 unk218; // used
+    struct216 *unk218;
     u16 unk21C;
-    s16 pad21E;
-    u8  pad220[0x2];
+    u8  unk21E;
+    u8  unk21F;
+    u8  unk220;
+    s8  unk221;
     u8  unk222;
     u8  unk223;
-    u32 pad224;
-    u32 pad228;
-    u16 pad22C;
+    u16 unk224;
+    u8  unk226;
+    u8  pad227;
+    u8  pad228;
+    u8  unk229;
+    u8  pad22A;
+    u8  unk22B;
+    u16 unk22C;
     s16 unk22E;
-    u16 pad230;
-    s8  unk232; // used
-    u8  pad233;
-    u8  pad234;
-    u8  pad235;
-    u8  pad236;
-    u8  pad237;
-    u8  pad238;
+    u8  pad230;
+    u8  unk231;
+    u8  unk232; // used
+    u8  unk233;
+    u8  unk234;
+    u8  unk235;
+    u8  unk236;
+    u8  unk237;
+    u8  unk238;
     s8  unk239; // used
-    s8  pad23A[0xA];
+    u8  unk23A;
+    u8  unk23B;
+    u8  pad23C;
+    u8  unk23D;
+    u8  unk23E;
+    u8  unk23F;
+    u8  unk240;
+    u8  unk241;
+    u8  unk242;
+    u8  pad243;
     s16 unk244;
-    u8  pad246;
+    u8  unk246;
     u8  unk247;
     u8  unk248;
-    u8  pad249[0x5];
+    u8  unk249;
+    u8  unk24A;
+    u8  pad24B;
+    u8  unk24C;
+    u8  unk24D;
     u8  unk24E;
     s8  unk24F;
-    u8  pad250[0xC];
+    u8  unk250;
+    u8  unk251;
+    u8  unk252;
+    u8  unk253;
+    u8  unk254;
+    u8  unk255;
+    u8  unk256;
+    u8  unk257;
+    u8  unk258;
+    u8  pad259[0x3];
     s32 unk25C;
     u8  pad260[0x14];
     u8  unk274;
@@ -1554,18 +1605,19 @@ struct struct127 {
     u8  unk285;
     u8  unk286;
     u8  unk287;
-    u8  pad288[0x43];
+    u8  pad288[0x41];
+    u8  unk2C9;
+    u8  pad2CA;
     s8  unk2CB;
-    u8  pad2CC[0x4];
+    s32 unk2CC;
     struct197 *unk2D0;
     u8  pad2D4[0x10];
     s32 unk2E4;
     s32 unk2E8;
     s32 unk2EC;
     u8  pad2F0[0x8];
-    s32 unk2F8; // wait animation?
-    u8  unk2FC;
-    u8  pad2FD[0x1A];
+    u16 unk2F8; // wait animation?
+    u8  pad2FA[0x1E];
     struct108 *unk318; // just a guess
     struct126 *unk31C; // used (is this actually 127?)
     u8  pad320[0xC];
@@ -2312,12 +2364,24 @@ typedef struct {
     s32 unk8;
 } struct177;
 
+// typedef struct {
+//     s16 unk0;
+//     s16 pad2;
+//     s16 unk4;
+//     s16 unk6;
+//     u8  pad8[0xE98];
+//     s32 unkEA0;
+//     u8  padEA4[0x30];
+//     s32 unkED4;
+// } struct178;
+
 typedef struct {
-    u8  pad0[0xEA0];
-    s32 unkEA0;
-    u8  padEA4[0x30];
-    s32 unkED4;
+    s16 unk0;
+    s16 pad2;
+    s16 unk4;
+    u8  unk6[0x2E];
 } struct178;
+// size 0x34
 
 typedef struct {
     s32 unk0;
@@ -2614,7 +2678,7 @@ typedef struct {
     s32 unk14;
     union {
         struct UBYTES4 b;
-        struct INT1    i;
+        struct WORD    i;
     } unk18;
     u8  unk1C[0x2];
     u8  unk1E;
@@ -2674,7 +2738,7 @@ typedef struct {
     s32 unk0;
     union {
         struct UBYTES4 b;
-        struct INT1   i;
+        struct WORD   i;
     } unk4;
     u8  unk8;
     u8  unk9;
@@ -2720,10 +2784,19 @@ typedef struct {
     s32 unk8;
     union {
         struct SHORTS s;
-        struct INT1   i;
+        struct WORD   i;
     } unkC;
     s32 unk10;
     s32 unk14;
 } struct215;
+
+
+struct struct216 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+};
 
 #endif

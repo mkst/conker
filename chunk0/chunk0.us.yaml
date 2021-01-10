@@ -9,6 +9,7 @@ options:
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
+  # create_detected_syms: yes
 segments:
   - name:  code
     type:  code
@@ -143,15 +144,15 @@ segments:
     - [0x3F800, "asm"]
     - [0x3F9F0, "asm"]
     - [0x40350, "c"]
-    - [0x40D90, "asm"]
+    - [0x40D90, "c"]
     - [0x412C0, "asm"]
     - [0x42D50, "c"]
     - [0x44370, "asm"]
     - [0x47C00, "asm"]
-    - [0x47D60, "asm"]
+    - [0x47D60, "c"]
     - [0x48190, "asm"]
     - [0x485E0, "c", "done/code_485E0"]
-    - [0x48720, "c"]
+    - [0x48720, "c", "done/code_48720"]
     - [0x487E0, "c"]
     - [0x489B0, "c"]
     - [0x48B10, "c"]

@@ -1,24 +1,12 @@
+import argparse
 import os
+import re
 import sys
 
-# python3 progress chunk0/build/chunk0.map chunk0/
+def parse_map(mapfile, section, ending=None):
+    functions = {}
+    files = {}
 
-if len(sys.argv) < 4:
-    print("usage: python3 %s .map src_dir section" % sys.argv[0])
-    sys.exit(1)
-
-mapfile = sys.argv[1]
-basedir = sys.argv[2]
-section = sys.argv[3]
-if len(sys.argv) > 4:
-    ending = sys.argv[4]
-else:
-    ending = None
-
-files = {}
-functions = {}
-
-with open(mapfile) as f:
     in_code = False
 
     filename = None
@@ -28,11 +16,27 @@ with open(mapfile) as f:
     previous_offset = 0
 
     while True:
-        line = f.readline()
+        line = mapfile.readline()
         if not line:
             break
 
-        if in_code:
+        if not in_code:
+            if line.startswith(section):
+                in_code = True
+                split_line = line.split()
+                if len(split_line) > 2:
+                    # should we take file offset from individual offsets?
+                    total_size = int(split_line[1], 16) + int(split_line[2], 16)
+                else:
+                    # try nextline
+                    line = mapfile.readline()
+                    split_line = line.split()
+                    if len(split_line) < 2:
+                        print("Could not determine total size, aborting")
+                        break
+                    total_size = int(split_line[0], 16) + int(split_line[1], 16)
+                continue
+        else:
             if (ending and line.startswith(ending)) or (ending is None and len(line) in [0, 1, 2]):
                 in_code = False
                 if function and total_size:
@@ -43,6 +47,7 @@ with open(mapfile) as f:
             # assuming "build/src/..."
             if line.startswith(" build/"):
                 filename = line[7:].replace(".o(.text)", "").strip()
+                files[filename] = []
                 continue
             if line.startswith(" .text "):
                 continue
@@ -59,30 +64,17 @@ with open(mapfile) as f:
                 # not 100% accurate due to nops but.. it'll do for now
                 functions[function]["length"] = offset - functions[function]["offset"]
             functions[new_function] = {"offset": offset, "filename": filename, "language": "asm"}
-            if filename not in files:
-                files[filename] = []
             files[filename].append(new_function)
             function = new_function
             previous_offset = offset
-        else:
-            if line.startswith(section):
-                in_code = True
-                split_line = line.split()
-                if len(split_line) > 2:
-                    # should we take file offset from individual offsets?
-                    total_size = int(split_line[1], 16) + int(split_line[2], 16)
-                else:
-                    # try nextline
-                    line = f.readline()
-                    split_line = line.split()
-                    if len(split_line) < 2:
-                        print("Could not determine total size, aborting")
-                        break
-                    total_size = int(split_line[0], 16) + int(split_line[1], 16)
-                continue
 
-for filename, funcs in files.items():
+    return (files, functions)
+
+
+def parse_file(basedir, filename, file_funcs):
+    updates = []
     c_path = os.path.join(basedir, filename + ".c")
+    pattern = re.compile(r'#pragma GLOBAL_ASM\(".*\/([^\/]+)\.s"\)')
     if os.path.isfile(c_path):
         global_asms = []
         with open (c_path, "r") as f:
@@ -90,23 +82,50 @@ for filename, funcs in files.items():
                 line = f.readline()
                 if not line:
                     break
-                if line.startswith("#pragma GLOBAL_ASM"):
-                    global_asms.append(line.strip())
-        # hashmap this?
-        for function in funcs:
-            found = False
-            for global_asm in global_asms:
-                if function in global_asm:
-                    found = True
-                    break
-            if not found:
-                functions[function]["language"] = "c"
+                match = pattern.match(line)
+                if match:
+                    global_asms.append(match.group(1))
+        for function in file_funcs:
+            if not function in global_asms:
+                updates.append(function)
+    return updates
 
-print("filename,function,offset,length,language")
-for filename, funcs in files.items():
-    basename = os.path.basename(filename)
-    for func in funcs:
-        language = functions[func]["language"]
-        offset = functions[func]["offset"]
-        length = functions[func]["length"]
-        print (f"{basename},{func},{offset},{length},{language}")
+
+def generate_csv(files, functions, version):
+    ret = []
+    ret.append("version,filename,function,offset,length,language")
+    for filename, funcs in files.items():
+        basename = os.path.basename(filename)
+        for func in funcs:
+            language = functions[func]["language"]
+            offset = functions[func]["offset"]
+            length = functions[func]["length"]
+            ret.append(f"{version},{basename},{func},{offset},{length},{language}")
+    return "\n".join(ret)
+
+
+def main(basedir, mapfile, section, ending, version):
+    files, functions = parse_map(mapfile, section, ending)
+    for filename, file_funcs in files.items():
+        c_functions = parse_file(basedir, filename, file_funcs)
+        for c_function in c_functions:
+            functions[c_function]["language"] = "c"
+    csv = generate_csv(files, functions, version)
+    print(csv)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Create progress csv based on map file',
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('basedir', type=str,
+                        help="base directory (containing src/)")
+    parser.add_argument('mapfile', type=argparse.FileType('r'),
+                        help=".map file to be parsed")
+    parser.add_argument('section', type=str,
+                        help=".text section of the map")
+    parser.add_argument('--ending', type=str,
+                        help="section name that marks the end of 'section'")
+    parser.add_argument('--version', type=str, default='us',
+                        help="ROM version, us, eu, debug, ects")
+    args = parser.parse_args()
+
+    main(args.basedir, args.mapfile, args.section, args.ending, args.version)

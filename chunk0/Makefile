@@ -68,8 +68,8 @@ OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON = python3
 
-GZIPLEVEL := --best --no-name --force -c
-GZIP = ../tools/gzip $(GZIPLEVEL)
+RZIP    := $(PYTHON) ../tools/rarezip.py
+RZIPDIR := $(PYTHON) ../tools/compress_dir.py
 SPLIT := split -b 4096 -d --additional-suffix=.bin --suffix-length=4
 
 OPT_FLAGS := -O2 -g3
@@ -85,7 +85,9 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T ../undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_funcs_auto.txt ../undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
+# -T undefined_syms_auto.txt
+
 ####################### Overrides ############################
 
 # custom OPT_FLAGS
@@ -94,7 +96,8 @@ LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T ../undefin
 # $(BUILD_DIR)/src/code_8A10.o: OPT_FLAGS := -g
 # $(BUILD_DIR)/src/code_91D0.o: OPT_FLAGS := -g
 
-# $(BUILD_DIR)/src/code_3120.o: LOOP_UNROLL := -Wo,-loopunroll,0
+
+# $(BUILD_DIR)/src/code_A7770.o: LOOP_UNROLL := -Wo,-loopunroll,0
 
 # CC
 $(BUILD_DIR)/src/%.o: CC := $(CC_OLD)
@@ -175,21 +178,23 @@ $(SPLIT_DIR)/0000.bin: $(TARGET).code.bin
 	$(SPLIT) $(TARGET).code.bin $(SPLIT_DIR)/
 
 $(SPLIT_DIR)/offsets.bin: $(SPLIT_DIR)/0000.bin
-	$(PYTHON) ../tools/compress_dir.py $(SPLIT_DIR) $(SPLIT_DIR) --offsets-file $(SPLIT_DIR)/offsets.bin $(COMPRESS_DIR_ARGS)
+	$(RZIPDIR) $(SPLIT_DIR) $(SPLIT_DIR) --offsets-file $(SPLIT_DIR)/offsets.bin $(COMPRESS_DIR_ARGS)
 
 $(TARGET).code.gz.bin: $(TARGET).code.bin $(SPLIT_DIR)/offsets.bin
 	cat $(SPLIT_DIR)/*.gz > $(TARGET).code.gz.bin
 
 $(TARGET).data.gz.bin: $(TARGET).data.bin
-	$(GZIP) $(TARGET).data.bin > $(TARGET).data.bin.gz
-	$(PYTHON) ../tools/fixup_gzip.py $(TARGET).data.bin.gz $(TARGET).data.gz.bin
+	$(RZIP) $(TARGET).data.bin $(TARGET).data.gz.bin
 
 $(TARGET).gz.bin: $(TARGET).code.gz.bin $(TARGET).data.gz.bin $(TARGET).code.pad $(TARGET).data.pad
 	cat $(SPLIT_DIR)/offsets.bin $(TARGET).code.gz.bin $(TARGET).code.pad $(TARGET).data.gz.bin $(TARGET).data.pad > $(TARGET).gz.bin
 
-$(BUILD_DIR)/splat: chunk0.$(VERSION).yaml
+$(BUILD_DIR)/splat: chunk0.$(VERSION).yaml game.$(VERSION).bin
 	$(PYTHON) ../tools/n64splat/split.py game.$(VERSION).bin chunk0.$(VERSION).yaml .
 	@touch $(BUILD_DIR)/splat
+
+game.$(VERSION).bin:
+	make decompress -C ..
 
 ifeq ($(NON_MATCHING),1)
 $(TARGET).code.pad: $(TARGET).code.gz.bin
@@ -205,4 +210,4 @@ $(TARGET).data.pad: $(TARGET).data.gz.bin
 
 ../html/progress.csv: verify_o
 	mkdir -p ../html
-	$(PYTHON) ../tools/progress.py $(BUILD_DIR)/chunk0.map . .code_code > $@
+	$(PYTHON) ../tools/progress.py . $(BUILD_DIR)/chunk0.map .code_code > $@

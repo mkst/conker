@@ -66,6 +66,7 @@ s32  func_1000B830(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32  func_1000B8B8(s32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32  func_1000BBE8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 s32  func_1000BC28(s32 arg0, u8 arg1, s32 arg2, s32 arg3);
+void func_1000CBA8(s32 arg0);
 void func_1000E054(s32 arg0, s32 arg1);
 s32  func_1000E0F8(s32 arg0);
 s32  func_1000E654(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -345,6 +346,7 @@ void func_15010240(void);
 void func_150102C0(void);
 void func_150102D0(void);
 void func_150103E0(void);
+void func_15010538(struct127 *arg0);
 void func_15010680(void);
 void func_150106A0(void);
 void func_150106B0(void);
@@ -387,9 +389,13 @@ void func_150432CC(s32 arg0, s32 arg1);
 void func_150432FC(s16 arg0, s16 arg1);
 void func_1504332C(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_15043A00(struct105 *arg0, s32 arg1, s32 arg2);
+void func_15043E68(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
 void func_15043EC8(struct112 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
 void func_15043FF0(vertex *arg0, struct113 *arg1);
 void func_150442C0(struct112 *arg0, f32 x, f32 y, f32 z);
+void func_15047F00(f32 *arg0, u16 *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+void func_15048134(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+f32  func_15048720(f32 arg0, f32 arg1, f32 arg2);
 void func_15048758(f32 *arg0);
 f32  func_150487E0(f32 arg0);
 f32  func_15048864(f32 arg0);
@@ -682,6 +688,8 @@ void func_150750A4(struct127 *arg0, s32 arg1, s32 arg2);
 void func_150750C4(struct127 *arg0, struct127 *arg1, u8 *arg2);
 
 void func_15075498(void);
+void func_15075A50(void);
+void func_15075B60(void) ;
 
 void func_1508F9C4(void);
 
@@ -696,9 +704,12 @@ void func_150CEF10(struct108 *arg0);
 void func_150DE310(s32 arg0);
 void func_150DE32C(void); // dummy
 void func_150DEC90(s32 arg0);
+void func_150EB430(void *arg0, void *arg1);
 void func_150FCA00(struct108 *arg0);
 
 void func_15100330(s32 arg0);
+void func_15103800(void);
+void func_15103828(void);
 void func_1510550C(struct102 *arg0, s32 arg1, u8 arg2);
 void func_15105548(struct207 *arg0, s32 *arg1, u8 arg2);
 void func_15105848(struct207 *arg0, s32 arg1, u8 arg2);
@@ -876,7 +887,6 @@ s32 func_1000C530(s32, u8, f32, f32, f32);
 //func_1000C934
 //func_1000CA18
 //func_1000CAE4
-//func_1000CBA8
 //func_1000CBF0
 //func_1000CC54
 //func_1000CD40
@@ -995,13 +1005,14 @@ s32  func_1501A490(s32 arg0, s16 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_150403C8(void *arg0, u32 arg1, s32 arg2);
 f32  func_15047C00(f32 arg0);
 f32  func_15047D60(f32 arg0);
-void func_15048134(s32, s32, f32, f32, f32, f32, f32);
 f32  func_150484A0(f32 arg0, f32 arg1);
 f32  func_150488C8(f32 arg0);
 f32  func_15048C30(f32 arg0);
 f32  func_15048FC8(struct17 *arg0);
 void func_15049688(f32 *arg0, f32 arg1, f32 *arg2, f32 arg3, f32 arg4, f32 arg5);
 void func_1505A184(u16 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4, f32 *arg5);
+s32  func_1505A630(f32, f32, s32);
+f32  func_1505A6F8(struct127 *, s32);
 f32  func_1505A72C(s32, s32);
 void func_1505E650(struct127 *arg0, u16 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6);
 void func_15060F28(void *arg0, s32 arg1);
@@ -1020,6 +1031,7 @@ f32  func_150AD930(f32 *arg0);
 u8   func_150ADA20(void);
 f32  func_150ADA68(void);
 void func_150E2EA4(s32, s32, s32, s32, f32, f32, f32, f32, f32, f32, s32, s32, s32, f32, f32, s32, f32);
+void func_150EA904(s32 arg0, s32 arg1);
 void func_1510B32C(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_1510B958(s32 arg0);
 s32  func_1510B9D0(s32 arg0, s16 arg1);
@@ -1036,6 +1048,7 @@ f32  func_151423D8(u8);
 f32  func_15144598(struct134 *arg0);
 f32  func_1514462C(s32 arg0);
 f32  func_15144B68(f32 arg0);
+void func_1514D3B0(s32, s16, u8, u8);
 s32  func_1515D6D0(s32 arg0, s32 arg1);
 void func_1516127C(s32 arg0, u8 arg1, u8 arg2);
 void func_15161334(s32 arg0, u8 arg1, u8 arg2);

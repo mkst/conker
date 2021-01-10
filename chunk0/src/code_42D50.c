@@ -60,18 +60,16 @@ void func_15043A00(struct105 *arg0, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_42D50/func_15043CA4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_42D50/func_15043D90.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_42D50/func_15043E68.s")
-// NON-MATCHING: need to figure out the struct and called function
-// f32 func_150A8050(void *arg0, f32 arg1, f32 arg2, f32 arg3);
-// void func_15043E68(s32 arg0, f32 arg1, s32 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6) {
-//     struct111 sp18;
-//
-//     func_150A8050(arg1, arg2, &sp18, arg1, arg2, arg3);
-//     sp18.unk48 = arg4;
-//     sp18.unk4C = arg5;
-//     sp18.unk50 = arg6;
-//     func_150A7790(&sp18, arg0);
-// }
+
+void func_15043E68(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
+    f32 sp18[16];
+
+    func_150A8050(&sp18, arg1, arg2, arg3);
+    sp18[12] = arg4;
+    sp18[13] = arg5;
+    sp18[14] = arg6;
+    func_150A7790(&sp18, arg0);
+}
 
 void func_15043EC8(struct112 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
     arg0->unk30 = arg4;
