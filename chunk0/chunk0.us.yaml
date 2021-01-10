@@ -9,7 +9,8 @@ options:
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
-  # create_detected_syms: yes
+  create_detected_syms: yes
+  undefined_syms: ../undefined_syms.us.txt
 segments:
   - name:  code
     type:  code

@@ -12,6 +12,7 @@ options:
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
+  create_detected_syms: yes
   undefined_syms: undefined_syms.ects.txt
   symbol_addrs:   symbol_addrs.ects.txt
 segments:

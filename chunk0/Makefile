@@ -85,8 +85,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_funcs_auto.txt ../undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
-# -T undefined_syms_auto.txt
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) ../undefined_syms.$(VERSION).txt -Map $(TARGET).map  -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections
 
 ####################### Overrides ############################
 

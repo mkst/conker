@@ -78,10 +78,6 @@ ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
           $(BUILD_DIR)/rzip/assets1B/assets1B.o \
           $(BUILD_DIR)/rzip/assets1C/assets1C.o
 
-ifeq ($(VERSION),debug)
-	ASSETS :=
-endif
-
 O_FILES += $(ASSETS)
 
 # Files requiring pre/post-processing
@@ -116,7 +112,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T undefined_funcs_auto.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.$(VERSION).txt -Map $(TARGET).map --no-check-sections
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -T undefined_syms.$(VERSION).txt -Map $(TARGET).map -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections
 
 ### file-specific compile flags
 
