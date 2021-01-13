@@ -25,5 +25,6 @@ textures/
 .splat_cache
 chunk0.ld
 conker.ld
+progress.csv
 undefined_funcs_auto.txt
 undefined_syms_auto.txt

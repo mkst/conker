@@ -136,7 +136,7 @@ verify:
 verify_gz: $(TARGET).gz.bin
 	@echo "$$(cat game.$(VERSION).gz.sha1)  $(TARGET).gz.bin" | sha1sum --check
 
-progress: ../html/progress.csv
+progress: progress.csv
 
 ### Recipes
 
@@ -157,11 +157,13 @@ $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 # --just-symbols=../build/asm/libultra/os/createmesgqueue.o
 # --just-symbols=../build/conker.us.elf
 
+ifndef PERMUTER
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
 	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude $(ASM_PROCESSOR_DIR)/prelude.s
+endif
 
 $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
 	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
@@ -207,6 +209,6 @@ $(TARGET).data.pad: $(TARGET).data.gz.bin
 	dd if=/dev/zero of=$@ bs=1 count=$$(($(DATA_SECTION_LENGTH)-$$(wc -c <$(TARGET).data.gz.bin)))
 
 
-../html/progress.csv: verify_o
-	mkdir -p ../html
+progress.csv: verify_o
+	mkdir -p ../progress
 	$(PYTHON) ../tools/progress.py . $(BUILD_DIR)/chunk0.map .code_code > $@

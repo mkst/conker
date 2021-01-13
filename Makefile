@@ -78,6 +78,16 @@ ASSETS := $(BUILD_DIR)/rzip/assets00/assets00.o \
           $(BUILD_DIR)/rzip/assets1B/assets1B.o \
           $(BUILD_DIR)/rzip/assets1C/assets1C.o
 
+COMPRESSED := bin/compressed00.bin bin/compressed01.bin \
+              bin/compressed02.bin bin/compressed03.bin \
+              bin/compressed04.bin bin/compressed05.bin \
+              bin/compressed06.bin
+
+UNCOMPRESSED := extracted/compressed00/00000000.bin extracted/compressed01/00000000.bin \
+                extracted/compressed02/00000000.bin extracted/compressed03/00000000.bin \
+                extracted/compressed04/00000000.bin extracted/compressed05/00000000.bin \
+                extracted/compressed06/00000000.bin
+
 O_FILES += $(ASSETS)
 
 # Files requiring pre/post-processing
@@ -201,6 +211,8 @@ extract_game: chunk0/game.$(VERSION).bin
 # deprecated
 decompress: dirs extract_game
 
+extract_compressed: $(UNCOMPRESSED)
+
 check:
 	@echo "$$(cat conker.$(VERSION).sha1)  baserom.$(VERSION).z64" | sha1sum --check
 
@@ -251,6 +263,13 @@ game/rzip/data/0000.bin: bin/game.$(VERSION).bin
 
 bin/game.$(VERSION).bin: conker.$(VERSION).yaml
 	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 $< .
+
+bin/compressed00.bin: bin/game.$(VERSION).bin
+
+$(UNCOMPRESSED): $(COMPRESSED)
+	mkdir -p extracted/$(notdir $(@D))
+	$(PYTHON) tools/extract_compressed.py config/$(notdir $(@D)).$(VERSION).yaml bin/$(notdir $(@D)).bin extracted/$(notdir $(@D))/
+
 
 # settings
 .PHONY: all clean default

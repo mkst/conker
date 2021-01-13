@@ -82,38 +82,64 @@ void func_15058EA4(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060A30.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060A9C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060B04.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060B70.s")
+
+void func_15060B70(s32 arg0, s32 arg1) {
+    func_10010154(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060BA4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060BE0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060D54.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15060F28.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150611E8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150615DC.s")
+
+void func_150615DC(struct127 *arg0) {
+    arg0->unk7 = 0xFF;
+    arg0->unk8 = 0xFF;
+    arg0->unk9 = 0;
+    arg0->unkA = 0;
+    arg0->unkF = 0;
+    arg0->unkB = arg0->unkC = arg0->unkD = arg0->unkE = 0xFF;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_1506160C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150617BC.s")
+// ???
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_1506196C.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150619A8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15061B4C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150623F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150626EC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_150627D4.s")
+
+void func_150627D4(struct127 *arg0) {
+    arg0->unk2FB = 0;
+    func_1503B840(arg0);
+    func_15039CC8(arg0);
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15062800.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15062AC4.s")
 // NON-MATCHING: no nop after jr
 // void func_15062AC4(struct127 *arg0) {
-//
 //     if (arg0->unkE6 && arg0->unkE4) {
 //         arg0->unkEC = arg0->unkE4 / (f32) arg0->unkE6;
 //         arg0->unkF0 = arg0->unkE6 / (f32) arg0->unkE4;
 //     } else {
-//         arg0->unkEC = 0.0f;
-//         arg0->unkF0 = 0.0f;
+//         arg0->unkF0 = arg0->unkEC = 0.0f;
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15062B1C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15062B50.s")
+void func_15062B1C(struct127 *arg0, f32 arg1) {
+    arg0->unkE4 = arg0->unk14C * arg1;
+    func_15062AC4(arg0);
+}
+
+void func_15062B50(struct127 *arg0, f32 arg1) {
+    arg0->unkE6 = arg0->unk150 * arg1;
+    func_15062AC4(arg0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_55E50/func_15062B84.s")
 // NON-MATCHING: no nop after jr

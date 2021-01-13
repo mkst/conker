@@ -356,7 +356,7 @@ extern s32  D_80044B20; // 253952 bytes, bunch of structs?
 
 /* 80080000 */
 extern s32  D_80082B20;
-extern u8   D_80082B40[];
+extern void (*D_80082B40[])(struct108 *);
 extern u8   D_80082BB4;
 extern u8   D_80082BC0;
 extern void (*D_80082BFC[])(s32 arg0);
@@ -627,6 +627,17 @@ extern f32 D_800A56C4;
 extern f32 D_800A56C8;
 extern s32 D_800AB3C8;
 
+// code_1D8E20
+extern f32 D_800AB4C0;
+extern f32 D_800AB4C4;
+extern f32 D_800AB4C8;
+extern f32 D_800AB4CC;
+extern f32 D_800AB4E4;
+extern f32 D_800AB4E8;
+extern f32 D_800AB4EC;
+extern f32 D_800AB4F0;
+extern f32 D_800AB4F4;
+
 extern f32 D_800A548C[];
 
 // end of data D_800B0DBC
@@ -840,6 +851,7 @@ extern s8  D_800CC3D7;
 extern u8  D_800CC3F5[] ; // ??
 
 extern struct127  D_800CC5A0[];
+extern u8  D_800CC521[]; // ??
 
 extern struct127 *D_800CE370;
 
@@ -859,7 +871,7 @@ extern u8  D_800D1890;
 extern u8  D_800D1891;
 extern u8  D_800D1892;
 extern u8  D_800D1893;
-extern s32 D_800D1898[];
+extern f32 D_800D1898[];
 extern u16 D_800D18A0;
 extern u16 D_800D18A2;
 extern s32 D_800D18A4;
@@ -882,14 +894,14 @@ extern u8  D_800D1995;
 extern s32 D_800D1998;
 
 extern s32 D_800D19A0;
-extern struct124 *D_800D1C90[187]; // 748 bytes, 187 pointers
+extern struct124 *D_800D1C90[187]; // 748 bytes, 187 pointers? 17 structs?
 extern s32 D_800D1F80[187]; // 187 bytes long
 extern s32 D_800D2040[187]; // 187 bytes long
 extern struct39 *D_800D20FC;
 
-extern struct169* D_800D2104[];
+extern s32 D_800D2104[];
 extern s32 D_800D2108;
-extern s32 D_800D2110[];
+extern s16 D_800D2110[];
 extern s32 D_800D2120;
 extern s32 D_800D2124;
 extern s32 D_800D2128;
