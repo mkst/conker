@@ -18,7 +18,7 @@ void func_1500EE18(struct127 *arg0, s32 arg1, s32 arg2) {
 
     temp_v0 = func_15149130(0x12C, -1, 0x45, -1, 0, 0, 8, 0xFF, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 8); // memcpy
+        memcpy(&temp_v0->unk28, &tmp, 8); // memcpy
     }
 }
 
@@ -31,6 +31,6 @@ void func_1500EE94(struct16 *arg0) {
     tmp.unk8 = arg0->unk14;
     temp_v0 = func_15149130(0x12C, -1, 0x46, -1, 0, 0x39, 0xC, 0xFF, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 12);
+        memcpy(&temp_v0->unk28, &tmp, 12);
     }
 }

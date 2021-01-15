@@ -51,7 +51,7 @@ segments:
     - [0x6010, "c", "done/code_6010"]
     - [0x6170, "c", "done/code_6170"]
     - [0x61B0, "c"]
-    - [0x7830, "c"]
+    - [0x7830, "c", "main/entrypoint"] # called from main code
     - [0x7A70, "c"]
     - [0x8340, "c"]
     - [0x8840, "c", "done/code_8840"]
@@ -415,7 +415,7 @@ segments:
     - [0x174BF0, "asm"]
     - [0x177410, "asm"]
     - [0x177F90, "asm"]
-    - [0x178E50, "asm"]
+    - [0x178E50, "c", "done/code_178E50"]
     - [0x178EB0, "asm"]
     - [0x179DB0, "asm"]
     - [0x17ABB0, "asm"]
@@ -437,7 +437,7 @@ segments:
     - [0x18CA80, "asm"]
     - [0x18CD20, "asm"]
     - [0x191BE0, "asm"]
-    - [0x1927C0, "asm"]
+    - [0x1927C0, "c"]
     - [0x192800, "asm"]
     - [0x192920, "asm"]
     - [0x193390, "asm"]
@@ -503,20 +503,22 @@ segments:
     - [0x1F3DE0, "c"]
     - [0x1F8870, "asm"]
     - [0x1F9BF0, "asm"]
-  - type: code
-    name: data
+  - name:  data
+    type:  code
     start: 0x001FA130
     vram:  0x80082B20
     files:
       - [0x001FA130, "bin"]
       - [0x0020CFF0, ".data", "data/data_20CFF0"] # D_800959E0
       - [0x0020D010, "bin"]
-      - [0x0020D040, ".data", "code_7830"]
+      - [0x0020D040, ".data", "main/entrypoint"] # jumptable 0x80095A30
       - [0x0020D060, "bin"]
       - [0x0020DAD0, ".data", "code_113E0"]
       - [0x0020DB20, "bin"]
       - [0x0020DB40, "bin"] # D_80096530?
       - [0x0020DB50, "bin"]
+      - [0x0020ff70, "bin"] # jump table
+      - [0x002100c0, "bin"]
       - [0x00210410, ".data", "code_487E0"]
       - [0x00210630, ".data", "code_48B10"] # D_80099020
       - [0x00210690, ".data", "code_49260"] # D_80099080

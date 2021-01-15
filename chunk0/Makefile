@@ -31,7 +31,7 @@ COMPRESS_DIR_ARGS := --num-offsets 528 --total-size 1380000
 endif
 endif
 
-SRC_DIRS  := $(SRC_DIR) $(SRC_DIR)/data $(SRC_DIR)/done
+SRC_DIRS  := $(SRC_DIR) $(SRC_DIR)/data $(SRC_DIR)/done $(SRC_DIR)/main
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
@@ -85,7 +85,7 @@ CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r43
 CFLAGS += -D_LANGUAGE_C
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) ../undefined_syms.$(VERSION).txt -Map $(TARGET).map  -T undefined_funcs_auto.txt -T undefined_syms_auto.txt --no-check-sections
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) ../undefined_syms.$(VERSION).txt -Map $(TARGET).map -T undefined_funcs_auto.txt -T undefined_syms_auto.txt -T symbol_addrs.$(VERSION).txt --no-check-sections
 
 ####################### Overrides ############################
 
@@ -210,5 +210,4 @@ $(TARGET).data.pad: $(TARGET).data.gz.bin
 
 
 progress.csv: verify_o
-	mkdir -p ../progress
 	$(PYTHON) ../tools/progress.py . $(BUILD_DIR)/chunk0.map .code_code > $@

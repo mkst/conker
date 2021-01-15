@@ -139,7 +139,7 @@ s32 func_1501407C(s32 arg0) {
 //     tmp.unk1C = 0;
 //     tmp.unk8 = func_15149130(0x12C, -1, 0x21, -1, 0, 0, 0x34, 0xFF, 1);
 //     if (tmp.unk8 != 0) {
-//         func_10022EC0(tmp.unk8 + 0x28, &tmp, 0x34);
+//         memcpy(tmp.unk8 + 0x28, &tmp, 0x34);
 //     }
 // }
 

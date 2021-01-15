@@ -17,7 +17,7 @@ void func_1500EF20(void) {
     tmp.unk8 = 400.0f;
     temp_v0 = func_151491F4((s16) ((func_150ADA20() % 0x33U) + 0x19), 5, -1, 1, 0, 0x10, 0xFF, 0);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 16);
+        memcpy(&temp_v0->unk28, &tmp, 16);
     }
 
     tmp.unk0 = D_8009622C;
@@ -25,13 +25,13 @@ void func_1500EF20(void) {
     tmp.unkC = D_80096234;
     temp_v0 = func_151491F4((s16) ((func_150ADA20() % 0x33U) + 0x19), 5, -1, 1, 0, 0x10, 0xFF, 0);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 16);
+        memcpy(&temp_v0->unk28, &tmp, 16);
     }
 
     tmp.unk4 = D_80096238;
     temp_v0 = func_151491F4((s16) ((func_150ADA20() % 0x33U) + 0x19), 5, -1, 1, 0, 0x10, 0xFF, 0);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 16);
+        memcpy(&temp_v0->unk28, &tmp, 16);
     }
 
     tmp.unk0 = D_8009623C;
@@ -39,7 +39,7 @@ void func_1500EF20(void) {
     tmp.unkC = D_80096244;
     temp_v0 = func_151491F4((s16) ((func_150ADA20() % 0x33U) + 0x19), 5, -1, 1, 0, 0x10, 0xFF, 0);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 16);
+        memcpy(&temp_v0->unk28, &tmp, 16);
     }
 
     temp_v0 = &D_800DCD20;

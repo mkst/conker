@@ -15,7 +15,7 @@
 //         return NULL;
 //     }
 //     sp3C = temp_v0;
-//     func_10022EC0(temp_v0->unk98, arg2, 0x3C); // memcpy
+//     memcpy(temp_v0->unk98, arg2, 0x3C); // memcpy
 //     return sp3C;
 // }
 
@@ -90,7 +90,7 @@
 //     phi_v1 = &temp_v0_2;
 //     if (temp_v0_2 != 0) {
 //         sp3C = temp_v0_2;
-//         func_10022EC0(temp_v0_2->unk28, &sp30, 0xC); // memcpy
+//         memcpy(temp_v0_2->unk28, &sp30, 0xC); // memcpy
 //         phi_v1 = sp3C;
 //     }
 //     return phi_v1;

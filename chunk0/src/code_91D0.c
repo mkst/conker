@@ -39,7 +39,7 @@
 //     D_800DCD3B = 0;
 //     D_800DCD3C = 0;
 //     D_800DCD3D = 0;
-//     func_100226F0(&D_800DCD40, 56);
+//     bzero(&D_800DCD40, 56);
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_150092DC.s")
@@ -116,7 +116,7 @@ void func_15009944(s32 arg0, s32 arg1) {
 //     sp40 = (arg1 + 0x80090000)->unk5B50;
 //     temp_v0 = func_1516295C((arg1 + 0x80090000)->unk5B48, (arg1 + 0x80090000)->unk5B4C, 2, 300, 0xC, -1, 0, -1, 1, 1, 0xFF, 1);
 //     if (temp_v0 != 0) {
-//         func_10022EC0(&temp_v0->unk48, &sp40, 1); // memcpy
+//         memcpy(&temp_v0->unk48, &sp40, 1);
 //     }
 // }
 
@@ -154,7 +154,7 @@ void func_15009B84(s32 arg0, s32 arg1) {
 //     if (temp_v0 == 0) {
 //         goto block_2;
 //     }
-//     func_10022EC0(temp_v0 + 0x18, &sp28, 0xC);
+//     memcpy(temp_v0 + 0x18, &sp28, 0xC);
 // block_2:
 // }
 
@@ -312,7 +312,7 @@ void func_1500A68C(s32 arg0, s32 arg1) {
 //         sp4C = 0;
 //         temp_v0 = func_1516037C(&sp48, arg0, 24, 0xFF, 1);
 //         if (temp_v0 != 0) {
-//             func_10022EC0(temp_v0 + 0x18, &sp30, 0x18);
+//             memcpy(temp_v0 + 0x18, &sp30, 0x18);
 //         }
 //     }
 // }
@@ -355,7 +355,7 @@ void func_1500A79C(s32 arg0, s32 arg1) {
 //         sp44 = (f32) temp_v0->unk14;
 //         temp_v0_2 = func_1516037C(temp_a0, arg0, 0x18, 0xFF, 1);
 //         if (temp_v0_2 != 0) {
-//             func_10022EC0(temp_v0_2 + 0x18, &sp30, 0x18); // memcpy
+//             memcpy(temp_v0_2 + 0x18, &sp30, 0x18);
 //         }
 //     }
 // }
@@ -389,15 +389,15 @@ void func_1500A990(s32 arg0) {
     tmp.unk10 = 30.0f;
     tmp.unk14 = 50.0f;
 
-    phi_f18 = (u32)(func_10024770() * func_150ADA20()) & 0xFFFF;
+    phi_f18 = (u32)(osGetCount() * func_150ADA20()) & 0xFFFF;
     phi_f18 *= D_80095BB8;
     tmp.unk18 = (phi_f18 + phi_f18) * D_80095BBC;
 
-    phi_f18 = (u32)(func_10024770() * func_150ADA20()) & 0xFFFF;
+    phi_f18 = (u32)(osGetCount() * func_150ADA20()) & 0xFFFF;
     phi_f18 *= D_80095BC0;
     tmp.unk1C = (phi_f18 + phi_f18) * D_80095BC4;
 
-    phi_f18 = (u32)(func_10024770() * func_150ADA20()) & 0xFFFF;
+    phi_f18 = (u32)(osGetCount() * func_150ADA20()) & 0xFFFF;
     phi_f18 *= D_80095BC8;
 
     tmp.unk20 = (phi_f18 + phi_f18) * D_80095BCC;
@@ -407,7 +407,7 @@ void func_1500A990(s32 arg0) {
 
     temp_v0 = func_15149130(300, -1, 45, -1, 0, 0, 48, 255, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 48); // memcpy
+        memcpy(&temp_v0->unk28, &tmp, 48);
     }
 }
 
@@ -420,10 +420,10 @@ void func_1500AB5C(s32 arg0) {
 }
 
 void func_1500ABA0(s32 arg0) {
-    func_100226F0(&D_800BE4A0, 60); // bzero
+    bzero(&D_800BE4A0, 60);
     func_1502B8E0(&D_800BE4A0, 60, 3, 12, arg0, 10);
-    func_100226F0(&D_800DDA90, 240);
-    func_100226F0(&D_800DD478, 1560);
+    bzero(&D_800DDA90, 240);
+    bzero(&D_800DD478, 1560);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_91D0/func_1500AC14.s")

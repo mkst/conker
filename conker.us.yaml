@@ -13,6 +13,7 @@ options:
     #include "variables.h"
   create_detected_syms: yes
   undefined_syms: undefined_syms.us.txt
+  symbol_addrs:   symbol_addrs.us.txt
 segments:
   - name:  header
     type:  header
@@ -173,7 +174,9 @@ segments:
     - [0x27660, "asm", "libultra/io/pfsinit"]
     - [0x27820, "asm", "libultra/io/leodiskinit"]
     - [0x28670, "asm", "libultra/io/pfschecker"]
-  - [0x000290D0, "bin"] # data
+  - [0x290D0, "bin"] # data
+  - [0x291A0, "bin"] # ?
+  - [0x2AAD0, "bin"] # ?
   - type: code
     start: 0x0002C080
     vram:  0x8002C080

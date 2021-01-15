@@ -5,16 +5,14 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_39E0/func_150039E0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_39E0/func_15004574.s")
-// NON-MATCHING: just not right
-// extern struct107 D_800DBEF4[];
-// u8 func_15004574(void) {
-//     if (D_800DBF88 != 0xFF) {
-//         D_800DBF8C = D_800DBEF4[D_800DBF88].unk1C;
-//         D_800DBF90 = D_800DBEF4[D_800DBF88].unk28;
-//     }
-//     return D_800DBF88;
-// }
+
+// FIXME: matches but something isnt right
+void func_15004574(void) {
+    if (D_800DBF88 != 0xFF) {
+        D_800DBF8C = D_800DBEF4[D_800DBF88].unk1C;
+        D_800DBF90 = D_800DBEF4[D_800DBF88].unk28;
+    }
+}
 
 void func_150045BC(void) {
 }

@@ -137,7 +137,7 @@ f32 D_8009650C = 5.8676557540893555;
 //
 //     temp_v0 = func_151407D0(520.0f, 72.0f, &tmp.spAC, 0x7C, &tmp.sp54, 0, 0x20, 0, 0, -1, 0xFF, 1);
 //     if (temp_v0 != 0) {
-//         func_10022EC0(&temp_v0->unk170, &tmp, 12); // memcpy
+//         memcpy(&temp_v0->unk170, &tmp, 12);
 //     }
 //     tmp.sp70 = -520.0f;
 //     tmp.sp7C = -520.0f;
@@ -147,7 +147,7 @@ f32 D_8009650C = 5.8676557540893555;
 //     tmp.sp84 = D_800964F8;
 //     temp_v0 = func_151407D0(&tmp.spAC, 0x7C, &tmp.sp54, 0, 0x20, 0, 0, -1, 0xFF, 1);
 //     if (temp_v0 != 0) {
-//         func_10022EC0(&temp_v0->unk170, &tmp, 12); // memcpy
+//         memcpy(&temp_v0->unk170, &tmp, 12);
 //     }
 //
 //     tmp.sp74 = 70.0f;
@@ -157,7 +157,7 @@ f32 D_8009650C = 5.8676557540893555;
 //     tmp.sp7C = -584.0f;
 //     temp_v0 = func_151407D0(&tmp.spAC, 0x7C, &tmp.sp54, 0, 0x20, 0, 0, -1, 0xFF, 1);
 //     if (temp_v0 != 0) {
-//         func_10022EC0(&temp_v0->unk170, &tmp, 12); // memcpy
+//         memcpy(&temp_v0->unk170, &tmp, 12);
 //     }
 //     tmp.sp70 = 506.0f;
 //     tmp.sp7C = 506.0f;
@@ -167,7 +167,7 @@ f32 D_8009650C = 5.8676557540893555;
 //     tmp.sp84 = -208.0f;
 //     temp_v0 = func_151407D0(&tmp.spAC, 0x7C, &tmp.sp54, 0, 0x20, 0, 0, -1, 0xFF, 1);
 //     if (temp_v0 != 0) {
-//         func_10022EC0(&temp_v0->unk170, &tmp, 12); // memcpy
+//         memcpy(&temp_v0->unk170, &tmp, 12);
 //     }
 // }
 
@@ -183,6 +183,6 @@ void func_15011A78(struct127 *arg0, u8 arg1, s32 arg2) {
 
     temp_v0 = func_15149130(300, -1, 85, -1, 0, 66, 8, arg1, arg2);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 8);
+        memcpy(&temp_v0->unk28, &tmp, 8);
     }
 }

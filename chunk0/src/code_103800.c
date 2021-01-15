@@ -5,7 +5,7 @@
 
 
 void func_15103800(void) {
-    func_100226F0(D_800D9AB0, 8); // bzero
+    bzero(D_800D9AB0, 8); // bzero
 }
 
 void func_15103828(void) {

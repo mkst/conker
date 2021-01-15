@@ -68,15 +68,6 @@ extern OSThread *__osRunningThread;
 /* FUNCTIONS */
 // FIXME: we should be able to reference these directly
 extern s32  D_10013598;
-extern s32  D_1001E530;
-extern s32 *D_10023850;
-extern s32 *D_10023930;
-extern s32  D_10026B10;
-extern s32  D_100291A0;
-extern s32  D_100290D0;
-extern s32 *D_1002AAD0;
-
-extern struct14 *D_100071D0;
 
 
 /* 80000000 */
@@ -421,6 +412,7 @@ extern void (*D_80089EF8[])(void);
 extern void (*D_80089F2C[])(void);
 // extern void (*D_80089F60[])(s32, s32);
 extern void (*D_80089F60[])(s32, s32, u8);
+extern s32 D_8008A074[2];
 extern struct32 D_8008A0B4[];
 extern s32  D_8008A084[];
 extern struct115 D_8008B4A8[];
@@ -432,7 +424,7 @@ extern u8   D_8008CD00;
 extern s32  D_8008CFFC[];
 
 extern s8   D_8008FD8C;
-extern s32  D_8008FD90;
+extern s8   D_8008FD90;
 extern s32  D_8008FD94;
 extern s8   D_8008FDA8;
 extern u16  D_8008FDBC;
@@ -589,7 +581,8 @@ extern s16 D_8009DCB4[];
 /* 800A0000 */
 extern f32 D_800A2148;
 extern f32 D_800A2154;
-extern struct201 D_800A2CD0[];
+// extern struct201 D_800A2CD0[];
+extern u8  D_800A2CD0[][3];
 extern f32 D_800A1B80;
 extern f32 D_800A1B8C;
 extern f32 D_800A1B98;
@@ -627,6 +620,11 @@ extern f32 D_800A56C4;
 extern f32 D_800A56C8;
 extern s32 D_800AB3C8;
 
+extern u8  D_800AB34C[4]; // 96, 97, 98, 99
+extern s32 D_800AB350[7]; // 0, 1, 2, 58, 59, 60, 61
+extern s32 D_800AB36C[3]; // 15, 16, 17
+extern s32 *D_800AB384; // 28, 29
+
 // code_1D8E20
 extern f32 D_800AB4C0;
 extern f32 D_800AB4C4;
@@ -649,6 +647,8 @@ extern s32  D_800B0DC4;
 extern s32  D_800B0DC8;
 extern s32  D_800B0DCC;
 extern s32  D_800B0DD0;
+extern s32  D_800B0DD4;
+extern u16  D_800B0DD8;
 extern s32  D_800B0DDC;
 extern u8  *D_800B0DE0;
 extern s32  D_800B0DE4;
@@ -657,7 +657,7 @@ extern struct104 *D_800B0DF0;
 extern s32 D_800B0E00[];
 extern s32  D_800B0E04;
 
-extern s32 *D_800B0E30[];
+extern s32  D_800B0E30[];
 extern u8   D_800B0E34[];
 
 extern s32 D_800B0E58[7762];
@@ -737,7 +737,7 @@ extern s32  D_800BE9E0; // OSMesg
 extern s32  D_800BE9E4;
 extern s32  D_800BE9E8;
 extern u8   D_800BE9ED;
-extern u16  *D_800BE9F4;
+extern u16  *D_800BE9F4; // was u16
 extern s32  D_800BE9F8;
 
 extern struct14 D_800BE730;
@@ -746,8 +746,8 @@ extern s32 D_800BE74E;
 extern s32 D_800BE754;
 extern s32 D_800BE75A;
 
-extern struct04 *D_800BEA00;
-extern struct04 *D_800BEA04;
+extern s32 D_800BEA00[]; // struct04
+extern s32 D_800BEA04[]; // struct04
 extern s32 D_800BEA08;
 extern OSMesgQueue D_800BEA10;
 extern OSMesg      D_800BEA28;
@@ -1012,8 +1012,9 @@ extern s32 D_800DBDD8[];
 extern s32 D_800DBDE8[];
 extern s32 D_800DBDF8[];
 
+extern u16* D_800DBE08[];
 extern s32 D_800DBE18[];
-extern s32 D_800DBE1C;
+extern s32 D_800DBE1C[];
 extern s32 D_800DBE20;
 extern s32 D_800DBE24;
 extern s16 D_800DBE28;
@@ -1032,7 +1033,7 @@ extern u8  D_800DBE62;
 extern u8  D_800DBE63;
 extern f32 D_800DBE64;
 extern s32 D_800DBEF0;
-extern struct131 D_800DBEF4[];
+extern struct131 *D_800DBEF4; // ???
 extern s32 D_800DBEF8[];
 extern s8  D_800DBEFC[];
 extern u8  D_800DBF00;
@@ -1172,16 +1173,11 @@ extern s32  D_800E0934;
 extern s32  D_800E0940;
 extern u8   D_800E0A10;
 extern struct186 *D_800E0D80;
+
+// end of zero'd out section
+
 extern s32  D_800E9D00;
 extern struct54 *D_800E9D10; // probably not struct54
-
-/* chunk0 functions */
-extern s32  D_15000000;
-extern s32  D_150EA904;
-extern s32  D_150EB430;
-extern s32  D_15103910;
-extern s32  D_15103AA0;
-extern s32  D_151FA130;
 
 /* debugger variables */
 
@@ -1227,10 +1223,11 @@ extern u8   D_160047E0[];
 
 /* other */
 
-extern u32  D_803F5000;
-extern u32  D_803FE000;
-extern u32  D_807F5000;
-extern u32  D_807FE000;
+extern u32  D_00AB1950; // offsets table
+
+extern s32  D_100290D0; // start of data (?)
+extern s32  D_100291A0;
+extern s32 *D_1002AAD0;
 
 /* what is this */
 extern s16  D_BC000C02;

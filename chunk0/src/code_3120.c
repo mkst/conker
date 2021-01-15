@@ -4,7 +4,9 @@
 #include "variables.h"
 
 
+// what is this loop doing?
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_15003120.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/code_3120/func_150031EC.s")
 
 s32 func_150034B4(void) {

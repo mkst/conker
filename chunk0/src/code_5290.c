@@ -46,7 +46,7 @@
 //     u16 phi_s0;
 //     f32 phi_f4;
 //
-//     func_100226F0(arg0, 0x9A0); // bzero
+//     bzero(arg0, 0x9A0); // bzero
 //
 //     arg0->unk23C = 1;
 //     arg0->unk23D = arg1;

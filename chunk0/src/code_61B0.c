@@ -5,8 +5,8 @@
 
 
 void func_150061B0(void) {
-    func_10023790(&D_800BE900, &D_800BE2D0, 8); // osCreateMesgQueue
-    func_100237C0(OS_EVENT_SI, &D_800BE900, D_800BE9E0);  // osSetEventMesg
+    osCreateMesgQueue(&D_800BE900, &D_800BE2D0, 8);
+    osSetEventMesg(OS_EVENT_SI, &D_800BE900, D_800BE9E0);
     D_800BE730.unk0 = &D_800BE748;
     D_800BE730.unk4 = &D_800BE74E;
     D_800BE730.unk8 = &D_800BE754;

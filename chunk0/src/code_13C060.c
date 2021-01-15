@@ -24,7 +24,7 @@
 //     if (temp_v0 == 0) {
 //         return NULL;
 //     }
-//     func_10022EC0(&temp_v0->unk18.i.unk0, arg0, 0x28); // memcpy
+//     memcpy(&temp_v0->unk18.i.unk0, arg0, 0x28); // memcpy
 //     func_1513FFF4(&temp_v0->unk40, temp_v0->unk1E, arg4);
 //     func_151400D0(&temp_v0->unk40, arg1);
 //     temp_v0->unk80 = arg2;
@@ -583,6 +583,7 @@ void func_151411C4(struct210 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13C060/func_151416E8.s")
 
+// ???
 #pragma GLOBAL_ASM("asm/nonmatchings/code_13C060/func_151417C4.s")
 
 s32 func_15141818(s32 arg0, s32 arg1) {

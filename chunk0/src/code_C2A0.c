@@ -61,7 +61,7 @@ void func_1500C2A0(void) {
 //
 //         do {
 //             func_15008340(arg0, &tmp.unk30, &tmp.unk38, &tmp.unk4, &tmp.unk0);
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk34 = tmp.unk40 = (phi_f18 * D_80096170 * ((tmp.unk4 - tmp.unk0) * 0.5f)) + (tmp.unk0 + ((tmp.unk4 - tmp.unk0) * 0.25f));
 //
 //             temp_f12 = fabsf(tmp.unk40 - tmp.unk4);
@@ -72,31 +72,31 @@ void func_1500C2A0(void) {
 //             } else {
 //                 temp_f0 = temp_f12;
 //             }
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk54 = ((phi_f18 * D_80096170 * 0.75f) + 0.25f) * temp_f0;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk3C = ((phi_f18 * D_80096170) + (phi_f18 * D_80096170)) * D_80096174;
 //
-//             phi_f18 = (u16)(func_10024770() * func_150ADA20());
+//             phi_f18 = (u16)(osGetCount() * func_150ADA20());
 //             tmp.unk44 = (phi_f18 * D_80096170 * D_80096178) + D_8009617C;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk18 = phi_f18 * D_80096170 * 360.0f;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk1C = phi_f18 * D_80096170 * 360.0f;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk20 = phi_f18 * D_80096170 * 360.0f;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk48 = phi_f18 * D_80096170 * D_80096180;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk50 = phi_f18 * D_80096170 * D_80096184;
 //
-//             phi_f18 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f18 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk10 = tmp.unk14 = (phi_f18 * D_80096170 * 0.25f) + 1.0f;
 //
 //             func_1510F800(0);
@@ -163,18 +163,18 @@ void func_1500C2A0(void) {
 //         temp_f22 = D_800961B4;
 //
 //         do {
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20()) ;
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20()) ;
 //
 //             tmp.unk68 = tmp.unk6C = tmp.unk24 = (phi_f10 * temp_f22 * 600.0f) + 200.0f;
 //
-//             tmp.unk5B = (func_10024770() * func_150ADA20()) % 0x47U + 0x32;
-//             tmp.unk2A = (func_10024770() * func_150ADA20()) % 3U;
-//             tmp.unk2B = (func_10024770() * func_150ADA20()) % 3U;
+//             tmp.unk5B = (osGetCount() * func_150ADA20()) % 0x47U + 0x32;
+//             tmp.unk2A = (osGetCount() * func_150ADA20()) % 3U;
+//             tmp.unk2B = (osGetCount() * func_150ADA20()) % 3U;
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk2C = ((phi_f10 * temp_f22 * temp_f28) + temp_f30) * tmp.unk24;
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk30 = ((phi_f10 * temp_f22 * temp_f28) + temp_f30) * tmp.unk24;
 //
 //             if ((func_150ADA20() & 1) != 0) {
@@ -189,11 +189,11 @@ void func_1500C2A0(void) {
 //                 phi_v1 = 0;
 //             }
 //             tmp.unk98 = phi_v1 | tmp.unk0 | 0xC000 | 0x20000 | 0x800000;
-//             tmp.unk58 = ((func_10024770() * func_150ADA20()) % 0x38U) + 0x50;
-//             tmp.unk54 = ((func_10024770() * func_150ADA20()) % 0x2EU) + 0xB4;
+//             tmp.unk58 = ((osGetCount() * func_150ADA20()) % 0x38U) + 0x50;
+//             tmp.unk54 = ((osGetCount() * func_150ADA20()) % 0x2EU) + 0xB4;
 //             func_15008340(arg0, &tmp.unk70, &tmp.unk78, &tmp.unk1C, &tmp.unk18);
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //
 //             temp_f0 = tmp.unk1C - tmp.unk18;
 //             tmp.unk8C = (phi_f10 * temp_f22 * (temp_f0 * 0.5f)) + (tmp.unk18 + (temp_f0 * 0.25f));
@@ -203,20 +203,20 @@ void func_1500C2A0(void) {
 //                 temp_f0 = tmp.unk74;
 //             }
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk94 = ((phi_f10 * temp_f22 * 0.75f) + 0.25f) * temp_f0;
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //             temp_f0 = phi_f10 * temp_f22;
 //             tmp.unk88 = (temp_f0 + temp_f0) * D_800961B8;
 //
-//             phi_f10 = (u16) (func_10024770() * func_150ADA20());
+//             phi_f10 = (u16) (osGetCount() * func_150ADA20());
 //             tmp.unk90 = (phi_f10 * temp_f22 * D_800961BC) + D_800961C0;
 //             func_1510F800(0);
 //             tmp.unk9C = func_1510FD20(tmp.unk70, tmp.unk78);
 //             temp_v0 = func_15130280(&tmp.unk40, 2, 0, 28, 255, 1);
 //             if (temp_v0 != NULL) {
-//                 func_10022EC0(&temp_v0->unkA8, &tmp.unk24, 28); // memcpy  temp_v0->A8 ?
+//                 memcpy(&temp_v0->unkA8, &tmp.unk24, 28); // memcpy  temp_v0->A8 ?
 //             }
 //             phi_f24 -= 1.0f;
 //         }

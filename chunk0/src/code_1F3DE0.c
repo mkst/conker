@@ -37,7 +37,7 @@
 //         return NULL;
 //     }
 //     sp1C->unk8474 = 0;
-//     func_100226F0(sp1C + 0x6A64, 0x900);
+//     bzero(sp1C + 0x6A64, 0x900);
 //     return sp1C;
 // }
 

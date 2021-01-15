@@ -934,7 +934,13 @@ typedef struct {
     u8  unkE;
     u8  padF;
     u8  unk10;
-    u8  pad11[0x9];
+    u8  pad11;
+    u8  unk12;
+    u8  pad13;
+    u8  unk14;
+    u8  pad15;
+    s16 unk16;
+    u8  pad18[0x2];
     u16 unk1A;
     u8  pad1C[0xD];
     u8  unk29;
@@ -1072,6 +1078,7 @@ typedef struct {
     s16 unk36;  // used
     s16 unk38;
     s8  unk3A;  // used
+    u8  unk3B;
 } struct114;
 
 typedef struct {
@@ -1647,9 +1654,11 @@ typedef struct {
 } struct130;
 
 typedef struct {
-    u8  pad0[0x1C];
+    u8  pad[0x1C];
     s32 unk1C;
-    u8  pad20[0x2F];
+    u8  pad20[0x8];
+    s32 unk28;
+    u8  pad2C[0x23];
     s8  unk4F;
     u8  pad50[0x6];
     s16 unk56;
@@ -2816,5 +2825,24 @@ typedef struct {
   u8  pad8[0x7];
   u8  unkF;
 } struct217;
+
+typedef struct {
+    u8 pad0[0x14];
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 pad17;
+    u8 unk18;
+    u8 unk19;
+    u8 unk1A;
+} struct218;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    u8  unk8;
+    u8  pad9[9];
+    u8  unk12;
+} struct219;
 
 #endif

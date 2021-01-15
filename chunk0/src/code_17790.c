@@ -6,16 +6,16 @@
 
 void func_15017790(void) {
     func_1509C120();
-    func_100226F0(D_800D2E4C, 0x1B);  // bzero
-    func_100226F0(&D_800D2E50, 0x10);
-    func_100226F0(&D_800D2E60, 9);
-    func_100226F0(&D_800D2E70, 0xCC);
+    bzero(D_800D2E4C, 0x1B);
+    bzero(&D_800D2E50, 0x10);
+    bzero(&D_800D2E60, 9);
+    bzero(&D_800D2E70, 0xCC);
     D_800D2E44 = (u8)0;
 }
 
 void func_150177F8(void) {
     func_1509BA04(1);
-    func_100226F0(&D_800D2F48, 0xC);
+    bzero(&D_800D2F48, 0xC);
     func_150A00F0();
     D_800D2DB0 = D_800968C0;
     D_800D2E41 = 0xA;

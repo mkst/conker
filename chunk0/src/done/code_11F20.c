@@ -13,6 +13,6 @@ void func_15011F20(s32 arg0) {
     tmp.unk8 = 0.0f;
     temp_v0 = func_15149130(300, -1, 71, -1, 0, 0, 12, 255, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 12);
+        memcpy(&temp_v0->unk28, &tmp, 12);
     }
 }

@@ -21,7 +21,7 @@ dummy_label_927029:
 
     temp_v0 = func_15149130(300, -1, 80, -1, 0, 61, 12, 255, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 12); // memcpy
+        memcpy(&temp_v0->unk28, &tmp, 12); // memcpy
     }
 }
 

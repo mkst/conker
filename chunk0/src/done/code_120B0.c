@@ -19,7 +19,7 @@ void func_150120B0(s32 arg0) {
 
     temp_v0 = func_15149130(300, -1, 30, -1, 0, 65, 32, 255, 1);
     if (temp_v0 != NULL) {
-        func_10022EC0(&temp_v0->unk28, &tmp, 32);
+        memcpy(&temp_v0->unk28, &tmp, 32);
     }
 }
 

@@ -25,7 +25,7 @@ void func_15010780(void) {
 //
 //     temp_v0 = func_15149130(300, -1, 94, -1, 0, 0, 12, 255, 1);
 //     if (temp_v0 != NULL) {
-//         func_10022EC0(&temp_v0->unk28, &tmp, 12); // memcpy
+//         memcpy(&temp_v0->unk28, &tmp, 12); // memcpy
 //     }
 //     if ((D_800D2E4C->unk12 & 0x40) != 0) {
 //         func_15149130(5, 9, -1, -1, 1, 0, 0, 255, 1);

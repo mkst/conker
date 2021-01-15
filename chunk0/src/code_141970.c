@@ -322,15 +322,14 @@ void func_15145A50(struct127 *arg0) {
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15145AD8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15145C90.s")
-// NON-MATCHING: mostly right idea
-// u8 func_15145C90(s32 arg0) {
-//     if (arg0 < 0) {
-//         return 1;
-//     } else {
-//         return (D_800DBEF4[arg0].unk6F & 0x80) == 0x80;
-//     }
-// }
+
+u8 func_15145C90(s32 arg0) {
+    if (arg0 < 0) {
+        return 1;
+    } else {
+        return (D_800DBEF4[arg0].unk6F & 0x80) == 0x80;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15145CD0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/code_141970/func_15145DB4.s")

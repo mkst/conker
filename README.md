@@ -1,6 +1,7 @@
 # Conker's Bad Fur Day Decompilation
 
 ![build](https://github.com/mkst/conker/workflows/build/badge.svg)
+![progress](https://img.shields.io/badge/dynamic/json?url=https%3A//conker.deco.mp/latest.json&color=critical&label=Complete&query=$.summary[0].percent&suffix=%&link=https%3A//conker.deco.mp)
 
 A WIP decompilation of Conker's Bad Fur Day.
 
@@ -106,7 +107,7 @@ The core game logic code is compressed within the ROM. See the [README](chunk0/R
 
 ## Custom tools
 
- - `rareunzip`; python script to compress/decompress the compression format used in the ROM.
+ - `rarezip/rareunzip`; python script to compress/decompress the compression format used in the ROM.
 
 NOTE: `gzip` is used for compression rather than `zlib`; use the binary in `tools/` in order to get matching compression.
 
@@ -118,7 +119,7 @@ This repo makes use of the following open-source tools without which, there woul
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow `GLOBAL_ASM` wrappers to include assembly within the c files
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
  - [ido-static-recomp](https://github.com/Emill/ido-static-recomp); IDO compiler
- - [gzip](https://ftp.gnu.org/gnu/gzip/); gzip 1.24 from 1993
+ - [gzip](https://github.com/mkst/gzip); gzip
 
 # Contributing
 

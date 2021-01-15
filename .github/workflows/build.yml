@@ -76,4 +76,3 @@ jobs:
         destination_folder: 'progress/data'
         user_email: 'streetster@gmail.com'
         user_name: 'mkst'
-        commit_message: 'Adding ${{ steps.vars.outputs.progress_filename }}'
