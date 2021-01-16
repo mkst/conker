@@ -88,14 +88,13 @@ void func_15001B5C(u8 arg0) {
     *D_800B0DE0++ = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001B8C.s")
+//#pragma GLOBAL_ASM("asm/nonmatchings/code_940/func_15001B8C.s")
 // NON-MATCHING: JUSTREG: uses t8 not t7
-// void func_15001B8C(u16 arg0) {
-//     s8 tmp = arg0 >> 8;
-//     D_800B0DE0[0] = tmp;
-//     D_800B0DE0[1] = tmp;
-//     D_800B0DE0 += 2;
-// }
+ void func_15001B8C(u16 arg0) {
+     D_800B0DE0[0] = (arg0 >> 8);
+     D_800B0DE0[1] = arg0 & 0xFF;
+     D_800B0DE0 += 2;
+ }
 
 void func_15001BC8(s32 arg0, s16 *arg1, s16 *arg2) {
     u16 *tmp;
