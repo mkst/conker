@@ -66,16 +66,18 @@ void func_1500E890(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/code_E470/func_1500E8C0.s")
 // NON-MATCHING: fair bit to figure out
 // void func_1500E8C0(void) {
-//     s16 phi_v0;
 //     struct145 tmp;
+//     s32 phi_v0;
 //
 //     func_15195AA8(D_800B0E00[0], D_800902E8, 0, -1, 0, 0, 0, -6);
 //     func_15195AA8(D_800B0E00[1], D_800902E8, 0, -1, 0, 1, 0, -6);
-//     tmp.unk28 = D_80096210;
+//     tmp.unk28 = D_80096210; // 0.2142857164144516
 //     tmp.unk30 = 5.0f;
 //     tmp.unk34 = 6.0f;
 //     tmp.unk20 = 8.0f;
 //     tmp.unk24 = 7.0f;
+//     tmp.unk14 = 0.0f;
+//     tmp.unk18 = 0.0f;
 //     tmp.unk2C = 0.0f;
 //     tmp.unk48 = 3;
 //     tmp.unk4C = 2;
@@ -88,21 +90,18 @@ void func_1500E890(void) {
 //     tmp.unk44 = 0x29;
 //     tmp.unk46 = 0x29;
 //     tmp.unk10 = 400.0f;
-//     tmp.unk14 = 0.0f;
-//     tmp.unk18 = 0.0f;
-//     tmp.unk1C = 400.0f;
-//     tmp.unk1C = 900.0f - tmp.unk1C;
-//     tmp.unk3C = D_80096214;
+//     tmp.unk1C = 900.0f - 400.0f;
+//     tmp.unk3C = D_80096214; // 0.6000000238418579
 //     tmp.unk40 = D_80096218;
 //     tmp.unkC = D_8009621C;
 //     tmp.unk8 = 800.0f;
 //     func_15189900(&tmp, 1);
 //     if (D_800BE9F0 == 6) {
-//         phi_v0 = 0x34;
+//         phi_v0 = 52;
 //     } else {
 //         phi_v0 = 7;
 //     }
-//     func_1000FA64(1567, phi_v0, 0, 0, 12000, 1000, 400, &D_1000EF40, 0, 0, 72, 0);
+//     func_1000FA64(1567, (s16)phi_v0, 0, 0, 12000, 1000, 400, func_1000EF40, 0, 0, 72, 0);
 // }
 
 void func_1500EAA0(void) {

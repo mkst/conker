@@ -204,7 +204,6 @@ segments:
     - [0x0002C7A0, "bin"] # more data
     - [0x0002C810, ".data", "data/data_2C810"]
     - [0x0002C850, "bin"] # more data
-  - [0x0002C8D0, "bin"] # tbd
   - [0x0002D4B0, "bin"] # ucode?
   - [0x0002DE08, "bin"] # ucode?
   - [0x0002e698, "bin"] # ucode?

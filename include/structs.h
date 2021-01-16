@@ -1799,7 +1799,7 @@ typedef struct {
 typedef struct {
     u16 unk0;
     u16 unk2;
-    u16 unk4;
+    s16 unk4;
     u16 unk6;
     f32 unk8;
     f32 unkC;
@@ -2016,7 +2016,8 @@ struct struct108 {
     /* 0x310 */ u8  pad310[0x38];
     /* 0x348 */ f32 unk348;      // used
     /* 0x34C */ f32 unk34C;      // used
-    /* 0x350 */ u8  pad350[0x8];
+    /* 0x350 */ u8  pad350[0x4];
+    /* 0x354 */ f32 unk354;
     /* 0x358 */ f32 unk358;
     /* 0x35C */ f32 unk35C;
     /* 0x360 */ u32 pad360;
@@ -2844,5 +2845,18 @@ typedef struct {
     u8  pad9[9];
     u8  unk12;
 } struct219;
+
+typedef struct {
+    s8  unk0;
+    s8  unk1;
+    s16 unk2;
+    u8  unk4;
+} struct220;
+
+typedef struct {
+    s32 unk0; // struct pointer
+    f32 unk4;
+    f32 unk8;
+} struct221; // size 0xC
 
 #endif

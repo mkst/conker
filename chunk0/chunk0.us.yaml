@@ -523,4 +523,6 @@ segments:
       - [0x00210630, ".data", "code_48B10"] # D_80099020
       - [0x00210690, ".data", "code_49260"] # D_80099080
       - [0x002106A0, "bin"]
+      - [0x0021aac0, ".data", "code_122AE0"]
+      - [0x0021abc0, "bin"]
   - [0x2283D0]  # chunk0 end

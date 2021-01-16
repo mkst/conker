@@ -132,9 +132,11 @@ extern s32  D_8002BD18;
 extern s32  D_8002BD20; // init ok?
 extern s32  D_8002BD60;
 
-/* data section from D_8002C080 to D_8002C8D0 (ish) */
+/* DATA section from D_8002C080 to D_8002D4B0 */
 
-// BSS STARTS at D_8002D4B0
+
+/* BSS STARTS at D_8002D4B0 */
+
 extern s32  D_8002D4B0; // BSS
 extern s32 *D_8002D8B0;
 
@@ -350,6 +352,8 @@ extern s32  D_80082B20;
 extern void (*D_80082B40[])(struct108 *);
 extern u8   D_80082BB4;
 extern u8   D_80082BC0;
+extern u8   D_80082BE0[4];
+extern u8   D_80082BE4[5];
 extern void (*D_80082BFC[])(s32 arg0);
 extern void (*D_80082D60[])(void);
 extern void (*D_80082D90[])(void);
@@ -456,16 +460,20 @@ extern f32 D_80095B18;
 extern f32 D_80095B1C;
 extern f32 D_80095B20;
 extern f32 D_80095B24;
+extern u8  D_80095B27[];
 extern f32 D_80095B28;
 extern f32 D_80095B2C;
 extern f32 D_80095B30;
 extern f32 D_80095B40;
 extern f32 D_80095B44;
-extern f32 D_80095B48;
-extern f32 D_80095B4C;
-extern f32 D_80095B50;
+// func_15009990 suggests they are u8, but they look like floats!
+extern u8 D_80095B48[]; // 0.002188183832913637
+extern u8 D_80095B4C[]; // 20.100000381469727
+extern u8 D_80095B50[]; // 0.4000000059604645
+
 extern f32 D_80095B54;
-extern f32 D_80095B70;
+extern u8  D_80095B70[4];
+extern u8  D_80095B74[2];
 extern f32 D_80095BB8;
 extern f32 D_80095BBC;
 extern f32 D_80095BC0;
@@ -595,17 +603,7 @@ extern f32 D_800A028C;
 extern f32 D_800A0290;
 extern f32 D_800A0310;
 extern f32 D_800A0314;
-extern f32 D_800A34D0;
-extern f32 D_800A34D4;
-extern f32 D_800A351C;
-extern f32 D_800A3520;
-extern f32 D_800A3524;
-extern f32 D_800A3528;
-extern f32 D_800A352C;
-extern f32 D_800A3530;
-extern f32 D_800A3550;
-extern f32 D_800A3554;
-extern f32 D_800A35AC;
+
 extern s32 D_800A4AA0; //?
 extern f32 D_800A5168;
 extern f32 D_800A5178;

@@ -1,7 +1,7 @@
 #include <ultra64.h>
 
 
-void (*jtbl_8002C0A0[8])(void) = {
+void (*jtbl8002C0A0[8])(void) = {
     0x10004AAC,
     0x10004CE0,
     0x10004BEC,

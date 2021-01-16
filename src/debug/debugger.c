@@ -257,6 +257,7 @@ s32 func_16000A5C(void) {
     return res;
 }
 
+// called from func_10007DAC
 #pragma GLOBAL_ASM("asm/nonmatchings/debug/debugger/func_16000B14.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/debug/debugger/func_16000F8C.s")
 // NON-MATCHING: lots to figure out
