@@ -32,7 +32,7 @@ done
 
 ### Compression
 
-The same script that is used to compress the `chunk0` assets can be re-used to compressed these files. There is no 2-byte alignment within these files, so be sure to pass the `--no-padding` flag:
+The same script that is used to compress the `game` assets can be re-used to compressed these files. There is no 2-byte alignment within these files, so be sure to pass the `--no-padding` flag:
 
 ```sh
 # create output folder

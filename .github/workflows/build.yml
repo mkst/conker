@@ -24,27 +24,23 @@ jobs:
     - name: Decrypt baserom
       run: echo ${{ secrets.CONKER_BASEROM_US }} | openssl enc -d -aes-256-cbc -pass stdin -pbkdf2 -in baserom/baserom.us.z64.aes -out baserom.us.z64
 
-    - name: Perform make extract
+    - name: Perform make extract (rom)
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: make extract
-    - name: Perform make decompress
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: make decompress
 
-    - name: Perform make extract (chunk0)
+    - name: Perform make extract (code)
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make extract"
-    - name: Perform make (chunk0)
+        args: sh -c "cd conker && make extract"
+    - name: Perform make (code)
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make --jobs"
-    - name: Perform make replace (chunk0)
+        args: sh -c "cd conker && make --jobs"
+    - name: Perform make replace
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make replace"
+        args: sh -c "cd conker && make replace"
 
     - name: Perform make
       uses: docker://docker.io/markstreet/conker:latest
@@ -54,7 +50,7 @@ jobs:
     - name: Create progress.csv
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make progress"
+        args: sh -c "cd conker && make progress"
 
     - name: Create progress_filename variable
       id: vars
@@ -63,7 +59,7 @@ jobs:
         echo "::set-output name=progress_filename::$(echo ${GITHUB_SHA}.$(git show -s --format=%at ${GITHUB_SHA}).csv)"
 
     - name: Rename progress.csv
-      run: mv chunk0/progress.csv "${{ steps.vars.outputs.progress_filename }}"
+      run: mv conker/progress.csv "${{ steps.vars.outputs.progress_filename }}"
 
     - name: Push progress.csv to conker-website repo
       if: ${{ github.event_name == 'push' }}

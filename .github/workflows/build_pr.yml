@@ -28,23 +28,19 @@ jobs:
       uses: docker://docker.io/markstreet/conker:latest
       with:
         args: make extract
-    - name: Perform make decompress
-      uses: docker://docker.io/markstreet/conker:latest
-      with:
-        args: make decompress
 
-    - name: Perform make extract (chunk0)
+    - name: Perform make extract (code)
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make extract"
-    - name: Perform make (chunk0)
+        args: sh -c "cd conker && make extract"
+    - name: Perform make (code)
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make --jobs"
-    - name: Perform make replace (chunk0)
+        args: sh -c "cd conker && make --jobs"
+    - name: Perform make replace
       uses: docker://docker.io/markstreet/conker:latest
       with:
-        args: sh -c "cd chunk0 && make replace"
+        args: sh -c "cd conker && make replace"
 
     - name: Perform make
       uses: docker://docker.io/markstreet/conker:latest

@@ -91,16 +91,16 @@ def parse_file(basedir, filename, file_funcs):
     return updates
 
 
-def generate_csv(files, functions, version):
+def generate_csv(files, functions, version, section):
     ret = []
-    ret.append("version,filename,function,offset,length,language")
+    ret.append("version,section,filename,function,offset,length,language")
     for filename, funcs in files.items():
         basename = os.path.basename(filename)
         for func in funcs:
             language = functions[func]["language"]
             offset = functions[func]["offset"]
             length = functions[func]["length"]
-            ret.append(f"{version},{basename},{func},{offset},{length},{language}")
+            ret.append(f"{version},{section},{basename},{func},{offset},{length},{language}")
     return "\n".join(ret)
 
 
@@ -110,7 +110,8 @@ def main(basedir, mapfile, section, ending, version):
         c_functions = parse_file(basedir, filename, file_funcs)
         for c_function in c_functions:
             functions[c_function]["language"] = "c"
-    csv = generate_csv(files, functions, version)
+    section_name = section.split("_")[-1] # .code_game -> game
+    csv = generate_csv(files, functions, version, section_name)
     print(csv)
 
 if __name__ == '__main__':
