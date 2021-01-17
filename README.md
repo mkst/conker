@@ -14,7 +14,9 @@ Place the **US** Conker's Bad Fur Day ROM in the root of this repository, name i
 **Preamble**
 
 The assumption is that you will be using [Docker](https://www.docker.com/products/docker-desktop) for the building process.
-If this is not the case, see the [Dockerfile](Dockerfile) for the prerequisites; the steps below work perfectly well in Ubuntu 20.04 running via WSL on Windows. See the [Quickstart](https://github.com/mkst/conker/wiki/Quickstart) for more information.
+If this is not the case, see the [Dockerfile](Dockerfile) for the prerequisites; the steps below work perfectly well in **Ubuntu 20.04** running via WSL on Windows.
+
+See the [Quickstart](https://github.com/mkst/conker/wiki/Quickstart) for more information.
 
 **Clone repository**
 
@@ -41,22 +43,40 @@ docker run --rm -ti -v $(pwd):/conker conker bash
 make check
 ```
 
-**Extract assets from ROM**
+**Extract ROM**
 
 ```sh
 make extract
 ```
 
-**Decompress chunk0 (optional)**
+**Decompress code (optional)**
 
 ```sh
-make decompress
+make -C conker extract
 ```
 
-**Compile**
+**Compile code (optional)**
+
+```sh
+make -C conker --jobs
+```
+
+**Replace compiled code (optional)**
+
+```sh
+make -C conker replace
+```
+
+**Compile ROM**
 
 ```sh
 make --jobs
+```
+
+If everything matches, you will be greeted with an `OK`:
+
+```
+build/conker.us.z64: OK
 ```
 
 # Progress
@@ -71,7 +91,6 @@ This project is in its infancy; there are multiple tasks being worked on:
 ## Open issues
 
   - Identifying and documenting Conker asset (model/texture/sound) format
-  - Linking `src` and `chunk0/src` code
 
 ## ROM layout
 
@@ -85,8 +104,8 @@ Overview of US ROM shown below:
 [ ???? ]  0002 90D0 > ???? ???? ;
 [ data ]  0002 C750 > 0002 C7A0 ; init + libultra .data
 [ ???? ]  0002 C7A0 > 0004 2C50 ; μcode
-[ rzip ]  0004 2C50 > 0018 6B50 ; chunk0 .text (compressed)
-[ rzip ]  0018 8328 > 0019 C7D8 ; chunk0 .data (compressed)
+[ rzip ]  0004 2C50 > 0018 6B50 ; game .text (compressed)
+[ rzip ]  0018 8328 > 0019 C7D8 ; game .data (compressed)
 [ code ]  0019 EA88 > 001A 2190 ; debugger .text
 [ data ]  001A 2190 > 001A 37E0 ; debugger .data
 [ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets + unknown
@@ -99,9 +118,11 @@ Overview of US ROM shown below:
 
 There are a number of compressed sections within the ROM. The decompression/compression method is understood and generates matching results.
 
-### Game Logic AKA "Chunk 0"
+## Building ROM
 
-The core game logic code is compressed within the ROM. See the [README](chunk0/README.md) for more information.
+Due to the compressed code sections, all code segments within the ROM are cut from the ROM and combined together, creating a sub-project inside the `conker/` directory.
+
+See the [README](conker/README.md) for more information.
 
 # Tools
 
@@ -119,7 +140,7 @@ This repo makes use of the following open-source tools without which, there woul
  - [asm-processor](https://github.com/simonlindholm/asm-processor); allow `GLOBAL_ASM` wrappers to include assembly within the c files
  - [n64splat](https://github.com/ethteck/n64splat); split up the rom & much more...
  - [ido-static-recomp](https://github.com/Emill/ido-static-recomp); IDO compiler
- - [gzip](https://github.com/mkst/gzip); gzip
+ - [gzip](https://github.com/mkst/gzip); gzip; specifically with the pre-1.5 `memzero` behaviour
 
 # Contributing
 

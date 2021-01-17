@@ -1,91 +1,24 @@
 basename: conker
 options:
-  find_file_boundaries: yes
   compiler: IDO
-  cpp_args:
-  - "-Iinclude"
-  - "-Iinclude/2.0L"
-  - "-D_LANGUAGE_C"
-  - "-D_FINALROM"
   extensions: "custom/n64splat"
-  generated_c_preamble: |
-    #include <ultra64.h>
-    #include "functions.h"
-    #include "variables.h"
-  create_detected_syms: yes
-  undefined_syms: undefined_syms.debug.txt
-  symbol_addrs: symbol_addrs.debug.txt
 segments:
-  - name: header
-    type: header
-    start: 0x0
-    files:
-    - [0x0, header, header]
-  - name: boot
+  - name: header.debug
     type: bin
-    start: 0x40
-  - type: code
-    start: 0x1000
-    vram: 0x10001000
-    files:
-    - [0x1000, asm, "entrypoint"]
-    - [0x1050, asm]
-    - [0x1460, asm]
-    - [0x2CC0, asm]
-    - [0x2D60, asm]
-    - [0x3130, asm]
-    - [0x37D0, asm]
-    - [0x38F0, asm]
-    - [0x3940, asm]
-    - [0x39C0, asm]
-    - [0x47C0, asm]
-    - [0x6ED0, asm]
-    - [0x6F70, asm]
-    - [0x7010, asm]
-    - [0x72D0, asm]
-    - [0x7590, asm]
-    - [0x7640, asm]
-    - [0x7680, asm]
-    - [0x77E0, asm]
-    - [0x7970, asm]
-    - [0x7C10, asm]
-    - [0x7CC0, asm]
-    - [0x7E00, asm]
-    - [0x80B0, asm]
-    - [0x80D0, asm]
-    - [0x8620, asm]
-    - [0x8670, asm]
-    - [0x8700, asm]
-    - [0x8C80, asm]
-    - [0x9000, asm]
-    - [0x92F0, asm]
-    - [0x9390, asm]
-    - [0x93E0, asm]
-    - [0x94A0, asm]
-    - [0x9540, asm]
-    - [0x95A0, asm]
-    - [0xA170, asm]
-    - [0xA230, asm]
-    - [0xA240, asm]
-    - [0xA3C0, asm]
-  - [0x0A4E0, bin]   # might be cutting code (start: 0xA774)
-  - [0x11de8, bin]
-  - [0x132ff, bin]
-  - [0x14800, bin]
-  - [0x15d38, bin]
-  - [0x17268, bin]
-  - [0x18708, bin]
-  - [0x19ba8, bin]
-  - [0x1b048, bin]
-  - [0x22240, bin, "game.debug"] ## offsets 1380000 # 0x8039ccca same key, total 1472000 bytes
-  - type: code
-    start: 0x189840
-    vram: 0x16000000
-    files:
-    - [0x189840, asm]
-    - [0x191A50, asm]
-    - [0x194020, asm]
-  - [0x194040, bin] # .data
+    start: 0x00000000
+  - name: boot.debug
+    type: bin
+    start: 0x00000040
+  - name: init.debug
+    type: bin
+    start: 0x00001000
+  - [0xD2B0, bin] # ucode etc
+  - name: game.debug.rzip # offsets 1380000 # 0x8039ccca same key, total 1472000 bytes
+    type: bin
+    start: 0x00022240
+  - name: debugger.debug
+    type: bin
+    start: 0x00189840
   - [0x199ba0, bin, "compressed00"]
   - [0x32c3ae, bin] # ??
   - [0x3336a6, bin, "compressed01"]
