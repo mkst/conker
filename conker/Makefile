@@ -97,6 +97,8 @@ ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
 CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r4300_mul
 CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
+# ignore compiler warnings about anonymous structs
+CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
 
 LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T symbol_addrs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt  --no-check-sections

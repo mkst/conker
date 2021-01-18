@@ -617,14 +617,29 @@ extern f32 D_800A56BC; // 57.2957763671875
 extern f32 D_800A56C0;
 extern f32 D_800A56C4;
 extern f32 D_800A56C8;
-extern s32 D_800AB3C8;
 
+// game_2062D0.c
+extern u8  D_800AB340[3]; // 88, 64, 62
+extern u8  D_800AB344[5]; // 46, 48, 45, 51, 52
 extern u8  D_800AB34C[4]; // 96, 97, 98, 99
 extern s32 D_800AB350[7]; // 0, 1, 2, 58, 59, 60, 61
 extern s32 D_800AB36C[3]; // 15, 16, 17
-extern s32 *D_800AB384; // 28, 29
+extern s32 D_800AB384[2]; // 28, 29
+extern s32 D_800AB378[3]; // 143, 144, 145
+extern s32 D_800AB38C[2]; // 8, 9
+extern s32 D_800AB394[5]; // 49, 50, 51, 13, 14
+extern s32 D_800AB3A8[3]; // 150, 151, 152
+extern s32 D_800AB3B4[2]; // 27, 28
+extern s32 D_800AB3BC[3]; // 160, 161, 162
+extern s32 D_800AB3C8[1]; // 179
+extern s32 D_800AB3CC[3]; // 185, 186, 187
+extern s32 D_800AB3D8[4]; // 96, 97, 98, 99
+extern f32 D_800AB3E8; // 0.0f;
+extern f32 D_800AB3EC; //-1.0f
 
-// code_1D8E20
+extern f32 D_800AB464;
+extern f32 D_800AB468;
+extern f32 D_800AB46C; // 0.0003000000142492354f
 extern f32 D_800AB4C0;
 extern f32 D_800AB4C4;
 extern f32 D_800AB4C8;
@@ -635,6 +650,7 @@ extern f32 D_800AB4EC;
 extern f32 D_800AB4F0;
 extern f32 D_800AB4F4;
 
+extern f32 D_800A5480;
 extern f32 D_800A548C[];
 
 // end of data D_800B0DBC

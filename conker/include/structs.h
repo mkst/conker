@@ -2831,7 +2831,11 @@ typedef struct {
 } struct217;
 
 typedef struct {
-    u8 pad0[0x14];
+    u16 unk0;
+    u8  pad2[0x2];
+    s32 unk4;
+    s32 unk8;
+    u8  padC[0x8];
     u8 unk14;
     u8 unk15;
     u8 unk16;
@@ -2862,7 +2866,8 @@ typedef struct {
     f32 unk8;
 } struct221; // size 0xC
 
-typedef struct{
+typedef struct {
     u8 unk0[8];
 } struct222; //size 0x08
+
 #endif

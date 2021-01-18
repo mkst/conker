@@ -97,7 +97,7 @@ endif
 
 $(EXTRACT_DIR)/00000000.bin:
 	@mkdir -p $(EXTRACT_DIR)
-	$(PYTHON) tools/extract_compressed.py compressed.$(VERSION).yaml bin/compressed.bin $(EXTRACT_DIR)
+	$(PYTHON) tools/extract_compressed.py config/compressed.$(VERSION).yaml bin/compressed.bin $(EXTRACT_DIR)
 
 # settings
 .PHONY: all clean default

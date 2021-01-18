@@ -1081,6 +1081,8 @@ void func_151B8DB0(s32 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_151D5404(s32, f32, f32, f32, s32, s32, s32, s32);
 void func_151D5714(s32, s32, s32, s32, f32, s32, s32);
 void func_151D9B8C(u8 arg0, f32 arg1, u8 arg2, s32 arg3, struct17 *arg4, s16 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, s32 argA);
+void func_151DA08C(u8 arg0, f32 arg1, f32 arg2, u8 arg3, s16 arg4, s32 arg5, void *arg6, s32 arg7, s32 arg8);
+void func_151DBCBC(u8 arg0, f32 arg1, s16 arg2, s32 arg3, void *arg4, u8 arg5, s32 arg6);
 void func_151F3C4C(void);
 // void func_15048F90(f32 *arg0, f32 *arg1, s32 arg2);
 void func_151FA130(void);

@@ -320,7 +320,6 @@ void func_15145A50(struct127 *arg0) {
     }
 }
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145AD8.s")
 
 u8 func_15145C90(s32 arg0) {
@@ -351,9 +350,9 @@ void func_15146508(struct127 *arg0, struct127 *arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514654C.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514672C.s")
-// NON-MATCHING: JUSTREG: uses f0/f2 not at/f0
+// NON-MATCHING: JUSTREG: first 3 statements are out of order
 // s32 func_1514672C(struct17 *arg0) {
-//     if ((fabsf(arg0->unk0) > D_800A56C4) || (fabsf(arg0->unk8) > D_800A56C4) || (arg0->unk4 > D_800A56C4) || (arg0->unk4 < D_800A56C8)) {
+//     if ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {
 //         return 0;
 //     } else {
 //         return 1;

@@ -692,10 +692,10 @@ segments:
     - [0x228130, bin]
   - name: debugger
     type: code
-    start: 0x00256450 #0x19ede8
+    start: 0x00256450
     vram:  0x16000000
     files:
-    - [0x256450, asm] # debugger
+    - [0x256450, asm]
     - [0x257F20, asm]
     - [0x259AA0, asm]
   - name:  debugger_data
