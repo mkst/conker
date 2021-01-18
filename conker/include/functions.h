@@ -19,7 +19,6 @@ s32  func_1000390C(void);
 void func_10003930(void);
 void func_100039B0(void);
 void func_100039C0(void);
-s32  func_10003C40(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_10004250(void);
 void func_10004308(void);
 void func_1000440C(void);
