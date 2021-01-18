@@ -1,533 +1,141 @@
 basename: conker
 options:
-  find_file_boundaries: yes
   compiler: IDO
-  cpp_args:
-  - "-Iinclude"
-  - "-Iinclude/2.0L"
-  - "-D_LANGUAGE_C"
-  - "-D_FINALROM"
   extensions: "custom/n64splat"
-  generated_c_preamble: |
-    #include <ultra64.h>
-    #include "functions.h"
-    #include "variables.h"
-  create_detected_syms: yes
-  undefined_syms: undefined_syms.ects.txt
-  symbol_addrs:   symbol_addrs.ects.txt
 segments:
-  - name: header
-    type: header
+  - name:  header.ects
+    type:  bin
     start: 0x00000000
-  - name: boot
-    type: bin
+  - name:  boot.ects
+    type:  bin
     start: 0x00000040
-  - type: code
+  - name:  init.ects
+    type:  bin
     start: 0x1000
-    vram: 0x10001000
-    files:
-    - [0x1000, asm, "entrypoint"]
-    - [0x1050, asm]
-    - [0x2B60, asm]
-    - [0x2F30, asm]
-    - [0x35D0, asm]
-    - [0x36B0, asm]
-    - [0x36F0, asm]
-    - [0x3770, asm]
-    - [0x3EF0, asm]
-    - [0x4460, asm]
-    - [0x6870, asm]
-    - [0x6910, asm]
-    - [0x6BD0, asm]
-    - [0x6E90, asm]
-    - [0x6F40, asm]
-    - [0x6F80, asm]
-    - [0x7020, asm]
-    - [0x71B0, asm]
-    - [0x7450, asm]
-    - [0x7590, asm]
-    - [0x7900, asm]
-    - [0x7920, asm]
-    - [0x7E70, asm]
-    - [0x7EF0, asm]
-    - [0x7F40, asm]
-    - [0x7FD0, asm]
-    - [0x8550, asm]
-    - [0x88D0, asm]
-    - [0x8BC0, asm]
-    - [0x8C60, asm]
-    - [0x8CB0, asm]
-    - [0x8D70, asm]
-    - [0x8E10, asm]
-    - [0x8E70, asm]
-    - [0x9A40, asm]
-    - [0x9B00, asm]
-    - [0x9B10, asm]
-    - [0x9C90, asm]
-  - [0xA044, bin]
-  - [0xd448, bin]
-  - [0xdcd8, bin]
-  - [0xeb60, bin]
-  - [0xf3f0, bin]
-  - [0x10278, bin]
+  - [0xCAF0, bin] # start of ucode
+  - [0xD448, bin]
+  - [0xDCD8, bin]
+  - [0xEB60, bin]
+  - [0xF3F0, bin]
+  - [0xf920, bin]   # same as 0xCAF0
+  - [0x10278, bin]  # same as 0xD448
   - [0x10b08, bin]
   - [0x11628, bin]
   - [0x12b38, bin]
   - [0x14048, bin]
   - [0x15578, bin]
-  - [0x16aa8, bin]
+  - [0x16aa0, bin]
   - [0x17f48, bin]
   - [0x193e8, bin]
-  - [0x1a888, bin]
-  - type: code
+  - [0x1a888, bin] # ucode data?
+  - name:  game.ects
+    type:  bin
     start: 0x26040
-    vram: 0x15000000
     files:
-    - [0x26040, asm]
-    - [0x260F0, asm]
-    - [0x26370, asm]
-    - [0x26390, asm]
-    - [0x26B40, asm]
-    - [0x26B90, asm]
-    - [0x26BE0, asm]
-    - [0x26BF0, asm]
-    - [0x26C10, asm]
-    - [0x26C40, asm]
-    - [0x26C50, asm]
-    - [0x26D10, asm]
-    - [0x26D70, asm]
-    - [0x26DF0, asm]
-    - [0x26E50, asm]
-    - [0x26E90, asm]
-    - [0x26F10, asm]
-    - [0x26F30, asm]
-    - [0x26FA0, asm]
-    - [0x26FE0, asm]
-    - [0x27020, asm]
-    - [0x27060, asm]
-    - [0x270C0, asm]
-    - [0x276B0, asm]
-    - [0x28310, asm]
-    - [0x28520, asm]
-    - [0x28B60, asm]
-    - [0x28BC0, asm]
-    - [0x291A0, asm]
-    - [0x291D0, asm]
-    - [0x29370, asm]
-    - [0x294F0, asm]
-    - [0x29550, asm]
-    - [0x295B0, asm]
-    - [0x29900, asm]
-    - [0x29970, asm]
-    - [0x2B2D0, asm]
-    - [0x2C910, asm]
-    - [0x2C9B0, asm]
-    - [0x2CA10, asm]
-    - [0x2CAB0, asm]
-    - [0x2EF40, asm]
-    - [0x2F180, asm]
-    - [0x2F3E0, asm]
-    - [0x2F570, asm]
-    - [0x2F860, asm]
-    - [0x2F8E0, asm]
-    - [0x30490, asm]
-    - [0x30750, asm]
-    - [0x30880, asm]
-    - [0x30900, asm]
-    - [0x30910, asm]
-    - [0x30B30, asm]
-    - [0x30B80, asm]
-    - [0x30C00, asm]
-    - [0x30C20, asm]
-    - [0x30C30, asm]
-    - [0x30C50, asm]
-    - [0x30E00, asm]
-    - [0x30E90, asm]
-    - [0x313E0, asm]
-    - [0x31570, asm]
-    - [0x315A0, asm]
-    - [0x31620, asm]
-    - [0x31A80, asm]
-    - [0x31AB0, asm]
-    - [0x31B80, asm]
-    - [0x31D60, asm]
-    - [0x31DE0, asm]
-    - [0x31E70, asm]
-    - [0x32120, asm]
-    - [0x32150, asm]
-    - [0x32920, asm]
-    - [0x32980, asm]
-    - [0x34FF0, asm]
-    - [0x358B0, asm]
-    - [0x35910, asm]
-    - [0x35A40, asm]
-    - [0x367C0, asm]
-    - [0x36970, asm]
-    - [0x36BB0, asm]
-    - [0x36CD0, asm]
-    - [0x36E50, asm]
-    - [0x36FC0, asm]
-    - [0x371D0, asm]
-    - [0x42C10, asm]
-    - [0x42C70, asm]
-    - [0x4A010, asm]
-    - [0x4E040, asm]
-    - [0x53F40, asm]
-    - [0x58FE0, asm]
-    - [0x5A650, asm]
-    - [0x5B220, asm]
-    - [0x5B2C0, asm]
-    - [0x5CD40, asm]
-    - [0x5D6A0, asm]
-    - [0x5DC50, asm]
-    - [0x5E620, asm]
-    - [0x5EB50, asm]
-    - [0x61E00, asm]
-    - [0x63420, asm]
-    - [0x63A20, asm]
-    - [0x666B0, asm]
-    - [0x66810, asm]
-    - [0x66C40, asm]
-    - [0x67090, asm]
-    - [0x67290, asm]
-    - [0x67460, asm]
-    - [0x675C0, asm]
-    - [0x67D10, asm]
-    - [0x67EF0, asm]
-    - [0x68060, asm]
-    - [0x68290, asm]
-    - [0x686F0, asm]
-    - [0x68D60, asm]
-    - [0x68EB0, asm]
-    - [0x69090, asm]
-    - [0x690D0, asm]
-    - [0x769B0, asm]
-    - [0x82710, asm]
-    - [0x881A0, asm]
-    - [0x88940, asm]
-    - [0x98DF0, asm]
-    - [0x993C0, asm]
-    - [0x99840, asm]
-    - [0x9AD60, asm]
-    - [0x9B610, asm]
-    - [0x9CFD0, asm]
-    - [0x9D770, asm]
-    - [0x9E0E0, asm]
-    - [0x9EE70, asm]
-    - [0xA1410, asm]
-    - [0xA1C60, asm]
-    - [0xA20A0, asm]
-    - [0xAB780, asm]
-    - [0xAC2A0, asm]
-    - [0xCEEE0, asm]
-    - [0xCF210, asm]
-    - [0xD0750, asm]
-    - [0xD3BE0, asm]
-    - [0xD50E0, asm]
-    - [0xD5680, asm]
-    - [0xD6490, asm]
-    - [0xD64A0, asm]
-    - [0xD7E40, asm]
-    - [0xD8270, asm]
-    - [0xD85D0, asm]
-    - [0xD8F50, asm]
-    - [0xD9BA0, asm]
-    - [0xDA450, asm]
-    - [0xDA850, asm]
-    - [0xDABC0, asm]
-    - [0xDB160, asm]
-    - [0xDBBE0, asm]
-    - [0xDE9E0, asm]
-    - [0xDF2E0, asm]
-    - [0xDF610, asm]
-    - [0xDF6A0, asm]
-    - [0xDF730, asm]
-    - [0xE0970, asm]
-    - [0xE21F0, asm]
-    - [0xE31B0, asm]
-    - [0xE4030, asm]
-    - [0xE4EE0, asm]
-    - [0xE5000, asm]
-    - [0xE5CA0, asm]
-    - [0xE62C0, asm]
-    - [0xE7120, asm]
-    - [0xE71C0, asm]
-    - [0xE7950, asm]
-    - [0xE7E30, asm]
-    - [0xE7F30, asm]
-    - [0xE8110, asm]
-    - [0xE8780, asm]
-    - [0xE8AC0, asm]
-    - [0xE8D60, asm]
-    - [0xE9930, asm]
-    - [0xEB850, asm]
-    - [0xED910, asm]
-    - [0xEDC90, asm]
-    - [0xEDFF0, asm]
-    - [0xEE220, asm]
-    - [0xF0400, asm]
-    - [0xF3690, asm]
-    - [0xF36A0, asm]
-    - [0xF3BF0, asm]
-    - [0xF3C20, asm]
-    - [0xF46B0, asm]
-    - [0xF4750, asm]
-    - [0xF4D80, asm]
-    - [0xF5240, asm]
-    - [0xF52A0, asm]
-    - [0xF57B0, asm]
-    - [0xF9A40, asm]
-    - [0xF9F30, asm]
-    - [0xFA770, asm]
-    - [0xFDEB0, asm]
-    - [0xFF090, asm]
-    - [0xFFFB0, asm]
-    - [0x100120, asm]
-    - [0x102C00, asm]
-    - [0x104310, asm]
-    - [0x104340, asm]
-    - [0x104B30, asm]
-    - [0x104D00, asm]
-    - [0x1053A0, asm]
-    - [0x106340, asm]
-    - [0x1074D0, asm]
-    - [0x108220, asm]
-    - [0x109290, asm]
-    - [0x1092C0, asm]
-    - [0x1097A0, asm]
-    - [0x1097D0, asm]
-    - [0x109C80, asm]
-    - [0x10A570, asm]
-    - [0x10AF10, asm]
-    - [0x10B580, asm]
-    - [0x10B7D0, asm]
-    - [0x10B7E0, asm]
-    - [0x10BAA0, asm]
-    - [0x10DBC0, asm]
-    - [0x10E5D0, asm]
-    - [0x10E600, asm]
-    - [0x10EC40, asm]
-    - [0x10F2E0, asm]
-    - [0x10F330, asm]
-    - [0x1117C0, asm]
-    - [0x112D80, asm]
-    - [0x113300, asm]
-    - [0x113EB0, asm]
-    - [0x1153D0, asm]
-    - [0x1154C0, asm]
-    - [0x1158B0, asm]
-    - [0x1167A0, asm]
-    - [0x11B760, asm]
-    - [0x11E520, asm]
-    - [0x11ED10, asm]
-    - [0x11ED30, asm]
-    - [0x11EEC0, asm]
-    - [0x11FD80, asm]
-    - [0x120C80, asm]
-    - [0x1214E0, asm]
-    - [0x1222E0, asm]
-    - [0x123EF0, asm]
-    - [0x125C70, asm]
-    - [0x128580, asm]
-    - [0x1337B0, asm]
-    - [0x133A50, asm]
-    - [0x133A90, asm]
-    - [0x135330, asm]
-    - [0x1356A0, asm]
-    - [0x135730, asm]
-    - [0x135EF0, asm]
-    - [0x136050, asm]
-    - [0x13AAD0, asm]
-    - [0x13AF90, asm]
-    - [0x13B870, asm]
-    - [0x13BB90, asm]
-    - [0x13C2F0, asm]
-    - [0x13DEB0, asm]
-    - [0x13ED30, asm]
-    - [0x13EF00, asm]
-    - [0x13F090, asm]
-    - [0x13F700, asm]
-    - [0x1400A0, asm]
-    - [0x141300, asm]
-    - [0x141350, asm]
-    - [0x142E70, asm]
-    - [0x1449C0, asm]
-    - [0x14D010, asm]
-    - [0x151140, asm]
-    - [0x152090, asm]
-    - [0x1528A0, asm]
-    - [0x159500, asm]
-    - [0x15A4E0, asm]
-    - [0x15BC20, asm]
-    - [0x15EC90, asm]
-    - [0x15F420, asm]
-    - [0x161B90, asm]
-    - [0x166950, asm]
-    - [0x1673D0, asm]
-    - [0x168890, asm]
-    - [0x169490, asm]
-    - [0x16C380, asm]
-    - [0x16CF30, asm]
-    - [0x16D2A0, asm]
-    - [0x16D7A0, asm]
-    - [0x16E820, asm]
-    - [0x170540, asm]
-    - [0x175C50, asm]
-    - [0x176EE0, asm]
-    - [0x1771D0, asm]
-    - [0x1771E0, asm]
-    - [0x178240, asm]
-    - [0x17A4E0, asm]
-    - [0x17A840, asm]
-    - [0x17B340, asm]
-    - [0x17DDD0, asm]
-    - [0x181590, asm]
-    - [0x181FE0, asm]
-    - [0x182680, asm]
-    - [0x183600, asm]
-    - [0x1838E0, asm]
-    - [0x183C50, asm]
-    - [0x184320, asm]
-    - [0x184670, asm]
-    - [0x185000, asm]
-    - [0x185300, asm]
-    - [0x185570, asm]
-    - [0x1879E0, asm]
-    - [0x188550, asm]
-    - [0x1893E0, asm]
-    - [0x189440, asm]
-    - [0x18A330, asm]
-    - [0x18B120, asm]
-    - [0x18B960, asm]
-    - [0x18E510, asm]
-    - [0x18F2A0, asm]
-    - [0x192B70, asm]
-    - [0x193580, asm]
-    - [0x194320, asm]
-    - [0x197300, asm]
-    - [0x198520, asm]
-    - [0x199E00, asm]
-    - [0x19A1D0, asm]
-    - [0x19A820, asm]
-    - [0x19AB20, asm]
-    - [0x19B890, asm]
-    - [0x19C720, asm]
-    - [0x19C880, asm]
-    - [0x19CB20, asm]
-    - [0x1A15A0, asm]
-    - [0x1A21E0, asm]
-    - [0x1A2220, asm]
-    - [0x1A2340, asm]
-    - [0x1A2DB0, asm]
-    - [0x1A30E0, asm]
-    - [0x1A3720, asm]
-    - [0x1AD8B0, asm]
-    - [0x1AF5A0, asm]
-    - [0x1B1AE0, asm]
-    - [0x1B3CA0, asm]
-    - [0x1B5190, asm]
-    - [0x1B5400, asm]
-    - [0x1B5E40, asm]
-    - [0x1B6ED0, asm]
-    - [0x1B7D80, asm]
-    - [0x1B9FF0, asm]
-    - [0x1BB140, asm]
-    - [0x1BCBA0, asm]
-    - [0x1BCC70, asm]
-    - [0x1BE040, asm]
-    - [0x1BEB50, asm]
-    - [0x1C03C0, asm]
-    - [0x1C0970, asm]
-    - [0x1C17B0, asm]
-    - [0x1C4220, asm]
-    - [0x1C4270, asm]
-    - [0x1C4630, asm]
-    - [0x1C4940, asm]
-    - [0x1C71C0, asm]
-    - [0x1C7900, asm]
-    - [0x1C7B70, asm]
-    - [0x1C8440, asm]
-    - [0x1C8CB0, asm]
-    - [0x1D0240, asm]
-    - [0x1D2C00, asm]
-    - [0x1D3B80, asm]
-    - [0x1D46C0, asm]
-    - [0x1D6AB0, asm]
-    - [0x1DDAA0, asm]
-    - [0x1DE430, asm]
-    - [0x1E06C0, asm]
-    - [0x1E1060, asm]
-    - [0x1E12D0, asm]
-    - [0x1E1CD0, asm]
-    - [0x1E47D0, asm]
-    - [0x1E4A20, asm]
-    - [0x1E4C80, asm]
-    - [0x1E4D40, asm]
-    - [0x1E4DC0, asm]
-    - [0x1E5250, asm]
-    - [0x1EEEC0, asm]
-    - [0x1F4170, asm]
-    - [0x1F4190, asm]
-    - [0x1F4AC0, asm]
-    - [0x1F4E70, asm]
-    - [0x1F51E0, asm]
-    - [0x1F5250, asm]
-    - [0x1F54B0, asm]
-    - [0x1F5990, asm]
-    - [0x1F5A00, asm]
-    - [0x1F5A90, asm]
-    - [0x1F5EC0, asm]
-    - [0x1F5F40, asm]
-    - [0x1F5FD0, asm]
-    - [0x1F60B0, asm]
-    - [0x1F63F0, asm]
-    - [0x1F64C0, asm]
-    - [0x1F6550, asm]
-    - [0x1F72B0, asm]
-    - [0x1F7F60, asm]
-    - [0x1F9380, asm]
-    - [0x1FB6B0, asm]
-    - [0x1FB760, asm]
-    - [0x1FC1E0, asm]
-    - [0x1FE3B0, asm]
-    - [0x1FE630, asm]
-    - [0x1FE680, asm]
-    - [0x1FE980, asm]
-    - [0x1FEA50, asm]
-    - [0x1FEAE0, asm]
-    - [0x1FEB30, asm]
-    - [0x1FF880, asm]
-    - [0x1FF8D0, asm]
-    - [0x1FF9C0, asm]
-    - [0x1FF9F0, asm]
-    - [0x1FFAB0, asm]
-    - [0x200700, asm]
-    - [0x2007A0, asm]
-    - [0x201840, asm]
-    - [0x205D60, asm]
-    - [0x2073A0, asm]
-    - [0x207990, asm]
-    - [0x209000, asm]
-    - [0x2095B0, asm]
-    - [0x2096E0, asm]
-    - [0x20AAC0, asm]
-    - [0x20AE10, asm]
-    - [0x20AF70, asm]
-    - [0x20B060, asm]
-    - [0x20B0F0, asm]
-    - [0x20DAF0, asm]
-    - [0x20EE70, asm]
-    - [0x20F3B0, asm]
-    - [0x20F3D0, asm]
-    - [0x20F800, asm]
-  - [0x20fb10, bin]
-  - [0x245060, bin] # debugger strings
-  - [0x3c4168, bin] # rzip?
-  - [0xBABC10, bin] # some textures
-  - [0xBB0010, bin] # some textures
-  - [0x1000000, bin]
-  - [0x138b578, bin] # first mp3
-  - [0x2625558, bin] # final mp3
-  - [0x2700000, bin]
-  - [0x3000000, bin]
+    - [0x26040, bin]
+  - name:  debugger.ects
+    type:  bin
+    start: 0x23da50
+    files:
+    - [0x23DA50, bin]
+  ###
+  - [0x246E10, bin, compressed] # 8427 files
+  - [0xB802DF, bin, compressed_padding] # 1 byte 0x0 padding
+  ###
+  - [0xB802E0, bin, assets_offsets_table]
+  - name:  assets00 # 71 file(s) / 6240 bytes
+    type:  rzip
+    start: 0xb803e0
+  - name:  assets01 # 60 file(s) / 286312 bytes
+    type:  rzip
+    start: 0xb81c40
+  - name:  assets02 # 182 file(s) / 790520 bytes
+    type:  rzip
+    start: 0xbc7aa8
+  - name:  assets03 # 143 file(s) / 3311648 bytes
+    type:  rzip
+    start: 0xc88aa0
+  - name:  assets04 # 75 file(s) / 59936 bytes
+    type:  rzip
+    start: 0xfb12c0
+  - name:  assets05 # 69 file(s) / 1881744 bytes
+    type:  rzip
+    start: 0xfbfce0
+  - name:  assets06 # 37 file(s) / 173288 bytes
+    type:  rzip
+    start: 0x118b370
+  - name:  assets07 # 48 file(s) / 758048 bytes
+    type:  rzip
+    start: 0x11b5858
+  - name:  assets08 # 1 file(s) / 80 bytes
+    type:  rzip
+    start: 0x126e978
+  - name:  assets09 # 1 file(s) / 1992 bytes
+    type:  rzip
+    start: 0x126e9c8
+  - name:  assets0A # 422 file(s) / 307008 bytes
+    type:  rzip
+    start: 0x126f190
+  - name:  assets0B # 28 file(s) / 168760 bytes
+    type:  rzip
+    start: 0x12ba0d0
+  - name:  assets0C # 51 file(s) / 10472 bytes
+    type:  rzip
+    start: 0x12e3408
+  - name:  assets0D # 65 file(s) / 195224 bytes
+    type:  rzip
+    start: 0x12e5cf0
+  - name:  assets0E # 9 file(s) / 304 bytes
+    type:  rzip
+    start: 0x1315788
+  - name:  assets0F # 69 file(s) / 13760 bytes
+    type:  rzip
+    start: 0x13158b8
+  - name:  assets10 # 180 file(s) / 246480 bytes
+    type:  rzip
+    start: 0x1318e78
+  - name:  assets11 # 69 file(s) / 20088 bytes
+    type:  rzip
+    start: 0x1355148
+  - name:  assets12 # 182 file(s) / 14080 bytes
+    type:  rzip
+    start: 0x1359fc0
+  - name:  assets13 # 17 file(s) / 2816 bytes
+    type:  rzip
+    start: 0x135d6c0
+  - name:  assets14 # 2 file(s) / 19832 bytes
+    type:  rzip
+    start: 0x135e1c0
+  - name:  assets15 # 180 file(s) / 154608 bytes
+    type:  rzip
+    start: 0x1362f38
+  - name:  assets16 # 69 files / 7816 bytes
+    type:  rzip
+    start: 0x1388b28
+  - name:  assets17 # 377 file(s) / 19561184 bytes
+    type:  rzip
+    start: 0x138a9b0
+  - name:  assets18 # 4 file(s) / 19908248 bytes
+    type:  rzip
+    start: 0x2632490
+  - name:  assets19 # 6 file(s) / 4392 bytes
+    type:  rzip
+    start: 0x392eb28
+  - name:  assets1A # 1 file(s) / 800 bytes
+    type:  rzip
+    start: 0x392fc50
+  - name:  assets1B # 25 file(s) / 19616 bytes
+    type:  rzip
+    start: 0x392ff70
+  - name:  assets1C # 5 file(s) / 5432 bytes
+    type:  rzip
+    start: 0x3934c10
+  - name:  assets1D # 4 file(s) / 5536 bytes
+    type:  rzip
+    start: 0x3936148
+  - name:  assets1E # 5 file(s) / 9272 bytes
+    type:  rzip
+    start: 0x3937620
+  - [0x3939a58, bin]
+  - [0x3939af0, bin, trailer] # 0xff to end
   - [0x4000000]

@@ -55,6 +55,7 @@ O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o))
 
 TARGET = $(BUILD_DIR)/$(BASENAME).$(VERSION)
+
 LD_SCRIPT = $(BASENAME).ld
 
 CC     := ../ido/ido5.3_recomp/cc
@@ -77,6 +78,14 @@ MIPSBIT := -mips2 -o32
 
 ASM_PROCESSOR_DIR := ../tools/asm-processor
 
+# Target version differences
+
+ifeq ($(VERSION),ects)
+TARGET_GAME_BIN = $(TARGET).game.bin
+else
+TARGET_GAME_BIN = $(TARGET).game.rzip.bin
+endif
+
 # Files requiring pre/post-processing
 GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null)
@@ -93,12 +102,6 @@ CFLAGS += $(INCLUDE_CFLAGS)
 LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T symbol_addrs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt  --no-check-sections
 
 ### Overrides
-
-# Default to IDO 5.3
-# $(BUILD_DIR)/$(SRC_DIR)/%.o: CC := $(CC_OLD)
-
-# TODO: check this
-# $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: CC := $(CC_OLD)
 
 $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 
@@ -168,11 +171,11 @@ verify: $(TARGET).ok
 progress: verify progress.csv
 
 # replace original binaries
-replace: verify $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET).game.rzip.bin $(TARGET).debugger.bin
+replace: verify $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
 	cp $(TARGET).header.bin ../bin
 	cp $(TARGET).boot.bin ../bin
 	cp $(TARGET).init.bin ../bin
-	cp $(TARGET).game.rzip.bin ../bin
+	cp $(TARGET_GAME_BIN) ../bin
 	cp $(TARGET).debugger.bin ../bin
 
 ### Recipes
@@ -229,6 +232,10 @@ $(TARGET).init.code.bin: $(TARGET).elf
 
 $(TARGET).init.data.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .code_init_data $< $@
+
+#ects only
+$(TARGET).game.bin: $(TARGET).game.code.bin $(TARGET).game.data.bin
+	cat $^ > $@
 
 $(TARGET).game.code.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .code_game $< $@

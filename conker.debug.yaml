@@ -3,132 +3,116 @@ options:
   compiler: IDO
   extensions: "custom/n64splat"
 segments:
-  - name: header.debug
-    type: bin
+  - name:  header.debug
+    type:  bin
     start: 0x00000000
-  - name: boot.debug
-    type: bin
+  - name:  boot.debug
+    type:  bin
     start: 0x00000040
-  - name: init.debug
-    type: bin
+  - name:  init.debug
+    type:  bin
     start: 0x00001000
   - [0xD2B0, bin] # ucode etc
-  - name: game.debug.rzip # offsets 1380000 # 0x8039ccca same key, total 1472000 bytes
-    type: bin
+  - name:  game.debug.rzip # offsets 1380000 # 0x8039ccca same key, total 1472000 bytes
+    type:  bin
     start: 0x00022240
-  - name: debugger.debug
-    type: bin
+  - name:  debugger.debug
+    type:  bin
     start: 0x00189840
-  - [0x199ba0, bin, "compressed00"]
-  - [0x32c3ae, bin] # ??
-  - [0x3336a6, bin, "compressed01"]
-  - [0x37106e, bin] # ??
-  - [0x371075, bin, "compressed02"]
-  - [0x3be153, bin] # ?? matches US rom
-  - [0x3bf565, bin, "compressed03"]
-  - [0x419c95, bin] # ?? matches US rom
-  - [0x419dfe, bin, "compressed04"]
-  - [0x56f53b, bin] # ?? matches US rom
-  - [0x56fbb6, bin, "compressed05"]
-  - [0x60bba3, bin] # ??
-  - [0x60c4a2, bin, "compressed06"]
-  - [0x74b59d, bin] # ??
-  - [0x74b5a4, bin, "compressed07"]
-  - [0x7f413c, bin] # ?? matches US rom
-  - [0x7f4365, bin, "compressed08"]
-  - [0xabbcfd, bin] # padding
+  - [0x199BA0, bin, compressed] # 7808 files
+  - [0xABBCFD, bin, compressed_padding] # 3 bytes 0x0 padding
   ###
-  - [0x00ABBD00, "bin", "assets_offsets_table"]
-  - name: assets00
-    type: rzip
+  - [0xABBD00, bin, assets_offsets_table]
+  - name:  assets00
+    name:  rzip
     start: 0xabbdf8
-  - name: assets01
-    type: rzip
+  - name:  assets01
+    name:  rzip
     start: 0xb01c60
-  - name: assets02
-    type: rzip
+  - name:  assets02
+    name:  rzip
     start: 0xbc1708
-  - name: assets03
-    type: rzip
+  - name:  assets03
+    name:  rzip
     start: 0xfa0578
-  - name: assets04
-    type: rzip
+  - name:  assets04
+    name:  rzip
     start: 0xfb0a88
-  - name: assets05
-    type: rzip
+  - name:  assets05
+    name:  rzip
     start: 0x11645e8
-  - name: assets06
-    type: rzip
+  - name:  assets06
+    name:  rzip
     start: 0x118f850
-  - name: assets07
-    type: rzip
+  - name:  assets07
+    name:  rzip
     start: 0x1212fc0
-  - name: assets08
-    type: rzip
+  - name:  assets08
+    name:  rzip
     start: 0x1213010
-  - name: assets09
-    type: rzip
+  - name:  assets09
+    name:  rzip
     start: 0x1213390
-  - name: assets0A
-    type: rzip
+  - name:  assets0A
+    name:  rzip
     start: 0x126b740
-  - name: assets0B
-    type: rzip
+  - name:  assets0B
+    name:  rzip
     start: 0x12acff0
-  - name: assets0C
-    type: rzip
+  - name:  assets0C
+    name:  rzip
     start: 0x12afd58
-  - name: assets0D
-    type: rzip
+  - name:  assets0D
+    name:  rzip
     start: 0x12e85c0
-  - name: assets0E
-    type: rzip
+  - name:  assets0E
+    name:  rzip
     start: 0x12e8788
-  - name: assets0F
-    type: rzip
+  - name:  assets0F
+    name:  rzip
     start: 0x12ec430
-  - name: assets10
-    type: rzip
+  - name:  assets10
+    name:  rzip
     start: 0x1331c88
-  - name: assets11
-    type: rzip
+  - name:  assets11
+    name:  rzip
     start: 0x13379c8
-  - name: assets12
-    type: rzip
+  - name:  assets12
+    name:  rzip
     start: 0x133b220
-  - name: assets13
-    type: rzip
+  - name:  assets13
+    name:  rzip
     start: 0x133be58
-  - name: assets14
-    type: rzip
+  - name:  assets14
+    name:  rzip
     start: 0x1340bd0
-  - name: assets15
-    type: rzip
+  - name:  assets15
+    name:  rzip
     start: 0x13688e8
-  - name: assets16
-    type: rzip
+  - name:  assets16
+    name:  rzip
     start: 0x136a6b8
-  - name: assets17
-    type: rzip
+  - name:  assets17
+    name:  rzip
     start: 0x29ff1c8
-  - name: assets18
-    type: rzip
+  - name:  assets18
+    name:  rzip
     start: 0x3faa638
-  - name: assets19
-    type: rzip
+  - name:  assets19
+    name:  rzip
     start: 0x3fab760
-  - name: assets1A
-    type: rzip
+  - name:  assets1A
+    name:  rzip
     start: 0x3faba80
-  - name: assets1B
-    type: rzip
+  - name:  assets1B
+    name:  rzip
     start: 0x3fb1128
-  - name: assets1C
-    type: rzip
+  - name:  assets1C
+    name:  rzip
     start: 0x3fb2800
-  - [0x3fb3cd8, bin]
-  # - name: assets1D
-  #   type: rzip
-  #   start: 0x3fb3cd8
+  - name:  assets1D
+    name:  rzip
+    start: 0x3fb3cd8
+  - [0x3fb7338, bin] # junk?
   - [0x3fb73d0, bin, "trailer"] # 0xff to end
   - [0x4000000]

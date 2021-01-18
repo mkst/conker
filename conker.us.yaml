@@ -12,30 +12,30 @@ segments:
   - name:  init.us
     type:  bin
     start: 0x00001000
-  - [0x0002D4B0, "bin"] # ucode?
-  - [0x0002DE08, "bin"] # ucode?
-  - [0x0002e698, "bin"] # ucode?
-  - [0x0002f520, "bin"] # ucode?
-  - [0x0002fdb0, "bin"] # ucode?
-  - [0x00030c38, "bin"] # ucode? same as 0x0002DE08
-  - [0x000314c8, "bin"] # ucode?
-  - [0x00031fe8, "bin"] # ucode?
-  - [0x0003293d, "bin"] # ucode?
-  - [0x000334f8, "bin"] # ucode?
-  - [0x00033e4d, "bin"] # ucode? same as 0x0003293d
-  - [0x00034a08, "bin"] # ucode? same as 0x00031fe8
-  - [0x0003535d, "bin"] # ucode?
-  - [0x00035f38, "bin"] # ucode? same as 0x000334f8
-  - [0x0003688d, "bin"] # ucode? same as 0x0003535d
-  - [0x00037468, "bin"] # ucode?
-  - [0x00037dba, "bin"] # ucode?
-  - [0x00038908, "bin"] # ucode?
-  - [0x0003925c, "bin"] # ucode?
-  - [0x00039da8, "bin"] # ucode?
-  - [0x0003a6fc, "bin"] # ucode?
-  - [0x0003b248, "bin"] # ucode? same as 0x00038908
-  - [0x0003bb9c, "bin"] # ucode?
-  - [0x0003c124, "bin"] # ucode .data section
+  - [0x0002D4B0, bin] # ucode?
+  - [0x0002DE08, bin] # ucode?
+  - [0x0002e698, bin] # ucode?
+  - [0x0002f520, bin] # ucode?
+  - [0x0002fdb0, bin] # ucode?
+  - [0x00030c38, bin] # ucode? same as 0x0002DE08
+  - [0x000314c8, bin] # ucode?
+  - [0x00031fe8, bin] # ucode?
+  - [0x0003293d, bin] # ucode?
+  - [0x000334f8, bin] # ucode?
+  - [0x00033e4d, bin] # ucode? same as 0x0003293d
+  - [0x00034a08, bin] # ucode? same as 0x00031fe8
+  - [0x0003535d, bin] # ucode?
+  - [0x00035f38, bin] # ucode? same as 0x000334f8
+  - [0x0003688d, bin] # ucode? same as 0x0003535d
+  - [0x00037468, bin] # ucode?
+  - [0x00037dba, bin] # ucode?
+  - [0x00038908, bin] # ucode?
+  - [0x0003925c, bin] # ucode?
+  - [0x00039da8, bin] # ucode?
+  - [0x0003a6fc, bin] # ucode?
+  - [0x0003b248, bin] # ucode? same as 0x00038908
+  - [0x0003bb9c, bin] # ucode?
+  - [0x0003c124, bin] # ucode .data section
   - name:  game.us.rzip
     type:  bin
     start: 0x00042450
@@ -43,22 +43,10 @@ segments:
     type:  bin
     start: 0x0019EA88
   ###
-  - [0x001A37E0, "bin", "compressed00"]
-  - [0x00333291, "bin"] # ??
-  - [0x0033389a, "bin", "compressed01"]
-  - [0x00333e1c, "bin"] # ??
-  - [0x00334045, "bin", "compressed02"]
-  - [0x003c1309, "bin"] # ??
-  - [0x003c271b, "bin", "compressed03"]
-  - [0x0041b17d, "bin"] # ??
-  - [0x0041b2e6, "bin", "compressed04"]
-  - [0x0056caab, "bin"] # ??
-  - [0x0056d126, "bin", "compressed05"]
-  - [0x007edf84, "bin"] # ??
-  - [0x007ee1ad, "bin", "compressed06"]
-  - [0x00ab1941, "bin"] # padding
+  - [0x001A37E0, bin, compressed] # 7760 files
+  - [0x00AB1941, bin, compressed_padding] # 15 bytes 0x0 padding
   ###
-  - [0x00AB1950, "bin", "assets_offsets_table"] # TODO: use to generate this next section
+  - [0x00AB1950, bin, assets_offsets_table] # TODO: use to generate this next section
   - name:  assets00
     type:  rzip
     start: 0x00AB1A40
@@ -146,6 +134,6 @@ segments:
   - name:  assets1C    # text, credits etc
     type:  rzip
     start: 0x03f8ab18
-  - [0x03F8B770, "bin"] # TODO: anything interesting here?
-  - [0x03F8b800, "bin", "trailer"] # 0xff to the end
+  - [0x03F8B770, bin] # TODO: anything interesting here?
+  - [0x03F8b800, bin, trailer] # 0xff to the end
   - [0x04000000] # the end of the rom

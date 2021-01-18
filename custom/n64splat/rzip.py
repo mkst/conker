@@ -19,7 +19,7 @@ class N64SegRzip(N64Segment):
         self.has_files = "files" in segment
         self.segment = segment
         self.next_segment = next_segment["start"] if "start" in next_segment else 0
-        self.xor = segment["xor"] if "xor" in segment else None
+        self.xor = segment.get("xor", None)
     def get_default_name(self, addr):
         return f"code_{addr:X}"
 
@@ -61,7 +61,7 @@ class N64SegRzip(N64Segment):
             #
             start = base + uncompressed
             type = compressed >> 24
-            length = compressed % 0x10000000 # can we just and with 0xffffff ?
+            length = compressed % 0x10000000 # can we just AND with 0xffffff ?
             if self.next_segment and start >= self.next_segment:
                 break
             if length > len(rom_bytes):
@@ -122,18 +122,26 @@ class N64SegRzip(N64Segment):
         with open(os.path.join(out_dir, self.name + ".bin"), "wb") as f:
             f.write(rom_bytes[self.rom_start:self.rom_end])
 
+        total_processed_bytes = 0
+        if len(self.files) > 0:
+            # add header segment bytes if applicable
+            header_length = self.files[0]["start"] - self.rom_start
+            total_processed_bytes += header_length
+
         for i, split_file in enumerate(self.files):
             result = padding = None
 
             filename = str(i).zfill(4)
             extension = "bin"
 
-            pad = split_file["pad"] if "pad" in split_file else 0
+            pad = split_file.get("pad", 0)
             data = rom_bytes[split_file["start"] : split_file["end"] + pad]
 
             if split_file["subtype"] in ("uncompressed", "mp3"):
-                result = data[:-pad]
-                if pad:
+                if pad == 0:
+                    result = data
+                else:
+                    result = data[:-pad]
                     padding = data[-pad:]
                 if split_file["subtype"] == "mp3":
                     extension = "mp3"
@@ -142,6 +150,8 @@ class N64SegRzip(N64Segment):
                     result, padding = rareunzip.runzip_with_leftovers(data)
                 except Exception as e:
                     print("Failed to decompress file", split_file, e)
+            # update total
+            total_processed_bytes += len(data)
             # write out raw data
             out_filename = filename + (".gz" if split_file["subtype"] in ("gz", "compressed") else "")
             with open(os.path.join(out_dir,  out_filename), "wb") as f:
@@ -154,6 +164,11 @@ class N64SegRzip(N64Segment):
             if padding:
                 with open(os.path.join(out_dir,  filename + ".pad"), "wb") as f:
                     f.write(padding)
+
+        expected_length = self.rom_end - self.rom_start
+        if total_processed_bytes != expected_length:
+            print("Processed %i bytes but section is %i bytes!" % (total_processed_bytes, expected_length))
+
 
 
     def get_ld_files(self):

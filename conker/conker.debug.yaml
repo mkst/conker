@@ -80,7 +80,7 @@ segments:
   - name:  init_data
     type:  code
     start: 0x0000A4E0
-    vram:  0x800290D0 # TBD;
+    vram:  0x8000A4E0
     files:
     - [0xA4E0, bin] # might be cutting code (start: 0xA774)
   - name:  game ## size 2339424
@@ -88,7 +88,7 @@ segments:
     start: 0x0001FF50
     vram:  0x15000000
     files:
-    - [0x0001FF50, asm]
+    - [0x1FF50, asm]
     - [0x22740, asm]
     - [0x22CB0, asm]
     - [0x22D70, asm]
@@ -499,7 +499,7 @@ segments:
   - name:  game_data
     type:  code
     start: 0x002190F0
-    vram:  0x80082B20
+    vram:  0x8005B0F0
     files:
     - [0x002190F0, "bin"]
   - name:  debugger

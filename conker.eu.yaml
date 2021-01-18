@@ -12,30 +12,17 @@ segments:
   - name:  init.eu
     type:  bin
     start: 0x00001000
-  - [0x2D810, "bin"] # ucode etc
+  - [0x2D810, bin] # ucode etc
   - name:  game.eu.rzip
     type:  bin
     start: 0x000427B0
   - name:  debugger.eu
     type:  bin
     start: 0x0019EDE8
-  # besides 1 file, the contents match US ROM
-  - [0x1a3b40, "bin", "compressed00"]
-  - [0x3335f1, "bin"] # ??
-  - [0x333bfa, "bin", "compressed01"]
-  - [0x33417c, "bin"] # ??
-  - [0x3343a5, "bin", "compressed02"]
-  - [0x3c1669, "bin"] # ??
-  - [0x3c2a7b, "bin", "compressed03"]
-  - [0x41b4dd, "bin"] # ??
-  - [0x41b646, "bin", "compressed04"] # differs from US ROM
-  - [0x56d3a8, "bin"] # ??
-  - [0x56da23, "bin", "compressed05"]
-  - [0x7ee881, "bin"] # ??
-  - [0x7eeaaa, "bin", "compressed06"]
-  - [0xab223e, "bin"] # padding
+  - [0x1A3B40, bin, compressed] # 7762 files
+  - [0xAB223E, bin, compressed_padding] # 2 bytes 0x0 padding
   ###
-  - [0xAB2240, "bin", "assets_offsets_table"] # offsets
+  - [0xAB2240, bin, assets_offsets_table]
   - name:  assets00
     type:  rzip
     start: 0xab2330
@@ -126,6 +113,6 @@ segments:
   # - name:  assets1D
   #   type:  rzip
   #   start: 0x3f8c6b0
-  - [0x3f8c6b0, "bin"]
-  - [0x3f8c740, "bin", trailer] # 0xff to end
+  - [0x3f8c6b0, bin]
+  - [0x3f8c740, bin, trailer] # 0xff to end
   - [0x04000000] # the end of the rom

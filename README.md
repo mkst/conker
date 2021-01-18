@@ -108,7 +108,7 @@ Overview of US ROM shown below:
 [ rzip ]  0018 8328 > 0019 C7D8 ; game .data (compressed)
 [ code ]  0019 EA88 > 001A 2190 ; debugger .text
 [ data ]  001A 2190 > 001A 37E0 ; debugger .data
-[ rzip ]  001A 37E0 > 00AB 1950 ; compressed assets + unknown
+[ rzip ]  001A 37E0 > 00AB 1950 ; compressed section (textures?)
 [ offs ]  00AB 1950 > 00AB 1A40 ; table of asset offsets
 [ rzip ]  00AB 1A40 > 03F8 B800 ; assets 00 thru assets 1C
 [ ffff ]  03F8 B800 > 0400 0000 ; 0xff padding

@@ -9,7 +9,6 @@ def main(config_file, infile, outdir):
 
     with open(config_file, "r") as f:
         config = yaml.safe_load(f.read())
-        offset = config["start"]
         with open(infile, "rb") as b:
             data = b.read()
             for file in config["files"]:
@@ -19,7 +18,7 @@ def main(config_file, infile, outdir):
                 if end > len(data):
                     print("bad config!", file)
                     break
-                filename = f"{outdir}{offset+start:08X}.bin"
+                filename = f"{outdir}{start:08X}.bin"
                 chunk = data[start:end]
                 try:
                     res = ru.runzip(chunk)
