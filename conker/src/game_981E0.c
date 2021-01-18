@@ -1561,27 +1561,23 @@ void func_150730A4(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15073118.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1507342C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150738E8.s")
-// NON-MATCHING: lots to figure out
-// void func_150738E8(void) {
-//     s32 temp_t7;
-//     struct127 *temp_v0_2;
-//
-//     if (D_800D154C->unk13C != 0) {
-//         temp_t7 = ((D_800D154C->unk13C - 0x64) & 0xFF) * 0xCB;
-//         D_800D154C->unk13C = 0U;
-//         temp_v0_2 = &D_800CC2D0[temp_t7];
-//         temp_v0_2->unkF8 = 0x8200;
-//         temp_v0_2->unk13D = 0;
-//         temp_v0_2->unk65 = 0;
-//         temp_v0_2->unk232 = 6;
-//         temp_v0_2->unk218 = 0;
-//         temp_v0_2->unk104 = 0;
-//         temp_v0_2->unk76 = D_800D154C->unk7A;
-//         temp_v0_2->unk7A = 0xE000;
-//         func_1505E650(D_800D154C, 0x97, 1.0f, 5.0f, 0.0f, 0.0f, 0);
-//     }
-// }
+
+void func_150738E8(void) {
+    u8 temp_v0 = (u8)(D_800D154C->unk13C - 100);
+
+    if (D_800D154C->unk13C != 0) {
+        D_800D154C->unk13C = 0U;
+        D_800CC2D0[temp_v0].unkF8 = 0x8200;
+        D_800CC2D0[temp_v0].unk13D = 0;
+        D_800CC2D0[temp_v0].unk76 = D_800D154C->unk7A;
+        D_800CC2D0[temp_v0].unk65 = 0;
+        D_800CC2D0[temp_v0].unk232 = 6;
+        D_800CC2D0[temp_v0].unk218 = 0;
+        D_800CC2D0[temp_v0].unk104 = 0;
+        D_800CC2D0[temp_v0].unk7A = 0xE000;
+        func_1505E650(D_800D154C, 0x97, 1.0f, 5.0f, 0.0f, 0.0f, 0);
+    }
+}
 
 void func_150739A4(void) {
     D_800D154C->unk64 = (s8) D_800D1580;
