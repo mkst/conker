@@ -2412,7 +2412,7 @@ typedef struct {
     f32 unk4;
     s32 unk8;
     s32 unkC;
-    s32 unk10;
+    f32 unk10;
     s32 unk14;
 } struct180; // size 0x18
 
