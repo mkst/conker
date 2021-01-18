@@ -1373,7 +1373,10 @@ struct struct127 {
     u8  unk74;
     s8  pad75;
     u16 unk76;  // moving_angle
-    u16 unk78;
+    union{
+        u16 unk78;
+        u8 unk78_u8;
+    };
     u16 unk7A;  // facing angle
     u16 unk7C;
     u16 unk7E;
@@ -2859,4 +2862,7 @@ typedef struct {
     f32 unk8;
 } struct221; // size 0xC
 
+typedef struct{
+    u8 unk0[8];
+} struct222; //size 0x08
 #endif
