@@ -9,6 +9,7 @@
 // 0x0002C200
 extern f32 D_8002C200;
 extern f32 D_8002C204;
+extern f32 D_8002C208;
 
 // 0x0002C210
 extern f32 D_8002C210;
@@ -297,7 +298,8 @@ extern s8   D_80041FD8;
 extern u8   D_80041FD9;
 extern s32  D_80041FDC;
 extern struct15 D_80041FE0[];
-extern s32  D_80041FEC[];
+// extern struct15 **D_80041FEC[]; // struct size 0x30 ?
+extern s32 D_80041FEC[][12];
 
 extern OSMesgQueue *D_80041298;
 extern OSMesg      *D_800412B0;
@@ -618,6 +620,8 @@ extern f32 D_800A56C0;
 extern f32 D_800A56C4;
 extern f32 D_800A56C8;
 
+extern u16  D_800AB140[];
+extern s32 D_800AB168[1];
 // game_2062D0.c
 extern u8  D_800AB340[3]; // 88, 64, 62
 extern u8  D_800AB344[5]; // 46, 48, 45, 51, 52
@@ -978,9 +982,17 @@ extern s32 D_800D3858;
 
 extern s32 D_800D98E0;
 extern u8  D_800D987C;
+extern u8  D_800D9890;
 
 extern u8  D_800D9930[];
-extern u8  D_800D9920[];
+extern u8  D_800D9920;
+extern u8  D_800D9921;
+extern u8  D_800D9928;
+extern u8  D_800D9929;
+extern u8  D_800D9938;
+extern u8  D_800D9939;
+extern u8  D_800D992A[];
+extern u8  D_800D993A[];
 
 extern s32 D_800D99D0[8];
 extern struct134 *D_800D9A20;
@@ -1096,13 +1108,16 @@ extern f32 D_800DCD9C;
 extern f32 D_800DCDA0;
 
 extern struct100 *D_800DCD20;
-extern struct100 *D_800DCD24;
-extern struct100 *D_800DCD28;
+// extern struct100 *D_800DCD24;
+// extern struct100 *D_800DCD28;
+
+extern s8 D_800DCD24[3];
+extern u8 D_800DCD28[3];
 
 extern s32  D_800DCDC4; // probably wrong type
 extern u8   D_800DCDD0;
 extern s8   D_800DD190;
-extern u8   D_800DD198;
+extern u8   D_800DD198[]; // 24 bytes
 extern f32  D_800DD1D8[];
 extern f32  D_800DD1E8[];
 
@@ -1186,8 +1201,12 @@ extern struct134 *D_800E0900[]; // probably not struct134
 extern s32  D_800E0930;
 extern s32  D_800E0934;
 extern s32  D_800E0940;
+extern u8   D_800E0950;
+extern s32  D_800E0964;
+extern s16  D_800E0968[];
+extern s32  D_800E0990[];
 extern u8   D_800E0A10;
-extern struct186 *D_800E0D80;
+extern struct186 D_800E0D80; // libaudio struct?
 
 // end of zero'd out section
 
@@ -1243,6 +1262,7 @@ extern u32  D_00AB1950; // offsets table
 extern s32  D_100290D0; // start of data (?)
 extern s32  D_100291A0;
 extern s32 *D_1002AAD0;
+extern s32  D_151F3C4C;
 
 /* what is this */
 extern s16  D_BC000C02;

@@ -33,6 +33,7 @@
 //     func_15008B90();
 //     func_1500E5C0();
 //
+//     if (0) {};
 //     if (D_800B0DF0->unkA) {
 //         D_80082D90[D_800B0DF0->unkA]();
 //     }
@@ -42,10 +43,11 @@
 //     func_151872B0(arg0);
 //     func_15178EB0();
 //     func_15012FE0();
+//
+//     if (0) {};
 //     tmp = (D_800D2E4C->unk4 & 128) == 0;
 //     func_151645C4(tmp);
 // }
-
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_3B920/func_1500E5C0.s")
 

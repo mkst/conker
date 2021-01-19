@@ -4,43 +4,45 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_150091D0.s")
-// NON-MATCHING: is this all a struct?
-// void func_150091D0(void) {
-//     D_800DCD78 = 0;
-//     D_800DCD7C = 1;
-//     D_800DCD80 = 0;
-//     D_800DCD84 = 0;
-//
-//     func_1515D4D4(255, 255, 255, 0);
-//
-//     D_800DCD24->unk0 = 0;
-//     D_800DCD24->unk1 = 0;
-//     D_800DCD24->unk2 = 0;
-//
-//     D_800DCD28->unk0 = 255;
-//     D_800DCD28->unk1 = 255;
-//     D_800DCD28->unk2 = 255;
-//
-//     D_800DCD30 = 127;
-//     D_800DCD31 = 0;
-//     D_800DCD32 = 0;
-//
-//     D_800DCD33 = 127;
-//     D_800DCD34 = 0;
-//     D_800DCD35 = 0;
-//
-//     D_800DCD36 = 127;
-//     D_800DCD37 = 0;
-//     D_800DCD38 = 0;
-//
-//     D_800DCD39 = 127;
-//     D_800DCD3A = 0;
-//     D_800DCD3B = 0;
-//     D_800DCD3C = 0;
-//     D_800DCD3D = 0;
-//     bzero(&D_800DCD40, 56);
-// }
+void func_150091D0(void) {
+    int tmp0 = 127;
+
+    D_800DCD78 = 0;
+    D_800DCD7C = 1;
+    D_800DCD80 = 0;
+    D_800DCD84 = 0;
+
+    func_1515D4D4(255, 255, 255, 0);
+
+    D_800DCD24[0] = 0;
+    D_800DCD24[1] = 0;
+    D_800DCD24[2] = 0;
+
+    D_800DCD28[0] = 255;
+    D_800DCD28[1] = 255;
+    D_800DCD28[2] = 255;
+
+    if (0) {};
+
+    D_800DCD30 = tmp0;
+    D_800DCD31 = 0;
+    D_800DCD32 = 0;
+
+    D_800DCD33 = tmp0;
+    D_800DCD34 = 0;
+    D_800DCD35 = 0;
+
+    D_800DCD36 = tmp0;
+    D_800DCD37 = 0;
+    D_800DCD38 = 0;
+
+    D_800DCD39 = tmp0;
+    D_800DCD3A = 0;
+    D_800DCD3B = 0;
+    D_800DCD3C = 0;
+    D_800DCD3D = 0;
+    bzero(&D_800DCD40, 56);
+}
 
 void func_150092DC(void) {
     u32 i;

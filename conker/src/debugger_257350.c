@@ -48,5 +48,3 @@ s32 func_16001B8C(u8 *arg0, u8 *arg1, u32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16002D2C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16002DE4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_160033A8.s")
-// uses tlbr
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16003650.s")
