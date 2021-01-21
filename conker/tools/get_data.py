@@ -73,6 +73,7 @@ def main(infile, user_input, length=64, version='us', is_string=False):
     res = get_bytes(data, start, length)
     if res:
         offset = int(user_input[2:]  if is_variable else user_input,16)
+        print("start", hex(start))
         pretty_print(res, offset, is_variable, is_string)
 
 

@@ -388,6 +388,9 @@ extern u16 D_80085F3C[];
 extern u16 D_80085FBC[];
 
 extern s32 D_80086000;
+extern void (*D_80086004[])(s32);
+extern void (*D_8008600C[])(s32);
+extern void (*D_80086014[])(s32);
 extern void (*D_80086150[])(s32);
 extern void (*D_80086730[])(void);
 extern s8  D_80087260;
@@ -536,9 +539,18 @@ extern f32 D_80098D90[];
 extern f32 D_80098DB0; // 0.008726646192371845
 extern f32 D_80098DB4; // 0.008726646192371845
 
-extern f32 D_800990B0;
+extern f32 D_800990B0; // 0.6931471824645996f
+extern f32 D_800990B4; // 0.6931471824645996f
+extern s8  D_80099140[];
 extern u16 D_8009919C[6];
 extern f32 D_800991A8;
+extern f32 D_800991AC;
+extern f32 D_800991B0;
+extern f32 D_800991D4; // 0.10000000149011612f
+extern f32 D_80099408;
+extern f32 D_8009940C;
+extern f32 D_80099410;
+extern f32 D_80099414;
 extern f32 D_80099418;
 extern f32 D_8009941C; // 0.949999988079071
 
@@ -696,6 +708,7 @@ extern s32 D_800BE5D0;
 extern u8  D_800BE5E0;
 extern u8  D_800BE9A0;
 extern f32 D_800BE9A4;
+extern f32 D_800BE9A8;
 extern s32 D_800BE9F0;
 
 extern s32  D_800BE2B0[]; // type?
@@ -755,6 +768,7 @@ extern s32  D_800BE9C4;
 extern s32  D_800BE9E0; // OSMesg
 extern s32  D_800BE9E4;
 extern s32  D_800BE9E8;
+extern u8   D_800BE9EC;
 extern u8   D_800BE9ED;
 extern u16  *D_800BE9F4; // was u16
 extern s32  D_800BE9F8;
@@ -847,8 +861,14 @@ extern f32 D_800CC234;
 extern f32 D_800CC238;
 extern f32 D_800CC23C;
 
+extern s32 D_800CC250;
+
 extern s16 D_800CC264;
+extern s32 D_800CC268;
 extern u8  D_800CC26E;
+extern u8  D_800CC27C;
+extern s32 D_800CC280;
+extern s32 D_800CC284; //pointer to 6 u8s
 extern s32 D_800CC288;
 extern s32 D_800CC298; // 0x18 length
 extern u8  D_800CC2A2;
@@ -858,6 +878,9 @@ extern f32 D_800CC2C4;
 extern f32 D_800CC2C8;
 
 extern u8  D_800CC2B0;
+extern u8  D_800CC2B8;
+extern s32 D_800CC2BA;
+extern s32 D_800CC2BC;
 extern struct127 D_800CC2D0[26]; // objects
 extern u8  D_800CC2D4[];
 extern f32 D_800CC2E8[];
@@ -876,11 +899,12 @@ extern struct127 *D_800CE370;
 
 /* 800D0000 */
 
-extern f32 D_800D1550;
+extern f32 D_800D1550[];
 extern s32 D_800D1580; // array?
 extern s16 D_800D1582;
 extern u8  D_800D1583;
 extern s32 D_800D1588[187];  // 748 bytes
+extern s32 D_800D1548;
 extern struct127 *D_800D154C;
 
 extern f32 D_800D1874;
@@ -974,6 +998,7 @@ extern s32 D_800D2DB4;
 extern s32 D_800D3094;
 extern struct178 D_800D3098[73];
 extern struct00 *D_800D3300;
+extern s32 D_800D35DC;
 extern s32 D_800D3668;
 extern s32 D_800D366C;
 extern f32 D_800D3670;

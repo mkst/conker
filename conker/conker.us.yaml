@@ -758,9 +758,10 @@ segments:
     - [0x23B000, "bin"]
     - [0x23D420, "bin"] # jump table
     - [0x23D570, "bin"]
-    - [0x23D8C0, ".data", "game_75C90"]
-    - [0x23DAE0, ".data", "game_75FC0"]
-    - [0x23DB40, ".data", "game_76710"]
+    - [0x23D8C0, ".data",   game_75C90]
+    # - [0x23DAC0, ".rodata", game_75C90]
+    - [0x23DAE0, ".data",   game_75FC0]
+    - [0x23DB40, ".rodata", game_76710]
     - [0x23DB50, "bin"]
     - [0x247F70, ".data", "game_14FF90"]
     - [0x248070, "bin"]

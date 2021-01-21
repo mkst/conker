@@ -120,16 +120,15 @@ void func_150627D4(struct127 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15062800.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15062AC4.s")
-// NON-MATCHING: no nop after jr
-// void func_15062AC4(struct127 *arg0) {
-//     if (arg0->unkE6 && arg0->unkE4) {
-//         arg0->unkEC = arg0->unkE4 / (f32) arg0->unkE6;
-//         arg0->unkF0 = arg0->unkE6 / (f32) arg0->unkE4;
-//     } else {
-//         arg0->unkF0 = arg0->unkEC = 0.0f;
-//     }
-// }
+void func_15062AC4(struct127 *arg0) {
+    if (arg0->unkE6 && arg0->unkE4) {
+        f32 tmp = arg0->unkE4;
+        arg0->unkEC = tmp / arg0->unkE6;
+        arg0->unkF0 = arg0->unkE6 / tmp;
+    } else {
+        arg0->unkF0 = arg0->unkEC = 0.0f;
+    }
+}
 
 void func_15062B1C(struct127 *arg0, f32 arg1) {
     arg0->unkE4 = arg0->unk14C * arg1;
@@ -141,17 +140,16 @@ void func_15062B50(struct127 *arg0, f32 arg1) {
     func_15062AC4(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15062B84.s")
-// NON-MATCHING: no nop after jr
-// void func_15062B84(struct127 *arg0) {
-//     if (arg0->unkD4 && arg0->unkD2) {
-//         arg0->unkDC = arg0->unkD2 / (f32)arg0->unkD4;
-//         arg0->unkE0 = arg0->unkD4 / (f32)arg0->unkD2;
-//         return;
-//     }
-//     arg0->unkDC = 0.0f;
-//     arg0->unkE0 = 0.0f;
-// }
+void func_15062B84(struct127 *arg0) {
+    if (arg0->unkD4 && arg0->unkD2) {
+        f32 tmp = arg0->unkD2;
+        arg0->unkDC = tmp / arg0->unkD4;
+        arg0->unkE0 = arg0->unkD4 / tmp;
+    } else {
+        arg0->unkDC = 0.0f;
+        arg0->unkE0 = 0.0f;
+    }
+}
 
 void func_15062BDC(struct127 *arg0, f32 arg1, f32 arg2) {
     struct124 *temp_v0;
