@@ -14,7 +14,7 @@ void func_1500EE18(struct127 *arg0, s32 arg1, s32 arg2) {
     struct37 *temp_v0;
 
     tmp.unk0 = arg0;
-    tmp.unk4 = arg0->unk3B;
+    tmp.unk4 = arg0->unique_id;
 
     temp_v0 = func_15149130(0x12C, -1, 0x45, -1, 0, 0, 8, 0xFF, 1);
     if (temp_v0 != NULL) {

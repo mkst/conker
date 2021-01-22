@@ -79,7 +79,7 @@ s32 func_151422C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return (arg3 + arg2) >> 1;
 }
 
-s32 func_151422DC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_151422DC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     return arg4;
 }
 
@@ -309,8 +309,8 @@ f32 func_15145A0C(f32 arg0, f32 arg1, f32 arg2) {
 void func_15145A50(struct127 *arg0) {
     arg0->unk5 = 3;
     if (D_800BE9F0 != 51) {
-        if ((D_800BE616 != 0) || (arg0->unk0 == 5) || (arg0->unk0 == 1) || (arg0->unk0 == 21)) {
-            arg0->unk0 = 5;
+        if ((D_800BE616 != 0) || (arg0->interaction_state == 5) || (arg0->interaction_state == 1) || (arg0->interaction_state == 21)) {
+            arg0->interaction_state = 5;
             if (arg0->unk31C != NULL) {
                 arg0->unk31C->unk78 = 0;
             }
@@ -342,8 +342,8 @@ void func_15146508(struct127 *arg0, struct127 *arg1) {
 
     tmp.unk0 = arg0;
     tmp.unk4 = arg1;
-    tmp.unk8 = arg0->unk3B;
-    tmp.unk9 = arg1->unk3B;
+    tmp.unk8 = arg0->unique_id;
+    tmp.unk9 = arg1->unique_id;
     func_15169040(&tmp, 45, arg0, arg1);
 }
 

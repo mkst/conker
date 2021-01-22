@@ -94,7 +94,7 @@ void func_1507DB64(void) {
 
 void func_1507DE4C(struct127 *arg0) {
 
-    if (arg0->unk0 == 1) {
+    if (arg0->interaction_state == 1) {
         func_150836CC(arg0, 0x44);
         func_150836CC(arg0, 0x23);
         arg0->unk9C |= 0xF000;
@@ -103,7 +103,7 @@ void func_1507DE4C(struct127 *arg0) {
         return;
     }
 
-    switch(arg0->unk4) {
+    switch(arg0->id) {
         case 0x9F:
         case 0xa0:
             arg0->unk9C |= 0xF000;

@@ -3,9 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-extern f32 fabsf(f32);
-#pragma intrinsic (fabsf)
-
 
 void func_10019B50(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct25 *sp2C;

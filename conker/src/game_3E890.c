@@ -178,7 +178,7 @@ void func_15011A78(struct127 *arg0, u8 arg1, s32 arg2) {
     struct37 *temp_v0;
 
     tmp.unk0 = arg0;
-    tmp.unk4 = arg0->unk3B;
+    tmp.unk4 = arg0->unique_id;
     tmp.unk6 = 0;
 
     temp_v0 = func_15149130(300, -1, 85, -1, 0, 66, 8, arg1, arg2);

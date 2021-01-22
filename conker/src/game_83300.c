@@ -16,17 +16,17 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15058898.s")
 
 void func_15058EA4(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
-    if (arg1 < arg0->unk18) {
-        arg0->unk24 = arg2;
-    } else if (arg0->unk18 < arg3) {
-        arg0->unk24 = arg4;
+    if (arg1 < arg0->y_position) {
+        arg0->gravity = arg2;
+    } else if (arg0->y_position < arg3) {
+        arg0->gravity = arg4;
     }
-    if (arg5 < arg0->unk20) {
-        arg0->unk20 = arg5;
+    if (arg5 < arg0->y_velocity) {
+        arg0->y_velocity = arg5;
         return;
     }
-    if (arg0->unk20 < arg6) {
-        arg0->unk20 = arg6;
+    if (arg0->y_velocity < arg6) {
+        arg0->y_velocity = arg6;
     }
 }
 
@@ -131,12 +131,12 @@ void func_15062AC4(struct127 *arg0) {
 }
 
 void func_15062B1C(struct127 *arg0, f32 arg1) {
-    arg0->unkE4 = arg0->unk14C * arg1;
+    arg0->unkE4 = arg0->xz_scale * arg1;
     func_15062AC4(arg0);
 }
 
 void func_15062B50(struct127 *arg0, f32 arg1) {
-    arg0->unkE6 = arg0->unk150 * arg1;
+    arg0->unkE6 = arg0->y_scale * arg1;
     func_15062AC4(arg0);
 }
 
@@ -154,16 +154,16 @@ void func_15062B84(struct127 *arg0) {
 void func_15062BDC(struct127 *arg0, f32 arg1, f32 arg2) {
     struct124 *temp_v0;
 
-    arg0->unk14C = arg1;
-    arg0->unk150 = arg2;
-    if (arg0->unk4 != 255) {
-        temp_v0 = D_800D1C90[arg0->unk4];
-        arg0->unkD2 = (s32) (temp_v0->unk20 * arg0->unk14C);
-        arg0->unkD4 = (s32) (temp_v0->unk22 * arg0->unk150);
-        arg0->unkD6 = (s32) (temp_v0->unk24 * arg0->unk150);
-        arg0->unkE4 = (s32) (temp_v0->unk1A * arg0->unk14C);
-        arg0->unkE6 = (s32) (temp_v0->unk1C * arg0->unk150);
-        arg0->unkE8 = (s32) (temp_v0->unk1E * arg0->unk150);
+    arg0->xz_scale = arg1;
+    arg0->y_scale = arg2;
+    if (arg0->id != 255) {
+        temp_v0 = D_800D1C90[arg0->id];
+        arg0->unkD2 = (s32) (temp_v0->unk20 * arg0->xz_scale);
+        arg0->unkD4 = (s32) (temp_v0->unk22 * arg0->y_scale);
+        arg0->unkD6 = (s32) (temp_v0->unk24 * arg0->y_scale);
+        arg0->unkE4 = (s32) (temp_v0->unk1A * arg0->xz_scale);
+        arg0->unkE6 = (s32) (temp_v0->unk1C * arg0->y_scale);
+        arg0->unkE8 = (s32) (temp_v0->unk1E * arg0->y_scale);
         func_15062AC4(arg0);
         func_15062B84(arg0);
     }

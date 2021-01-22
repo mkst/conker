@@ -14,7 +14,7 @@ void func_15010538(struct127 *arg0) {
 // FAKEMATCH but works...
 dummy_label_927029:
     tmp.unk0 = arg0;
-    tmp.unk4 = arg0->unk3B;
+    tmp.unk4 = arg0->unique_id;
     tmp.unk6 = 0;
     tmp.unk8 = 0;
     tmp.unkA = 0;

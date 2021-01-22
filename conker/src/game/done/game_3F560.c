@@ -28,7 +28,7 @@ void func_1501214C(struct127 *arg0) {
 
     if (D_800BE9F0 != 24) {
         tmp.unk0 = arg0;
-        tmp.unk4 = arg0->unk3B;
+        tmp.unk4 = arg0->unique_id;
         tmp.unk6 = 300;
         tmp.unk8 = 0;
         tmp.unk9 = 0;

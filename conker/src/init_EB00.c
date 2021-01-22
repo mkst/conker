@@ -304,17 +304,17 @@ void func_10010720(u16 arg0, struct48 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 a
 }
 
 s32 func_100107F8(struct127 *arg0) {
-    if (arg0->unk0 == 0) {
+    if (arg0->interaction_state == 0) {
         return 0;
     } else {
-        if (arg0->unk318 != 0) {
+        if (arg0->camera != 0) {
             if (arg0->unk8E != 0) {
                 if (func_1000F3D0(arg0->unk8E) != 0) {
                     return 1;
                 }
             }
         } else {
-            if (func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x10000) != -1) {
+            if (func_1000FF90(func_1000EE70, arg0, arg0->unique_id | 0x10000) != -1) {
                 return 1;
             }
         }
@@ -324,14 +324,14 @@ s32 func_100107F8(struct127 *arg0) {
 }
 
 s32 func_10010894(struct127 *arg0) {
-    if (arg0->unk318 != 0) {
+    if (arg0->camera != 0) {
         if (arg0->unk8C != 0) {
             if (func_1000F3D0(arg0->unk8C) != 0) {
                 return 1;
             }
         }
     } else {
-        if (func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x20000) != -1) {
+        if (func_1000FF90(func_1000EE70, arg0, arg0->unique_id | 0x20000) != -1) {
             return 1;
         }
     }
@@ -345,12 +345,12 @@ s32 func_10010894(struct127 *arg0) {
 //     s32 temp_v0;
 //
 //     if ((arg1 != NULL) && (arg0->unk0 != 0)) {
-//         if (arg0->unk318 != 0) {
+//         if (arg0->camera != 0) {
 //             if (arg0->unk8E != 0) {
 //                 func_1000F85C(arg0->unk8E, 8, arg1->unk1C); // help
 //             }
 //         } else {
-//             temp_v0 = func_1000FF90(func_1000EE70, arg0, arg0->unk3B | 0x10000);
+//             temp_v0 = func_1000FF90(func_1000EE70, arg0, arg0->unique_id | 0x10000);
 //             if (temp_v0 != -1) {
 //                 D_80041FEC[temp_v0][0] = arg1;
 //             } else {
@@ -361,23 +361,23 @@ s32 func_10010894(struct127 *arg0) {
 // }
 
 void func_100109D0(struct127 *arg0) {
-  if (arg0->unk318) {
+  if (arg0->camera) {
       if (arg0->unk8E) {
           func_100111C8(arg0->unk8E);
       }
   } else {
-      func_1000FD38(func_1000EE70, arg0, arg0->unk3B | 0x10000);
+      func_1000FD38(func_1000EE70, arg0, arg0->unique_id | 0x10000);
   }
   arg0->unk8E = 0;
 }
 
 void func_10010A3C(struct127 *arg0) {
-    if (arg0->unk318) {
+    if (arg0->camera) {
         if (arg0->unk8C) {
             func_100111C8(arg0->unk8C);
         }
     } else {
-        func_1000FD38(func_1000EE70, arg0, arg0->unk3B | 0x20000);
+        func_1000FD38(func_1000EE70, arg0, arg0->unique_id | 0x20000);
     }
     arg0->unk8C = 0;
 }
@@ -386,7 +386,7 @@ void func_10010AA8(struct127 *arg0) {
     s32 sp24;
     struct15 *tmp;
 
-    if (arg0->unk318 != 0) {
+    if (arg0->camera != 0) {
         if (arg0->unk8C && func_1000F44C(arg0->unk8C)) {
             func_100111C8(arg0->unk8C);
         }
@@ -394,7 +394,7 @@ void func_10010AA8(struct127 *arg0) {
             func_100111C8(arg0->unk8E);
         }
     } else {
-        sp24 = func_1000FEF0(arg0->unk8C, arg0, arg0->unk3B);
+        sp24 = func_1000FEF0(arg0->unk8C, arg0, arg0->unique_id);
         if (sp24 != -1) {
             if (func_1000F44C(arg0->unk8C)) {
                 func_100111C8(arg0->unk8C);
@@ -402,7 +402,7 @@ void func_10010AA8(struct127 *arg0) {
             tmp = &D_80041FE0[sp24];
             tmp->unk10 |= 0x80;
         }
-        sp24 = func_1000FEF0(arg0->unk8E, arg0, arg0->unk3B);
+        sp24 = func_1000FEF0(arg0->unk8E, arg0, arg0->unique_id);
         if (sp24 != -1) {
             if (func_1000F44C(arg0->unk8E)) {
                 func_100111C8(arg0->unk8E);

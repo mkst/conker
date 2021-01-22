@@ -512,9 +512,9 @@ void func_15126138(struct108 *arg0) {
 
     temp_v0_2 = arg0->unk3D0;
 
-    if (((temp_v0_2->unk14 != arg0->unk2B0) ||
-         (temp_v0_2->unk18 != arg0->unk2B4) ||
-         (temp_v0_2->unk1C != arg0->unk2B8)) && ((arg0->unk2C & ~0x100) != 0)) {
+    if (((temp_v0_2->x_position != arg0->unk2B0) ||
+         (temp_v0_2->y_position != arg0->unk2B4) ||
+         (temp_v0_2->z_position != arg0->unk2B8)) && ((arg0->unk2C & ~0x100) != 0)) {
         arg0->unk298 = 1;
         arg0->unk7E6 = 60;
         arg0->unk8ED = 0;
@@ -524,7 +524,7 @@ void func_15126138(struct108 *arg0) {
 
     if (arg0->unk84 & 0x200000) {
         temp_v0_2 = arg0->unk3D0; // again?!
-        if (temp_v0_2->unk0 != 0x1E) {
+        if (temp_v0_2->interaction_state != 0x1E) {
             if (temp_v0_2->unk102 == 0) {
                 if ((*(arg0->unk36C) & 0xF) != 0) {
                     if ((arg0->unk2C & 0x40) == 0) {
@@ -623,9 +623,9 @@ void func_15128680(s32 arg0) {
 
 void func_15128774(struct108 *arg0, struct127 *arg1) {
     arg0->unk35C = arg1->unk180;
-    arg0->unk304 = arg0->unk2F8 = arg1->unk14;
-    arg0->unk308 = arg0->unk2FC = arg1->unk18;
-    arg0->unk30C = arg0->unk300 = arg1->unk1C;
+    arg0->unk304 = arg0->unk2F8 = arg1->x_position;
+    arg0->unk308 = arg0->unk2FC = arg1->y_position;
+    arg0->unk30C = arg0->unk300 = arg1->z_position;
     arg0->unk37C = arg0->unk3D0->unk40 - 180.0f;
     arg0->unk3D4->unk18C = D_800A35AC;
     arg0->unk23C = 1;

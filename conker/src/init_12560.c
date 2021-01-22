@@ -55,10 +55,10 @@ s32 func_10012718(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4) {
     u32 sp38;
     u32 sp34;
 
-    if (arg1->unk318 != 0) {
+    if (arg1->camera != 0) {
         func_1001263C(arg0, arg2, 64);
     } else {
-        func_100114D0(arg1->unk14, arg1->unk18, arg1->unk1C, arg2, arg4, arg3, &sp3C, &sp38, &sp34);
+        func_100114D0(arg1->x_position, arg1->y_position, arg1->z_position, arg2, arg4, arg3, &sp3C, &sp38, &sp34);
         func_1001263C(arg0, sp38, sp3C);
     }
     return 1;

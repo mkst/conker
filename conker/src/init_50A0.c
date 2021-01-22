@@ -27,7 +27,7 @@
 
 void func_100051C8(OSPfs *pfs, OSMesgQueue *queue) {
     pfs->queue = queue;
-    pfs->status = D_8003B234;
+    pfs->status = (s32)D_8003B234;
     D_8003B234 = pfs;
 }
 

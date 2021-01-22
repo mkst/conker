@@ -66,7 +66,7 @@
 //     arg0->unk250 = 1.0f;
 //     arg0->unk3CC = (s16) temp_v0;
 //     arg0->unk5D8 = (f32) (((f32) D_800BE624 * 40.0f) / 216.0f);
-//     temp_a2->unk318 = arg0;
+//     temp_a2->camera = arg0;
 //     arg0->unk134 = 1;
 //     arg0->unk84 = 0xE;
 //     arg0->unk240 = 0;

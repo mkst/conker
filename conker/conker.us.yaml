@@ -619,7 +619,7 @@ segments:
     - [0x1897a0, c]
     - [0x18a8f0, asm]
     - [0x18d250, asm]
-    - [0x18d770, asm]
+    - [0x18d770, c]
     - [0x191c30, asm]
     - [0x193130, asm]
     - [0x193420, c, "game/done/game_193420"]
