@@ -12,8 +12,8 @@ options:
     #include "functions.h"
     #include "variables.h"
   create_detected_syms: yes
-  undefined_syms: undefined_syms.eu.txt
-  symbol_addrs:   symbol_addrs.eu.txt
+  undefined_syms_path: undefined_syms.eu.txt
+  symbol_addrs_path:   symbol_addrs.eu.txt
 segments:
   - name:  header
     type:  header
