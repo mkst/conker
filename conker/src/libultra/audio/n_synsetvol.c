@@ -17,28 +17,40 @@
  * Copyright Laws of the United States.
  *====================================================================*/
 
+#include <os_internal.h>
+#include <ultraerror.h>
 #include "n_synthInternals.h"
 
-// FIXME: when we can...
-// N_ALGlobals *n_alGlobals=0;
-// N_ALSynth *n_syn=0;
-
-void n_alInit(N_ALGlobals *g, ALSynConfig *c)
+void n_alSynSetVol( N_ALVoice *v, s16 volume, ALMicroTime t)
 {
-    if (!n_alGlobals) { /* already initialized? */
-        n_alGlobals = g;
-        if(!n_syn) {
-            n_syn = &n_alGlobals->drvr;
-            n_alSynNew(c);
-        }
-    }
-}
+    ALParam  *update;
+    ALFilter *f;
 
-void n_alClose(N_ALGlobals *glob)
-{
-    if (n_alGlobals) {
-        n_alSynDelete();
-        n_alGlobals = 0;
-        n_syn = 0;
+    if (v->pvoice) {
+        /*
+         * get new update struct from the free list
+         */
+        update = __n_allocParam();
+        ALFailIf(update == 0, ERR_ALSYN_NO_UPDATE);
+
+        /*
+         * set offset and volume data
+         */
+#ifdef SAMPLE_ROUND
+        update->delta  = SAMPLE184( n_syn->paramSamples + v->pvoice->offset);
+#else
+        update->delta  = n_syn->paramSamples + v->pvoice->offset;
+#endif
+        update->type            = AL_FILTER_SET_VOLUME;
+        update->data.i          = volume;
+
+#ifdef SAMPLE_ROUND
+        update->moredata.i = SAMPLE184( _n_timeToSamples( t) );
+#else
+        update->moredata.i = _n_timeToSamples( t);
+#endif
+        update->next            = 0;
+
+         n_alEnvmixerParam(v->pvoice, AL_FILTER_ADD_UPDATE, update);
     }
 }

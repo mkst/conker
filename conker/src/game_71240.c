@@ -13,7 +13,7 @@ void func_15043E68(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f
     sp18[12] = arg4;
     sp18[13] = arg5;
     sp18[14] = arg6;
-    func_150A7790(&sp18, arg0);
+    guMtxF2L(&sp18, arg0);
 }
 
 void func_15043EC8(struct112 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {

@@ -8,76 +8,93 @@
 #include "n_cseqp.h"
 
 
-static ALMicroTime      __n_CSPVoiceHandler(void *node);
+       ALMicroTime      __n_CSPVoiceHandler(void *node);
 static void              __n_CSPHandleNextSeqEvent(N_ALCSPlayer *seqp);
 static void             __n_CSPHandleMIDIMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
 static void             __n_CSPHandleMetaMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
-static void             __n_CSPRepostEvent(ALEventQueue *evtq, N_ALEventListItem *item);
-void              __n_setUsptFromTempo(N_ALCSPlayer *seqp, f32 tempo);
+       void             __n_CSPRepostEvent(ALEventQueue *evtq, N_ALEventListItem *item);
+       void              __n_setUsptFromTempo(N_ALCSPlayer *seqp, f32 tempo);
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/n_alCSPNew.s")
-// void n_alCSPNew(struct26 *arg0, struct30 *arg1) {
-//     s32 i;
-//     s32 sp30;
-//     struct30 *sp2C;
-//     s32 sp28;
-//     s32 sp24;
-//     s32 temp_t5;
-//
-//     sp24 = arg1->unkC;
-//     arg0->unk20 = 0;
-//     arg0->unk18 = 0;
-//     arg0->unk14 = D_8002BA44; // fuuuuuuu
-//     arg0->unk30 = 0xFFFF;
-//     func_10017B30(arg0);
-//     arg0->unk24 = 488;
-//     arg0->unk28 = 0;
-//     arg0->unk2C = 0;
-//     arg0->unk32 = 32767;
-//     arg0->unk35 = arg1->unk9;
-//     arg0->unk5C = 16000;
-//     arg0->unk1C = 0;
-//     arg0->unk70 = arg1->unk10;
-//     arg0->unk74 = arg1->unk14;
-//     arg0->unk78 = arg1->unk18;
-//     arg0->unk7C = 0.0f;
-//     arg0->unk80 = 1.0f;
-//     arg0->unk84 = 0;
-//     arg0->unk8D = 0;
-//     arg0->unk8C = arg1->unk0;
-//     arg0->unk38 = 9;
-//     arg0->unk34 = arg1->unk8;
-//     arg0->unk60 = alHeapDBAlloc(0, 0, sp24, arg1->unk8, 0x3C);
-//     __n_initChanState(arg0);
-//     sp28 = alHeapDBAlloc(0, 0, sp24, arg1->unk0, 0x44);
-//     arg0->unk6C = 0; // NULL?
-//     /// fuuuuuuu
-//     // for (i = 0; i < arg1->unk0; i++)
-//     // {
-//     //     arg0->unk6C[i].unk0 = arg1;
-//     // }
-// //     if (arg1->unk0 > 0) {
-// // loop_1:
-// //         sp2C = (i * 0x44) + sp28;
-// //         *sp2C = (s32) arg0->unk6C;
-// //         arg0->unk6C = sp2C;
-// //         temp_t5 = i + 1;
-// //         i = temp_t5;
-// //         if (temp_t5 < arg1->unk0) {
-// //             goto loop_1;
-// //         }
-// //     }
-//
-//     arg0->unk64 = 0;
-//     arg0->unk68 = 0;
-//     sp30 = alHeapDBAlloc(0, 0, sp24, arg1->unk4, 0x1C);
-//     n_alEvtqNew(arg0 + 0x48, sp30, arg1->unk4);
-//     arg0->unk0 = 0;
-//     arg0->unk8 = &D_10013598;
-//     arg0->unk4 = arg0;
-//     func_1001C700(arg0);
-// }
+void n_alCSPNew(N_ALCSPlayer *seqp, ALSeqpConfig *c)
+{
+    s32                 i;
+    N_ALEventListItem  *items;
+    N_ALVoiceState     *vs;
+    N_ALVoiceState     *voices;
+
+    ALHeap *hp = c->heap;
+
+    /*
+     * initialize member variables
+     */
+    seqp->bank          = 0;
+    seqp->target        = NULL;
+    seqp->drvr          = n_syn;
+    seqp->chanMask      = 0xffff;
+    func_10017B30(seqp);
+    seqp->uspt          = 488;
+    seqp->nextDelta     = 0;
+    seqp->state         = AL_STOPPED;
+    seqp->vol           = 0x7FFF;              /* full volume  */
+    seqp->debugFlags    = c->debugFlags;
+    seqp->frameTime     = AL_USEC_PER_FRAME;   /* should get this from driver */
+    seqp->curTime       = 0;
+    seqp->initOsc       = c->initOsc;
+    seqp->updateOsc     = c->updateOsc;
+    seqp->stopOsc       = c->stopOsc;
+
+#if 1
+    seqp->unk7C = 0.0f;
+    seqp->unk80 = 1.0f;
+    seqp->unk84 = 0;
+    seqp->unk8D = 0;
+    seqp->unk8C = c->maxVoices;
+#endif
+
+    seqp->nextEvent.type = AL_SEQP_API_EVT;  /* this will start the voice handler "spinning" */
+
+    /*
+     * init the channel state
+     */
+    seqp->maxChannels = c->maxChannels;
+    seqp->chanState = alHeapAlloc(hp, c->maxChannels, sizeof(ALChanState) );
+    __n_initChanState((N_ALSeqPlayer*)seqp);  /* sct 11/6/95 */
+
+    /*
+     * init the voice state array
+     */
+    voices = alHeapAlloc(hp, c->maxVoices, sizeof(N_ALVoiceState));
+    seqp->vFreeList = 0;
+    for (i = 0; i < c->maxVoices; i++) {
+      vs = &voices[i];
+      vs->next = seqp->vFreeList;
+      seqp->vFreeList = vs;
+    }
+
+    seqp->vAllocHead = 0;
+    seqp->vAllocTail = 0;
+
+    /*
+     * init the event queue
+     */
+    items = alHeapAlloc(hp, c->maxEvents, sizeof(N_ALEventListItem));
+    n_alEvtqNew(&seqp->evtq, items, c->maxEvents);
+
+
+    /*
+     * add ourselves to the driver
+     */
+    seqp->node.next       = NULL;
+    seqp->node.handler    = __n_CSPVoiceHandler;
+    seqp->node.clientData = seqp;
+#if 1
+    n_alSynAddSndPlayer (&seqp->node);
+#endif
+#if 0
+    n_alSynAddSeqPlayer( &seqp->node);
+#endif
+}
 
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPVoiceHandler.s")
@@ -88,85 +105,77 @@ extern void (*jtbl_8002C4CC[])(void);
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPHandleMIDIMsg.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPHandleMetaMsg.s")
-// void func_10015044(void *arg0, void *arg1) {
-//     void *sp44;
-//     s32 sp40;
-//     s32 sp3C;
-//     s32 sp38;
-//     s32 sp34;
-//     s32 sp30;
-//     void *sp2C;
-//     void *sp28;
-//     void *sp24;
-//     void *sp20;
-//     void *sp1C;
-//     void *sp18;
-//     void *temp_t2;
-//
-//     sp44 = arg1 + 4;
-//     sp30 = 0;
-//     sp24 = NULL;
-//     if ((arg1->unk8 == 0xFF) && (arg1->unk9 == 0x51)) {
-//         sp3C = arg0->unk24;
-//         sp40 = (sp44->unk7 << 0x10) | (sp44->unk8 << 8) | sp44->unk9;
-//         __n_setUsptFromTempo(arg0, (f32) sp40);
-//         sp2C = arg0->unk50;
-//         if (sp2C != 0) {
-// loop_3:
-//             sp30 = sp30 + sp2C->unk8;
-//             sp28 = sp2C->unk0;
-//             if (sp2C->unkC == 0x16) {
-//                 sp20 = sp2C;
-//                 if (sp20->unk0 != 0) {
-//                     sp20->unk0->unk4 = (s32) sp20->unk4;
-//                 }
-//                 if (sp20->unk4 != 0) {
-//                     *sp20->unk4 = (s32) sp20->unk0;
-//                 }
-//                 if (sp24 != 0) {
-//                     sp1C = sp2C;
-//                     sp18 = sp24;
-//                     sp1C->unk0 = (s32) *sp18;
-//                     sp1C->unk4 = sp18;
-//                     if (*sp18 != 0) {
-//                         (*sp18)->unk4 = sp1C;
-//                     }
-//                     *sp18 = sp1C;
-//                 } else {
-//                     sp2C->unk0 = 0;
-//                     sp2C->unk4 = 0;
-//                     sp24 = sp2C;
-//                 }
-//                 sp34 = sp30;
-//                 if (sp28 != 0) {
-//                     sp30 = sp30 - sp2C->unk8;
-//                     sp28->unk8 = (s32) (sp28->unk8 + sp2C->unk8);
-//                 }
-//                 sp2C->unk8 = sp34;
-//             }
-//             sp2C = sp28;
-//             if (sp2C != 0) {
-//                 goto loop_3;
-//             }
-//         }
-//         sp2C = sp24;
-//         if (sp2C != 0) {
-// loop_18:
-//             temp_t2 = sp2C->unk0;
-//             sp28 = temp_t2;
-//             sp38 = (s32) sp2C->unk8 / sp3C;
-//             sp2C->unk8 = (s32) (arg0->unk24 * sp38);
-//             func_10015310(arg0->unk48, sp2C);
-//             sp2C = temp_t2;
-//             if (sp2C != 0) {
-//                 goto loop_18;
-//             }
-//         }
-//     }
-// }
+void __n_CSPHandleMetaMsg(N_ALCSPlayer *seqp, N_ALEvent *event)
+{
+  ALTempoEvent    *tevt = &event->msg.tempo;
+  s32             tempo;
+  s32             oldUspt;
+  u32             ticks;
+  ALMicroTime         tempDelta,curDelta = 0;
+  N_ALEventListItem     *thisNode,*nextNode,*firstTemp = 0;
+  N_ALEventListItem     *temp0,*temp1,*temp2;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/func_10015310.s")
+  if (event->msg.tempo.status == AL_MIDI_Meta) {
+    if (event->msg.tempo.type == AL_MIDI_META_TEMPO) {
+      oldUspt = seqp->uspt;
+      tempo = (tevt->byte1 << 16) | (tevt->byte2 <<  8) | (tevt->byte3 <<  0);
+      __n_setUsptFromTempo (seqp, (f32)tempo);    /* sct 1/8/96 */
+
+      thisNode = (N_ALEventListItem*)seqp->evtq.allocList.next;
+      while (thisNode) {
+          curDelta += thisNode->delta;
+          nextNode = (N_ALEventListItem*)thisNode->node.next;
+          if (thisNode->evt.type == 0x16 ) { // AL_CSP_NOTEOFF_EVT
+              // custom
+              temp0 = thisNode;
+              if (temp0->node.next) {
+                  temp0->node.next->prev = temp0->node.prev;
+              }
+              if (temp0->node.prev) {
+                  temp0->node.prev->next = temp0->node.next;
+              }
+              if (firstTemp != 0) {
+                  temp1 = thisNode;
+                  if (1) {
+                      temp2 = firstTemp;
+
+                      temp1->node.next = temp2->node.next;
+                      temp1->node.prev = temp2;
+
+                      if (temp2->node.next != 0) {
+                          temp2->node.next->prev = temp1;
+                      }
+                      temp2->node.next = temp1;
+                  }
+              } else {
+                    thisNode->node.next = 0;
+                    thisNode->node.prev = 0;
+                    firstTemp = thisNode;
+              }
+
+              tempDelta = curDelta;                   /* record the current delta */
+              if (nextNode)                           /* don't do this if no nextNode */ {
+                  curDelta -= thisNode->delta;        /* subtract out this delta */
+                  nextNode->delta += thisNode->delta; /* add it to next event */
+              }
+              thisNode->delta = tempDelta;            /* set this event delta from current */
+          }
+          thisNode = nextNode;
+      }
+
+      thisNode = firstTemp;
+      while (thisNode) {
+          nextNode = (N_ALEventListItem*)thisNode->node.next;
+          ticks = thisNode->delta/oldUspt;
+          thisNode->delta = ticks * seqp->uspt;
+          __n_CSPRepostEvent(&seqp->evtq,thisNode);
+          thisNode = nextNode;
+      }
+    }
+  }
+}
+
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPRepostEvent.s")
 
 void __n_setUsptFromTempo (N_ALCSPlayer *seqp, f32 tempo)
 {

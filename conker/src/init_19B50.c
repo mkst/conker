@@ -249,9 +249,9 @@ void func_1001AA08(struct26 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk60[arg2].unkD = arg3;
     arg0->unk60[arg2].unkE = arg3;
     if (arg3 == 0) {
-        arg0->unk30 = arg0->unk30 & ((1 << arg2) ^ 0xFFFF);
+        arg0->unk30 &= (1 << arg2) ^ 0xFFFF; // disable
     } else {
-        arg0->unk30 = arg0->unk30 | (1 << arg2);
+        arg0->unk30 |= 1 << arg2;
     }
     func_1001A45C(arg0, arg2);
 }

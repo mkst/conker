@@ -35,37 +35,37 @@ extern "C" {
  */
 typedef struct N_ALVoice_s {
     ALLink              node;
-    struct N_PVoice_s     *pvoice;
+    struct N_PVoice_s   *pvoice;
     ALWaveTable         *table;
-    void                *clientPrivate;
-    s16                 state;
-    s16                 priority;
-    s16                 fxBus;
-    s16                 unityPitch;
+    /* 0x10 */  s16                 state;
+    /* 0x12 */  s16                 priority;
+    /* 0x14 */  void                *clientPrivate; // is this right?
+    /* 0x18 */  s16                 fxBus;
+    /* 0x1A */  s16                 unityPitch;
 } N_ALVoice;
 
 typedef struct {
-    ALPlayer    *head;          /* client list head                     */
-    ALPlayer    *n_seqp1;	/* for fade in / fade out */
-    ALPlayer    *n_seqp2;
-    ALPlayer    *n_sndp;
-
+    /* 0x00 */  ALPlayer    *head;          /* client list head                     */
+    // ALPlayer    *n_seqp1;    /* for fade in / fade out */
+    // ALPlayer    *n_seqp2;
+    // ALPlayer    *n_sndp;
     ALLink      pFreeList;      /* list of free physical voices         */
     ALLink      pAllocList;     /* list of allocated physical voices    */
     ALLink      pLameList;      /* list of voices ready to be freed     */
-    s32         paramSamples;
-    s32         curSamples;     /* samples from start of game           */
-    ALDMANew    dma;
+    /* 0x1C */  s32         paramSamples;
+    /* 0x20 */  s32         curSamples;     /* samples from start of game           */
+    /* 0x24 */  u8          pad[0x8];
+    /* 0x2C */  ALDMANew    dma;
     ALHeap      *heap;
-    struct ALParam_s    *paramList;
+    struct ALParam_s      *paramList;
     struct N_ALMainBus_s  *mainBus;
     struct N_ALAuxBus_s   *auxBus;
-    s32                 numPVoices;
-    s32                 maxAuxBusses;
-    s32                 outputRate;
-    s32                 maxOutSamples;
-    s32	       		sv_dramout;
-    s32                 sv_first;
+    s32         numPVoices;
+    s32         maxAuxBusses;
+    s32         outputRate;
+    s32         maxOutSamples;
+    s32         sv_dramout;
+    s32         sv_first;
 } N_ALSynth;
 
 
@@ -90,7 +90,7 @@ void    n_alSynSetPriority( N_ALVoice *voice, s16 priority);
 void    n_alSynSetVol( N_ALVoice *v, s16 volume, ALMicroTime t);
 void    n_alSynStartVoice(N_ALVoice *v, ALWaveTable *table);
 void    n_alSynStartVoiceParams(N_ALVoice *v, ALWaveTable *w,f32 pitch, s16 vol,
-				ALPan pan, u8 fxmix, ALMicroTime t);
+                                ALPan pan, u8 fxmix, ALMicroTime t);
 void    n_alSynStopVoice( N_ALVoice *v);
 
 void    n_alSynNew(ALSynConfig *c);
@@ -110,7 +110,7 @@ extern N_ALSynth *n_syn;
 void n_alInit(N_ALGlobals *g, ALSynConfig *c);
 void n_alClose(N_ALGlobals *glob);
 Acmd *n_alAudioFrame(Acmd *cmdList, s32 *cmdLen,
-			s16 *outBuf, s32 outLen);
+            s16 *outBuf, s32 outLen);
 
 
 /*
@@ -122,118 +122,157 @@ typedef struct {
 
 
 typedef struct {
-    struct N_ALVoice_s    *voice;
+    struct N_ALVoice_s  *voice;
     ALMicroTime         delta;
     u8                  vol;
 } N_ALVolumeEvent;
 
 
 typedef struct {
-    struct N_ALVoiceState_s      *vs;
+    struct N_ALVoiceState_s    *vs;
     void                       *oscState;
     u8                         chan;
 } N_ALOscEvent;
 
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    u8  pad8[0x4];
+} N_ALUnknownEvent1;
 
 typedef struct {
-    s16                 	type;
+    /* 0x00 */  ALLink              node;
+    /* 0x08 */  u8                  pad8[0x4];
+    /* 0x0C */  s32                 unkC;
+    /* 0x10 */  N_ALVoice          *unk10;
+    /* 0x14 */  u8                  pad14[0x1C];
+    /* 0x30 */  f32                 unk30;
+    /* 0x34 */  u8                  pad34[0x4];
+    /* 0x38 */  s32                *unk38;
+    /* 0x3C */  s32                 unk3C;
+    /* 0x40 */  s32                 unk40;
+    /* 0x44 */  u8                  pad44[0x8];
+    /* 0x4C */  s16                 unk4C;
+    /* 0x4E */  s8                  unk4E;
+    /* 0x4F */  u8                  pad4F[0x4];
+    /* 0x53 */  u8                  unk53;
+    /* 0x54 */  u8                  unk54;
+} N_ALUnknownStruct1;
+
+typedef struct {
+    N_ALUnknownStruct1 *unk0;
+    u8  pad4[0x8];
+} N_ALUnknownEvent2;
+
+typedef struct {
+    s16                     type;
     union {
-        ALMIDIEvent     	midi;
-        ALTempoEvent    	tempo;
-        ALEndEvent      	end;
-        N_ALNoteEvent     	note;
-        N_ALVolumeEvent   	vol;
-        ALSeqpLoopEvent 	loop;
-        ALSeqpVolEvent  	spvol;
-	ALSeqpPriorityEvent	sppriority;
-	ALSeqpSeqEvent		spseq;
-	ALSeqpBankEvent		spbank;
-        N_ALOscEvent      	osc;
+        ALMIDIEvent         midi;
+        ALTempoEvent        tempo;
+        ALEndEvent          end;
+        N_ALNoteEvent       note;
+        N_ALVolumeEvent     vol;
+        ALSeqpLoopEvent     loop;
+        ALSeqpVolEvent      spvol;
+        ALSeqpPriorityEvent sppriority;
+        ALSeqpSeqEvent      spseq;
+        ALSeqpBankEvent     spbank;
+        N_ALOscEvent        osc;
+        N_ALUnknownEvent1   unknown0;
+        N_ALUnknownEvent2   unknown1;
     } msg;
 } N_ALEvent;
 
 
 typedef struct {
-    ALLink      node;
-    ALMicroTime delta;
-    N_ALEvent     evt;
+    ALLink         node;
+    ALMicroTime    delta;
+    N_ALEvent      evt;
 } N_ALEventListItem;
 
 void            n_alEvtqNew(ALEventQueue *evtq, N_ALEventListItem *items, s32 itemCount);
 ALMicroTime     n_alEvtqNextEvent(ALEventQueue *evtq, N_ALEvent *evt);
 void            n_alEvtqPostEvent(ALEventQueue *evtq, N_ALEvent *evt, ALMicroTime delta, s32 foo);
-void        	n_alEvtqFlushType(ALEventQueue *evtq, s16 type);
+void            n_alEvtqFlushType(ALEventQueue *evtq, s16 type);
 
 
 typedef struct N_ALVoiceState_s {
-    struct N_ALVoiceState_s *next;/* MUST be first                */
-    N_ALVoice   voice;
-    ALSound    *sound;
-    ALMicroTime envEndTime;     /* time of envelope segment end */
-    f32         pitch;          /* currect pitch ratio          */
-    f32         vibrato;        /* current value of the vibrato */
-    u8          envGain;        /* current envelope gain        */
-    u8          channel;        /* channel assignment           */
-    u8          key;            /* note on key number           */
-    u8          velocity;       /* note on velocity             */
-    u8          envPhase;       /* what envelope phase          */
-    u8          phase;
-    u8          tremelo;        /* current value of the tremelo */
-    u8          flags;          /* bit 0 tremelo flag
-                                   bit 1 vibrato flag           */
+    /* 0x00 */  struct N_ALVoiceState_s *next;     /* MUST be first                */
+    /* 0x04 */  N_ALVoice          voice;
+    /* 0x20 */  ALSound            *sound;
+    /* 0x24 */  ALMicroTime        envEndTime;     /* time of envelope segment end */
+    /* 0x28 */  f32                pitch;          /* currect pitch ratio          */
+    /* 0x2C */  f32                vibrato;        /* current value of the vibrato */
+    /* 0x30 */  u8                 envGain;        /* current envelope gain        */
+    /* 0x31 */  u8                 channel;        /* channel assignment           */
+    /* 0x32 */  u8                 key;            /* note on key number           */
+    /* 0x33 */  u8                 velocity;       /* note on velocity             */
+    /* 0x34 */  u8                 envPhase;       /* what envelope phase          */
+    /* 0x35 */  u8                 phase;
+    /* 0x36 */  u8                 tremelo;        /* current value of the tremelo */
+    /* 0x37 */  u8                 flags;          /* bit 0 tremelo flag
+                                                      bit 1 vibrato flag           */
+    u8 pad[0xC];
 } N_ALVoiceState;
 
 typedef struct {
-    ALPlayer            node;          /* note: must be first in structure */
-    N_ALSynth          *drvr;          /* reference to the client driver   */
-    ALSeq              *target;        /* current sequence                 */
-    ALMicroTime         curTime;
-    ALBank             *bank;           /* current ALBank                   */
-    s32                 uspt;           /* microseconds per tick            */
-    s32                 nextDelta;      /* microseconds to next callback    */
-    s32                 state;
-    u16                 chanMask;       /* active channels                  */
-    s16                 vol;            /* overall sequence volume          */
-    u8                  maxChannels;    /* number of MIDI channels          */
-    u8                  debugFlags;     /* control which error get reported */
-    N_ALEvent           nextEvent;
-    ALEventQueue        evtq;
-    ALMicroTime         frameTime;
-    ALChanState        *chanState;      /* 16 channels for MIDI             */
-    N_ALVoiceState     *vAllocHead;     /* list head for allocated voices   */
-    N_ALVoiceState     *vAllocTail;     /* list tail for allocated voices   */
-    N_ALVoiceState     *vFreeList;      /* list of free voice state structs */
-    ALOscInit           initOsc;
-    ALOscUpdate         updateOsc;
-    ALOscStop           stopOsc;
-    ALSeqMarker        *loopStart;
-    ALSeqMarker        *loopEnd;
-    s32                 loopCount;      /* -1 = loop forever, 0 = no loop   */
+    /* 0x00 */  ALPlayer            node;          /* note: must be first in structure */
+    /* 0x14 */  N_ALSynth          *drvr;          /* reference to the client driver   */
+    /* 0x18 */  ALSeq              *target;        /* current sequence                 */
+    /* 0x1C */  ALMicroTime         curTime;
+    /* 0x20 */  ALBank             *bank;           /* current ALBank                   */
+    /* 0x24 */  s32                 uspt;           /* microseconds per tick            */
+    /* 0x28 */  s32                 nextDelta;      /* microseconds to next callback    */
+    /* 0x2C */  s32                 state;
+    /* 0x30 */  u16                 chanMask;       /* active channels                  */
+    /* 0x32 */  s16                 vol;            /* overall sequence volume          */
+    /* 0x34 */  u8                  maxChannels;    /* number of MIDI channels          */
+    /* 0x35 */  u8                  debugFlags;     /* control which error get reported */
+    /* 0x38 */  N_ALEvent           nextEvent;
+    /* 0x48 */  ALEventQueue        evtq;
+    /* 0x5C */  ALMicroTime         frameTime;
+    /* 0x60 */  ALChanState        *chanState;      /* 16 channels for MIDI             */
+    /* 0x64 */  N_ALVoiceState     *vAllocHead;     /* list head for allocated voices   */
+    /* 0x68 */  N_ALVoiceState     *vAllocTail;     /* list tail for allocated voices   */
+    /* 0x6C */  N_ALVoiceState     *vFreeList;      /* list of free voice state structs */
+    /* 0x70 */  ALOscInit           initOsc;
+    /* 0x74 */  ALOscUpdate         updateOsc;
+    /* 0x78 */  ALOscStop           stopOsc;
+    /* 0x7C */  ALSeqMarker        *loopStart;
+    /* 0x80 */  ALSeqMarker        *loopEnd;
+    /* 0x84 */  s32                 loopCount;      /* -1 = loop forever, 0 = no loop   */
 } N_ALSeqPlayer;
 
 typedef struct {
-    ALPlayer            node;           /* note: must be first in structure */
-    N_ALSynth          *drvr;           /* reference to the client driver   */
-    ALCSeq             *target;         /* current sequence                 */
-    ALMicroTime         curTime;
-    ALBank             *bank;           /* current ALBank                   */
-    s32                 uspt;           /* microseconds per tick            */
-    s32                 nextDelta;      /* microseconds to next callback    */
-    s32                 state;
-    u16                 chanMask;       /* active channels                  */
-    s16                 vol;            /* overall sequence volume          */
-    u8                  maxChannels;    /* number of MIDI channels          */
-    u8                  debugFlags;     /* control which error get reported */
-    N_ALEvent           nextEvent;
-    ALEventQueue        evtq;
-    ALMicroTime         frameTime;
-    ALChanState        *chanState;      /* 16 channels for MIDI             */
-    N_ALVoiceState     *vAllocHead;     /* list head for allocated voices   */
-    N_ALVoiceState     *vAllocTail;     /* list tail for allocated voices   */
-    N_ALVoiceState     *vFreeList;      /* list of free voice state structs */
-    ALOscInit           initOsc;
-    ALOscUpdate         updateOsc;
-    ALOscStop           stopOsc;
+    /* 0x00 */  ALPlayer            node;           /* note: must be first in structure */
+    /* 0x14 */  N_ALSynth          *drvr;           /* reference to the client driver   */
+    /* 0x18 */  ALCSeq             *target;         /* current sequence                 */
+    /* 0x1C */  ALMicroTime         curTime;
+    /* 0x20 */  ALBank             *bank;           /* current ALBank                   */
+    /* 0x24 */  s32                 uspt;           /* microseconds per tick            */
+    /* 0x28 */  s32                 nextDelta;      /* microseconds to next callback    */
+    /* 0x2C */  s32                 state;
+    /* 0x30 */  u16                 chanMask;       /* active channels                  */
+    /* 0x32 */  s16                 vol;            /* overall sequence volume          */
+    /* 0x34 */  u8                  maxChannels;    /* number of MIDI channels          */
+    /* 0x35 */  u8                  debugFlags;     /* control which error get reported */
+    /* 0x38 */  N_ALEvent           nextEvent;
+    /* 0x48 */  ALEventQueue        evtq;
+    /* 0x5C */  ALMicroTime         frameTime;
+    /* 0x60 */  ALChanState        *chanState;      /* 16 channels for MIDI             */
+    /* 0x64 */  N_ALVoiceState     *vAllocHead;     /* list head for allocated voices   */
+    /* 0x68 */  N_ALVoiceState     *vAllocTail;     /* list tail for allocated voices   */
+    /* 0x6C */  N_ALVoiceState     *vFreeList;      /* list of free voice state structs */
+    /* 0x70 */  ALOscInit           initOsc;
+    /* 0x74 */  ALOscUpdate         updateOsc;
+    /* 0x78 */  ALOscStop           stopOsc;
+    /* RARE CUSTOM */
+    /* 0x7C */  f32 unk7C;
+    /* 0x80 */  f32 unk80;
+    /* 0x84 */  s32 unk84;
+    /* 0x88 */  u8  unk88[0x4];
+    /* 0x8C */  u8  unk8C;
+    /* 0x8D */  u8  unk8D;
 } N_ALCSPlayer;
 
 
@@ -253,19 +292,19 @@ void    n_alCSeqNewMarker(ALCSeq *seq, ALCSeqMarker *m, u32 ticks);
  */
 void    n_alSeqpNew(N_ALSeqPlayer *seqp, ALSeqpConfig *config);
 void    n_alSeqpDelete(N_ALSeqPlayer *seqp);
-u8	n_alSeqpGetChlVol(N_ALSeqPlayer *seqp, u8 chan);
+u8      n_alSeqpGetChlVol(N_ALSeqPlayer *seqp, u8 chan);
 u8      n_alSeqpGetChlFXMix(N_ALSeqPlayer *seqp, u8 chan);
 ALPan   n_alSeqpGetChlPan(N_ALSeqPlayer *seqp, u8 chan);
 u8      n_alSeqpGetChlPriority(N_ALSeqPlayer *seqp, u8 chan);
 s32     n_alSeqpGetChlProgram(N_ALSeqPlayer *seqp, u8 chan);
 ALSeq  *n_alSeqpGetSeq(N_ALSeqPlayer *seqp);
-s32	n_alSeqpGetState(N_ALSeqPlayer *seqp);
+s32     n_alSeqpGetState(N_ALSeqPlayer *seqp);
 s32     n_alSeqpGetTempo(N_ALSeqPlayer *seqp);
-s16     n_alSeqpGetVol(N_ALSeqPlayer *seqp);		/* Master volume control */
+s16     n_alSeqpGetVol(N_ALSeqPlayer *seqp);        /* Master volume control */
 void    n_alSeqpPlay(N_ALSeqPlayer *seqp);
 void    n_alSeqpSendMidi(N_ALSeqPlayer *seqp, s32 ticks, u8 status, u8 byte1, u8 byte2);
 void    n_alSeqpSetBank(N_ALSeqPlayer *seqp, ALBank *b);
-void	n_alSeqpSetChlVol(N_ALSeqPlayer *seqp, u8 chan, u8 vol);
+void    n_alSeqpSetChlVol(N_ALSeqPlayer *seqp, u8 chan, u8 vol);
 void    n_alSeqpSetChlFXMix(N_ALSeqPlayer *seqp, u8 chan, u8 fxmix);
 void    n_alSeqpSetChlPan(N_ALSeqPlayer *seqp, u8 chan, ALPan pan);
 void    n_alSeqpSetChlPriority(N_ALSeqPlayer *seqp, u8 chan, u8 priority);
@@ -282,19 +321,19 @@ void    n_alSeqpLoop(N_ALSeqPlayer *seqp, ALSeqMarker *start, ALSeqMarker *end, 
  */
 void    n_alCSPNew(N_ALCSPlayer *seqp, ALSeqpConfig *config);
 void    n_alCSPDelete(N_ALCSPlayer *seqp);
-u8	n_alCSPGetChlVol(N_ALCSPlayer *seqp, u8 chan);
+u8      n_alCSPGetChlVol(N_ALCSPlayer *seqp, u8 chan);
 u8      n_alCSPGetChlFXMix(N_ALCSPlayer *seqp, u8 chan);
 ALPan   n_alCSPGetChlPan(N_ALCSPlayer *seqp, u8 chan);
 u8      n_alCSPGetChlPriority(N_ALCSPlayer *seqp, u8 chan);
 s32     n_alCSPGetChlProgram(N_ALCSPlayer *seqp, u8 chan);
 ALCSeq *n_alCSPGetSeq(N_ALCSPlayer *seqp);
-s32	n_alCSPGetState(N_ALCSPlayer *seqp);
+s32     n_alCSPGetState(N_ALCSPlayer *seqp);
 s32     n_alCSPGetTempo(N_ALCSPlayer *seqp);
 s16     n_alCSPGetVol(N_ALCSPlayer *seqp);
 void    n_alCSPPlay(N_ALCSPlayer *seqp);
 void    n_alCSPSendMidi(N_ALCSPlayer *seqp, s32 ticks, u8 status, u8 byte1, u8 byte2);
 void    n_alCSPSetBank(N_ALCSPlayer *seqp, ALBank *b);
-void	n_alCSPSetChlVol(N_ALCSPlayer *seqp, u8 chan, u8 vol);
+void    n_alCSPSetChlVol(N_ALCSPlayer *seqp, u8 chan, u8 vol);
 void    n_alCSPSetChlFXMix(N_ALCSPlayer *seqp, u8 chan, u8 fxmix);
 void    n_alCSPSetChlPan(N_ALCSPlayer *seqp, u8 chan, ALPan pan);
 void    n_alCSPSetChlPriority(N_ALCSPlayer *seqp, u8 chan, u8 priority);
@@ -309,16 +348,16 @@ void    n_alCSPStop(N_ALCSPlayer *seqp);
  * Sound Player stuff
  */
 typedef struct {
-    ALPlayer            node;           /* note: must be first in structure */
-    ALEventQueue        evtq;
-    N_ALEvent           nextEvent;
-    N_ALSynth           *drvr;          /* reference to the client driver   */
-    s32                 target;
-    void                *sndState;
-    s32                 maxSounds;
-    ALMicroTime         frameTime;
-    ALMicroTime         nextDelta;      /* microseconds to next callback    */
-    ALMicroTime         curTime;
+    /* 0x00 */  ALPlayer            node;           /* note: must be first in structure */
+    /* 0x14 */  ALEventQueue        evtq;
+    /* 0x28 */  N_ALEvent           nextEvent;
+    /* 0x38 */  N_ALSynth           *drvr;          /* reference to the client driver   */
+    /* 0x3C */  s32                 target;
+    /* 0x40 */  void                *sndState;
+    /* 0x44 */  s32                 maxSounds;
+    /* 0x48 */  ALMicroTime         frameTime;
+    /* 0x4C */  ALMicroTime         nextDelta;      /* microseconds to next callback    */
+    /* 0x50 */  ALMicroTime         curTime;
 } N_ALSndPlayer;
 
 void     n_alSndpNew(N_ALSndPlayer *sndp, ALSndpConfig *c);

@@ -88,11 +88,12 @@ s32 n_alEnvmixerParam(struct21 *arg0, s32 arg1, s32 arg2) {
 //         sp1C->unk4 = osVirtualToPhysical(sp30->unk5C);
 //         // nop...
 //     }
+//     // just this line :(
 //     arg1 = &arg1->unk170;
 //     sp30->unk78 += 0xb8; // 184
 //     if ((((s16)sp30->unk68 & 2)) || (((s16)sp30->unk6A & 2))) {
-//         sp30->unk68 = (s16)sp30->unk68 & -3;
-//         sp30->unk6A = (s16)sp30->unk6A & -3;
+//         sp30->unk68 &= -3; // (s16)sp30->unk68 & -3;
+//         sp30->unk6A &= -3;
 //         sp30->unk80 = 1;
 //     }
 //     return sp34;

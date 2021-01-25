@@ -132,6 +132,7 @@ extern s32  D_8002BD14;
 extern s32  D_8002BD18;
 extern s32  D_8002BD20; // init ok?
 extern s32  D_8002BD60;
+extern u8   D_8002BF70[];
 
 /* DATA section from D_8002C080 to D_8002D4B0 */
 
@@ -145,11 +146,11 @@ extern s32 *D_8002D8B0;
 extern OSThread D_80031AE0;
 extern OSThread D_800318B0;
 
-extern s32  D_80032B3F;
-extern s32  D_8003333F;
+extern s32  D_80032B30;
+extern s32  D_80033330;
 
 extern s32  D_800354F8;
-extern u32  *D_800354FC; // contains chunk0 offsets
+extern s32 *D_800354FC; // contains chunk0 offsets
 extern s16  D_80035500;
 extern OSThread *D_80035910;
 
@@ -174,10 +175,10 @@ extern u32  D_80038098;
 extern u32  D_8003809C;
 extern f32  D_800380A0;
 extern f32  D_800380A4;
-extern struct54 *D_800380B0;
-extern struct54 *D_800380B4;
-extern struct54 *D_800380B8;
-extern struct54 *D_800380BC;
+extern s32 *D_800380B0;
+extern s32 *D_800380B4;
+extern s32 *D_800380B8;
+extern s32 *D_800380BC;
 
 extern s32  D_800380C0;
 extern s32  D_800380C4;
@@ -238,15 +239,15 @@ extern s32  D_8003BC30;
 extern s32  D_8003BD30;
 extern s32  D_8003BE30;
 extern u8   D_8003BE50[];
-extern s8   D_8003BE70[];
-extern u32  D_8003BE74;
+extern s32  D_8003BE70;
+extern s32  D_8003BE74;
 extern s16  D_8003BE78;
 extern s8   D_8003BE7C;
 
 extern s32  D_8003C8E0;
 extern struct26 *D_8003C900[];
 extern struct14 *D_8003CD40;
-extern struct108 D_8003CD48[];
+extern struct247  D_8003CD48[];
 extern s16  D_8003C910[];
 
 extern s32  D_8003E368;
@@ -261,9 +262,9 @@ extern OSMesg      *D_8003E620;
 extern OSMesgQueue *D_8003E5D0;
 extern OSMesg      *D_8003E5E8;
 
-extern s32  D_8003CA3C;
-extern s32  D_8003CA48[];
-extern struct149 D_8003CA58[];
+extern s32  D_8003CA3C[];
+extern u8   D_8003CA48[];
+extern ALCSeq D_8003CA58[];
 extern s32  D_8003C90C;
 
 /* 80040000 */
@@ -343,7 +344,7 @@ extern s32 *D_800428F8;
 
 // BSS ENDS AT D_80043B40
 
-extern s32  D_80043B40[]; // 4064
+extern s32  *D_80043B40; // 4064
 extern s32  D_80044B20; // 253952 bytes, bunch of structs?
 
 // this space is filled by D_80044B20
@@ -609,6 +610,7 @@ extern f32 D_8009A420[];
 extern f32 D_8009A620[];
 
 extern s16 D_8009DCB4[];
+extern f32 D_8009F6C0; // 0.01745329238474369f
 
 /* 800A0000 */
 extern f32 D_800A028C;
@@ -671,8 +673,7 @@ extern f32 D_800A68A8[];
 extern f32 D_800A68BC[];
 extern f32 D_800A68D0[];
 extern f32 D_800A68E4[];
-extern f32 D_800A68F8[];
-
+extern f32 D_800A68F8[3];
 extern f32 D_800A6904[3];
 extern f32 D_800A6910[3];
 extern s32 D_800A691C[3];
@@ -1297,7 +1298,7 @@ extern struct186 D_800E0D80; // libaudio struct?
 // end of zero'd out section
 
 extern s32  D_800E9D00;
-extern struct54 *D_800E9D10; // probably not struct54
+extern s32  *D_800E9D10; // probably not struct54
 
 /* debugger variables */
 

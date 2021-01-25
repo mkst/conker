@@ -16,29 +16,58 @@
  * DOD or NASA FAR Supplement. Unpublished - rights reserved under the
  * Copyright Laws of the United States.
  *====================================================================*/
-
+#include <os_internal.h>
 #include "n_synthInternals.h"
 
-// FIXME: when we can...
-// N_ALGlobals *n_alGlobals=0;
-// N_ALSynth *n_syn=0;
 
-void n_alInit(N_ALGlobals *g, ALSynConfig *c)
+void n_alSynAddPlayer(ALPlayer *client)
 {
-    if (!n_alGlobals) { /* already initialized? */
-        n_alGlobals = g;
-        if(!n_syn) {
-            n_syn = &n_alGlobals->drvr;
-            n_alSynNew(c);
-        }
-    }
+    OSIntMask mask = osSetIntMask(OS_IM_NONE);
+
+    client->samplesLeft = n_syn->curSamples;
+
+    client->next = n_syn->head;
+    n_syn->head  = client;
+
+    osSetIntMask(mask);
 }
 
-void n_alClose(N_ALGlobals *glob)
+void n_alSynAddSndPlayer(ALPlayer *client)
 {
-    if (n_alGlobals) {
-        n_alSynDelete();
-        n_alGlobals = 0;
-        n_syn = 0;
-    }
+    OSIntMask mask = osSetIntMask(OS_IM_NONE);
+
+    client->samplesLeft = n_syn->curSamples;
+
+#if 1
+    client->next = n_syn->head;
+    n_syn->head  = client;
+#endif
+
+#if 0
+    if(!(n_syn->n_sndp))
+        n_syn->n_sndp = client;
+#endif
+
+    osSetIntMask(mask);
 }
+
+#if 0
+void n_alSynAddSeqPlayer( ALPlayer *client)
+{
+    OSIntMask mask = osSetIntMask(OS_IM_NONE);
+
+    client->samplesLeft = n_syn->curSamples;
+
+#if 1
+    client->next = n_syn->head;
+    n_syn->head   = client;
+#endif
+
+    if( !(n_syn->n_seqp1) )
+      n_syn->n_seqp1 = client;
+    else if( !(n_syn->n_seqp2) )
+      n_syn->n_seqp2 = client;
+
+    osSetIntMask(mask);
+}
+#endif

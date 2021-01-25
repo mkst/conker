@@ -182,7 +182,7 @@ s32 func_10012F94(struct124 *arg0, f32 *arg1) {
                 sp28->unk24 = 0;
             }
             sp2C = (f32)(u16)sp28->unk24 / (f32) (u16)sp28->unk22;
-            sp2C = func_15047D60(sp2C * D_8002C454);
+            sp2C = sinf(sp2C * D_8002C454);
             sp2C = sp28->data.i.unk0 * sp2C;
             *arg1 = sp28->data.i.unk1 + sp2C;
             break;
@@ -193,7 +193,7 @@ s32 func_10012F94(struct124 *arg0, f32 *arg1) {
                 sp28->unk24 = 0;
             }
             sp2C = (f32)(u16) sp28->unk24 / (f32)(u16) sp28->unk22;
-            sp2C = func_15047D60(sp2C * D_8002C458) * sp28->data.f.unk0;
+            sp2C = sinf(sp2C * D_8002C458) * sp28->data.f.unk0;
             *arg1 = alCents2Ratio(sp2C);
             break;
         default:

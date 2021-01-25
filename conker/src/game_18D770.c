@@ -4,8 +4,8 @@
 
 s32 func_151149AC(u32);
 
-struct225 *func_151602C0(struct231 *arg0, struct00 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u8 arg6, u8 arg7, s32 arg8, u8 arg9, s32 argA);
-struct225 *func_1516037C(struct231 *src, struct226 *arg1, s32 arg2, u8 arg3, s32 arg4);
+struct225 *func_151602C0(Header *header, Header2 *header2, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u8 arg6, u8 arg7, s32 offset, u8 arg9, s32 argA);
+struct225 *func_1516037C(Header *src, struct226 *arg1, s32 size, u8 arg3, s32 arg4);
 void func_151603FC(struct225 *arg0);
 s32  func_15160600(struct225 *arg0);
 s32  func_1516065C(struct225 *arg0);
@@ -35,11 +35,11 @@ void func_15161F2C(struct225 *arg0);
 struct225 *func_15162034(s32 arg0, u8 arg1, s32 arg2);
 void func_15162110(s32 arg0);
 struct225 *func_15162740(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, u8 arg6, s32 arg7);
-struct225 *func_1516284C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6, s32 arg7, u8 arg8, u8 arg9, s32 argA);
+struct225 *func_1516284C(Header *header, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6, s32 size, u8 arg8, u8 arg9, s32 argA);
 void func_15162EF8(struct239 *arg0);
 void func_15162F50(struct239 *arg0);
 struct225 *func_15162FAC(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, u8 arg6, s32 arg7);
-struct225 *func_15163414(s32 arg0, f32* arg1, f32* arg2, f32* arg3, s8 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB, s32 argC, u8 argD, s32 argE);
+struct225 *func_15163414(Header *header, f32* arg1, f32* arg2, f32* arg3, s8 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB, s32 argC, u8 argD, s32 argE);
 struct225 *func_15163604(s32 arg0, u8 arg1, u8 arg2, s16 arg3, u8 arg4, s32 arg5, u8 arg6, s32 arg7);
 s32  func_15163704(struct225 *arg0);
 void func_1516381C(s32 arg0, u8 arg1, u8 arg2, s32 arg3);
@@ -60,14 +60,14 @@ s32  func_151643F8(struct225 *arg0);
 void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4);
 s32  func_151644A8(struct242 *arg0);
 
-struct225 *func_151602C0(struct231 *arg0, struct00 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u8 arg6, u8 arg7, s32 arg8, u8 arg9, s32 argA) {
+struct225 *func_151602C0(Header *header, Header2 *header2, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u8 arg6, u8 arg7, s32 offset, u8 arg9, s32 argA) {
     struct225 *ret;
     struct226 *sp30;
 
     ret = NULL;
-    sp30 = func_1515D5F8(arg1->unk0, arg1->unk4, arg1->unk8, arg2, arg3, arg4, arg5, arg6, arg7, 0);
+    sp30 = func_1515D5F8(header2->unk0, header2->unk4, header2->unk8, arg2, arg3, arg4, arg5, arg6, arg7, 0);
     if (sp30 != 0) {
-        ret = func_1516037C(arg0, sp30, arg8, arg9, argA);
+        ret = func_1516037C(header, sp30, offset, arg9, argA);
         if (ret != 0) {
             ret->unkE |= 2;
         } else {
@@ -77,12 +77,12 @@ struct225 *func_151602C0(struct231 *arg0, struct00 *arg1, s32 arg2, s32 arg3, s3
     return ret;
 }
 
-struct225 *func_1516037C(struct231 *src, struct226 *arg1, s32 arg2, u8 arg3, s32 arg4) {
-    struct225 *ret = func_15167A68(0x35, arg4, arg2 + 0x18, 1, arg3, 1);
+struct225 *func_1516037C(Header *header, struct226 *arg1, s32 offset, u8 arg3, s32 arg4) {
+    struct225 *ret = func_15167A68(53, arg4, offset + 24, 1, arg3, 1);
     if (ret == 0) {
         return NULL;
     }
-    memcpy(&ret->unkE, src, 6);
+    memcpy(&ret->unkE, header, 6);
     ret->unk14 = arg1;
     return ret;
 }
@@ -262,39 +262,39 @@ s32 func_15161238(struct127 *arg0, struct127 *arg1) {
 
 struct225 *func_1516127C(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     f32 src[4];
 
     src[0] = 50.0f;
     src[1] = 40.0f;
     src[2] = func_150ADA68() * D_800A6AD8;
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 1;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 5;
+    header.unk0 = 0;
+    header.unk1 = 1;
+    header.unk2 = 300;
+    header.unk4 = 5;
 
     src[3] = D_800A6ADC;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 16, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 16);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
 
 struct225 *func_15161334(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     f32 tmp1[8];
 
     tmp1[1] = 1.0f;
     tmp1[3] = 1.0f;
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 2;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 6;
+    header.unk0 = 0;
+    header.unk1 = 2;
+    header.unk2 = 300;
+    header.unk4 = 6;
 
     tmp1[0] = 20.0f;
     tmp1[2] = 50.0f;
@@ -303,80 +303,80 @@ struct225 *func_15161334(s32 arg0, u8 arg1, s32 arg2) {
     tmp1[6] = D_800A6AE0;
     tmp1[7] = 127.0f;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 32, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp1, 32);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(tmp1), arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp1, sizeof(tmp1));
     }
     return temp_v0;
 }
 
 struct225 *func_15161408(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
-    s32 sp20;
+    Header header;
+    s32 tmp;
 
-    sp20 = func_151149AC(249); // what does this return?
+    tmp = func_151149AC(249); // what does this return?
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 3;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 8;
+    header.unk0 = 0;
+    header.unk1 = 3;
+    header.unk2 = 300;
+    header.unk4 = 8;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 4, arg1, arg2);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(tmp), arg1, arg2);
 
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &sp20, 4);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp, sizeof(tmp));
     }
     return temp_v0;
 }
 
 struct225 *func_15161494(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
-    f32 tmp1[4];
+    Header header;
+    f32 tmp[4];
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 1;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 5;
+    header.unk0 = 0;
+    header.unk1 = 1;
+    header.unk2 = 300;
+    header.unk4 = 5;
 
-    tmp1[0] = 127.0f;
-    tmp1[1] = 100.0f;
-    tmp1[2] = 0.0f;
-    tmp1[3] = D_800A6AE4;
+    tmp[0] = 127.0f;
+    tmp[1] = 100.0f;
+    tmp[2] = 0.0f;
+    tmp[3] = D_800A6AE4;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 16, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp1, 16);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(tmp), arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp, sizeof(tmp));
     }
     return temp_v0;
 }
 
 struct225 *func_15161540(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
-    f32 tmp1[4];
+    Header header;
+    f32 tmp[4];
 
-    tmp1[0] = 28.0f;
-    tmp1[1] = 27.0f;
-    tmp1[2] = func_150ADA68() * D_800A6AE8;
-    tmp1[3] = D_800A6AEC;
+    tmp[0] = 28.0f;
+    tmp[1] = 27.0f;
+    tmp[2] = func_150ADA68() * D_800A6AE8;
+    tmp[3] = D_800A6AEC;
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 1;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 5;
+    header.unk0 = 0;
+    header.unk1 = 1;
+    header.unk2 = 300;
+    header.unk4 = 5;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 16, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp1, 16);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(tmp), arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp, sizeof(tmp));
     }
     return temp_v0;
 }
 
 struct225 *func_151615F8(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, s32 arg5) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     struct232 tmp1;
     f32 tmp;
 
@@ -395,15 +395,14 @@ struct225 *func_151615F8(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, s32 arg5)
     tmp1.unk10 = 0;
     tmp1.unk12 = arg1;
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 4;
-    tmp0.unk2 = 300;
+    header.unk0 = 0;
+    header.unk1 = 4;
+    header.unk2 = 300;
+    header.unk4 = arg3;
 
-    tmp0.unk4 = arg3;
-
-    temp_v0 = func_1516037C(&tmp0, arg0, 20, arg4, arg5);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp1, 20);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(tmp1), arg4, arg5);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp1, sizeof(tmp1));
     }
     return temp_v0;
 }
@@ -414,7 +413,7 @@ void func_151616D0(u8 arg0, u8 arg1, s32 arg2) {
     tmp.unk0 = arg0;
     tmp.unk4 = arg2;
 
-    func_1516944C(0x35, &tmp, arg1);
+    func_1516944C(53, &tmp, arg1);
 }
 
 void func_15161714(struct225 *arg0) {
@@ -486,23 +485,24 @@ void func_15161860(struct225 *arg0) {
 
 struct225 *func_151619A0(s32 arg0, s16 arg1, u8 arg2, s32 arg3) {
     struct225 *temp_v0;
-    struct231 tmp0;
-    s32 tmp1[4];
+    Header header;
+    s32 tmp;
+    Header2 header2;
 
-    tmp1[3] = arg0;
+    tmp = arg0;
 
-    tmp0.unk0 = 3;
-    tmp0.unk1 = 9;
-    tmp0.unk2 = arg1;
-    tmp0.unk4 = 20;
+    header.unk0 = 3;
+    header.unk1 = 9;
+    header.unk2 = arg1;
+    header.unk4 = 20;
 
-    tmp1[0] = 0;
-    tmp1[1] = 0;
-    tmp1[2] = 0;
+    header2.unk0 = 0;
+    header2.unk4 = 0;
+    header2.unk8 = 0;
 
-    temp_v0 = func_151602C0(&tmp0, &tmp1, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0, 4, arg2, arg3);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp1[3], 4);
+    temp_v0 = func_151602C0(&header, &header2, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0, sizeof(tmp), arg2, arg3);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp, sizeof(tmp));
     }
     return temp_v0;
 }
@@ -575,30 +575,30 @@ s32 func_15161A68(struct225 *arg0) {
 
 struct225 *func_15161E24(struct127 *arg0, u8 arg1, u8 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, u8 arg8, s32 arg9) {
     struct225 *temp_v0;
-    struct231 tmp0;
-    struct244 tmp2;
-    s32 tmp1[3];
+    Header header;
+    struct244 tmp;
+    Header2 header2;
 
     if (arg0 == NULL) {
         return 0;
     }
 
-    tmp0.unk0 = arg2;
-    tmp0.unk1 = 0xA;
-    tmp0.unk2 = arg3;
-    tmp0.unk4 = 0x15;
+    header.unk0 = arg2;
+    header.unk1 = 10;
+    header.unk2 = arg3;
+    header.unk4 = 21;
 
-    tmp2.unk0 = arg0;
-    tmp2.unk4 = arg0->unique_id;
-    tmp2.unk5 = arg1;
+    tmp.unk0 = arg0;
+    tmp.unk4 = arg0->unique_id;
+    tmp.unk5 = arg1;
 
-    tmp1[0] = (s32) arg0->x_position;
-    tmp1[1] = (s32) arg0->y_position;
-    tmp1[2] = (s32) arg0->z_position;
+    header2.unk0 = arg0->x_position;
+    header2.unk4 = arg0->y_position;
+    header2.unk8 = arg0->z_position;
 
-    temp_v0 = func_151602C0(&tmp0, &tmp1, arg4, arg5, arg6, arg7, 0xFF, 0, 8, arg8, arg9);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp2, 8);
+    temp_v0 = func_151602C0(&header, &header2, arg4, arg5, arg6, arg7, 0xFF, 0, sizeof(tmp), arg8, arg9);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &tmp, sizeof(tmp));
     }
     return temp_v0;
 }
@@ -611,13 +611,13 @@ void func_15161F2C(struct225 *arg0) {
 
 struct225 *func_15162034(s32 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     f32 src[8];
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 2;
-    tmp0.unk2 = 0x12C;
-    tmp0.unk4 = 6;
+    header.unk0 = 0;
+    header.unk1 = 2;
+    header.unk2 = 0x12C;
+    header.unk4 = 6;
 
     src[1] = 15.0f;
     src[0] = 22.0f;
@@ -629,9 +629,9 @@ struct225 *func_15162034(s32 arg0, u8 arg1, s32 arg2) {
     src[6] = D_800A6AF0;
     src[7] = 127.0f;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 32, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 32);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
@@ -649,9 +649,9 @@ void func_15162110(s32 arg0) {
     src[3] = 37.5f;
     src[7] = D_800A6AF4;
 
-    temp_v0 = func_15149130(300, -1, 30, -1, 0, 0, 32, 0xFF, 1);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk28, &src, 32);
+    temp_v0 = func_15149130(300, -1, 30, -1, 0, 0, sizeof(src), 0xFF, 1);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk28, &src, sizeof(src));
     }
 }
 
@@ -665,7 +665,7 @@ void func_15162110(s32 arg0) {
 //     u8 temp_a2;
 //
 //     temp_v0 = &arg0->unk28;
-//     temp_f0 = func_15047D60(temp_v0->unk18);
+//     temp_f0 = sinf(temp_v0->unk18);
 //
 //     temp_a0 = temp_v0->unk0 + (temp_f0 * temp_v0->unkC);
 //     temp_a1 = temp_v0->unk4 + (temp_f0 * temp_v0->unk10);
@@ -686,7 +686,7 @@ void func_15162110(s32 arg0) {
 //     struct235 *temp_v1;
 //     f32 temp_f0;
 //
-//     temp_f0 = func_15047D60(arg0->unk18.unk18);
+//     temp_f0 = sinf(arg0->unk18.unk18);
 //     temp_v1 = &arg0->unk18;
 //
 //     arg0->unk14->unk5 = temp_v1->unk0 + (temp_f0 * arg0->unk0[2]);
@@ -700,7 +700,7 @@ void func_15162110(s32 arg0) {
 
 struct225 *func_15162740(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, u8 arg6, s32 arg7) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     f32 src[8];
 
     if (arg1 >= 24) {
@@ -716,19 +716,19 @@ struct225 *func_15162740(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5,
     src[6] = D_800A6AF8;
     src[7] = 127.0f;
 
-    tmp0.unk0 = arg3;
-    tmp0.unk1 = arg5;
-    tmp0.unk2 = arg4;
-    tmp0.unk4 = arg2;
+    header.unk0 = arg3;
+    header.unk1 = arg5;
+    header.unk2 = arg4;
+    header.unk4 = arg2;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 32, arg6, arg7);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 32);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg6, arg7);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
 
-struct225 *func_1516284C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6, s32 arg7, u8 arg8, u8 arg9, s32 argA) {
+struct225 *func_1516284C(Header *header, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5, u8 arg6, s32 offset, u8 arg8, u8 arg9, s32 argA) {
     struct225 *temp_v0;
     f32 src[8];
 
@@ -744,9 +744,9 @@ struct225 *func_1516284C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 ar
     src[5] = 10.0f;
     src[6] = D_800A6AFC;
     src[7] = 127.0f;
-    temp_v0 = func_151602C0(arg0, arg1, 0, arg2, arg3, arg4, arg5, arg6, arg7 + 0x20, arg9, argA);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 0x20);
+    temp_v0 = func_151602C0(header, arg1, 0, arg2, arg3, arg4, arg5, arg6, offset + sizeof(src), arg9, argA);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
@@ -754,7 +754,7 @@ struct225 *func_1516284C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 ar
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_1516295C.s")
 // s32 func_1516295C(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, s8 arg6, s8 arg7, s8 arg8, s8 arg9, s32 argA, u8 argB, s32 argC) {
 //     struct225 *temp_v0;
-//     struct231 tmp0;
+//     Header header;
 //     struct238 src;
 //
 //     f32 temp_f0;
@@ -801,15 +801,15 @@ struct225 *func_1516284C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 ar
 //         src.unk24 = 4;
 //     }
 //
-//     tmp0.unk0 = arg3;
-//     tmp0.unk1 = arg5;
-//     tmp0.unk2 = arg4;
-//     tmp0.unk4 = arg2;
+//     header.unk0 = arg3;
+//     header.unk1 = arg5;
+//     header.unk2 = arg4;
+//     header.unk4 = arg2;
 //
 //     src.unk20 = 1.0f / temp_f18;
 //
-//     temp_v0 = func_1516037C(&tmp0, arg0, argA + 0x30, argB, argC);
-//     if (temp_v0 != 0) {
+//     temp_v0 = func_1516037C(&header, arg0, argA + 0x30, argB, argC);
+//     if (temp_v0 != NULL) {
 //         memcpy(&temp_v0->unk18, &src, 0x30);
 //     }
 //     return temp_v0;
@@ -826,8 +826,8 @@ void func_15162EF8(struct239 *arg0) {
     if (temp_v0 != NULL) {
         temp_v0->unk7C |= 1;
     }
-    sp1C[0] = arg0->unk12 - 0x15;
-    func_151403A8(&sp1C, 0x24);
+    sp1C[0] = arg0->unk12 - 21;
+    func_151403A8(&sp1C, 36);
 }
 
 void func_15162F50(struct239 *arg0) {
@@ -838,14 +838,13 @@ void func_15162F50(struct239 *arg0) {
     if (temp_v0 != NULL) {
         temp_v0->unk7C &= ~1;
     }
-    // temp_a0 = &sp1C;
-    sp1C[0] = arg0->unk12 - 0x15;
+    sp1C[0] = arg0->unk12 - 21;
     func_151403A8(&sp1C, 37);
 }
 
 struct225 *func_15162FAC(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, u8 arg6, s32 arg7) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     struct241 src;
 
     if (arg1 >= 3) {
@@ -866,14 +865,14 @@ struct225 *func_15162FAC(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5,
     src.unk1C = D_800A6928[arg1];
     src.unk30 = D_800A6958[arg1];
 
-    tmp0.unk0 = arg3;
-    tmp0.unk1 = arg5;
-    tmp0.unk2 = arg4;
-    tmp0.unk4 = arg2;
+    header.unk0 = arg3;
+    header.unk1 = arg5;
+    header.unk2 = arg4;
+    header.unk4 = arg2;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 0x34, arg6, arg7);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 0x34);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg6, arg7);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
@@ -881,24 +880,24 @@ struct225 *func_15162FAC(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5,
 // big one
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151630F4.s")
 
-struct225 *func_15163414(s32 arg0, f32* arg1, f32* arg2, f32* arg3, s8 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB, s32 argC, u8 argD, s32 argE) {
+struct225 *func_15163414(Header *header, f32* arg1, f32* arg2, f32* arg3, s8 arg4, u8 arg5, u8 arg6, u8 arg7, u8 arg8, u8 arg9, u8 argA, u8 argB, s32 argC, u8 argD, s32 argE) {
     struct225 *temp_v0;
-    struct245 tmp0;
-    s32 tmp1[3];
+    struct245 data;
+    Header2 header2;
 
-    tmp0.unk0 = arg1;
-    tmp0.unk4 = arg2;
-    tmp0.unk8 = arg3;
-    tmp0.unkC = arg4;
-    tmp0.unkD = arg5;
+    data.unk0 = arg1;
+    data.unk4 = arg2;
+    data.unk8 = arg3;
+    data.unkC = arg4;
+    data.unkD = arg5;
 
-    tmp1[0] = *arg1;
-    tmp1[1] = *arg2;
-    tmp1[2] = *arg3;
+    header2.unk0 = *arg1;
+    header2.unk4 = *arg2;
+    header2.unk8 = *arg3;
 
-    temp_v0 = func_151602C0(arg0, &tmp1, arg6, arg7, arg8, arg9, argA, argB, argC + 0x10, argD, argE);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &tmp0, 16);
+    temp_v0 = func_151602C0(header, &header2, arg6, arg7, arg8, arg9, argA, argB, argC + sizeof(data), argD, argE);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &data, sizeof(data));
     }
     return temp_v0;
 }
@@ -928,7 +927,7 @@ struct225 *func_15163414(s32 arg0, f32* arg1, f32* arg2, f32* arg3, s8 arg4, u8 
 
 struct225 *func_15163604(s32 arg0, u8 arg1, u8 arg2, s16 arg3, u8 arg4, s32 arg5, u8 arg6, s32 arg7) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     f32 src[4];
 
     if (arg1 < 0) {
@@ -943,14 +942,14 @@ struct225 *func_15163604(s32 arg0, u8 arg1, u8 arg2, s16 arg3, u8 arg4, s32 arg5
     src[2] = func_150ADA68() * D_800A6B00;
     src[3] = D_800A69D4[arg1];
 
-    tmp0.unk0 = arg4;
-    tmp0.unk1 = 1;
-    tmp0.unk2 = arg3;
-    tmp0.unk4 = arg2;
+    header.unk0 = arg4;
+    header.unk1 = 1;
+    header.unk2 = arg3;
+    header.unk4 = arg2;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 0x10, arg6, arg7);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 0x10);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg6, arg7);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
@@ -961,7 +960,7 @@ s32 func_15163704(struct225 *arg0) {
     s32 pad1;
 
     temp_v0 = &arg0->unk18;
-    tmp = func_15047D60(temp_v0->unk8);
+    tmp = sinf(temp_v0->unk8);
     arg0->unk14->unk2F = temp_v0->unk0 + (temp_v0->unk4 * tmp);
 
     temp_v0->unk8 += temp_v0->unkC * D_800BE9A4;
@@ -974,7 +973,7 @@ s32 func_15163704(struct225 *arg0) {
 }
 
 void func_1516381C(s32 arg0, u8 arg1, u8 arg2, s32 arg3) {
-    struct231 tmp;
+    Header tmp;
     tmp.unk0 = 0;
     tmp.unk1 = -1;
     tmp.unk2 = 300;
@@ -982,14 +981,14 @@ void func_1516381C(s32 arg0, u8 arg1, u8 arg2, s32 arg3) {
     func_1516037C(&tmp, arg0, 0, arg2, arg3);
 }
 
-void func_1516387C(s32 arg0, u8 arg1, s8 arg2, s16 arg3, u8 arg4, s32 arg5, u8 arg6, s32 arg7) {
-    struct231 tmp;
+void func_1516387C(s32 arg0, u8 arg1, s8 arg2, s16 arg3, u8 arg4, s32 offset, u8 arg6, s32 arg7) {
+    Header tmp;
     tmp.unk0 = arg1;
     tmp.unk1 = arg2;
     tmp.unk2 = arg3;
     tmp.unk4 = arg4;
 
-    func_1516037C(&tmp, arg0, arg5, arg6, arg7);
+    func_1516037C(&tmp, arg0, offset, arg6, arg7);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151638E0.s")
@@ -1024,10 +1023,10 @@ void func_15163A18(struct225 *arg0, s32 arg1, u8 arg2) {
 
 struct225 *func_15163A60(u8 arg0, u8 arg1, s32 arg2) {
     struct225 *temp_v0_2;
-    struct231 tmp0;
+    Header header;
     f32 tmp1[4];
     struct226 *temp_v0;
-    s32 tmp2[3];
+    Header2 header2;
 
     temp_v0 = func_151149AC(arg0); // maybe different types?
     if (temp_v0 == 0) {
@@ -1038,16 +1037,16 @@ struct225 *func_15163A60(u8 arg0, u8 arg1, s32 arg2) {
     tmp1[2] = func_150ADA68() * D_800A6B08;
     tmp1[3] = D_800A69D4[6]; // D_800A69EC;
 
-    tmp2[0] = temp_v0->unk10;
-    tmp2[1] = temp_v0->unk12;
-    tmp2[2] = temp_v0->unk14;
+    header2.unk0 = temp_v0->unk10;
+    header2.unk4 = temp_v0->unk12;
+    header2.unk8 = temp_v0->unk14;
 
-    tmp0.unk0 = 2;
-    tmp0.unk1 = 17;
-    tmp0.unk2 = 300;
-    tmp0.unk4 = 5;
+    header.unk0 = 2;
+    header.unk1 = 17;
+    header.unk2 = 300;
+    header.unk4 = 5;
 
-    temp_v0_2 = func_151602C0(&tmp0, &tmp2, D_800A6964[6], 0, 0xFF, 0, 0xFF, 0, 0x14, arg1, arg2);
+    temp_v0_2 = func_151602C0(&header, &header2, D_800A6964[6], 0, 0xFF, 0, 0xFF, 0, 20, arg1, arg2);
     if (temp_v0_2 != 0) {
         memcpy(&temp_v0_2->unk18, &tmp1, 16);
         memcpy(&temp_v0_2->unk28, &temp_v0, 4);
@@ -1078,9 +1077,9 @@ struct225 *func_15163BE8(s32 arg0, u8 arg1, s32 arg2) {
     src[2] = func_150ADA68() * D_800A6B0C;
     src[3] = D_800A69D4[6];
 
-    temp_v0 = func_15160A58(arg0, 1, &D_800A6A0C, 2, 300, 100, 0, 0xFF, 0, 0xFF, 0, 0, 16, 1, arg1, arg2);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk30, &src, 16);
+    temp_v0 = func_15160A58(arg0, 1, &D_800A6A0C, 2, 300, 100, 0, 0xFF, 0, 0xFF, 0, 0, sizeof(src), 1, arg1, arg2);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk30, &src, sizeof(src));
     }
     return temp_v0;
 }
@@ -1091,7 +1090,7 @@ s32 func_15163CD0(struct225 *arg0) {
 }
 
 void func_15163CF8(struct227 *arg0, struct225 *arg1) {
-    f32 tmp = func_15047D60(arg0->unk8);
+    f32 tmp = sinf(arg0->unk8);
     arg1->unk14->unk2F = arg0->unk0 + (arg0->unk4 * tmp);
     arg0->unk8 = arg0->unk8 + (arg0->unkC * D_800BE9A4);
     arg0->unk8 = func_15144B68(arg0->unk8);
@@ -1138,27 +1137,27 @@ s32 func_15163F50(struct225 *arg0, struct225 *arg1) {
 
 struct225 *func_15164208(s32 arg0, u8 arg1, u8 arg2, s32 arg3) {
     struct225 *temp_v0;
-    struct231 tmp0;
+    Header header;
     struct243 src;
 
     src.unk0 = 0.0f;
     src.unk4 = arg1;
 
-    tmp0.unk0 = 0;
-    tmp0.unk1 = 0x14;
-    tmp0.unk2 = 0x12C;
-    tmp0.unk4 = 0x27;
+    header.unk0 = 0;
+    header.unk1 = 20;
+    header.unk2 = 300;
+    header.unk4 = 39;
 
-    temp_v0 = func_1516037C(&tmp0, arg0, 8, arg2, arg3);
-    if (temp_v0 != 0) {
-        memcpy(&temp_v0->unk18, &src, 8);
+    temp_v0 = func_1516037C(&header, arg0, sizeof(src), arg2, arg3);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
     }
     return temp_v0;
 }
 
 s32 func_1516429C(struct237 *arg0) {
     arg0->unk14->unk2F = arg0->unk18.unk0;
-    arg0->unk18.unk0 = (arg0->unk18.unk0 - (arg0->unk18.unk0 * D_800A6B10));
+    arg0->unk18.unk0 = arg0->unk18.unk0 - (arg0->unk18.unk0 * D_800A6B10);
     return 1;
 }
 
@@ -1168,10 +1167,10 @@ s32 func_1516429C(struct237 *arg0) {
 void func_151643A8(struct225 *arg0, s32 arg1, u8 arg2) {
     struct227 *tmp;
     tmp = &arg0->unk18;
-    if (arg2 == 0x40) {
-        tmp->unk24 |= 1;
-    } else if (arg2 == 0x41) {
-        tmp->unk24 &= 0xFFFE;
+    if (arg2 == 64) {
+        tmp->unk24 |= 1;      // force odd?
+    } else if (arg2 == 65) {
+        tmp->unk24 &= 0xFFFE; // force even?
     }
 }
 
@@ -1196,18 +1195,22 @@ s32 func_151644A8(struct242 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151644F4.s")
 // NON-MATCHING: close...
 // void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {
-//     f32 tmp[20];
+//     f32 tmp1;
+//     f32 tmp2;
+//     f32 tmp3;
 //
-//     func_150A8050(&tmp, arg3, 0, arg4); // arg3
+//     f32 tmp[16];
+//
+//     func_150A8050(&tmp, arg3, 0.0f, arg4);
+//
 //     tmp[13] = arg1->unk0;
 //     tmp[14] = arg1->unk4;
 //     tmp[15] = arg1->unk8;
+//     func_150A7960(&tmp, NULL, arg0, NULL, &tmp1, &tmp2, &tmp3);
 //
-//     func_150A7960(&tmp, 0, arg0, 0, &tmp[17], &tmp[18], &tmp[19]);
-//
-//     arg0->unk14->unkE = tmp[17];
-//     arg0->unk14->unk10 = tmp[18];
-//     arg0->unk14->unk12 = tmp[19];
+//     arg0->unk14->unkE =  tmp1;
+//     arg0->unk14->unk10 = tmp2;
+//     arg0->unk14->unk12 = tmp3;
 // }
 
 // loop

@@ -122,13 +122,13 @@ void func_10011FEC(void) {
 //         sp5C = 127.0f;
 //         sp68 = (13.0f - temp_f0) + temp_f0;
 //         temp_f2 = D_80042780;
-//         sp54 = ((D_8002C428 + (func_15047D60(D_80042798 * D_8002C424) * 200.0f)) - temp_f2) + temp_f2;
+//         sp54 = ((D_8002C428 + (sinf(D_80042798 * D_8002C424) * 200.0f)) - temp_f2) + temp_f2;
 //         goto block_23;
 //     case 1:
 //         D_8004277C = 0;
 //         sp68 = 70.0f;
 //         sp5C = 127.0f;
-//         sp54 = (func_15047D60(D_80042798 * D_8002C42C) * 200.0f) + 450.0f;
+//         sp54 = (sinf(D_80042798 * D_8002C42C) * 200.0f) + 450.0f;
 //         goto block_23;
 //     case 2:
 //         temp_f14 = D_8002C430;
@@ -138,7 +138,7 @@ void func_10011FEC(void) {
 //         sp68 = ((52.0f - temp_f0_2) * temp_f14) + temp_f0_2;
 //         sp5C = ((127.0f - temp_f2_2) * temp_f14) + temp_f2_2;
 //         temp_f2_3 = D_80042780;
-//         temp_f10 = func_15047D60(D_80042798 * D_8002C434, temp_f14) * 282.0f;
+//         temp_f10 = sinf(D_80042798 * D_8002C434, temp_f14) * 282.0f;
 //         D_80041FD9 = (u8)0;
 //         sp54 = (((436.0f + temp_f10) - temp_f2_3) * D_8002C438) + temp_f2_3;
 //         goto block_23;

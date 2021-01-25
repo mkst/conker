@@ -1,74 +1,123 @@
-#include <ultra64.h>
-
-#include "functions.h"
-#include "variables.h"
-
+#include <os_internal.h>
+#include <ultraerror.h>
+#include "n_synthInternals.h"
 
 
+// s32 _allocatePVoice( N_PVoice **pvoice, s16 priority);
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synallocvoice/n_alSynAllocVoice.s")
-// s32 n_alSynAllocVoice(struct43 *arg0, struct44 *arg1) {
-//     void *sp2C;
-//     void *sp28;
-//     s32 sp24;
-//     void *sp20;
-//     void *sp1C;
-//     void *sp18;
-//     void *temp_t1;
+// NON-MATCHING: plenty to figure out with the nlibaudio struct changes
+// s32 n_alSynAllocVoice( N_ALVoice *voice, ALVoiceConfig *vc)
+// {
+//     N_PVoice  *pvoice = 0;
+//     ALFilter *f;
+//     ALParam *update;
+//     s32 stolen;
+//     N_PVoice *sp20;
 //
-//     sp2C = NULL;
-//     arg0->unk1A = (s16) arg1->unk0;
-//     arg0->unk1E = (s16) arg1->unk4;
-//     arg0->unkC = 0;
-//     arg0->unk1C = (s16) arg1->unk2;
-//     arg0->unk18 = (u16)0;
-//     arg0->unk8 = 0;
-//     arg0->unk14 = (s32) arg1->unk8;
-//     sp24 = func_1001DF3C(&sp2C, arg1->unk0);
-//     if (sp2C != 0) {
-//         if (sp24 != 0) {
-//             sp2C->unk90 = 0x228;
-//             sp2C->unk10->unk8 = 0;
-//             sp2C->unk10 = arg0;
-//             arg0->unk8 = sp2C;
-//             sp28 = __n_allocParam();
-//             if (sp28 != 0) {
-//                 sp28->unk4 = (s32) D_8002BA44->unk1C;
-//                 sp28->unk8 = (u16)0xB;
-//                 sp28->unkC = 0;
-//                 sp28->unk10 = 0x170;
-//                 n_alEnvmixerParam(arg0->unk8, 3, sp28);
-//             }
-//             sp28 = __n_allocParam();
-//             if (sp28 != 0) {
-//                 sp28->unk4 = (s32) (D_8002BA44->unk1C + sp2C->unk90);
-//                 sp28->unk8 = (u16)0xF;
-//                 sp28->unk0 = 0;
-//                 n_alEnvmixerParam(arg0->unk8, 3, sp28);
-//             }
-//         } else {
-//             sp2C->unk90 = 0;
-//             sp2C->unk10 = arg0;
-//             arg0->unk8 = sp2C;
-//             sp20 = sp2C + 8;
-//             if (sp20->unk0 != 0) {
-//                 sp20->unk0->unk4 = (s32) sp20->unk4;
-//             }
-//             if (sp20->unk4 != 0) {
-//                 *sp20->unk4 = (s32) sp20->unk0;
-//             }
-//             temp_t1 = sp2C + 8;
-//             sp1C = temp_t1;
-//             sp18 = D_8002BA44->unk48[arg1->unk2].unk14;
-//             *temp_t1 = (s32) *sp18;
-//             sp1C->unk4 = sp18;
-//             if (*sp18 != 0) {
-//                 (*sp18)->unk4 = sp1C;
-//             }
-//             *sp18 = sp1C;
-//             sp2C->unk28 = 0;
-//         }
+// #ifdef _DEBUG
+//     /* need two updates if voice is stolen */
+//     if (n_syn->paramList == 0) {
+//         __osError(ERR_ALSYN_NO_UPDATE, 0);
+//         return 0;
+//     } else if (n_syn->paramList->next == 0) {
+//         __osError(ERR_ALSYN_NO_UPDATE, 0);
+//         return 0;
 //     }
-//     return sp2C != 0;
+// #endif
+//
+//     voice->priority     = vc->priority;
+//     voice->unityPitch   = vc->unityPitch;
+//     voice->table        = 0;
+//     voice->fxBus        = vc->fxBus;
+//     voice->state        = AL_STOPPED;
+//     voice->pvoice       = 0;
+//
+//     voice->clientPrivate = vc->unk8;
+//
+//     stolen = _allocatePVoice( &pvoice, vc->priority);
+//
+//     if (pvoice) {    /* if we were able to allocate a voice */
+//         if (stolen) {
+//
+//             pvoice->offset = 0x228; //512;
+//             pvoice->vvoice->pvoice = 0; /* zero stolen voice */
+//
+// #if 1
+//             pvoice->vvoice = voice;
+//             voice->pvoice  = pvoice;
+// #endif
+//
+//             /*
+//              * ramp down stolen voice
+//              */
+//             update = __n_allocParam();
+//             if (update) {
+// #ifdef SAMPLE_ROUND
+//                 update->delta      = SAMPLE184( n_syn->paramSamples );
+// #else
+//                 update->delta      = n_syn->paramSamples;
+// #endif
+//                 update->type       = AL_FILTER_SET_VOLUME;
+//                 update->data.i     = 0;
+//                 update->moredata.i = 0x170; //pvoice->offset - 64;
+//
+//                 n_alEnvmixerParam(voice->pvoice, AL_FILTER_ADD_UPDATE, update);
+//             }
+//             /*
+//              * stop stolen voice
+//              */
+//             update = __n_allocParam();
+//             if (update) {
+// #ifdef SAMPLE_ROUND
+//                 update->delta  = SAMPLE184( n_syn->paramSamples + pvoice->offset);
+// #else
+//                 update->delta  = n_syn->paramSamples + pvoice->offset;
+// #endif
+//                 update->type   = AL_FILTER_STOP_VOICE;
+//                 update->next   = 0;
+//                 n_alEnvmixerParam(voice->pvoice, AL_FILTER_ADD_UPDATE, update);
+//
+//             } else {
+// #ifdef _DEBUG
+//                 __osError(ERR_ALSYN_NO_UPDATE, 0);
+// #endif
+//             }
+//
+//         } else {
+//             pvoice->offset = 0;
+// #if 1
+//             pvoice->vvoice = voice;
+//             voice->pvoice  = pvoice;
+//
+//             sp20 = pvoice->vvoice; // + 8;
+//             if (sp20->node.next != 0) {
+//                 sp20->node.prev = sp20->node;
+//             }
+//             // if (sp20->unk4 != 0) {
+//             //     *sp20->unk4 = (s32) sp20->unk0;
+//             // }
+//             // temp_t1 = pvoice + 8;
+//             // sp1C = temp_t1;
+//             // sp18 = D_8002BA44->unk48[vc->unk2].unk14;
+//             // *temp_t1 = (s32) *sp18;
+//             // sp1C->unk4 = sp18;
+//             // if (*sp18 != 0) {
+//             //     (*sp18)->unk4 = sp1C;
+//             // }
+//             // *sp18 = sp1C;
+//             // pvoice->unk28 = 0;
+// #endif
+//         }
+//
+// #if 0
+//         pvoice->vvoice = voice;     /* assign new voice  */
+//         voice->pvoice  = pvoice;
+// #endif
+//
+//     }
+//
+//     return (pvoice != 0);
 // }
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synallocvoice/_allocatePVoice.s")

@@ -101,41 +101,24 @@ CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
 CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T symbol_addrs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt  --no-check-sections
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt  --no-check-sections
 
 ### Overrides
 
 $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 
 # TODO: blindly move all of this into libultra/audio
-$(BUILD_DIR)/$(SRC_DIR)/init_12820.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_128D0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_13320.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_15550.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17870.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17880.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17A80.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17AA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17AF0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17C00.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17D80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17DF0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17EC0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17F10.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_18C60.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_18CB0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_18DA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_18E60.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_19AB0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_19B50.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1AAE0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1C690.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1C9E0.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1C060.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1CBF0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1D900.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1DBA0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1DC80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1E170.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1E2A0.o: OPT_FLAGS := -g
+# $(BUILD_DIR)/$(SRC_DIR)/init_1E480.o: OPT_FLAGS := -g # --> not -g!
 $(BUILD_DIR)/$(SRC_DIR)/init_1E4A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1E530.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1FB40.o: OPT_FLAGS := -g
@@ -143,6 +126,7 @@ $(BUILD_DIR)/$(SRC_DIR)/init_20000.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
+
 
 ### Targets
 

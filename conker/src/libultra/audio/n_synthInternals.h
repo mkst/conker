@@ -33,16 +33,16 @@
 #define SAMPLE184(delta)      (((delta) + (SAMPLES / 2)) / SAMPLES) * SAMPLES
 #define FIXED_SAMPLE          SAMPLES
 
-#define N_AL_DECODER_IN	        0
-#define	N_AL_RESAMPLER_OUT	0
-#define N_AL_TEMP_0	        0
-#define	N_AL_DECODER_OUT        368
-#define	N_AL_TEMP_1	        368
-#define	N_AL_TEMP_2	        736
-#define	N_AL_MAIN_L_OUT	        1248
-#define	N_AL_MAIN_R_OUT	        1616
-#define	N_AL_AUX_L_OUT	        1984
-#define	N_AL_AUX_R_OUT	        2352
+#define N_AL_DECODER_IN          0
+#define  N_AL_RESAMPLER_OUT  0
+#define N_AL_TEMP_0          0
+#define  N_AL_DECODER_OUT        368
+#define  N_AL_TEMP_1          368
+#define  N_AL_TEMP_2          736
+#define  N_AL_MAIN_L_OUT          1248
+#define  N_AL_MAIN_R_OUT          1616
+#define  N_AL_AUX_L_OUT          1984
+#define  N_AL_AUX_R_OUT          2352
 
 #define N_AL_DIVIDED            368
 
@@ -56,6 +56,8 @@ typedef struct {
 typedef struct N_PVoice_s {
     ALLink               node;
     struct N_ALVoice_s    *vvoice;
+    /* RARE CUSTOM */
+    u8                          pad[0x8];
 /** ALLoadFilter *********************************/
     ADPCM_STATE                 *dc_state;
     ADPCM_STATE                 *dc_lstate;
@@ -67,34 +69,43 @@ typedef struct N_PVoice_s {
     s32                         dc_sample;
     s32                         dc_lastsam;
     s32                         dc_first;
-    s32                         dc_memin; 
+    s32                         dc_memin;
 /** ALResampler *********************************/
     RESAMPLE_STATE      *rs_state;
     f32                 rs_ratio;
-    s32			rs_upitch;
-    f32		        rs_delta;
-    s32			rs_first;
+    s32      rs_upitch;
+    f32            rs_delta;
+    s32      rs_first;
 /** ALEnvMixer *********************************/
-    ENVMIX_STATE	*em_state;
-    s16		        em_pan;
-    s16		        em_volume;
-    s16		        em_cvolL;
-    s16		        em_cvolR;
-    s16		        em_dryamt;
-    s16		        em_wetamt;
-    u16                 em_lratl;
-    s16                 em_lratm;
-    s16                 em_ltgt;
-    u16                 em_rratl;
-    s16                 em_rratm;
-    s16                 em_rtgt;
-    s32                 em_delta;
-    s32                 em_segEnd;
-    s32			em_first;
-    ALParam		*em_ctrlList;
-    ALParam		*em_ctrlTail;
-    s32                 em_motion;
-    s32                 offset;
+    ENVMIX_STATE  *em_state;
+    s16            em_pan;
+    s16            em_volume;
+    s16            em_cvolL;
+    s16            em_cvolR;
+    s16            em_dryamt;
+    s16            em_wetamt;
+    u16            em_lratl;
+    s16            em_lratm;
+    s16            em_ltgt;
+    u16            em_rratl;
+    s16            em_rratm;
+    s16            em_rtgt;
+    s32            em_delta;
+    s32            em_segEnd;
+    s32            em_first;
+    ALParam        *em_ctrlList;
+    ALParam        *em_ctrlTail;
+    s32            em_motion;
+    s32            offset;
+    /* RARE CUSTOM */
+    /* 0x94 */ u8             pad94[0x5];
+    /* 0x99 */ s8             unk99;
+    /* 0x9A */ u8             pad9A[0x6];
+    /* 0xA0 */ s16            unkA0;
+    /* 0xA2 */ s16            unkA2;
+    /* 0xA4 */ u8             padA4[0x24];
+    /* 0xC8 */ s32            unkC8;
+    /* 0xC8 */ s32            *unkCC;
 } N_PVoice;
 
 
@@ -121,7 +132,7 @@ typedef struct N_ALAuxBus_s {
     s32                 maxSources;
     N_PVoice           **sources;
     ALFx                *fx;
-    ALFx		*fx_array[AL_MAX_AUX_BUS_SOURCES];
+    ALFx    *fx_array[AL_MAX_AUX_BUS_SOURCES];
 } N_ALAuxBus;
 
 void alN_PVoiceNew(N_PVoice *mv, ALDMANew dmaNew, ALHeap *hp);
@@ -148,7 +159,7 @@ Acmd *n_alAuxBusPull( s32 sampleOffset, Acmd *p);
 
 Acmd *n_alFxPull( s32 sampleOffset, Acmd *p);
 s32 n_alFxParamHdl(void *filter, s32 paramID, void *param);
-void n_alFxNew(ALFx **r, ALSynConfig *c, ALHeap *hp);
+void n_alFxNew(ALFx **r, ALSynConfig *c, ALHeap *hp, s32 unknown);
 
 Acmd *n_alMainBusPull( s32 sampleOffset, Acmd *p);
 s32 n_alMainBusParam( s32 paramID, void *param);

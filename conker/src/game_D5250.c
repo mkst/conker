@@ -1,9 +1,6 @@
 #include <ultra64.h>
-
 #include "functions.h"
 #include "variables.h"
 
 
-s32 func_10017A80(struct26 *arg0) {
-    return arg0->unk2C;
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_D5250/func_150A7DA0.s")

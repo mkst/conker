@@ -17,7 +17,7 @@ void func_15048B10(s32 arg0, s32 arg1) {
     struct191 tmp;
 
     func_1503E5F8(arg0, &tmp.unk194, &tmp.unk190, &tmp.unk18C, &tmp.unk17C, &tmp.unk178, &tmp.unk174, &tmp.unk188, &tmp.unk184, &tmp.unk180);
-    func_150A7BC0(&tmp.unk80);
+    guMtxIdentF(&tmp.unk80);
     tmp.unkA4 = -tmp.unk194;
     tmp.unkA8 = -tmp.unk190;
     tmp.unkAC = -tmp.unk18C;

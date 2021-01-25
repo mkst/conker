@@ -1,66 +1,91 @@
-#include <ultra64.h>
-
-#include "functions.h"
-#include "variables.h"
+#include <n_libaudio.h>
 
 
-void func_10015550(struct26 *arg0, s32 arg1) {
-    struct33 tmp;
+typedef struct {
+    s32 pad0;
+    u8  unk4;
+    s8  unk5; // used
+} struct152;
 
-    tmp.unk0 = 14;
-    tmp.unk4 = arg1;
+typedef struct {
+    s32 pad0;
+    struct152 *unk4;
+} struct153;
 
-    n_alEvtqPostEvent(&arg0->unk48, &tmp, 0, 2);
+typedef struct {
+    u8  pad0[0xC];
+    struct153 *unkC;
+    u8  pad10[0x24];
+    f32 unk34;  // used
+} struct154;
+
+extern N_ALUnknownStruct1 *D_8002BA20;
+extern N_ALUnknownStruct1 *D_8002BA24;
+extern N_ALUnknownStruct1 *D_8002BA28;
+extern N_ALSndPlayer *D_8002BA2C;
+extern s16 D_8002BA30;
+
+void func_10017298(N_ALUnknownStruct1 *arg0);
+
+void func_10015550(N_ALCSPlayer *csp, s32 arg1) {
+    N_ALEvent event;
+
+    event.type = 14;
+    event.msg.midi.ticks = arg1;
+
+    n_alEvtqPostEvent(&csp->evtq, &event, 0, 2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_100155A0.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_100155A0.s")
 
-s32 func_10015878(struct04 *arg0) {
-    struct04 *sp2C;
-    struct33 tmp;
+s32 func_10015878(N_ALSndPlayer *sp) {
+    N_ALSndPlayer *alsp;
+    N_ALEvent event;
 
-    sp2C = arg0;
+    alsp = sp;
     do {
-        if (sp2C->unk28 == 32) {
+        if (alsp->nextEvent.type == 32) {
             if (0) {};
-            tmp.unk0 = 32;
-            n_alEvtqPostEvent(&sp2C->unk14, &tmp, sp2C->unk48, 3);
+            event.type = 32;
+            n_alEvtqPostEvent(&alsp->evtq, &event, alsp->frameTime, 3);
         } else {
-            func_10015944(&sp2C->unk28);
+            func_10015944(&alsp->nextEvent);
             if (0) {};
         }
-        sp2C->unk4C = n_alEvtqNextEvent(&sp2C->unk14, &sp2C->unk28);
-    } while (sp2C->unk4C == 0);
+        alsp->nextDelta = n_alEvtqNextEvent(&alsp->evtq, &alsp->nextEvent);
+    } while (alsp->nextDelta == 0);
 
-    sp2C->unk50 += sp2C->unk4C;
-    return sp2C->unk4C;
+    alsp->curTime += alsp->nextDelta;
+    return alsp->nextDelta;
 }
 
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_10015944.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10015944.s")
 
-void func_10016E90(struct31 *arg0) {
+void func_10016E90(N_ALUnknownStruct1 *arg0) {
     if ((arg0->unk53 & 4) != 0) {
         n_alSynStopVoice(&arg0->unk10);
         n_alSynFreeVoice(&arg0->unk10);
     }
     func_10017298(arg0);
-    func_10016F80(D_8002BA2C + 20, arg0, 0xFFFF);
+    func_10016F80(&D_8002BA2C->evtq, arg0, 0xFFFF);
 }
 
 void func_10016F00(struct154 *arg0) {
-    s16 pad;
-    struct155 tmp;
+    N_ALEvent event;
     f32 res;
 
     res = alCents2Ratio(arg0->unkC->unk4->unk5) * arg0->unk34;
-    tmp.unk0 = 16;
-    tmp.unk4 = arg0;
-    tmp.unk8 = *(s32*)&res;
-    n_alEvtqPostEvent(D_8002BA2C + 20, &tmp, 33333, 2);
+
+    event.type = 16;
+    /* TODO: check if this is the right struct */
+    event.msg.vol.voice = arg0;
+    event.msg.vol.delta = *(s32*)&res;
+
+    n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, 33333, 2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_10016F80.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10016F80.s")
 // void func_10016F80(void *arg0, s32 arg1, u16 arg2) {
 //     void *sp3C;
 //     void *sp38;
@@ -108,30 +133,30 @@ void func_10016F00(struct154 *arg0) {
 //     osSetIntMask(sp28);
 // }
 
-struct31 *func_10017100(s32 arg0, s16 arg1) {
-    struct31 *sp24;
+N_ALUnknownStruct1 *func_10017100(s32 arg0, s16 arg1) {
+    N_ALUnknownStruct1 *sp24;
     u32 mask;
-    struct31 *sp1C;
+    N_ALUnknownStruct1 *sp1C;
 
     mask = osSetIntMask(1);
     sp24 = D_8002BA28;
     if (sp24 != 0) {
-        D_8002BA28 = sp24->unk0;
+        D_8002BA28 = sp24->node.next;
         sp1C = sp24;
-        if (sp1C->unk0) {
-            sp1C->unk0->unk4 = sp1C->unk4;
+        if (sp1C->node.next) {
+            sp1C->node.next->prev = sp1C->node.prev;
         }
-        if (sp1C->unk4) {
-            *sp1C->unk4 = sp1C->unk0;
+        if (sp1C->node.prev) {
+            sp1C->node.prev->next = sp1C->node.next;
         }
         if (D_8002BA20) {
-            sp24->unk0 = D_8002BA20;
-            sp24->unk4 = NULL;
-            D_8002BA20->unk4 = sp24;
+            sp24->node.next = D_8002BA20;
+            sp24->node.prev = NULL;
+            D_8002BA20->node.prev = sp24;
             D_8002BA20 = sp24;
         } else {
-            sp24->unk4 = 0;
-            sp24->unk0 = sp24->unk4;
+            sp24->node.prev = 0;
+            sp24->node.next = sp24->node.prev;
             D_8002BA20 = sp24;
             D_8002BA24 = sp24;
         }
@@ -151,60 +176,63 @@ struct31 *func_10017100(s32 arg0, s16 arg1) {
     return sp24;
 }
 
-void func_10017298(struct31 *arg0) {
-    struct31 *sp4;
+void func_10017298(N_ALUnknownStruct1 *arg0) {
+    N_ALUnknownStruct1 *sp4;
 
     if (D_8002BA20 == arg0) {
-        D_8002BA20 = arg0->unk0;
+        D_8002BA20 = arg0->node.next;
     }
     if (D_8002BA24 == arg0) {
-        D_8002BA24 = arg0->unk4;
+        D_8002BA24 = arg0->node.prev;
     }
+
     sp4 = arg0;
-    if (sp4->unk0) {
-        sp4->unk0->unk4 = sp4->unk4;
+    if (sp4->node.next) {
+        sp4->node.next->prev = sp4->node.prev;
     }
-    if (sp4->unk4) {
-        *sp4->unk4 = sp4->unk0;
+
+    if (sp4->node.prev) {
+        sp4->node.prev->next = sp4->node.next;
     }
+
     if (D_8002BA28) {
-        arg0->unk0 = D_8002BA28;
-        arg0->unk4 = NULL;
-        D_8002BA28->unk4 = arg0;
+        arg0->node.next = D_8002BA28;
+        arg0->node.prev = NULL;
+        D_8002BA28->node.prev = arg0;
         D_8002BA28 = arg0;
     } else {
-        arg0->unk4 = NULL;
-        arg0->unk0 = arg0->unk4;
+        arg0->node.prev = NULL;
+        arg0->node.next = arg0->node.prev;
         D_8002BA28 = arg0;
     }
     if (arg0->unk53 & 4) {
-        D_8002BA30 = D_8002BA30 - 1;
+        D_8002BA30 -= 1;
     }
     arg0->unk54 = 0;
     if (arg0->unk38) {
-        if (*arg0->unk38 == arg0) {
+        if (*arg0->unk38 == (s32)arg0) {
             *arg0->unk38 = 0;
         }
         arg0->unk38 = NULL;
     }
 }
 
-s32 func_100173C4(struct31 **arg0) {
-    s32 sp1C;
+s32 func_100173C4(N_ALUnknownEvent2 *arg0) {
+    s32 ret;
     s32 mask;
 
-    sp1C = 0;
-    if (*arg0) {
+    ret = 0;
+    if (arg0->unk0) {
         mask = __osDisableInt();
-        if (*arg0) {
-            sp1C = (*arg0)->unk54;
+        if (arg0->unk0) {
+            ret = arg0->unk0->unk54;
         }
         __osRestoreInt(mask);
     }
-    return sp1C;
+    return ret;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_10017438.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10017438.s")
 // void *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, void *arg7) {
 //     void *sp34;
 //     void *sp30;
@@ -247,22 +275,18 @@ s32 func_100173C4(struct31 **arg0) {
 //     return sp30;
 // }
 
-// TODO: use struct
-void func_10017594(struct31 *arg0) {
-    u16 pad0[3];
-    struct31 *sp1C;
-    u16 pad1;
-    s16 sp18;
+void func_10017594(N_ALUnknownStruct1 *arg0) {
+    N_ALEvent event;
 
     if (arg0) {
-        sp18 = 1024;
-        sp1C = arg0;
-        sp1C->unk53 &= -0x11;
-        n_alEvtqPostEvent(D_8002BA2C + 20, &sp18, 0, 2);
+        event.type = 1024;
+        event.msg.unknown1.unk0 = arg0;
+        event.msg.unknown1.unk0->unk53 &= -0x11;
+        n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, 0, 2);
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_10017604.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10017604.s")
 // NON-MATCHING: stack isnt quite right
 // void func_10017604(u8 arg0) {
 //     s32 mask;
@@ -297,18 +321,18 @@ void func_100176EC(void) {
     func_10017604(3);
 }
 
-void func_10017714(s32 arg0, s16 arg1, s32 arg2) {
-    struct35 tmp;
+void func_10017714(s32 arg0, s16 type, s32 arg2) {
+    N_ALEvent event;
 
     if (arg0 != 0) {
-        tmp.unk0 = arg1;
-        tmp.unk4 = arg0;
-        tmp.unk8 = arg2;
-        n_alEvtqPostEvent(D_8002BA2C + 20, &tmp, 0, 2);
+        event.type = type;
+        event.msg.vol.voice = arg0;
+        event.msg.vol.delta = arg2;
+        n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, 0, 2);
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_15550/func_10017780.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10017780.s")
 // NON-MATCHING: far from matching
 // void func_10017780(u8 arg0, u16 arg1) {
 //     s32 sp34;
