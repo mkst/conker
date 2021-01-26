@@ -24,94 +24,94 @@ segments:
   ###
   - [0xABBD00, bin, assets_offsets_table]
   - name:  assets00
-    name:  rzip
+    type:  rzip
     start: 0xabbdf8
   - name:  assets01
-    name:  rzip
+    type:  rzip
     start: 0xb01c60
   - name:  assets02
-    name:  rzip
+    type:  rzip
     start: 0xbc1708
   - name:  assets03
-    name:  rzip
+    type:  rzip
     start: 0xfa0578
   - name:  assets04
-    name:  rzip
+    type:  rzip
     start: 0xfb0a88
   - name:  assets05
-    name:  rzip
+    type:  rzip
     start: 0x11645e8
   - name:  assets06
-    name:  rzip
+    type:  rzip
     start: 0x118f850
   - name:  assets07
-    name:  rzip
+    type:  rzip
     start: 0x1212fc0
   - name:  assets08
-    name:  rzip
+    type:  rzip
     start: 0x1213010
   - name:  assets09
-    name:  rzip
+    type:  rzip
     start: 0x1213390
   - name:  assets0A
-    name:  rzip
+    type:  rzip
     start: 0x126b740
   - name:  assets0B
-    name:  rzip
+    type:  rzip
     start: 0x12acff0
   - name:  assets0C
-    name:  rzip
+    type:  rzip
     start: 0x12afd58
   - name:  assets0D
-    name:  rzip
+    type:  rzip
     start: 0x12e85c0
   - name:  assets0E
-    name:  rzip
+    type:  rzip
     start: 0x12e8788
   - name:  assets0F
-    name:  rzip
+    type:  rzip
     start: 0x12ec430
   - name:  assets10
-    name:  rzip
+    type:  rzip
     start: 0x1331c88
   - name:  assets11
-    name:  rzip
+    type:  rzip
     start: 0x13379c8
   - name:  assets12
-    name:  rzip
+    type:  rzip
     start: 0x133b220
   - name:  assets13
-    name:  rzip
+    type:  rzip
     start: 0x133be58
   - name:  assets14
-    name:  rzip
+    type:  rzip
     start: 0x1340bd0
   - name:  assets15
-    name:  rzip
+    type:  rzip
     start: 0x13688e8
   - name:  assets16
-    name:  rzip
+    type:  rzip
     start: 0x136a6b8
   - name:  assets17
-    name:  rzip
+    type:  rzip
     start: 0x29ff1c8
   - name:  assets18
-    name:  rzip
+    type:  rzip
     start: 0x3faa638
   - name:  assets19
-    name:  rzip
+    type:  rzip
     start: 0x3fab760
   - name:  assets1A
-    name:  rzip
+    type:  rzip
     start: 0x3faba80
   - name:  assets1B
-    name:  rzip
+    type:  rzip
     start: 0x3fb1128
   - name:  assets1C
-    name:  rzip
+    type:  rzip
     start: 0x3fb2800
   - name:  assets1D
-    name:  rzip
+    type:  rzip
     start: 0x3fb3cd8
   - [0x3fb7338, bin] # junk?
   - [0x3fb73d0, bin, "trailer"] # 0xff to end

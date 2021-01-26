@@ -1052,8 +1052,8 @@ extern u8  D_800D2E45;
 extern struct102 *D_800D2E4C;
 
 extern u8  D_800D2F3C;
-extern s32 D_800D2F40;
-extern s32 D_800D2F48;
+extern u16 *D_800D2F40;
+extern struct248 D_800D2F48; // bzero'd 0xC
 extern f32 D_800D2DB0;
 extern s32 D_800D2DB4;
 

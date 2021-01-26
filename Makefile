@@ -6,7 +6,13 @@ TARGET     = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 GAME_DIR   = $(BASENAME)
 
 BIN_DIR    = bin
+
+ifeq ($(VERSION),ects)
 BIN_FILES  = $(wildcard $(BIN_DIR)/*.bin)
+else
+# don't compile game.$(VERSION).bin
+BIN_FILES  = $(filter-out $(BIN_DIR)/game.$(VERSION).bin, $(wildcard $(BIN_DIR)/*.bin))
+endif
 
 EXTRACT_DIR = extracted
 
@@ -15,10 +21,6 @@ RZIP_FILES = $(wildcard rzip/assets*/assets*.bin)
 
 O_FILES    = $(foreach file,$(BIN_FILES) $(RZIP_FILES),$(BUILD_DIR)/$(file:.bin=.o))
 
-
-# ifeq ($(VERSION),ects)
-# $(error The ECTS ROM is not yet supported)
-# endif
 
 CROSS   = mips-linux-gnu-
 CPP     = cpp

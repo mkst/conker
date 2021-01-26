@@ -17,10 +17,14 @@ else
 ifeq ($(VERSION),eu)
 SRC_DIR := src_eu
 else
+ifeq ($(VERSION),ects)
+SRC_DIR := src_ects
+else
 SRC_DIR := src_debug
 OFFSETS_LENGTH      := 2112
 TEXT_SECTION_LENGTH := 1380000
-COMPRESS_DIR_ARGS   := --num-offsets 528 --total-size 1380000
+COMPRESS_DIR_ARGS   := --num-offsets 528 --total-size 1380000 --level 8
+endif
 endif
 endif
 
@@ -59,7 +63,6 @@ TARGET = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 LD_SCRIPT = $(BASENAME).ld
 
 CC     := ../ido/ido5.3_recomp/cc
-CC_NEW := ../ido/ido7.1_recomp/cc
 
 CROSS   = mips-linux-gnu-
 AS      = $(CROSS)as
@@ -82,8 +85,10 @@ ASM_PROCESSOR_DIR := ../tools/asm-processor
 
 ifeq ($(VERSION),ects)
 TARGET_GAME_BIN = $(TARGET).game.bin
+TARGET_ROOT_GAME_BIN = ../bin/game.$(VERSION).bin
 else
 TARGET_GAME_BIN = $(TARGET).game.rzip.bin
+TARGET_ROOT_GAME_BIN = ../bin/game.$(VERSION).rzip.bin
 endif
 
 # Files requiring pre/post-processing
@@ -158,11 +163,12 @@ progress: verify progress.csv
 
 # replace original binaries
 replace: verify $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
-	cp $(TARGET).header.bin ../bin
-	cp $(TARGET).boot.bin ../bin
-	cp $(TARGET).init.bin ../bin
-	cp $(TARGET_GAME_BIN) ../bin
-	cp $(TARGET).debugger.bin ../bin
+	cp $(TARGET).header.bin ../bin/header.$(VERSION).bin
+	cp $(TARGET).boot.bin ../bin/boot.$(VERSION).bin
+	cp $(TARGET).init.bin ../bin/init.$(VERSION).bin
+	cp $(TARGET).debugger.bin ../bin/debugger.$(VERSION).bin
+	cp $(TARGET_GAME_BIN) $(TARGET_ROOT_GAME_BIN)
+
 
 ### Recipes
 
@@ -194,7 +200,7 @@ $(TARGET).bin: $(TARGET).elf
 
 # extract
 $(BUILD_DIR)/splat: check $(BASENAME).$(VERSION).yaml
-	$(PYTHON) ../tools/n64splat/split.py conker.$(VERSION).bin $(BASENAME).$(VERSION).yaml .
+	$(PYTHON) ../tools/n64splat/split.py $(BASENAME).$(VERSION).bin $(BASENAME).$(VERSION).yaml .
 
 %.ok: %.bin
 	@echo "$$(cat $(BASENAME).$(VERSION).sha1)  $<" | sha1sum --check

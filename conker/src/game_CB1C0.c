@@ -60,12 +60,10 @@ s32 func_15178C9C(u8 arg0, s32 arg1);
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_CB1C0/func_1509DEC4.s")
-// NON-MATCHING: ???
-// s32 func_1509DEC4(s32 arg0, s32 arg1, struct215 *arg2) {
-//     if (arg1 == 0) {
-//         return func_15178C9C(arg0 & 0xff, func_15084000(arg2->unk8 & ~0x2000));
-//     } else {
-//         return 0;
-//     }
-// }
+s32 func_1509DEC4(s32 arg0, s32 arg1, struct215 *arg2) {
+    if (arg1 == 0) {
+        s32 mask = ~0x2000;
+        return func_15178C9C(arg0 & 0xff, func_15084000(arg2->unk8 & mask));
+    }
+    return 0;
+}

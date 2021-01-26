@@ -3183,7 +3183,13 @@ typedef struct {
 } struct246;
 
 typedef struct {
-  u8 pad0[0x760];
+    u8 pad0[0x760];
 } struct247; // maybe naudio?
+
+typedef struct {
+    s32 *unk0;
+    u8  pad2[7];
+    u16 unkA;
+} struct248;
 
 #endif

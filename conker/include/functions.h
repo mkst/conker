@@ -690,6 +690,7 @@ void func_1508F9C4(void);
 
 void func_15093818(s32 arg0);
 void func_15093878(void);
+void func_1509B4A0(s32 arg0, s32 arg1);
 void func_1509BFB0(s32 num, s32, s32, ...);
 void func_150AECCC(struct42 *arg0);
 void func_150AED4C(struct114 *arg0);
@@ -700,6 +701,7 @@ void func_150DE310(s32 arg0);
 void func_150DE32C(void); // dummy
 void func_150DEC90(s32 arg0);
 void func_150EB430(void *arg0, void *arg1);
+void func_150EC4B0(struct108 *arg0);
 void func_150FCA00(struct108 *arg0);
 
 void func_15100330(s32 arg0);
@@ -1038,7 +1040,8 @@ void func_15083568(s32, s32, f32, s32);
 s32  func_15083E0C(u8);
 s32  func_150859AC(s16 arg0, s32 arg1); // a guess
 void func_1508B20C(f32, f32, f32, f32);
-void func_150A8050(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z);
+void func_150A8050(f32 mtx[4][4], f32 arg1, f32 arg2, f32 arg3);
 void func_150AD770(void);
 f32  func_150AD900(f32 *arg0, f32 *arg1);
 f32  func_150AD930(f32 *arg0);

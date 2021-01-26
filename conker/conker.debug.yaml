@@ -21,7 +21,8 @@ segments:
   - name:  boot
     type:  bin
     start: 0x00000040
-  - type:  code
+  - name:  init
+    type:  code
     start: 0x00001000
     vram:  0x10001000
     files:
@@ -82,13 +83,105 @@ segments:
     start: 0x0000A4E0
     vram:  0x8000A4E0
     files:
-    - [0xA4E0, bin] # might be cutting code (start: 0xA774)
-  - name:  game ## size 2339424
+    - [0xA4E0, bin] # TODO: check this, we might be truncating code
+  - name:  game
     type:  code
-    start: 0x0001FF50
+    start: 0x0000D2B0
     vram:  0x15000000
     files:
-    - [0x1FF50, asm]
+    - [0xD2B0, asm]
+    - [0xD990, asm]
+    - [0xDB80, asm]
+    - [0xDD00, asm]
+    - [0xE6D0, asm]
+    - [0x10280, asm]
+    - [0x103E0, asm]
+    - [0x10CA0, asm]
+    - [0x11FF0, asm]
+    - [0x120A0, asm]
+    - [0x121A0, asm]
+    - [0x121D0, asm]
+    - [0x12280, asm]
+    - [0x12510, asm]
+    - [0x12530, asm]
+    - [0x12CE0, asm]
+    - [0x12D30, asm]
+    - [0x12D40, asm]
+    - [0x12D80, asm]
+    - [0x12DB0, asm]
+    - [0x12DC0, asm]
+    - [0x12E20, asm]
+    - [0x12E80, asm]
+    - [0x12ED0, asm]
+    - [0x12F50, asm]
+    - [0x12FB0, asm]
+    - [0x13000, asm]
+    - [0x13080, asm]
+    - [0x130A0, asm]
+    - [0x13110, asm]
+    - [0x13150, asm]
+    - [0x13190, asm]
+    - [0x131D0, asm]
+    - [0x131F0, asm]
+    - [0x13250, asm]
+    - [0x133B0, asm]
+    - [0x133F0, asm]
+    - [0x139E0, asm]
+    - [0x14B60, asm]
+    - [0x14D70, asm]
+    - [0x14DC0, asm]
+    - [0x15460, asm]
+    - [0x154B0, asm]
+    - [0x155A0, asm]
+    - [0x15AA0, asm]
+    - [0x15AD0, asm]
+    - [0x15C70, asm]
+    - [0x15DF0, asm]
+    - [0x15E50, asm]
+    - [0x16040, asm]
+    - [0x16090, asm]
+    - [0x163E0, asm]
+    - [0x19460, asm]
+    - [0x19500, asm]
+    - [0x1B700, asm]
+    - [0x1BA30, asm]
+    - [0x1BCC0, asm]
+    - [0x1BF20, asm]
+    - [0x1C0C0, asm]
+    - [0x1C3B0, asm]
+    - [0x1C430, asm]
+    - [0x1CB70, asm]
+    - [0x1CFD0, asm]
+    - [0x1D290, asm]
+    - [0x1D3C0, asm]
+    - [0x1D440, asm]
+    - [0x1D450, asm]
+    - [0x1D670, asm]
+    - [0x1D800, asm]
+    - [0x1D820, asm]
+    - [0x1D830, asm]
+    - [0x1D850, asm]
+    - [0x1D900, asm]
+    - [0x1DBE0, asm]
+    - [0x1E130, asm]
+    - [0x1E250, asm]
+    - [0x1E2D0, asm]
+    - [0x1E490, asm]
+    - [0x1E4C0, asm]
+    - [0x1E540, asm]
+    - [0x1ED50, asm]
+    - [0x1ED80, asm]
+    - [0x1EE50, asm]
+    - [0x1F030, asm]
+    - [0x1F0B0, asm]
+    - [0x1F130, asm]
+    - [0x1F1C0, asm]
+    - [0x1F2D0, asm]
+    - [0x1F680, asm]
+    - [0x1F6D0, asm]
+    - [0x1F6E0, asm]
+    - [0x1F710, asm]
+    - [0x1FF30, asm]
     - [0x22740, asm]
     - [0x22CB0, asm]
     - [0x22D70, asm]
@@ -103,6 +196,16 @@ segments:
     - [0x24330, asm]
     - [0x24450, asm]
     - [0x25380, asm]
+    - [0x28990, asm]
+    - [0x29310, asm]
+    - [0x29580, asm]
+    - [0x298F0, asm]
+    - [0x29A30, asm]
+    - [0x29A40, asm]
+    - [0x29FE0, asm]
+    - [0x30B00, asm]
+    - [0x30B60, asm]
+    - [0x37B10, asm]
     - [0x38B40, asm]
     - [0x3CC90, asm]
     - [0x40BA0, asm]
@@ -175,6 +278,47 @@ segments:
     - [0xAC240, asm]
     - [0xACAF0, asm]
     - [0xACDB0, asm]
+    - [0xB23A0, asm]
+    - [0xB3070, asm]
+    - [0xB37B0, asm]
+    - [0xB3FE0, asm]
+    - [0xB4000, asm]
+    - [0xB41D0, asm]
+    - [0xB43F0, asm]
+    - [0xB4430, asm]
+    - [0xB4480, asm]
+    - [0xB4520, asm]
+    - [0xB4570, asm]
+    - [0xB4610, asm]
+    - [0xB4660, asm]
+    - [0xB48C0, asm]
+    - [0xB4A10, asm]
+    - [0xB9FB0, asm]
+    - [0xBA000, asm]
+    - [0xBA060, asm]
+    - [0xBA0A0, asm]
+    - [0xBA1F0, asm]
+    - [0xBACB0, asm]
+    - [0xBB530, asm]
+    - [0xBB880, asm]
+    - [0xBCC50, asm]
+    - [0xBD000, asm]
+    - [0xBE870, asm]
+    - [0xBEB30, asm]
+    - [0xBFEA0, asm]
+    - [0xC01C0, asm]
+    - [0xC17E0, asm]
+    - [0xC1D00, asm]
+    - [0xC4DD0, asm]
+    - [0xC62C0, asm]
+    - [0xC6F80, asm]
+    - [0xC7AA0, asm]
+    - [0xC9A90, asm]
+    - [0xC9EC0, asm]
+    - [0xCA1E0, asm]
+    - [0xCAB90, asm]
+    - [0xCACF0, asm]
+    - [0xCB200, asm]
     - [0xCD870, asm]
     - [0xCDBE0, asm]
     - [0xCE180, asm]
@@ -501,10 +645,10 @@ segments:
     start: 0x002190F0
     vram:  0x8005B0F0
     files:
-    - [0x002190F0, "bin"]
+    - [0x2190F0, bin]
   - name:  debugger
     type:  code
-    start: 0x00248510 # 0x189840
+    start: 0x00248510
     vram:  0x16000000
     files:
     - [0x248510, asm]
@@ -512,8 +656,8 @@ segments:
     - [0x252CF0, asm]
   - name:  debugger_data
     type:  code
-    start: 0x252d10
+    start: 0x00252D10
     vram:  0x1600A800
     files:
-    - [0x252D10, bin] # .data
+    - [0x252D10, bin]
   - [0x258870] # end of file

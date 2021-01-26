@@ -4,12 +4,12 @@
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/gu/guMtxIdentF/guMtxIdentF.s")
-// NON-MATCHING: what a bugger.
+// NON-MATCHING: assume handwritten like OOT
 // void guMtxIdentF(f32 mf[4][4]) {
-//     if (0) { }
+//     if (0) {};
 //     ((s32)mf[0][1]) = (s32)0;
 //     mf[0][0] = 1;
-//     dummy_label_418035: ;
+//     dummy_label:;
 //     ((s32)mf[0][2]) = 0;
 //     ((s32)mf[0][3]) = 0;
 //     ((s32)mf[1][0]) = 0;
