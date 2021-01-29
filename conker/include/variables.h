@@ -9,12 +9,12 @@
 // 0x0002C200
 extern f32 D_8002C200;
 extern f32 D_8002C204;
-extern f32 D_8002C208;
+extern f64 D_8002C208;
 
 // 0x0002C210
 extern f32 D_8002C210;
 extern f32 D_8002C214;
-extern f32 D_8002C218;
+extern f64 D_8002C218;
 
 // 0x0002C220
 extern f32 D_8002C220;
@@ -308,6 +308,7 @@ extern OSMesgQueue *D_800416F0;
 extern OSMesg      *D_80041708;
 
 extern struct151* D_800417B0[];
+extern u32 D_800417BC;
 extern u8 D_800418AC[];
 
 extern u8 D_800419A0;
@@ -794,7 +795,7 @@ extern u8   D_800BE617;
 extern s8   D_800BE618;
 extern s32  D_800BE620;
 extern s32  D_800BE624;
-extern struct140 D_800BE628[]; // contains structs size 0x180
+extern f32 D_800BE628[][16]; // contains structs size 0x180
 // extern s32 D_800BE628;
 extern s32  D_800BE62C;
 extern u8   D_800BE635;
@@ -1043,6 +1044,7 @@ extern s32 D_800D2C2C;
 
 extern s32 D_800D2E50;
 extern u8  D_800D2E60[];
+extern u8  D_800D2E68;
 extern s32 D_800D2E70; // struct/array of size 0xF0
 extern u8  D_800D2E41;
 extern u8  D_800D2E42;
@@ -1053,7 +1055,7 @@ extern struct102 *D_800D2E4C;
 
 extern u8  D_800D2F3C;
 extern u16 *D_800D2F40;
-extern struct248 D_800D2F48; // bzero'd 0xC
+extern struct250 D_800D2F48; // bzero'd 0xC
 extern f32 D_800D2DB0;
 extern s32 D_800D2DB4;
 
@@ -1164,7 +1166,7 @@ extern s32  D_800DC010;
 extern s32 D_800DC020;
 extern struct10 *D_800DC2A0; // TODO: find correct struct
 extern s32 D_800DC2B0;
-extern struct112 D_800DCC10[];
+extern f32 *D_800DCC10[][4];
 extern s32 D_800DC460;
 extern s32 D_800DC464;
 extern u16 D_800DC468[];

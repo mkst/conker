@@ -1,40 +1,32 @@
-#include <ultra64.h>
+#include <libaudio.h>
+#include "n_libaudio.h"
+#include <os_internal.h>
+#include <ultraerror.h>
 
-#include "functions.h"
-#include "variables.h"
+void n_alEvtqNew(ALEventQueue *evtq, N_ALEventListItem *items, s32 itemCount)
+{
+    s32 i;
+    ALLink *item, *to;
 
+    evtq->eventCount     = 0;
+    evtq->allocList.next = 0;
+    evtq->allocList.prev = 0;
+    evtq->freeList.next  = 0;
+    evtq->freeList.prev  = 0;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1C060/n_alEvtqNew.s")
-// void n_alEvtqNew(struct15 *arg0, s32 arg1, s32 arg2) {
-//     s32 spC;
-//     void *sp8;
-//     void *sp4;
-//     s32 temp_t2;
-//
-//     arg0->unk10 = 0;
-//     arg0->unk8 = 0;
-//     arg0->unkC = 0;
-//     arg0->unk0 = 0;
-//     arg0->unk4 = 0;
-//     spC = 0;
-//     if (arg2 > 0) {
-// loop_1:
-//         sp8 = (spC * 0x1C) + arg1;
-//         sp4 = arg0;
-//         sp8->unk0 = (s32) *sp4;
-//         sp8->unk4 = sp4;
-//         if (*sp4 != 0) {
-//             (*sp4)->unk4 = sp8;
-//         }
-//         *sp4 = sp8;
-//         temp_t2 = spC + 1;
-//         spC = temp_t2;
-//         if (temp_t2 < arg2) {
-//             goto loop_1;
-//         }
-//     }
-// }
+    for (i = 0; i < itemCount; i++) {
+        item = &items[i];
+        to = &evtq->freeList;
+        // effectively alLink, TODO: macro this?
+        item->next = to->next;
+        item->prev = to;
+        if (to->next) {
+            to->next->prev = item;
+        }
+        to->next = item;
+    }
 
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1C060/n_alEvtqNextEvent.s")
 // s32 n_alEvtqNextEvent(void *arg0, void *arg1) {

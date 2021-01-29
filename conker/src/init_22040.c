@@ -47,7 +47,7 @@
 //     return sp2C;
 // }
 
-s32 func_10022338(struct21 *arg0, s32 arg1, s32 arg2) {
+s32 n_alLoadParam(struct21 *arg0, s32 arg1, s32 arg2) {
     f32 *sp24 = &arg2;
 
     switch (arg1) {
@@ -68,7 +68,7 @@ s32 func_10022338(struct21 *arg0, s32 arg1, s32 arg2) {
             break;
         default:
             func_10021C40(arg0, arg1, arg2);
-            if (0){};
+            break;
     }
 
     return 0;

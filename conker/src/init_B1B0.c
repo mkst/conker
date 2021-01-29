@@ -18,6 +18,29 @@ struct151 *func_1000B1B0(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B1FC.s")
+// NON-MATCHING: something like this, but not this.
+// void *func_1000B1FC(s32 arg0) {
+//     struct151 *phi_v1_2;
+//     u32 i;
+//
+//     for (i = 0; i < D_800417BC; i += 4) {
+//         if ( D_800417B0[i] != 0 &&  D_800417B0[i]->unk4 == arg0) {
+//             return  D_800417B0[i];
+//         }
+//     }
+//
+//     for (i = 0; i < D_800417BC; i += 4) {
+//         if ( D_800417B0[i] != 0) {
+//             phi_v1_2 =  D_800417B0[i]->unk60;
+//             if (phi_v1_2 != 0 && phi_v1_2->unk4 == arg0) {
+//                 return phi_v1_2;
+//             }
+//         }
+//     }
+//
+//     return NULL;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B294.s")
 // NON-MATCHING: no idea.
 // struct151 * func_1000B294(s32 *arg0) {
@@ -89,23 +112,16 @@ struct151 *func_1000B1B0(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B3D4.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B548.s")
-// NON-MATCHING: something like this but reg is wrong
+// NON-MATCHING: JUSTREG using v0 not v1
 // s32 func_1000B548(s32 *arg0) {
-//     s32 tmp0;
-//     s32 tmp4;
-//     s32 i;
-//     // s32 *ptr = arg0;
 //     s32 ret = 0;
+//     s32 i;
 //
 //     for (i = 0; i < 12; i++) {
-//         tmp4 = D_800419A8[i].unk4;
-//         if (tmp4 != -1) {
-//             tmp0 = D_800419A8[i].unk0;
-//             if (tmp0 != -1) {
-//                 if (tmp4 < 3) {
-//                     *arg0++ = tmp4;
-//                     ret++;
-//                 }
+//         if ((D_800419A8[i].unk4 != -1) && (D_800419A8[i].unk0 != -1)) {
+//             if (D_800419A8[i].unk4 < 3) {
+//                 *arg0++ = D_800419A8[i].unk4;
+//                 ret++;
 //             }
 //         }
 //     }
@@ -309,24 +325,23 @@ s32 func_1000E134(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E17C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E2F4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E40C.s")
-// NON-MATCHING: using a0 not a1
-// void func_1000E40C(s32 arg0, s32 arg1) {
-//     struct151 *temp_v0;
-//
-//     if (arg1 >= 0x8000) {
-//         arg1 = 0x7FFF;
-//     } else if (arg1 < 0) {
-//         arg1 = 0;
-//     }
-//     temp_v0 = func_1000B1FC(arg1);
-//     if (temp_v0 != NULL) {
-//         if (temp_v0->unk0 < 0) {
-//             temp_v0->unk30 = arg1;
-//         }
-//         temp_v0->unk2C = arg1;
-//     }
-// }
+
+void func_1000E40C(s32 arg0, s32 arg1) {
+    struct151 *temp_v0;
+
+    if (arg1 >= 0x8000) {
+        arg1 = 0x7FFF;
+    } else if (arg1 < 0) {
+        arg1 = 0;
+    }
+    temp_v0 = func_1000B1FC(arg0);
+    if (temp_v0 != NULL) {
+        if (temp_v0->unk0 < 0) {
+            temp_v0->unk30 = arg1;
+        }
+        temp_v0->unk2C = arg1;
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E46C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E588.s")

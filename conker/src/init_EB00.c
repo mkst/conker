@@ -41,29 +41,26 @@ s32 func_1000EBC4(struct00 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000EC24.s")
-// ? func_1000EC24(void *arg0, ? arg1, void *arg2, void *arg3, void *arg4, void *arg5, void *arg6) {
-//     s16 temp_v1;
-//     s32 temp_v0_2;
-//     u16 temp_v0;
-//
-//     temp_v0 = *arg6;
-//     if (temp_v0 != 0) {
-//         arg0->unk1C = (s32) temp_v0;
-//         arg0->unk0 = (u16)0;
-//         *arg6 = (u16)0U;
-//     }
-//     temp_v1 = arg0->unk1A - D_800BE9E4;
-//     if ((s32) temp_v1 <= 0) {
-//         temp_v0_2 = *arg2;
-//         if (temp_v0_2 != 0) {
-//             func_10010F30(arg0->unk1C, temp_v0_2 & 0xFFFF, arg3->unk3, arg4->unk2, *arg5);
-//         }
-//         return 1;
-//     }
-//     arg0->unk18 = (?32) temp_v1;
-//     return 0;
-// }
+s32 func_1000EC24(struct251 *arg0, s32 arg1, s32 *arg2, struct11 *arg3, struct04 *arg4, s32 *arg5, u16 *arg6) {
+    s16 temp_v1 = arg0->unk18.h[1];
+
+    if (*arg6 != 0) {
+        arg0->unk1C = *arg6;
+        arg0->unk0 = 0;
+        *arg6 = 0;
+    }
+
+    temp_v1 -= D_800BE9E4;
+
+    if (temp_v1 <= 0) {
+        if (*arg2 != 0) {
+            func_10010F30(arg0->unk1C, *arg2, arg3->unk3, arg4->unk2, *arg5);
+        }
+        return 1;
+    }
+    arg0->unk18.w = temp_v1;
+    return 0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000ECCC.s")
 // ? func_1000ECCC(void *arg0, ? arg1, ? arg2, ? arg3, void *arg6) {

@@ -91,7 +91,7 @@ typedef struct N_PVoice_s {
     s16            em_rratm;
     s16            em_rtgt;
     s32            em_delta;
-    s32            em_segEnd;
+    /* 0x7C */  s32            em_segEnd;
     s32            em_first;
     ALParam        *em_ctrlList;
     ALParam        *em_ctrlTail;
@@ -124,14 +124,12 @@ typedef struct N_ALMainBus_s {
     N_ALFilter           filter;
 } N_ALMainBus;
 
-
-
 typedef struct N_ALAuxBus_s {
     ALFilter            filter;
     s32                 sourceCount;
     s32                 maxSources;
     N_PVoice           **sources;
-    ALFx                *fx;
+    /* 0x20 */  ALFx                *fx;
     ALFx    *fx_array[AL_MAX_AUX_BUS_SOURCES];
 } N_ALAuxBus;
 

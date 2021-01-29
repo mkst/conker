@@ -674,19 +674,6 @@ typedef struct {
 } struct42;
 
 typedef struct {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    u16 unk18;
-    s16 unk1A;
-    s16 unk1C;
-    s16 unk1E;
-} struct43;
-
-typedef struct {
     s16 unk0;   // used
     s16 unk2;   // used
     s16 unk4;   // used
@@ -900,7 +887,9 @@ typedef struct {
     u8  unk6;
     u8  unk7;
     s32 unk8;
-    s32 unkC;
+    s16 unkC;
+    u8  unkE;
+    u8  unkF;
     s16 unk10;
     u8  unk12;  // used
     u8  unk13;
@@ -1028,32 +1017,6 @@ typedef struct {
     u8  pad17[0x4];
     u8  unk1B;
 } struct110;
-
-typedef struct {
-    u8 pad[0x18];
-    f32 unk48;
-    f32 unk4C;
-    f32 unk50;
-} struct111;
-
-typedef struct {
-    f32 unk0;   // used
-    f32 unk4;   // used
-    f32 unk8;   // used
-    f32 unkC;
-    f32 unk10;  // used
-    f32 unk14;  // used
-    f32 unk18;  // used
-    f32 unk1C;
-    f32 unk20;  // used
-    f32 unk24;  // used
-    f32 unk28;  // used
-    f32 unk2C;
-    f32 unk30;  // used
-    f32 unk34;  // used
-    f32 unk38;  // used
-    f32 unk3C;
-} struct112;
 
 typedef struct {
     u8 pad0[0x18];
@@ -1913,7 +1876,7 @@ typedef struct {
     u16 unk4E;
     u16 unk50;
     u8  unk52[0xE];
-    s32 *unk60;  // used
+    struct00 *unk60;  // used
 } struct151;
 
 typedef struct {
@@ -3187,9 +3150,38 @@ typedef struct {
 } struct247; // maybe naudio?
 
 typedef struct {
-    s32 *unk0;
-    u8  pad2[7];
+    u16 unk0; // is this a pointer?
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
     u16 unkA;
-} struct248;
+} struct248; // size 0xC;
+
+typedef struct struct249 struct249;
+
+struct struct249 {
+    u16 unk0;
+    u8  pad2[0x16];
+    struct249 *next;
+};
+
+typedef struct {
+    u16 length;
+    u8  pad2[0x2];
+    struct249 *unk4;
+    s32 unk8;         // tbd
+} struct250; // size 0xC;
+
+typedef struct {
+    u16 unk0;
+    u8  pad2[0x16];
+    union {
+      s32 w;
+      u16 h[2];
+    } unk18;
+    s32 unk1C;
+} struct251;
+
 
 #endif

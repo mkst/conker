@@ -1,44 +1,47 @@
-#include <ultra64.h>
+#include "n_synthInternals.h"
 
-#include "functions.h"
-#include "variables.h"
+extern f32 D_8002C814;
 
 // relies on jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/init_20000/func_10020000.s")
 
-s32 n_alEnvmixerParam(struct21 *arg0, s32 arg1, s32 arg2) {
-    struct21 *sp24 = arg0;
+s32 n_alEnvmixerParam(N_PVoice *filter, s32 paramID, void *param) {
+    N_PVoice  *e = filter;
 
-    switch (arg1) {
-        case 3:
-            if (sp24->unk88 != 0) {
-                *sp24->unk88 = arg2;
-            } else {
-                sp24->unk84 = arg2;
-            }
-            sp24->unk88 = arg2;
-            break;
-        case 4:
-            sp24->unk80 = 1;
-            sp24->unk8C = 0;
-            sp24->unk62 = 1;
-            sp24->unk7C = 0;
-            sp24->unk54 = 0.0f;
-            sp24->unk58 = 1;
-            sp24->unk50 = 0;
-            func_10022338(sp24, 4, arg2);
-            break;
-        case 9:
-            sp24->unk8C = 1;
-            break;
-        default:
-            func_10022338(sp24, arg1, arg2);
-            break;
-    }
-
-    return 0;
+    switch (paramID) {
+      case (AL_FILTER_ADD_UPDATE):
+          if (e->em_ctrlTail) {
+              e->em_ctrlTail->next = (ALParam *)param;
+          } else {
+              e->em_ctrlList = (ALParam *)param;
+          }
+          e->em_ctrlTail = (ALParam *)param;
+          break;
+      case (AL_FILTER_RESET):
+          e->em_first = 1;
+          e->em_motion = AL_STOPPED;
+          e->em_volume = 1;
+          e->em_segEnd = 0;
+          e->rs_delta  = 0.0;
+          e->rs_first  = 1;
+          e->rs_upitch = 0;
+          n_alLoadParam(e, AL_FILTER_RESET, param);
+          break;
+      case (AL_FILTER_START):
+          e->em_motion = AL_PLAYING;
+          break;
+      default:
+#if 1
+          n_alLoadParam(e, paramID, param);
+#else
+          n_alResampleParam(e, paramID, param); // TODO
+#endif
+          break;
+  }
+  return 0;
 }
 
+// _pullSubFrame
 #pragma GLOBAL_ASM("asm/nonmatchings/init_20000/func_10020ABC.s")
 // NON-MATCHING: pretty close but no cigar
 // struct21 *func_10020ABC(struct42 *arg0, struct119 *arg1, s32 arg2, s32 arg3, struct21 *arg4) {
@@ -63,9 +66,9 @@ s32 n_alEnvmixerParam(struct21 *arg0, s32 arg1, s32 arg2) {
 //     if (sp30->unk80) {
 //         sp30->unk80 = 0;
 //         sp30->unk70 = (D_8002BC10[(s16)sp30->unk60] * (s16)sp30->unk62) >> 15;
-//         sp30->unk6E = func_10020E18((s16)sp30->unk64, (s16)sp30->unk70, sp30->unk7C, &sp30->unk6C);
+//         sp30->unk6E = _getRate((s16)sp30->unk64, (s16)sp30->unk70, sp30->unk7C, &sp30->unk6C);
 //         sp30->unk76 = (D_8002BD0E[-(s16)sp30->unk60] * (s16)sp30->unk62) >> 15;
-//         sp30->unk74 = func_10020E18((s16)sp30->unk66, (s16)sp30->unk76, sp30->unk7C, &sp30->unk72);
+//         sp30->unk74 = _getRate((s16)sp30->unk66, (s16)sp30->unk76, sp30->unk7C, &sp30->unk72);
 //
 //         sp2C = sp34 = &sp34->unk8;
 //         sp2C->unk0 = ((s16)sp30->unk64 & 0xFFFF) | 0x9060000;
@@ -99,7 +102,7 @@ s32 n_alEnvmixerParam(struct21 *arg0, s32 arg1, s32 arg2) {
 //     return sp34;
 // }
 
-s16 func_10020E18(f32 arg0, f32 arg1, s32 arg2, u16 *arg3) {
+s16 _getRate(f32 arg0, f32 arg1, s32 arg2, u16 *arg3) {
     s16 spE;
     s16 spC;
     f32 sp8;
@@ -135,15 +138,25 @@ s16 func_10020E18(f32 arg0, f32 arg1, s32 arg2, u16 *arg3) {
     return spE;
 }
 
-s16 func_10021028(s16 arg0, s32 arg1, s16 arg2, u16 arg3) {
-    s32 tmp;
+s16 _getVol(s16 ivol, s32 samples, s16 ratem, u16 ratel)
+{
+    s32 tmp1;
+#ifdef AUD_PROFILE
+    lastCnt[++cnt_index] = osGetCount();
+#endif
 
-    arg1 = arg1 >> 3;
-    if (arg1 == 0) {
-        return arg0;
+    samples >>= 3;
+    if (samples == 0){
+        return ivol;
     }
-    tmp = arg1 * arg3;
-    tmp = tmp >> 16;
-    tmp += (arg2 * arg1);
-    return arg0 = arg0 + tmp;
+
+    tmp1 = ratel * samples;
+    tmp1 >>= 16;
+    tmp1 += ratem * samples;
+    ivol += tmp1;
+
+#ifdef AUD_PROFILE
+    PROFILE_AUD(vol_num, vol_cnt, vol_max, vol_min);
+#endif
+    return ivol;
 }

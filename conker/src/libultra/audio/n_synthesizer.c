@@ -1,7 +1,6 @@
-#include <ultra64.h>
+#include "n_synthInternals.h"
 
-#include "functions.h"
-#include "variables.h"
+extern f32 D_8002C750;
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/n_alSynNew.s")
 // void n_alSynNew(struct07 *arg0) {
@@ -186,36 +185,35 @@
 //     return sp38;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/__n_allocParam.s")
-// void *__n_allocParam(void) {
-//     void *sp4;
-//     void *temp_t0;
-//
-//     sp4 = NULL;
-//     if (D_8002BA44->unk40 != 0) {
-//         sp4 = D_8002BA44->unk40;
-//         temp_t0 = D_8002BA44;
-//         temp_t0->unk40 = (void *) *temp_t0->unk40;
-//         *sp4 = 0;
-//     }
-//     return sp4;
-// }
+ALParam *__n_allocParam() {
+    ALParam *update = 0;
 
-void _n_freeParam(struct36 **arg0) {
-    *arg0 = (s32) D_8002BA44->unk40;
-    D_8002BA44->unk40 = arg0;
+    if (n_syn->paramList) {
+        update = n_syn->paramList;
+        n_syn->paramList = n_syn->paramList->next;
+        update->next = 0;
+    }
+    return update;
+  }
+
+
+void _n_freeParam(ALParam *param)
+{
+  param->next = n_syn->paramList;
+  n_syn->paramList = param;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_collectPVoices.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_freePVoice.s")
 
 s32 _n_timeToSamplesNoRound(s32 micros) {
-    f32 tmp = (((f32) micros * (f32) D_8002BA44->unk54) / D_8002C750) + 0.5f; // 1000000.0f
+    f32 tmp = (((f32) micros * (f32) n_syn->outputRate) / D_8002C750) + 0.5f; // 1000000.0f
     return (s32) tmp;
 }
 
-s32 _n_timeToSamples(s32 micros) {
-    return _n_timeToSamplesNoRound(micros) & -0x10;
+s32 _n_timeToSamples( s32 micros)
+{
+  return _n_timeToSamplesNoRound( micros) & ~0xf;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/__n_nextSampleTime.s")
@@ -255,6 +253,7 @@ s32 _n_timeToSamples(s32 micros) {
 //
 //   return (*client)->samplesLeft;
 // }
+
 // s32 func_10019A04(void *arg0) {
 //     u32 sp4;
 //     void *sp0;

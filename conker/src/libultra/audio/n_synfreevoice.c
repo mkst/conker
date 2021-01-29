@@ -49,7 +49,7 @@ void n_alSynFreeVoice( N_ALVoice *voice)
         }
         voice->pvoice = 0;
     }
-    if (voice->clientPrivate != 0) {
-        n_syn->dma(voice->clientPrivate);
+    if (voice->unk14 != 0) {
+        n_syn->dma(voice->unk14);
     }
 }

@@ -59,7 +59,7 @@ segments:
     - [0xEB00, c]
     - [0x11FA0, c]
     - [0x12560, c]
-    # -g from here (libultra audio code?)
+    # -g from here (libultra (n)audio code)
     - [0x12820, c, "libultra/audio/heap"]
     - [0x128D0, c, "libultra/audio/init_128D0"]
     - [0x13320, c, "libultra/audio/n_csplayer"]
@@ -68,11 +68,12 @@ segments:
     - [0x17A80, c, "libultra/audio/init_17A80"]
     - [0x17AA0, c, "libultra/audio/code_17AA0"]
     - [0x17AF0, c, "libultra/audio/init_17AF0"]
-    - [0x17C00, c]
+    - [0x17C00, c, "libultra/audio/init_17C00"]
     - [0x17D80, c, "libultra/audio/code_17D80"]
-    - [0x17DF0, c]
+    - [0x17DF0, c, "libultra/audio/init_17DF0"]
     - [0x17EC0, c, "libultra/audio/n_cspgettempo"]
-    - [0x17F10, c]
+    - [0x17F10, c, "libultra/audio/init_17F10"]
+    - [0x17F80, c, "libultra/audio/n_csq"]
     - [0x18C60, c, "libultra/audio/code_18C60"]
     - [0x18CB0, c, "libultra/audio/code_18CB0"]
     - [0x18DA0, c, "libultra/audio/n_sl"]
@@ -88,16 +89,17 @@ segments:
     - [0x1C9E0, c, "libultra/audio/n_synsetpitch"]
     - [0x1CA90, c, "libultra/audio/n_synsetpitch2"]
     - [0x1CB40, c, "libultra/audio/n_synsetpan"]
-    - [0x1CBF0, c] # contains n_drvrNew.c + other
-    - [0x1D900, c] #, "libultra/audio/n_synsetfxmix"]
-    - [0x1DBA0, c, "libultra/audio/code_1DBA0"] # __alCSeqNextDelta
+    - [0x1CBF0, c, "libultra/audio/init_1CBF0"] # contains n_drvrNew.c + other
+    - [0x1D900, c, "libultra/audio/init_1D900"] #, "libultra/audio/n_synsetfxmix"]
+    - [0x1DBA0, c, "libultra/audio/n_cseqnextdelta"] # split out of cseq
     - [0x1DC80, c, "libultra/audio/n_synallocvoice"]
-    - [0x1E170, c]
+    - [0x1E170, c, "libultra/audio/n_synstartvoiceparam"]
     - [0x1E2A0, c]
     - [0x1E480, c] # not -g?
     - [0x1E4A0, c]
     - [0x1E530, c]
     - [0x1FB40, c]
+    - [0x1FFE0, c, "libultra/audio/n_synsetpriority"]
     - [0x20000, c]
     - [0x210C0, c]
     - [0x214F0, c]
@@ -202,14 +204,14 @@ segments:
     - [0x0002C3F0, ".data", "init/data/data_2C3F0"]
     - [0x0002C400, ".data", "init/data/data_2C400"]
     - [0x0002C410, ".data", "init_11FA0"]
-    - [0x0002C450, ".data", "libultra/audio/init_128D0"]
+    - [0x0002C450, ".rodata", "libultra/audio/init_128D0"]
     - [0x0002C460, ".data", "init/data/data_2C460"] # jumptables for code_13320.c
     - [0x0002C6B0, ".data", "init/data/data_2C6B0"]
     - [0x0002C710, "bin"] # more data
     - [0x0002C750, ".data", "init/data/data_2C750"]
     - [0x0002C760, ".rodata", "libultra/audio/cents2ratio"]
-    - [0x0002C770, ".data", "init_1CBF0"]
-    - [0x0002C790, ".data", "init_1D900"]
+    - [0x0002C770, ".data", "libultra/audio/init_1CBF0"]
+    - [0x0002C790, ".rodata", "libultra/audio/init_1D900"]
     - [0x0002C7A0, "bin"] # more data
     - [0x0002C810, ".data", "init/data/data_2C810"]
     - [0x0002C850, "bin"] # more data
@@ -361,8 +363,8 @@ segments:
     - [0x75210, c, "libultra/gu/sinf"]
     - [0x753B0, c, "libultra/gu/guPerspectiveF"]
     - [0x75640, c, "libultra/gu/guRotateF"]
-    - [0x75810, asm]
-    - [0x75950, asm]
+    - [0x75810, c, "game/done/game_75810"]
+    - [0x75950, c, "game/done/game_75950"]
     - [0x75a90, c, "game/done/game_75A90"]
     - [0x75bd0, c, "game/done/game_75BD0"]
     - [0x75c90, c]
@@ -426,6 +428,7 @@ segments:
     - [0xD52A0, asm]
     - [0xd5500, c]
     - [0xD5650, asm]
+    - [0xD70F0, asm]
     - [0xD7980, asm]
     - [0xd86a0, asm]
     - [0xdac20, asm] # syscall
@@ -731,23 +734,26 @@ segments:
     - [0x215960, asm]
     - [0x21c4f0, asm]
     - [0x21c540, asm]
-    - [0x21C900, asm]
+    - [0x21C900, asm, libultra/io/pfsinit2] # dupe of libultra/io/pfsinit
+    - [0x21CAC0, asm]
     - [0x21CAF0, asm]
-    - [0x21ccb0, asm]
-    - [0x21ce70, asm]
-    - [0x21cf50, asm]
-    - [0x21d1b0, asm]
+    - [0x21ccb0, asm] # gu function
+    - [0x21ce70, asm] # modified osSetTimer ?
+    - [0x21cf50, asm, libultra/io/contreaddata2]
+    - [0x21d1b0, asm] # more matrix funcs
     - [0x21D420, asm]
     - [0x21d4a0, c, libultra/gu/guNormalize]
-    - [0x21d530, asm]
-    - [0x21d5f0, asm]
-    - [0x21d800, asm]
-    - [0x21d970, asm]
-    - [0x21da00, asm]
-    - [0x21e760, asm]
-    - [0x21F530, asm]
-    - [0x21f8e0, asm]
-    - [0x21fc90, asm]
+    - [0x21d530, c]
+    - [0x21d5f0, c]
+    - [0x21d800, asm, libultra/io/siacs2]          # dupe of libultra/io/siacs
+    - [0x21D8C0, asm, libultra/io/sirawdma2]       # dupe of libultra/io/sirawdma
+    - [0x21d970, asm, libultra/os/gettime2]        # dupe of libultra/os/gettime
+    - [0x21da00, asm, libultra/io/contpfs2]        # dupe of libultra/io/contpfs
+    - [0x21e760, c,   libultra/io/pfschecker2]     # dupe of libultra/io/pfschecker
+    - [0x21F1C0, c,   libultra/io/pfsisplug2]      # dupe of libultra/io/pfsisplug
+    - [0x21F530, asm, libultra/io/contramread2]    # dupe of libultra/io/contramread
+    - [0x21f8e0, asm, libultra/io/contramwrite2]   # dupe of libultra/io/contramwrite
+    - [0x21fc90, c,   libultra/audio/game_21FC90]  # -g
     - [0x221290, c]
     - [0x225d20, asm]
     - [0x2270a0, asm]
@@ -757,6 +763,8 @@ segments:
     vram:  0x80082B20
     files:
     - [0x2275E0, "bin"]
+    - [0x22A980, ".data", "game/done/game_75A90"]
+    - [0x22AA90, "bin"]
     - [0x23A4A0, ".data", "game/data/data_800959E0"]
     - [0x23A4C0, "bin"]
     - [0x23A4F0, ".data", "game/entrypoint"] # jumptable 0x80095A30
@@ -769,7 +777,8 @@ segments:
     - [0x23D570, "bin"]
     - [0x23D870, ".rodata", libultra/gu/guPerspectiveF]
     - [0x23D880, ".rodata", libultra/gu/guRotateF]
-    - [0x23D890, "bin"]
+    - [0x23D890, ".rodata", game/done/game_75810]
+    - [0x23D8A0, ".rodata", game/done/game_75950]
     - [0x23D8C0, ".data",   game_75C90]
     # - [0x23DAC0, ".rodata", game_75C90]
     - [0x23DAE0, ".data",   game_75FC0]

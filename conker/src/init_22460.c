@@ -1,9 +1,7 @@
-#include <ultra64.h>
-
-#include "functions.h"
-#include "variables.h"
+#include "n_synthInternals.h"
 
 
+// modified n_alResamplePull
 #pragma GLOBAL_ASM("asm/nonmatchings/init_22460/func_10022460.s")
 // NON-MATCHING: same issues as the other functions in this range
 // struct21 *func_10022460(struct42 *arg0, struct119 *arg1, struct21 *arg2) {

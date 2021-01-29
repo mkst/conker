@@ -34,15 +34,17 @@ extern "C" {
  * Synthesis driver stuff
  */
 typedef struct N_ALVoice_s {
-    ALLink              node;
-    struct N_PVoice_s   *pvoice;
-    ALWaveTable         *table;
-    /* 0x10 */  s16                 state;
-    /* 0x12 */  s16                 priority;
-    /* 0x14 */  void                *clientPrivate; // is this right?
-    /* 0x18 */  s16                 fxBus;
-    /* 0x1A */  s16                 unityPitch;
-} N_ALVoice;
+    /* 0x00 */  ALLink              node;
+    /* 0x08 */  struct N_PVoice_s   *pvoice;
+    /* 0x0C */  ALWaveTable         *table;
+    /* 0x10 */  void                *unk10;
+    /* 0x14 */  void                *unk14;
+    /* 0x18 */  s16                 state;
+    /* 0x1A */  s16                 priority;
+    // /* 0x1C */  void                *clientPrivate;
+    /* 0x20 */  s16                 fxBus;
+    /* 0x22 */  s16                 unityPitch;
+} N_ALVoice; // size 0x20
 
 typedef struct {
     /* 0x00 */  ALPlayer    *head;          /* client list head                     */
@@ -54,15 +56,16 @@ typedef struct {
     ALLink      pLameList;      /* list of voices ready to be freed     */
     /* 0x1C */  s32         paramSamples;
     /* 0x20 */  s32         curSamples;     /* samples from start of game           */
-    /* 0x24 */  u8          pad[0x8];
+    /* 0x24 */  u8          pad24[0x8];
     /* 0x2C */  ALDMANew    dma;
     ALHeap      *heap;
-    struct ALParam_s      *paramList;
-    struct N_ALMainBus_s  *mainBus;
-    struct N_ALAuxBus_s   *auxBus;
+    u8 pad[0xC];
+    /* 0x40 */  struct ALParam_s      *paramList;
+    /* 0x44 */  struct N_ALMainBus_s  *mainBus;
+    /* 0x48 */  struct N_ALAuxBus_s   *auxBus;
     s32         numPVoices;
     s32         maxAuxBusses;
-    s32         outputRate;
+    /* 0x54 */ s32         outputRate;
     s32         maxOutSamples;
     s32         sv_dramout;
     s32         sv_first;
@@ -90,7 +93,8 @@ void    n_alSynSetPriority( N_ALVoice *voice, s16 priority);
 void    n_alSynSetVol( N_ALVoice *v, s16 volume, ALMicroTime t);
 void    n_alSynStartVoice(N_ALVoice *v, ALWaveTable *table);
 void    n_alSynStartVoiceParams(N_ALVoice *v, ALWaveTable *w,f32 pitch, s16 vol,
-                                ALPan pan, u8 fxmix, ALMicroTime t);
+                                ALPan pan, u8 fxmix, u8 arg6, f32 arg7, u8 arg8,
+                                ALMicroTime t);
 void    n_alSynStopVoice( N_ALVoice *v);
 
 void    n_alSynNew(ALSynConfig *c);
@@ -165,6 +169,15 @@ typedef struct {
 } N_ALUnknownEvent2;
 
 typedef struct {
+    u8  unk0;
+    u8  unk1;
+    u8  unk2;
+    u8  pad3;
+    s32 unk4;
+    u8  pad[0x4];
+} N_ALUnknownEvent3;
+
+typedef struct {
     s16                     type;
     union {
         ALMIDIEvent         midi;
@@ -180,6 +193,7 @@ typedef struct {
         N_ALOscEvent        osc;
         N_ALUnknownEvent1   unknown0;
         N_ALUnknownEvent2   unknown1;
+        N_ALUnknownEvent3   unknown2;
     } msg;
 } N_ALEvent;
 
@@ -199,20 +213,20 @@ void            n_alEvtqFlushType(ALEventQueue *evtq, s16 type);
 typedef struct N_ALVoiceState_s {
     /* 0x00 */  struct N_ALVoiceState_s *next;     /* MUST be first                */
     /* 0x04 */  N_ALVoice          voice;
-    /* 0x20 */  ALSound            *sound;
-    /* 0x24 */  ALMicroTime        envEndTime;     /* time of envelope segment end */
-    /* 0x28 */  f32                pitch;          /* currect pitch ratio          */
-    /* 0x2C */  f32                vibrato;        /* current value of the vibrato */
-    /* 0x30 */  u8                 envGain;        /* current envelope gain        */
-    /* 0x31 */  u8                 channel;        /* channel assignment           */
-    /* 0x32 */  u8                 key;            /* note on key number           */
-    /* 0x33 */  u8                 velocity;       /* note on velocity             */
-    /* 0x34 */  u8                 envPhase;       /* what envelope phase          */
-    /* 0x35 */  u8                 phase;
-    /* 0x36 */  u8                 tremelo;        /* current value of the tremelo */
-    /* 0x37 */  u8                 flags;          /* bit 0 tremelo flag
+    /* 0x24 */  ALSound            *sound;
+    /* 0x28 */  ALMicroTime        envEndTime;     /* time of envelope segment end */
+    /* 0x2C */  f32                pitch;          /* currect pitch ratio          */
+    /* 0x30 */  f32                vibrato;        /* current value of the vibrato */
+    /* 0x34 */  u8                 envGain;        /* current envelope gain        */
+    /* 0x35 */  u8                 channel;        /* channel assignment           */
+    /* 0x36 */  u8                 key;            /* note on key number           */
+    /* 0x37 */  u8                 velocity;       /* note on velocity             */
+    /* 0x38 */  u8                 envPhase;       /* what envelope phase          */
+    /* 0x39 */  u8                 phase;
+    /* 0x3A */  u8                 tremelo;        /* current value of the tremelo */
+    /* 0x3B */  u8                 flags;          /* bit 0 tremelo flag
                                                       bit 1 vibrato flag           */
-    u8 pad[0xC];
+    u8 pad3C[0x8];
 } N_ALVoiceState;
 
 typedef struct {
@@ -241,6 +255,9 @@ typedef struct {
     /* 0x7C */  ALSeqMarker        *loopStart;
     /* 0x80 */  ALSeqMarker        *loopEnd;
     /* 0x84 */  s32                 loopCount;      /* -1 = loop forever, 0 = no loop   */
+    /* 0x88 */  u8 pad88[0x4];
+    /* 0x8C */  u8 maxVoices;
+    /* 0x8D */  u8 usedVoices;
 } N_ALSeqPlayer;
 
 typedef struct {

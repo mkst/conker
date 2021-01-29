@@ -6,7 +6,9 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001E530.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001ED6C.s")
+// _n_loadOutputBuffer ?
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001F28C.s")
+// _n_loadBuffer ?
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001F5A4.s")
 // void *func_1001F5A4(void *arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, void *arg5) {
 //     void *sp34;
@@ -114,21 +116,20 @@
 //     return sp24;
 // }
 
-
-f32 func_1001FA78(struct112 *arg0, s32 arg1) {
+f32 func_1001FA78(f32 arg0[4][4], s32 arg1) {
     f32 tmp;
 
-    arg0->unk14 += arg0->unk10 * arg1;
-    if (arg0->unk14 > 2.0f) {
-        arg0->unk14 -= 4.0f;
+    arg0[1][1] += arg0[1][0] * arg1;
+    if (arg0[1][1] > 2.0f) {
+        arg0[1][1] -= 4.0f;
     }
     else {
-        arg0->unk14 = arg0->unk14; // ???
+        arg0[1][1] = arg0[1][1]; // ???
     }
 
-    tmp = arg0->unk14;
+    tmp = arg0[1][1];
     tmp = tmp < 0.0f ? -tmp : tmp;
     tmp = tmp - 1.0f;
 
-    return tmp * arg0->unk1C;
+    return tmp * arg0[1][3];
 }

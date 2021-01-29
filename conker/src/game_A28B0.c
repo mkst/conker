@@ -1639,7 +1639,7 @@ void func_1507B2CC(void) {
 void func_1507B318(void) {
     D_800D1580 = func_1507A3E8();
     if (func_1506E46C(D_800D154C, &D_800D1580, 0) != 0) {
-        func_1506BA4C(0x12C, 0xBB8);
+        func_1506BA4C(300, 0xBB8);
     }
 }
 

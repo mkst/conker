@@ -1,8 +1,6 @@
-#include <ultra64.h>
+#include <n_libaudio.h>
 
-#include "functions.h"
-#include "variables.h"
-
+void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan);
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001AAE0.s")
 // void func_1001AAE0(void *arg0, s32 arg1) {
@@ -37,8 +35,8 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001ABA0.s")
-// void func_1001ABA0(struct26 *arg0, void *arg1, s32 arg2) {
+#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_seqpReleaseVoice.s")
+// void __n_seqpReleaseVoice(void *arg0, void *arg1, s32 arg2) {
 //     void *sp3C;
 //     s16 sp38;
 //     void *sp34;
@@ -88,7 +86,7 @@
 //     sp34->unk38 = (u8)3;
 //     sp34->unk34 = (u8)0;
 //     sp34->unk28 = (s32) (arg0->unk1C + arg2);
-//     func_1001FFE0(arg1, 0);
+//     n_alSynSetPriority(arg1, 0);
 //     n_alSynSetVol(arg1, 0, arg2);
 //     sp38 = 5;
 //     sp3C = arg1;
@@ -98,52 +96,59 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001ADA4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001AF28.s")
-// NON-MATCHING: what is going on with struct26!
-// struct29 *func_1001AF28(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3) {
-//     struct29 *sp4;
-//
-//     sp4 = arg0->unk6C;
-//     if (arg0->unk8D > arg0->unk8C) {
-//         return NULL;
-//     }
-//     if (sp4 != 0) {
-//         arg0->unk6C = sp4->unk0;
-//         sp4->unk0 = 0;
-//         if (arg0->unk64 == 0) {
-//             arg0->unk64 = &sp4->unk0;
-//         } else {
-//             arg0->unk68 = &sp4->unk0;
-//         }
-//         arg0->unk68 = sp4->unk0;
-//         sp4->unk35 = arg3;
-//         sp4->unk36 = arg1;
-//         sp4->unk37 = arg2;
-//         sp4->unk14 = sp4;
-//         arg0->unk8D++;
-//     }
-//     return sp4;
-// }
+N_ALVoiceState *__n_mapVoice(N_ALSeqPlayer *seqp, u8 key, u8 vel, u8 channel)
+{
+    N_ALVoiceState  *vs = seqp->vFreeList;
+
+    if (seqp->usedVoices > seqp->maxVoices) {
+        return NULL;
+    }
+
+    if (vs) {
+
+        seqp->vFreeList = vs->next;
+
+        vs->next = 0;
+
+        if (!seqp->vAllocHead)
+            seqp->vAllocHead = vs;
+        else
+            seqp->vAllocTail->next = vs;
+
+        seqp->vAllocTail = vs;
+
+        vs->channel             = channel;
+        vs->key                 = key;
+        vs->velocity            = vel;
+        vs->voice.unk10         = vs; // this isn't right
+
+        seqp->usedVoices++;
+    }
+
+    return vs;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001AFEC.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B07C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_vsVol.s")
-// s16 __n_vsVol(struct25 *arg0, struct26 *arg1) {
-//     s32 sp4;
-//     s32 sp0;
-//
-//     sp4 = (s32) (arg0->unk3A * arg0->unk37 * arg0->unk34) >> 6;
-//     sp0 = (s32) ((arg1->unk60 + (arg0->unk35 * 0x3C))->unk9 * (arg0->unk24->unkD * arg1->unk32)) >> 0xE;
-//     if ((arg1->unk60 + (arg0->unk35 * 0x3C))->unkD != 0xFF) {
-//         sp0 = (s32) ((u32) (((arg1->unk60 + (arg0->unk35 * 0x3C))->unkD * sp0) + 1) >> 8);
-//     }
-//     sp4 = sp4 * sp0;
-//     sp4 = (s32) ((u32) sp4 >> 0xF);
-//     return sp6;
-// }
+s16 __n_vsVol(N_ALVoiceState *vs, N_ALSeqPlayer *seqp)
+{
+    u32     t1,t2;
 
+    t1 = (vs->tremelo*vs->velocity*vs->envGain) >> 6;
+    t2 = (vs->sound->sampleVolume*seqp->vol*
+          seqp->chanState[vs->channel].vol) >> 14;
+
+    if (seqp->chanState[vs->channel].unkD != 0xFF) {
+        t2 = ((seqp->chanState[vs->channel].unkD * t2) + 1) >> 8;
+    }
+
+    t1 *= t2;
+    t1 >>= 15;
+
+    return t1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B310.s")
 // NON-MATCHING: missing a move
@@ -157,36 +162,66 @@
 //     return (MAX(0, MIN(127, sp10)) | sp14) & 0xff;
 // }
 
-s32 __n_vsDelta(struct07 *arg0, s32 t) {
-    s32 delta = arg0->unk28 - t;
-    if (delta >= 0) {
-        return delta;
-    } else {
-        return 1000; // AL_GAIN_CHANGE_TIME
+ALMicroTime __n_vsDelta(N_ALVoiceState *vs, ALMicroTime t) {
+  /*
+   * If we are interrupting a previously set envelope segment, we
+   * need to recalculate the segment end time given the current
+   * time. Note: this routine assumes that the voice is currently
+   * playing.
+   */
+
+  s32 delta = vs->envEndTime - t;
+
+  if (delta >= 0) {
+      return delta;
+  } else {
+      return AL_GAIN_CHANGE_TIME;
+  }
+}
+
+ALPan __n_vsPan(N_ALVoiceState *vs, N_ALSeqPlayer *seqp)
+{
+    s32 tmp;
+
+    tmp = seqp->chanState[vs->channel].pan - AL_PAN_CENTER +
+        vs->sound->samplePan;
+    tmp = MAX(tmp, AL_PAN_LEFT);
+    tmp = MIN(tmp, AL_PAN_RIGHT);
+
+    return (ALPan) tmp;
+}
+
+// not vanilla
+#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_initFromBank.s")
+
+void __n_initChanState(N_ALSeqPlayer *seqp)
+{
+    int i;
+
+    for (i = 0; i < seqp->maxChannels; i++)
+    {
+        seqp->chanState[i].instrument = 0;
+        __n_resetPerfChanState (seqp, i);
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_vsPan.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_initFromBank.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_initChanState.s")
-
-void __n_resetPerfChanState(struct26 *arg0, s32 chan) {
-    arg0->unk60[chan].unkA = 0;     // fxId or fxmix ?
-    arg0->unk60[chan].unk6 = 64;    // pan
-    arg0->unk60[chan].unk9 = 127;   // vol
-    arg0->unk60[chan].unk7 = 5;     // priority
-    arg0->unk60[chan].unkC = 0;     // sustain
-    arg0->unk60[chan].unk4 = 200;   // bendRange
-    arg0->unk60[chan].unk18 = 1.0f; // pitchBend
-    arg0->unk60[chan].unk17 = 0;
-    arg0->unk60[chan].unkD = 255;
-    arg0->unk60[chan].unkE = 255;
-    arg0->unk60[chan].unkF = 0;
-    arg0->unk60[chan].unkB = 0;
-    arg0->unk60[chan].unk16 = 0;
-    arg0->unk60[chan].unk15 = 0;
-    arg0->unk60[chan].unk14 = 0;
-    arg0->unk60[chan].unk8 = 0;
+void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan) {
+    seqp->chanState[chan].fxmix = 0;
+    seqp->chanState[chan].pan = AL_PAN_CENTER;
+    seqp->chanState[chan].vol = AL_VOL_FULL;
+    seqp->chanState[chan].priority = AL_DEFAULT_PRIORITY;
+    seqp->chanState[chan].sustain = 0;
+    seqp->chanState[chan].bendRange = 200;
+    seqp->chanState[chan].pitchBend = 1.0f;
+    seqp->chanState[chan].unk17 = 0;
+    seqp->chanState[chan].unkD = 255;
+    seqp->chanState[chan].unkE = 255;
+    seqp->chanState[chan].unkF = 0;
+    seqp->chanState[chan].unkB = 0;
+    seqp->chanState[chan].unk16 = 0;
+    seqp->chanState[chan].unk15 = 0;
+    seqp->chanState[chan].unk14 = 0;
+    seqp->chanState[chan].unk8 = 0;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B7D0.s")

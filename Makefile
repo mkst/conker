@@ -31,11 +31,17 @@ PYTHON  = python3
 LD_SCRIPT = $(BASENAME).ld
 LDFLAGS   = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map --no-check-sections
 
+ifeq ($(NON_MATCHING),1)
+VERIFY :=
+else
+VERIFY := verify
+endif
+
 ### Targets
 
 default: all
 
-all: dirs $(TARGET).z64 verify
+all: dirs $(TARGET).z64 $(VERIFY)
 
 dirs:
 	$(foreach dir,$(BIN_DIR) $(RZIP_DIRS),$(shell mkdir -p $(BUILD_DIR)/$(dir)))

@@ -654,26 +654,26 @@ typedef struct ALVoiceState_s {
 
 typedef struct {
     ALInstrument        *instrument;    /* instrument assigned to this chan */
-    s16                 bendRange;      /* pitch bend range in cents        */
-    ALFxId              fxId;           /* type of fx assigned to this chan */
-    ALPan               pan;            /* overall pan for this chan        */
-    u8                  priority;       /* priority for this chan           */
-    u8                  vol;            /* current volume for this chan     */
-    u8                  fxmix;          /* current fx mix for this chan     */
-    u8                  sustain;        /* current sustain pedal state      */
+    /* 0x04 */  s16                 bendRange;      /* pitch bend range in cents        */
+    // /* 0x06 */  ALFxId              fxId;           /* type of fx assigned to this chan */
+    /* 0x06 */  ALPan               pan;            /* overall pan for this chan        */
+    /* 0x07 */  u8                  priority;       /* priority for this chan           */
+    /* 0x08 */  u8                  unk8;
+    /* 0x09 */  u8                  vol;            /* current volume for this chan     */
+    /* 0x0A */  u8                  fxmix;          /* current fx mix for this chan     */
+    /* 0x0B */  u8                  unkB;
+    /* 0x0C */  u8                  sustain;        /* current sustain pedal state      */
 /* RARE EXTRAS */
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-/* DEFAULT */
-    f32                 pitchBend;      /* current pitch bend val in cents  */
-/* MORE RARE EXTRAS */
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 pad18[0x24];
+    /* 0x0D */  u8                  unkD;
+    /* 0x0E */  u8                  unkE;
+    /* 0x0F */  u8                  unkF;
+    /* 0x10 */  u8                  pad10[0x4];
+    /* 0x14 */  u8                  unk14;
+    /* 0x15 */  u8                  unk15;
+    /* 0x16 */  u8                  unk16;
+    /* 0x17 */  u8                  unk17;
+    /* 0x18 */  f32                 pitchBend;  /* current pitch bend val in cents  */
+    /* 0x1C */  u8                  pad1C[0x20];
 /* END OF RARE EXTRAS */
 } ALChanState;
 

@@ -26,17 +26,18 @@ void func_100010F8(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1050/func_10001194.s")
 // NON-MATCHING: start/end mostly ok, middle, not-so-much.
+// s32 *malloc(s32, s32, s32, s32);
 // void func_10001194(s32 arg0) {
-//     s32 pad;
+//     u32 block_count;
 //     s32 sp44;
 //     s32 sp40;
 //     u32 sp28;
-//     u32 block_count;
+//     s32 offset;
 //     s32 phi_s0;
 //     s32 i;
-//     s32 offset;
+//     s32 *fb;
 //
-//     offset = 0x42450;
+//     offset = D_80042450;
 //
 //     func_10005218();
 //     phi_s0 = 0x80400000 - (s32)&D_80043B40;
@@ -45,29 +46,38 @@ void func_100010F8(s32 arg0) {
 //     } else {
 //         bzero(&D_800E9D10, 0x80400000 - (s32)&D_800E9D10);
 //     }
-//     osInvalICache(D_80043B40, phi_s0);
-//     osInvalDCache(D_80043B40, phi_s0);
+//     osInvalICache(&D_80043B40, phi_s0);
+//     osInvalDCache(&D_80043B40, phi_s0);
 //     func_10003920();
 //     func_10003930();
 //     func_10003BD0();
 //     func_1000709C();
-//     D_8002AAE8[0] = func_10003C6C(126144, 0xFF, 3, 1, 0);
-//     D_8002AAE8[1] = func_10003C6C(126144, 0xFF, 3, 1, 0);
+//     fb = D_8002AAE8;
+//     *(fb + 0) = func_10003C6C(126144, 0xFF, 3, 1, 0);
+//     *(fb + 1) = func_10003C6C(126144, 0xFF, 3, 1, 0);
 //     osCreateViManager(OS_PRIORITY_VIMGR);
+//
+//     // permuter...
+//     if (!phi_s0) {};
+//
 //     func_10004514(offset, &D_80082B20, 16, 1);
+//     if (0) {};
 //     sp44 = D_80082B20 + offset;         // D_80082B20 + first
 //     sp28 = (s32)func_1019EA88 - sp44;   // second TLB offset - temp_v0 // func_1600000 ?
 //     sp40 = malloc(sp28, 1, 2, 0);
 //     func_10004514(sp44, sp40, sp28, 1);
+//     if (0) {};
 //     func_10006240(sp40, &D_80082B20, D_8003809C);
 //     func_10004074(sp40);
+//     // D_80033330 is the current compressed item
 //     block_count = (u32) (((s32)func_151FA130 - (s32)func_15000000) + 4095) >> 12; // 2072880 bytes / 4096 = 506 offsets
-//     D_800354F8 = ALIGN16(D_80033330); // + 0xF) & -0x10);
-//     D_800354FC = ALIGN16(D_80032B30); // & -0x10;
-//     func_10004514(offset + 4, D_800354FC, ALIGN16(block_count+2), 1); // ((((block_count + 2) * 4) + 0xF) | 0xF) ^ 0xF
+//     D_800354F8 = ALIGN16(&D_80033330);
+//     // D_800354FC holds compressed code offsets (encrypted/unencrypted)
+//     D_800354FC = ALIGNU16(&D_80032B30);
+//     func_10004514(offset + 4, D_800354FC, (((((block_count + 2)) + 0xF) | 0xF) ^ 0xF) , 1); //
 //
 //     for (i = 0; i < block_count; i++) {
-//         D_800354FC[i] = (D_800354FC[i] ^ 0x8039CCCA) + offset; //tmp;
+//         D_800354FC[i] = (D_800354FC[i] ^ 0x8039CCCA) + offset;
 //     }
 //
 //     D_8003BE74 = 0;

@@ -53,7 +53,7 @@ enum {
 };
 
 #define AL_MAX_RSP_SAMPLES      160
-    
+
 /*
  * buffer locations based on AL_MAX_RSP_SAMPLES
  */
@@ -105,16 +105,20 @@ typedef struct ALParam_s {
 } ALParam;
 
 typedef struct {
-    struct ALParam_s            *next;
-    s32                         delta;
-    s16                         type;
-    s16                         unity;  /* disable resampler */
-    f32                         pitch;
-    s16                         volume;
-    ALPan                       pan;
-    u8                          fxMix;
-    s32                         samples;
-    struct ALWaveTable_s        *wave;
+    /* 0x00 */  struct ALParam_s            *next;
+    /* 0x04 */  s32                         delta;
+    /* 0x08 */  s16                         type;
+    /* 0x0A */  s16                         unity;  /* disable resampler */
+    /* 0x0C */  f32                         pitch;
+    /* 0x10 */  s16                         volume;
+    /* 0x12 */  ALPan                       pan;
+    /* 0x13 */  u8                          fxMix;
+    /* 0x14 */  u8                          unk14;
+    /* 0x15 */  u8                          unk15;
+    /* 0x16 */  u8                          pad[0x2];
+    /* 0x18 */  f32                         unk18;
+    /* 0x1C */  s32                         samples;
+    /* 0x20 */  struct ALWaveTable_s        *wave;
 } ALStartParamAlt;
 
 typedef struct {
@@ -161,7 +165,7 @@ typedef struct {
     s32                         sample;
     s32                         lastsam;
     s32                         first;
-    s32                         memin; 
+    s32                         memin;
 } ALLoadFilter;
 
 void    alLoadNew(ALLoadFilter *f, ALDMANew dma, ALHeap *hp);
@@ -333,4 +337,3 @@ s32             _timeToSamples(ALSynth *ALSynth, s32 micros);
 ALMicroTime     _samplesToTime(ALSynth *synth, s32 samples);
 
 #endif
-

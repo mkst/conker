@@ -32,6 +32,9 @@ D_800A6958 = 0x800A6958;
 D_800A6A0C = 0x800A6A0C;
 D_800CC521 = 0x800CC521;
 D_800CC5A0 = 0x800CC5A0;
+D_80098DD8 = 0x80098DD8;
+D_80098DE0 = 0x80098DE0;
+D_80098DE8 = 0x80098DE8;
 
 gMessageQueue     = 0x80038908;
 gMessageQueue0    = 0x800388C8;
@@ -43,3 +46,6 @@ __osRunningThread = 0x8002BE00;
 n_alGlobals       = 0x8002BA40;
 n_syn             = 0x8002BA44;
 D_8002BA44        = 0x8002BA44;
+osViClock         = 0x8002BDE8;
+
+jtbl8002C708      = 0x8002C708;

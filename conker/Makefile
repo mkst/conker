@@ -23,7 +23,7 @@ else
 SRC_DIR := src_debug
 OFFSETS_LENGTH      := 2112
 TEXT_SECTION_LENGTH := 1380000
-COMPRESS_DIR_ARGS   := --num-offsets 528 --total-size 1380000 --level 8
+COMPRESS_DIR_ARGS   := --num-offsets 528 --total-size 1380000
 endif
 endif
 endif
@@ -96,7 +96,7 @@ GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
 
-INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os -I src/libultra/audio
+INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os -I src/libultra/audio -I src/libultra/io
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
@@ -116,6 +116,7 @@ $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17C00.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17DF0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17F10.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_17F80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_19B50.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1AAE0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1C060.o: OPT_FLAGS := -g
@@ -132,12 +133,21 @@ $(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
 
+# not exactly right:
+# $(BUILD_DIR)/$(SRC_DIR)/libultra/io/%.o: OPT_FLAGS := -g3
+
+### Non-matching
+ifeq ($(NON_MATCHING),1)
+VERIFY :=
+else
+VERIFY := verify
+endif
 
 ### Targets
 
 default: all
 
-all: dirs $(TARGET).bin verify
+all: dirs $(TARGET).bin $(VERIFY)
 
 dirs:
 	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) ,$(shell mkdir -p build/$(dir)))
@@ -159,10 +169,10 @@ check: $(BASENAME).$(VERSION).ok
 # check built bin
 verify: $(TARGET).ok
 
-progress: verify progress.csv
+progress: $(VERIFY) progress.csv
 
 # replace original binaries
-replace: verify $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
+replace: $(VERIFY) $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
 	cp $(TARGET).header.bin ../bin/header.$(VERSION).bin
 	cp $(TARGET).boot.bin ../bin/boot.$(VERSION).bin
 	cp $(TARGET).init.bin ../bin/init.$(VERSION).bin

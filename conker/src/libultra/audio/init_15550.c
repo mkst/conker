@@ -44,13 +44,14 @@ s32 func_10015878(N_ALSndPlayer *sp) {
 
     alsp = sp;
     do {
-        if (alsp->nextEvent.type == 32) {
-            if (0) {};
+        switch (alsp->nextEvent.type) {
+        case 32:
             event.type = 32;
             n_alEvtqPostEvent(&alsp->evtq, &event, alsp->frameTime, 3);
-        } else {
-            func_10015944(&alsp->nextEvent);
-            if (0) {};
+            break;
+        default:
+            _n_handleEvent(&alsp->nextEvent);
+            break;
         }
         alsp->nextDelta = n_alEvtqNextEvent(&alsp->evtq, &alsp->nextEvent);
     } while (alsp->nextDelta == 0);
@@ -60,7 +61,7 @@ s32 func_10015878(N_ALSndPlayer *sp) {
 }
 
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10015944.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/_n_handleEvent.s")
 
 void func_10016E90(N_ALUnknownStruct1 *arg0) {
     if ((arg0->unk53 & 4) != 0) {

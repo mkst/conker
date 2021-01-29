@@ -6,4 +6,8 @@
 #define ALIGN8(val) ((((s32)val) + 0x7) & ~0x7)
 #define ALIGN16(val) ((((s32)val) + 0xF) & ~0xF)
 
+#define ALIGNU16(val) ((((u32)val) + 0xF) & ~0xF)
+
+#define CLAMP(x, min, max) ((x) < (min) ? (min) : (x) > (max) ? (max) : (x))
+
 #endif

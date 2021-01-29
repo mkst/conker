@@ -1,7 +1,4 @@
-#include <ultra64.h>
-
-#include "functions.h"
-#include "variables.h"
+#include <n_libaudio.h>
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1FB40/func_1001FB40.s")
@@ -140,7 +137,3 @@
 //     }
 //     return sp54;
 // }
-
-void func_1001FFE0(struct43 *arg0, s16 arg1) {
-    arg0->unk1A = arg1;
-}

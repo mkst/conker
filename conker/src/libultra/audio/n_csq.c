@@ -1,25 +1,9 @@
-#include <ultra64.h>
+#include <n_libaudio.h>
 
-#include "functions.h"
-#include "variables.h"
-
-
-void func_10017F10(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
-    struct38 tmp;
-
-    tmp.unk0 = 0x1A;
-    tmp.unk4 = arg1;
-    tmp.unk5 = arg2;
-    tmp.unk6 = arg3;
-    tmp.unk7 = arg4;
-
-    n_alEvtqPostEvent(&arg0->unk48, &tmp, 0, 2);
-}
-
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/n_alCSeqNew.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/n_alCSeqNextEvent.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/__n_alCSeqGetTrackEvent.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/func_100186DC.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/n_alCSeqNew.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/n_alCSeqNextEvent.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/__n_alCSeqGetTrackEvent.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/func_100186DC.s")
 // void func_100186DC(void *arg0, void *arg1) {
 //     s32 sp4;
 //     s32 temp_t0;
@@ -47,8 +31,8 @@ void func_10017F10(struct26 *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/func_10018790.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_17F10/__getTrackByte.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/func_10018790.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/__getTrackByte.s")
 // u8 __getTrackByte(s32 arg0, s32 arg1) {
 //     u8 spF;
 //     u8 spE;

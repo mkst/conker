@@ -12,7 +12,7 @@ s32 func_10002070(s32 arg0, s32 arg1, s32 arg2) {
 // NOT MATCHING: stack is incorrect
 // void func_10002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     D_80035500 = 0;
-//     func_100020D0(func_10002070, 0, arg3, &arg3);
+//     func_100020D0(func_10002070, 0, arg1, &arg1);
 // }
 
 // this is a beast:

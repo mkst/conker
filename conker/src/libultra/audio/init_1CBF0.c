@@ -13,14 +13,6 @@ f32 D_8002C78C = 0.0;
 
 f32 func_150484A0(f32, f32);
 
-typedef struct {
-    s16 unk0;
-    s16 unk2;
-    s32 unk4;
-    s16 unk8[0x10];
-    s32 unk28;
-} struct125;
-
 
 void func_1001CBF0(f32 arg0, f32 arg1, f32 arg2, f32 arg3[3], f32 arg4[3]) {
     f32 sp24;
@@ -41,7 +33,7 @@ void func_1001CBF0(f32 arg0, f32 arg1, f32 arg2, f32 arg3[3], f32 arg4[3]) {
     arg4[2] = ((1.0f + sp20) - sp1C) / (1.0f + sp20 + sp1C);
 }
 
-void func_1001CD54(struct125 *arg0) {
+void init_lpfilter(ALLowPass *arg0) {
     s32 i;
     s32 sp10;
     s16 spE;
@@ -49,25 +41,24 @@ void func_1001CD54(struct125 *arg0) {
     f32 sp4;
     f32 sp0;
 
-    sp10 = arg0->unk0 * 16384.0f;
+    sp10 = arg0->fc * 16384.0f;
     spE = sp10 >> 15;
-    arg0->unk2 = 16384.0f - spE;
-    arg0->unk28 = 0;
+    arg0->fgain = 16384.0f - spE;
+    arg0->fstate = 0;
 
     for (i = 0; i < 8; i++)
     {
-        arg0->unk8[i] = 0;
+        arg0->fcvec.fccoef[i] = 0;
     }
-    arg0->unk8[i] = spE;
+    arg0->fcvec.fccoef[i++] = spE;
 
-    i = i + 1;
     sp0 = 16384.0f;
     sp4 = temp_f8 = spE / sp0;
 
     for (;i < 16; i++)
     {
         sp4 *= temp_f8;
-        arg0->unk8[i] = sp4 * sp0;
+        arg0->fcvec.fccoef[i] = sp4 * sp0;
     }
 }
 
@@ -93,37 +84,35 @@ f32 func_1001CEA4(s32 arg0) {
     return sp0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1CBF0/func_1001CF38.s")
-// NON-MATCHING: missing some addiu
-// void func_1001CF38(struct139 *arg0, f32 arg1) {
-//     s32 i;
-//     struct17 sp30;
-//     struct17 sp24;
-//
-//     if (arg0->unk2 == 0) {
-//         return;
-//     }
-//     if ((s32) arg0->unk2 < 10) {
-//         arg0->unk2 = 10;
-//     }
-//     func_1001CBF0(arg1,  arg0->unk0 + 10.0f, arg0->unk2 / 10.0f, &sp30, &sp24);
-//
-//     for(i = 3; i < 8; i++) {
-//         arg0->unk8[i] = 0;
-//     }
-//     arg0->unk8[0] =       (s32) (sp30.unk0 * (D_8002C780 - (arg0->unk2 * 128.0f)));
-//     arg0->unk8[1] = (s16) (s32) (sp30.unk4 * (D_8002C784 - (arg0->unk2 * 128.0f)));
-//     arg0->unk8[2] = 0;
-//
-//     arg0->unk8[8] = (s16) (s32) (sp24.unk4 * -16384.0f);
-//     arg0->unk8[9] = (s16) (s32) (sp24.unk8 * -16384.0f);
-//     //
-//     for (i = 10; i < 16; i++) {
-//         arg0->unk8[i] = 0;
-//     }
-// }
+void func_1001CF38(ALLowPass *arg0, f32 arg1) {
+    s32 i;
+    f32 sp30[3];
+    f32 sp24[3];
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1CBF0/n_alFxNew.s")
+    if (arg0->fgain == 0) {
+        return;
+    }
+    if (arg0->fgain < 10) {
+        arg0->fgain = 10;
+    }
+    func_1001CBF0(arg1,  arg0->fc + 10.0f, arg0->fgain / 10.0f, &sp30, &sp24);
+
+    for(i = 3; i < 8; i++) {
+        arg0->fcvec.fccoef[i] = 0;
+    }
+    arg0->fcvec.fccoef[0] = sp30[0] * (D_8002C780 - (arg0->fgain * 128.0f));
+    arg0->fcvec.fccoef[1] = sp30[1] * (D_8002C784 - (arg0->fgain * 128.0f));
+    arg0->fcvec.fccoef[2] = 0;
+
+    arg0->fcvec.fccoef[8] = sp24[1] * -16384.0f;
+    arg0->fcvec.fccoef[9] = sp24[2] * -16384.0f;
+
+    for (i = 10; i < 16; i++) {
+        arg0->fcvec.fccoef[i] = 0;
+    }
+}
+
+#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_1CBF0/n_alFxNew.s")
 
 void alN_PVoiceNew(N_PVoice *mv, ALDMANew dmaNew, ALHeap *hp) {
     mv->dc_state = alHeapDBAlloc(0, 0, hp, 1, sizeof(ADPCM_STATE));

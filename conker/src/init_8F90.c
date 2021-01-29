@@ -159,6 +159,7 @@ void func_100093CC(void) {
     }
 }
 
+// audio thread
 #pragma GLOBAL_ASM("asm/nonmatchings/init_8F90/func_10009400.s")
 // NON-MATCHING: a long way to go
 // void func_10009400(s32 arg0) {
