@@ -1,7 +1,9 @@
 # Conker's Bad Fur Day Decompilation
 
 ![build](https://github.com/mkst/conker/workflows/build/badge.svg)
-![progress](https://img.shields.io/badge/dynamic/json?url=https%3A//conker.deco.mp/latest.json&color=critical&label=Complete&query=$.summary[0].percent&suffix=%&link=https%3A//conker.deco.mp)
+![progress](https://img.shields.io/badge/dynamic/json?url=https%3A//conker.deco.mp/latest.json&color=critical&label=Complete&query=$.progress[?(@.version=='us'\)].sections[?(@.section=='game'\)].percent&suffix=%&link=https%3A//conker.deco.mp)
+
+
 
 A WIP decompilation of Conker's Bad Fur Day.
 

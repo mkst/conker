@@ -109,45 +109,54 @@ s32 func_1000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000EFB4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F1A8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F248.s")
+// #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F248.s")
 // NON-MATCHING: plenty still to do
-// void func_1000F248(s32 arg0) {
-//     s32 temp_v0;
-//
-//     func_1000F1A8();
-//     if (arg0 == 4) {
-//         D_80041F54 = 0;
-//         D_80041F58 = D_8002C3F8; // 0.009999999776482582
-//     } else {
-//         D_80041F54 = 23000;
-//         D_80041F58 = D_8002C3FC; // 0.10000000149011612
-//     }
-//     if (arg0 == 0x35) {
-//         D_80041FD9 = (u8)0;
-//     } else if (arg0 == 0x36) {
-//         D_80041FD9 = (u8)0;
-//     } else if ((arg0 == (u8)0x3C) || (arg0 == 0x3A) || (arg0 == 0x40)) {
-//         D_80041FD9 = (u8)0;
-//         D_80041FD8 = (u8)0x3C;
-//     } else if (arg0 == 0x27) {
-//         D_80041FD9 = (u8)0;
-//         D_80041FD8 = 40;
-//     }
-//     temp_v0 = malloc(1762, 1, 0, 0);
-//     D_80041F5C = temp_v0;
-//     bzero(temp_v0, 1762);
-//     if (arg0 == 0x31) {
-//         D_80041FDC = 14000;
-//     } else {
-//         D_80041FDC = 23000;
-//     }
-//     func_10011E88(&arg0);
-//     D_80041F61 = (u8)0;
-//     D_80041F60 = (u8)0;
-//     func_10017780(0, D_80041F56);
-//     func_10017780(1, D_80041F56);
-//     func_10017780(2, 23000);
-// }
+void func_10017780(u8 arg0, u16 arg1);
+s32* malloc(s32, s32, s32, s32);
+void func_1000F248(s32 arg0) {
+    u16 tmp;
+
+    func_1000F1A8();
+    if (arg0 == 4) {
+        D_80041F54 = 0;
+        D_80041F58 = D_8002C3F8; // 0.009999999776482582
+    } else {
+        D_80041F54 = 23000;
+        D_80041F58 = D_8002C3FC; // 0.10000000149011612
+    }
+
+    if (arg0 == 0x35) {
+        D_80041FD9 = 0;
+    } else if (arg0 == 0x36) {
+        D_80041FD9 = 0;
+    } else if (arg0 == 0x3C) {
+        D_80041FD9 = 0;
+        D_80041FD8 = 0x3C;
+    } else if (arg0 == 0x27) {
+        D_80041FD9 = 0;
+        D_80041FD8 = 0x28;
+    } else if ((arg0 == 0x3A) || (arg0 == 0x40)) {
+        D_80041FD9 = 0;
+        D_80041FD8 = 0x3C;
+    }
+
+    D_80041F5C = malloc(1762, 1, 0, 0);
+
+    bzero(D_80041F5C, 1762);
+
+    if (arg0 == 0x31) {
+        D_80041FDC = 14000;
+    } else {
+        D_80041FDC = 23000;
+    }
+    func_10011E88(arg0);
+    D_80041F60 = D_80041F61 = 0;
+    func_10017780(0, D_80041F56);
+    func_10017780(1, D_80041F56);
+    func_10017780(2, 23000);
+    // fakematch
+    if (arg0) {}
+}
 
 s32 func_1000F3D0(u16 arg0) {
     struct120 *temp_v1;
@@ -290,13 +299,23 @@ void func_1000F9D4(u16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010154.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010344.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010558.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010630.s")
 
-void func_10010720(u16 arg0, struct48 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 arg5) {
+#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010630.s")
+// void func_10010630(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4) {
+//     if (arg1->interaction_state != 0) {
+//         if (arg1->camera != 0) {
+//             func_10010F30(arg0, arg2 & 0xFFFF, 64, 0, (((u32) arg1->unk184 >> 3) & 0x30) * 2); //
+//         } else {
+//             func_1000FA64(arg0, arg1->x_position, arg1->y_position, arg1->z_position, arg2, arg4, arg3, (void *)func_1000EE70, arg1, arg1->unique_id, 0, 0);
+//         }
+//     }
+// }
+
+void func_10010720(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 arg5) {
     if (arg5 <= 0) {
         func_10010630(arg0, arg1, arg2, arg3, arg4);
     } else {
-        func_1000FA64(arg0, arg1->unk14, arg1->unk18, arg1->unk1C, arg2, arg4, arg3, func_1000EDA0, arg5, arg1, 0, 0);
+        func_1000FA64(arg0, arg1->x_position, arg1->y_position, arg1->z_position, arg2, arg4, arg3, func_1000EDA0, arg5, arg1, 0, 0);
     }
 }
 
@@ -358,14 +377,14 @@ s32 func_10010894(struct127 *arg0) {
 // }
 
 void func_100109D0(struct127 *arg0) {
-  if (arg0->camera) {
-      if (arg0->unk8E) {
-          func_100111C8(arg0->unk8E);
-      }
-  } else {
-      func_1000FD38(func_1000EE70, arg0, arg0->unique_id | 0x10000);
-  }
-  arg0->unk8E = 0;
+    if (arg0->camera) {
+        if (arg0->unk8E) {
+            func_100111C8(arg0->unk8E);
+        }
+    } else {
+        func_1000FD38(func_1000EE70, arg0, arg0->unique_id | 0x10000);
+    }
+    arg0->unk8E = 0;
 }
 
 void func_10010A3C(struct127 *arg0) {

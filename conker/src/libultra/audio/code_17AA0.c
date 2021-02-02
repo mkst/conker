@@ -2,6 +2,8 @@
 
 
 // this was the very first function to be successfully translated to C
+
+// n_alSeqpPlay or n_alCSPPlay?
 void func_10017AA0(N_ALCSPlayer *seqp)
 {
     N_ALEvent evt;

@@ -33,4 +33,5 @@ conker/ctx.c
 # optional tools
 
 tools/decomp-permuter
+tools/gfxdis
 tools/mips_to_c

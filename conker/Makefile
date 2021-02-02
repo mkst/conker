@@ -106,7 +106,7 @@ CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
 CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt  --no-check-sections
+LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt --no-check-sections
 
 ### Overrides
 
@@ -132,6 +132,7 @@ $(BUILD_DIR)/$(SRC_DIR)/init_20000.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
+
 
 # not exactly right:
 # $(BUILD_DIR)/$(SRC_DIR)/libultra/io/%.o: OPT_FLAGS := -g3

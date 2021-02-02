@@ -743,7 +743,7 @@ segments:
     - [0x21d1b0, asm] # more matrix funcs
     - [0x21D420, asm]
     - [0x21d4a0, c, libultra/gu/guNormalize]
-    - [0x21d530, c]
+    - [0x21d530, c, libultra/gu/mtxcatl]
     - [0x21d5f0, c]
     - [0x21d800, asm, libultra/io/siacs2]          # dupe of libultra/io/siacs
     - [0x21D8C0, asm, libultra/io/sirawdma2]       # dupe of libultra/io/sirawdma

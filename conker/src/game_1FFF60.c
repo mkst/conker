@@ -137,33 +137,28 @@ void func_151D3308(struct224 *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D3354.s")
-// NON-MATCHING: JUSTREG - using v1 not v0
-// void func_151D3354(struct224 *arg0) {
-//     struct224 *temp_v0;
-//     struct224 *temp_v1;
-//
-//     if (arg0->unk30 != 0)
-//     {
-//         temp_v0 = arg0->unk30;
-//         temp_v1 = arg0->unk44;
-//         if (temp_v1) {
-//             temp_v1->unk40 = arg0->unk40;
-//         }
-//         else {
-//             temp_v0->unk24 = arg0->unk40;
-//         }
-//
-//         temp_v0 = arg0->unk40;
-//         if (temp_v0) {
-//             temp_v0->unk44 = arg0->unk44;
-//         }
-//         else {
-//             temp_v0->unk28 = arg0->unk44;
-//         }
-//         temp_v0->unk20 -= 1;
-//     }
-// }
+void func_151D3354(struct224 *arg0) {
+    struct224 *temp_v0;
+    struct224 *temp_v1;
+    struct224 *temp_v2;
+
+    if (arg0->unk30) {
+        temp_v0 = arg0->unk30;
+        if (temp_v1 = arg0->unk44) {
+            temp_v1->unk40 = arg0->unk40;
+        } else {
+            temp_v0->unk24 = arg0->unk40;
+        }
+
+        if (temp_v2 = arg0->unk40) {
+            temp_v2->unk44 = arg0->unk44;
+        } else {
+            temp_v0->unk28 = arg0->unk44;
+        }
+
+        temp_v0->unk20 -= 1;
+    }
+}
 
 void func_151D33B8(struct224 *arg0) {
     while (arg0->unk20 > 0) {
