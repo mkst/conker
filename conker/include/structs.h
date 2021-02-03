@@ -847,20 +847,6 @@ typedef struct {
     u16 unk24;  // used
 } struct57;
 
-typedef struct { // size 0x44
-    u32 pad0[3];
-    s32 unkC;               // used
-    void *framebuffer;      // framebuffer
-    s32 unk14;
-    OSTask *osTask;          // used
-    u32 pad1[0xF];
-    OSMesgQueue *mesgQueue; // used
-    OSMesg *mesg;           // used
-} struct58;
-
-
-/* chunk 0 */
-
 typedef struct {
     f32 x;
     f32 y;
@@ -1877,7 +1863,11 @@ typedef struct {
     u8  pad34[0x1A];
     u16 unk4E;
     u16 unk50;
-    u8  unk52[0xE];
+    u8  unk52[0x6];
+    s16 unk58;
+    s16 unk5A;
+    s16 unk5C;
+    u8  pad5E[0x2];
     struct00 *unk60;  // used
 } struct151;
 

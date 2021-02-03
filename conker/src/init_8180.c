@@ -26,7 +26,7 @@ void func_10017E4C(N_ALCSPlayer *csp, u8 chan, u8 arg2);
 void func_10017F10(N_ALCSPlayer *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4);
 void func_10018790(N_ALCSPlayer *arg0, s32 arg1, u32 arg2, u32 arg3);
 void func_10018D00(N_ALCSPlayer *arg0, s16 arg1);
-
+void func_10018D50(N_ALCSPlayer *seqp);
 
 // this one is a monster
 #pragma GLOBAL_ASM("asm/nonmatchings/init_8180/func_10008180.s")

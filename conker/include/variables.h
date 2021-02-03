@@ -2,7 +2,7 @@
 #define VARIABLES_H
 
 #include "structs.h"
-
+#include "sched.h"
 
 /* defined */
 
@@ -94,12 +94,12 @@ extern u8   D_8002AAE0;
 extern u8   D_8002AAE4;
 extern s32  D_8002AAE8[2]; // pointer to framebuffer
 extern u8   D_8002AB40;
-extern OSViMode *D_8002AB90;
-extern OSViMode *D_8002ABE0;
+extern OSViMode D_8002AB90;
+extern OSViMode D_8002ABE0;
 extern s32  D_8002AC30;
-extern struct58 *D_8002AC50; // contains pointer to framebuffer pointer
-extern struct58 *D_8002AC54;
-extern struct58 *D_8002AC58;
+extern OSScTask *D_8002AC50;
+extern OSScTask *D_8002AC54;
+extern OSScTask *D_8002AC58;
 extern u8   D_8002AC5C;
 extern u8   D_8002AC60;
 extern u16  D_8002AC64;
@@ -175,9 +175,9 @@ extern u32  D_80038098;
 extern u32  D_8003809C;
 extern f32  D_800380A0;
 extern f32  D_800380A4;
-extern s32 *D_800380B0;
-extern s32 *D_800380B4;
-extern s32 *D_800380B8;
+extern struct54 *D_800380B0;
+extern struct54 *D_800380B4;
+extern struct54 *D_800380B8;
 extern s32 *D_800380BC;
 
 extern s32  D_800380C0;
@@ -243,7 +243,9 @@ extern s32  D_8003BE70;
 extern s32  D_8003BE74;
 extern s16  D_8003BE78;
 extern s8   D_8003BE7C;
+extern s32  D_8003BE94;
 
+extern s32  D_8003C858;
 extern s32  D_8003C8E0;
 extern struct26 *D_8003C900[];
 extern struct14 *D_8003CD40;
@@ -328,7 +330,7 @@ extern f32  D_80042788;
 extern f32  D_80042790;
 extern f32  D_80042794;
 extern f32  D_80042798;
-extern s32  D_800427A0;
+extern struct105 D_800427A0;
 extern s32  D_800427B0;
 extern s16  D_800427F4;
 extern struct120 D_800425E0[];

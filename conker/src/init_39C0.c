@@ -20,7 +20,7 @@ void func_100039C0(void) {
         mode = &D_8002AB90;
     }
     osViSetMode(mode);
-    osViSwapBuffer(D_8002AAE8[D_800BE9C0 ^ 1]);
+    osViSwapBuffer((void *)D_8002AAE8[D_800BE9C0 ^ 1]);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_39C0/func_10003ACC.s")

@@ -31,22 +31,3 @@ void func_10018CB0(N_ALCSPlayer *seqp, ALCSeq *seq)
 
     n_alEvtqPostEvent(&seqp->evtq, &evt, 0, 2);
 }
-
-void func_10018D00(N_ALCSPlayer *seqp, s16 vol)
-{
-    N_ALEvent evt;
-
-    evt.type            = AL_SEQP_VOL_EVT;
-    evt.msg.spvol.vol   = vol;
-
-    n_alEvtqPostEvent(&seqp->evtq, &evt, 0, 2);
-}
-
-void func_10018D50(N_ALCSPlayer *seqp)
-{
-    N_ALEvent evt;
-
-    evt.type            = AL_SEQP_STOP_EVT;
-
-    n_alEvtqPostEvent(&seqp->evtq, &evt, 0, 2);
-}

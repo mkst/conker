@@ -54,34 +54,39 @@ void func_1508F9C4(void) {
 // NON-MATCHING: help.
 // Gfx** func_15091534(Gfx** arg0, struct257 *arg1, u8 *arg2) {
 //     s32 temp_v0;
+//     Gfx** tmp;
+//
 //     *arg2 = 0;
 //     // get address for texture?
 //     temp_v0 = func_1510D0EC(&arg1->unkD16, 0, 3, 0);
+//     tmp = arg0;
 //     if (temp_v0 != 0x80000000) {
 //       // FD50000012345678
 //       gDPSetTextureImage(*arg0++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, temp_v0);
 //       // F550000007098260
-//       gDPSetTile(*arg0++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
+//       gDPSetTile(*tmp++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
 //       // E600000000000000
-//       gDPLoadSync(*arg0++);
+//       gDPLoadSync(*tmp++);
 //       // F3000000073FF000
-//       gDPLoadBlock(*arg0++, G_TX_LOADTILE, 0, 0, 1023, 0);
+//       gDPLoadBlock(*tmp++, G_TX_LOADTILE, 0, 0, 1023, 0);
 //       // E700000000000000
-//       gDPPipeSync(*arg0++);
+//       gDPPipeSync(*tmp++);
 //       // F540080000098260
-//       gDPSetTile(*arg0++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
+//       gDPSetTile(*tmp++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
 //       // F2000000000FC0FC
-//       gDPSetTileSize(*arg0++, G_TX_RENDERTILE, 0, 0, qu102(63), qu102(63));
+//       gDPSetTileSize(*tmp++, G_TX_RENDERTILE, 0, 0, qu102(63), qu102(63));
 //       // FD10000012345678
-//       gDPSetTextureImage(*arg0++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, temp_v0 + 2048);
+//       gDPSetTextureImage(*tmp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, temp_v0 + 2048);
 //       // E600000000000000
-//       gDPLoadSync(*arg0++);
+//       gDPLoadSync(*tmp++);
 //       // F00000000603C000
-//       gDPLoadTLUTCmd(*arg0++, 6, 15);
+//       gDPLoadTLUTCmd(*tmp++, 6, 15);
 //       // EF00AC3F00504244
-//       gDPSetOtherMode(*arg0++, G_AD_DISABLE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_RGBA16 | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE | G_PM_NPRIMITIVE | 0x0000000F, G_AC_NONE | G_ZS_PRIM | G_RM_XLU_SURF | G_RM_XLU_SURF2);
+//       gDPSetOtherMode(*tmp++, G_AD_DISABLE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_RGBA16 | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE | G_PM_NPRIMITIVE | 0x0000000F, G_AC_NONE | G_ZS_PRIM | G_RM_XLU_SURF | G_RM_XLU_SURF2);
+//
+//       *arg2 = (u8)1;
 //     }
-//     return arg0;
+//     return tmp;
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150916B4.s")

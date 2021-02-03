@@ -51,9 +51,9 @@ void func_100126E8(s32 arg0, s32 arg1) {
 }
 
 s32 func_10012718(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4) {
-    u32 sp3C;
-    u32 sp38;
-    u32 sp34;
+    s32 sp3C;
+    s32 sp38;
+    s32 sp34;
 
     if (arg1->camera != 0) {
         func_1001263C(arg0, arg2, 64);

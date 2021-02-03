@@ -12,9 +12,9 @@ s32 malloc(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_3C40/func_10004074.s")
 
 void func_10004250(void) {
-    u32 temp_v0;
+    s32 temp_v0;
     u32 temp_v1;
-    u32 mask;
+    OSIntMask mask;
     struct54 *phi_s0;
 
     mask = osSetIntMask(1);
@@ -67,17 +67,13 @@ void func_1000440C(void) {
     struct54 *last_good_foo;
     s32 tmp0;
 
-    foo = D_800380B8;
-    tmp0 = 0;
-
-    if (foo) {
-        do {
-            if (tmp0 < (s32) foo->unk8) {
-                tmp0 = foo->unk8;
-                last_good_foo = foo;
-            }
-        } while ((foo = foo->unkC));
+    for (foo = D_800380B8, tmp0 = NULL; foo != NULL; foo = (struct54 *)foo->unkC) {
+        if (tmp0 < (s32) foo->unk8) {
+            tmp0 = foo->unk8;
+            last_good_foo = foo;
+        }
     }
+
     D_800380B0 = last_good_foo;
     D_8002AC30 = tmp0;
 }

@@ -503,9 +503,9 @@ void func_10011E88(s32 arg0) {
 void func_10011E94(s32 arg0) {
     if (arg0) {
         D_80041F61 = 1;
-        return;
+    } else {
+        D_80041F61 = 0;
     }
-    D_80041F61 = 0;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10011EB8.s")

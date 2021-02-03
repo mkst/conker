@@ -77,26 +77,24 @@ void func_15018F80(s16 arg0) {
     D_8003C8E0 = 0;
 }
 
-
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_1501905C.s")
-// NON-MATCHING: JUSTREG: 99% there, but struct calls using v1 not v0
-// void func_1501905C(void) {
-//     D_800BE9D0 = D_800BE9D8[D_800BE9C0];
-//     *D_800BE728 = func_1501BBB8();
-//     func_15019F20();
-//     if ((D_800BEAC1 != 0) && (D_800BEAC0 == 0)) {
-//         func_15169040(0, 0x47);
-//     }
-//     func_1501C1B0();
-//     func_1501BB20();
-//     func_1502C380();
-//     func_1000D758(D_800DBFF0->unk2A4, D_800DBFF0->unk2A8, D_800DBFF0->unk2AC);
-//     func_10011BB8();
-//     if (D_800E0B94 == 2) {
-//         func_150ADACC(0x81280783); // 2166884227
-//     }
-//     func_10012020();
-// }
+void func_1501905C(void) {
+    D_800BE9D0 = D_800BE9D8[D_800BE9C0];
+    *D_800BE728 = func_1501BBB8();
+    func_15019F20();
+    if ((D_800BEAC1 != 0) && (D_800BEAC0 == 0)) {
+        func_15169040(0, 0x47);
+    }
+    func_1501C1B0();
+    func_1501BB20();
+    func_1502C380();
+    if (0) {};
+    func_1000D758(D_800DBFF0->unk2A4, D_800DBFF0->unk2A8, D_800DBFF0->unk2AC);
+    func_10011BB8();
+    if (D_800E0B94 == 2) {
+        func_150ADACC(0x81280783); // 2166884227
+    }
+    func_10012020();
+}
 
 // few loops
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019130.s")

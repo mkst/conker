@@ -101,7 +101,7 @@ INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
 CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r4300_mul
-CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI
+CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D_MIPS_SZLONG=32
 # ignore compiler warnings about anonymous structs
 CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
@@ -113,18 +113,12 @@ LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VE
 $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 
 # TODO: blindly move all of this into libultra/audio
-$(BUILD_DIR)/$(SRC_DIR)/init_17C00.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17DF0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17F10.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_17F80.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_19B50.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1AAE0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1C060.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1CBF0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1D900.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1E170.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1E2A0.o: OPT_FLAGS := -g
-# $(BUILD_DIR)/$(SRC_DIR)/init_1E480.o: OPT_FLAGS := -g # --> not -g!
+$(BUILD_DIR)/$(SRC_DIR)/init_1E480.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1E4A0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1E530.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_1FB40.o: OPT_FLAGS := -g
@@ -158,6 +152,7 @@ clean:
 	rm -rf bin
 	rm -rf build
 	rm -rf $(BASENAME).*.ok
+	rm -f *auto.txt
 
 really-clean: clean
 	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin

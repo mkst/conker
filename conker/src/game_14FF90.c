@@ -588,38 +588,34 @@ void func_15127FEC(struct108 *arg0, s32 arg1, s32 arg2) {
 void func_15128680(s32 arg0) {
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_1512868C.s")
-// NON-MATCHING: JUSTREG: using a2 not t0
-// void func_1512868C(struct108 *arg0) {
-//     struct127 *temp_v1_2;
-//     struct126 *temp_t0;
-//     u8 idx;
-//     s32 i;
-//
-//     for (i = 0; i < 21; i++)
-//     {
-//         arg0->unk20C[i] = 0;
-//     }
-//
-//     arg0->unk2C = 1;
-//     arg0->unkDC = 0;
-//     arg0->unk134 = 1;
-//     arg0->unk84 = 14;
-//     arg0->unk1B4 = 3;
-//     func_15124B18(arg0);
-//     idx = arg0->unk23D;
-//     arg0->unk3D0 = temp_v1_2 = &D_800CC2D0[idx];
-//     arg0->unk368 = arg0->unk3CC = idx;
-//     temp_t0 = temp_v1_2->unk31C;
-//     arg0->unk190 = 0.0f;
-//     arg0->unk198 = 0.0f;
-//     arg0->unk18C = 0.0f;
-//     arg0->unk194 = 0.0f;
-//     arg0->unk674 = 1.0f;
-//     arg0->unk3D4 = temp_t0;
-//     temp_t0->unk198 = 0;
-//     arg0->unk73C = 0;
-// }
+void func_1512868C(struct108 *arg0) {
+    struct127 *temp_v1_2;
+    u8 idx;
+    s32 i;
+
+    for (i = 0; i < 21; i++)
+    {
+        arg0->unk20C[i] = 0;
+    }
+
+    arg0->unk2C = 1;
+    arg0->unkDC = 0;
+    arg0->unk134 = 1;
+    arg0->unk84 = 14;
+    arg0->unk1B4 = 3;
+    func_15124B18(arg0);
+    idx = arg0->unk23D;
+    arg0->unk3D0 = temp_v1_2 = &D_800CC2D0[idx];
+    arg0->unk368 = arg0->unk3CC = idx;
+    arg0->unk3D4 = temp_v1_2->unk31C;
+    arg0->unk190 = 0.0f;
+    arg0->unk198 = 0.0f;
+    arg0->unk18C = 0.0f;
+    arg0->unk194 = 0.0f;
+    arg0->unk674 = 1.0f;
+    arg0->unk3D4->unk198 = 0;
+    arg0->unk73C = 0;
+}
 
 void func_15128774(struct108 *arg0, struct127 *arg1) {
     arg0->unk35C = arg1->unk180;

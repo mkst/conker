@@ -39,7 +39,7 @@
 #define OS_SC_DONE_MSG          2
 #define OS_SC_RDP_DONE_MSG      3
 #define OS_SC_PRE_NMI_MSG       4
-#define OS_SC_LAST_MSG          4	/* this should have highest number */
+#define OS_SC_LAST_MSG          4  /* this should have highest number */
 #define OS_SC_MAX_MESGS         8
 
 typedef struct {
@@ -48,32 +48,33 @@ typedef struct {
 } OSScMsg;
 
 typedef struct OSScTask_s {
-    struct OSScTask_s   *next;          /* note: this must be first */
-    u32                 state;
-    u32			flags;
-    void		*framebuffer;	/* used by graphics tasks */
+    /* 0x00 */  struct OSScTask_s   *next;           /* note: this must be first */
+    /* 0x04 */  u32                 state;
+    /* 0x08 */  u8                  pad[0x4];
+    /* 0x0C */  u32                 flags;
+    /* 0x10 */  void                *framebuffer;    /* used by graphics tasks */
 
-    OSTask              list;
-    OSMesgQueue         *msgQ;
-    OSMesg              msg;
-#ifndef _FINALROM                       /* all #ifdef items should    */
-    OSTime              startTime;      /* remain at the end!!, or    */
-    OSTime              totalTime;      /* possible conflict if       */
-#endif                                  /* FINALROM library used with */
-} OSScTask;                             /* non FINALROM code          */
+    /* 0x14 */  OSTask              list;
+    /* 0x58 */  OSMesgQueue         *msgQ;
+    /* 0x5C */  OSMesg              msg;
+#ifndef _FINALROM                                   /* all #ifdef items should    */
+    /* 0x60 */  OSTime              startTime;      /* remain at the end!!, or    */
+    /* 0x64 */  OSTime              totalTime;      /* possible conflict if       */
+#endif                                              /* FINALROM library used with */
+} OSScTask;                                         /* non FINALROM code          */
 
 /*
  * OSScTask flags:
  */
-#define OS_SC_NEEDS_RDP	        0x0001	/* uses the RDP */
-#define OS_SC_NEEDS_RSP	        0x0002  /* uses the RSP */
+#define OS_SC_NEEDS_RDP          0x0001  /* uses the RDP */
+#define OS_SC_NEEDS_RSP          0x0002  /* uses the RSP */
 #define OS_SC_DRAM_DLIST        0x0004  /* SP & DP communicate through DRAM */
-#define OS_SC_PARALLEL_TASK     0x0010	/* must be first gfx task on list */
-#define OS_SC_LAST_TASK	        0x0020	/* last task in queue for frame */
-#define OS_SC_SWAPBUFFER        0x0040	/* swapbuffers when gfx task done */
+#define OS_SC_PARALLEL_TASK     0x0010  /* must be first gfx task on list */
+#define OS_SC_LAST_TASK          0x0020  /* last task in queue for frame */
+#define OS_SC_SWAPBUFFER        0x0040  /* swapbuffers when gfx task done */
 
-#define OS_SC_RCP_MASK		0x0003	/* mask for needs bits */
-#define OS_SC_TYPE_MASK		0x0007	/* complete type mask */
+#define OS_SC_RCP_MASK    0x0003  /* mask for needs bits */
+#define OS_SC_TYPE_MASK    0x0007  /* complete type mask */
 /*
  * OSScClient:
  *
@@ -112,4 +113,3 @@ void            osScRemoveClient(OSSched *s, OSScClient *c);
 OSMesgQueue     *osScGetCmdQ(OSSched *s);
 
 #endif
-

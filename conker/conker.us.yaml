@@ -51,6 +51,8 @@ segments:
     - [0x5570, asm, "libultra/io/motor"]
   # - [0x57E0, asm] no file split here!
     - [0x5AB0, c]
+    # - [0x6240, c]
+    # - [0x71D0, c]
     - [0x8120, asm, "libultra/os/maptlbrdb"]
     - [0x8180, c]
     - [0x8F90, c]
@@ -76,6 +78,8 @@ segments:
     - [0x17F80, c, "libultra/audio/n_csq"]
     - [0x18C60, c, "libultra/audio/code_18C60"]
     - [0x18CB0, c, "libultra/audio/code_18CB0"]
+    - [0x18D00, c, "libultra/audio/init_18D00"]
+    - [0x18D50, c, "libultra/audio/init_18D50"]
     - [0x18DA0, c, "libultra/audio/n_sl"]
     - [0x18E60, c, "libultra/audio/n_synthesizer"]
     - [0x19AB0, c, "libultra/audio/cents2ratio"]
@@ -94,7 +98,9 @@ segments:
     - [0x1DBA0, c, "libultra/audio/n_cseqnextdelta"] # split out of cseq
     - [0x1DC80, c, "libultra/audio/n_synallocvoice"]
     - [0x1E170, c, "libultra/audio/n_synstartvoiceparam"]
-    - [0x1E2A0, c]
+    - [0x1E2A0, c, "libultra/audio/init_1E2A0"]
+    - [0x1E350, c, "libultra/audio/init_1E350"]
+    - [0x1E400, c, "libultra/audio/init_1E400"]
     - [0x1E480, c] # not -g?
     - [0x1E4A0, c]
     - [0x1E530, c]

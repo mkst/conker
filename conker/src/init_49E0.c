@@ -71,14 +71,14 @@
 // case 2:
 //     if (D_8003A582 == 3) {
 //         if (osSpTaskYielded(D_8002AC50->osTask) == (u8)1U) {
-//             osSpTaskLoad(D_8002AC54->osTask);
-//             osSpTaskStartGo(D_8002AC54->osTask);
+//             osSpTaskLoad(D_8002AC54->list);
+//             osSpTaskStartGo(D_8002AC54->list);
 //             D_8003A581 = (u8)1U;
 //             D_8003A582 = (u8)4U;
 //         } else {
 //             D_8003A582 = (u8)1U;
-//             osSpTaskLoad(D_8002AC54->osTask);
-//             osSpTaskStartGo(D_8002AC54->osTask);
+//             osSpTaskLoad(D_8002AC54->list);
+//             osSpTaskStartGo(D_8002AC54->list);
 //             D_8003A581 = (u8)1U;
 //             D_8003A583 = (u8)0U;
 //         }
@@ -113,8 +113,8 @@
 //             osSpTaskYield();
 //             D_8003A582 = (u8)3U;
 //         } else {
-//             osSpTaskLoad(D_8002AC54->osTask);
-//             osSpTaskStartGo(D_8002AC54->osTask);
+//             osSpTaskLoad(D_8002AC54->list);
+//             osSpTaskStartGo(D_8002AC54->list);
 //             D_8003A581 = (u8)1U;
 //             goto loop_1;
 //         case 6:
@@ -156,8 +156,8 @@
 
 void func_10004F00(void) {
     if (D_8002AC5C == 0) {
-        osSpTaskLoad(&D_8002AC50->osTask);
-        osSpTaskStartGo(&D_8002AC50->osTask);
+        osSpTaskLoad(&D_8002AC50->list);
+        osSpTaskStartGo(&D_8002AC50->list);
         D_8003A580 = 0;
         D_8002AC58 = D_8002AC50;
         D_8003A583 = 1;
@@ -174,7 +174,7 @@ void func_10004F00(void) {
 }
 
 void func_10004FE0(void) {
-    if ((s32) D_8003B238 <= 0) {
+    if (D_8003B238 <= 0) {
         D_8003A582 = 6;
     } else {
         func_10005020();
@@ -182,13 +182,13 @@ void func_10004FE0(void) {
 }
 
 void func_10005020(void) {
-    s32 fb;
+    void *fb;
 
     D_8003A582 = 0;
     fb = D_8002AC50->framebuffer;
-    if ((D_8002AC50->unkC & 0x40) && (D_8002AC5C == 0)) {
-        func_1515FDA0(D_8002AC50->framebuffer);
+    if ((D_8002AC50->flags & OS_SC_SWAPBUFFER) && (D_8002AC5C == 0)) {
+        func_1515FDA0(fb);
         osViSwapBuffer(fb);
     }
-    osSendMesg(D_8002AC50->mesgQueue, D_8002AC50->mesg, 1);
+    osSendMesg(D_8002AC50->msgQ, D_8002AC50->msg, 1);
 }

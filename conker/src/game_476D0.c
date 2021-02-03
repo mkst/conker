@@ -52,6 +52,7 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A490.s")
 
+// display list
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A680.s")
 // NON-MATCHING: ???
 // struct189 *func_1501A680(struct189 *arg0) {
