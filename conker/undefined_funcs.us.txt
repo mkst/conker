@@ -1,1 +1,2 @@
+__osDevMgrMain                  = 0x10002E50;
 __n_CSPHandleMetaMsg            = 0x10015044;

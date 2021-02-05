@@ -1,36 +1,36 @@
-#include <ultra64.h>
+// #include <ultra64.h>
+
+#include <libaudio.h>
+#include <os_internal.h>
+#include <ultraerror.h>
 
 #include "functions.h"
 #include "variables.h"
 
-
-void func_100128D0(struct8 *arg0, s32 arg1) {
-    s32 size = arg1;
+void alSeqFileNew(ALSeqFile *arg0, u8 *base) {
+    s32 offset = base;
     s32 i;
-    for (i = 0; i < arg0->unk2; i++)
+
+    for (i = 0; i < arg0->seqCount; i++)
     {
-        arg0->unk4[i].unk0 += size;
+        arg0->seqArray[i].offset += offset;
     }
 }
 
-void func_10012934(struct122 *arg0, s32 arg1, s32 arg2) {
-    struct8 *sp24;
-    s32 sp20;
-    s32 sp1C;
+// non-vanila alBnkfNew
+void func_10012934(ALBankFile *file, u8 *table, s32 arg2) {
+    s32 offset = file;
+    s32 woffset = table;
+    s32 sp1C = arg2;
+
     s32 i;
 
-    sp24 = arg0;
-    sp20 = arg1;
-    sp1C = arg2;
+    ALFailIf(file->revision != AL_BANK_VERSION, ERR_ALBNKFNEW);
 
-    if (arg0->unk0 != 'B1') { // 0x4231 - first 4 bytes of assets17/0000.bin!
-        return;
-    }
-
-    for (i = 0; i < arg0->unk2; i++) {
-        arg0->unk4[i] += (s32)sp24; // ??
-        if (arg0->unk4[i] != 0) {
-            func_10012A28(arg0->unk4[i], sp24, sp20, sp1C);
+    for (i = 0; i < file->bankCount; i++) {
+        file->bankArray[i] = (ALBank *)((u8 *)file->bankArray[i] + offset) ; // (s32)sp24; // ??
+        if (file->bankArray[i] != 0) {
+            func_10012A28(file->bankArray[i], offset, woffset, sp1C);
         }
     }
 }
@@ -44,6 +44,7 @@ void func_10012A28(struct121 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 
     arg0->unk2 = 1;
+
     if (arg0->unk8 != 0) {
         arg0->unk8 += arg1;
         func_10012B84(arg0->unk8, arg3);

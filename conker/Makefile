@@ -127,6 +127,7 @@ $(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
 
+# $(BUILD_DIR)/$(SRC_DIR)/game_3B920.o: OPT_FLAGS := -g
 
 # not exactly right:
 # $(BUILD_DIR)/$(SRC_DIR)/libultra/io/%.o: OPT_FLAGS := -g3
@@ -148,13 +149,13 @@ dirs:
 	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) ,$(shell mkdir -p build/$(dir)))
 
 clean:
-	rm -rf asm
-	rm -rf bin
 	rm -rf build
-	rm -rf $(BASENAME).*.ok
-	rm -f *auto.txt
 
 really-clean: clean
+	rm -rf asm
+	rm -rf bin
+	rm -rf $(BASENAME).*.ok
+	rm -f *auto.txt
 	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
 
 extract: $(BUILD_DIR)/splat

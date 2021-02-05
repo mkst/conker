@@ -10,6 +10,7 @@ html/
 junk/
 nonmatchings
 py/
+rodata/
 rzip/
 src_debug/
 src_eu/

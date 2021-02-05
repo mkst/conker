@@ -60,4 +60,5 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_5AB0/func_10007DA0.s")
 
+// contains "EXITED OK" etc text
 #pragma GLOBAL_ASM("asm/nonmatchings/init_5AB0/func_10007DAC.s")

@@ -109,7 +109,7 @@ s32 func_1000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000EFB4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F1A8.s")
-// #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F248.s")
+
 // NON-MATCHING: plenty still to do
 void func_10017780(u8 arg0, u16 arg1);
 s32* malloc(s32, s32, s32, s32);

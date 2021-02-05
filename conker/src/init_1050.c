@@ -6,7 +6,7 @@
 
 void func_10001050(void) {
     bzero(&D_8002D4B0, (s32) &D_80043B40 - (s32) &D_8002D4B0); // zero out bss
-    func_100061F8(1, 31); // in the middle of asm
+    func_100061F8(1, 31);
     osInitialize();
     __osSetSR(__osGetSR() | SR_CU1 | SR_FR);
     __osSetFpcCsr(FPCSR_FS);

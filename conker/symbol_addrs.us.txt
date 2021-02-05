@@ -14,6 +14,7 @@ osMotorInit                     = 0x10005948;
 osMapTLBRdb                     = 0x10008120;
 alHeapInit                      = 0x10012820;
 alHeapDBAlloc                   = 0x10012844;
+alSeqFileNew                    = 0x100128D0;
 n_alCSPNew                      = 0x10013320;
 __n_CSPVoiceHandler             = 0x10013598;
 __n_CSPHandleNextSeqEvent       = 0x10014048;

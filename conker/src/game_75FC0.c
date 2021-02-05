@@ -110,54 +110,55 @@ void func_15048F90(struct17 *arg0, struct17 *arg1, struct17 *arg2) {
     arg2->unk8 = arg1->unk8 - arg0->unk8;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_75FC0/func_15048FC8.s")
-// NON-MATCHING: JUSTREG: using reg f2 not f12
-// f32 func_15048FC8(struct17 *arg0) {
-//     f32 tmp1;
-//     f32 tmp2;
-//
-//     tmp1 = sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk8 * arg0->unk8));
-//     if (tmp1 == 0.0f) {
-//         return 0.0f;
-//     }
-//     tmp2 = func_15048C30(-arg0->unk0 / tmp1);
-//
-//     if (arg0->unk8 > 0.0f) {
-//         tmp2 = 270.0f - (tmp2 * D_80099070);
-//     } else {
-//         tmp2 = 90.0f + (tmp2 * D_80099074);
-//     }
-//
-//     tmp2 -= 90.0f;
-//
-//     if (tmp2 < 0.0f) {
-//         tmp2 += 360.0f;
-//     }
-//     return tmp2;
-// }
+f32 func_15048FC8(struct17 *arg0) {
+    f32 tmp1;
+    f32 tmp2;
+    f32 tmp3;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_75FC0/func_150490A8.s")
-// NON-MATCHING: JUSTREG: using f16 not f12!
-// s32 func_150490A8(struct17 *arg0) {
-//     f32 temp_f12;
-//     s32 phi_v1;
-//
-//     temp_f12 = sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk8 * arg0->unk8));
-//
-//     if (temp_f12 == 0.0f) {
-//         return 0;
-//     }
-//     phi_v1 = func_15048864(arg0->unk0 / temp_f12); // , arg0->unk0
-//
-//     if (0.0f < arg0->unk8) {
-//         if (phi_v1 < 64) {
-//             phi_v1 = 128 - phi_v1;
-//         } else {
-//             phi_v1 = 384 - phi_v1;
-//         }
-//     }
-//     return phi_v1;
-// }
+    tmp1 = sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk8 * arg0->unk8));
+    if (tmp1 == 0.0f) {
+        return 0.0f;
+    }
+
+    tmp2 = -arg0->unk0 / tmp1;
+    tmp2 = func_15048C30(tmp2);
+
+    if (arg0->unk8 > 0.0f) {
+        tmp2 = 270.0f - (tmp2 * D_80099070);
+    } else {
+        tmp2 = 90.0f + (tmp2 * D_80099074);
+    }
+
+    tmp2 -= 90.0f;
+
+    if (tmp2 < 0.0f) {
+        tmp2 += 360.0f;
+    }
+    return tmp2;
+}
+
+s32 func_150490A8(struct17 *arg0) {
+    f32 temp_f12;
+    s32 phi_v1;
+
+    temp_f12 = sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk8 * arg0->unk8));
+
+    if (temp_f12 == 0.0f) {
+        return 0;
+    }
+
+    temp_f12 = arg0->unk0 / temp_f12;
+    phi_v1 = func_15048864(temp_f12);
+
+    if (0.0f < arg0->unk8) {
+        if (phi_v1 < 64) {
+            phi_v1 = 128 - phi_v1;
+        } else {
+            phi_v1 = 384 - phi_v1;
+        }
+    }
+    return phi_v1;
+}
 
 void func_15049148(struct17 *arg0, f32 arg1, struct17 *arg2) {
     arg2->unk0 = arg0->unk0 * arg1;

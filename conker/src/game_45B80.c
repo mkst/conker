@@ -110,27 +110,29 @@ void func_15019414(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019464.s")
-// NON-MATCHING: maybe 60% of the way there
-// s32 func_15019464(struct14 *arg0, s16 arg1) {
+// NON-MATCHING: 70% of the way there... maybe.
+// s32 func_15019464(Gfx *arg0, s16 arg1) {
+//     s32 temp_s0;
 //     s32 ret;
 //
 //     func_1510B958(arg1);
-//     arg0->unk0 = 0xDC080008;
-//     arg0->unk4 = &D_800BE628[arg1].unk40[D_800BE9C0];
-//     ret = func_1501A490(&arg0->unk8, arg1, 0, 0, 0, 0);
-//     if (D_800BEAC0 != 0) {
-//         return ret;
+//     gSPViewport(arg0++, (D_800BE628 + (arg1 * 0x180) + (D_800BE9C0 * 0x10) + 0x40));
+//     // arg0->unk0 = 0xDC080008;
+//     // arg0->unk4 = (s32) (D_800BE628 + (temp_t6 * 0x180) + (D_800BE9C0 * 0x10) + 0x40);
+//     temp_s0 = func_1501A490(arg0, arg1, 0, 0, 0, 0);
+//     if ((D_800BEAC0 != 0) || (D_80084480 != 0)) {
+//         return temp_s0;
 //     }
-//     if (D_80084480 != 0) {
-//         return ret;
+//
+//     temp_s0 = func_1510FEA0(temp_s0, D_800BE9F0);
+//     if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)){
+//         return temp_s0;
 //     }
-//     ret = func_1510FEA0(ret, D_800BE9F0);
-//     if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {
-//         return ret;
-//     }
-//     ret = func_1515D6D0(ret, arg1);
-//     ret = func_1510B9D0(ret, arg1);
-//     return ret;
+//
+//     temp_s0 = func_1515D6D0(temp_s0, arg1);
+//     temp_s0 = func_1510B9D0(temp_s0, arg1);
+//     return temp_s0;
+//
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_150195A0.s")
@@ -162,19 +164,14 @@ void func_15019414(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019CC8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019E60.s")
-// NON-MATCHING: very far away
-// void func_15019E60(struct189 *arg0) {
-//     if (D_80082FA0 != 0) {
-//         D_80082FA4 = D_80082FA0 + 1;
-//         arg0->unk0 = 0xDC080008;
-//         arg0->unk4 = (s32) &D_800BE628[D_80082FA4].unk40;
-//     } else {
-//         arg0->unk0 = 0xDC080008;
-//         arg0->unk4 = (s32) &D_800BE628[0].unk40; // + 0x40);
-//     }
-//
-//     func_15043384(func_151E8620(func_1501A490(&arg0->unk8, 0xFF, 0, 0, 0, 0)));
-// }
+void func_15019E60(Gfx *arg0) {
+    if (D_80082FA0 != 0) {
+        D_80082FA4 = D_80082FA0 + 1;
+        gSPViewport(arg0++, (D_80082FA4 * 0x180) + D_800BE628 + 64);
+    } else {
+        gSPViewport(arg0++, D_800BE628 + 64);
+    }
+    func_15043384(func_151E8620(func_1501A490(arg0, 0xFF, 0, 0, 0, 0)));
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019F20.s")

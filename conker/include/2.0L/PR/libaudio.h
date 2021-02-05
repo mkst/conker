@@ -667,9 +667,9 @@ typedef struct {
     /* 0x0D */  u8                  unkD;
     /* 0x0E */  u8                  unkE;
     /* 0x0F */  u8                  unkF;
-    /* 0x10 */  u8                  pad10[0x4];
+    /* 0x10 */  f32                 unk10;
     /* 0x14 */  u8                  unk14;
-    /* 0x15 */  u8                  unk15;
+    /* 0x15 */  s8                  unk15;
     /* 0x16 */  u8                  unk16;
     /* 0x17 */  u8                  unk17;
     /* 0x18 */  f32                 pitchBend;  /* current pitch bend val in cents  */

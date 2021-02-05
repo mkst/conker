@@ -44,7 +44,7 @@ def pretty_print(data, offset, is_variable=True, is_string=False):
         dbl = ""
         if i % 2:
             dbl = f"// {struct.unpack('>d', data[i*4-4:i*4+4])[0]}"
-        print(f'f32 {prefix} = {str(float)+"f;":<24} // {ints[i]:<14} // {data[i*4:i*4+4]} // {[int(x) for x in data[i*4:i*4+4]]} {dbl}')
+        print(f'f32 {prefix} = {str(float)+"f;":<24} // {hex(ints[i]):<14} // {data[i*4:i*4+4]} // {[int(x) for x in data[i*4:i*4+4]]} {dbl}')
         # print(f'f32 {prefix} = {shorts[2*i]}, {shorts[2*i+1]}')
 
 def get_bytes(data, start, length):

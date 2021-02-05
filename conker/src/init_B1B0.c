@@ -19,7 +19,7 @@ struct151 *func_1000B1B0(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B1FC.s")
 // NON-MATCHING: something like this, but not this.
-// void *func_1000B1FC(s32 arg0) {
+// struct151 *func_1000B1FC(s32 arg0) {
 //     struct151 *phi_v1_2;
 //     u32 i;
 //
@@ -69,64 +69,50 @@ struct151 *func_1000B1B0(s32 arg0) {
 //     return ret;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B2F4.s")
-// NON-MATCHING: JUSTREG: using t1/t2 not t2/t3
-// struct137 *func_1000B2F4(s32 arg0) {
-//     struct137 *tmp;
-//     struct138 *tmp2 = &D_8002B074[arg0];
-//     s32 i;
-//
-//     for (i = 0; i < 12; i++)
-//     {
-//         tmp = &D_800419A8[i];
-//
-//         if (tmp->unk4 == -1) {
-//
-//             bzero(&D_800419A8[i], 100);
-//
-//             tmp->unk0 = -1;
-//
-//             if (arg0 < 150) {
-//                 tmp->unk2C = (s32)(u16)tmp2->unk0;
-//             } else {
-//                 tmp->unk2C = 26000;
-//             }
-//             tmp->unk30 = tmp->unk2C;
-//
-//             tmp->unk5A = 32768;
-//             tmp->unk58 = 32768;
-//             tmp->unk54 = 32768;
-//             tmp->unk52 = 32768;
-//             tmp->unk4C = 32768;
-//             tmp->unk4E = 32768;
-//             tmp->unk4 = arg0;
-//             tmp->unk8 = &D_8002B9D4;
-//             tmp->unkC = &D_8002B9F4;
-//             tmp->unk10 = tmp;
-//             return tmp;
-//         }
-//     }
-//     return NULL;
-// }
+struct137 *func_1000B2F4(s32 arg0) {
+    s32 i;
+
+    for (i = 0; i < 12; i++)
+    {
+        if (D_800419A8[i].unk4 == -1) {
+
+            bzero(&D_800419A8[i], 100);
+
+            D_800419A8[i].unk0 = -1;
+
+            if (arg0 < 150) {
+                D_800419A8[i].unk2C = D_8002B074[arg0].unk0; // (s32)(u16)
+            } else {
+                D_800419A8[i].unk2C = 26000;
+            }
+            D_800419A8[i].unk30 = D_800419A8[i].unk2C;
+            D_800419A8[i].unk4E = D_800419A8[i].unk4C = D_800419A8[i].unk52 = D_800419A8[i].unk54 = D_800419A8[i].unk58 = D_800419A8[i].unk5A = 32768;
+            D_800419A8[i].unk4 = arg0;
+            D_800419A8[i].unk8 = &D_8002B9D4;
+            D_800419A8[i].unkC = &D_8002B9F4;
+            D_800419A8[i].unk10 = &D_800419A8[i];
+            return &D_800419A8[i];
+        }
+    }
+    return NULL;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B3D4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B548.s")
-// NON-MATCHING: JUSTREG using v0 not v1
-// s32 func_1000B548(s32 *arg0) {
-//     s32 ret = 0;
-//     s32 i;
-//
-//     for (i = 0; i < 12; i++) {
-//         if ((D_800419A8[i].unk4 != -1) && (D_800419A8[i].unk0 != -1)) {
-//             if (D_800419A8[i].unk4 < 3) {
-//                 *arg0++ = D_800419A8[i].unk4;
-//                 ret++;
-//             }
-//         }
-//     }
-//     return ret;
-// }
+s32 func_1000B548(s32 *arg0) {
+    s32 ret = 0;
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        if ((D_800419A8[i].unk4 != -1) && (D_800419A8[i].unk0 != -1)) {
+            if (ret < 3) {
+                *arg0++ = D_800419A8[i].unk4;
+                ret++;
+            }
+        }
+    }
+    return ret;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B638.s")
 
@@ -172,7 +158,26 @@ s32 func_1000B8B8(s32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
     return func_1000C530(arg0, arg1, arg2, arg3, arg4);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BA18.s")
+s32 func_1000BA18(u32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
+    u32 sp44;
+    s32 sp40;
+    s32 sp3C;
+
+    sp44 = 0;
+    sp3C = arg0 & 0x00FFFFFF;
+    arg0 = arg0 & 0xFF000000;
+    func_100114D0(0, -377, 8227, 32767, 4000, 3000, &sp40, &sp44, 0);
+    sp44 = (sp44 << 16) & 0xFF000000;
+    if (arg0 != sp44) {
+        arg0 = sp44;
+        func_1000E588(0x4D, arg0 >> 24, 0x6000);
+    }
+    sp3C = func_1000C530(sp3C, arg1, arg2, arg3, arg4) & 0xFFFFFF;
+    // fakematch
+    sp44 = sp3C & 0xFFFFFFFFFFFFFFFF;
+    return arg0 | sp44;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BAFC.s")
 
 s32 func_1000BBE8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -205,6 +210,7 @@ s32 func_1000BC28(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C350.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C530.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C7E8.s")
+
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C934.s")
 // NON-MATCHING: close but last part isn't quite right
 // s32 func_1000C934(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -226,10 +232,10 @@ s32 func_1000BC28(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
 //     }
 //     temp_a1 = sp3C;
 //     if ((sp3C != arg0) & 0xFFFF) {
-//         // sp3C = temp_a1;
+//         sp3C = temp_a1;
 //         func_1000E40C(84, sp3C);
 //     }
-//     return temp_a1 | 0x80000000;
+//     return sp3C | 0x80000000;
 // }
 
 s32 func_1000CA18(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -266,8 +272,72 @@ void func_1000CBA8(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CBF0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CC54.s")
+// NON-MATCHING: JUSTREG? need some love
+// void func_1000CBF0(s32 *arg0, s32 *arg1, s32 arg2) {
+//     struct151 *tmp;
+//     s32 i;
+//     s32 tmp2;
+//
+//     for (i = 0; i < 3; i++) {
+//         if (arg2 & (1 << i)) {
+//             tmp = &D_800417B0[i];
+//             tmp2 = tmp->unk0;
+//             if (tmp2) {
+//                 tmp->unk5A = arg0;
+//                 tmp->unk5C = *arg1;
+//                 if (arg1 == 0) {
+//                   tmp->unk58 = *arg0;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CC54.s")
+void func_1000CC54(s32 arg0) {
+    s32 phi_a3;
+    struct151 *temp_v0;
+
+    temp_v0 = D_800417B0[arg0];
+    if (temp_v0 != 0) {
+        phi_a3 = (((u32) (temp_v0->unk58 * ((u32) (temp_v0->unk4C * temp_v0->unk52) >> 0xF)) >> 0xF) * temp_v0->unk2C) >> 0xF;
+        if (phi_a3 != temp_v0->unk30) {
+            if (temp_v0->unk30 == 0) {
+                func_10008988(arg0, temp_v0->unk38 ^ 0xFFFF, 1);
+            } else {
+                if (phi_a3 == 0) {
+                    func_10008988(arg0, temp_v0->unk38 ^ 0xFFFF, 0);
+                }
+            }
+            temp_v0->unk30 = phi_a3;
+            func_10008EE0(arg0, phi_a3);
+        }
+    }
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CD40.s")
+// NON-MATCHING: 2 lines are wrong here
+// s32 func_1000CD40(s32 arg0, s32 arg1, s32 arg2) {
+//
+//     if (arg1 != arg0) {
+//         arg2 = arg2 * D_800BE9E4;
+//         if (arg0 < arg1) {
+//             arg0 = arg0 + arg2;
+//             if (arg1 < arg0) {
+//                 arg0 = arg1;
+//             }
+//         } else {
+//             arg0 = arg0 - arg2;
+//             if (arg0 < arg1) {
+//                 if (arg0 < 0) {
+//                     arg0 = arg1;
+//                 }
+//             }
+//         }
+//     }
+//     return arg0;
+// }
+
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CDA0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CEAC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D2F8.s")
@@ -286,7 +356,7 @@ void func_1000E054(s32 arg0, s32 arg1) {
             func_100084D8(sp1C->unk0);
             sp1C->unk15 = 0;
             sp1C->unk30 = -1;
-            func_1000CC54(sp1C->unk0, sp1C);
+            func_1000CC54(sp1C->unk0);
             return;
         }
         if ((2 != sp1C->unk15) && (arg1 != 0)) {
@@ -399,7 +469,6 @@ s32 func_1000E770(s32 *arg0, s32 *arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E7A0.s")
 // NON-MATCHING: mostly just wrong registers
 // void func_1000E7A0(u32 arg0, s32 arg1) {
-//     s32 tmp;
 //     if ((arg0 & 1) == 1) {
 //         D_80041F04 |= 1;
 //     } else if (arg0 & 2) {

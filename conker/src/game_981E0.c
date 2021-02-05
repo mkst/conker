@@ -823,17 +823,15 @@ void func_1506EED8(void) {
     D_800D154C->unk24E = (s8) D_800D1580;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EEF4.s")
-// NON-MATCHING: JUSTREG
-// void func_1506EEF4(void) {
-//     D_800D154C->unk276 = D_800D1580 >> 16;
-//     D_800D154C->unk278 = (D_800D1580 >> 24) & 0xFF;
-//     D_800D154C->unk282 = D_800D1580;
-//     D_800D154C->unk284 = 0;
-//     D_800D154C->unk285 = 0;
-//     D_800D154C->unk286 = 0;
-//     D_800D154C->unk287 = 0;
-// }
+void func_1506EEF4(void) {
+    D_800D154C->unk276 = (D_800D1580 >> 16) & 0xFFFF;
+    D_800D154C->unk278 = (D_800D1580 >> 24) & 0xFF;
+    D_800D154C->unk282 = D_800D1580 & 0xFFFF;
+    D_800D154C->unk284 = 0;
+    D_800D154C->unk285 = 0;
+    D_800D154C->unk286 = 0;
+    D_800D154C->unk287 = 0;
+}
 
 // TBD whats goins on here
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EF5C.s")

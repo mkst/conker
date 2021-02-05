@@ -46,14 +46,19 @@ typedef enum {
 } ALSndpMsgType;
 
 typedef struct {
-    N_ALVoice     voice;     
+    N_ALVoice     voice;
     ALSound     *sound;         /* sound referenced here */
     s16         priority;
     f32         pitch;          /* current playback pitch                    */
     s32         state;          /* play state for this sound                 */
-    s16         vol;            /* volume - combined with volume from bank   */
-    ALPan       pan;            /* pan - 0 = left, 127 = right               */
-    u8          fxMix;          /* wet/dry mix - 0 = dry, 127 = wet          */
+    /* 0x30 */  s16         vol;            /* volume - combined with volume from bank   */
+    /* 0x32 */  ALPan       pan;            /* pan - 0 = left, 127 = right               */
+    /* 0x33 */  u8          fxMix;          /* wet/dry mix - 0 = dry, 127 = wet          */
+    /* 0x34 */  u8          unk34;
+    /* 0x35 */  u8          chan;
+    /* 0x36 */  u8          unk36;
+    /* 0x37 */  u8          pad37;
+    /* 0x38 */  u8          unk38;
 } N_ALSoundState;
 
 typedef union {
@@ -64,31 +69,31 @@ typedef union {
         s16              type;
         N_ALSoundState  *state;
     } common;
-    
+
     struct {
         s16             type;
         N_ALSoundState *state;
         s16             vol;
     } vol;
-    
+
     struct {
         s16             type;
         N_ALSoundState *state;
         f32             pitch;
     } pitch;
-    
+
     struct {
         s16             type;
         N_ALSoundState *state;
         ALPan           pan;
     } pan;
-    
+
     struct {
         s16             type;
         N_ALSoundState *state;
         u8              mix;
     } fx;
-    
+
 } N_ALSndpEvent;
 
 static  ALMicroTime     _n_sndpVoiceHandler(void *node);

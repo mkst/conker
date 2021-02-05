@@ -47,10 +47,10 @@ dirs:
 	$(foreach dir,$(BIN_DIR) $(RZIP_DIRS),$(shell mkdir -p $(BUILD_DIR)/$(dir)))
 
 clean:
-	rm -rf bin
 	rm -rf build
 
 really-clean: clean
+	rm -rf bin
 	rm -rf rzip
 	make -C $(GAME_DIR) really-clean
 

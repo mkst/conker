@@ -31,9 +31,9 @@ segments:
     - [0x1050, c]
     - [0x1420, c]
     - [0x2070, c]
-    - [0x2DB0, asm, "libultra/io/aisetnextbuf"]
+    - [0x2DB0, c, "libultra/io/aisetnextbuf"]
     - [0x2E50, c]
-    - [0x30A0, asm, "libultra/io/pimgr"]
+    - [0x30A0, c, "libultra/io/pimgr"]
     - [0x3220, c,   "libultra/io/sptask"]
     - [0x34E0, asm, "libultra/io/vimgr"]
     - [0x37F0, c,   "libultra/os/createthread"]
@@ -83,7 +83,7 @@ segments:
     - [0x18DA0, c, "libultra/audio/n_sl"]
     - [0x18E60, c, "libultra/audio/n_synthesizer"]
     - [0x19AB0, c, "libultra/audio/cents2ratio"]
-    - [0x19B50, c]
+    - [0x19B50, c, "libultra/audio/init_19B50"]
     - [0x1AAE0, c]
     - [0x1C060, c]
     - [0x1C690, c, "libultra/audio/n_synaddplayer"]
@@ -101,7 +101,7 @@ segments:
     - [0x1E2A0, c, "libultra/audio/init_1E2A0"]
     - [0x1E350, c, "libultra/audio/init_1E350"]
     - [0x1E400, c, "libultra/audio/init_1E400"]
-    - [0x1E480, c] # not -g?
+    - [0x1E480, c]
     - [0x1E4A0, c]
     - [0x1E530, c]
     - [0x1FB40, c]
@@ -199,9 +199,9 @@ segments:
     start: 0x000290D0
     vram:  0x800290D0
     files:
-    - [0x290D0, "bin"] # data
+    - [0x290D0, "bin"] # data (for boot?)
     - [0x291A0, "bin"] # ?
-    - [0x2AAD0, "bin"] # ?
+    - [0x2AAD0, "bin"] # first int is 0x42450, second is 0x19ea88
     - [0x2C080, ".data", "init/data/data_2C080"] # jump table for func_10002E50
     - [0x2C0A0, ".data", "init/data/data_2C0A0"] # jump table for func_100049E0
     - [0x2C0C0, "bin"]
@@ -238,7 +238,7 @@ segments:
     - [0x32490, c]
     - [0x32720, c, "game/done/game_32720"]
     - [0x32740, c]
-    - [0x32f10, c]
+    - [0x32F10, c, "game/done/game_32F10"]
     - [0x32f60, c, "game/done/game_32F60"]
     - [0x32fb0, c, "game/done/game_32FB0"]
     - [0x32fc0, c, "game/done/game_32FC0"]
@@ -263,7 +263,7 @@ segments:
     - [0x33660, c]
     - [0x33990, c]
     - [0x34ce0, c, "game/entrypoint"] # called from main code
-    - [0x34ED0, c]
+    - [0x34ED0, c, "game/done/game_34ED0"]
     - [0x34f20, c]
     - [0x357f0, c]
     - [0x35cf0, c, "game/done/game_35CF0"]
@@ -279,6 +279,7 @@ segments:
     - [0x39690, c, "game/done/game_39690"]
     - [0x39750, c]
     - [0x3b920, c]
+    - [0x3BA70, c]
     - [0x3bfd0, c, "game/done/game_3BFD0"]
     - [0x3bfe0, c, "game/done/game_3BFE0"]
     - [0x3c230, c, "game/done/game_3C230"]
@@ -327,7 +328,7 @@ segments:
     - [0x43820, c, "game/done/game_43820"]
     - [0x43880, asm]
     - [0x439b0, c]
-    - [0x43b20, c]
+    - [0x43B20, c, "game/done/game_43B20"]
     - [0x43d00, asm]
     - [0x447b0, c]
     - [0x44a90, c]

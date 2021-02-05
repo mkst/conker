@@ -47,48 +47,47 @@
 //     func_1510B070(arg1);
 // }
 
-
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A39C.s")
+// NON-MATCHING: something along these lines
+// extern Gfx* D_800BE9C8;
+// extern s32 D_8002C930;
+// Gfx *func_1501A39C(void) {
+//     s32 i;
+//     Gfx *tmp = D_800BE9C8;
+//     for (i = 0; i < 3; i++) {
+//         gSPSegment(tmp++, 0x00, 0x00000000);
+//         gSPSegment(tmp++, 0x00, 0x00000000);
+//         gSPDisplayList(tmp++, D_8002C930);
+//         gDPSetDepthImage(tmp++, D_800BE9C4);
+//         gSPViewport(tmp++, D_800BE628 + i + 0x40);
+//     }
+//     return tmp;
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A490.s")
 
-// display list
-#pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A680.s")
-// NON-MATCHING: ???
-// struct189 *func_1501A680(struct189 *arg0) {
-//     arg0->unk0 = ((D_800BE620 - 1) & 0xFFF) | 0xFF100000;
-//     arg0->unk4 = *(&D_8002AAE8[D_800BE9C0]);
-//     return &arg0->unk8;
-// }
+Gfx *func_1501A680(Gfx *arg0) {
+    gDPSetColorImage(arg0++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800BE620, D_8002AAE8[D_800BE9C0]);
+    return arg0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A6CC.s")
-// NON-MATCHING: 80%
-// struct189 *func_1501A6CC(struct189 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-//     struct189 *temp_a0;
-//     s32 tmp;
-//
-//     if (arg1 < 3) {
-//         arg1 = 2;
-//     }
-//     tmp = arg2;
-//     if (arg2 <= 0) {
-//         tmp = 0;
-//     }
-//
-//     temp_a0 = arg0;
-//
-//     if (arg3 >= (D_800BE620 - 2)) {
-//         arg3 = D_800BE620 - 2;
-//     }
-//
-//     if (arg4 >= D_800BE624) {
-//         arg4 = D_800BE624;
-//     }
-//     arg0 = temp_a0->unk8;
-//     temp_a0->unk4 = ((arg1 & 0x3FF) << 14) | ((tmp & 0x3FF) << 2);
-//     temp_a0->unk0 = ((arg3 & 0x3FF) << 14) | ((arg4 & 0x3FF) << 2) | 0xF6000000;
-//     return arg0;
-// }
+Gfx *func_1501A6CC(Gfx *arg0, s32 a, s32 b, s32 c, s32 d) {
+    if (a < 3) {
+        a = 2;
+    }
+    if (b <= 0) {
+        b = 0;
+    }
+    if (c >= (D_800BE620 - 2)) {
+        c = D_800BE620 - 2;
+    }
+    if (d >= D_800BE624) {
+        d = D_800BE624;
+    }
+
+    gDPFillRectangle(arg0++, a, b, c, d);
+    return arg0;
+}
 
 void func_150A7A00(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f32* arg6, f32* arg7, f32* arg8, f32* arg9);
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A764.s")
@@ -120,3 +119,42 @@ void func_150A7A00(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501B0A0.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501B22C.s")
+// JUSTREG: I think?
+// void func_1501B22C(s32 arg0) {
+//     f32 tmp0;
+//     f32 tmp1;
+//     f32 tmp2;
+//     f32 tmp3;
+//     f32 tmp4;
+//     f32 tmp5;
+//     f32 tmp6;
+//     f32 tmp7;
+//
+//     struct259 *temp_s0;
+//
+//     temp_s0 = D_800BE628 + (arg0 * 0x180);
+//     tmp0 = temp_s0->unk74 * 0.5f;
+//     tmp7 = -tmp0;
+//     tmp5 = temp_s0->unk78 * 0.5f;
+//     tmp7 *= D_80096900;
+//     tmp3 = cosf(tmp7);
+//     tmp7 = sinf(tmp7);
+//     temp_s0->unk9C = tmp7;
+//     temp_s0->unk90 = tmp7;
+//     tmp3 = -tmp3;
+//     temp_s0->unk88 = -tmp3;
+//     temp_s0->unk94 = tmp3;
+//     temp_s0->unk98 = 0.0f;
+//     temp_s0->unk8C = 0.0f;
+//     tmp6 = tmp5 * D_80096904;
+//     tmp2 = cosf(tmp6);
+//     tmp0 = sinf(tmp6);
+//     tmp4 = -tmp2;
+//     tmp0 = -tmp0;
+//     temp_s0->unkA0 = 0.0f;
+//     temp_s0->unkB0 = -tmp4;
+//     temp_s0->unkA8 = tmp0;
+//     temp_s0->unkB4 = tmp0;
+//     temp_s0->unkAC = 0.0f;
+//     temp_s0->unkA4 = tmp4;
+// }
