@@ -206,6 +206,7 @@ guPerspectiveF                  = 0x15047F00;
 guPerspective                   = 0x15048134;
 guRotateF                       = 0x15048190;
 guRotate                        = 0x15048310;
+tanf                            = 0x1504A5E0;
 guMtxF2L                        = 0x150A7790;
 guNormalize                     = 0x151EFFF0;
 osPfsIsPlug2                    = 0x151F1D10;
@@ -242,7 +243,6 @@ __osContRamRead2                = 0x151F2080;
 __osPackRamReadData2            = 0x151F22C4;
 __osContRamWrite2               = 0x151F2430;
 __osPackRamWriteData2           = 0x151F2660;
-
 
 __osMaxControllers              = 0x80042A51;
 __osContInitialized             = 0x8002BE10;

@@ -315,28 +315,23 @@ void func_1000CC54(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CD40.s")
-// NON-MATCHING: 2 lines are wrong here
-// s32 func_1000CD40(s32 arg0, s32 arg1, s32 arg2) {
-//
-//     if (arg1 != arg0) {
-//         arg2 = arg2 * D_800BE9E4;
-//         if (arg0 < arg1) {
-//             arg0 = arg0 + arg2;
-//             if (arg1 < arg0) {
-//                 arg0 = arg1;
-//             }
-//         } else {
-//             arg0 = arg0 - arg2;
-//             if (arg0 < arg1) {
-//                 if (arg0 < 0) {
-//                     arg0 = arg1;
-//                 }
-//             }
-//         }
-//     }
-//     return arg0;
-// }
+s32 func_1000CD40(s32 arg0, s32 arg1, s32 arg2) {
+    if (arg1 != arg0) {
+        arg2 = arg2 * D_800BE9E4;
+        if (arg0 < arg1) {
+            arg0 = arg0 + arg2;
+            if (arg1 < arg0) {
+                arg0 = arg1;
+            }
+        } else {
+            arg0 = arg0 - arg2;
+            if ((arg0 < arg1) || (arg0 < 0)) {
+                arg0 = arg1;
+            }
+        }
+    }
+    return arg0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CDA0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CEAC.s")

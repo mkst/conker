@@ -296,9 +296,7 @@ void func_15124AB4(struct108 *arg0) {
     arg0->unk66C = cosf(arg0->unk39C) * arg0->unk66C;
 }
 
-
-
-f32 func_15124B18(struct108 *arg0) {
+void func_15124B18(struct108 *arg0) {
     s32 temp_t8;
     f32 *temp_v0;
 
@@ -585,7 +583,7 @@ void func_15127FEC(struct108 *arg0, s32 arg1, s32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_151284C4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15128540.s")
 
-void func_15128680(s32 arg0) {
+void func_15128680(struct108 *arg0) {
 }
 
 void func_1512868C(struct108 *arg0) {

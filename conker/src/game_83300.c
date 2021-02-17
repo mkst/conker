@@ -1021,13 +1021,14 @@ void func_15060B70(s32 arg0, void *arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060F28.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_150611E8.s")
 
+// TODO: is this really struct127?
 void func_150615DC(struct127 *arg0) {
     arg0->unk7 = 0xFF;
     arg0->unk8 = 0xFF;
     arg0->unk9 = 0;
     arg0->unkA = 0;
-    arg0->unkF = 0;
-    arg0->unkB = arg0->unkC = arg0->unkD = arg0->unkE = 0xFF;
+    arg0->unkE.ub[1] = 0;
+    arg0->unkB = arg0->unkC = arg0->unkD = arg0->unkE.ub[0] = 0xFF;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1506160C.s")

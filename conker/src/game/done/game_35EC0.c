@@ -12,13 +12,12 @@ void func_15008A10(void) {
     D_80088730 = func_15083E90(1);
 }
 
-// #pragma GLOBAL_ASM("asm/nonmatchings/game_35EC0/func_15008A60.s")
-// NON-MATCHING:is this handwritten or something?
 void func_15008A60(void) {
     if (0) {}
 
     D_800DDE08 = 0;
 
+    // unrolled loop?
     D_800DDE40 = 0;
     D_800DDDAC = 0;
     D_800DDE28 = 0;

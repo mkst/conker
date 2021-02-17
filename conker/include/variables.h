@@ -144,7 +144,7 @@ extern s32 *D_8002D8B0;
 
 /* 80030000 */
 extern OSThread D_80031AE0;
-extern OSThread D_800318B0;
+extern OSThread D_800318B0; // thread 1
 
 extern s32  D_80032B30;
 extern s32  D_80033330;
@@ -409,8 +409,8 @@ extern u8  D_80087280[];
 extern u32 D_80087380;
 
 extern u64 D_800885B0;
-extern s32 D_80088720;
-extern s32 D_80088730;
+extern struct127 *D_80088720;
+extern struct127 *D_80088730;
 extern s32 D_80088750;
 extern vertex D_80088724;
 extern u8  D_80088980;
@@ -423,17 +423,24 @@ extern s32 D_80089520;
 extern s32 D_80089524[]; // struct arrays?
 extern s32 D_80089534[];
 extern s16 D_80089550;
+extern void (*D_80089AAC[10])(void);
+extern void (*D_80089AD4[10])(void);
 extern void (*D_80089C44[])(void);
 extern void (*D_80089C54[])(void);
 extern void (*D_80089EE8[])(void);
 extern void (*D_80089EF0[])(void);
 extern void (*D_80089EF8[])(void);
 extern void (*D_80089F2C[])(void);
-// extern void (*D_80089F60[])(s32, s32);
 extern void (*D_80089F60[])(s32, s32, u8);
 extern s32 D_8008A074[2];
 extern struct32 D_8008A0B4[];
 extern s32  D_8008A084[];
+extern void (*D_8008A4E8[])(struct260*);
+extern void (*D_8008A4C0[])(struct260*);
+extern void (*D_8008A688[])(struct260*);
+extern void (*D_8008A7B0[])(struct260*);
+extern void (*D_8008A8D8[74])(struct260*, s32, u8);
+extern s32 (*D_8008A670[])(s32, struct260*, s16);
 extern s32  (*D_8008B0F0[])(void);
 extern u8   (*D_8008B1F8[])(struct225*);
 extern void (*D_8008B208[])(struct225*);
@@ -675,9 +682,12 @@ extern f32 D_800A2154;
 // extern struct201 D_800A2CD0[];
 extern u8  D_800A2CD0[][3];
 
+extern u8 D_800A3FB4[]; // "power"
+extern u8 D_800A3FBC[]; // "../Effects/Blood/blood.c"
 extern s32 D_800A4AA0; //?
 extern f32 D_800A5168;
 extern f32 D_800A5178;
+extern f32 D_800A45B4;
 extern f32 D_800A5644;
 extern f32 D_800A56A8;
 extern f32 D_800A56AC;
@@ -687,6 +697,7 @@ extern f32 D_800A56BC; // 57.2957763671875
 extern f32 D_800A56C0;
 extern f32 D_800A56C4;
 extern f32 D_800A56C8;
+extern s32 D_800A5770;
 
 // in game_18D770.c
 extern u8  D_800A6690[5];  // "scale"
@@ -1348,9 +1359,9 @@ extern u8   D_800E0B94;
 extern s32  D_800E0C20;
 extern s32  D_800E0E04;
 extern struct134 *D_800E0900[]; // probably not struct134
-extern s32  D_800E0930;
+extern void *D_800E0930;
 extern s32  D_800E0934;
-extern s32  D_800E0940;
+extern void *D_800E0940;
 extern u8   D_800E0950;
 extern s32  D_800E0964;
 extern s16  D_800E0968[];
@@ -1415,7 +1426,7 @@ extern s32 *D_1002AAD0;
 extern s32  D_151F3C4C;
 
 /* what is this */
-extern s16  D_BC000C02;
+extern u16  D_BC000C02;
 extern s32  D_1FC007FC;
 
 #endif

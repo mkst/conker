@@ -166,7 +166,7 @@ void func_1513C9FC(struct210 *arg0) {
 }
 
 void func_1513CA48(struct210 *arg0) {
-    func_151D5E30(&arg0->unk100, arg0);
+    func_151D5E30(&arg0->unk100);
 }
 
 void func_1513CA6C(struct210 *arg0) {

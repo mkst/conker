@@ -1,7 +1,4 @@
-#include <ultra64.h>
-
-#include "functions.h"
-#include "variables.h"
+#include "n_synthInternals.h"
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_22040/func_10022040.s")
@@ -47,27 +44,27 @@
 //     return sp2C;
 // }
 
-s32 n_alLoadParam(struct21 *arg0, s32 arg1, s32 arg2) {
-    f32 *sp24 = &arg2;
+s32 n_alLoadParam(N_PVoice *filter, s32 paramID, void *param) {
+    f32 *sp24 = &param;
 
-    switch (arg1) {
+    switch (paramID) {
         case 4:
-            arg0->unkA2 = 0;
-            func_10021C40(arg0, 4, arg2);
+            filter->unkA2 = 0;
+            func_10021C40(filter, 4, param);
             break;
         case 18:
-            arg0->unkA2 = arg2;
-            arg0->unkC8 |= 2;
+            filter->unkA2 = param;
+            filter->unkC8 |= 2;
             break;
         case 19:
-            arg0->unkA0 = *sp24;
-            arg0->unkC8 |= 2;
+            filter->unkA0 = *sp24;
+            filter->unkC8 |= 2;
             break;
         case 17:
-            arg0->unk99 = arg2;
+            filter->unk99 = param;
             break;
         default:
-            func_10021C40(arg0, arg1, arg2);
+            func_10021C40(filter, paramID, param);
             break;
     }
 

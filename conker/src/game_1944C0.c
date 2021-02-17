@@ -111,7 +111,7 @@ void func_15169804(struct102 *arg0) {
     func_15168B10(arg0, 1);
 }
 
-void func_15169824(s32 arg0) {
+void func_15169824(struct102 *arg0) {
     func_15168A9C(arg0);
     func_10004074(arg0);
 }

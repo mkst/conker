@@ -6,7 +6,7 @@
 // NON-MATCHING: matches won't OK until .bss is figured out (i think?)
 // s32 osAiSetNextBuffer(void *bufPtr, u32 size)
 // {
-//   	static u8 hdwrBugFlag = 0;
+//     static u8 hdwrBugFlag = 0;
 //   	char *bptr = bufPtr;
 //   	if (hdwrBugFlag != 0)
 //   		  bptr = (u32)bufPtr - 0x2000;

@@ -100,7 +100,7 @@ INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/
 
 ASFLAGS = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -I include
 
-CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -g -nostdinc -non_shared -Wab,-r4300_mul
+CFLAGS := -G 0 -Xfullwarn -Xcpluscomm -signed -nostdinc -non_shared -Wab,-r4300_mul
 CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D_MIPS_SZLONG=32
 # ignore compiler warnings about anonymous structs
 CFLAGS += -woff 649,838
@@ -127,10 +127,18 @@ $(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
 $(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
 
-# $(BUILD_DIR)/$(SRC_DIR)/game_3B920.o: OPT_FLAGS := -g
 
-# not exactly right:
-# $(BUILD_DIR)/$(SRC_DIR)/libultra/io/%.o: OPT_FLAGS := -g3
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/ai.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aigetstat.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.o: OPT_FLAGS := -O1
+
+$(BUILD_DIR)/$(SRC_DIR)/libultra/os/getthreadpri.o: OPT_FLAGS := -O1
+
+$(BUILD_DIR)/$(SRC_DIR)/init_3920.o: OPT_FLAGS := -O2
+
+# $(BUILD_DIR)/$(SRC_DIR)/init_B1B0.o: OPT_FLAGS := -O2
+
+# $(BUILD_DIR)/$(SRC_DIR)/game_14FF90.o: OPT_FLAGS := -O3
 
 ### Non-matching
 ifeq ($(NON_MATCHING),1)
