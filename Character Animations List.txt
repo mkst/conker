@@ -1,0 +1,2053 @@
+Note: if using the character animation modifier codes, the values differ by one digit backwards, ie 0000 - Sneaking
+would be FFFF - Sneaking. 0001 - Walking is 0000 - Walking, and so on. The value as seen in RAM
+however will still be the actual value as seen here on the list.
+Conker, weasel henchmen, and all else multiplayer characters
+Model IDs: 00, 01, 02, 03, 04, 75, 80, 82, 88, 90, 96, 98, 9C, 9D, 9F, A0, B0, B1, B2, B4
+0000 - sneaking
+0001 - walking
+0002 - run
+0003 - conker comments while tapping foot
+0004 - conker tapping foot
+0005 - conker racing on lavaboard 
+0006 - jump(Beta)
+0007 - Alternate death? (Unused)
+0008 - Farting (Beta)
+0009 - landing (Beta? still have to do more research on this)
+000A - ??(Beta?)
+000B - Tail Whip(Beta)
+000C - backing slowly
+000D - about to pull out gameboy out of pocket
+000E - putting gameboy in pocket after playing
+000F - Idle
+0010 - waving arms up and down(Beta? Probably a test animation)
+0011 - pull out magazine
+0012 - run (beta)
+0013 - die 1 (comic close circle alert!)
+0014 - pull lever
+0015 - turning around to see what happened behind back
+0016 - Knee bend
+0017 - ???
+0018 - pushing something
+0019 - dodge something 1
+001A - pointing
+001B - crawling
+001C - ???
+001D - "No Idea" (used in various cutscenes)
+001E - ???
+001F - ???
+0020 - ???
+0021 - braking
+0022 - swim on surface
+0023 - pushing something 2
+0024 - underwater, dead
+0025 - looking around
+0026 - reading magazine
+0027 - Landing from high place, taking damage
+0028 - running out of breath
+0029 - finished reading magazine
+002A - after grabbing the money
+002B - running away in terror
+002C - urinating (no pee appears)
+002D - done urinating (zip sfx)
+002E - about to start peeing (zip sfx)
+002F - filling up the tank ('burp!!' sfx, then drunk behavior)
+0030 - ?
+0031 - ??
+0032 - jump
+0033 - drunk, punching
+0034 - grabbing money
+0035 - pull out knifes
+0036 - landing
+0037 - Jump (Beta)
+0038 - waving arms while in the air
+0039 - waving arms while in the air 2
+003A - aiming with knife
+003B - diving
+003C - falling in dive pose
+003D - slingshot fire
+003E - slingshot aim
+003F - throwing knifes
+0040 - climbing up platform
+0041 - loading slingshot with a conker
+0042 - hanging from a platform
+0043 - drunk, jumping
+0044 - peppering
+0045 - slamming with bricks
+0046 - frying pan swing
+0047 - drinking beer can
+0048 - Anvil
+0049 - Pulling out beer can
+004A - turning into an anvil
+004B - anvil slam
+004C - Over fire
+004D - yellow robot suit idle
+004E - yellow robot suit walking
+004F - yellow robot suit rotating it's claws
+0050 - ?
+0051 - ?
+0052 - conker wet
+0053 - Weird jump(beta?)
+0054 - Falling
+0055 - milkshake glass pull out
+0056 - milkshake glass throw backwards
+0057 - milkshake glass drink
+0058 - dead (comic close circle alert!)
+0059 - dead 2
+005A - riding Franky the pitchfork 1
+005B - riding Franky the pitchfork 2
+005C - riding Franky the pitchfork 3
+005D - 
+005E - pull out juggling balls
+005F - conker juggling
+0060 - Done juggling balls, saying "i thank you" 
+0061 - Shaking off water
+0062 - Holding tight at broken leg
+0063 - Standing, with leg broken
+0064 - Walking, balancing
+0065 - oh, oh!
+0066 - Trying to keep his balance
+0067 - About to put hands in pockets
+0068 - flametorch
+0069 - Jumping up from lava, all over fire
+006A - ??
+006B - standing still, balancing
+006C - walking through water
+006D - walking with broken leg
+006E - Jumping with broken leg(unused?)
+006F - Getting back up(cutscene)
+0070 - jumping away to avoid the great mighty poo's pooball
+0071 - "Buff you, asshole!" cutscene part
+0072 - 1 chocolate piece left(feeling weak, in short)
+0073 - i'm waiting(idle waiting animation)
+0074 - what about that guy over there(cutscene)
+0075 - NO WAY i'm going there (cutscene)
+0076 - pull out bazooka
+0077 - firing bazooka
+0078 - put away bazooka
+0079 - ??(cutscene)
+007A - Push on wall
+007B - pull out dual guns
+007C - firing dual guns
+007D - put away dual guns
+007E - walking with dual guns
+007F - standing still with dual guns
+0080 - 
+0081 - kicking away beer can
+0082 - scratching his head
+0083 - yawning
+0084 - hitting button on hayminators back
+0085 - walking through water
+0086 - Done waiting
+0087 - Sitting down
+0088 - 
+0089 - 
+008A - 
+008B - walking through the water
+008C - riding bull?
+008D - 
+008E - Knocking on toilet door
+008F - 
+0090 - 
+0091 - pulling out flametorch
+0092 - One, Two, Three.. Ten.
+0093 - watching Gargoyle plummet down?
+0094 - Putting away flametorch
+0095 - Ten Dollars? I though you said it was a FORTUNE!
+0096 - walking with something in hands
+0097 - 
+0098 - Climbing rope
+0099 - Crawling low
+009A - 
+009B - Pulling out stopwatch
+009C - 
+009D - 
+009E - 
+009F - ???
+00A0 - ???
+00A1 - oh, hi, i...
+00A2 - ???
+00A3 - ???
+00A4 - hanging at a rope
+00A5 - getting up after sliding down a steep slope(when walking towards certain steep slopes ONLY)
+00A6 - swing walk while drunk
+00A7 - walking fast while drunk
+00A8 - staggering(didn't have any better name for it)
+00A9 - BLARF!!
+00AA - strange walk while drunk (no idea where it comes from, but it oddly stops at the end)
+00AB - standing while drunk
+00AC - walking and headache
+00AD - ?
+00AE - Glass Drink(prologue)
+00AF - ?
+00B0 - ?
+00B1 - Avoiding the blood splatter(or somthing like that)
+00B2 - ?
+00B3 - Conker juggling
+00B4 - Hypno
+00B5 - Hypno 2
+00B6 - Done Hypno
+00B7 - Ducking
+00B8 - Getting head down
+00B9 - Sitting on throne(prologue)
+00BA - Idle, saying "I hate butterflies" once, at random
+00BB - "Boredi-bored-bored"
+00BC - ?
+00BD - standing still holding bazooka
+00BE - Pulling out Flamethrower
+00BF - Standing still, holding Flamethrower
+00C0 - Put away Flamethrower
+00C1 - ?
+00C2 - grabbed by the Gargoyle(animation no.1)
+00C3 - throwing knife
+00C4 - 
+00C5 - 
+00C6 - 
+00C7 - 
+00C8 - Getting up after landing with head first
+00C9 - ???
+00CA - falling(slows down)
+00CB - Swimming underwater with object in hands
+00CC - above surface(in water)
+00CD - Alternate swimming animation?(Unused)
+00CE - swimming underwater
+00CF - falling
+00D0 - Sliding down steep slope
+00D1 - landing in the water
+00D2 - ???
+00D3 - walking with broken leg
+00D4 - ???
+00D5 - picking something up(cog, cheese, sweet corn, etc.)
+00D6 - throwing away what he were holding(cheese, sweetcorn, etc.)
+00D7 - walking while holding something
+00D8 - holding something(cog, cheese, sweet corn, etc.)
+00D9 - conkers shoot from slingshot animation (it actually works)
+00DA - unknown
+00DB - yeh, i know i'm great(cutscene animation)
+00DC - grabbing bone from the remaining uga(cutscene)
+00DD - hypno
+00DE - hypno
+00DF - chasing money
+00E0 - turning around while peeing
+00E1 - 
+00E2 - 
+00E3 - 
+00E4 - 
+00E5 - 
+00E6 - 
+00E7 - standing still with bazooka animation
+00E8 - walking with bazooka animation
+00E9 - helico animation
+00EA - heightless jump
+00EB - jump extra high animation
+00EC - jump extra high animation
+00ED - crossbow walking???
+00EE - crossbow???
+00EF - something hit me in the butt animation
+00F0 - regain control animation
+00F1 - flattened
+00F2 - automatically re-inflated
+00F3 - falling
+00F4 - falling
+00F5 - after being knocked animation
+00F6 - still flat
+00F7 - throw multiple knifes one after the other
+00F8 - walking with crossbow
+00F9 - aiming knife
+00FA - conker juggling
+00FB - pull out crossbow animation
+00FC - crossbow arrow fire animation
+00FD - ???
+00FE - ???
+00FF - ???
+0100 - ???
+0101 - sliding down a steep hill animation
+0102 - pull out knife animation
+0103 - put away knife animation
+0104 - conker pulls out the rareware logo animation (the logo itself doesn't show up in normal gameplay though)
+0105 - ???
+0106 - walking with crossbow animation?
+0107 - conker wipes the dust out of the rareware logo animation 
+0108 - Standing with chainsaw(intro, offscreen)
+0109 - conker sends the broken N64 logo pieces off the viewing screen and throws away the chainsaw animation
+010A - aiming with crossbow animation
+010B - conker leaning onto the rareware logo animation
+010C - firing crossbow arrows in aiming view animation
+010D - after conker cuts off the N64 logo animation 
+010E - pulling out the bat from pocket animation 
+010F - stand in place with baseball bat animation
+0110 - put away baseball bat animation
+0111 - running with baseball bat animation
+0112 - walking with baseball bat animation
+0113 - swing baseball bat animation
+0114 - grabbing moneybag animation
+0115 - stand in place with moneybag animation
+0116 - walking with moneybag animation
+0117 - running with moneybag animation
+0118 - throw away moneybag animation
+0119 - swing baseball bat downwards animation
+011A - reloading the guns animation
+011B - hit by baseball bat animation
+011C - hit by baseball bat animation 2
+011D - hit by gun bullets animation
+011E - it smells pretty bad here animation (backing in disgust)
+011F - it smells pretty bad here animation 2 (standing still in place)
+0120 - pull out katana animation (katana is visible)
+0121 - katana put away animation
+0122 - katana stand animation
+0123 - katana walking animation
+0124 - katana run animation
+0125 - On sunflower
+0126 - Tickled by Tickling bees, standing
+0127 - waving arms while flaming animation
+0128 - katana slice animation
+0129 - katana slice animation 2
+012A - katana slice animation 3
+012B -
+012C - Pulling out info book
+012D - reading info book
+012E - put away info book, then frying pan swing
+012F - extra chance after death 1
+0130 - 
+0131 - 
+0132 - Sidestepping(Unused?)
+0133 - Sidestepping(Unused?)
+0134 - ???
+0135 - conker pointing to him or something
+0136 - "What again?"
+0137 - 
+0138 - 
+0139 - 
+013A - 
+013B - Conker: hang on a sec. what did you say about disposable(animation no.4)/Whose round is it?
+013C - 
+013D - 
+013E - 
+013F - Putting cigar in mouth
+0140 - 
+0141 - 
+0142 - 
+0143 - 
+0144 - aiming with guns
+0145 - 
+0146 - 
+0147 - 
+0148 - 
+0149 - 
+014A - 
+014B - 
+014C - Walking with something in hands, sounding panicked
+014D - Put on gas mask(no gas mask. beta?)
+014E - put off gas mask
+014F - 
+0150 - Vommiting, can't move
+0151 - put on gas mask
+0152 - Pull out Sniper gun
+0153 - Standing, holding Sniper gun
+0154 - Firing Sniper Gun
+0155 - Put away Sniper gun
+0156 - 
+0157 - 
+0158 - 
+0159 - 
+015A - Standing, holding chainsaw
+015B - walk with chainsaw
+015C - run with chainsaw
+015D - pull out Chainsaw
+015E - put away Chainsaw
+015F - Using chainsaw
+0160 - 
+0161 - Walk with one hit kill gun
+0162 - Run with one hit kill gun
+0163 - Pull out one hit kill gun
+0164 - Put away one hit kill gun
+0165 - Stand with one hit kill gun
+0166 - Firing one hit kill gun
+0167 - 
+0168 - pull out Flamethrower
+0169 - Riding Bull
+016A - climbing rope
+016B - Throwing something(multiplayer Tediz)
+016C - Throwing something
+016D - Shaking water off shoe before entering pub
+016E - holding breath
+016F - 
+0170 - 
+0171 - pull out Yoyo
+0172 - Yoyo
+0173 - put away Yoyo
+0174 - Yoyo
+0175 - pulling out grenade
+0176 - pulling out explosive thingy(tediz weapon in singleplayer)
+0177 - holding grenade, standing still
+0178 - walking with grenade
+0179 - run with grenade
+017A - Yoyo
+017B - Salute
+017C - waving hand at someone
+017D - ???
+017E - head blown off
+017F - 
+0180 - 
+0181 - 
+0182 - looking out for something far away(Unused?)
+0183 - Kneeling down(Unused)
+0184 - About to pet something(Unused)
+0185 - Conker petting something.(Unused)
+0186 - Conker: "I don't think any need for guesses"(Unused)
+0187 - ?? Unused?
+0188 - ?? Unused?
+0189 - From the experiment
+018A - Dead 3
+018B - 
+018C - Grabbing Glass of water
+018D - Dropping Anti-Drunk-Pills in glass
+018E - effects of the anti(no-more-drunk-pills) animation
+018F - Weasel Henchmen Imitating Don Weaso(Unused)
+0190 - Weasel Henchmen Imitating Don Weaso(Unused)
+0191 - Weasel Henchmen Imitating Don Weaso(Unused)
+0192 - Weasel Henchmen Imitating Don Weaso(Unused)
+0193 - Climbing ladder
+0194 - 
+0195 - Weasel Henchmen pose, as seen in Heist(Multi)
+0196 - 
+0197 - 
+0198 - 
+0199 - ???
+019A - 
+019B - 
+019C - 
+019D - 
+019E - 
+019F - Playing Gameboy(Conker)
+01A0 - 
+01A1 - 
+01A2 - 
+01A3 - 
+01A4 - 
+01A5 - standing, holding key
+01A6 - walking with key in hands
+01A7 - running with key in hands
+01A8 - "I think they've gone for a swim"
+01A9 - "I wouldn't hold ya breath, cause it's ironic. which is what they do now"
+01AA - of
+01AB - 
+01AC - 
+01AD - 
+01AE - 
+01AF - 
+01B0 - 
+01B1 - 
+01B2 - Running(It's War chapter)
+01B3 - eh, what?
+01B4 - oh a job...
+01B5 - Conker: and i feel lots better(animation no.4)
+01B6 - Conker: right, let's get outta here(animation no.5)
+01B7 - Conker's hungover, context B button tutorial, event(animation no.1)
+01B8 - Holding bomb, standing(only animation)
+01B9 - conker about to do the worm
+01BA - conker doi'n the worm animation 1
+01BB - conker doi'n the worm animation 2
+01BC - boogie
+01BD - Conker's hungover, meeting Birdy(animation no.5)
+01BE - Conker's hungover, meeting Birdy(animation no.3)
+01BF - hungover drunk
+01C0 - Conker's hungover, context B button tutorial(animation no.1)
+01C1 - Conker's hungover, meeting Birdy(animation no.6)
+01C2 - Hungover(Unused)
+01C3 - Hungover(Unused)
+01C4 - Hungover(Unused)
+01C5 - Hungover(Unused)
+01C6 - Hungover(Unused)
+01C7 - Hungover(Unused)
+01C8 - Hungover(Unused)
+01C9 - Hungover(Unused)
+01CA - Hungover(Unused)
+01CB - when bored at rock solid animation 2
+01CC - when bored at rock solid animation 3
+01CD - pull out toilet paper
+01CE - toilet paper aim
+01CF - toilet paper pull out and throw it
+01D0 - put away toilet paper
+01D1 - 
+01D2 - Conker's hungover, meeting Birdy(animation no.8)
+01D3 - Conker's hungover, meeting Birdy(animation no.7)
+01D4 - 
+01D5 - Conker's hungover, meeting Birdy(animation no.9)
+01D6 - 
+01D7 - 
+01D8 - 
+01D9 - Conker: oh, just what i needed(animation no.1)
+01DA - Conker:i see what he means.(animation no.2)
+01DB - Conker:context sensitive(animation no.3)
+01DC - 
+01DD - 
+01DE - 
+01DF - 
+01E0 - 
+01E1 - 
+01E2 - run with shotgun?
+01E3 - Conker's hungover, context B button tutorial(animation no.5)
+01E4 - Conker's hungover, context B button tutorial, event(animation no.2)
+01E5 - Conker's hungover(animation no.3)
+01E6 - Conker's hungover(animation no.1)
+01E7 - Conker's hungover(animation no.5)
+01E8 - Conker's hungover(animation no.6)(A variant of 200, but yet went unused?)
+01E9 - 
+01EA - 
+01EB - 
+01EC - 
+01ED - run with sniper rifle?
+01EE - pull out sniper rifle?
+01EF - 
+01F0 - Conker's hungover, context B button tutorial(animation no.4)
+01F1 - Conker's hungover, meeting Birdy(animation no.2)
+01F2 - Conker's hungover, meeting Birdy(animation no.1)
+01F3 - Stand with shotgun
+01F4 - Firing shotgun
+01F5 - Walk with shotgun
+01F6 - Run with shotgun
+01F7 - Pull out shotgun
+01F8 - Put away shotgun
+01F9 - 
+01FA - standing, holding bomb
+01FB - walking with bomb
+01FC - Throwing bomb
+01FD - "Im gonna be a bit late"
+01FE - 
+01FF - "I don't feel soo good now"
+0200 - Conker's hungover(animation no.6)
+0201 - Conker's hungover(animation no.2)
+0202 - Conker's hungover(animation no.4)
+0203 -
+0204 -
+0205 - Conker's hungover, context B button tutorial(animation no.3)
+0206 - ??
+0207 - firing bazooka
+0208 - "Doesn't look too good tonight"
+0209 - "I've met up with a couple guys"
+020A - Putting phone handle back onto place
+020B - ?
+020C - Conker's hungover, context B button tutorial(animation no.2)
+020D - walking and shooting (looping, and gun bursts)
+020E - matrix jump animation
+020F - matrix jump animation
+0210 - Uga gyro standing, pretending nothings going on.
+0211 - "You guys enjoy yourselves and all that.."
+0212 - "Oh, i'll go this way"
+0213 - ?
+0214 - ?
+0215 - ?
+0216 - Jumping down
+0217 - "Sorry about that, old chap."
+0218 - vomitting (story cutscene)
+0219 - Conker's hungover, recovering(animation no.1)
+021A - Conker's hungover, recovering(animation no.2)
+021B - Conker's hungover, recovering(animation no.3)
+021C - Conker's hungover, context B button tutorial, event(animation no.3)
+021D - ?
+021E - gun reload
+021F - "Gotta go."
+0220 - Conker's hungover, meeting Birdy(animation no.4)
+0221 - stand still holding shotgun
+0222 - shotgun fire and reload
+0223 - walking with shotgun
+0224 - run with shotgun
+0225 - pulling out shotgun
+0226 - put away shotgun
+0227 - shotgun fire and reload(without gun burst)
+0228 - "I dunno. fight some war somewhere"
+0229 - try to keep hold of heavy bazooka
+022A - aiming bazooka(idle animation)
+022B - walking with bazooka
+022C - running with dual guns
+022D - ?
+022E - Been drinking too much again
+022F - where could we be now then
+0230 - ?
+0231 - ?
+0232 - "Ok  i think she bought it"
+0233 - zombie idle
+0234 - zombie walking
+0235 - Shotgun fire 2
+0236 - Shotgun fire 2
+0237 - Shotgun fire 2(without gun burst)
+0238 - Dual Guns firing, walking
+0239 - ?
+023A - "I gotta go home."
+023B - Neo Conker, walking with bag
+023C - matrix animation
+023D - zombie coming out of grave
+023E - zombie idle
+023F - zombie walking
+0240 - pulling out a battery and inserting it into explorer helmet
+0241 - ?
+0242 - shot
+0243 - caveman on lavaboard
+0244 - matrix animation
+0245 - ?
+0246 - neo conker idle
+0247 - attention notice
+0248 - ?
+0249 - putting TNT in pooball
+024A - Neo Conker, pulling up dual guns
+024B - ?
+024C - ?
+024D - ?
+024E - zombie shot
+024F - zombie shot
+0250 - zombie shot
+0251 - zombie crawling
+0252 - ?
+0253 - ?
+0254 - ?
+0255 - villager hooked onto conker bat
+0256 - villager hooked onto conker bat
+0257 - ?
+0258 - villager hooked onto conker bat
+0259 - villager laying down, stunned
+025A - zombie eating
+025B - conker being eaten by a zombie
+025C - crossing arms and tapping foot(cutscene animation)
+025D - crossing arms(cutscene animation)
+025E - right, and that means?
+025F - conker being eaten by a zombie
+0260 - ?
+0261 - a zombie eating with legs not functioning 
+0262 - reaching top of ladder(and also going UP a few pixels, not just graphically)
+0263 - ?
+0264 - ?
+0265 - look. you know, you can have the money...
+0266 - ?
+0267 - "Has the testers got lazy or somethin'?"
+0268 - "Has the testers got lazy or somethin'?", part 2
+0269 -
+026A -
+026B -
+026C -
+026D -
+026E -
+026F - conker remembering things 1
+0270 - conker remembering things 2
+0271 - conker remembering things 3
+0272 - conker remembering things 4
+0273 - conker remembering things 5
+0274 - conker remembering things 6
+0275 - conker remembering things 7
+0276 - conker remembering things 8
+0277 -
+0278 - Conker: well, asses to you then(animation no.3)/It's giving me an idea!
+0279 - yellow suit hovering rockets
+027A - yellow suit punch
+027B - yellow suit punch 2
+027C - yellow suit punch 3
+027D - yellow suit punch 4
+027E - yellow suit alien hold
+027F - Gargoyle encounter(animation no.1)
+0280 - Gargoyle encounter(animation no.2)
+0281 - Gargoyle encounter(animation no.3)
+0282 -
+0283 - Yellow suit blocking
+0284 - Yellow suit attacked
+0285 -
+0286 -
+0287 -
+0288 -
+0289 - Yellow suit getting back up
+028A -
+028B -
+028C -
+028D -
+028E -
+028F -
+0290 - oh no! what is the world coming to..
+0291 - i recognize that money.
+0292 - oi! give me my money back!
+0293 - Just stay there, the cavarly has arrived
+0294 - Yeah, it's written on it.
+0295 - Eenie, Meenie, Minie... okay!
+0296 -
+0297 -
+0298 - laughing at the caveman who fell off the lavaboard
+0299 -
+029A - Oh hang on, I think it's this one actually.
+029B - Ah, more Tediz(the animation plays at normal speed in the Off-Duty scene, so the last few frames are never seen normally)
+029C - Oh no, what they're doin'??(From the Experiment scene, Unused)
+029D - He's Still Alive!(From the Experiment scene, Unused)
+029E - hey, squirrel, you've woken up...
+029F - we nicked your money! money! money! money!
+02A0 - prepare to moony moon him.
+02A1 - moony moon moon gesture.
+02A2 - 
+02A3 - ha! ha! stupid simon fell off the board
+02A4 - yeah. the stupid bastard is burned up!
+02A5 - now if the stupid squirrel wants his money back...
+02A6 - yeah, let's go race him!
+02A7 - let's go!
+02A8 - caveman falling off lava board
+02A9 - right! time to teach them a lesson!
+02AA - 
+02AB - caveman with green, spiky hair on lavaboard, watching the bald caveman plummet down
+02AC -
+02AD -
+02AE -
+02AF -
+02B0 -
+02B1 - ?
+02B2 - Conker: "Oh. Hey! excuse me. Hello."
+02B3 - Conker: "Friendly type."
+02B4 - Conker: "I don't see anything red around.."
+02B5 - Conker: "Oh. Here we go again.."
+02B6 - Conker: "Now logic would denote.."
+02B7 - Lower body below ground, inanimate(unused?)
+02B8 - Conker: "I think i get it.."
+02B9 - "i told you i'm NOT a squirrel"
+02BA - "Squirrels aren't short and furry, they're big and gray"
+02BB - "they're long and snouty, and has flappy ears"
+02BC - "and as for twitchy noses"
+02BD - "ok calm down, i'll go and get it back"
+02BE -
+02BF -
+02C0 - ah, another one, hi.
+02C1 - whistling
+02C2 - pulling out bone from pocket
+02C3 -
+02C4 - looking around(when in the Bull area)
+02C5 -
+02C6 -
+02C7 - firing bazooka(tediz?)
+02C8 - pulling out crossbow
+02C9 - firing crossbow
+02CA - pulling out cavemen knife of pocket
+02CB - putting away cavemen knife
+02CC - rapidly throwing cavemen knifes
+02CD - throwing a cavemen knife
+02CE - 
+02CF - 
+02D0 - drunk, walking(beta?)
+02D1 - putting key in keyhole
+02D2 - 
+02D3 - putting key in keyhole
+02D4 - 
+02D5 - 
+02D6 - 
+02D7 - 
+02D8 - 
+02D9 - drinking
+02DA - eating
+02DB - 
+02DC - 
+02DD - 
+02DE - 
+02DF - "eh, you're not drinking then?"
+02E0 - "he looks like you"
+02E1 - "i don't mind if i do, thank you"
+02E2 - 
+02E3 - 
+02E4 - walking with somthing in hand
+02E5 - 
+02E6 - 
+02E7 - 
+02E8 - 
+02E9 - 
+02EA - 
+02EB - WAHAY!
+02EC - Neo Conker, enraged
+02ED - 
+02EE - hey Berri..
+02EF - 
+02F0 - 
+02F1 - 
+02F2 - weasel, sitting at the meeting
+02F3 - not me, i've shown respect
+02F4 - paulie dead
+02F5 - ooh no, NOT me! i didn't do it..
+02F6 - who of us weasels haven't shown any respect??
+02F7 - don weaso's gonna beat me up
+02F8 - i can't watch, it's too horrible
+02F9 - watching again, in case it isn't actually happening
+02FA - 
+02FB - 
+02FC - 
+02FD - 
+02FE - 
+02FF - 
+0300 - 
+0301 - "now mr. alien"(ending scene, throne room)
+0302 - riding mr. barrel
+0303 - riding mr. barrel
+0304 - um, hello. any software enginneers in here?(cutscene animation)
+0305 - "Oh yeah, hello!"
+0306 - "I won't tell anyone about this lockup"
+0307 - "Quite a bad lockup, that is."
+0308 - "meh, this background looks grimy"(cutscene)
+0309 - "Hm.. Let's see now"
+030A - 
+030B - "Ah, that's better"
+030C - "Ha, you guys"
+030D - "ok, take me back to..."
+030E - "the game's locked up.."
+030F - "oh no, that's a bit volatile."
+0310 - "oh no, i felt sure that was it.."
+0311 - "And to think things would end this way. so near."
+0312 - Game "locks up"
+0313 - Opening suit helmet
+0314 - ???
+0315 - ???
+0316 - "Confidence pills"
+0317 - "I feel alot more confident. won't need these anymore"
+0318 - I'll just cross this threshold here
+0319 - ???
+031A - climbing down ladder
+031B - running with gun?
+031C - "What are you doing, get off!"
+031D - ???
+031E - ???
+031F - Neo Conker, shooting from both sides
+0320 - Neo Conker, shooting from both sides
+0321 - 
+0322 - sitting on the throne
+0323 - Conker:"This day didn't turn out that bad"
+0324 - "Oh yeah. Ten 'o clock, i remember"
+0325 - talking to the sergeant(at the end of It's War)
+0326 - Hatching dino egg
+0327 - 
+0328 - 
+0329 - 
+032A - "Get away from her you BITCH!"
+032B - Conker: you're offering me cash(animation no.1)
+032C - Conker: me, you mean?(animation no.2)
+032D - 
+032E - 
+032F - Conker: oh and by the way(animation no.6)
+0330 - Conker, depressed
+0331 - Conker:"Scotch. Single malt. Speyside. No ice"
+0332 - Conker:"Whoa there cowboy. Keep it comin'.."
+0333 - Conker:"Ugh. You wouldn't believe it.."
+0334 - Conker:"I don't wanna talk about it. I'll just drink this"
+0335 - Conker:"Oh. Leave the bottle."
+0336 - ??
+0337 - crying frenchie(multiplayer beach, when tediz win)
+0338 - patting crying frenchie(multiplayer beach, when tediz win)
+0339 - looking at the Tediz as they parade in front of frenchies(multiplayer beach, when tediz win)
+033A - 
+033B - 
+033C - I'm starving..(From Raptor Multiplayer)
+033D - I'm starving..(From Raptor Multiplayer)
+033E - ???
+033F - ???
+0340 - ???
+0341 - grabbing money (no Faji visible)
+0342 - Standing with shotgun(cutscene)
+0343 - Moving right arm alot, less with left arm, and talking with bottom lip.Probably another test animation
+0344 - ???
+0345 - put new battery in lighthelmet
+0346 - aaoooww
+0347 - ???
+0348 - ???
+0349 - 
+034A - The part where Conker assumes Rodent died cutscene 1
+034B - The part where Conker assumes Rodent died cutscene 2
+034C - The part where Conker assumes Rodent died cutscene 3
+034D - The part where Conker assumes Rodent died cutscene 4
+034E - yellow suit frozen (cutscene still model)
+034F - ???
+0350 - ???
+0351 - regain control (unused?)
+0352 - floating (looping)
+0353 - death animation (looping, cutscene??)
+0354 - bone swing (on lavaboard)
+0355 - homerun bat swing (on lavaboard)
+0356 - reloading shotgun (cutscene)
+0357 - Uga Buga, ashamed(Raptor Multi)
+0358 - putting away something
+Corn Bag: model ID: 0E
+0000 - looking around
+0001 - hopping
+0002 - getting up
+0003 - laying on back
+0004 - Fall on his back
+0005 - trying to get up?
+0006 - waah!!
+0007 - trying to get up(he may've had some of his own sounds here once,
+but they were overwritten before the final release, so that's all what is left)
+Franky the Pitchfork
+0000 - Idling
+0001 - Charging
+0002 - Looking around
+0003 - hopping
+0004 - "there you are!"
+0005 - knocked backwards by hitting wall
+0006 - "this is too much"
+0007 - Charging
+0008 - Keeping still
+0009 - Ashamed of his failure
+000A - hitting his target
+000B - getting back up
+000C - hopping
+000D - walking
+000E - Charging
+000F - jumping(when Conker rides him)
+0010 - jumping
+0011 - getting stuck in ground after falling down
+0012 - Trying to free himself
+0013 - cutscene
+0014 - 
+0015 - banging his head on something??
+0016 - Prologue, sitting by Conker's throne
+Bucket: model ID: 2C
+0000 - Hopping
+0001 - Talking
+0002 - Idling
+0003 - Staying put
+0004 - 
+0005 - Looking down
+0006 - looking up
+0007 - Looking down as Franky falls
+0008 - Looking up at Franky, talking
+Paintbrush: model ID: 2D
+0000 - Idling
+0001 - Hopping
+0002 - In mouth of Bucket
+0003 - Idling?
+Monk: Model ID: 31
+Bucket: model ID: 2C
+0000 - Reading his rune
+0001 - Walking with his rune
+0002 - "Get off my stone!"
+0003 - Sending Conker up in the air
+0004 - "Heeeeech"
+0005 - Looking around
+0006 - 
+0007 - 
+0008 - 
+0009 -
+000A - "How dare he vomitting at me"
+000B - "Yuckk!"
+000C - Idling
+Fire Imps(both Normal and Gray)
+0000 -
+0001 -
+0002 -
+0003 catching something with his mouth(from a montage trailer of a beta version of CBFD)
+0004 - 
+0005 rolling
+0006 - 
+0007 - 
+0008 - cartwheeling(Perhaps beta? Also makes unused Fire Imp sounds)
+0009 - 
+000A - jumping
+000B - 
+000C - 
+000D - Smoking cigar
+000E - cutscene animation
+000F - 
+0010 - cutscene animation
+0011 - Drinking lighter fluid
+0012 - chasing "furry guy"(Conker)
+0013 - farting
+0014 - farting
+0015 - freaking out(beta?)
+0016 - 
+0017 - lying down, drunk, laughing(looping)
+0018 - lying down, drunk, laughing
+0019 - coughing?
+001A - 
+001B - 
+001C - shoving cigar up his ass
+001D - 
+001E - 
+001F - 
+0020 - 
+0021 - i got peed by now
+0022 - Dissapearing
+0023 - Appearing
+0024 - standing by the fire
+0025 - standing by the fire 2
+0026 - 
+0027 - whacked by frying pan(without sound)
+0028 - you got it
+0029 - wrong cheat
+002A - You cheatin' bastard
+002B - Looking at what you're typing at the letter table
+002C - whacked by frying pan(with sound)
+002D - Backflipping(have no clue if used or not.)
+Fajo: model ID: 3C
+0000 - pause screen/just stayin' put
+0001 - jumping around
+0002 - 
+0003 - Not him again!!
+0004 - pause screen/just stayin' put
+0005 - jumping around
+0006 - 
+0007 - whacked
+0008 - lying down
+0009 - lying down
+000A - jumping around
+Dung Beetle: model ID: 44
+0000 idle
+0001 in position, popping out head
+0002 in position with head out
+0003 
+0004 flying
+0005 trying to beat Conker
+0006 
+0007 
+0008 flying
+0009 beetle landing on back.(beta?)
+000A beetle lying on back, spinning(beta?)
+000B getting up(beta?)
+000C turning(clockwise)
+000D turning(counter-clockwise)
+000E 
+000F 
+0010 
+0011 in position, looking around
+0012 on back(beta?)
+0013 on back, spinning(beta?)
+0014 
+0015 
+0016 on back, dissapearing(freezes)
+0017 cutscene animation
+0018 lying, sleeping
+0019 sitting by the desk in poo cabin
+001A sitting by the desk in poo cabin, pointing to that spot
+001B Dung Beetle: "Get your shitty arse in there.."
+001C Dung Beetle: "Go on. on your bike"
+001D an animation used in cutscene, but completely offscreen before switching to value 0004
+001E bumping into Conker without looking
+001F 
+0020 another animation only used offscreen, again
+0021 "All right there"(beta?)
+0022 "You just don't wanna go in there"(beta?)
+0023 Walking
+0024 Dung beetle going from "skeleton" position to "Sitting down with cup of tea" position(beta?)
+0025 Left Dung beetle drinking tea with static wings out. Animates a bit slower, making it look more fluid(beta?)
+0026 Left beetle holding tea
+0027 about to wave over
+0028 waving
+0029 Left beetle drinking tea
+002A Right beetle grabbed by The Great Mighty Poo
+002B Left beetle looking at the middle beetle
+002C Chatting with the beetle to the left
+002D Chatting with the beetle to the left
+002E Chatting with the beetle to the left
+002F Drinking cup of tea
+0030 Chatting with the beetle to the left
+0031 Sitting, with cup of tea
+0032 Dung Beetle: "Take my advice and get outta here"
+0033 Dung Beetle: "It all started two days ago.."
+0034 Dung Beetle: "I'm outta here. You can do what you like"
+0035 Dung Beetle: "There's cash up there if ya can be arsed to get it"
+0036 Dung Beetle: "This thing came outta the shite"
+0037 telling Conker off after having been whacked
+0038 getting hit by frying pan
+Franky's nemesis: model ID: 45
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Blue cog: model ID: 46
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Metal spider: model ID: 47
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+War boat: model ID: 49
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Submarine: model ID: 4A
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Haybot: model ID: 4B
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Green cog: model ID: 4C
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Cannons: model ID: 4E
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Armadillo rocket: model ID: 4F
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Bat: model ID: 50
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Bottom part of Haybot: model ID: 51
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+Carl and Quentin: model ID: 52
+0000 idle
+0001 Carl saying "Fuck off"
+0002 spinning
+0003 Carl with strange face
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C Quentin
+000D 
+000E 
+Raptor: model ID: 53
+0000 idle
+0001 walking
+0002 looking around
+0003 looking around
+0004 turning(counter-clockwise)
+0005 turning(clockwise)
+0006 looking around
+0007 nabbing uga buga
+0008 swallowing uga buga
+0009 attempting to grab with cheeks
+000A running
+000B 
+000C roaming
+000D turning
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+0022 
+0023 
+0024 
+0025 
+0026 
+0027 
+0028 
+0029 
+002A 
+002B 
+002C 
+002D 
+002E 
+002F killed
+Buga the Knut: model ID: 54
+0000 idle
+0001 walking (automatic)
+0002 whacking with his bone
+0003 looking after Conker
+0004 jumping (counter-clockwise)
+0005 jumping (clockwise)
+0006 holding bone up
+0007 dropping cloth, embarrassed
+0008 embarrassed, covering his private part
+0009 
+000A getting bitten in butt
+000B holding bone up 2
+000C holding bone up 3
+000D bitten in butt, screaming
+000E No-no!
+000F "Iii'm best!!"
+0010 "Time to whack that furry bastard"
+0011 jumping and landing on butt (will also hurt you, in which results buga standing in skeleton position)
+0012 getting up on feet
+0013 "Iii'm best!!" 2
+0014 "Iii'm best!!" 2
+0015 No-no! (no sound)
+0016 Sitting (can't move) (cutscene)
+0017 holding bone up 
+0018 whacking with bone
+0019 holding bone up 2
+001A whacking with bone 2
+001B holding bone up 3
+001C whacking with bone 3
+001D 
+001E Yeeoow!!
+001F 
+0020 ??beta??
+0021 trying to drag up his cloth
+0022 "Whut are ya staring at?!"
+0023 
+0024 running (automatic)
+N Logo 56
+0000 
+0001 
+Moneybag: model ID: 57
+0000 idle
+0001 hopping
+0002 
+0003 Jumping
+0004 looking around
+0005 dropped?
+0006 being carried
+0007 being carried
+0008 being carried
+0009 dropped?
+000A 
+000B 
+000C Traveling on line?(Beta? Can't recall seeing this ingame)
+000D 
+SHC Soldier: model ID: 58
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E Tied, shot to death(unused)
+001F Tied, shot to death(unused)
+0020 Tied, shot to death(unused)
+0021 Tied(unused)
+0022 
+0023 
+0024 
+0025 
+0026 
+0027 
+0028 
+0029 
+002A on electrical chair
+002B on electrical chair
+002C on electrical chair
+002D on electrical chair
+002E on electrical chair, chocked
+002F on electrical chair, chocked
+0030 on electrical chair, chocked
+0031 Being experimented on by tediz.(unused)
+0032 Being experimented on by tediz, begging them to let go of him.(unused)
+0033 Chatting in the bar
+0034 Chatting in the bar
+0035 Chatting in the bar
+0036 Chatting in the bar
+0037 Chatting in the bar
+0038 Chatting in the bar
+0039 Chatting in the bar
+003A Chatting in the bar
+003B 
+003C 
+003D Being experimented on by tediz.(unused)
+003E 
+003F 
+0040 
+0041 sleeping on plane
+0042 sleeping on plane
+0043 getting shot
+0044 dead, lying down
+Rodent: model ID: 5B
+0000 idle
+0001 walking
+0002 hiding in armor
+0003 popping out of armor
+0004 Turning around(counter-clockwise)
+0005 Turning around(clockwise)
+0006 Rolling(beta?)
+0007 popping out of armor(duplicate?)
+0008 Looking around
+0009 Heavy armor
+000A 
+000B Pointing??(beta?)
+000C 
+000D 
+000E 
+000F 
+0010 Rodent: "Oh Conker. You're king."
+0011 Rodent: "Can i be your general?"
+0012 Rodent: "Long live the king!"
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+Alien: model ID: 5E
+0000 idle
+0001 knocked by yellow robot suit 1
+0002 knocked by yellow robot suit 2
+0003 knocked by yellow robot suit 3
+0004 biting
+0005 tail whack
+0006 
+0007 crawling
+0008 turning (counter-clockwise)
+0009 turning (clockwise)
+000A knockout
+000B knocked out
+000C 
+000D flung against wall
+000E getting up
+000F being spinned
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+0022 
+0023 
+0024 
+0025 
+0026 
+0027 
+0028 
+0029 
+002A 
+002B 
+Jugga: model ID: 69
+0000 
+0001 watching
+0002 walking
+0003 garderning her hair(sorry, didn't have a better name)
+0004 when taking notice of Buga the Knut's secret
+0005 giggling
+0006 good show
+0007 slapping hands
+0008 another one of those i just can't come up with a fancy name
+0009 sitting(cutscene animation)
+000A standing up(in a similar way to Neo Berri)
+000B ???
+000C 
+000D 
+000E 
+000F 
+0010 cutscene
+0011 cutscene
+0012 cutscene
+0013 cutscene
+0014 cutscene
+0015
+0016 byebye Conker (cutscene)
+0017 cutscene
+Sunflower: model ID: 6C
+0000 idle
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+King Bee: model ID: 6D
+0000 idle
+0001 
+0002 
+0003 
+0004 "Could ya' spare me a dime?"
+0005 
+0006 "I'm king at my own country"
+0007 "That bitch threw me out."
+0008 
+0009 Rolling backwards
+000A Beta??
+000B 
+000C 
+000D 
+000E Beta?
+000F Beta?
+0010 Hit with frying pan
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+N Logo being chopped off 6F
+0000 
+0001 
+0002 
+0003 unused?
+0004 unused?
+0005 unused?
+0006 unused?
+Single player gregg: model ID: 70
+0000 idle
+0001 walking
+0002 walking with his megaphone
+0003 standing
+0004 You just have a few more chances
+0005 whose idea was it anyway
+0006 
+0007 
+0008 Gaah, those cats
+0009 Just you wait smart ass.
+000A According to the powers that be..
+000B How many grim have you met before..
+000C How many grim have you met before..
+000D what am i supposed to look like
+000E You may not be dead/explaining about squirrel tails
+000F oh twat, my reaper thing got stuck
+0010 Going through list of names over "not quite" dead persons
+0011 I'm just doing my job
+0012 right, that's it, piss off
+0013 Explaining about squirrel tails
+0014 i'm not getting paid very much
+0015 You're dead. But not quite
+0016 oh bloody hell, you have to be a sodding squirrel wouldn't you
+0017 oh bloody hell, you have to be a sodding squirrel wouldn't you
+0018 Oh, you again. why don't you piss off!/turning around, walking away back to his job
+0019 Strange?
+001A Explaining about squirrel tails
+001B Explaining about squirrel tails
+001C Squirrels can have as many lives...
+001D Squirrels can have as many lives...
+001E In the bar, having headache
+001F That's another Twelve souls
+0020 I don't bloody believe it..
+0021 Come here ya bastards
+0022 Ah, there's a'oner
+0023 Unbloody dead
+0024 I suppose ya wanna go up there?
+0025 Unbloody dead?
+0026 Shoot through the head. It's what kills them
+0027 
+0028 
+0029 Inheritance? Pah!
+002A Chopping catfish
+002B Chopping catfish
+002C Chopping catfish(waiting)
+Moneybag 2: Model ID: 71
+
+Berri: model ID: 72
+FFFF
+0000 rock solid 1
+0001 rock solid 2
+0002 slapping hands in sync with rock solid/dance/whatever music
+0003 bending down
+0004 about to handstand?
+0005 about to handstand?
+0006 stretching left, left, and right, right
+0007 another one of those i just can't come up with a fancy name
+0008 another one of those i just can't come up with a fancy name
+0009 up, down, up, down
+000A ???
+000B kick
+000C handstand
+000D pulling forward
+000E getting back on feet
+000F swooch
+0010 rock solid3
+0011 rock solid4
+0012 ???
+0013 ???
+0014 ???
+0015 ???
+0016 ??? (cutscene??)
+0017 
+0018 
+0019 he better have an excuse
+001A who are you?
+001B i'm not interested
+001C walking
+001D running
+001E looking around
+001F jumping down
+0020 falling animation
+0021 landing animation
+0022 standing
+0023 
+0024 
+0025 
+0026 
+0027 
+Little Girl: model ID: 7C
+0000 idle??
+0001 
+0002 
+0003 
+0004 knocked off tedi boss
+0005 falling
+0006 
+0007 hopping up and down? (beta?)
+0008 
+0009 lying on back
+000A 
+000B 
+000C 
+000D fake crying
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+0022 
+0023 
+0024 
+0025 
+0026 
+0027 
+0028 
+0029 
+002A 
+002B 
+Don Weaso: model ID: 86
+0000 idle
+0001 Don Weaso in confusion.
+0002 cutscene
+0003 Don Weaso: "my way, or he's a dead mother ---- way/They're on MY patch."
+0004 Don Weaso: "When that bomb goes off... I suggest you leave town."
+0005 Don Weaso: "OK. Here's the plan"
+0006 let's go to work
+0007 Don Weaso Holding his hands out. Does not seem to be used anywhere
+0008 Don Weaso: "They seem totally outta place in this ecosystem."
+0009 we're robbing the feral reserve bank
+000A Don Weaso: "We have got ourselves. A little problem. In fact, several little problems"
+000B c'mon tough guy
+000C where's Frankie, where's Chicho, where's Allie(Ali), where's Paulie
+000D walking
+000E Sitting
+000F Duplicate of 0000
+0010 Duplicate of 0000
+0011 Duplicate of 0000
+0012 Duplicate of 0000
+0013 Don Weaso: "Right here. Boss"
+0014 Don Weaso: "Thanks very much."
+0015 Don Weaso: "So you're not gonna kill him?!"
+0016 Don Weaso: "That is the wise that tried to steal MY dough.."
+0017 Don Weaso: "Whaddya gotta say for yourself, boy?"
+0018 Looking at Conker when he shows up
+0019 Don Weaso: "Do you know this tea leaf?"
+001A Don Weaso: "The broad does not seem to know you."
+001B Get outta here.
+001C Listening to Berri
+001D Don Weaso: "Let's get back to business. Just got one thing to do. I'll be with you, in a minute."
+001E Looking to the left
+001F Don Weaso: "Could it be, Paulie!"
+0020 about to beat up Paulie
+0021 Don Weaso: "when you step outta line, you can expect to be respected back."
+0022 Don Weaso backing away?(beta??)
+0023 Don Weaso: "WHAAT the??!"
+0024 Don Weaso: "Sorry dollface"
+0025 Killing Berri by shooting her
+0026 Done firing
+0027 Don Weaso: "Am i interrupting something here?"
+0028 Don Weaso: "Take it. or Leave it!"
+0029 Smoking his cigar
+Tediz/Dr. Tediz: model ID: 5A 8D
+0000 Popping out of ground
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+0022 
+0023 
+0024 
+0025 
+0026 
+0027 
+0028 
+0029 
+002A 
+002B Standing on briefing table(Unused. Leftover from ECTS Beta)
+002C Explaining the rules of Blitzkrieg(Unused. Leftover from ECTS Beta)
+002D - 
+002E 
+002F - Doing a funny pose?
+0030 
+0031 
+0032 
+0033 
+0034 
+0035 
+0036 
+0037 
+0038 - Standing, holding gun pointed up
+0039 - Patrolling
+003A 
+003B 
+003C 
+003D 
+003E 
+003F 
+0040 
+0041 
+0042 
+0043 
+0044 
+0045 
+0046 
+0047 off duty
+0048 
+0049 off duty
+004A - off-duty
+004B 
+004C 
+004D - Into character
+004E - Off-duty
+004F 
+0050 
+0051 
+0052 
+The Great Mighty Poo: model ID: 92
+0000 Bending back and forth, hands up, wiggling his fingers(beta)
+0001 appearing elsewhere
+0002 pulling out poo ball off himself
+0003 throwing right poo ball
+0004 spitting toilet paper out
+0005 about to appear somewhere else
+0006 about to say aah
+0007 aah
+0008 idle (waiting)
+0009 pulling out poo ball off himself 2
+000A throwing left poo ball
+000B flushed down (not spinning) (cutscene animation)
+000C flushed down 2 (not spinning) (cutscene animation)
+000D holding sweet corn in hand (cutscene animation)
+000E Early animation of phase 1?(beta)
+000F preparing to sing (beta)
+0010 idle (cutscene animation)
+0011 Bending back and forth, hands up, wiggling his fingers(beta, duplicate)
+0012 Bending back and forth, hands up, wiggling his fingers(beta, duplicate)
+0013 ahem, ahem!! (cutscene animation)
+0014 i'am the great mighty poo (cutscene animation)
+0015 do you really think you'll survive in here (cutscene animation)
+0016 sweet corn is the only thing... (cutscene animation)
+0017 now i'm really getting rather mad... (cutscene animation)
+0018 mii,mi,mi,mi,mi, miiiiiiii!! (cutscene animation)
+0019 Idle(phase 2)
+001A showing his "lovely" grin (cutscene animation)
+001B putting sweet corn into his mouth for use as tooth (cutscene animation)
+001C aah, aah, aah, aah, aah, aah, aaaaaaaaaaaaaahhhhhh!!!! (cutscene animation)
+001D and up - no data
+Neo Berri:  model ID: 97
+0000 Standing, holding gun with both hands
+0001 walking
+0002 running
+0003 Pulling a knife?(beta?)
+0004 Sticking knife on Weasel guard?(beta?)
+0005 Running up wall, matrix-style
+0006 matrix kick prepare (cutscene)
+0007 matrix kick idle (without multiplayer matrix effect) (cutscene)
+0008 matrix kick begin (cutscene)
+0009 deactivating laser barriers (cutscene)
+000A running (cutscene)
+000B deactivating laser barriers (after)
+000C Firing at Weasel guard (cutscene)
+000D walking (cutscene)
+000E Done firing (cutscene)
+000F standing with gun (cutscene)
+0010 throwing knife (cutscene)
+0011 Standing with gun? (cutscene)
+0012 Firing at Weasel guard(cutscene)
+0013 Jumping
+0014 Idle
+0015 Arms crossed(cutscene)
+0016 Ok materialist, it's all your's now(cutscene)
+0017 Lying on floor, killed/dead
+0018 Lying on floor, killed, nearly dead
+0019 Lying on floor, nearly dead
+001A Lying on floor, dead
+001B Alternate standing(idle) pose?(beta)
+001C Getting shot
+001D Yeah. Just like my boyfriend(cutscene) 
+001E cutscene?
+001F Adjusting ponytail(cutscene)
+0020 ?
+0021 Stupid uncomfortable pants(cutscene)
+0022 Lunged out of air lock(cutscene)
+0023 Flying out into space(cutscene)
+0024 ?
+Prof. Von Kriplespac:  model ID: 99
+0000 walking
+0001 
+0002 
+0003 
+0004 
+0005 
+0006 
+0007 
+0008 
+0009 
+000A 
+000B 
+000C 
+000D 
+000E 
+000F 
+0010 
+0011 
+0012 
+0013 Cutscene: Throwing chocolate out of window
+0014 
+0015 
+0016 
+0017 
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 
+0022 
+0023 
+0024 
+0025 
+0026
+0027 
+0028
+0029 
+002A 
+002B 
+002C 
+002D 
+002E 
+002F
+0030
+0031
+0032
+0033
+0034
+0035
+0036
+0037
+0038 dragged by air lock
+0039
+003A and up end of list(Skeletal position)
+Bat Conker: model ID: 9A
+Note: Both bats share the same property and bones, so the animations of the normal bats might not be used for
+Bat Conker, and vice versa
+0000 Hanging on ceiling(unused)
+0001 cutscene?(unused)
+0002 rolling?
+0003 
+0004 
+0005 
+0006 retreating back to ceiling(unused)
+0007 
+0008 But i'm blind you #%�*(unused)
+0009 But i'm blind you #%�*(unused)
+000A 
+000B 
+000C 
+000D 
+000E 
+000F Flapping wings, flying
+0010 Crawling on ground
+0011 Zooming down
+0012 
+0013 
+0014 
+0015 
+0016 Idling
+0017 Flapping wings in air, still
+0018 
+0019 
+001A 
+001B 
+001C 
+001D 
+001E 
+001F 
+0020 
+0021 and up end of list(skeletal position)
+Pikachu Tail: model ID: AA
+0000 bending back and forth
+Panther King model ID 76
+0000 - 
+0001 - 
+0002 - Sitting on throne
+0003 - "More milk? Yes!"
+0004 - Having his glass filled
+0005 - Drinking his glass of milk
+0006 - "What's wrong with my table?"
+0007 - "Tasty milk!"
+0008 - Putting glass on table
+0009 - Angered
+000A - "Call the Professor!!"
+000B - 
+000C - 
+000D - 
+000E - 
+000F - 
+0010 - 
+0011 - 
+0012 - 
+0013 - 
+0014 - 
+0015 - 
+0016 - 
+0017 - 
+0018 - 
+0019 - 
+001A - 
+001B - 
+001C - 
+001D - 
+001E - 
+001F - 
+0020 - 

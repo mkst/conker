@@ -1,0 +1,265 @@
+AI mod (multiplayer)
+800E1020 00XX
+Computer AI In Current Match (multiplayer)
+800E1000 00XX
+normal ai:
+XX= Cpu AI
+
+00-inbred.(cpus take it all easy, and doesn't run away from bombs or grenades)
+01-crap.(same as inbred, only a little bit smarter)
+02-normal.(quite smart)
+03-bastard.(even smarter)
+04-einstein.(Super Smart cpus)
+invalid ai:(invalid ai levels tested on project 64. what's different on console i haven't had time to spend at,
+but most of them lock the game up after a multiplayer game has been started(heist to what i
+can remember).)(Even though some of them have no description, they still work.)
+05-has no description data in the multiplayer options menu, thus instantly freezes the game
+AI Info: 05(cpus appear to behave like normal, but when they obtain weapons, AND pulls them out, and is
+ABOUT to use them, they don't aim them properly, thus leading to funny, and strange things, like having
+them commit suicide(if the bazooka is their weapon.). Most of these invalid AI levels are like that, because
+Rare did not program them, but they're part of the AI data, so, they are in the game.)
+0006-quit.
+AI Info: 06(cpus appear to behave like normal, like the normal ai levels. but they still seem to have
+difficulty with aiming the bazooka more properly, as they rotate a little bit back and forth. When they
+use the sniper rifle, they aim at you, but never shoots you, same goes for the crossbow. they do avoid
+the bombs though, and they also use the knife like normal.)
+07-8"skull"wnd?333?.
+AI Info: 07(cpus don't use the sniper and crossbow, but they do aim the knife just like they should, same
+goes for the bazooka)
+08-beachhead.
+AI Info: 08(cpus do use the sniper and crossbow, and aims them correctly, but they shot at you rapidly,
+thus making it a little harder to avoid the projectiles, same thing with the bazooka)
+09-has no description data in the multiplayer options menu, thus instantly freezes the game
+AI Info: 09(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+0A-forwards.
+AI Info: 0A(same as 09)
+0B-backwards.
+AI Info: 0B(same as 0A)
+0C>10-has no description data in the multiplayer options menu, thus instantly freezes the game
+AI Info: 0C(same as B, but they fire the crossbow at a slower pace)
+AI Info: 0D(same as 09-0B, but they never use them.)
+AI Info: 0E(same as 0D)
+AI Info: 0F(same as 0E)
+AI Info: 10(cpus fires the crossbow at a even slower pace)
+11-quit.
+AI Info: 11(cpus fires the crossbow a little faster, but never aims it properly)
+12-picture.
+AI Info: 12(same as 0C)
+13-deathmatch.
+AI Info: 13(cpus fires the crossbow rapidly, same goes for every else shooting weapon)
+14-picture.
+AI Info: 14(cpus never uses the crossbow and sniper)
+15-deathmatch.
+AI Info: 15(same as 14)
+16>17-has no description data in the multiplayer options menu, thus instantly freezes the game
+18-off.
+AI Info: 18(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+19-off.
+AI Info: 19(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+1A-off.
+AI Info: 1A(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+1B-english.
+AI Info: 1B(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+1C-off.
+1D-japanese.
+1E-off.
+1F-off.
+20-off.
+21-off.
+22-on.
+23-off.
+24-off.
+25-english.
+26-off.
+27-crap.
+28-on.
+2A-on.
+2B-on.
+2C-time.
+2D>2E-off.
+2F-english.
+30-off.
+31-capture flag.
+32-collection.
+33-battle.
+34>35-weasels vs tediz.
+36-cash.
+37>38-off.
+AI Info: 37(cpus aims the crossbow and sniper at you, but never use them)
+AI Info: 38(cpus use the sniper and crossbow, but never aim them properly, same goes for the bazooka)
+39-forwards.
+AI Info: 39(cpus never uses the crossbow and sniper)
+3A-off.
+AI Info: 3A(cpus don't use the crossbow and sniper, but aims downwards, almost at his torso)
+3B-infinite.
+AI Info: 3B(cpus don't use the crossbow and sniper, but aims downwards, almost at his torso)
+3C-battle.
+AI Info: 3C(cpus don't use the crossbow and sniper, but aims downwards, almost at his torso)
+3D>3F-has no description data in the multiplayer options menu, thus instantly freezes the game
+AI Info: 3D(cpus don't use the crossbow and sniper)
+AI Info: 3E(cpus don't use the crossbow and sniper)
+AI Info: 3F(cpus don't use the crossbow and sniper)
+40-collection.
+AI Info: 40(cpus use the crossbow and sniper, and fires it rapidly, but cannot aim properly)
+41>42-off.
+43-cheats.
+44-off.
+45-multiplayer.
+46-battle.
+47-ujug1
+48>49-has no description data in the multiplayer options menu, thus instantly freezes the game
+4A-collection.
+4B>4C-off.
+4D-infinite.
+4E-off.
+4F-page.
+50-battle.
+51-uo4uj1
+52>53-has no description data in the multiplayer options menu, thus instantly freezes the game
+54-collection.
+55>56-off.
+57-score.
+58-off.
+59-japanese.
+5A-battle.
+AI Info: 5F(cpus use the crossbow and sniper, but cannot aim properly)
+AI Info: 60(cpus don't use the crossbow and sniper)
+AI Info: 61(cpus use the crossbow and sniper, but cannot aim properly)
+AI Info: 62(cpus don't use the crossbow and sniper)
+AI Info: 63(cpus use the crossbow and sniper, but cannot aim properly)
+AI Info: 64(cpus don't use the crossbow and sniper)
+65-ujug1
+AI Info: 65(cpus don't use the crossbow and sniper)
+AI Info: 66(cpus don't use the crossbow and sniper)
+AI Info: 67(cpus use the crossbow and sniper, but cannot aim properly)
+AI Info: 68(cpus don't use the crossbow and sniper)
+AI Info: 69(cpus use the crossbow and sniper, but cannot aim properly)
+AI Info: 73(cpus don't use the crossbow and sniper)
+AI Info: 74(cpus don't use the crossbow and sniper)
+AI Info: 75(cpus don't use the crossbow and sniper)
+AI Info: 76(cpus don't use the crossbow and sniper)
+AI Info: 77(cpus aims the crossbow and sniper at you, but never use them)
+AI Info: 78(cpus don't use the crossbow and sniper)
+AI Info: 79(cpus don't use the crossbow and sniper)
+AI Info: 7A(cpus don't use the crossbow and sniper)
+AI Info: 7B(cpus don't use the crossbow and sniper)
+AI Info: 7C(cpus don't use the crossbow and sniper)
+AI Info: 7D(cpus don't use the crossbow and sniper)
+AI Info: 7E(cpus don't use the crossbow and sniper)
+AI Info: 7F(cpus don't use the crossbow and sniper)
+AI Info: 80(cpus don't use the crossbow and sniper)
+86-spooky.
+88-ugas.
+89-score.
+8B-has no description data in the multiplayer options menu, thus instantly freezes the game
+8C-sound.
+8D-off.
+8E-spooky.
+8F-has no description data in the multiplayer options menu, thus instantly freezes the game
+90-ugas.
+91-score.
+92-off.
+93-has no description data in the multiplayer options menu, thus instantly freezes the game
+94-normal.
+95-off.
+96-spooky.
+97-has no description data in the multiplayer options menu, thus instantly freezes the game
+98-ugas.
+99-score.
+9A-off.
+9B-um4uh[1.
+9C-hi.
+9D-off.
+9E-spooky.
+9F-has no description data in the multiplayer options menu, thus instantly freezes the game
+A0-ugas.
+A1-score.
+A2-off.
+A3-uh[ufd1.
+A4-AI level.
+A5-off.
+A6-spooky.
+A7-has no description data in the multiplayer options menu, thus instantly freezes the game
+A8-ugas.
+A9-score.
+AA-off.
+AB-has no description data in the multiplayer options menu, thus instantly freezes the game
+AC-einstein.
+AD-off.
+AE-spooky.
+AF-has no description data in the multiplayer options menu, thus instantly freezes the game
+B0-ugas.
+B1-score.
+B2-off.
+B3-has no description data in the multiplayer options menu, thus instantly freezes the game
+B4-radar.
+B5-off.
+B6-has no description data in the multiplayer options menu, thus instantly freezes the game
+B7>B8-game 3.
+B9-normal.
+BA-reds.
+BB-has no description data in the multiplayer options menu, thus instantly freezes the game
+BC-raptor.
+BD-has no description data in the multiplayer options menu, thus instantly freezes the game
+BE-english.
+BF>C0-has no description data in the multiplayer options menu, thus instantly freezes the game
+C1-turret player.
+C2>C4-has no description data in the multiplayer options menu, thus instantly freezes the game
+C5>C6-total war.
+C7>D3-has no description data in the multiplayer options menu, thus instantly freezes the game
+D4>D5-off.
+D6-goal.
+D7-collection.
+D8-battle.
+D9-weasels vs tediz.
+DA-teams.
+DB-quit.
+DC-has no description data in the multiplayer options menu, thus instantly freezes the game
+DD-war.
+DE-has no description data in the multiplayer options menu, thus instantly freezes the game
+DF-balance.
+E0-has no description data in the multiplayer options menu, thus instantly freezes the game
+E1-play again.
+E2-bots.
+E3-play again.
+E4-has no description data in the multiplayer options menu, thus instantly freezes the game
+E5-beachhead.
+E6-has no description data in the multiplayer options menu, thus instantly freezes the game
+E7-play again.
+E8-has no description data in the multiplayer options menu, thus instantly freezes the game
+E9-death match.
+EA>EB-has no description data in the multiplayer options menu, thus instantly freezes the game
+EC-language.
+AI Info: EC(cpus aim the crossbow and sniper at the opposite direction of you, but never fires them.
+if you stand too close, they start rotating erratically.(they do even if you're not close enough to them, if
+you stay away from them about a number of seconds))
+ED-english.
+AI Info: ED(cpus aim the crossbow and sniper at the opposite direction of you, but never fires them.
+if you stand too close, they start rotating erratically.(they do even if you're not close enough to them, if
+you stay away from them about a number of seconds))
+EE-spanish.
+AI Info: EE(cpus aim the crossbow and sniper at your head, but never fires them)
+EF-french.
+AI Info: EF(cpus aim the crossbow and sniper at your head, but never fires them)
+F0-german.
+AI Info: F0(cpus use the crossbow and sniper, but aims at specific parts on your body, and tries to get a
+headshot of course.)
+F1-japanese.
+AI Info: F1(cpus use the crossbow and sniper, but aims at your head extremely quickly, and tries to get a
+headshot. most of the time you won't even see their laser sights)
+F2-AI-view.
+AI Info: F2(cpus aim the crossbow and sniper at your head, but never fires them)
+F3-quit.
+F4-goal.
+F5-bomb battle.
+F6-battle.
+AI Info: F6(cpus aim the crossbow and sniper at you, but never fires them)
+F7-civilian.
+F8-cash.
+F9-race.
+FA-has no description data in the multiplayer options menu, thus instantly freezes the game
+FB-quit.
+FC-1 player multiplayer resolution.
+FD-normal.
+FE-hi.
+FF-has no description data in the multiplayer options menu, thus instantly freezes the game

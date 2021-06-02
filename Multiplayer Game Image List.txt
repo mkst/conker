@@ -1,0 +1,13 @@
+Multiplayer game image modifier
+81090160 00XX
+this cheat modifies the image used for multiplayer mode. values are listed below
+0037=Heist
+0038=Beta heist?(shows the number of moneybags every player has at whatever amount instead of multiple
+dollar signs)
+0234=war
+0C14=death match, radar disabled
+0C34=death match & tank
+1096=race
+4014=raptor, radar disabled
+4034=raptor
+A034=colors

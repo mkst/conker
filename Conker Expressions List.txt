@@ -1,0 +1,97 @@
+Conker's Expression Modifier(PAL)
+810CC760 ??00
+800CC762 0000
+800CC763 0000
+800CC764 0000
+800CC765 0000
+00 - default
+01 - Mouth Open
+02 - idle expression
+03 - Shut Mouth With Front Teeth Showing
+04 - idle expression
+05 - Mouth Open
+06 - Mouth Wide Open
+07 - Shut Mouth With Front Teeth Showing
+08 - "O" Mouth
+09 - Shut Mouth Without Front Teeth Showing
+0A - Teary Eyes With Mouth Wide Open
+0B - Bloodshot Eyes With Shut Mouth Without Front Teeth Showing
+0C - Bloodshot Eyes With "O" Mouth
+0D - Bloodshot Eyes With Dorky Shut Mouth Smile With Front Teeth Showing
+0E - Angry Eyes With Normal Mouth
+0F - Angry Eyes With Open Mouth
+10 - Angry Eyes With Mouth Wide Open
+11 - Angry Eyes With Shut Mouth With Front Teeth Showing
+12 - Angry Eyes With "O" Mouth
+13 - Angry Eyes With Shut Mouth Without Front Teeth Showing
+14 - Angry Eyes With Mouth Wide Open
+15 - Wide Eyes With Drunk Smile
+16 - Money Eyes With Drunk Smile
+17 - Possessed Dino Eyes With Evil Smile(beta expression?)
+18 - Sad Eyes With Normal Mouth
+19 - Sad Eyes With Open Mouth
+1A - Sad Eyes With Wide Open Mouth
+1B - Sad Eyes With Shut Mouth With Front Teeth Showing
+1C - Sad Eyes With "O" Mouth
+1D - Sad Eyes With shut Mouth
+1E - 
+1F - Angry Dino Eyes With Front Teeth Showing(beta expression?)
+20 - Conker's eyes popping out, cartoon style
+21 - Closed eyes with "O" Mouth
+22 - Closed eyes with open Mouth
+23 - Closed eyes with Mouth Wide Open
+24 -
+25 - Closed eyes with shut Mouth With Front Teeth Showing
+26 - Closed eyes with "O" Mouth
+27 - Closed eyes with shut Mouth
+28 - 
+29 - 
+2A - hungover expression
+2B - Conker's eyes popping out, cartoon style, with tongue out(beta expression?)
+2C - 
+2D - tank filled 1/5 expression
+2E - tank filled 2/5 expression
+2F - tank filled 3/5 expression
+30 - tank filled 4/5 expression
+31 - tank filled 5/5 expression
+32 - 
+33 - 
+34 - 
+35 - 
+36 - 
+37 - 
+38 - Unused?
+39 - "Hmph" expression
+3A - dead expression
+3B - Slingshot Aim expression
+3C - Balance stance expression
+3D - 
+3E - 
+3F - 
+40 - Horrified
+41 - 
+42 - 
+43 - 
+44 - 
+45 - 
+46 - 
+47 - 
+48 - glitch
+49 - glitch
+4A - 
+4B - 
+4C - 
+4D - 
+4E - 
+4F - 
+50 - glitch
+51 - glitch
+52 - glitch
+53 - glitch
+54 - conker's expression in hungover 1
+55 - conker's expression in hungover 2
+56 - conker's expression in hungover 3
+57 - conker's expression in hungover 4
+58 - conker's expression in hungover 5
+59 - conker's expression in hungover 6
+5A and onwards - nothing

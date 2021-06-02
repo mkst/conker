@@ -1,0 +1,166 @@
+Music modifier V1.6
+8100DC74 240E
+8100DC76 00??
+81008BB0 2406
+81008BB2 7FFF
+810140AE 0000
+8100CBFE 0000
+
+?? = digit to be replaced
+
+00 - No music
+01 - Windy (every single variation plays all at once. however, it can be fixed with the following adress=
+81014584 2008 81014586 03FF. this will make the song only play the default windy variation, with
+nothing else)
+02 - The woes of Mrs. Bee
+03 - Mr. Barrel's hideout 
+04 - When you pick up the hive for the first time
+05 - When you give the hive back and the wasps get shot at
+06 - Mad Pitchfork
+07 - When Marvin explodes
+08 - Nothing(There is ONE note though, when listening to it with the
+instrument modifier. Yep. ONE constant note, and nothing else. Was most likely
+a piece of music removed from the game early on.)
+09 - Uga Buga Land
+0A - Pissing on the little devil guys (Actually an leftover from Twelve Tales Reused)
+0B - Metallic, wars sound
+0C - Hayminator alert
+0D - Bullfish
+0E - Conker gettin' bitten by bullfish
+0F - Bat's tower
+10 - Underground cave, water dripping
+11 - Beware of Bullfish
+12 - Talking to the good/evil cog
+13 - Bullets 1
+14 - Squirrel Soldiers getting shot and Conker watches as they blow into pieces and such
+15 - Gameboy tune 1
+16- Gameboy tune 2
+17- Gameboy tune 3
+18 - Story Beginning Intro
+19 - Crowd cheering
+1A - Uga blowing in giant horn
+1B - Cavemen and drums
+1C - Hypno tune (not used. instead, it's used as part of a voice clip for reasons unknown)
+1D - Before Raptor comes out
+1E - Heist
+1F - Graveyard
+20 - Nighttime and War sounds
+21 - Waves and seagulls
+22 - Cock And Plucker(Only heard at the menu, but fixable by the following address--
+810140AE 0000.(this has the disadvantage that a few notes may remain in the background for a split
+second or something))
+23 - Wind outside bar(aren't normally heard in any else area, but 81017D76 0000 will do the trick)
+24 - Bullets 2
+25 - War tune
+26 - Footsteps
+27 - Footsteps
+28 - Footsteps
+29 - Footsteps
+2A - Footsteps
+2B - Footsteps
+2C - Tediz base interior
+2D - Tediz 1
+2E - Tediz alarm
+2F - Tediz alarm 2
+30 - Tediz 2/Dr Tediz
+31 - Danger
+32 - War Siren
+33 - War Sirens
+34 - Being chased towards the lift by metal spiders in War
+35 - Poo Mountain
+36 - N64 cube massacre intro
+37 - Drunk
+38 - The ten percent deal
+39 - Bullfish's free
+3A - Catfish getting eaten by dog-shark
+3B - Catfish 2 getting eaten by dog-shark
+3C - bullfish bumping into solid land, getting stuck in wall
+3D - Rock Solid
+3E - outside rock solid(aren't heard unless one goes to Uga Buga Land)(8100CBFE 0000 fixes it)
+3F - Birds and crows
+40 - Escape from Tediz Base(Don't know if it's a leftover from Twelve Tales or not...)
+41 - Lava board race
+42 - Great Mighty poo, verse 1
+43 - Matrix (base tune)
+44 - The Newspaper(Maybe a Remixed Twelve Tales Leftover) (not used. instead, it's used as part of a
+voice clip for reasons unknown)
+45 - Conker gets lost and goes the wrong way
+46 - Water, nighttime, ghost
+47 - Evil panther-like king
+48 - Milk glass slides off table, panther king gets angry
+49 - The Great Mighty Poo gets flushed
+4A - Bowel moment
+4B - Poo sounds
+4C - Pipes and metal sounds
+4D - Bullets 3
+4E - Experimenting Cutscene(Unused)
+4F - "Frying tonight"
+50 - Squirrel Soldier gets shocked
+51 - mono set (options screen)
+52 - stereo set (options screen)
+53 - surround set (options screen)
+54 - Dinosaur land
+55 - Cut scene (Matrix intro part 1)
+56 - Cut scene (Matrix intro part 2)
+57 - Uga Buga Dinosaur Head Dramatic Intro
+58 - Uga Buga
+59 - Outside Spooky Castle
+5A - Count Batula
+5B - Spooky Castle
+5C - Screeching. Was supposed to be playing after another track in a cutscene that were removed very late in development.
+5D - Scary, chased
+5E - Mission; Drop Bomb Down The Cliff
+5F - Wind and Thunder
+60 - Small birds and flies
+61 - Water/poo sound
+62 - Riding bull music!
+63 - why am i such a fat bast..
+64 - bull defeated
+65 - It's war tune
+66 - War boss music
+67 - Mini boss (banjo)
+68 - Haybot
+69 - Evil panther-like king
+6A - Evil panther-like king
+6B - Evil panther-like king
+6C - Professor von Kriplespacs "master plan"
+6D - Evil panther-like king
+6E - Bubbling
+6F - Birdy
+70 - Affects of the anti-drunk pills
+71 - End Credits
+72 - My nemesis is defeated
+73 - Sweet Corns dramatic moment
+74 - Bullfish reeled in, unable to swim up to the surface
+75 - haybot making the floor collapse
+76 - Haybot defeated
+77 - Franky's Dramatic Moment
+78 - Anvil Slam
+79 - Berry gets kidnapped by rock man part 1
+7A - Berry gets kidnapped by rock man part 2
+7B - dino egg hatch
+7C - baby dino squashing lizard monk
+7D - baby dino's first and last day in life
+7E - Dino stone head "released"
+7F - Dino stone head sneezing
+80 - Don Weaso's tune
+81 - Don Weaso Outside Feral Reserve Bank
+82 - Farewell Raptor
+83 - Jugga (beta leftover from twelve tales?)
+84 - Conker falling off Mr. Barrel, smashing open blocked entrance
+85 - Bullets 4
+86 - Dramatic
+87 - War background music
+88 - Countdown
+89 - Last Boss - The air lock is open
+8A - The Royal Anthem
+8B - War Honour Antem
+8C - Evil panther-like king appears in the vault
+8D - Berry gets shot
+8E - Heinrichs birth
+8F - First two attempts at throwing the alien out
+90 - Game locking up
+91 - End Of Story
+92 - In the Space Vault (Last boss area)
+93 - Bullets 5
+94 - Death of Count Conkula
