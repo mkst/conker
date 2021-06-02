@@ -1,0 +1,75 @@
+0000 - Bull area
+0001 - Barn
+0002 - Rock Solid - bar. Outside.
+0003 - removed level, but some objects are left(cannot be explored normally, since the emu crash whenever
+conker spawns, but theres a solution; 810bee16 00XX(with XX being whatever level digit, except 03))
+0004 - Beach
+0005 - Black - and empty
+0006 - nasty/nice spot
+0007 - catfish area
+0008 - big plain empty area
+0009 - removed level, loads data from previous level(tested on emu)
+000A - Boiler. At spot when you piss on guys.
+000B - Water near cogs.
+000C - Barn Boys level
+000D - removed level, loads data from previous level(Has cheese on it. Conker starts at a different point
+on the map, instead of at the middle. Could possibly have been some removed beta area)
+000E - War - Area with tank
+000F - removed level, loads data from previous level(maybe a half removed debug room, has Fangy in it)
+0010 - Electrical room at top of Haybot Second Battle Spot
+0011 - FREEZE
+0012 - Inside water of safe
+0013 - Beginning spot of War
+0014 - Raptor arena
+0015 - removed level, loads data from previous level(tested on emu)
+0016 - removed level, loads data from previous level(tested on emu)
+0017 - Water in safe
+0018 - Intro
+0019 - Prehistoric (dinosaurs parolling fort)
+001A - Heist (multi)
+001B - War lasers
+001C - War part w/ Rodent
+001D - Inside Pub (Cock and Plucker)
+001E - War - lasers
+001F - removed level, loads data from previous level(tested on emu)
+0020 - big plain empty area (black void)
+0021 - Ncube Massacre intro
+0022 - Greggs room
+0023 - War - Fighting tedi boss and subs
+0024 - Tank (multi)
+0025 - big plain empty area3(blue background)
+0026 - Room with conveyor belt (master plan)
+0027 - Bee hive
+0028 - Escaping Tedi Boss
+0029 - Starting level
+002A - X FREEZE X (WRONG!! it loads a stage or level you're in with incorrect structures, and leads to many strange things. where it goes:800BEE13 002A
+and the real level modifier:800BEE17 00?? with whatever digit you like to put there, without 800BEE17, then it wont work, or maybe it does..
+however, you must be in either the same level, or whatever else level,for example, the great mighty poo for this to work correctly)
+002B - Beach (Multi)
+002C - Beetles house
+002D - War arena (Multi)
+002E - Inside Cave with key (first level)
+002F - War - Operating room
+0030 - Multi-area
+0031 - Rock Solid bar
+0032 - Beginning spot of race
+0033 - Race (multi)
+0034 - Multi-area
+0035 - The Poo Boss
+0036 - Inside Feral Reserve - beginning
+0037 - Poo Slicers
+0038 - Meeting place of Weasels? You can't play here normally.
+0039 - Outside Feral Reserve - Signs
+003A - Inside Feral Reserve - in safe
+003B - Nasty/Nice area - night
+003C - Haunted Castle
+003D - Path leading to Haunted Castle
+003E - FREEZE
+003F - Raptor (multi)
+0040 - Inside Feral Reserve - Final Boss
+0041 - Spooky - flooded mineshafts
+0042 - Slimy passage - Phlegm
+0043 - Inside Prehistoric --> 44
+0044 - Inside Prehistoric --> 32
+0045 - FREEZE
+0046 - FREEZE
