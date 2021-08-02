@@ -10,7 +10,7 @@ void func_15004D50(void) {
 
     D_800C3FC0 = (struct222*) &D_80084300;
     for( i = 1;  i <= D_80082FA0; i++){
-        (&D_800C3FC0)[i] = (struct222 *) malloc(0x50, 1, 2, 0); //malloc
+        (&D_800C3FC0)[i] = (struct222 *) allocate_memory(0x50, 1, 2, 0); //allocate_memory
         bcopy(D_800C3FC0, (&D_800C3FC0)[i], 0x50); //bcopy
     }
 }

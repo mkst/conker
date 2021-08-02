@@ -26,7 +26,7 @@ void func_100010F8(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1050/func_10001194.s")
 // NON-MATCHING: start/end mostly ok, middle, not-so-much.
-// s32 *malloc(s32, s32, s32, s32);
+// s32 *allocate_memory(s32, s32, s32, s32);
 // void func_10001194(s32 arg0) {
 //     u32 block_count;
 //     s32 sp44;
@@ -64,7 +64,7 @@ void func_100010F8(s32 arg0) {
 //     if (0) {};
 //     sp44 = D_80082B20 + offset;         // D_80082B20 + first
 //     sp28 = (s32)func_1019EA88 - sp44;   // second TLB offset - temp_v0 // func_1600000 ?
-//     sp40 = malloc(sp28, 1, 2, 0);
+//     sp40 = allocate_memory(sp28, 1, 2, 0);
 //     func_10004514(sp44, sp40, sp28, 1);
 //     if (0) {};
 //     func_10006240(sp40, &D_80082B20, D_8003809C);

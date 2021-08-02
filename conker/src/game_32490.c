@@ -14,7 +14,7 @@
 //     sp34 = 0;
 //     temp_lo = func_1502B7F0(&sp34, 3, 12, arg0, 3) / 24U;
 //     D_800C6654 = temp_lo;
-//     malloc(temp_lo * 20, 1, 1, 0);
+//     allocate_memory(temp_lo * 20, 1, 1, 0);
 //
 //     for(i = 0; i < D_800C6654; i++) {
 //         D_800C6650[i].unk0 = sp34[i]->unk0;

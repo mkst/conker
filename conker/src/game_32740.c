@@ -16,14 +16,14 @@
 //     D_800DC020 = func_1502B5C8(&sp68, 3, 12, arg0, 8);
 //     D_80089550 = (sp68 / 24U);
 //     temp_s0 = D_80082FA0 + 1;
-//     D_800DBFF0 = malloc(temp_s0 * 0x9A0, 1, 1, 0);
-//     D_800DC2B0 = malloc(temp_s0 * 0xB0, 1, 0, 0);
-//     D_800DC2A0->unk0 = malloc(temp_s0 << 6, 1, 1, 0);
-//     D_800DC2A0->unk4 = malloc(temp_s0 << 6, 1, 1, 0);
+//     D_800DBFF0 = allocate_memory(temp_s0 * 0x9A0, 1, 1, 0);
+//     D_800DC2B0 = allocate_memory(temp_s0 * 0xB0, 1, 0, 0);
+//     D_800DC2A0->unk0 = allocate_memory(temp_s0 << 6, 1, 1, 0);
+//     D_800DC2A0->unk4 = allocate_memory(temp_s0 << 6, 1, 1, 0);
 //
 //     i = 0;
 //     do {
-//         D_800BE2B0[i] = malloc(D_800BE620 * 2, 1, 2, 0);
+//         D_800BE2B0[i] = allocate_memory(D_800BE620 * 2, 1, 2, 0);
 //         func_150054C4(&D_800DBFF0[i], i, arg0, arg1);
 //         D_800DBFF4[i] = 0;
 //     } while (D_80082FA0 >= i++) ;
@@ -31,7 +31,7 @@
 //     func_1512ABF8();
 //     func_1512D238();
 //     D_800894B0 = 0;
-//     D_800DC010 = malloc((D_80082FA0 * 0x9A0) + 0x9A0, 1, 2, 0);
+//     D_800DC010 = allocate_memory((D_80082FA0 * 0x9A0) + 0x9A0, 1, 2, 0);
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_32740/func_150054C4.s")

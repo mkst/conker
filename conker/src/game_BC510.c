@@ -23,7 +23,7 @@ void func_1508F7BC(void) {
     D_800D2456 -= 1;
     D_800D2890.unk0 = (u32) (func_150ADA20() % 5U);
     D_800D2890.unk8 = sqrtf(25.0f - (D_800D2890.unk0 * D_800D2890.unk0));
-    temp_v0 = malloc(sizeof(*temp_v0), 1, 1, 0);
+    temp_v0 = allocate_memory(sizeof(*temp_v0), 1, 1, 0);
     temp_v0->unk80 = D_800D245C;
     D_800D245C = temp_v0;
     guMtxL2F(&sp48, (D_800D2456 << 7) + ((D_800BE9C0 ^ 1) << 6) + &D_800D2590);
@@ -106,7 +106,7 @@ void func_15093818(s32 arg0) {
 
 void func_15093878(void) {
     D_800D2448 = func_1518C900(0xBA);
-    D_800D244C = malloc(0x80, 1, 1, 0);
+    D_800D244C = allocate_memory(0x80, 1, 1, 0);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150938BC.s")

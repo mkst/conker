@@ -1,5 +1,7 @@
-basename: conker
 options:
+  basename: conker
+  target_path: conker.eu.bin
+  base_path: .
   find_file_boundaries: yes
   compiler: IDO
   cpp_args:
@@ -25,7 +27,7 @@ segments:
     type:  code
     start: 0x00001000
     vram:  0x10001000
-    files:
+    subsegments:
     - [0x1000, asm, "entrypoint"]
     - [0x2100, asm]
     - [0x2E40, asm]
@@ -45,6 +47,8 @@ segments:
     - [0x5860, asm]
     - [0x5AD0, asm]
     - [0x5DA0, asm]
+    # - [0x6530, asm]
+    # - [0x74C0, asm]
     - [0x8410, asm]
     - [0x8470, asm]
     - [0x9280, asm]
@@ -145,13 +149,13 @@ segments:
     type: code
     start: 0x29400
     vram:  0x29400
-    files:
+    subsegments:
     - [0x29400, bin]
   - name:  game
     type:  code
     start: 0x0002D810
     vram:  0x15000000
-    files:
+    subsegments:
     - [0x2D810, asm]
     - [0x2E150, asm]
     - [0x2E2D0, asm]
@@ -688,13 +692,13 @@ segments:
     type: code
     start: 0x00228130
     vram:  0x80082EB0
-    files:
+    subsegments:
     - [0x228130, bin]
   - name: debugger
     type: code
     start: 0x00256450
     vram:  0x16000000
-    files:
+    subsegments:
     - [0x256450, asm]
     - [0x257F20, asm]
     - [0x259AA0, asm]
@@ -702,6 +706,6 @@ segments:
     type:  code
     start: 0x259B50
     vram:  0x16003700
-    files:
+    subsegments:
     - [0x259B50, bin] # .data
   - [0x25B1A8] # end of file

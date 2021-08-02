@@ -7,3 +7,6 @@
 [submodule "tools/asm-processor"]
 	path = tools/asm-processor
 	url = https://github.com/simonlindholm/asm-processor.git
+[submodule "tools/mips_to_c"]
+	path = tools/mips_to_c
+	url = git@github.com:matt-kempster/mips_to_c.git

@@ -25,7 +25,7 @@ void func_15001970(void) {
     D_800DBE20 = 0;
     tmp = D_80091C04[D_800BE9F0];
     D_800DBE24 = 0;
-    D_800B0DC0 = malloc(tmp, 1, 0, 0);
+    D_800B0DC0 = allocate_memory(tmp, 1, 0, 0);
     D_800B0DC8 = tmp + D_800B0DC0;
     D_800B0DC4 = D_800B0DC0;
 }
@@ -53,7 +53,7 @@ void func_15001970(void) {
 //         sp24 <<= 1;
 //     }
 //
-//     D_800B0DDC = malloc(sp24, 1, 0, 0);
+//     D_800B0DDC = allocate_memory(sp24, 1, 0, 0);
 //     D_800B0DE0 = D_800B0DDC;
 //     D_800B0DCC = 0;
 //     D_800B0DD0 = 0;
@@ -99,7 +99,7 @@ void func_15001BC8(s32 arg0, s16 *arg1, s16 *arg2) {
     func_1510F800(arg0);
     D_800B0DD8 = 10;
     D_800B0DD4 = 512;
-    sp20 = malloc((D_800DBE4C + 1) << 1, 1, 0, 0);
+    sp20 = allocate_memory((D_800DBE4C + 1) << 1, 1, 0, 0);
 
     *sp20 = D_800DBE4C;
     for (i = 0; i < D_800DBE4C; i++) {
@@ -140,7 +140,7 @@ void func_15001CEC(s32 arg0) {
     temp_v0[5] = 0;
     temp_v0[6] = 0;
 
-    sp20 = malloc((D_800DBE4C + 1) << 1, 1, 0, 0);
+    sp20 = allocate_memory((D_800DBE4C + 1) << 1, 1, 0, 0);
 
     *sp20 = D_800DBE4C;
     for (i = 0; i < D_800DBE4C; i++) {

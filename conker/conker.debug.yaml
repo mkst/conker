@@ -1,5 +1,7 @@
-basename: conker
 options:
+  basename: conker
+  target_path: conker.debug.bin
+  base_path: .
   find_file_boundaries: yes
   compiler: IDO
   cpp_args:
@@ -25,7 +27,7 @@ segments:
     type:  code
     start: 0x00001000
     vram:  0x10001000
-    files:
+    subsegments:
     - [0x1000, asm, "entrypoint"]
     - [0x1050, asm]
     - [0x1460, asm]
@@ -82,13 +84,13 @@ segments:
     type:  code
     start: 0x0000A4E0
     vram:  0x8000A4E0
-    files:
+    subsegments:
     - [0xA4E0, bin] # TODO: check this, we might be truncating code
   - name:  game
     type:  code
     start: 0x0000D2B0
     vram:  0x15000000
-    files:
+    subsegments:
     - [0xD2B0, asm]
     - [0xD990, asm]
     - [0xDB80, asm]
@@ -644,13 +646,13 @@ segments:
     type:  code
     start: 0x002190F0
     vram:  0x8005B0F0
-    files:
+    subsegments:
     - [0x2190F0, bin]
   - name:  debugger
     type:  code
     start: 0x00248510
     vram:  0x16000000
-    files:
+    subsegments:
     - [0x248510, asm]
     - [0x250720, asm]
     - [0x252CF0, asm]
@@ -658,6 +660,6 @@ segments:
     type:  code
     start: 0x00252D10
     vram:  0x1600A800
-    files:
+    subsegments:
     - [0x252D10, bin]
   - [0x258870] # end of file

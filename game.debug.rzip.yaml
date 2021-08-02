@@ -1,6 +1,9 @@
 basename: conker
 options:
-  extensions: "custom/n64splat"
+  target_path: assets/game.debug.rzip.bin
+  base_path: .
+  asset_path: assets/game
+  extensions_path: tools/splat_ext
 segments:
   - name:  code
     type:  rzip
@@ -10,7 +13,7 @@ segments:
   - name:  data
     type:  rzip
     start: 0x150EA0
-    files:
+    subsegments:
       - [0x150EA0, "compressed"] # compressed .data
   - [0x165A70, "bin", "data_padding"] # zero padding
   - [0x167600] # 1,472,000 bytes

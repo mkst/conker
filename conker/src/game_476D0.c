@@ -20,8 +20,8 @@
 //     } else {
 //         phi_s0 = arg0 + 2;
 //     }
-//     D_800BE628 = malloc((phi_s0 * 3) << 7, 1, 1, 0);
-//     D_800BE62C = malloc(phi_s0 * 16, 1, 1, 0);
+//     D_800BE628 = allocate_memory((phi_s0 * 3) << 7, 1, 1, 0);
+//     D_800BE62C = allocate_memory(phi_s0 * 16, 1, 1, 0);
 //     if (D_80082FA0 == 1) {
 //         temp_f0 = D_800BE63C - 2.0f;
 //         temp_f16 = temp_f0 * D_800968E0;
