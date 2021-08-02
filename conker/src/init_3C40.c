@@ -4,7 +4,7 @@
 #include "variables.h"
 
 
-s32 malloc(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 allocate_memory(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return func_10003C6C(arg0, arg1, arg2, 0, arg3);
 }
 

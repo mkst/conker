@@ -203,7 +203,7 @@ void func_10008C04(u8 idx, u8 arg1, s32 arg2) {
 //         }
 //
 //         sp3C = D_8003CD40[arg1].unk4;
-//         temp_s0_3 = malloc(&D_8003C910[arg1], 0xFF, 2, 2);
+//         temp_s0_3 = allocate_memory(&D_8003C910[arg1], 0xFF, 2, 2);
 //         if (temp_s0_3 == NULL) {
 //             return -1;
 //         }

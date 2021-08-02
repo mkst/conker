@@ -1,7 +1,9 @@
-basename: conker
 options:
+  basename: conker
+  target_path: baserom.ects.z64
+  base_path: .
   compiler: IDO
-  extensions: "custom/n64splat"
+  extensions_path: tools/splat_ext
 segments:
   - name:  header.ects
     type:  bin

@@ -1,25 +1,25 @@
 import os
 import struct
 
-
-from segtypes.n64.segment import N64Segment
 from pathlib import Path
 
-# FIXME: this is horrible
+from segtypes.n64.segment import N64Segment
+from util import options
+
 import sys
-if not 'custom/n64splat/' in sys.path:
-    sys.path.append('custom/n64splat/')
+if options.get_extensions_path() not in sys.path:
+    sys.path.append('tools/splat_ext')
 import rareunzip
 
 # Rare zip format:
 # 4 byte uncompressed length followed by deflate level 9 raw payload
 class N64SegRzip(N64Segment):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
-        self.has_files = "files" in segment
-        self.segment = segment
-        self.next_segment = next_segment["start"] if "start" in next_segment else 0
-        self.xor = segment.get("xor", None)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
+        self.has_subsegments = "subsegments" in yaml
+        self.yaml = yaml
+        self.xor = yaml.get("xor", None)
+
     def get_default_name(self, addr):
         return f"code_{addr:X}"
 
@@ -62,7 +62,8 @@ class N64SegRzip(N64Segment):
             start = base + uncompressed
             type = compressed >> 24
             length = compressed % 0x10000000 # can we just AND with 0xffffff ?
-            if self.next_segment and start >= self.next_segment:
+            # if self.next_segment and start >= self.next_segment:
+            if start >= self.rom_end:
                 break
             if length > len(rom_bytes):
                 break
@@ -86,11 +87,11 @@ class N64SegRzip(N64Segment):
             ret.append(fl)
         return ret
 
-    def parse_segment_files(self, segment):
+    def parse_subsegments(self):
         prefix = self.name if self.name.endswith("/") else f"{self.name}_"
 
         ret = []
-        for i, split_file in enumerate(segment["files"]):
+        for i, split_file in enumerate(self.yaml["subsegments"]):
             if type(split_file) is dict:
                 start = split_file["start"]
                 end = split_file["end"]
@@ -98,7 +99,7 @@ class N64SegRzip(N64Segment):
                 subtype = split_file["type"]
             else:
                 start = split_file[0]
-                end = self.rom_end if i == len(segment["files"]) - 1 else segment["files"][i + 1][0]
+                end = self.rom_end if i == len(self.yaml["subsegments"]) - 1 else self.yaml["subsegments"][i + 1][0]
                 name = None if len(split_file) < 3 else split_file[2]
                 subtype = split_file[1]
 
@@ -110,25 +111,32 @@ class N64SegRzip(N64Segment):
 
         return ret
 
-    def split(self, rom_bytes, base_path):
-        if self.has_files:
-            self.files = self.parse_segment_files(self.segment)
-        else:
-            self.files = self.get_files_from_offsets(rom_bytes)
-            self.log(f"Found {len(self.files)}file(s)")
+    def out_path(self) -> Path:
+        return self.out_dir() / f"{self.name}.bin"
 
-        out_dir = self.create_split_dir(base_path, "rzip/%s" % self.name)
+    def out_dir(self) -> Path:
+        return options.get_asset_path() / "rzip" / self.name
+
+    def split(self, rom_bytes):
+        if self.has_subsegments:
+            self.subsegments = self.parse_subsegments()
+        else:
+            self.subsegments = self.get_files_from_offsets(rom_bytes)
+            self.log(f"Found {len(self.subsegments)}file(s)")
+
+        out_dir = self.out_dir()
+        out_dir.mkdir(parents=True, exist_ok=True)
         # write out bin until compression is matching
-        with open(os.path.join(out_dir, self.name + ".bin"), "wb") as f:
+        with open(self.out_path(), "wb") as f:
             f.write(rom_bytes[self.rom_start:self.rom_end])
 
         total_processed_bytes = 0
-        if len(self.files) > 0:
+        if len(self.subsegments) > 0:
             # add header segment bytes if applicable
-            header_length = self.files[0]["start"] - self.rom_start
+            header_length = self.subsegments[0]["start"] - self.rom_start
             total_processed_bytes += header_length
 
-        for i, split_file in enumerate(self.files):
+        for i, split_file in enumerate(self.subsegments):
             result = padding = None
 
             filename = str(i).zfill(4)
@@ -160,16 +168,10 @@ class N64SegRzip(N64Segment):
             if result:
                 with open(os.path.join(out_dir,  filename + "." + extension), "wb") as f:
                     f.write(result)
-            # write out padding
-            if padding:
-                with open(os.path.join(out_dir,  filename + ".pad"), "wb") as f:
-                    f.write(padding)
 
         expected_length = self.rom_end - self.rom_start
         if total_processed_bytes != expected_length:
             print("Processed %i bytes but section is %i bytes!" % (total_processed_bytes, expected_length))
-
-
 
     def get_ld_files(self):
         return [(f"rzip/{self.name}/", f"{self.name}.bin", ".data", self.rom_start)]

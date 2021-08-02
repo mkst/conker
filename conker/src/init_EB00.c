@@ -111,7 +111,7 @@ s32 func_1000EF40(struct57 *arg0, struct57 *arg1, s32 *arg2, s32 arg3, s32 arg4,
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F1A8.s")
 
 void func_10017780(u8 arg0, u16 arg1);
-s32* malloc(s32, s32, s32, s32);
+s32* allocate_memory(s32, s32, s32, s32);
 void func_1000F248(s32 arg0) {
     u16 tmp;
 
@@ -139,7 +139,7 @@ void func_1000F248(s32 arg0) {
         D_80041FD8 = 0x3C;
     }
 
-    D_80041F5C = malloc(1762, 1, 0, 0);
+    D_80041F5C = allocate_memory(1762, 1, 0, 0);
 
     bzero(D_80041F5C, 1762);
 

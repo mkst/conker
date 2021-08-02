@@ -39,7 +39,7 @@ s32 func_150034B4(void) {
 //     s16 *phi_s2;
 //     s16 *phi_s3;
 //
-//     temp_s4 = malloc(16, 1, 2, 0);
+//     temp_s4 = allocate_memory(16, 1, 2, 0);
 //
 //     phi_s0 = 0x1A37E0; // 1718240
 //     phi_s2 = D_80091D20;

@@ -31,7 +31,7 @@ void func_151F2960(s32 arg0, s32 arg1) {
     D_800E0E04 = 4;
     if (D_800E0E2C == 0) {
       D_800E0E2C = 1;
-        D_800E0E30 = malloc(0x8000, 0xFF, 2, 1);
+        D_800E0E30 = allocate_memory(0x8000, 0xFF, 2, 1);
         if (D_800E0E30 == 0) {
             D_800E0E2C = 0;
             return;

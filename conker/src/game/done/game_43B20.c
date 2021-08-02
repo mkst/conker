@@ -20,7 +20,7 @@ void func_15016690(s32 arg0) {
     tmp = func_1502B7F0(&D_800D212C, 3, 12, arg0, 6) / 24U;
     D_800D2128 = tmp;
     if (tmp == 0) {
-        D_800D212C = malloc(24, 1, 0, 0);
+        D_800D212C = allocate_memory(24, 1, 0, 0);
         D_800D2128 = 1U;
         if (D_800D20FC) {
             D_800D212C->unk0 = D_800D20FC->unk6;

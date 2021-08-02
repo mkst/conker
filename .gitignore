@@ -2,6 +2,7 @@
 
 __pycache__/
 asm/
+assets/
 bin/
 build/
 expected/
@@ -35,4 +36,3 @@ conker/ctx.c
 
 tools/decomp-permuter
 tools/gfxdis
-tools/mips_to_c

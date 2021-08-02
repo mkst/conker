@@ -1,0 +1,34 @@
+name: Create and push Docker build image
+on:
+  push:
+    branches: [ master ]
+jobs:
+  push_to_dockerhub:
+    name: Publish Docker build image to Docker Hub + Github Registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_PAT }}
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: markstreet/conker:latest
+      - name: Build and push to Github registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/conker:latest

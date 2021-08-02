@@ -44,21 +44,11 @@ D_800C18B8 = 0x800C18B8;
 D_800CC521 = 0x800CC521;
 D_800CC5A0 = 0x800CC5A0;
 
-gMessageQueue     = 0x80038908;
-gMessageQueue0    = 0x800388C8;
-gMessages         = 0x800388F8;
-gMessage0         = 0x80038400;
-__osActiveQueue   = 0x8002BDFC;
-__osRunningThread = 0x8002BE00;
-n_alGlobals       = 0x8002BA40;
-n_syn             = 0x8002BA44;
-D_8002BA44        = 0x8002BA44;
-osViClock         = 0x8002BDE8;
-hdwrBugFlag       = 0x8002AB40;
-jtbl8002C708      = 0x8002C708;
-
-piEventQueue      = 0x80036B40;
-__osPiAccessQueueEnabled = 0x8002BD60;
-__osPiAccessQueue = 0x800428F8;
-
-__osCleanupThread = 0x10007BF8;
+D_8002BA44 = 0x8002BA44;
+D_8002C080 = 0x8002C080;
+D_8002C0A0 = 0x8002C0A0;
+D_8002C410 = 0x8002C410;
+D_8002C460 = 0x8002C460;
+D_8002C4CC = 0x8002C4CC;
+D_8002C520 = 0x8002C520;
+D_80095A30 = 0x80095A30;

@@ -5,7 +5,7 @@ BUILD_DIR  = build
 TARGET     = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 GAME_DIR   = $(BASENAME)
 
-BIN_DIR    = bin
+BIN_DIR    = assets
 
 ifeq ($(VERSION),ects)
 BIN_FILES  = $(wildcard $(BIN_DIR)/*.bin)
@@ -16,11 +16,10 @@ endif
 
 EXTRACT_DIR = extracted
 
-RZIP_DIRS  = $(wildcard rzip/assets*)
-RZIP_FILES = $(wildcard rzip/assets*/assets*.bin)
+RZIP_DIRS  = $(wildcard $(BIN_DIR)/rzip/assets*)
+RZIP_FILES = $(wildcard $(BIN_DIR)/rzip/assets*/assets*.bin)
 
-O_FILES    = $(foreach file,$(BIN_FILES) $(RZIP_FILES),$(BUILD_DIR)/$(file:.bin=.o))
-
+O_FILES    = $(foreach file,$(BIN_FILES) $(RZIP_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o))
 
 CROSS   = mips-linux-gnu-
 CPP     = cpp
@@ -50,7 +49,7 @@ clean:
 	rm -rf build
 
 really-clean: clean
-	rm -rf bin
+	rm -rf assets
 	rm -rf rzip
 	make -C $(GAME_DIR) really-clean
 
@@ -71,7 +70,7 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT)
 	@$(LD) $(LDFLAGS) -o $@
 
-$(BUILD_DIR)/%.o: %.bin
+$(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
 $(TARGET).bin: $(TARGET).elf
@@ -81,22 +80,22 @@ $(TARGET).z64: $(TARGET).bin
 	@cp $< $@
 
 # combine
-$(GAME_DIR)/$(BASENAME).$(VERSION).bin: bin/game.$(VERSION).bin
-	cat bin/header.$(VERSION).bin bin/boot.$(VERSION).bin bin/init.$(VERSION).bin bin/game.$(VERSION).bin bin/debugger.$(VERSION).bin > $@
+$(GAME_DIR)/$(BASENAME).$(VERSION).bin: $(BIN_DIR)/game.$(VERSION).bin
+	cat $(BIN_DIR)/header.$(VERSION).bin $(BIN_DIR)/boot.$(VERSION).bin $(BIN_DIR)/init.$(VERSION).bin $(BIN_DIR)/game.$(VERSION).bin $(BIN_DIR)/debugger.$(VERSION).bin > $@
 
 # game code is not compressed in ECTS ROM
 ifeq ($(VERSION),ects)
-bin/game.$(VERSION).bin: $(BASENAME).$(VERSION).yaml
-	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 $< .
+$(BIN_DIR)/game.$(VERSION).bin: $(BASENAME).$(VERSION).yaml
+	$(PYTHON) tools/n64splat/split.py $<
 else
-bin/game.$(VERSION).bin: bin/game/rzip/data/0000.bin
-	cat bin/game/rzip/code/0*.bin bin/game/rzip/data/0000.bin > $@
+$(BIN_DIR)/game.$(VERSION).bin: $(BIN_DIR)/game/rzip/data/0000.bin
+	cat $(BIN_DIR)/game/rzip/code/0*.bin $(BIN_DIR)/game/rzip/data/0000.bin > $@
 
-bin/game/rzip/data/0000.bin: bin/game.$(VERSION).rzip.bin
-	$(PYTHON) tools/n64splat/split.py $< game.$(VERSION).rzip.yaml bin/game --modes bin rzip
+$(BIN_DIR)/game/rzip/data/0000.bin: $(BIN_DIR)/game.$(VERSION).rzip.bin
+	$(PYTHON) tools/n64splat/split.py game.$(VERSION).rzip.yaml --modes bin rzip
 
-bin/game.$(VERSION).rzip.bin: $(BASENAME).$(VERSION).yaml
-	$(PYTHON) tools/n64splat/split.py baserom.$(VERSION).z64 $< .
+$(BIN_DIR)/game.$(VERSION).rzip.bin: $(BASENAME).$(VERSION).yaml
+	$(PYTHON) tools/n64splat/split.py $<
 endif
 
 .baserom.$(VERSION).ok: baserom.$(VERSION).z64
@@ -105,7 +104,7 @@ endif
 
 $(EXTRACT_DIR)/00000000.bin:
 	@mkdir -p $(EXTRACT_DIR)
-	$(PYTHON) tools/extract_compressed.py config/compressed.$(VERSION).yaml bin/compressed.bin $(EXTRACT_DIR)
+	$(PYTHON) tools/extract_compressed.py config/compressed.$(VERSION).yaml $(BIN_DIR)/compressed.bin $(EXTRACT_DIR)
 
 # settings
 .PHONY: all clean default

@@ -31,8 +31,10 @@ endif
 ### Directories
 
 ASM_DIRS  = asm \
-            asm/libultra asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os
-BIN_DIRS  = bin
+            asm/libultra asm/libultra/audio asm/libultra/gu asm/libultra/io asm/libultra/libc asm/libultra/os \
+			asm/data asm/data/init asm/data/game asm/data/libultra
+
+BIN_DIRS  = assets
 
 SPLIT_DIR := $(BUILD_DIR)/split
 
@@ -54,9 +56,9 @@ C_FILES   = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 H_FILES   = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.h))
 BIN_FILES = $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 
-O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
-           $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
-           $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.o))
+O_FILES := $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.s.o)) \
+           $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.c.o)) \
+           $(foreach file,$(BIN_FILES),$(BUILD_DIR)/$(file:.bin=.bin.o))
 
 TARGET = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 
@@ -85,16 +87,16 @@ ASM_PROCESSOR_DIR := ../tools/asm-processor
 
 ifeq ($(VERSION),ects)
 TARGET_GAME_BIN = $(TARGET).game.bin
-TARGET_ROOT_GAME_BIN = ../bin/game.$(VERSION).bin
+TARGET_ROOT_GAME_BIN = ../assets/game.$(VERSION).bin
 else
 TARGET_GAME_BIN = $(TARGET).game.rzip.bin
-TARGET_ROOT_GAME_BIN = ../bin/game.$(VERSION).rzip.bin
+TARGET_ROOT_GAME_BIN = ../assets/game.$(VERSION).rzip.bin
 endif
 
 # Files requiring pre/post-processing
 GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null)
-GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
+GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file:.c=.c.o))
 
 INCLUDE_CFLAGS := -I . -I include -I include/2.0L -I include/2.0L/PR -I include/libc -I src/libultra/os -I src/libultra/audio -I src/libultra/io
 
@@ -113,28 +115,28 @@ LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VE
 $(BUILD_DIR)/$(SRC_DIR)/libultra/audio/%.o: OPT_FLAGS := -g
 
 # TODO: blindly move all of this into libultra/audio
-$(BUILD_DIR)/$(SRC_DIR)/init_17F10.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_17F80.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_19B50.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1AAE0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1C060.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1E480.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1E4A0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1E530.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_1FB40.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_20000.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_214F0.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_22040.o: OPT_FLAGS := -g
-$(BUILD_DIR)/$(SRC_DIR)/init_22460.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_17F10.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_17F80.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_19B50.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1AAE0.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1C060.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1E480.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1E4A0.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1E530.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_1FB40.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_20000.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_214F0.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_22040.c.o: OPT_FLAGS := -g
+$(BUILD_DIR)/$(SRC_DIR)/init_22460.c.o: OPT_FLAGS := -g
 
 
-$(BUILD_DIR)/$(SRC_DIR)/libultra/io/ai.o: OPT_FLAGS := -O1
-$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aigetstat.o: OPT_FLAGS := -O1
-$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/ai.c.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aigetstat.c.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.c.o: OPT_FLAGS := -O1
 
-$(BUILD_DIR)/$(SRC_DIR)/libultra/os/getthreadpri.o: OPT_FLAGS := -O1
+$(BUILD_DIR)/$(SRC_DIR)/libultra/os/getthreadpri.c.o: OPT_FLAGS := -O1
 
-$(BUILD_DIR)/$(SRC_DIR)/init_3920.o: OPT_FLAGS := -O2
+$(BUILD_DIR)/$(SRC_DIR)/init_3920.c.o: OPT_FLAGS := -O2
 
 # $(BUILD_DIR)/$(SRC_DIR)/init_B1B0.o: OPT_FLAGS := -O2
 
@@ -162,6 +164,7 @@ clean:
 really-clean: clean
 	rm -rf asm
 	rm -rf bin
+	rm -rf assets
 	rm -rf $(BASENAME).*.ok
 	rm -f *auto.txt
 	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
@@ -178,10 +181,10 @@ progress: $(VERIFY) progress.csv
 
 # replace original binaries
 replace: $(VERIFY) $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
-	cp $(TARGET).header.bin ../bin/header.$(VERSION).bin
-	cp $(TARGET).boot.bin ../bin/boot.$(VERSION).bin
-	cp $(TARGET).init.bin ../bin/init.$(VERSION).bin
-	cp $(TARGET).debugger.bin ../bin/debugger.$(VERSION).bin
+	cp $(TARGET).header.bin ../assets/header.$(VERSION).bin
+	cp $(TARGET).boot.bin ../assets/boot.$(VERSION).bin
+	cp $(TARGET).init.bin ../assets/init.$(VERSION).bin
+	cp $(TARGET).debugger.bin ../assets/debugger.$(VERSION).bin
 	cp $(TARGET_GAME_BIN) $(TARGET_ROOT_GAME_BIN)
 
 
@@ -191,23 +194,23 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
-	@$(LD) $(LDFLAGS) -o $@
+	$(LD) $(LDFLAGS) -o $@
 
 ifndef PERMUTER
-$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.o: %.c include/variables.h include/structs.h include/functions.h
+$(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.c.o: %.c include/variables.h include/structs.h include/functions.h
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
 	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
 	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude $(ASM_PROCESSOR_DIR)/prelude.s
 endif
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.c.o: %.c
 	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.s
+$(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.bin
+$(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $@ $<
 
 $(TARGET).bin: $(TARGET).elf
@@ -215,7 +218,7 @@ $(TARGET).bin: $(TARGET).elf
 
 # extract
 $(BUILD_DIR)/splat: check $(BASENAME).$(VERSION).yaml
-	$(PYTHON) ../tools/n64splat/split.py $(BASENAME).$(VERSION).bin $(BASENAME).$(VERSION).yaml .
+	$(PYTHON) ../tools/n64splat/split.py $(BASENAME).$(VERSION).yaml
 
 %.ok: %.bin
 	@echo "$$(cat $(BASENAME).$(VERSION).sha1)  $<" | sha1sum --check
@@ -229,35 +232,35 @@ $(TARGET).header.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .header $< $@
 
 $(TARGET).boot.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .data_40 $< $@
+	$(OBJCOPY) -O binary --only-section .boot $< $@
 
 $(TARGET).init.bin: $(TARGET).init.code.bin $(TARGET).init.data.bin
 	cat $^ > $@
 
 $(TARGET).init.code.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_init $< $@
+	$(OBJCOPY) -O binary --only-section .init $< $@
 
 $(TARGET).init.data.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_init_data $< $@
+	$(OBJCOPY) -O binary --only-section .init_data $< $@
 
 #ects only
 $(TARGET).game.bin: $(TARGET).game.code.bin $(TARGET).game.data.bin
 	cat $^ > $@
 
 $(TARGET).game.code.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_game $< $@
+	$(OBJCOPY) -O binary --only-section .game $< $@
 
 $(TARGET).game.data.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_game_data $< $@
+	$(OBJCOPY) -O binary --only-section .game_data $< $@
 
 $(TARGET).debugger.bin: $(TARGET).debugger.code.bin $(TARGET).debugger.data.bin
 	cat $^ > $@
 
 $(TARGET).debugger.code.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_debugger $< $@
+	$(OBJCOPY) -O binary --only-section .debugger $< $@
 
 $(TARGET).debugger.data.bin: $(TARGET).elf
-	$(OBJCOPY) -O binary --only-section .code_debugger_data $< $@
+	$(OBJCOPY) -O binary --only-section .debugger_data $< $@
 
 # split code section
 $(SPLIT_DIR)/0000.bin: $(TARGET).game.code.bin
@@ -278,7 +281,7 @@ $(TARGET).game.data.rzip.bin: $(TARGET).game.data.bin
 
 # create padding
 $(TARGET).game.code.padding.bin:
-	cp ../bin/game/bin/code_padding.bin $@
+	cp ../assets/game/code_padding.bin $@
 
 $(TARGET).game.data.padding.bin: $(TARGET).game.data.rzip.bin
 	dd if=/dev/zero of=$@ bs=1 count=$$(($(DATA_SECTION_LENGTH)-$$(wc -c <$<)))
@@ -290,11 +293,11 @@ progress.csv: progress.init.csv progress.game.csv progress.debugger.csv
 	cat $^ > $@
 
 progress.init.csv: $(TARGET).elf
-	$(PYTHON) ../tools/progress.py . $(TARGET).map .code_init --version $(VERSION) > $@
+	$(PYTHON) ../tools/progress.py . $(TARGET).map .init --version $(VERSION) > $@
 progress.game.csv: $(TARGET).elf
-	$(PYTHON) ../tools/progress.py . $(TARGET).map .code_game --version $(VERSION) > $@
+	$(PYTHON) ../tools/progress.py . $(TARGET).map .game --version $(VERSION) > $@
 progress.debugger.csv: $(TARGET).elf
-	$(PYTHON) ../tools/progress.py . $(TARGET).map .code_debugger --version $(VERSION) > $@
+	$(PYTHON) ../tools/progress.py . $(TARGET).map .debugger --version $(VERSION) > $@
 
 
 # settings
