@@ -525,7 +525,7 @@ segments:
     - [0x10dd20, asm]
     - [0x10e240, asm]
     - [0x10ea20, asm]
-    - [0x10ecb0, asm]
+    - [0x10ecb0, c, game/done/game_10ECB0]
     - [0x10ed10, asm]
     - [0x10EF60, asm]
     - [0x1104d0, asm]
