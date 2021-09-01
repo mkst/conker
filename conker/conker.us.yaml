@@ -546,7 +546,7 @@ segments:
     - [0x11f780, asm]
     - [0x11ff10, asm]
     - [0x121a20, asm]
-    - [0x122650, asm]
+    - [0x122650, c, game/done/game_122650]
     - [0x122760, asm]
     - [0x1227f0, asm]
     - [0x1228d0, asm]
