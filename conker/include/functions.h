@@ -714,6 +714,9 @@ void func_150DE32C(void); // dummy
 void func_150DEC90(s32 arg0);
 void func_150EB430(void *arg0, void *arg1);
 void func_150EC4B0(struct108 *arg0);
+void func_150F51A0(s32 arg0, s32 arg1);
+s32  func_150F51BC(void);
+void func_150F51E8(s32 arg0);
 void func_150FCA00(struct108 *arg0);
 
 void func_15100330(s32 arg0);
