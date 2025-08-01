@@ -9,8 +9,7 @@ options:
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
-  undefined_funcs_auto_path: undefined_syms.us.txt
-  undefined_syms_auto_path:   symbol_addrs.us.txt
+  symbol_addrs_path: symbol_addrs.us.txt
 segments:
   - name:  header
     type:  header
