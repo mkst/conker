@@ -3,21 +3,23 @@ import struct
 
 from pathlib import Path
 
-from segtypes.n64.segment import N64Segment
-from util import options
+from splat.util import options
+from splat.segtypes.segment import Segment
+import zlib
 
-import sys
-if options.get_extensions_path() not in sys.path:
-    sys.path.append('tools/splat_ext')
-import rareunzip
+# TODO: This is from rareunzip.py, but I can't get the relative import to work with splat.
+#       Figure out a way to import this function instead of copying it here.
+def runzip_with_leftovers(data):
+    d = zlib.decompressobj(wbits=-15) # raw deflate bytestream
+    res = d.decompress(data[4:])      # drop 4 byte length header
+    return (res, d.unused_data)
 
 # Rare zip format:
 # 4 byte uncompressed length followed by deflate level 9 raw payload
-class N64SegRzip(N64Segment):
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
+class N64SegRzip(Segment):
+    def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml)
         self.has_subsegments = "subsegments" in yaml
-        self.yaml = yaml
         self.xor = yaml.get("xor", None)
 
     def get_default_name(self, addr):
@@ -92,7 +94,7 @@ class N64SegRzip(N64Segment):
 
         ret = []
         for i, split_file in enumerate(self.yaml["subsegments"]):
-            if type(split_file) is dict:
+            if isinstance(split_file, dict):
                 start = split_file["start"]
                 end = split_file["end"]
                 name = None if "name" not in split_file else split_file["name"]
@@ -115,7 +117,7 @@ class N64SegRzip(N64Segment):
         return self.out_dir() / f"{self.name}.bin"
 
     def out_dir(self) -> Path:
-        return options.get_asset_path() / "rzip" / self.name
+        return options.opts.asset_path / "rzip" / self.name
 
     def split(self, rom_bytes):
         if self.has_subsegments:
@@ -155,7 +157,7 @@ class N64SegRzip(N64Segment):
                     extension = "mp3"
             else:
                 try:
-                    result, padding = rareunzip.runzip_with_leftovers(data)
+                    result, padding = runzip_with_leftovers(data)
                 except Exception as e:
                     print("Failed to decompress file", split_file, e)
             # update total

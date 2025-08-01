@@ -4,6 +4,7 @@ options:
   base_path: .
   find_file_boundaries: yes
   compiler: IDO
+  platform: n64
   cpp_args:
   - "-Iinclude"
   - "-Iinclude/2.0L"

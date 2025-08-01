@@ -1,10 +1,11 @@
+sha1: 4cbadd3c4e0729dec46af64ad018050eada4f47a
 options:
   basename: conker
   target_path: baserom.us.z64
+  platform: n64
   base_path: .
   compiler: IDO
   extensions_path: tools/splat_ext
-  sha1: 4cbadd3c4e0729dec46af64ad018050eada4f47a
 segments:
   - name:  header.us
     type:  bin

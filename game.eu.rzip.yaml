@@ -2,6 +2,7 @@ options:
   target_path: assets/game.eu.rzip.bin
   base_path: .
   asset_path: assets/game
+  platform: n64
   extensions_path: tools/splat_ext
 segments:
   - name:  code

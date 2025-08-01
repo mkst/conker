@@ -12,3 +12,5 @@ python-ranges
 pyyaml
 toml
 watchdog
+splat64[mips]>=0.34,<0.35
+spimdisasm>=1.32.0,<2.0.0

@@ -4,13 +4,13 @@ options:
   base_path: .
   # find_file_boundaries: yes
   compiler: IDO
+  platform: n64
   generated_c_preamble: |
     #include <ultra64.h>
     #include "functions.h"
     #include "variables.h"
-  create_detected_syms: yes
-  undefined_syms_path: undefined_syms.us.txt
-  symbol_addrs_path:   symbol_addrs.us.txt
+  undefined_funcs_auto_path: undefined_syms.us.txt
+  undefined_syms_auto_path:   symbol_addrs.us.txt
 segments:
   - name:  header
     type:  header

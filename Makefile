@@ -86,16 +86,16 @@ $(GAME_DIR)/$(BASENAME).$(VERSION).bin: $(BIN_DIR)/game.$(VERSION).bin
 # game code is not compressed in ECTS ROM
 ifeq ($(VERSION),ects)
 $(BIN_DIR)/game.$(VERSION).bin: $(BASENAME).$(VERSION).yaml
-	$(PYTHON) tools/n64splat/split.py $<
+	$(PYTHON) -m splat split $<
 else
 $(BIN_DIR)/game.$(VERSION).bin: $(BIN_DIR)/game/rzip/data/0000.bin
 	cat $(BIN_DIR)/game/rzip/code/0*.bin $(BIN_DIR)/game/rzip/data/0000.bin > $@
 
 $(BIN_DIR)/game/rzip/data/0000.bin: $(BIN_DIR)/game.$(VERSION).rzip.bin
-	$(PYTHON) tools/n64splat/split.py game.$(VERSION).rzip.yaml --modes bin rzip
+	$(PYTHON) -m splat split game.$(VERSION).rzip.yaml --modes bin rzip
 
 $(BIN_DIR)/game.$(VERSION).rzip.bin: $(BASENAME).$(VERSION).yaml
-	$(PYTHON) tools/n64splat/split.py $<
+	$(PYTHON) -m splat split $<
 endif
 
 .baserom.$(VERSION).ok: baserom.$(VERSION).z64
