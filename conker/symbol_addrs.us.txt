@@ -25,6 +25,7 @@ __n_CSPRepostEvent              = 0x10015310;
 __n_setUsptFromTempo            = 0x10015464;
 __n_CSPPostNextSeqEvent         = 0x100154AC;
 _n_handleEvent                  = 0x10015944;
+n_alCSPGetState                 = 0x10017A80;
 n_alCSPGetTempo                 = 0x10017EC0;
 n_alCSeqNew                     = 0x10017F80;
 n_alCSeqNextEvent               = 0x10018100;

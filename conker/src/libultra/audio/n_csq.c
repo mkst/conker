@@ -32,46 +32,44 @@
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/func_10018790.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/__getTrackByte.s")
-// u8 __getTrackByte(s32 arg0, s32 arg1) {
-//     u8 spF;
-//     u8 spE;
-//     u8 spD;
-//     u8 spC;
-//     u8 spB;
-//     s32 sp4;
-//
-//     if ((arg0 + arg1)->unk98 != 0) {
-//         spF = *(arg0 + (arg1 * 4))->unk58;
-//         (arg0 + (arg1 * 4))->unk58 = (s32) ((arg0 + (arg1 * 4))->unk58 + 1);
-//         (arg0 + arg1)->unk98 = (s8) ((arg0 + arg1)->unk98 - 1);
-//     } else {
-//         spF = *(arg0 + (arg1 * 4))->unk18;
-//         (arg0 + (arg1 * 4))->unk18 = (s32) ((arg0 + (arg1 * 4))->unk18 + 1);
-//         if (spF == 0xFE) {
-//             spB = *(arg0 + (arg1 * 4))->unk18;
-//             (arg0 + (arg1 * 4))->unk18 = (s32) ((arg0 + (arg1 * 4))->unk18 + 1);
-//             if (spB != 0xFE) {
-//                 spD = spB;
-//                 spE = *(arg0 + (arg1 * 4))->unk18;
-//                 (arg0 + (arg1 * 4))->unk18 = (s32) ((arg0 + (arg1 * 4))->unk18 + 1);
-//                 spC = *(arg0 + (arg1 * 4))->unk18;
-//                 (arg0 + (arg1 * 4))->unk18 = (s32) ((arg0 + (arg1 * 4))->unk18 + 1);
-//                 sp4 = (s32) spD;
-//                 sp4 = sp4 << 8;
-//                 sp4 = sp4 + spE;
-//                 (arg0 + (arg1 * 4))->unk58 = (s32) (((arg0 + (arg1 * 4))->unk18 - sp4) - 4);
-//                 (arg0 + arg1)->unk98 = spC;
-//                 spF = *(arg0 + (arg1 * 4))->unk58;
-//                 (arg0 + (arg1 * 4))->unk58 = (s32) ((arg0 + (arg1 * 4))->unk58 + 1);
-//                 (arg0 + arg1)->unk98 = (s8) ((arg0 + arg1)->unk98 - 1);
-//             }
-//         }
-//     }
-//     return spF;
-// }
 
-u32 __readVarLen(s32 seq, s32 track) {
+u8 __getTrackByte(ALCSeq *seq, s32 track) {
+    u8 theByte;
+
+    if (seq->curBULen[track]) {
+        theByte = *seq->curBUPtr[track];
+        seq->curBUPtr[track]++;
+        seq->curBULen[track]--;
+    } else {
+        theByte = *seq->curLoc[track];
+        seq->curLoc[track]++;
+        if (theByte == AL_CMIDI_BLOCK_CODE) {
+            u8 loBackUp, hiBackUp, theLen, nextByte;
+            u32 backup;
+
+            nextByte = *seq->curLoc[track];
+            seq->curLoc[track]++;
+            if (nextByte != AL_CMIDI_BLOCK_CODE) {
+                hiBackUp = nextByte;
+                loBackUp = *seq->curLoc[track];
+                seq->curLoc[track]++;
+                theLen = *seq->curLoc[track];
+                seq->curLoc[track]++;
+                backup = (u32) hiBackUp;
+                backup <<= 8;
+                backup += loBackUp;
+                seq->curBUPtr[track] = seq->curLoc[track] - (backup + 4);
+                seq->curBULen[track] = (u32)theLen;
+                theByte = *seq->curBUPtr[track];
+                seq->curBUPtr[track]++;
+                seq->curBULen[track]--;
+            }
+        }
+    }
+    return theByte;
+}
+
+u32 __readVarLen(ALCSeq *seq, s32 track) {
     u32 value;
     u32 c;
 

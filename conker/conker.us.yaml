@@ -64,7 +64,7 @@ segments:
     - [0x13320, c, libultra/audio/n_csplayer]
     - [0x15550, c, libultra/audio/init_15550]
     - [0x17870, c, libultra/audio/init_17870]
-    - [0x17A80, c, libultra/audio/init_17A80]
+    - [0x17A80, c, libultra/audio/n_cspgetstate]
     - [0x17AA0, c, libultra/audio/code_17AA0]
     - [0x17AF0, c, libultra/audio/init_17AF0]
     - [0x17C00, c, libultra/audio/init_17C00]

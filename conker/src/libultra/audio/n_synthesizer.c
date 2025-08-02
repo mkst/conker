@@ -185,7 +185,7 @@ extern f32 D_8002C750;
 //     return sp38;
 // }
 
-ALParam *__n_allocParam() {
+ALParam *__n_allocParam(void) {
     ALParam *update = 0;
 
     if (n_syn->paramList) {
@@ -194,7 +194,7 @@ ALParam *__n_allocParam() {
         update->next = 0;
     }
     return update;
-  }
+}
 
 
 void _n_freeParam(ALParam *param)
