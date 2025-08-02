@@ -7,16 +7,16 @@ on:
 jobs:
   build_pr:
     if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout this repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: recursive
         ref: ${{ github.event.pull_request.head.ref }}
         repository: ${{ github.event.pull_request.head.repo.full_name }}
     - name: Checkout baserom
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: mkst/conker-private
         token: ${{ secrets.PRIVATE_REPO_ACCESS }}
@@ -24,25 +24,25 @@ jobs:
     - name: Decrypt baserom
       run: echo ${{ secrets.CONKER_BASEROM_US }} | openssl enc -d -aes-256-cbc -pass stdin -pbkdf2 -in baserom/baserom.us.z64.aes -out baserom.us.z64
 
-    - name: Perform make extract
-      uses: docker://docker.io/markstreet/conker:latest
+    - name: Perform make extract (rom)
+      uses: docker://ghcr.io/mkst/conker:latest
       with:
         args: make extract
 
     - name: Perform make extract (code)
-      uses: docker://docker.io/markstreet/conker:latest
+      uses: docker://ghcr.io/mkst/conker:latest
       with:
         args: sh -c "cd conker && make extract"
     - name: Perform make (code)
-      uses: docker://docker.io/markstreet/conker:latest
+      uses: docker://ghcr.io/mkst/conker:latest
       with:
         args: sh -c "cd conker && make --jobs"
     - name: Perform make replace
-      uses: docker://docker.io/markstreet/conker:latest
+      uses: docker://ghcr.io/mkst/conker:latest
       with:
         args: sh -c "cd conker && make replace"
 
     - name: Perform make
-      uses: docker://docker.io/markstreet/conker:latest
+      uses: docker://ghcr.io/mkst/conker:latest
       with:
         args: make --jobs
