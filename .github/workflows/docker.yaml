@@ -18,22 +18,12 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push to Docker Hub
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: markstreet/conker:latest
       - name: Build and push to Github registry
         uses: docker/build-push-action@v6
         with:
