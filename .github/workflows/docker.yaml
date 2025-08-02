@@ -2,6 +2,12 @@ name: Create and push Docker build image
 on:
   push:
     branches: [ master ]
+    paths:
+      - Dockerfile
+      - packages.txt
+      - requirements.txt
+      - .bash_aliases
+      - .github/workflows/docker.yaml
 jobs:
   push_to_dockerhub:
     name: Publish Docker build image to Github Registry
