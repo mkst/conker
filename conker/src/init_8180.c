@@ -32,13 +32,13 @@ void func_10018D50(N_ALCSPlayer *seqp);
 #pragma GLOBAL_ASM("asm/nonmatchings/init_8180/func_10008180.s")
 
 void func_100084D8(u8 idx) {
-    if ((func_10017A80(D_8003C900[idx]) == 0) || (func_10017A80(D_8003C900[idx]) == 3)) {
+    if ((n_alCSPGetState(D_8003C900[idx]) == 0) || (n_alCSPGetState(D_8003C900[idx]) == 3)) {
         func_10017AA0(D_8003C900[idx]);
     }
 }
 
 s32 func_1000853C(u8 idx) {
-    return func_10017A80(D_8003C900[idx]);
+    return n_alCSPGetState(D_8003C900[idx]);
 }
 
 void func_10008570(u8 idx, s32 arg1) { // arg1 is OSMesgQueue ?
@@ -185,13 +185,13 @@ void func_10008C04(u8 idx, u8 arg1, s32 arg2) {
 //
 //     i = 0;
 //     func_10018C60(&D_8003C900[idx]);
-//     while ((func_10017A80(&D_8003C900[idx]) != 0) && (i < 2000000)) {
+//     while ((n_alCSPGetState(&D_8003C900[idx]) != 0) && (i < 2000000)) {
 //         i++;
 //     };
 //
 //     if (i >= 2000000) {
 //         func_10018C60(&D_8003C900[idx]);
-//         while ((func_10017A80(&D_8003C900[idx]) != 0) && (i < 4000000)) {
+//         while ((n_alCSPGetState(&D_8003C900[idx]) != 0) && (i < 4000000)) {
 //             i++;
 //         }
 //     }
