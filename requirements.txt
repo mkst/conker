@@ -3,6 +3,7 @@ attrs
 capstone
 colorama
 cxxfilt
+git
 pycparser
 pylibyaml
 pynacl
