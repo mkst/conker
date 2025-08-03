@@ -12,7 +12,7 @@ options:
     #include "variables.h"
   symbol_addrs_path:   symbol_addrs.us.txt
 
-  auto_all_sections: []
+  auto_link_sections: []
   string_encoding: ASCII
 
   # asm_jtbl_label_macro: jlabel
