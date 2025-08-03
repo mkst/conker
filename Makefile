@@ -38,6 +38,10 @@ endif
 
 ### Targets
 
+## REVERT ME - CI only uses the publish Docker container, so this is a workaround to install requirements. DO NOT MERGE THIS DO NOT MERGE THIS DO NOT MERGE THIS DO NOT MERGE THIS
+pipinstall:
+	python3 -m pip install -r requirements.txt
+
 default: all
 
 all: dirs $(TARGET).z64 $(VERIFY)
@@ -55,7 +59,7 @@ really-clean: clean
 
 check: .baserom.$(VERSION).ok
 
-extract: check $(GAME_DIR)/$(BASENAME).$(VERSION).bin
+extract: pipinstall check $(GAME_DIR)/$(BASENAME).$(VERSION).bin
 
 decompress: $(EXTRACT_DIR)/00000000.bin
 
