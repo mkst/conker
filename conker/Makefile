@@ -64,6 +64,7 @@ TARGET = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 
 LD_SCRIPT = $(BASENAME).ld
 
+# Build tools
 CC     := ../ido/ido5.3_recomp/cc
 
 CROSS   = mips-linux-gnu-
@@ -77,11 +78,53 @@ PYTHON  = python3
 RZIP    := $(PYTHON) ../tools/rarezip.py
 RZIPDIR := $(PYTHON) ../tools/compress_dir.py
 SPLIT := split -b 4096 -d --additional-suffix=.bin --suffix-length=4
+N64SPLAT_SPLIT := $(PYTHON) ../tools/n64splat/split.py
 
 OPT_FLAGS := -O2 -g3
 MIPSBIT := -mips2 -o32
 
 ASM_PROCESSOR_DIR := ../tools/asm-processor
+
+PRINT   := printf
+
+# System tools
+MKDIR := mkdir
+CP := cp
+RM := rm
+CAT := cat
+DIFF := diff
+
+### Functions
+
+# Whether to colorize build messages
+COLOR ?= 1
+
+# Colorful text printing
+ifeq ($(COLOR),1)
+NO_COL  := \033[0m
+RED     := \033[0;31m
+GREEN   := \033[0;32m
+BLUE    := \033[0;34m
+YELLOW  := \033[0;33m
+ORANGE  := \033[38;5;208m
+BLINK   := \033[33;5m
+BOLD    := \033[1m
+endif
+
+# Print message with zero arguments (i.e. message)
+define print0
+  @$(PRINT) "$(GREEN)$(1)$(NO_COL)\n"
+endef
+
+# Print message with one argument (i.e. message arg)
+define print1
+  @$(PRINT) "$(GREEN)$(1) $(BLUE)$(2)$(NO_COL)\n"
+endef
+
+# Print message with two arguments (i.e. message arg1 -> arg2)
+define print2
+  @$(PRINT) "$(GREEN)$(1) $(YELLOW)$(2)$(GREEN) -> $(BLUE)$(3)$(NO_COL)\n"
+endef
 
 # Target version differences
 
@@ -156,18 +199,18 @@ default: all
 all: dirs $(TARGET).bin $(VERIFY)
 
 dirs:
-	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) ,$(shell mkdir -p build/$(dir)))
+	$(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) ,$(shell $(MKDIR) -p build/$(dir)))
 
 clean:
-	rm -rf build
+	$(RM) -rf build
 
 really-clean: clean
-	rm -rf asm
-	rm -rf bin
-	rm -rf assets
-	rm -rf $(BASENAME).*.ok
-	rm -f *auto.txt
-	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
+	$(RM) -rf asm
+	$(RM) -rf bin
+	$(RM) -rf assets
+	$(RM) -rf $(BASENAME).*.ok
+	$(RM) -f *auto.txt
+	$(RM) -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
 
 extract: $(BUILD_DIR)/splat
 
@@ -181,44 +224,58 @@ progress: $(VERIFY) progress.csv
 
 # replace original binaries
 replace: $(VERIFY) $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(TARGET_GAME_BIN) $(TARGET).debugger.bin
-	cp $(TARGET).header.bin ../assets/header.$(VERSION).bin
-	cp $(TARGET).boot.bin ../assets/boot.$(VERSION).bin
-	cp $(TARGET).init.bin ../assets/init.$(VERSION).bin
-	cp $(TARGET).debugger.bin ../assets/debugger.$(VERSION).bin
-	cp $(TARGET_GAME_BIN) $(TARGET_ROOT_GAME_BIN)
+	$(CP) $(TARGET).header.bin ../assets/header.$(VERSION).bin
+	$(CP) $(TARGET).boot.bin ../assets/boot.$(VERSION).bin
+	$(CP) $(TARGET).init.bin ../assets/init.$(VERSION).bin
+	$(CP) $(TARGET).debugger.bin ../assets/debugger.$(VERSION).bin
+	$(CP) $(TARGET_GAME_BIN) $(TARGET_ROOT_GAME_BIN)
 
 
 ### Recipes
 
+# .ld -> .ld with preprocessor
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
-	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+	$(call print2,Preprocessing linker script:,$<,$@)
+	@$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
+# .o -> .elf
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
+	$(call print1,Linking elf:,$@)
 	$(LD) $(LDFLAGS) -o $@
 
 ifndef PERMUTER
+# .c -> .o with asm processor
 $(GLOBAL_ASM_O_FILES): $(BUILD_DIR)/%.c.o: %.c include/variables.h include/structs.h include/functions.h
-	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
-	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
-	$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
+	$(call print2,Compiling (with ASM Processor):,$<,$@)
+	@$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< > $(BUILD_DIR)/$<
+	@$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(LOOP_UNROLL) $(MIPSBIT) -o $@ $(BUILD_DIR)/$<
+	@$(PYTHON) $(ASM_PROCESSOR_DIR)/asm_processor.py $(OPT_FLAGS) $< --post-process $@ \
 		--assembler "$(AS) $(ASFLAGS)" --asm-prelude $(ASM_PROCESSOR_DIR)/prelude.inc
 endif
 
+# .c -> .o
 $(BUILD_DIR)/%.c.o: %.c
-	$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
+	$(call print2,Compiling:,$<,$@)
+	@$(CC) -c -32 $(CFLAGS) $(OPT_FLAGS) $(MIPSBIT) -o $@ $<
 
+# .s -> .o
 $(BUILD_DIR)/%.s.o: %.s
-	$(AS) $(ASFLAGS) -o $@ $<
+	$(call print2,Assembling:,$<,$@)
+	@$(AS) $(ASFLAGS) -o $@ $<
 
+# .bin -> .o
 $(BUILD_DIR)/%.bin.o: %.bin
-	$(LD) -r -b binary -o $@ $<
+	$(call print2,Converting bin to obj:,$<,$@)
+	@$(LD) -r -b binary -o $@ $<
 
 $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $(OBJCOPYFLAGS) -O binary $< $@
 
-# extract
+# Split baserom
 $(BUILD_DIR)/splat: check $(BASENAME).$(VERSION).yaml
-	$(PYTHON) ../tools/n64splat/split.py $(BASENAME).$(VERSION).yaml
+	$(call print1,Splitting rom:,$(word 2,$^))
+	rm -rf $(ASM_DIRS)
+	$(N64SPLAT_SPLIT) $(BASENAME).$(VERSION).yaml
 
 %.ok: %.bin
 	@echo "$$(cat $(BASENAME).$(VERSION).sha1)  $<" | sha1sum --check
@@ -235,7 +292,7 @@ $(TARGET).boot.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .boot $< $@
 
 $(TARGET).init.bin: $(TARGET).init.code.bin $(TARGET).init.data.bin
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 $(TARGET).init.code.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .init $< $@
@@ -245,7 +302,7 @@ $(TARGET).init.data.bin: $(TARGET).elf
 
 #ects only
 $(TARGET).game.bin: $(TARGET).game.code.bin $(TARGET).game.data.bin
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 $(TARGET).game.code.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .game $< $@
@@ -254,7 +311,7 @@ $(TARGET).game.data.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .game_data $< $@
 
 $(TARGET).debugger.bin: $(TARGET).debugger.code.bin $(TARGET).debugger.data.bin
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 $(TARGET).debugger.code.bin: $(TARGET).elf
 	$(OBJCOPY) -O binary --only-section .debugger $< $@
@@ -264,16 +321,19 @@ $(TARGET).debugger.data.bin: $(TARGET).elf
 
 # split code section
 $(SPLIT_DIR)/0000.bin: $(TARGET).game.code.bin
-	mkdir -p $(SPLIT_DIR)
+	$(call print1,Splitting code section,$@)
+	$(MKDIR) -p $(SPLIT_DIR)
 	$(SPLIT) $< $(SPLIT_DIR)/
 
 # create offsets file
 $(SPLIT_DIR)/offsets.bin: $(SPLIT_DIR)/0000.bin
+	$(call print1,Creating offsets:,$@)
 	$(RZIPDIR) $(SPLIT_DIR) $(SPLIT_DIR) --offsets-file $@ $(COMPRESS_DIR_ARGS)
 
 # concatenate compressed code blocks
 $(TARGET).game.code.rzip.bin: $(TARGET).game.code.bin $(SPLIT_DIR)/offsets.bin
-	cat $(SPLIT_DIR)/*.gz > $@
+	$(call print1,Combining compressed code blocks:,$@)
+	$(CAT) $(SPLIT_DIR)/*.gz > $@
 
 # compressed data section
 $(TARGET).game.data.rzip.bin: $(TARGET).game.data.bin
@@ -281,16 +341,16 @@ $(TARGET).game.data.rzip.bin: $(TARGET).game.data.bin
 
 # create padding
 $(TARGET).game.code.padding.bin:
-	cp ../assets/game/code_padding.bin $@
+	$(CP) ../assets/game/code_padding.bin $@
 
 $(TARGET).game.data.padding.bin: $(TARGET).game.data.rzip.bin
 	dd if=/dev/zero of=$@ bs=1 count=$$(($(DATA_SECTION_LENGTH)-$$(wc -c <$<)))
 
 $(TARGET).game.rzip.bin: $(SPLIT_DIR)/offsets.bin $(TARGET).game.code.rzip.bin $(TARGET).game.code.padding.bin $(TARGET).game.data.rzip.bin $(TARGET).game.data.padding.bin
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 progress.csv: progress.init.csv progress.game.csv progress.debugger.csv
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 progress.init.csv: $(TARGET).elf
 	$(PYTHON) ../tools/progress.py . $(TARGET).map .init --version $(VERSION) > $@
