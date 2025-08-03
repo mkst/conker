@@ -169,7 +169,11 @@ really-clean: clean
 	rm -f *auto.txt
 	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
 
-extract: $(BUILD_DIR)/splat
+## REVERT ME - CI only uses the publish Docker container, so this is a workaround to install requirements. DO NOT MERGE THIS DO NOT MERGE THIS DO NOT MERGE THIS DO NOT MERGE THIS
+pipinstall:
+	python3 -m pip install -r ../requirements.txt
+
+extract: pipinstall $(BUILD_DIR)/splat
 
 # sanity check base bin
 check: $(BASENAME).$(VERSION).ok
