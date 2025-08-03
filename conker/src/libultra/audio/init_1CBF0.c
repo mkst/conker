@@ -1,6 +1,6 @@
 #include "n_synthInternals.h"
 
-
+#if 0
 f32 PI = 3.1415927410125732;
 f32 D_8002C774 = 1.4142136573791504;
 f32 D_8002C778 = 1.0594631433486938;
@@ -9,7 +9,16 @@ f32 D_8002C780 = 26768.0;
 f32 D_8002C784 = 26768.0;
 f32 D_8002C788 = 173123.40625;
 f32 D_8002C78C = 0.0;
+#endif
 
+extern f32 D_8002C770;
+extern f32 D_8002C774;
+extern f32 D_8002C778;
+extern f32 D_8002C77C;
+extern f32 D_8002C780;
+extern f32 D_8002C784;
+extern f32 D_8002C788;
+extern f32 D_8002C78C;
 
 f32 func_150484A0(f32, f32);
 
@@ -23,7 +32,7 @@ void func_1001CBF0(f32 arg0, f32 arg1, f32 arg2, f32 arg3[3], f32 arg4[3]) {
         arg1 = arg0 - 200.0f;
     }
 
-    sp24 = func_150484A0(arg1 * PI, arg0);
+    sp24 = func_150484A0(arg1 * D_8002C770, arg0);
     sp20 = sp24 * sp24;
     sp1C = (sp24 * D_8002C774) / arg2;
     arg3[0] = sp20 / (1.0f + sp20 + sp1C);

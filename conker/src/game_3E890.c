@@ -3,7 +3,7 @@
 #include "functions.h"
 #include "variables.h"
 
-
+#if 0
 f32 D_800964C0 = 175.5;
 f32 D_800964C4 = 115.4000015258789;
 f32 D_800964C8 = 1.0420000553131104;
@@ -25,7 +25,7 @@ f32 D_80096504 = -339.0;
 // dont think these belong here?
 f32 D_80096508 = 15.045271873474121;
 f32 D_8009650C = 5.8676557540893555;
-
+#endif
 
 // typedef struct {
 //     f32 sp38;

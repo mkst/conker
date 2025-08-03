@@ -63,9 +63,6 @@ void func_15001970(void) {
 //     D_800DBE36 = 0;
 // }
 
-void func_15001B08(void) {
-}
-
 u16* func_15001B10(void) {
     u16 *temp_v0;
 
@@ -84,12 +81,11 @@ void func_15001B5C(u8 arg0) {
     *D_800B0DE0++ = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15001B8C.s")
-//void func_15001B8C(u16 arg0) {
-//    D_800B0DE0[0] = (arg0 >> 8);
-//    D_800B0DE0[1] = arg0 & 0xFF;
-//    D_800B0DE0 += 2;
-//}
+void func_15001B8C(u16 arg0) {
+   D_800B0DE0[0] = (arg0 >> 8);
+   D_800B0DE0[1] = arg0 & 0xFF;
+   D_800B0DE0 += 2;
+}
 
 void func_15001BC8(s32 arg0, s16 *arg1, s16 *arg2) {
     u16 *tmp;

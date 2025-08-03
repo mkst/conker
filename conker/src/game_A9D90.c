@@ -77,12 +77,6 @@ void func_1507CD0C(struct127 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507D754.s")
 
-void func_1507DB34(void) {
-}
-
-void func_1507DB3C(void) {
-}
-
 void func_1507DB44(s32 arg0, s32 arg1) {
     func_1503DE70(arg0, arg1, -1);
 }

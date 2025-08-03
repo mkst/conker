@@ -3,19 +3,19 @@ import struct
 
 from pathlib import Path
 
-from segtypes.n64.segment import N64Segment
-from util import options
+from src.splat.segtypes.segment import Segment
+from src.splat.util.options import opts
 
 import sys
-if options.get_extensions_path() not in sys.path:
+if opts.extensions_path not in sys.path:
     sys.path.append('tools/splat_ext')
 import rareunzip
 
 # Rare zip format:
 # 4 byte uncompressed length followed by deflate level 9 raw payload
-class N64SegRzip(N64Segment):
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
+class N64SegRzip(Segment):
+    def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml)
         self.has_subsegments = "subsegments" in yaml
         self.yaml = yaml
         self.xor = yaml.get("xor", None)
@@ -115,7 +115,7 @@ class N64SegRzip(N64Segment):
         return self.out_dir() / f"{self.name}.bin"
 
     def out_dir(self) -> Path:
-        return options.get_asset_path() / "rzip" / self.name
+        return opts.asset_path / "rzip" / self.name
 
     def split(self, rom_bytes):
         if self.has_subsegments:

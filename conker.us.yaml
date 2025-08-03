@@ -1,10 +1,16 @@
+sha1: 4cbadd3c4e0729dec46af64ad018050eada4f47a
+
 options:
+  platform: n64
   basename: conker
   target_path: baserom.us.z64
   base_path: .
   compiler: IDO
   extensions_path: tools/splat_ext
-  sha1: 4cbadd3c4e0729dec46af64ad018050eada4f47a
+
+  create_undefined_funcs_auto: no
+  create_undefined_syms_auto: no
+
 segments:
   - name:  header.us
     type:  bin
@@ -41,15 +47,15 @@ segments:
   - [0x0003c124, bin] # ucode .data section
   - name:  game.us.rzip
     type:  bin
-    start: 0x00042450
+    start: 0x42450
   - name:  debugger.us
     type:  bin
-    start: 0x0019EA88
+    start: 0x19EA88
   ###
-  - [0x001A37E0, bin, compressed] # 7760 files
-  - [0x00AB1941, bin, compressed_padding] # 15 bytes 0x0 padding
+  - [0x1A37E0, bin, compressed] # 7760 files
+  - [0xAB1941, bin, compressed_padding] # 15 bytes 0x0 padding
   ###
-  - [0x00AB1950, bin, assets_offsets_table] # TODO: use to generate this next section
+  - [0xAB1950, bin, assets_offsets_table] # TODO: use to generate this next section
   - name:  assets00
     type:  rzip
     start: 0x00AB1A40
