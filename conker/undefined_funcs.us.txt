@@ -1,2 +1,3 @@
 __osDevMgrMain                  = 0x10002E50;
 __n_CSPHandleMetaMsg            = 0x10015044;
+func_160036F0 = 0x160036F0;

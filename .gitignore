@@ -36,3 +36,5 @@ conker/ctx.c
 
 tools/decomp-permuter
 tools/gfxdis
+venv/
+.venv/
