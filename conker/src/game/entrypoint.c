@@ -4,17 +4,6 @@
 #include "variables.h"
 
 
-u32 jtbl_80095A30[8] = {
-    0x1500798C, // first case
-    0x15007994,
-    0x150079C0,
-    0x150079CC,
-    0x1500798C,
-    0,
-    0,
-    0
-};
-
 // game entrypoint
 #pragma GLOBAL_ASM("asm/nonmatchings/game/entrypoint/func_15007830.s")
 // NON-MATCHING: need to better understand jump tables

@@ -10,7 +10,6 @@
 
 #include <libaudio.h>
 
-
 f32 alCents2Ratio(s32 cents) {
     f32 x;
     f32 ratio = 1.0f;

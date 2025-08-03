@@ -3,6 +3,11 @@
 #include "functions.h"
 #include "variables.h"
 
+extern u16 D_80085EC0[61];
+extern u16 D_80085F3C[64];
+extern u16 D_80085FBC[4];
+
+#if 0
 u16 D_80085EC0[61] = {
     32768, 32442, 32116, 31789,
     31463, 31136,  30809, 30481,
@@ -40,7 +45,7 @@ u16 D_80085F3C[64] = {
     1844, 1597, 1304, 922 };
 
 u16 D_80085FBC[4] = { 922, 798, 652, 461 };
-
+#endif
 
 s32 func_150485E0(s32 arg0) {
     s32 index;

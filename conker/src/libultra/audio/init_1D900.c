@@ -51,7 +51,6 @@ void func_1001DAA0(s32 arg0, s16 arg1, s32 arg2) {
     func_1001ED6C(sp1C, arg1, arg2);
 }
 
-// probably not right but...
 void func_1001DAE4(ALVoiceConfig *arg0, s16 arg1, s32 *arg2) {
     if (arg1 == 8) {
         arg0->fxBus = (f32) *arg2 * 0.1f;

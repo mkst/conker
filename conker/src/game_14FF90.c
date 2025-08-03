@@ -3,7 +3,66 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_800A34B0[4][2];
+extern f32 D_800A34D0;
+extern f32 D_800A34D4;
+extern f32 D_800A34D8;
+extern f32 D_800A34DC;
+extern f32 D_800A34E0;
+extern f32 D_800A34E4;
+extern f32 D_800A34E8;
+extern f32 D_800A34EC;
+extern f32 D_800A34F0;
+extern f32 D_800A34F4;
+extern f32 D_800A34F8;
+extern f32 D_800A34FC;
+extern f32 D_800A3500;
+extern f32 D_800A3504;
+extern f32 D_800A3508;
+extern f32 D_800A350C;
+extern f32 D_800A3510;
+extern f32 D_800A3514;
+extern f32 D_800A3518;
+extern f32 D_800A351C;
+extern f32 D_800A3520;
+extern f32 D_800A3524;
+extern f32 D_800A3528;
+extern f32 D_800A352C;
+extern f32 D_800A3530;
+extern f32 D_800A3534;
+extern f32 D_800A3538;
+extern f32 D_800A353C;
+extern f32 D_800A3540;
+extern f32 D_800A3544;
+extern f32 D_800A3548;
+extern f32 D_800A354C;
+extern f32 D_800A3550;
+extern f32 D_800A3554;
+extern f32 D_800A3558;
+extern f32 D_800A355C;
+extern f32 D_800A3560;
+extern f32 D_800A3564;
+extern f32 D_800A3568;
+extern f32 D_800A356C;
+extern f32 D_800A3570;
+extern f32 D_800A3574;
+extern f32 D_800A3578;
+extern f32 D_800A357C;
+extern f32 D_800A3580;
+extern f32 D_800A3584;
+extern f32 D_800A3588;
+extern f32 D_800A358C;
+extern f32 D_800A3590;
+extern f32 D_800A3594;
+extern f32 D_800A3598;
+extern f32 D_800A359C;
+extern f32 D_800A35A0;
+extern f32 D_800A35A4;
+extern f32 D_800A35A8;
+extern f32 D_800A35AC;
 
+
+#if 0
 f32 D_800A34B0[4][2] = {
     { 267.0f, 100.0f },
     { 247.0f, 100.0f },
@@ -67,7 +126,7 @@ f32 D_800A35A0 = 999.0f;
 f32 D_800A35A4 = 0.01745329238474369f;
 f32 D_800A35A8 = 999.0f;
 f32 D_800A35AC = 999.0f;
-
+#endif
 
 void func_15122AE0(void) {
     struct108 *temp_s0;

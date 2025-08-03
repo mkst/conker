@@ -441,9 +441,6 @@ void func_1506C43C(void) {
 //     }
 // }
 
-void func_1506D4EC(void) {
-}
-
 void func_1506D4F4(void) {
     func_1505E650(D_800D154C, D_800D154C->unk84.uh, 0.009999999776482582f, 0.0f, 0.0f, 0.0f, 0);
 }
@@ -1492,10 +1489,6 @@ void func_15072EF4(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072F10.s")
-
-void func_1507304C(void) {
-
-}
 
 void func_15073054(void) {
     D_800D154C->unk22E = (s16) D_800D1580;

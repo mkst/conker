@@ -41,7 +41,7 @@ void func_100010F8(s32 arg0) {
 //
 //     func_10005218();
 //     phi_s0 = 0x80400000 - (s32)&D_80043B40;
-//     if (D_8000030C == 0) {
+//     if (D_8000030C == 0) { // osResetType
 //         bzero(&D_80043B40, phi_s0);
 //     } else {
 //         bzero(&D_800E9D10, 0x80400000 - (s32)&D_800E9D10);
