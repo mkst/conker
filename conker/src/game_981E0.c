@@ -797,7 +797,19 @@ void func_1506EE38(void) {
     D_800D154C->unk25C &= ~D_800D1580;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EE60.s")
+s32 func_15188810(struct127 *, s32, s32);             /* extern */
+s32 func_15188A9C(struct127 *, s32);                  /* extern */
+
+void func_1506EE60(void) {
+    s32 temp_a1;
+
+    temp_a1 = D_800D1580 & 0xFFFF;
+    if (D_800D1580 != 0) {
+        func_15188810(D_800D154C, temp_a1, (s32) D_800D1580 >> 0x10);
+        return;
+    }
+    func_15188A9C(D_800D154C, temp_a1);
+}
 // NON-MATCHING: same issue as earlier
 // void func_1506EE60(void) {
 //     s32 temp_a1;
@@ -1449,7 +1461,10 @@ void func_15072AF8(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072B44.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072DA0.s")
+void func_15072DA0(void) {
+    D_800D154C->unk2F8 &= 0xFFF8;
+    D_800D154C->unk2F8 |= D_800D1580;
+}
 
 void func_15072DD8(void) {
     func_15083568(D_800D154C, D_800D1580, 1.0f, 0);

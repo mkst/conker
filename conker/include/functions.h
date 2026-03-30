@@ -1127,4 +1127,16 @@ void func_151EF954(f32 arg0[4][4], f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 a
 void func_151F3C4C(void);
 void func_151FA130(void);
 void func_1019EA88(void);
+
+void func_151BC5A4(struct102 *arg0);
+void *func_15167A68(s32 arg0, s32 arg1, s32 arg2, s32 arg3, u8 arg4, s32 arg5);
+f32 func_150ADA68(void);
+void func_15143134(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_100111C8(u16 arg0);
+void func_15145EA4(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3);
+void func_1513A5E0(s32 arg0, u8 arg1, s32 arg2);
+
+/* Auto-generated function declarations for remaining undefined functions */
+#include "auto_funcs.h"
+
 #endif

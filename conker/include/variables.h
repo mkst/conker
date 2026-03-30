@@ -425,6 +425,12 @@ extern s32 D_80089534[];
 extern s16 D_80089550;
 extern void (*D_80089AAC[10])(void);
 extern void (*D_80089AD4[10])(void);
+extern void (*D_80089B70[])(struct102 *arg0);
+extern void (*D_80089B88[])(struct102 *arg0);
+extern f32 D_800A4828;
+extern f32 D_800A461C;
+extern f32 D_800A4620;
+extern s32 D_800A3FD8;
 extern void (*D_80089C44[])(void);
 extern void (*D_80089C54[])(void);
 extern void (*D_80089EE8[])(void);
@@ -687,6 +693,7 @@ extern u8 D_800A3FBC[]; // "../Effects/Blood/blood.c"
 extern s32 D_800A4AA0; //?
 extern f32 D_800A5168;
 extern f32 D_800A5178;
+extern f32 D_800A45B0;
 extern f32 D_800A45B4;
 extern f32 D_800A5644;
 extern f32 D_800A56A8;
@@ -1428,5 +1435,8 @@ extern s32  D_151F3C4C;
 /* what is this */
 extern u16  D_BC000C02;
 extern s32  D_1FC007FC;
+
+/* Auto-generated declarations for remaining undefined symbols */
+#include "auto_vars.h"
 
 #endif

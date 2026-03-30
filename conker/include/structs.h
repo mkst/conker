@@ -670,6 +670,27 @@ typedef struct {
     u8  unk3A;
     u8  pad3B[0x2];
     u8  unk3D;
+    u8  pad3E[0x2];
+    u16 unk40;
+    u8  pad42[0x2];
+    u16 unk44;
+    u8  pad46[0xA];
+    u8  unk50;
+    u8  pad51[0x3];
+    s16 unk54;
+    u8  pad56[0x6];
+    u8  unk5C;
+    u8  pad5D[0x3];
+    s32 unk60;
+    u8  pad64[0x10];
+    f32 unk74;
+    u8  pad78[0xB0];
+    f32 unk128;
+    f32 unk12C;
+    u8  pad130[0x40];
+    s32 unk170;
+    u8  pad174[0x60];
+    s32 unk1D4;
 } struct102;
 
 typedef struct {

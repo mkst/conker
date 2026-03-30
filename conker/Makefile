@@ -108,7 +108,7 @@ CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D_MIPS_SZLONG=32
 CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt --no-check-sections
+LDFLAGS = -melf32btsmip -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt --no-check-sections
 
 ### Overrides
 
@@ -211,7 +211,7 @@ $(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.bin.o: %.bin
-	$(LD) -r -b binary -o $@ $<
+	$(LD) -melf32btsmip -r -b binary -o $@ $<
 
 $(TARGET).bin: $(TARGET).elf
 	$(OBJCOPY) $(OBJCOPYFLAGS) -O binary $< $@
@@ -300,6 +300,14 @@ progress.debugger.csv: $(TARGET).elf
 	$(PYTHON) ../tools/progress.py . $(TARGET).map .debugger --version $(VERSION) > $@
 
 
+# objdiff expected .o generation
+EXPECTED_DIR := $(BUILD_DIR)/expected
+
+expected: $(EXPECTED_DIR)/game_161520.o $(EXPECTED_DIR)/game_16EE20.o $(EXPECTED_DIR)/game_1944C0.o $(EXPECTED_DIR)/game_981E0.o
+
+$(EXPECTED_DIR)/%.o: asm/nonmatchings/%
+	CROSS=$(CROSS) bash tools/gen_expected.sh $*
+
 # settings
-.PHONY: all clean default
+.PHONY: all clean default expected
 SHELL = /bin/bash -e -o pipefail
