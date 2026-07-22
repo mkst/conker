@@ -36,3 +36,8 @@ conker/ctx.c
 
 tools/decomp-permuter
 tools/gfxdis
+
+# decomp bot / agent tooling (never commit; may contain API keys)
+decomp_bot/
+decomp_bot_out/
+decomp_bot_config*.json
