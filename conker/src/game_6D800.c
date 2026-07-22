@@ -222,35 +222,31 @@ void func_15040A6C(s32 arg0) {
 // contains delay slot
 #pragma GLOBAL_ASM("asm/nonmatchings/game_6D800/func_15040A78.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_6D800/func_15040CC8.s")
-// NON-MATCHING: todo
-// void func_15040CC8(s32 *arg0) {
-//     s32 temp_a0_2;
-//     s32 temp_s0;
-//     s32 temp_s0_2;
-//     s32 *temp_a0;
-//     s32 phi_s0;
-//     s32 phi_s0_2;
-//
-//     for (phi_s0 = 0; phi_s0 < 16; phi_s0++)
-//     {
-//         // just waste time?
-//     }
-//
-//     phi_s0_2 = -0x14;
-// loop_3:
-//     temp_a0 = arg0[phi_s0_2]; // * 8) + arg0;
-//     D_800844B0[*temp_a0](temp_a0);
-//     temp_s0_2 = phi_s0_2 + 1;
-//     phi_s0_2 = temp_s0_2;
-//     if (temp_s0_2 < 0xA) {
-//         goto loop_3;
-//     }
-//     temp_a0_2 = D_800848B0;
-//     if (temp_a0_2 != 0) {
-//         func_1500390C(temp_a0_2);
-//     }
-// }
+// file-local 8-byte element type for func_15040CC8's argument array (not in structs.h)
+typedef struct {
+    u8 unk0;
+    u8 pad1[7];
+} Struct6D800;
+
+void func_15040CC8(Struct6D800 *arg0) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 16; i++) {
+    }
+
+    // the redundant i--/i++ keeps IDO from rewriting the loop test as "i != 0xA"; removing it mismatches
+    for (i = -0x14; i < 0xA; i++) {
+        j = (s32) &arg0[i];
+        D_800844B0[*(u8 *) j](j);
+        i--;
+        i++;
+    }
+
+    if (D_800848B0 != 0) {
+        func_1500390C(D_800848B0);
+    }
+}
 
 void func_15040D60(s32 arg0) {
 }

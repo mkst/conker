@@ -6,6 +6,28 @@
 struct249 *func_1509B704(s16 arg0);
 void func_1509C120(void);
 void func_1509C3A0(void);
+void *allocate_memory(s32, s32, s32, s32);
+struct248 *func_1509B950(struct248 *arg0);
+
+// structs.h's struct249 is missing the "prev" link at 0x1C, and struct250 types
+// its head/tail as struct249*. Declare local equivalents instead of editing the
+// shared headers.
+typedef struct Node249 Node249;
+struct Node249 {
+    u16 unk0;
+    u8  pad2[0x16];
+    Node249 *next;
+    Node249 *prev;
+};
+
+typedef struct {
+    u16 length;
+    u8  pad2[0x2];
+    Node249 *head;
+    Node249 *tail;
+} List250;
+
+#define LIST249 (*(List250 *)&D_800D2F48)
 
 
 void func_1509B4A0(s32 arg0, s32 arg1) {
@@ -57,9 +79,70 @@ struct249 *func_1509B704(s16 arg0) {
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509B764.s")
+void func_1509B764(Node249 *arg0) {
+    if (LIST249.length == 1) {
+        LIST249.head = NULL;
+        LIST249.tail = NULL;
+    } else {
+        if (arg0 == LIST249.head) {
+            LIST249.head = arg0->next;
+            arg0->next->prev = NULL;
+        } else {
+            arg0->prev->next = arg0->next;
+        }
+        if (arg0 == LIST249.tail) {
+            LIST249.tail = arg0->prev;
+            arg0->prev->next = NULL;
+        } else {
+            arg0->next->prev = arg0->prev;
+        }
+    }
+    func_10004074(arg0);
+    LIST249.length--;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509B810.s")
+void func_1509B810(Node249 *arg0) {
+    Node249 *v0;
+    s32 key;
+    s32 i;
+    s32 mask = 0xFFFF03FF;
+
+    v0 = LIST249.tail;
+    key = arg0->unk0 & mask;
+    if (LIST249.length == 0) {
+        LIST249.head = arg0;
+        LIST249.tail = arg0;
+        arg0->next = NULL;
+        arg0->prev = NULL;
+        LIST249.length++;
+        return;
+    }
+    for (i = 0; i < LIST249.length; v0 = v0->prev) {
+        i++;
+        if ((v0->unk0 & mask) < key) {
+            if (v0 == LIST249.tail) {
+                arg0->prev = v0;
+                arg0->next = NULL;
+                v0->next = arg0;
+                LIST249.tail = arg0;
+                LIST249.length++;
+                return;
+            }
+            arg0->prev = v0;
+            arg0->next = v0->next;
+            v0->next->prev = arg0;
+            v0->next = arg0;
+            LIST249.length++;
+            return;
+        }
+    }
+    v0 = LIST249.head;
+    LIST249.head = arg0;
+    arg0->prev = NULL;
+    arg0->next = v0;
+    v0->prev = arg0;
+    LIST249.length++;
+}
 
 void func_1509B8FC(s16 arg0) {
     struct248 *temp_v0;
@@ -71,7 +154,25 @@ void func_1509B8FC(s16 arg0) {
     func_1509B950(temp_v0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509B950.s")
+struct248 *func_1509B950(struct248 *arg0) {
+    struct248 *new_var;
+    s32 pad;
+
+    pad = 8 - (((s32)arg0 + arg0->unk4) & 7);
+    arg0->unkA = arg0->unk4 + pad;
+    arg0->unk4 = arg0->unkA + arg0->unk6;
+    arg0->unk4 = (arg0->unk4 - (((s32)arg0 + arg0->unk4) & 7)) + 8;
+
+    new_var = allocate_memory(arg0->unk4, 0xFF, 2, 0);
+    if (new_var == NULL) {
+        while (1) {}
+    }
+
+    bcopy(arg0, new_var, arg0->unk4);
+    bzero((u8 *)new_var + new_var->unkA, new_var->unk6);
+    func_10004074(arg0);
+    return new_var;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509BA04.s")
 
@@ -82,7 +183,18 @@ void func_1509B8FC(s16 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509BFB0.s")
 
-// need a bigger brain
+// PERMUTER CANDIDATE (best 39, pure stack-offset near-miss): logic byte-correct,
+// registers all match; only the {saved@0x34, sp38@0x38} local block lands 8 bytes
+// too high (saved@0x3C, sp38@0x40). Target reserves an 8-byte gap at frame top
+// (0x48-0x4F) that no accessed local produces. Reconstruction:
+//   void *sp38[4]; void *saved; s32 s3, i;
+//   s3 = func_150ADA20() & 3; saved = D_800D2E4C;
+//   if (saved != 0) { if ((func_150ADA20() & 4) == 0) return; }
+//   for (i=0;i<=s3;i++) sp38[i] = allocate_memory(0x1B,0xFF,2,0);
+//   for (i=0;i<=s3;i++) if (i != s3) func_10004074(sp38[i]);
+//   D_800D2E4C = sp38[s3];
+//   if (saved != 0) { bcopy(saved, D_800D2E4C, 0x1B); func_10004074(saved); }
+// permuter NO ZERO, best 39
 #pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509C120.s")
 
 void func_1509C228(void) {

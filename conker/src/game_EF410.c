@@ -7,142 +7,150 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C1F60.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2290.s")
 // TODO: figure out this struct!
-// void func_150C2290(s32 arg0) {
-//     s16 sp9A;
-//     s16 sp98;
-//     s8 sp95;
-//     s8 sp94;
-//     ?32 sp90;
-//     ?32 sp8C;
-//     ?32 sp88;
-//     ?32 sp84;
-//     ?32 sp80;
-//     ?32 sp7C;
-//     ?32 sp78;
-//     ?32 sp74;
-//     ?32 sp70;
-//     s8 sp6E;
-//     s8 sp6D;
-//     s8 sp6C;
-//     ?32 sp68;
-//     ?32 sp64;
-//     ?32 sp60;
-//     ?32 sp5C;
-//     ?32 sp58;
-//     ?32 sp54;
-//     s8 sp52;
-//     s8 sp51;
-//     s8 sp50;
-//     s16 sp4E;
-//     s16 sp4C;
-//     s16 sp4A;
-//     s16 sp48;
-//     s16 sp46;
-//     s16 sp44;
-//     s16 sp42;
-//     s16 sp40;
-//     s16 sp3E;
-//     s16 sp3C;
-//     f32 sp38;
-//     f32 sp34;
-//     f32 sp30;
-//     f32 sp2C;
-//     f32 sp28;
-//     f32 sp24;
-//     f32 sp20;
-//     f32 sp1C;
-//     f32 sp18;
-//
-//     sp18 = *(void *)0x800A0258;
-//     sp1C = 40.0f;
-//     sp3E = 3;
-//     sp40 = -0x29;
-//     sp44 = -0x16;
-//     sp42 = 0x15;
-//     sp46 = 0x16;
-//     sp48 = 7;
-//     sp4E = 0x15;
-//     sp50 = 0xB;
-//     sp20 = *(void *)0x800A025C;
-//     sp3C = 2;
-//     sp4C = 0x30;
-//     sp52 = 0x28;
-//     sp54 = 1;
-//     sp58 = 4;
-//     sp6C = 0xFF;
-//     sp6D = 0xFF;
-//     sp70 = 3;
-//     sp4A = 0;
-//     sp51 = 1;
-//     sp5C = 0;
-//     sp60 = 0;
-//     sp64 = 0;
-//     sp68 = 0;
-//     sp6E = 0;
-//     sp74 = 0xFF;
-//     sp78 = 0;
-//     sp7C = 0x220005;
-//     sp80 = 0x1D0600;
-//     sp84 = (?32) (u8)1;
-//     sp88 = 0x3B;
-//     sp8C = 0x80;
-//     sp90 = 0x20;
-//     sp94 = 0;
-//     sp95 = 7;
-//     sp98 = 0xC;
-//     sp9A = 0x15;
-//     sp34 = 100.0f;
-//     sp38 = 57.5f;
-//     sp24 = *(void *)0x800A0260;
-//     sp28 = 39.0f;
-//     sp2C = *(void *)0x800A0264;
-//     sp30 = 1.0f;
-//     func_15151A38(&sp18, arg0 & 0xFF, 1);
-// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2424.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C251C.s")
+typedef struct {
+    u8  pad0[0x1C];
+    s16 unk1C;
+    u8  pad1E[0x7A];
+    struct110 *unk98;
+} struct_EF410_0;
+
+s32 func_150C251C(struct_EF410_0 *arg0) {
+    struct110 *p = arg0->unk98;
+    s32 temp = arg0->unk1C << 3;
+    if (temp >= 0x100) {
+        temp = 0xFF;
+    }
+    p->unk1B = temp;
+    if (p->unk1B < 0) {
+        return 0;
+    }
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2558.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2700.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2804.s")
+extern f32 D_800A0280;
+extern f32 D_800A0284;
+void func_15134908(void *arg0, s32 arg1, u8 arg2, s32 arg3);
+
+typedef struct {
+    /* 0x00 */ s32 unk0;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+    /* 0x0C */ f32 unkC;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ s16 unk14;
+    /* 0x16 */ s8  unk16;
+    /* 0x17 */ s8  unk17;
+    /* 0x18 */ s8  unk18;
+    /* 0x19 */ s8  unk19;
+} struct_EF410_2;
+
+void func_150C2804(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
+    struct_EF410_2 sp1C;
+    sp1C.unk0 = arg0;
+    sp1C.unk4 = arg1;
+    sp1C.unk8 = arg2;
+    sp1C.unkC = D_800A0280;
+    sp1C.unk10 = D_800A0284;
+    sp1C.unk14 = arg3;
+    sp1C.unk16 = 5;
+    sp1C.unk17 = 6;
+    sp1C.unk18 = 3;
+    sp1C.unk19 = -1;
+    func_15134908(&sp1C, 0, arg4, arg5);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2898.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C29F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2C00.s")
+typedef struct {
+    u8  pad0[0x2C];
+    f32 unk2C;
+    f32 unk30;
+    u8  pad34[0x4];
+    f32 unk38;
+    u8  pad3C[0x10];
+    f32 unk4C;
+    f32 unk50;
+    u8  pad54[0xFC];
+    f32 unk150;
+} struct_EF410_1;
+
+// PERMUTER CANDIDATE (best 465): structure correct; residual = 10.0f constant CSE
+// (target re-materializes mtc1 per compare, IDO CSEs to f0) + f16/f18 register rename.
+// s32 func_150C2FCC(struct_EF410_1 *arg0) {
+//     f32 f0 = arg0->unk2C; f32 f2 = arg0->unk150; f32 f12 = arg0->unk30;
+//     f32 f14 = arg0->unk50; f32 f18 = arg0->unk4C;
+//     arg0->unk2C = f0 - f0 * f2;
+//     arg0->unk30 = f12 - f12 * f2;
+//     arg0->unk38 = arg0->unk38 + (f14 * D_800BE9A4 + 0.5f * f18 * D_800BE9A4 * D_800BE9A4);
+//     arg0->unk50 = f14 + f18 * D_800BE9A4;
+//     if (arg0->unk2C < 10.0f || arg0->unk30 < 10.0f) { return 0; }
+//     return 1;
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2FCC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C308C.s")
-// ? func_150C308C(void *arg0) {
-//     u8 sp1F;
-//     f32 temp_f0;
-//     f32 temp_f2;
-//     u8 temp_a1;
-//     void *temp_v0;
-//     u8 phi_a1;
-//
-//     phi_a1 = (u8)0U;
-//     if ((s32) arg0->unk1C >= 6) {
-//         sp1F = 0;
-//         temp_v0 = func_15144B34(D_80082FA4, (u8)0U);
-//         temp_f0 = temp_v0->unk0;
-//         temp_f2 = temp_v0->unk8;
-//         temp_a1 = sp1F;
-//         if (((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) < D_800A0310) {
-// block_4:
-//             phi_a1 = (u8)1U;
+typedef struct {
+    /* 0x00 */ f32 unk0;
+    /* 0x04 */ u8  pad4[4];
+    /* 0x08 */ f32 unk8;
+} struct_EF410_vec;
+
+typedef struct {
+    u8  pad0[0x1C];
+    s16 unk1C;
+    u8  pad1E[0x142];
+    f32 unk160;
+} struct_EF410_308C;
+
+extern struct_EF410_vec *func_15144B34(s32 arg0, s32 arg1);
+
+// PERMUTER CANDIDATE (best 165, JUSTREG): structure/frame correct; residual is pure
+// register renames -- flag lands in a2 vs target a1, and sum/consts f8/f10/f16 vs f12/f8/f10.
+// s32 func_150C308C(struct_EF410_308C *arg0) {
+//     u8 flag = 0;
+//     struct_EF410_vec *v;
+//     if (arg0->unk1C >= 6) {
+//         v = func_15144B34(D_80082FA4, 0);
+//         if (v->unk0 * v->unk0 + v->unk8 * v->unk8 < D_800A0310) {
+//             flag = 1;
 //         } else {
-//             sp1F = temp_a1;
-//             phi_a1 = temp_a1;
-//             if (D_800A0314 < func_15144C8C(func_150484A0(temp_v0->unk0, temp_v0->unk8, temp_a1), arg0->unk160)) {
-//                 goto block_4;
+//             if (D_800A0314 < func_15144C8C(func_150484A0(v->unk0, v->unk8), arg0->unk160)) {
+//                 flag = 1;
 //             }
 //         }
 //     }
-//     if (phi_a1 != 0) {
-//         arg0->unk1C = (u16)5;
-//     }
+//     if (flag != 0) { arg0->unk1C = 5; }
 //     return 1;
 // }
+#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C308C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3160.s")
+typedef struct {
+    u8  pad0[0x2E4];
+    s32 unk2E4;
+    s32 unk2E8;
+    s32 unk2EC;
+} struct_EF410_3160;
+
+// PERMUTER CANDIDATE (best 5, JUSTREG): whole body matches except the FIRST Gfx store's
+// base register -- target uses the copy (a1) for both words, IDO CSEs the first write to
+// arg0 (a2). Every other instruction is byte-identical.
+Gfx *func_150C3160(Gfx *arg0, struct_EF410_3160 *arg1) {
+    f32 frac; s32 val; s32 x;
+    if (arg1->unk2E8 != 0) { frac = (f32)arg1->unk2E4 / (f32)arg1->unk2E8; }
+    else { frac = 1.0f; }
+    frac = 1.0f - frac;
+    val = 500.0f * frac + 2.0f;
+    x = 2 - arg1->unk2EC;
+    arg1->unk2EC = val / 3;
+    while (x < 0) { x += 0x40; }
+    { Gfx *g = arg0;
+      if ((g && g) && g) {}
+      g->words.w0 = ((val & 0xFFF) << 12) | 0xF2000000 | (x & 0xFFF);
+      arg0++;
+      g->words.w1 = 0x041FE03E; }
+    return arg0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3230.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3574.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3994.s")

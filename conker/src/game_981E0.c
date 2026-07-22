@@ -3,6 +3,71 @@
 #include "functions.h"
 #include "variables.h"
 
+// structs.h declares struct126::unk94 as s8, but the game loads it unsigned (lbu).
+// Local overlay to get the correct load width without touching the shared header.
+typedef struct {
+    u8 pad0[0x94];
+    u8 unk94;
+} Struct126U8;
+
+// struct127::unk284..unk287 is really an array of 2-byte pairs.
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+} Pair981E0;
+
+// Locals passed by address to func_15131D4C / func_151494E0.
+typedef struct {
+    struct127 *unk0;
+    u8 unk4;
+} Struct981E0Ctx;
+
+typedef struct {
+    Struct981E0Ctx *unk0;
+    s32 unk4;
+} Struct981E0Ref;
+
+extern f32 D_80099EA0;
+extern f32 D_80099D50;
+extern f32 D_8009A108;
+extern f32 D_8009A10C;
+extern f32 D_8009A110;
+extern f32 D_8009A0D8;
+extern u32 D_80099BB8;
+extern f32 D_80099BBC;
+extern f32 D_800A5480;
+
+// Descriptor + int-vector built on the stack for func_151602C0.
+typedef struct {
+    u8  unk0;
+    s8  unk1;
+    s16 unk2;
+    u8  unk4;
+} Struct70224;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+} IVec70224;
+
+// Stack-built descriptor passed to func_151D8868.
+typedef struct {
+    u8  unk0;
+    u8  pad1;
+    s16 unk2;
+    u8  unk4;
+    u8  unk5;
+    s8  unk6;
+    u8  pad7;
+} Struct981E0D8868;
+
+// D_800CC2E8 is &D_800CC2D0[0].y_position; strided by sizeof(struct127) (0x32C).
+typedef struct {
+    f32 unk0;
+    u8 pad[0x328];
+} Struct981E0Y;
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506AD30.s")
 
@@ -341,7 +406,23 @@ void func_1506BCA0(void) {
 }
 
 // ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506BCC8.s")
+void func_1506BCC8(void) {
+    if (D_800D154C->interaction_state == 0x16) {
+        if (D_800D154C->y_position == D_800D154C->unk180) {
+            D_800D154C->y_velocity = (f32) ((func_151EF610() % 8) + D_800D1580);
+            if (D_800D154C->xz_velocity != 0.0f) {
+                D_800D154C->y_velocity = D_800D154C->y_velocity * (D_800D154C->xz_velocity / 40.0f);
+            } else {
+                D_800D154C->y_velocity = 0.0f;
+            }
+        }
+    } else {
+        f32 diff = D_800D154C->y_position - D_800D154C->unk180;
+        if ((diff > -5.0f) && (diff < 5.0f)) {
+            D_800D154C->y_velocity = (f32) D_800D1580;
+        }
+    }
+}
 
 void func_1506BDE8(void) {
     if (D_800D154C->y_position < D_80099C40) {
@@ -382,6 +463,10 @@ void func_1506BF1C(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506BF5C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506C32C.s")
+// NON-MATCHING: best 252. Structure byte-identical (extract four 0x7FF bitfields of D_800D1580 into
+// a stack s32[4], pick highest non-zero -> sel 4/3/2/0, optionally remap via func_1000F568, then
+// D_800D1580 = arr[sel] | (D_800D187C & 0xFFFEF800); func_1506BF5C()). Only IDO's array placement
+// (0x28 vs target 0x24) + the resulting whole-function register renumber differ. Layout-bound; PERMUTER.
 
 void func_1506C418(void) {
     func_10010A3C(D_800D154C);
@@ -456,9 +541,65 @@ void func_1506D570(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506D584.s")
-// ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506D6B4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506D74C.s")
+// permuter NO ZERO, best 20 (chained 550 -> 40 -> 20). Byte-identical instruction sequence; sole
+// residual is a pure register-numbering tie: target seeds &D_800D1580 into v0 (and p->unk2D0 into
+// t1), while IDO reverses them (a3 / v0), which renumbers nothing else. The permuter cannot flip it
+// (4 x 600s) and it is not hand-forceable (an explicit `s32 *bp = &D_800D1580` folds back). Needs a
+// fresh permuter seed. Best-20 reconstruction below (requires `extern f32 D_80099D48;` with the
+// top-of-file externs):
+// void func_1507E7E4(struct127 *, s32, s32, s32, s32);
+// void func_1506D584(void) {
+//     struct197 *new_var;
+//     struct127 *p = D_800D154C;
+//     s32 v, arg1, arg2;
+//     f32 divisor;
+//     int new_var2;
+//     if (((u8 *) p)[0x70] == 0x2A) { return; }
+//     v = D_800D1580;
+//     new_var = p->unk2D0;
+//     divisor = new_var->unk10;
+//     arg1 = (v >> 24) & 0xFF;
+//     arg2 = ((v >> 16) & 0xFF) & 0xFFFF;
+//     v = v & 0xFFFF;
+//     new_var2 = v != 0xFFFF;
+//     if (divisor == 0.0f) { divisor = D_80099D48; }
+//     if (new_var2) { v = (u32) ((f32) (u32) v / divisor) & 0xFFFF; }
+//     func_1507E7E4(p, arg1, arg2, v, 0);
+// }
+
+// MATCHED via permuter (was best 35 -> 0). The split-shift `(sel = (sel << 10) << 14)` phrasing
+// gives IDO the temp-register numbering the target uses over the final shared-store.
+void func_1506D6B4(void) {
+    struct127 *p = D_800D154C;
+    s32 sel;
+    if (D_80099D4C == p->unk118) { return; }
+    if (p->unk118 < (f32) p->unk1A6) { return; }
+    if (p->health >= 2) { sel = 0x2C; } else { sel = 0x29; }
+    D_800D1580 = (D_800D1580 & 0xFFFF) | (sel = (sel << 10) << 14);
+    func_1506D584();
+}
+void func_1506D74C(void) {
+    f32 sp34;
+    f32 sp30;
+    f32 sp2C;
+
+    if (D_800D154C->in_water == 0) {
+        D_800D154C->gravity = 5.0f;
+        D_800D154C->y_velocity = 0.0f;
+    }
+    D_800D154C->y_position += 70.0f;
+    ((u8 *) D_800D154C)[0x137] = 0;
+    D_800D154C->disable_run = 0;
+    func_1505A184(D_800D154C->unk76, (f32) D_800D1580, 0, &sp34, &sp30, &sp2C);
+    func_1505E650(D_800D154C, 0xF, 1.0f, 0.0f, 0.0f, 0.0f, 0);
+    D_800D154C->x_position += sp34;
+    D_800D154C->z_position += sp30;
+    D_800D154C->unk100 |= 2;
+    D_800D154C->unk28 = 0.0f;
+    D_800D154C->unk83 = 0x14;
+    D_800D154C->unk31C->unk44 = 0xC;
+    D_800D154C->unk31C->unk54 = 0xA;
+}
 
 void func_1506D898(void) {
     D_800D154C->y_position -= 80.0f;
@@ -517,7 +658,21 @@ void func_1506DBD4(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506DC10.s")
+void func_1506DC10(void) {
+    s32 sel;
+
+    if (((D_800D154C->unk118 - 60.0f) < D_800D154C->y_position) || (D_80099D50 == D_800D154C->unk118)) {
+        s32 r = func_150ADA20() & 3;
+        if (r >= 2) {
+            sel = r + 0x612;
+        } else {
+            sel = r + 0x8F;
+        }
+    } else {
+        sel = 9;
+    }
+    func_15060A9C(sel, D_800D154C);
+}
 
 void func_1506DCA4(void) {
     D_800D154C->unk2E8 = D_800D1580;
@@ -797,20 +952,14 @@ void func_1506EE38(void) {
     D_800D154C->unk25C &= ~D_800D1580;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EE60.s")
-// NON-MATCHING: same issue as earlier
-// void func_1506EE60(void) {
-//     s32 temp_a1;
-//     s32 temp_v0;
-//
-//     temp_v0 = D_800D1580;
-//     temp_a1 = temp_v0 & 0xFFFF;
-//     if (temp_v0 != 0) {
-//         func_15188810(D_800D154C.unk0, temp_a1, temp_v0 >> 0x10);
-//         return;
-//     }
-//     func_15188A9C(D_800D154C.unk154C, temp_a1);
-// }
+void func_1506EE60(void) {
+    s32 v = D_800D1580;
+    if (v != 0) {
+        func_15188810(D_800D154C, v & 0xFFFF, v >> 16);
+    } else {
+        func_15188A9C(D_800D154C);
+    }
+}
 
 void func_1506EEAC(void) {
     func_151898C0(D_800D154C, D_800D1580);
@@ -830,8 +979,17 @@ void func_1506EEF4(void) {
     D_800D154C->unk287 = 0;
 }
 
-// TBD whats goins on here
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EF5C.s")
+// NON-MATCHING: register-only near-miss (best 190); whole-function register renumber seeded by IDO
+// caching &D_800D154C in a0 vs target's a2. Sibling func_1506EEF4 matches. PERMUTER.
+// void func_1506EF5C(void) {
+//     s32 v = D_800D1580;
+//     s32 idx = (v >> 16) & 0xFF;
+//     *(u16 *)&D_800D154C->unk282 = 0xFFFF;
+//     D_800D154C->unk276 = 5;
+//     ((Pair981E0 *)&D_800D154C->unk284)[idx].unk0 = v >> 8;
+//     ((Pair981E0 *)&D_800D154C->unk284)[idx].unk1 = v;
+// }
 
 void func_1506EFB4(void) {
     D_800D154C->unk282 = (u16)0;
@@ -943,6 +1101,11 @@ void func_1506FCFC(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506FD30.s")
+// NON-MATCHING: correct logic (best 246); IDO splits the four 0.0f args across f2/f12, mine CSEs to f2
+// void func_1506FD30(s32 arg0) {
+//     struct127* a0;
+//     func_150E2EA4(a0 = D_800D154C, a0->unique_id, 1, -1, 0.0f, 0.0f, D_80099EA0, 0.0f, 0.0f, 414.0f, 3, 3, 5, 20.0f, (func_150ADA68() * 10.0f) + 40.0f, 1, 50.0f);
+// }
 
 void func_1506FDF0(s32 arg0) {
     func_151AABC4(D_800D154C, 0);
@@ -1043,7 +1206,19 @@ void func_150701F4(s32 arg0) {
     func_151C9740(D_800D154C, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070224.s")
+void func_15070224(s32 arg0) {
+    Struct70224 sp50;
+    IVec70224 sp44;
+
+    sp50.unk0 = 3;
+    sp50.unk1 = -1;
+    sp50.unk2 = (func_150ADA20() % 5U) + 4;
+    sp50.unk4 = 0;
+    sp44.unk0 = (s32) D_800D154C->x_position;
+    sp44.unk4 = (s32) D_800D154C->y_position;
+    sp44.unk8 = (s32) D_800D154C->z_position;
+    func_151602C0(&sp50, &sp44, (func_150ADA20() % 3U) + 4, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 1);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070300.s")
 
 void func_15070690(s32 arg0) {
@@ -1093,24 +1268,24 @@ void func_15070C18(s32 arg0) {
     func_15199834(D_800D154C);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070C40.s")
-// NON-MATCHING: missing a move and a branch
-// void func_15103E40(s32, s32, s32, u8, u8, u8, u8);
-// void func_15070C40(u8 arg0) {
-//     struct17 tmp;
-//     struct127 *temp_a1;
-//     struct127 *phi_a0;
-//
-//     phi_a0 = temp_a1 = D_800D154C;
-//     tmp.unk0 = temp_a1->x_position;
-//     tmp.unk4 = temp_a1->y_position;
-//     tmp.unk8 = temp_a1->z_position;
-//
-//     if (temp_a1->unk124) {
-//         phi_a0 = &D_800CC2D0[temp_a1->unk124 - 1];
-//         func_15103E40(phi_a0, temp_a1, &tmp, arg0, 0, 0xFF, 0);
-//     }
-// }
+void func_15103E40(struct127 *, struct127 *, struct17 *, u8, u8, u8, u8);
+
+void func_15070C40(u8 arg0) {
+    struct17 tmp;
+    struct127 *temp_a1 = D_800D154C;
+    struct127 *phi_a0;
+
+    tmp.unk0 = temp_a1->x_position;
+    tmp.unk4 = temp_a1->y_position;
+    tmp.unk8 = temp_a1->z_position;
+
+    if (temp_a1->unk124 != 0) {
+        phi_a0 = &D_800CC2D0[temp_a1->unk124 - 1];
+    } else {
+        phi_a0 = temp_a1;
+    }
+    func_15103E40(phi_a0, temp_a1, &tmp, arg0, 0, 0xFF, 0);
+}
 
 void func_15070CDC(s32 arg0) {
     func_15070C40(1);
@@ -1134,8 +1309,36 @@ void func_15071278(s32 arg0) {
     func_150FC438(D_800D154C, 0, 1, D_800D154C->unk84.ub[1]);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150712AC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15071360.s")
+void func_150712AC(s32 arg0) {
+    Struct981E0D8868 sp18;
+
+    func_150FE860(D_800D154C, 0xFF, 1);
+    if (D_800D154C->camera != 0) {
+        sp18.unk0 = 1;
+        sp18.unk2 = (func_150ADA20() % 7U) + 0xA;
+        sp18.unk5 = 1 << D_800D154C->camera->unk23D;
+        sp18.unk4 = (func_150ADA20() % 7U) + 2;
+        sp18.unk6 = -1;
+        func_151D8868(&sp18, 0, 0xFF, 1);
+    }
+}
+void func_15071360(s32 arg0) {
+    Struct981E0D8868 sp18;
+
+    if (func_151044F4() != 0) {
+        func_150FF084(D_800D154C, 0xFF, 1);
+    } else {
+        func_150FED30(D_800D154C, 0xFF, 1);
+    }
+    if (D_800D154C->camera != 0) {
+        sp18.unk0 = 1;
+        sp18.unk2 = (func_150ADA20() % 5U) + 0xF;
+        sp18.unk5 = 1 << D_800D154C->camera->unk23D;
+        sp18.unk4 = (func_150ADA20() & 3) + 3;
+        sp18.unk6 = -1;
+        func_151D8868(&sp18, 0, 0xFF, 1);
+    }
+}
 
 void func_15071434(s32 arg0) {
     func_150FF840(D_800D154C, 1, 0, 0xFF, 1);
@@ -1213,21 +1416,23 @@ void func_15071764(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150717E0.s")
+// permuter NO ZERO (false zero: permuter's scorer normalizes stack-frame/offset, so it reports 0 for
+// a frame-0x30 source that asm-differ scores 71). Target frame is 0x28 with a compiler spill of &ctx
+// (sw a0,0x18 / lw a0,0x18). Any phrasing that forces the spill adds a named pointer that -g3 gives
+// its own stack slot -> frame grows to 0x30; the natural &ctx phrasing rematerializes (best 300).
+// NON-MATCHING: 1 instruction away (frame 0x28, only the ptr spill 'sw a0,0x18' missing; IDO
+// rematerializes &ctx as 'addiu a0,sp,0x20' for the 2nd call instead of spill+reload). Everything
+// else byte-identical. Spill-vs-rematerialize reg-alloc choice; not forceable by hand. PERMUTER.
 // void func_150717E0(s32 arg0) {
-//     u8 sp24;
-//     void *sp20;
-//     void **sp18;
-//     void **temp_a0;
-//     void *temp_v0;
-//
-//     temp_v0 = func_15083E90(0x12);
-//     temp_a0 = &sp20;
-//     if (temp_v0 != 0) {
-//         sp20 = temp_v0;
-//         sp18 = temp_a0;
-//         sp24 = temp_v0->unk3B;
-//         func_15131D4C(temp_a0, 0x43);
-//         func_151494E0(temp_a0, 0x43);
+//     Struct981E0Ctx ctx;
+//     Struct981E0Ctx *ptr;
+//     struct127 *temp = func_15083E90(0x12);
+//     if (temp != NULL) {
+//         ctx.unk0 = temp;
+//         ptr = &ctx;
+//         ctx.unk4 = temp->unique_id;
+//         func_15131D4C(&ctx, 0x43);
+//         func_151494E0(ptr, 0x43);
 //     }
 // }
 
@@ -1243,7 +1448,17 @@ void func_15071888(s32 arg0) {
     func_151D5714(D_800D154C, &D_800A1FB0, &D_800A1FBC, D_80088B90, D_80099F30, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150718E4.s")
+void func_150718E4(s32 arg0) {
+    struct17 sp24;
+    u32 sp20 = D_80099BB8;
+    struct127 *p = D_800D154C;
+
+    if ((p->unk1D4 != 0) || ((p->unk74 & 0xF) == 0xF)) {
+        func_15143134(&D_800A5480, &sp24, ((u8 *) &sp20)[func_150ADA20() & 3] * 0x40 + (s32) D_800D154C->unk1D4);
+        sp24.unk4 = D_800D154C->unk180 + 20.0f;
+        func_151C329C(&sp24, 0xFF, 1);
+    }
+}
 
 void func_15071998(s32 arg0) {
     func_150FA520(D_800D154C, 0, 0xFF, 1);
@@ -1262,6 +1477,20 @@ void func_15071A34(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15071A64.s")
+// permuter NO ZERO, best 25
+// NON-MATCHING: PERMUTER CANDIDATE, best 25. Byte-identical instructions; only reg alloc differs -
+// target keeps p (D_800D154C) in a1 and D_800CC2D0 base in v0; IDO reuses v0 for both.
+// void func_15071A64(s32 arg0) {
+//     struct199 sp28;
+//     if (func_150ADA20() & 1) { return; }
+//     if (D_800D154C->unk1D4 == 0) { return; }
+//     if ((D_800D154C->unk74 & 0xF) == 0xF) { return; }
+//     if (D_800CC2D0[0].stunned == 0) { return; }
+//     if (D_800CC2D0[0].health <= 0) { return; }
+//     func_1504715C(&sp28);
+//     func_15143134(&D_80099BBC, &sp28.unk24, (s32) D_800D154C->unk1D4 + 0x3C0);
+//     func_151DC484(&sp28.unk24, &sp28, 0, 0xFF, 1);
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15071B18.s")
 
 void func_15071D08(s32 arg0) {
@@ -1338,6 +1567,11 @@ void func_15071FB0(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15071FDC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150721A4.s")
+// NON-MATCHING: register-only near-miss (best 260); IDO puts the two shifts directly in arg regs
+// a1/a3 then masks into temps + 2 extra `move`s; target does sra->temp then andi->arg. PERMUTER.
+// void func_150721A4(void) {
+//     func_1506160C(D_800D154C, (D_800D1580 >> 16) & 0xFF, (u8)D_800D1580, (u8)(D_800D1580 >> 8), 0);
+// }
 
 struct127 *func_150721E8(struct127 *arg0) {
     return func_15072208(arg0, 0);
@@ -1382,6 +1616,7 @@ void func_150723E0(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072420.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1507266C.s")
+// NON-MATCHING: best 1145; D_800D1580 load scheduling / register alloc over 14 field stores
 
 void func_15072740(void) {
     s32 temp_v0;
@@ -1400,6 +1635,12 @@ void func_150727AC(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150727F0.s")
+// NON-MATCHING: best 50. Structure/instructions byte-identical (IDO peels index 0 + 4x-unrolls
+// `for(i=0;i<25;i++) D_800CC2D0[i]` with body `if(interaction_state && D_800C3E78+1==unk65){unk218=0;
+// unk232=D_800D1580;}`), but the reference relocs against split .data symbols D_800CC5FC (loop start),
+// D_800D121C (end), D_800CC335/D_800CC4E8/D_800CC502 (index 0). Referencing those by name forces a
+// runtime trip-count (divu) instead of the clean unroll -> reloc-symbol vs unroll conflict, no C form
+// gives both. Same blocker on siblings func_1506D958 / func_15072208.
 
 void func_15072918(void) {
     func_15060F28(D_800D154C, 0);
@@ -1449,7 +1690,10 @@ void func_15072AF8(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072B44.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15072DA0.s")
+void func_15072DA0(void) {
+    D_800D154C->unk2F8 &= 0xFFF8;
+    D_800D154C->unk2F8 |= D_800D1580;
+}
 
 void func_15072DD8(void) {
     func_15083568(D_800D154C, D_800D1580, 1.0f, 0);
@@ -1558,7 +1802,35 @@ void func_15073A28(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15073A50.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15073B38.s")
+// NON-MATCHING: PERMUTER CANDIDATE, best 664. Logic/structure byte-identical; the remainder is a
+// v0<->v1 register-allocation swap for the D_800D154C(p) and D_800D1580(v) globals that cascades
+// (target keeps p in v1 and recycles v0 for both the unk124 index and v). Not crackable by hand.
+// void func_15073A50(void) {
+//     struct127 *p = D_800D154C;
+//     struct127 *obj = &D_800CC2D0[p->unk124];
+//     if (obj->unk65 != 0) {
+//         s32 v = D_800D1580;
+//         p->unk13C = 0;
+//         obj->immune = 0;
+//         func_1505D024(obj, D_800D1580 & 0xFF00FF, 0, D_800C3E78);
+//         obj->unk1CC = D_8009A0D8;
+//         if ((v << 1) < 0) { obj->unk1CC = D_800D154C->y_position; }
+//         obj->immune = 0x14;
+//         obj->unk76 = D_800D154C->unk7A + v;
+//     }
+// }
+typedef struct { u8 pad0[0xA8]; f32 unkA8; u8 unkAC; u8 unkAD; } Struct126_73B38;
+void func_15073B38(void) {
+    f32 new_var2;
+    f32 new_var;
+    new_var = (f32) (D_800D1580 & (0xFFFF ^ 0));
+    ((Struct126_73B38 *) D_800D154C->unk31C)->unkA8 = new_var;
+    new_var2 = (f32) ((D_800D1580 >> 16) & 0xFF);
+    ((Struct126_73B38 *) D_800D154C->unk31C)->unkAC = new_var2;
+    new_var++;
+    new_var--;
+    ((Struct126_73B38 *) D_800D154C->unk31C)->unkAD = (D_800D1580 >> 24) & 0xFFFFu;
+}
 
 void func_15073C28(void) {
     func_1507F640();
@@ -1568,8 +1840,9 @@ void func_15073C48(void) {
 
 }
 
-// ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15073C50.s")
+void func_15073C50(void) {
+    D_800D154C->unk224 = (s16) (((Struct981E0Y *) D_800CC2E8)[D_800D154C->unk222].unk0 + (f32) D_800D1580);
+}
 
 void func_15073CB8(void) {
     struct127 *tmp = func_1505F0AC(0x53);
@@ -1640,9 +1913,19 @@ void func_15074644(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074664.s")
+// NON-MATCHING: shared-store branch-likely structure + v0/v1 alloc (unk31C wants v1); best 1250
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150746F0.s")
-// ?
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150747E4.s")
+// NON-MATCHING: IDO folds the -1 into the store displacement instead of computing (idx-1)*0x32C
+// void func_150747E4(void) {
+//     u8 temp = D_800D154C->unk65;
+//     if (temp != 0) {
+//         D_800CC2D0[temp - 1].unk218 = 0;
+//         D_800CC2D0[temp - 1].unk232 = D_800D1580;
+//     }
+// }
 
 void func_15074840(void) {
     if (D_800D154C->unk31C != 0) {
@@ -1654,8 +1937,18 @@ void func_15074870(void) {
     D_800D154C->unk24F = (s8) D_800D1580;
 }
 
-// ??
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1507488C.s")
+// NON-MATCHING: register-only near-miss (600) - byte-identical ops, res wants reg a1 with a copy dance. PERMUTER.
+// void func_1507488C(void) {
+//     s32 v = D_800D1580;
+//     s32 res = v & 1;
+//     if ((((s32 *)&D_800D154C->unk2E4)[(v >> 16) & 0xFF] & ((v >> 8) & 0xFF)) != 0) {
+//         res = (res ^ 1) & 0xFF;
+//     }
+//     if (res != 0) {
+//         D_800D154C->unk138 += v >> 24;
+//     }
+// }
 
 void func_150748F4(void) {
     D_800CC3D7 = (s8) D_800D1580;
@@ -1675,7 +1968,18 @@ void func_1507490C(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074980.s")
+void func_15074980(void) {
+    s32 i;
+    f32 thresh = (f32) (D_800D1580 << 3);
+
+    for (i = 0; i < D_8008FD8C; i++) {
+        if (func_1505A72C(D_800D154C, &D_800CC2D0[i]) < thresh) {
+            if (D_800CC2D0[i].unk31C != 0) {
+                D_800CC2D0[i].unk31C->chasing = 0x14;
+            }
+        }
+    }
+}
 
 void func_15074A44(void) {
     if (D_800D154C->unk31C != 0) {
@@ -1783,7 +2087,14 @@ void func_15074F30(struct127 *arg0, struct127 *arg1, s32 arg2) {
     arg0->unk218 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074F48.s")
+void func_15074F48(struct127 *arg0, struct127 *arg1, s32 arg2) {
+    f32 dx = D_8009A108 - arg0->x_position;
+    f32 dz = arg0->z_position - D_8009A10C;
+
+    arg1->unk76 = func_1505A630(dx, dz, 0);
+    arg1->xz_velocity = sqrtf((dx * dx) + (dz * dz)) * D_8009A110;
+    func_15194408(arg0, arg1);
+}
 
 void func_15074FD4(struct127 *arg0, struct127 *arg1, s32 arg2) {
     if (arg1->interaction_state == 1) {

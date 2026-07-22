@@ -4,7 +4,16 @@
 #include "variables.h"
 
 
-// need to figure out D_800D2460
+// PERMUTER CANDIDATE (best 565): shape is exact but IDO constant-folds the row
+// base. Target anchors at &D_800D2460[2] via runtime `li v0,2; sll t6,v0,4; addu`,
+// which needs a non-foldable index 2 (no clean leaf C reproduces it):
+// s32 func_1508F060(void) {
+//     s32 i = 2;
+//     D_800D246D = 0; D_800D247D = 0;
+//     D_800D2460[i+1][13] = 0; D_800D2460[i+2][13] = 0;
+//     D_800D2460[i+3][13] = 0; D_800D2460[i][13] = 0;
+//     D_800D24C0 = 0; return i;
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_1508F060.s")
 
 void func_1508F0A4(void) {
@@ -50,47 +59,63 @@ void func_1508F9C4(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150911F4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_15091534.s")
-// NON-MATCHING: needs some love
-// Gfx* func_15091534(Gfx* arg0, struct257 *arg1, u8 *arg2) {
-//     u32 temp_v0;
-//
-//     *arg2 = 0;
-//     // get address for texture?
-//     temp_v0 = func_1510D0EC(&arg1->unkD16, 0, 3, 0);;
-//     // tmp = arg0;
-//     if (temp_v0 != 0x80000000) {
-//       // FD50000012345678
-//       gDPSetTextureImage(arg0++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, temp_v0);
-//       // F550000007098260
-//       gDPSetTile(arg0++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
-//       // E600000000000000
-//       gDPLoadSync(arg0++);
-//       // F3000000073FF000
-//       gDPLoadBlock(arg0++, G_TX_LOADTILE, 0, 0, 1023, 0);
-//       // E700000000000000
-//       gDPPipeSync(arg0++);
-//       // F540080000098260
-//       gDPSetTile(arg0++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
-//       // F2000000000FC0FC
-//       // FIXME: what are these macros
-//       // gDPSetTileSize(arg0++, G_TX_RENDERTILE, 0, 0, qu102(63), qu102(63));
-//       gDPSetTileSize(arg0++, G_TX_RENDERTILE, 0, 0, 63, 63);
-//       // FD10000012345678
-//       gDPSetTextureImage(arg0++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, temp_v0 + 2048);
-//       // E600000000000000
-//       gDPLoadSync(arg0++);
-//       // F00000000603C000
-//       gDPLoadTLUTCmd(arg0++, 6, 15);
-//       // EF00AC3F00504244
-//       gDPSetOtherMode(arg0++, G_AD_DISABLE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_RGBA16 | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE | G_PM_NPRIMITIVE | 0x0000000F, G_AC_NONE | G_ZS_PRIM | G_RM_XLU_SURF | G_RM_XLU_SURF2);
-//
-//       *arg2 = (u8)1;
-//     }
-//     return arg0;
-// }
+extern u8 D_D16;
+extern u32 func_1510D0EC(s32, s32, s32, s32);
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150916B4.s")
+Gfx *func_15091534(Gfx *arg0, s32 arg1, u8 *arg2) {
+    u32 temp_v0;
+
+    *arg2 = 0;
+    temp_v0 = func_1510D0EC(arg1 + (s32) &D_D16, 0, 3, 0);
+    if (temp_v0 != 0x80000000) {
+        { Gfx *g = arg0++; g->words.w0 = 0xFD500000; g->words.w1 = temp_v0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF5500000; g->words.w1 = 0x07098260; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE6000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF3000000; g->words.w1 = 0x073FF000; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE7000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF5400800; g->words.w1 = 0x00098260; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF2000000; g->words.w1 = 0x000FC0FC; }
+        { Gfx *g = arg0++; g->words.w0 = 0xFD100000; g->words.w1 = temp_v0 + 0x800; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE6000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF0000000; g->words.w1 = 0x0603C000; }
+        { Gfx *g = arg0++; g->words.w0 = 0xEF00AC3F; g->words.w1 = 0x00504244; }
+        *arg2 = 1;
+    }
+    return arg0;
+}
+
+void func_15042D94(s32 arg0, s32 arg1, u8 arg2, s32 arg3, ...);
+
+void func_150916B4(s32 x, s32 y, s32 frames, s32 color) {
+    s32 minutes;
+    s32 seconds;
+    s32 totalSec;
+    s32 centi;
+    s32 shift;
+
+    if (frames >= 0x57030) {
+        frames = 0x57030;
+    }
+    centi = (frames % 60) * 100 / 60;
+    if (centi >= 100) {
+        centi = 99;
+    }
+    x -= 8;
+    if (frames >= 0) {
+        totalSec = frames / 60;
+        minutes = totalSec / 60;
+        shift = (minutes >= 10) ? 5 : 0;
+        func_15042D94(x - shift - 8, y, color, (s32) &D_8009DCC0, minutes);
+        seconds = totalSec % 60;
+        func_15042D94(x, y, color, (s32) &D_8009DCC4, seconds);
+        func_15042D94(x + 0x10, y, color, (s32) &D_8009DCCC, centi);
+    } else {
+        func_15042D94(x - 8, y, color, (s32) &D_8009DCD4);
+        func_15042D94(x, y, color, (s32) &D_8009DCD8);
+        func_15042D94(x + 0x10, y, color, (s32) &D_8009DCE0);
+    }
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150918EC.s")
 
 void func_15093818(s32 arg0) {
@@ -109,5 +134,24 @@ void func_15093878(void) {
     D_800D244C = allocate_memory(0x80, 1, 1, 0);
 }
 
+// PERMUTER CANDIDATE (best 2417): logic is byte-perfect (all instructions match).
+// Remaining diffs: (1) IDO rotates saved regs s4-s7 by allocation priority so &D_11AD
+// lands in s4 (mine puts it in s7); (2) the float args need a runtime int->float
+// (li/mtc1/cvt.s.w) that IDO keeps constant-folding to lui float literals here.
+// extern u8 D_11AD; extern s32 D_800D2450; void func_150A7D00(s32, f32, f32, f32);
+// Gfx *func_150938BC(Gfx *arg0) {
+//     Gfx *gfx = arg0; s32 t; s32 i; u32 v0;
+//     t = (D_800D2450 / 30) % 60;
+//     for (i = 4; i != 0; i--) {
+//         v0 = func_1510D0EC((s32)(&D_11AD + (t % 10)), 0, 3, 0);
+//         if (v0 == 0x80000000) return gfx;
+//         { Gfx *g = gfx++; g->words.w0 = 0xDB060000 | ((i << 2) & 0xFFFF); g->words.w1 = v0; }
+//         if (i == 3) t = (D_800D2450 / 30) / 60; else t = t / 10;
+//     }
+//     func_150A7D00((D_800BE9C0 << 6) + D_800D244C, 120, 129, -303);
+//     { Gfx *g = gfx++; g->words.w0 = 0xDA380003; g->words.w1 = (D_800BE9C0 << 6) + D_800D244C; }
+//     { Gfx *g = gfx++; g->words.w0 = 0xDE000000; g->words.w1 = D_800D2448; }
+//     return gfx;
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150938BC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_15093B58.s")

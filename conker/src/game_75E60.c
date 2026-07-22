@@ -4,27 +4,29 @@
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_75E60/func_150489B0.s")
-// NON-MATCHING: not convinced this is correct
-// f32 func_150489B0(u8 arg0) {
-//     f32 ret;
-//
-//     if (arg0 >= 65) {
-//         if (arg0 >= 129) {
-//             if (arg0 >= 193) {
-//                 ret = D_8009A620[-arg0];
-//             } else {
-//                 ret = -D_8009A020[arg0];
-//             }
-//         } else {
-//             ret = -D_8009A420[-arg0];
-//         }
-//     } else {
-//         ret = D_8009A220[arg0];
-//     }
-//
-//     return ret;
-// }
+f32 func_150489B0(arg0)
+u8 arg0;
+{
+    f32 ret;
+    s32 i;
+
+    if (arg0 >= 65) {
+        i = arg0;
+        if (i >= 129) {
+            if (i >= 193) {
+                ret = D_8009A620[0 - i];
+            } else {
+                ret = -D_8009A020[i];
+            }
+        } else {
+            ret = -D_8009A420[0 - i];
+        }
+    } else {
+        ret = D_8009A220[arg0];
+    }
+
+    return ret;
+}
 
 void func_15048A40(u8 arg0) {
     func_150489B0((arg0 - 0x40) & 0xFF);
