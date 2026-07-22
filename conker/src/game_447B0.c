@@ -35,8 +35,30 @@ void func_15017498(void) {
     bzero(&D_800D2138, 524);
 }
 
-// double-loop
-#pragma GLOBAL_ASM("asm/nonmatchings/game_447B0/func_150174C0.s")
+// D_800D23C0 is declared as s32 in variables.h (shared header, not editable here)
+// but is really a pointer to an array of 0x18-byte records. RECORDS reinterprets
+// the storage as the correct pointer type.
+typedef struct {
+    /* 0x00 */ s16 unk0;
+    /* 0x02 */ u16 unk2;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ u16 unk8[8];
+} Struct150174C0; /* size = 0x18 */
+
+#define RECORDS (*(Struct150174C0**)&D_800D23C0)
+
+void func_150174C0(s32 arg0) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < (s32)D_80087380; i++) {
+        for (j = 0; j < RECORDS[i].unk2; j++) {
+            if ((RECORDS[i].unk8[j] >> 12) == 2) {
+                RECORDS[i].unk8[j] += arg0;
+            }
+        }
+    }
+}
 
 void func_15017578(s32 arg0) {
     u32 tmp = 0;

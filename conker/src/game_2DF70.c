@@ -5,6 +5,14 @@
 
 #include "macros.h"
 
+s32 func_150027F8(s8 *arg0);
+void func_15002560(s8 *arg0, s8 *arg1);
+void func_15002008(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 func_15002248(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4, s32 *arg5, s32 arg6, s32 *arg7);
+
+typedef struct { s16 x, z; } Coord_l;
+extern Coord_l *D_800DBE44;
+
 void func_15000AC0(void) {
     D_800D9E64 = (u8)0;
 }
@@ -30,31 +38,33 @@ void func_15001970(void) {
     D_800B0DC4 = D_800B0DC0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15001A08.s")
-// NON-MATCHING: JUSTREG
+// NON-MATCHING: best 445 (permuter candidate). Structure/frame (0x28) correct; residual is
+// a temp-register allocation cascade (target uses v0 for the 3 PI-status reads, IDO picks t8),
+// the D_A0000000 %hi/%lo reloc on the ROM read (literal 0xA0000000 gives no reloc), and a
+// trailing D_15001B08 `jr ra;nop` stub. size is spilled to 0x24(sp) across both PI calls.
+// permuter NO ZERO, best 345 (was 445): permuter only lever was retyping D_800B0DDC to
+// `volatile unsigned int` (445->345), which can't be applied without editing the header.
+// Even a perfect register match cannot reach 0: the ROM read needs a %hi/%lo reloc against
+// the named symbol D_A0000000 (literal 0xA0000000 emits reloc-free lui/ori), and the compared
+// region includes a separate trailing stub `glabel D_15001B08 (jr ra; nop)` that no single
+// C body for this func can emit. Both need symbol/split config (off-limits). Reverted to pragma.
 // void func_15001A08(void) {
-//     s32 sp24;
-//     s32 tmp;
-//     s32 sp1C;
+//     s32 size;
+//     u8 *ret;
+//     u32 romval;
 //
-//     tmp = D_800BE9F0;
-//     sp24 = D_80091AF0[tmp];
-//
-//     __osPiGetAccess();
-//
-//     while ((IO_READ(PI_STATUS_REG) & 3)) {};
-//
-//     tmp = D_80000308 | 0xB0000D24 | 0xA0000000;
-//     sp1C = *(s32*)tmp;
-//
-//     __osPiRelAccess();
-//
-//     if (sp1C != 0x98CCE31A) {
-//         sp24 <<= 1;
+//     size = D_80091AF0[D_800BE9F0];
+//     __osPiGetAccess(size);
+//     while (*(vu32 *)0xA4600010 & 3) {
 //     }
-//
-//     D_800B0DDC = allocate_memory(sp24, 1, 0, 0);
-//     D_800B0DE0 = D_800B0DDC;
+//     romval = *(u32 *)((D_80000308 | 0xB0000D24) | 0xA0000000);
+//     __osPiRelAccess(size);
+//     if (romval != 0x98CCE31A) {
+//         size <<= 1;
+//     }
+//     ret = allocate_memory(size, 1, 0, 0);
+//     D_800B0DDC = (s32) ret;
+//     D_800B0DE0 = ret;
 //     D_800B0DCC = 0;
 //     D_800B0DD0 = 0;
 //     D_800DBE30 = 0;
@@ -62,6 +72,7 @@ void func_15001970(void) {
 //     D_800DBE34 = 0;
 //     D_800DBE36 = 0;
 // }
+#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15001A08.s")
 
 u16* func_15001B10(void) {
     u16 *temp_v0;
@@ -206,10 +217,95 @@ u16 *func_15001DE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     return temp_v0;
 }
 
+typedef struct { f32 x, y, z; } Vec3f_l;
+typedef struct { Vec3f_l v[3]; } Tri9_l;
+typedef struct { s16 x, y, z; } DbVtx_l;
+typedef struct { DbVtx_l *v[3]; } DbTri_l;
+
+s32 func_15049260(Tri9_l arg0);
+
 // 3 loops
+// NON-MATCHING: algorithmically complete (best 6715). Residual is a pervasive saved-register
+// allocation + stack-layout cascade: target puts arg1/arg0/arg3/arg2 in s0/s1/s2/s3 and hoists
+// the 0x80000001 vertex-validity threshold to s4 and &tri.v[3] to s5, while IDO here assigns the
+// args to s2-s5 and the invariants to s0/s1, and the tri temp lands at sp+0x70 vs sp+0x78. Needs
+// a permuter register-swap pass (or manual saved-register coercion) from this base.
+// void func_15002008(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+//     Tri9_l tri;
+//     u16 *list, *end, *p;
+//     s32 count, s6, prev;
+//     DbTri_l *dt;
+//     func_150492CC((f32)(arg1 - arg0), 32000.0f, (f32)(arg3 - arg2));
+//     prev = -1;
+//     list = (u16 *)arg4;
+//     count = list[0];
+//     if (count > 0) {
+//         end = &list[count + 1];
+//         p = &list[1];
+//         s6 = *p;
+//         do {
+//             Vec3f_l *out; DbVtx_l **vp; s32 r;
+//             dt = (DbTri_l *)D_800DBE3C + s6;
+//             out = tri.v;
+//             vp = dt->v;
+//             do {
+//                 DbVtx_l *vtx = *vp;
+//                 if ((u32)vtx < 0x80000001U) {
+//                     out->x = 0.0f; out->y = 0.0f; out->z = 0.0f;
+//                 } else {
+//                     out->x = (f32)(vtx->x - (arg0 + arg1) / 2);
+//                     out->y = (f32)vtx->y;
+//                     out->z = (f32)(vtx->z - (arg2 + arg3) / 2);
+//                 }
+//                 out++; vp++;
+//             } while (out != &tri.v[3]);
+//             r = func_15049260(tri);
+//             if (r == 0) {
+//                 if (prev == -1) { func_15001B8C(s6 | 0x8000); prev = s6; }
+//                 else if ((s6 - prev) < 0x80) { func_15001B5C(s6 - prev); prev = s6; }
+//                 else { func_15001B8C(s6 | 0x8000); prev = s6; }
+//             }
+//             p++;
+//         } while (p != end);
+//     }
+//     func_15001B5C(0);
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15002008.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15002248.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15002560.s")
+
+void func_15002560(s8 *arg0, s8 *arg1) {
+    s8 *s1;
+    s32 v0;
+
+loop:
+    if (arg0 == 0) {
+        return;
+    }
+    if (*(s16 *)(arg0 + 4) == 0) {
+        if (arg1 != 0) {
+            v0 = (s32)arg1 - (s32)arg0;
+        } else {
+            v0 = 0;
+        }
+        *(s16 *)(arg0 + 4) = v0;
+    }
+    v0 = *(s16 *)(arg0 + 0xC);
+    if (v0 == 0) {
+        return;
+    }
+    s1 = arg0 + v0;
+    if (*(s16 *)(s1 + 4) != 0) {
+        s8 *s0;
+        do {
+            s0 = s1;
+            s0 += *(s16 *)(s1 + 4);
+            func_15002560(s1, s0);
+            s1 = s0;
+        } while (*(s16 *)(s0 + 4) != 0);
+    }
+    arg0 = s1;
+    goto loop;
+}
 
 void func_150025FC(void) {
     s32 tmp0;
@@ -246,10 +342,47 @@ void func_15002724(s32 arg0) {
     D_800DBE38 += func_150027F8(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15002754.s")
+void func_15002754(void) {
+    s32 idx;
+
+    D_800B0DC0 = ALIGN4(D_800B0DC0);
+    idx = D_800DBE50;
+    D_800DBDD8[idx] = D_800B0DC0;
+    D_800B0DC0 += D_800DBE38 * 12;
+    D_800DBDE8[idx] = D_800B0DC0;
+    D_800B0DC0 += D_800DBE38 * 8;
+    D_800DBDF8[idx] = D_800B0DC0;
+    D_800B0DC0 += D_800DBE38 * 4;
+    func_1510F800(idx);
+    D_800DBE38 = 0;
+}
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_150027F8.s")
+s32 func_150027F8(s8 *arg0) {
+    s32 count;
+    s32 total;
+    s8 val;
+
+    if (arg0 == 0) {
+        return 0;
+    }
+
+    count = 0;
+    total = 0;
+    val = arg0[0];
+    while (val != -0x21) {
+        count++;
+        if ((val >> 4) == 1) {
+            total += 4;
+        } else if (val == 6) {
+            total += 2;
+        } else if (val == 5) {
+            total += 1;
+        }
+        val = *(s8 *)((count << 3) + (s32)arg0);
+    }
+    return total;
+}
 
 s32 func_15002878(void) {
     s32 i;

@@ -5,6 +5,25 @@
 
 
 void* func_151674F8(void *arg0, s32 arg1, s16 arg2, s32 arg3);
+s32 func_1517F4D8(s32 arg0, s32 arg1);
+s32 func_1517F3A0(s32 arg0, s32 arg1);
+s32 func_15180580(s32 arg0, s32 arg1);
+s32 func_1507DB6C(s32 arg0, s32 arg1);
+s32 func_1510FEA0(s32 arg0, s32 arg1);
+s32 func_1502BAD0(s32 arg0, s32 arg1, s16 arg2);
+extern Mtx D_80089470;
+extern u8 D_800DCD27;
+
+typedef struct {
+    s32 pad0;
+    s32 unk4;
+    s32 pad8;
+    s32 unkC;
+    s32 pad10;
+    s32 unk14;
+    s32 pad18;
+    s32 unk1C;
+} Struct45B80Ctr;
 
 
 void func_150186D0(void) {
@@ -97,6 +116,99 @@ void func_1501905C(void) {
 }
 
 // few loops
+// NON-MATCHING: best ~5895, algorithmically exact. Everything matches byte-for-byte
+// EXCEPT the final array-increment loop (loop 3), which IDO unrolls 4x here but not in
+// the target. Loops 1 & 2 (with func calls) match; loop 3 has no call so IDO unrolls it.
+// Could not defeat the unroll from clean C (struct-ptr, flat-ptr, end-in-local all unroll;
+// named temps add -g3 frame slots). Not permuter-fixable (needs the un-unrolled schedule).
+/*
+s32 func_15019130(void) {
+    s32 i;
+    u8 j;
+    s32 *p;
+    s32 *end;
+
+    func_1510D864();
+    func_1509BA04(0);
+    func_1509BBA0(2);
+    D_800DCD27 = 0;
+    func_10004250();
+    func_1501E400(0);
+    func_15034F20();
+    func_1510B690();
+    func_1510F800(0);
+    func_15113180();
+    if (D_800BEAC0 == 0) {
+        func_15113E54(1);
+    }
+    if (D_800BEAC0 == 0) {
+        func_15114188();
+    }
+    func_15044A28();
+    func_15018DFC();
+    func_150242F8(1, 0);
+    func_1501EC38(0);
+    func_150242F8(0, 0);
+    func_15020EC4(0);
+    func_1501E2F8(0);
+    if ((s8)D_800D23A9 != 0) {
+        func_15087CC0();
+    }
+    func_15122AE0();
+    func_1504ADD0();
+    func_1510F800(0);
+    for (i = 0; i <= D_80082FA0; i++) {
+        func_1510FC34(i);
+    }
+    func_1510B690();
+    for (j = 0; j <= D_80082FA0; j++) {
+        func_15094EA0(j);
+    }
+    func_15112A80(0);
+    func_151749F8(D_800BE9F0, 0);
+    func_1501C860();
+    func_1511FC20(D_800BE9C0);
+    func_15188B74(0);
+    if (D_800BEAC0 == 0) {
+        func_1516706C();
+        func_151671E8();
+    }
+    func_1502BEE4();
+    if (D_800BE616 == 0) {
+        func_150A0D8C();
+    }
+    func_15113218();
+    func_15188B74(1);
+    func_151738C4(D_800BE9F0);
+    func_1502C1A4();
+    func_15113C88();
+    if (D_800CC2B0 != 0) {
+        func_150636F0();
+    }
+    if (D_800BEAC0 == 0) {
+        func_15183D28();
+        func_151670C0();
+        func_15177A94();
+    }
+    if (D_800BEAC0 == 0) {
+        func_151814FC();
+    }
+    func_1517F75C();
+    func_1517F7B4();
+    func_15036148();
+    func_1515D6C8();
+    p = (s32 *)&D_80043B40;
+    end = (s32 *)&D_80044B20;
+    do {
+        p[1]++;
+        p[3]++;
+        p[5]++;
+        p[7]++;
+        p += 8;
+    } while (p != end);
+    return 1;
+}
+*/
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019130.s")
 
 void func_15019414(void) {
@@ -109,59 +221,62 @@ void func_15019414(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019464.s")
-// NON-MATCHING: 70% of the way there... maybe.
-// s32 func_15019464(Gfx *arg0, s16 arg1) {
-//     s32 temp_s0;
-//     s32 ret;
-//
-//     func_1510B958(arg1);
-//     gSPViewport(arg0++, (D_800BE628 + (arg1 * 0x180) + (D_800BE9C0 * 0x10) + 0x40));
-//     // arg0->unk0 = 0xDC080008;
-//     // arg0->unk4 = (s32) (D_800BE628 + (temp_t6 * 0x180) + (D_800BE9C0 * 0x10) + 0x40);
-//     temp_s0 = func_1501A490(arg0, arg1, 0, 0, 0, 0);
-//     if ((D_800BEAC0 != 0) || (D_80084480 != 0)) {
-//         return temp_s0;
-//     }
-//
-//     temp_s0 = func_1510FEA0(temp_s0, D_800BE9F0);
-//     if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)){
-//         return temp_s0;
-//     }
-//
-//     temp_s0 = func_1515D6D0(temp_s0, arg1);
-//     temp_s0 = func_1510B9D0(temp_s0, arg1);
-//     return temp_s0;
-//
-// }
+void *func_15019464(Gfx *arg0, s16 arg1) {
+    func_1510B958(arg1);
+    gSPViewport(arg0++, (s32)((u8 *)D_800BE628 + arg1 * 0x180) + D_800BE9C0 * 0x10 + 64);
+    arg0 = (Gfx *)func_1501A490((s32)arg0, arg1, 0, 0, 0, 0);
+    if (D_800BEAC0 != 0) {
+        return arg0;
+    }
+    if (D_80084480 != 0) {
+        return arg0;
+    }
+    arg0 = (Gfx *)func_1510FEA0((s32)arg0, D_800BE9F0);
+    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {
+        return arg0;
+    }
+    arg0 = (Gfx *)func_1515D6D0((s32)arg0, arg1);
+    arg0 = (Gfx *)func_1510B9D0((s32)arg0, arg1);
+    return arg0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_150195A0.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_150198FC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019BB8.s")
-// NON-MATCHING: need to figure out what is going on
-// void func_15019BB8(struct14 *arg0, s32 arg1) {
-//     s32 temp_v0;
-//     s32 sp2A;
-//     s16 sp28;
-//
-//     arg0->unk0 = 0xDC080008;
-//     arg0->unk4 = &D_800BE628[arg1].unk40[D_800BE9C0];
-//     sp28 = arg1;
-//
-//     temp_v0 = func_1501A490(&arg0->unk8, &sp28, 0, 0, 0, 0);
-//     temp_v0 = func_1517F4D8(temp_v0, arg1);
-//     temp_v0 = func_1517F3A0(temp_v0, arg1);
-//     temp_v0 = func_15180580(temp_v0, arg1);
-//     // temp_v1 = 1 << arg1;
-//     if (((D_800D18A0 & (1 << arg1)) != 0) || ( ((D_800D18A2 & (1 << arg1)) != 0))) {
-//         temp_v0 = func_1507DB6C(temp_v0, arg1);
-//     }
-//     temp_v0 = func_151674F8(temp_v0, 4, sp2A, 0);
-//     func_151674F8(temp_v0, 4, sp2A, 1);
-// }
+void func_15019BB8(Gfx *arg0, s32 arg1) {
+    gSPViewport(arg0++, (s32)((u8 *)D_800BE628 + arg1 * 0x180) + D_800BE9C0 * 0x10 + 64);
+    arg0 = (Gfx *)func_1501A490((s32)arg0, arg1, 0, 0, 0, 0);
+    arg0 = (Gfx *)func_1517F4D8((s32)arg0, arg1);
+    arg0 = (Gfx *)func_1517F3A0((s32)arg0, arg1);
+    arg0 = (Gfx *)func_15180580((s32)arg0, arg1);
+    if ((D_800D18A0 & (1 << arg1)) || (D_800D18A2 & (1 << arg1))) {
+        arg0 = (Gfx *)func_1507DB6C((s32)arg0, arg1);
+    }
+    arg0 = (Gfx *)func_151674F8(arg0, 4, arg1, 0);
+    arg0 = (Gfx *)func_151674F8(arg0, 4, arg1, 1);
+}
 
+// NON-MATCHING: best 2922 (PERMUTER CANDIDATE). Algorithmically exact: branch,
+// gSPMatrix commands, D_800DC2A0[] access all correct. Only divergence is that IDO
+// homes arg1 to its stack arg-slot (0x44) and reloads on every use instead of
+// promoting it to $s0 like the target (target: `move s0,a1`). All ~2900 score comes
+// from that single allocation decision cascading register numbers + reload insns.
+// Needs the permuter to force arg1 into a callee-saved register.
+// void *func_15019CC8(Gfx *arg0, s32 arg1) {
+//     gSPViewport(arg0++, D_800BE628 + arg1 * 0x180 + D_800BE9C0 * 0x10 + 64);
+//     arg0 = (Gfx *)func_1501A490((s32)arg0, arg1, 0, 0, 0, 0);
+//     gSPMatrix(arg0++, &D_80089470, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+//     gSPMatrix(arg0++, D_800BE628 + arg1 * 0x180 + D_800BE9C0 * 0x40 + 0x100, G_MTX_PROJECTION | G_MTX_LOAD);
+//     if (D_800BE9F0 == 0x1D) {
+//         arg0 = (Gfx *)func_1502BAD0((s32)arg0, 6, arg1);
+//     }
+//     arg0 = (Gfx *)func_151674F8(arg0, 5, 0, 0);
+//     arg0 = (Gfx *)func_151674F8(arg0, 5, 0, 1);
+//     gSPMatrix(arg0++, D_800BE628 + arg1 * 0x180 + D_800BE9C0 * 0x40 + 0x100, G_MTX_PROJECTION | G_MTX_LOAD);
+//     gSPMatrix(arg0++, (s32)(&D_800DC2A0)[D_800BE9C0] + arg1 * 0x40, G_MTX_PROJECTION);
+//     return arg0;
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019CC8.s")
 
 void func_15019E60(Gfx *arg0) {
