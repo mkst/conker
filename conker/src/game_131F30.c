@@ -2,12 +2,74 @@
 #include "functions.h"
 #include "variables.h"
 
+// D_800DCE50 holds per-slot object list heads; D_800A5770 is declared as a
+// bare s32 in variables.h but is used as a 2 element array (see func_151494E0).
+typedef struct FileNode {
+    u8  pad0[0x8];
+    struct FileNode *unk8;
+    u8  padC[0x7];
+    u8  unk13;
+    u8  pad14[0x14];
+    s32 unk28;
+} FileNode;
+
+extern FileNode *D_800DCE50[2][104];
+
+typedef struct { s32 unk0; s32 unk4; u8 unk8; } Blk;
+typedef struct { s32 unk0; Blk *unk4; struct127 *unk8; } Arg;
+extern u32 *D_800DBF94;
+extern Blk D_800A2380;
+extern Blk D_800A238C;
+extern Blk D_800A2398;
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_131F30/func_15104A80.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_131F30/func_15104C44.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_131F30/func_15104FF8.s")
+// PERMUTER CANDIDATE. Best attempt: score 16. Every instruction, register and immediate matches;
+// the only difference is the frame's local-slot base - the target spills the
+// func_1000EF40 address to 0x3c(sp) and the &arg0->unk28 pointer to 0x40(sp),
+// while this spills them to 0x38(sp)/0x3c(sp) (frame size 0x48 is correct).
+// The target's frame reserves one extra word below the spill area; adding any
+// third local shifts the spills correctly but grows the frame to 0x50.
+//
+// // structs.h lacks the s16 x/y/z at the head of struct205 and a field at
+// // offset 8 in struct206, so file-local equivalents are used.
+// typedef struct {
+//     s16 unk0;
+//     s16 unk2;
+//     s16 unk4;
+//     u8  pad6[0xE];
+//     u8  unk14;
+// } FileObj;
+//
+// typedef struct {
+//     FileObj *unk0;
+//     u16 unk4;
+//     u8  pad6[0x2];
+//     s16 unk8;
+// } FileSub;
+//
+// typedef struct {
+//     u8      pad0[0x28];
+//     FileSub unk28;
+// } FileOwner;
+//
+// void func_15104FF8(FileOwner *arg0, s32 arg1, u8 arg2) {
+//     FileSub *sub = &arg0->unk28;
+//
+//     if (arg2 == 0x38) {
+//         if (sub->unk0->unk14 == 1) {
+//             FileObj *obj = sub->unk0;
+//
+//             sub->unk8 = 300;
+//             func_1000FD38(func_1000EF40, obj, 0);
+//             func_1000FA64(566, sub->unk0->unk0, sub->unk0->unk2, sub->unk0->unk4,
+//                           16384, 1500, 1000, func_1000EF40, sub->unk0, 0, 8, 0);
+//         }
+//     }
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_131F30/func_151050B0.s")
 
@@ -148,42 +210,29 @@ void func_15105BC8(struct204 *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_131F30/func_15105C24.s")
-// void *func_15105C24(s32 arg0) {
-//     s32 temp_t4;
-//     s32 temp_t5;
-//     void *temp_a0;
-//     void *temp_a0_2;
-//     s32 phi_v1;
-//     s32 phi_v0;
-//     void *phi_a0;
-//
-//     phi_v0 = 0;
-// loop_1:
-//     phi_v1 = 0;
-// loop_2:
-//     temp_a0 = *((((((phi_v1 * 4) - phi_v1) * 4) + phi_v1) << 5) + 0x800DCE50 + (((phi_v0 * 4) + 0x800A0000)->unk5770 * 4));
-//     phi_a0 = temp_a0;
-//     if (temp_a0 != 0) {
-// loop_3:
-//         if ((phi_a0->unk13 == 0x2E) && (arg0 == phi_a0->unk28)) {
-//             return phi_a0;
-//         }
-//         temp_a0_2 = phi_a0->unk8;
-//         phi_a0 = temp_a0_2;
-//         if (temp_a0_2 != 0) {
-//             goto loop_3;
-//         }
-//     }
-//     temp_t4 = (phi_v1 + 1) & 0xFF;
-//     phi_v1 = temp_t4;
-//     if (temp_t4 < 2) {
-//         goto loop_2;
-//     }
-//     temp_t5 = (phi_v0 + 1) & 0xFF;
-//     phi_v0 = temp_t5;
-//     if (temp_t5 < 2) {
-//         goto loop_1;
-//     }
-//     return NULL;
-// }
+FileNode *func_15105C24(s32 arg0) {
+    u8 i;
+    u8 j;
+    FileNode *p;
+
+    for (i = 0; i < 2; i++) {
+        j = 0;
+inner:
+        p = D_800DCE50[j][(&D_800A5770)[i]];
+        if (p != NULL) {
+list:
+            if ((p->unk13 == 0x2E) && (arg0 == p->unk28)) {
+                return p;
+            }
+            p = p->unk8;
+            if (p != NULL) {
+                goto list;
+            }
+        }
+        j++;
+        if (j < 2) {
+            goto inner;
+        }
+    }
+    return NULL;
+}
