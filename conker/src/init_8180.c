@@ -25,6 +25,7 @@ void func_10017DF0(N_ALCSPlayer *csp, f32 arg1, f32 arg2);
 void func_10017E4C(N_ALCSPlayer *csp, u8 chan, u8 arg2);
 void func_10017F10(N_ALCSPlayer *arg0, u8 arg1, u8 arg2, u8 arg3, s32 arg4);
 void func_10018790(N_ALCSPlayer *arg0, s32 arg1, u32 arg2, u32 arg3);
+void func_100186DC(void *arg0, void *arg1);
 void func_10018D00(N_ALCSPlayer *arg0, s16 arg1);
 void func_10018D50(N_ALCSPlayer *seqp);
 
@@ -170,51 +171,42 @@ void func_10008C04(u8 idx, u8 arg1, s32 arg2) {
     func_10018790(&D_8003CA58[idx], &D_8003CD48[idx], arg1, arg2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_8180/func_10008C6C.s")
-// NON-MATCHING: need to determine what these variables hold
-// void func_10008C6C(u8 idx, u8 arg1) {
-//     func_100186DC(&D_8003CA58[idx], &D_8003CD48[idx + (arg1 * 0xEC)]); // (idx * 0x760)
-// }
+void func_10008C6C(u8 idx, u8 arg1) {
+    func_100186DC(&D_8003CA58[idx], &D_8003CD48[idx].pad0[arg1 * 0xEC]);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_8180/func_10008CE8.s")
-// NON-MATCHING: 80% of the way there
-// s32 func_10008CE8(u8 idx, u16 arg1) {
-//     s32 sp3C;
-//     ALCSeq *temp_s0_3;
-//     u32 i;
-//
+// PERMUTER NO ZERO, best 20 (was 235). The permuter's new_var temp-split
+// (`new_var = D_8003CA48[idx]; func_10004074(new_var);`) collapses the old
+// v0/v1 register diff, dropping the isolated score to 0. But in the full-file
+// build the residual is a pure frame-packing diff the permuter is blind to:
+// the two compiler-homed temps land at 0x30/0x28 (idx<<2 / &D_8003CA3C[idx])
+// vs the target's 0x34/0x2c, while sp3C@0x3c matches. Swept all 3-local decl
+// orders (best 20 with sp3C declared first, else 28) + named-pointer homing
+// (98); none reach the target slots. Not reachable from C. Needs file-local:
+//   typedef struct { s32 unk0; s32 unk4; } StructCD40;
+//   extern u16 D_8003CA3C[]; extern u8 *D_8003CA48[];
+//   extern StructCD40 *D_8003CD40; extern u16 D_8003C910[];
+// s32 func_10008CE8(u8 idx, s32 arg1) {
+//     s32 sp3C; u8 *new_var; u32 i;
 //     i = 0;
-//     func_10018C60(&D_8003C900[idx]);
-//     while ((n_alCSPGetState(&D_8003C900[idx]) != 0) && (i < 2000000)) {
-//         i++;
-//     };
-//
+//     func_10018C60(D_8003C900[idx]);
+//     while ((n_alCSPGetState(D_8003C900[idx]) != 0) && (i < 2000000)) i++;
 //     if (i >= 2000000) {
-//         func_10018C60(&D_8003C900[idx]);
-//         while ((n_alCSPGetState(&D_8003C900[idx]) != 0) && (i < 4000000)) {
-//             i++;
-//         }
+//         func_10018C60(D_8003C900[idx]);
+//         while ((n_alCSPGetState(D_8003C900[idx]) != 0) && (i < 4000000)) i++;
 //     }
-//
 //     if (arg1 != D_8003CA3C[idx]) {
-//         if (D_8003CA48[idx] != NULL) {
-//             func_10004074(&D_8003CA48[idx]); // de-init?
-//             D_8003CA48[idx] = NULL;
-//         }
-//
+//         if (D_8003CA48[idx] != NULL) { new_var = D_8003CA48[idx]; func_10004074(new_var); D_8003CA48[idx] = NULL; }
 //         sp3C = D_8003CD40[arg1].unk4;
-//         temp_s0_3 = allocate_memory(&D_8003C910[arg1], 0xFF, 2, 2);
-//         if (temp_s0_3 == NULL) {
-//             return -1;
-//         }
-//         func_10004514(sp3C, temp_s0_3, ALIGN16(D_8003C910[arg1]), 1);
+//         D_8003CA48[idx] = allocate_memory(D_8003C910[arg1], 0xFF, 2, 2);
+//         if (D_8003CA48[idx] == NULL) return -1;
+//         func_10004514(sp3C, D_8003CA48[idx], ALIGN16(D_8003C910[arg1]), 1);
 //         D_8003CA3C[idx] = arg1;
-//       }
-//
-//     n_alCSeqNew(&D_8003CA58[idx], &D_8003CA48[idx]);
-//     func_10018CB0(&D_8003C900[idx], &D_8003CA58[idx]);
-//     func_10017B30(&D_8003C900[idx]);
-//
+//     }
+//     n_alCSeqNew(&D_8003CA58[idx], D_8003CA48[idx]);
+//     func_10018CB0(D_8003C900[idx], &D_8003CA58[idx]);
+//     func_10017B30(D_8003C900[idx]);
 //     return 0;
 // }
 

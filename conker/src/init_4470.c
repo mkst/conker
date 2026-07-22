@@ -67,44 +67,34 @@ void func_10004674(void) {
     D_8003A571 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_4470/func_100046E4.s")
-// NON-MATCHING: stack isnt right
-// void func_100046E4(s32 devAddr, void *dramAddr, u32 size) {
-//     s32 _dramAddr;
-//     s32 idx;
-//     s32 threadId;
-//     s32 _devAddr; // pad
-//     OSMesgQueue *mesgQueue;
-//     OSIoMesg *sp68;
-//     OSIoMesg *sp64; // mesg?
-//     u32 _size;
-//     u32 sent;
-//
-//
-//     threadId = __osRunningThread->id - 3;
-//     if ((threadId >= 4) || (idx = threadId, (threadId < 0))) {
-//         idx = 0;
-//     }
-//     sent = 0;
-//     osInvalDCache(dramAddr, size);
-//     if (size != 0) {
-//         mesgQueue =  &gMessageQueue[idx];
-//         _dramAddr = dramAddr;
-//         // _devAddr = devAddr;
-//         do {
-//             if ((size - sent) < 81920) {
-//                 _size = size - sent;
-//             } else {
-//                 _size = 81920;
-//             }
-//             osPiStartDma(&sp68, 0, 0, devAddr, _dramAddr, _size, mesgQueue);
-//             osRecvMesg(mesgQueue, &sp64, 1);
-//             sent += _size;
-//             devAddr += _size;
-//             _dramAddr += _size;
-//         } while (sent < size) ;
-//     }
-// }
+void func_100046E4(s32 devAddr, void *dramAddr, u32 size) {
+    OSIoMesg sp68;
+    OSMesg sp64;
+    s32 idx;
+    u32 chunk;
+    u32 sent;
+
+    idx = __osRunningThread->id - 3;
+    if ((idx >= 4) || (idx < 0)) {
+        idx = 0;
+    }
+    sent = 0;
+    osInvalDCache(dramAddr, size);
+    if (size != 0) {
+        do {
+            if ((size - sent) < 81920) {
+                chunk = size - sent;
+            } else {
+                chunk = 81920;
+            }
+            osPiStartDma(&sp68, 0, 0, devAddr, dramAddr, chunk, &gMessageQueue[idx]);
+            osRecvMesg(&gMessageQueue[idx], &sp64, 1);
+            sent += chunk;
+            devAddr += chunk;
+            dramAddr = (void *)((u8 *)dramAddr + chunk);
+        } while (sent < size);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_4470/func_1000480C.s")
 // void func_1000480C(s32 devAddr, void *dramAddr, u32 size) {

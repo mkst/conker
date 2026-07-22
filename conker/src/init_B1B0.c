@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1000DEC4(void);
+
 
 struct151 *func_1000B1B0(s32 arg0) {
     s32 i;
@@ -18,22 +20,31 @@ struct151 *func_1000B1B0(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B1FC.s")
-// NON-MATCHING: something like this, but not this.
-// struct151 *func_1000B1FC(s32 arg0) {
-//     struct151 *phi_v1_2;
-//     u32 i;
+// NON-MATCHING (asm-differ score 30, but every instruction is identical).
+// The code below produces the exact 38 instructions of the target. The only
+// difference is which symbol the two loop-end addresses relocate against:
+// the .s says %hi/%lo(D_800417BC) while the compiler emits
+// %hi(D_800417B0)/%lo(D_800417B0+0xc). Both resolve to 0x800417BC, so the
+// linked ROM bytes are identical; only the .o relocation entries differ.
+// Writing the loops as pointer walks against &D_800417BC does emit the right
+// symbol, but IDO then unrolls them 4x (152 -> 352 bytes) because the trip
+// count is no longer a compile-time constant.
 //
-//     for (i = 0; i < D_800417BC; i += 4) {
-//         if ( D_800417B0[i] != 0 &&  D_800417B0[i]->unk4 == arg0) {
-//             return  D_800417B0[i];
+// struct151 *func_1000B1FC(s32 arg0) {
+//     struct151 *temp;
+//     s32 i;
+//
+//     for (i = 0; i < 3; i++) {
+//         if ((D_800417B0[i] != NULL) && (D_800417B0[i]->unk4 == arg0)) {
+//             return D_800417B0[i];
 //         }
 //     }
 //
-//     for (i = 0; i < D_800417BC; i += 4) {
-//         if ( D_800417B0[i] != 0) {
-//             phi_v1_2 =  D_800417B0[i]->unk60;
-//             if (phi_v1_2 != 0 && phi_v1_2->unk4 == arg0) {
-//                 return phi_v1_2;
+//     for (i = 0; i < 3; i++) {
+//         if (D_800417B0[i] != NULL) {
+//             temp = (struct151 *) D_800417B0[i]->unk60;
+//             if ((temp != NULL) && (temp->unk4 == arg0)) {
+//                 return temp;
 //             }
 //         }
 //     }
@@ -42,31 +53,26 @@ struct151 *func_1000B1B0(s32 arg0) {
 // }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B294.s")
-// NON-MATCHING: no idea.
-// struct151 * func_1000B294(s32 *arg0) {
-//     s32 i;
-//     struct151 *phi_v1;
-//     struct151 *tmp;
-//     struct151 *ret = NULL;
+// NON-MATCHING (asm-differ score 10, but every instruction is identical).
+// Same situation as func_1000B1FC: the code below emits all 24 target
+// instructions; only the loop-end relocation differs (.s uses D_800417BC,
+// the compiler uses D_800417B0+0xc - same address, identical linked bytes).
 //
-//     for (i = 0; i < 3; i++)
-//     {
-//         phi_v1 = &D_800417B0[i];
-//         ret = phi_v1;
-//         if (phi_v1)
-//         {
-//             if (arg0 == phi_v1->unk10)
-//             {
-//                 phi_v1->unk10 = phi_v1;
+// void func_1000B294(s32 *arg0) {
+//     struct151 *temp;
+//     s32 i;
+//
+//     for (i = 0; i < 3; i++) {
+//         if (D_800417B0[i] != NULL) {
+//             if (arg0 == D_800417B0[i]->unk10) {
+//                 D_800417B0[i]->unk10 = (s32 *) D_800417B0[i];
 //             }
-//             tmp = *phi_v1->unk60;
-//             if ((tmp) && (arg0 == tmp->unk10))
-//             {
-//                 phi_v1->unk10 = tmp;
+//             temp = (struct151 *) D_800417B0[i]->unk60;
+//             if ((temp != NULL) && (arg0 == temp->unk10)) {
+//                 temp->unk10 = (s32 *) temp;
 //             }
 //         }
 //     }
-//     return ret;
 // }
 
 struct137 *func_1000B2F4(s32 arg0) {
@@ -115,6 +121,9 @@ s32 func_1000B548(s32 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000B638.s")
+// NON-MATCHING (score 3592): logic reconstructed but the stack frame comes out
+// 0x28 vs the target's 0x20 (target keeps the arg0&1 flag in a3 and reuses arg
+// homes for call-spills). Frame/register-allocation mismatch.
 
 
 s32 func_1000B830(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -178,7 +187,24 @@ s32 func_1000BA18(u32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
     return arg0 | sp44;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BAFC.s")
+s32 func_1000BAFC(u32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
+    u32 sp44;
+    s32 sp40;
+    s32 sp3C;
+
+    sp44 = 0;
+    sp3C = arg0 & 0x00FFFFFF;
+    arg0 = arg0 & 0xFF000000;
+    func_100114D0(0, 0, 0, 0x7FF8, 0xE74, 0xA28, &sp40, &sp44, 0);
+    sp44 = ((0x7FFF - sp44) << 16) & 0xFF000000;
+    if (arg0 != sp44) {
+        arg0 = sp44;
+        func_1000E588(0x93, arg0 >> 24, 0x6000);
+    }
+    sp3C = func_1000C530(sp3C, arg1, arg2, arg3, arg4) & 0xFFFFFF;
+    sp44 = sp3C & 0xFFFFFFFFFFFFFFFF;
+    return arg0 | sp44;
+}
 
 s32 func_1000BBE8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg0 == 0) {
@@ -207,12 +233,92 @@ s32 func_1000BC28(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BCBC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BF60.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C350.s")
+extern u8 D_800C35E8;
+extern void func_15178EFC(s32);
+
+s32 func_1000C350(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
+    s32 new_var;
+
+    if ((arg0 & 0x80) == 0) {
+        arg0 |= 0x80;
+        if (D_800C35EA != 1) {
+            func_1000886C(arg1, 0x1E, 1);
+            func_1000886C(arg1, 1, 1);
+            func_1000E40C(0x23, 0x61A8);
+        } else {
+            if (D_800C35E8 == 3) {
+                func_1000E40C(0x23, 0xFA);
+                func_15178EFC(2);
+            } else if (D_800C35E8 == 6) {
+                func_1000886C(arg1, 0x1E, 1);
+                func_1000886C(arg1, 1, 0x40);
+                func_15178EFC(2);
+            } else {
+                func_1000E40C(0x23, 0x61A8);
+            }
+        }
+        return arg0;
+    }
+    new_var = arg0 & 0x7F;
+    if (D_800BE9F0 != 0x1D) {
+        func_10008F24(arg1);
+        return arg0;
+    }
+    if (new_var != D_80041F08) {
+        switch (D_80041F08) {
+        case 1:
+            func_10008790(arg1, 0x1E, 0, 0);
+            func_10008790(arg1, 1, 0x40, 0);
+            break;
+        case 2:
+            func_10008790(arg1, 0x18, 0xFF, 0);
+            func_10008790(arg1, 6, 0, 0);
+            func_10008790(arg1, 1, 1, 0);
+            break;
+        }
+        arg0 = D_80041F08 | 0x80;
+    }
+    return arg0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C530.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C7E8.s")
+// NON-MATCHING (score 1865): logic + top control flow (out-of-line return
+// trampolines) verified byte-identical. Remaining diffs are one FP register-
+// allocation decision cascading through the whole float block: the target keeps
+// arg2 in $f14 (mtc1 a2,f14 at entry) so D_8002C238 gets the persistent $f18 and
+// 100.0f is re-materialized twice; IDO instead spills arg2 to 0x20(sp) here,
+// freeing $f14 for D_8002C238 and pinning 100.0f in $f18. Pure register-alloc
+// near-miss (PERMUTER CANDIDATE).
+// s32 func_1000C7E8(s32 arg0, s32 arg1, f32 arg2, s32 arg3, f32 arg4) {
+//     s32 v0;
+//     f32 v;
+//     if (D_800BE9F0 == 0x31) {
+//         if (arg0 != 2) {
+//             if (func_1000B1B0(9) == 0) {
+//                 func_1000E704(0x3E, 0, 0xFFFF);
+//                 func_1000E40C(0x3E, 0x7FFF);
+//                 func_1000D96C(0x3D, 0x3E, 4);
+//             }
+//             return 2;
+//         }
+//         return 0;
+//     }
+//     v0 = D_8002B070;
+//     if (v0 == 0) { v0 = 1; D_8002B070 = v0; }
+//     if (arg0 != v0) { arg0 = v0; }
+//     v = D_8002C238 - sqrtf((arg2 - -4000.0f) * (arg2 - -4000.0f) + arg4 * arg4) * 10.0f;
+//     if (v < 100.0f) { v = 100.0f; } else if (D_8002C238 < v) { v = D_8002C238; }
+//     func_1000E40C(0x3E, (s32) v);
+//     return arg0;
+// }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C934.s")
-// NON-MATCHING: close but last part isn't quite right
+// NON-MATCHING (score 145): byte-identical except sp3C is allocated to v1
+// instead of a1, producing one extra `move a1,v1` before the func_1000E40C
+// call. Pure register-coloring near-miss (PERMUTER CANDIDATE). The target loads
+// sp3C directly into a1 at every reload (17d4/1824) so it is already the arg1 of
+// func_1000E40C(0x54, sp3C); no C form observed forces IDO to color it a1 (clean
+// form scores 825 with t-regs+move; the temp_a1 idiom below reaches v1 @145).
 // s32 func_1000C934(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     s32 sp3C;
 //     s32 sp38;
@@ -258,7 +364,32 @@ s32 func_1000CA18(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return tmp | 0x80000000;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CAE4.s")
+s32 func_1000CAE4(s32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {
+    s32 tmp;
+
+    tmp = arg0 & 2;
+    arg0 = arg0 & 1;
+
+    if (D_800BE9F0 == 0x42) {
+        func_10011FA0((s32 *) 4);
+        if (arg0 == 0) {
+            arg0 = 1;
+            func_1000E704(0x58, 1, 0xFFFF);
+        }
+    } else {
+        if (arg0 != 0) {
+            func_1000E704(0x58, 0, 0xFFFF);
+            func_1000E40C(0x58, 16000);
+            arg0 = 0;
+        }
+    }
+
+    if (tmp == 0) {
+        func_10008790(arg1, 0x1000, 0, 1);
+        tmp = 2;
+    }
+    return tmp | arg0;
+}
 
 void func_1000CBA8(s32 arg0) {
     if (D_800417B0[0] != NULL) {
@@ -271,27 +402,21 @@ void func_1000CBA8(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CBF0.s")
-// NON-MATCHING: JUSTREG? need some love
-// void func_1000CBF0(s32 *arg0, s32 *arg1, s32 arg2) {
-//     struct151 *tmp;
-//     s32 i;
-//     s32 tmp2;
-//
-//     for (i = 0; i < 3; i++) {
-//         if (arg2 & (1 << i)) {
-//             tmp = &D_800417B0[i];
-//             tmp2 = tmp->unk0;
-//             if (tmp2) {
-//                 tmp->unk5A = arg0;
-//                 tmp->unk5C = *arg1;
-//                 if (arg1 == 0) {
-//                   tmp->unk58 = *arg0;
-//                 }
-//             }
-//         }
-//     }
-// }
+void func_1000CBF0(s32 arg0, s32 arg1, s32 arg2) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        if (((1 << i) & arg2) != 0) {
+            if (D_800417B0[i] != NULL) {
+                D_800417B0[i]->unk5A = arg0;
+                D_800417B0[i]->unk5C = arg1;
+                if (arg1 == 0) {
+                    D_800417B0[i]->unk58 = arg0;
+                }
+            }
+        }
+    }
+}
 
 // #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CC54.s")
 void func_1000CC54(s32 arg0) {
@@ -334,13 +459,104 @@ s32 func_1000CD40(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CDA0.s")
+// NON-MATCHING (score 1670): logic is correct, but the early `return 1` guards
+// compile to branch-likely + inline returns where the target uses plain beqz/bltz
+// branches to shared epilogue trampolines placed at the function end. IDO
+// return-placement heuristic not reproduced from structured C (confirmed: guards
+// 2 & 3 want plain beqz/bltz+nop to out-of-line returns; IDO emits inverted bnezl
+// with the continue-path load hoisted into the delay slot). PERMUTER CANDIDATE.
+// s32 func_1000CDA0(u8 arg0, struct137 *arg1) {
+//     if (arg0 == 0) return 1;
+//     if (arg1 == NULL) return 1;
+//     if (arg1->unk0 < 0) return 1;
+//     if (D_800417B0[arg1->unk0] == NULL) return 1;
+//     if (arg1->unk4 <= 0) return 1;
+//     if (func_1000853C(arg1->unk0) == 3) return 1;
+//     if ((D_8002B078[arg1->unk4][0] & 0x20) == 0) {
+//         D_800418AC[arg1->unk0] |= 3;
+//     }
+//     return (u8)(arg0 & ~D_800418AC[arg1->unk0]) == 0;
+// }
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CEAC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D2F8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D758.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D96C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DE1C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DEC4.s")
+
+void func_1000DE1C(s32 arg0, s32 arg1) {
+    s32 count;
+    s32 i;
+    s32 sp34[3];
+
+    arg0 &= 0xFFF;
+    if (arg0 == 0) {
+        func_1000DEC4();
+        count = func_1000B548(sp34);
+        for (i = 0; i < count; i++) {
+            if (sp34[i] > 0) {
+                func_1000D96C(0, sp34[i], arg1);
+            }
+        }
+    } else {
+        func_1000D96C(0, arg0, arg1);
+    }
+}
+
+void func_1000DEC4(void) {
+    struct137 *p;
+
+    // NOTE: keep the init on the same source line as the `do` - at -g3 IDO groups
+    // the three hoisted %hi/%lo address pairs per line, and splitting them changes
+    // the order the addiu halves are emitted in.
+    p = D_800419A8; do {
+        if (p->unk0 == -1) {
+            if (p->unk4 != -1) {
+                p->unk4 = -1;
+            }
+        } else if (func_1000853C(p->unk0) == 0) {
+            D_800417B0[p->unk0] = NULL;
+            p->unk0 = -1;
+            p->unk4 = -1;
+        }
+        // structs.h types offset 0x60 of struct137 as u16 pad60; the game stores a word there
+        *(s32 *) &p->pad60 = 0;
+        p++;
+    } while (p != (struct137 *) D_80041E58);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DF68.s")
+// NON-MATCHING (best score 415): structure verified correct. Remaining diffs are
+// (a) the final clamp's `v < 0x8000` test emits beqzl instead of the target's
+// bnezl-with-store-in-delay (branch-likely polarity that no observed C form flips
+// here; factored/inverted/nested variants all score 575-618, worse), and (b) the
+// func_1000CC54 pointer access reads v1 where the target reads v0 (the pointer is
+// live in both after `move v1,v0`; a pure coloring choice). PERMUTER CANDIDATE.
+// s16 func_1000DF68(s32 arg0, s32 arg1, s32 arg2) {
+//     struct151 *v1 = func_1000B1FC(arg0);
+//     s32 v;
+//     if (v1 != NULL) {
+//         v1->unk4E = arg1;
+//         if (arg2 == 1) {
+//             v1->unk4C = arg1;
+//             if (v1->unk0 >= 0) {
+//                 func_1000CC54(v1->unk0);
+//             }
+//         }
+//         if (arg2 >= 2) {
+//             v = v1->unk4C - arg1;
+//             if (v < 0) { v = -v; }
+//             v = v / arg2;
+//             if (v <= 0) {
+//                 v = 2;
+//             } else {
+//                 if (v < 0x8000) { v1->unk50 = v; goto done; }
+//                 v = 0x7FFF;
+//             }
+//             v1->unk50 = v;
+//         done:;
+//         } else {
+//             v1->unk50 = 0x200;
+//         }
+//     }
+// }
 
 void func_1000E054(s32 arg0, s32 arg1) {
     struct151 *sp1C;
@@ -389,7 +605,76 @@ s32 func_1000E134(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E17C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E2F4.s")
+// NON-MATCHING (score 1625): logic verified correct (3 loops over D_800419A8).
+// IDO CSE's &D_800419A8 across the three loops into one register (with `move`s)
+// while the target re-materializes lui/addiu each loop; also s3/s4/s5 constant
+// renames. GCSE/register-pressure mismatch, not expressible from C.
+// void func_1000E17C(void) {
+//     struct137 *p;
+//     s32 cls;
+//     struct137 *tmp;
+//     p = D_800419A8;
+//     do {
+//         if (p->unk4 > 0) {
+//             cls = ((s32 *) &D_8002B074[p->unk4])[1] & ~0xF0;
+//             if ((cls == 1) || (cls == 3)) {
+//                 if (p->unk0 == -1) { p->unk4 = -1; }
+//             }
+//         }
+//         p++;
+//     } while (p < (struct137 *) D_80041E58);
+//     p = D_800419A8;
+//     do {
+//         if (p->unk4 > 0) {
+//             tmp = *(struct137 **) &p->pad60;
+//             if ((tmp != NULL) && (tmp->unk4 == -1)) { *(s32 *) &p->pad60 = 0; }
+//             if ((p->unk10 != NULL) && (p->unk10->unk4 == -1)) { p->unk10 = NULL; }
+//         }
+//         p++;
+//     } while (p < (struct137 *) D_80041E58);
+//     p = D_800419A8;
+//     do {
+//         if (p->unk4 > 0) {
+//             cls = ((s32 *) &D_8002B074[p->unk4])[1] & ~0xF0;
+//             if ((cls == 1) || (cls == 3)) {
+//                 if (p->unk0 != -1) { func_1000DE1C(p->unk4, 4); }
+//             }
+//         }
+//         p++;
+//     } while (p != (struct137 *) D_80041E58);
+// }
+void func_1000E2F4(s32 arg0) {
+    struct151 *p;
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        p = D_800417B0[i];
+        if (p == NULL) {
+            continue;
+        }
+        if (p->unk4 <= 0) {
+            continue;
+        }
+        if (p->unk15 != 0) {
+            continue;
+        }
+        if (arg0 != 0) {
+            func_10008EE0((u8)i, 0);
+            if ((((s32 *) &D_8002B074[D_800417B0[i]->unk4])[1] & 0x10) != 0) {
+                continue;
+            }
+            func_10008F58((u8)i);
+        } else {
+            if ((((s32 *) &D_8002B074[p->unk4])[1] & 0x10) == 0) {
+                func_100084D8((u8)i);
+                p = D_800417B0[i];
+            }
+            p->unk30 = -1;
+            func_1000CC54(i);
+        }
+    }
+    D_80041F00 = (u8) arg0;
+}
 
 void func_1000E40C(s32 arg0, s32 arg1) {
     struct151 *temp_v0;
@@ -408,8 +693,67 @@ void func_1000E40C(s32 arg0, s32 arg1) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E46C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E588.s")
+s32 func_1000E46C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct151 *v0 = func_1000B1FC(arg0);
+    s32 v1;
+
+    arg1 = arg1 * 255 / 100;
+    if (arg1 >= 0x100) {
+        arg1 = 0xFF;
+    } else if (arg1 < 0) {
+        arg1 = 0;
+    }
+    if (v0 != NULL) {
+        if (v0->unk0 >= 0) {
+            if (arg3 < 0) {
+                func_1000886C(v0->unk0, arg2, arg1);
+            } else {
+                func_10008790(v0->unk0, arg2, arg1, arg3);
+            }
+            return 1;
+        }
+        if (arg1 == 0) {
+            v0->unk38 |= arg2;
+        } else if (arg1 > 0) {
+            v0->unk38 &= ~arg2;
+        }
+        v1 = 0;
+        if (arg2 != 0) {
+            do {
+                if (arg2 & 1) {
+                    v0->unk3C[v1] = arg1;
+                }
+                v1++;
+                arg2 = arg2 >> 1;
+            } while (arg2 != 0);
+        }
+        return 1;
+    }
+    return 0;
+}
+s32 func_1000E588(s32 arg0, s32 arg1, s32 arg2) {
+    struct151 *v1 = func_1000B1FC(arg0);
+    if (v1 != NULL) {
+        if (v1->unk0 >= 0) {
+            if (arg1 >= 101) {
+                arg1 = 100;
+            } else if (arg1 < 0) {
+                arg1 = 0;
+            }
+            func_1000886C(v1->unk0, arg2, arg1 * 255 / 100);
+            return 1;
+        } else {
+            if (arg1 <= 0) {
+                v1->unk38 |= arg2;
+                return 1;
+            } else if (arg1 > 0) {
+                v1->unk38 &= ~arg2;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 s32 func_1000E654(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct151 *sp1C;
@@ -462,21 +806,26 @@ s32 func_1000E770(s32 *arg0, s32 *arg1) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E7A0.s")
-// NON-MATCHING: mostly just wrong registers
+// NON-MATCHING (score 760): logic verified correct. Remaining diffs are pure
+// register allocation (target keeps arg0 in a0 and uses v0 for the F0C/F08
+// addresses; mine reuses a0) plus one branch-likely hoist of the `& 0x10`
+// check into the `& 8` guard delay slot. Permuter candidate.
 // void func_1000E7A0(u32 arg0, s32 arg1) {
+//     s32 tmp;
 //     if ((arg0 & 1) == 1) {
 //         D_80041F04 |= 1;
 //     } else if (arg0 & 2) {
 //         D_80041F08 += arg1;
 //         D_80041F0C += 1;
 //     } else if (arg0 & 4) {
-//         D_80041F08 = 1 + arg1;
+//         D_80041F08 = arg1 + 1;
 //         D_80041F04 |= 4;
 //     } else if (arg0 & 8) {
-//         D_80041F0C = (arg1 >> 8) & 0xff;
-//         if ((D_80041F0C == 0) || (D_80041F0C == 4) || (D_80041F0C == 5))  {
+//         D_80041F0C = arg1 >> 8;
+//         tmp = arg1 & 0xFF;
+//         if ((tmp == 0) || (tmp == 4) || (tmp == 5)) {
 //             D_80041F08 = 2;
-//         } else if (D_80041F0C == 10) {
+//         } else if (tmp == 10) {
 //             D_80041F08 = 1;
 //         } else {
 //             D_80041F08 = 3;

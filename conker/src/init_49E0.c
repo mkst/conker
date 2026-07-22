@@ -127,32 +127,30 @@
 //     goto loop_1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_49E0/func_10004DB0.s")
-// NON-MATCHING: branching is not right
-// void func_10004DB0(void) {
-//     if (D_8003A582 == 0) {
-//         if (osRecvMesg(&D_8003B1E8, &D_8002AC50, 0) == 0) {
-//             if ((osViGetCurrentFramebuffer() == D_8002AC50->framebuffer) ||
-//                 (osViGetNextFramebuffer() == D_8002AC50->framebuffer) ||
-//                 ((D_8003B23A != 0) && (D_8003B238 < D_8003B239))) {
-//                 D_8003A582 = 2;
-//             } else {
-//                 if (D_8003B238 != 255) {
-//                     if ((D_8003B238 >= D_8003B239) || (D_8003B23A == 0)) {
-//                         D_8003B239 = D_8003B238;
-//                     }
-//                 }
-//                 func_10004F00();
-//             }
-//         }
-//     } else if (D_8003A582 == 2) {
-//         if ((D_8003B23A == 0) || ( D_8003B238 >= D_8003B239)) {
-//             func_10004F00();
-//         }
-//     } else if (D_8003A582 == 6) {
-//         func_10004FE0();
-//     }
-// }
+void func_10004DB0(void) {
+    if (D_8003A582 == 0) {
+        if (osRecvMesg(&D_8003B1E8, &D_8002AC50, 0) == 0) {
+            if ((osViGetCurrentFramebuffer() != D_8002AC50->framebuffer) &&
+                (osViGetNextFramebuffer() != D_8002AC50->framebuffer) &&
+                ((D_8003B23A == 0) || (D_8003B238 >= D_8003B239))) {
+                if (D_8003B238 != 255) {
+                    if ((D_8003B238 >= D_8003B239) || (D_8003B23A == 0)) {
+                        D_8003B239 = D_8003B238;
+                    }
+                }
+                func_10004F00();
+            } else {
+                D_8003A582 = 2;
+            }
+        }
+    } else if (D_8003A582 == 2) {
+        if ((D_8003B23A == 0) || (D_8003B238 >= D_8003B239)) {
+            func_10004F00();
+        }
+    } else if (D_8003A582 == 6) {
+        func_10004FE0();
+    }
+}
 
 void func_10004F00(void) {
     if (D_8002AC5C == 0) {
